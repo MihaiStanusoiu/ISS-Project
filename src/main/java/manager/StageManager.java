@@ -7,7 +7,6 @@ import loader.SpringFXMLLoader;
 import view.ViewType;
 import java.util.Objects;
 
-
 /**
  * Name:        StageManager
  * Effect:      Manages switching scenes on the primary stage.
@@ -16,7 +15,6 @@ import java.util.Objects;
  * @author      Alexandru Stoica
  * @version     1.0
  */
-
 
 public class StageManager {
 
@@ -52,7 +50,6 @@ public class StageManager {
         Scene scene = getNewScene(root);
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);
-        primaryStage.centerOnScreen();
         try {
             primaryStage.show();
         } catch (Exception error) {
@@ -89,7 +86,6 @@ public class StageManager {
         }
         return root;
     }
-
 
     /**
      * Effect: Handle for errors. (that occurred in this class) [open for improvements]

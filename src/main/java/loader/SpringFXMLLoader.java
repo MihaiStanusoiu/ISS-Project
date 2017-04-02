@@ -17,7 +17,6 @@ import java.util.ResourceBundle;
  * @version     1.0
  */
 
-
 @Component
 public class SpringFXMLLoader {
 

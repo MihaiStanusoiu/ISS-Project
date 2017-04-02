@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ResourceBundle;
+
 /**
  * Name:        ViewType
  * Effect:      Defines the views and their fxml paths.
@@ -17,12 +19,21 @@ public enum ViewType implements ViewTypeInterface {
 
         @Override
         public String getTitle() {
-            return "Confery";
+            return ViewType.getDataFromBundle("application.title");
         }
 
         @Override
         public String getFXMLFile() {
             return "/fxml/ApplicationFrame.fxml";
         }
+    };
+
+    /**
+     * Effect: Returns data from application properties.
+     * @param key: The data's key in properties file.
+     * @return String value from application.properties external files.
+     */
+    private static String getDataFromBundle(final String key) {
+        return ResourceBundle.getBundle("application").getString(key);
     }
 }

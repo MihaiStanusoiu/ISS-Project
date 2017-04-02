@@ -1,5 +1,6 @@
 package main;
 
+import controller.Controller;
 import javafx.stage.Stage;
 import loader.SpringFXMLLoader;
 import manager.StageManager;
@@ -12,7 +13,7 @@ import java.util.ResourceBundle;
 
 /**
  * Name:        SpringConfiguration
- * Effect:      Beans configuration for spring context application.
+ * Effect:      Beans configuration for Spring context application.
  * Date:        31/03/2017
  * Tested:      False
  * @author      Alexandru Stoica
@@ -24,17 +25,24 @@ import java.util.ResourceBundle;
 public class SpringConfiguration {
 
     private @Autowired SpringFXMLLoader loader;             // FXML Loader with DI.
+    private StageManager stageManager;
+
+    @Bean
+    @Lazy
+    public Controller controller() {
+        return new Controller(stageManager);
+    }
 
     /** Local Resources Bundle */
     @Bean
     public ResourceBundle resourceBundle() {
-        return ResourceBundle.getBundle("Bundle");
+        return ResourceBundle.getBundle("application");
     }
 
     /**
      * Effect: Bean for Stage Manager Spring DI
      *
-     * <p>Requires @Lazy because the stage is NOT initialize when Spring
+     * <p>Requires @Lazy because the stage is NOT initialized when Spring
      * is initializing the application's context.</p>
      *
      * @param stage: The stage of the FX Application.
@@ -44,7 +52,8 @@ public class SpringConfiguration {
     @Lazy
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public StageManager stageManager(Stage stage) {
-        return new StageManager(loader, stage);
+        stageManager = new StageManager(loader, stage);
+        return stageManager;
     }
 
 }
