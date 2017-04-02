@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 /**
  * Name:         Idable
@@ -8,7 +8,8 @@ package model;
  * @author       Tiron Andreea - Ecaterina
  * @version      1.0
  */
-public class Idable<T> implements HasId<T>{
+public class Idable<T> implements HasId<T>
+{
     protected T id;
 
     /**
