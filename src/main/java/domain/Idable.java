@@ -8,8 +8,9 @@ package domain;
  * @author       Tiron Andreea - Ecaterina
  * @version      1.0
  */
-public class Idable<T> implements HasId<T>
-{
+
+public class Idable<T> implements HasId<T> {
+
     protected T id;
 
     /**
@@ -17,8 +18,7 @@ public class Idable<T> implements HasId<T>
      * @return [T] : returns the id.
      */
     @Override
-    public T getId()
-    {
+    public T getId() {
         return id;
     }
 
@@ -27,8 +27,7 @@ public class Idable<T> implements HasId<T>
      * @param Id : [T]  the value of the new id.
      */
     @Override
-    public void setId(T Id)
-    {
+    public void setId(T Id){
         this.id=Id;
     }
 }

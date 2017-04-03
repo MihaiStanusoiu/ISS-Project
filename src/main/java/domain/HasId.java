@@ -9,11 +9,13 @@ package domain;
  * @version      1.0
  */
 public interface HasId<T>{
+
     /**
      * Effect: Return the id.
      * @return [T] : returns the id.
      */
-     T getId();
+
+    T getId();
 
     /**
      * Effect: Set the id.
