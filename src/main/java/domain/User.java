@@ -3,17 +3,16 @@ package domain;
 import java.util.ArrayList;
 
 /**
- * Name:         User
- * Effect:         Class for basic user type
- * Date:           4/2/2017
- * Tested:        true
+ * Name:        User
+ * Effect:      Class for basic user type
+ * Date:        4/2/2017
+ * Tested:      True
  *
- * @author {Stanusoiu Mihai-Teodor}
- * @version 1.0
+ * @author      {Stanusoiu Mihai-Teodor}
+ * @version     1.0
  */
-public class User extends Idable<Integer> implements UserInterface {
 
-    //  Fields
+public class User extends Idable<Integer> implements UserInterface {
 
     protected String username;
     protected String password;
@@ -23,15 +22,16 @@ public class User extends Idable<Integer> implements UserInterface {
     protected String bio;
     protected String location;
 
+    public User() { }
 
-
-    //  Constructors
-
-    public User() {}
-
-    public User(
-            Integer id, String username, String password, String email, String name, String website, String bio, String location
-    ) {
+    public User( Integer id,
+                 String username,
+                 String password,
+                 String email,
+                 String name,
+                 String website,
+                 String bio,
+                 String location) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -41,9 +41,6 @@ public class User extends Idable<Integer> implements UserInterface {
         this.bio = bio;
         this.location = location;
     }
-
-
-    //  Getters and Setters
 
     /**
      * Effect: Return the username.
@@ -155,7 +152,6 @@ public class User extends Idable<Integer> implements UserInterface {
      */
     @Override
     public UserType getType() {
-
         return UserType.USER;
     }
 
@@ -164,7 +160,6 @@ public class User extends Idable<Integer> implements UserInterface {
      * @return ArrayList<Permission>: returns the array of permissions.
      */
     public ArrayList<Permission> getPermissions() {
-
         return UserType.USER.getPermissions();
     }
 }

@@ -12,17 +12,17 @@ import static org.junit.Assert.*;
 
 
 public class SectionTest {
-    Section s;
-    Date dateStart,dateEnd ;
+
+    private Section section;
+    private Date dateStart, dateEnd ;
+
     @Before
     public void setUp() throws Exception {
-        String str_date="13-03-2017";
-        String str_date2="14-03-2017";
-        DateFormat formatter ;
-        formatter = new SimpleDateFormat("dd-MM-yyyy");
-        dateStart = formatter.parse(str_date);
-        dateEnd = formatter.parse(str_date2);
-        s=new Section(0,"mate",dateStart,dateEnd,"cluj","iss",1,2);
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        dateStart = formatter.parse("13-03-2017");
+        dateEnd = formatter.parse("14-03-2017");
+        section = new Section(0,"mate", dateStart,
+                dateEnd,"New York","iss",1,2);
     }
 
     @After
@@ -31,37 +31,37 @@ public class SectionTest {
 
     @Test
     public void getName() throws Exception {
-        assertTrue(s.getName().equals("mate"));
+        assertTrue(section.getName().equals("mate"));
     }
 
     @Test
     public void getStartDate() throws Exception {
-        assertTrue(s.getStartDate().equals(dateStart));
+        assertTrue(section.getStartDate().equals(dateStart));
     }
 
     @Test
     public void getEndDate() throws Exception {
-        assertTrue(s.getEndDate().equals(dateEnd));
+        assertTrue(section.getEndDate().equals(dateEnd));
     }
 
     @Test
     public void getLocation() throws Exception {
-        assertTrue(s.getLocation().equals("cluj"));
+        assertTrue(section.getLocation().equals("New York"));
     }
 
     @Test
     public void getBio() throws Exception {
-        assertTrue(s.getBio().equals("iss"));
+        assertTrue(section.getBio().equals("iss"));
     }
 
     @Test
     public void getSeats() throws Exception {
-        assertTrue(s.getSeats().equals(1));
+        assertTrue(section.getSeats().equals(1));
     }
 
     @Test
     public void getIdConference() throws Exception {
-        assertTrue(s.getIdConference().equals(2));
+        assertTrue(section.getIdConference().equals(2));
     }
 
 }

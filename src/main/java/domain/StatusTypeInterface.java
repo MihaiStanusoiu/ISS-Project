@@ -8,6 +8,9 @@ package domain;
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
+
 public interface StatusTypeInterface {
+
     String convertString();
+
 }

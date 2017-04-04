@@ -8,6 +8,7 @@ package domain;
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
+
 public enum StatusTypeSubmission implements StatusTypeInterface {
 
     ACCEPTED_STATUS {
@@ -15,24 +16,21 @@ public enum StatusTypeSubmission implements StatusTypeInterface {
         public String convertString() {
             return "Accepted";
         }
-    }
-    ,
+    },
 
     REJECTED_STATUS {
         @Override
         public String convertString() {
             return "Rejected";
         }
-    }
-    ,
+    },
 
     BID_STATUS {
         @Override
         public String convertString() {
             return "Bid";
         }
-    }
-    ,
+    },
 
     REVIEW_STATUS {
         @Override

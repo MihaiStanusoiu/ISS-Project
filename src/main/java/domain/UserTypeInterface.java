@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author {Stanusoiu Mihai-Teodor}
  * @version 1.0
  */
+
 public interface UserTypeInterface {
 
     /**
@@ -18,4 +19,5 @@ public interface UserTypeInterface {
      * @return ArrayList<Permission>: returns the array of permissions.
      */
     ArrayList<Permission> getPermissions();
+
 }

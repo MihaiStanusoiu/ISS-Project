@@ -1,23 +1,22 @@
 package domain;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 /**
- * Name:         UserTest
- * Effect:         {ClassEffect}
- * Date:           4/2/2017
- * Tested:        False
+ * Name:        UserTest
+ * Effect:      {ClassEffect}
+ * Date:        4/2/2017
+ * Tested:      False
  *
- * @author {Stanusoiu Mihai-Teodor}
- * @version 1.0
+ * @author      {Stanusoiu Mihai-Teodor}
+ * @version     1.0
  */
-public class UserTest {
-    private User user;
 
+public class UserTest {
+
+    private User user;
 
     @Before
     public void setUp() throws Exception {
@@ -26,17 +25,12 @@ public class UserTest {
                 "mike", 
                 "1234", 
                 "mihai@gmail.com", 
-                "Mihai", 
-                "mihai.com", 
+                "John Snow",
+                "website.com",
                 "Student", 
                 "str..."
         );
         user.setId(1);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        
     }
 
     @Test
@@ -52,7 +46,7 @@ public class UserTest {
 
     @Test
     public void isGettingWebsite() throws Exception {
-        assertTrue(user.getWebsite().equals("mihai.com"));
+        assertTrue(user.getWebsite().equals("website.com"));
     }
 
     @Test

@@ -7,10 +7,12 @@ import java.util.Date;
  * Effect:       Main information about the conference.
  * Date:         02/04/2017
  * Tested:       True
- * @author       Tiron Andreea- Ecaterina
+ * @author       Tiron Andreea-Ecaterina
  * @version      1.0
  */
+
 public class Conference extends Idable<Integer> {
+
     private String name;
     private String acronym;
     private Date startDate;
@@ -22,8 +24,17 @@ public class Conference extends Idable<Integer> {
     private Date biddingDeadline;
     private Date evaluationDeadline;
 
-    public Conference(Integer id,String name, String acronym, Date startDate, Date endDate, String location, String bio, Date abstractDeadline, Date paperDeadline, Date biddingDeadline, Date evaluationDeadline) {
-
+    public Conference(Integer id,
+                      String name,
+                      String acronym,
+                      Date startDate,
+                      Date endDate,
+                      String location,
+                      String bio,
+                      Date abstractDeadline,
+                      Date paperDeadline,
+                      Date biddingDeadline,
+                      Date evaluationDeadline) {
         this.id = id;
         this.name = name;
         this.acronym = acronym;
@@ -37,8 +48,18 @@ public class Conference extends Idable<Integer> {
         this.evaluationDeadline = evaluationDeadline;
     }
 
-    private Conference(String name, String acronym, Date startDate, Date endDate, String location, String bio, Date abstractDeadline, Date paperDeadline, Date biddingDeadline, Date evaluationDeadline){
-        this(0,name,acronym,startDate,endDate,location,bio,abstractDeadline,paperDeadline,biddingDeadline,evaluationDeadline);
+    private Conference(String name,
+                       String acronym,
+                       Date startDate,
+                       Date endDate,
+                       String location,
+                       String bio,
+                       Date abstractDeadline,
+                       Date paperDeadline,
+                       Date biddingDeadline,
+                       Date evaluationDeadline){
+        this(0, name, acronym, startDate, endDate, location, bio,
+                abstractDeadline, paperDeadline, biddingDeadline, evaluationDeadline);
     }
 
     /**

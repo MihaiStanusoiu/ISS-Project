@@ -13,21 +13,22 @@ import java.util.ArrayList;
  */
 public class Listener extends SectionMember {
 
-    //  Constructors
-
-    public Listener(
-            Integer id, String username, String password, String email, String name, String website, String bio,
-            String location, Integer idConference, Integer idSection
-    ) {
+    public Listener(Integer id,
+                    String username,
+                    String password,
+                    String email,
+                    String name,
+                    String website,
+                    String bio,
+                    String location,
+                    Integer idConference,
+                    Integer idSection) {
         super(id, username, password, email, name, website, bio, location, idConference, idSection);
     }
 
     public Listener(Integer id, Integer idConference, Integer idSection) {
         super(id, idConference, idSection);
     }
-
-
-    //  Getters and Setters
 
     /**
      * Effect: Returns UserType.LISTENER

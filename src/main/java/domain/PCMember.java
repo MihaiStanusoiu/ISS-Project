@@ -11,23 +11,25 @@ import java.util.ArrayList;
  * @author {Stanusoiu Mihai-Teodor}
  * @version 1.0
  */
+
 public class PCMember extends SectionMember {
 
-    //  Constructors
-
-    public PCMember(
-            Integer id, String username, String password, String email, String name, String website, String bio,
-            String location, Integer idConference, Integer idSection
-    ) {
+    public PCMember(Integer id,
+                    String username,
+                    String password,
+                    String email,
+                    String name,
+                    String website,
+                    String bio,
+                    String location,
+                    Integer idConference,
+                    Integer idSection) {
         super(id, username, password, email, name, website, bio, location, idConference, idSection);
     }
 
     public PCMember(Integer id, Integer idConference, Integer idSection) {
         super(id, idConference, idSection);
     }
-
-
-    //  Getters and Setters
 
     /**
      * Effect: Returns UserType.PC_MEMBER

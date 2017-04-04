@@ -14,7 +14,6 @@ public interface HasId<T>{
      * Effect: Return the id.
      * @return [T] : returns the id.
      */
-
     T getId();
 
     /**
@@ -22,4 +21,5 @@ public interface HasId<T>{
      * @param id : [T]  the value of the new id.
      */
      void setId(T id);
+
 }

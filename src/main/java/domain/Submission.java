@@ -6,9 +6,10 @@ import java.util.ArrayList;
  * Effect:       The class with the paper submissions.
  * Date:         02/04/2017
  * Tested:       True
- * @author       Tiron Andreea- Ecaterina
+ * @author       Tiron Andreea-Ecaterina
  * @version      1.0
  */
+
 public class Submission extends Idable<Integer> {
 
     private String name;
@@ -22,8 +23,17 @@ public class Submission extends Idable<Integer> {
     private Integer idConference;
 
 
-    public Submission(Integer id,String name, StatusTypeSubmission status, String abstractUrl, String fullPaperUrl, Boolean isPaid, ArrayList<Integer> reviewers, ArrayList<Integer> topics, ArrayList<Integer> tags, Integer idConference) {
-        this.id=id;
+    public Submission(Integer id,
+                      String name,
+                      StatusTypeSubmission status,
+                      String abstractUrl,
+                      String fullPaperUrl,
+                      Boolean isPaid,
+                      ArrayList<Integer> reviewers,
+                      ArrayList<Integer> topics,
+                      ArrayList<Integer> tags,
+                      Integer idConference) {
+        this.id = id;
         this.name = name;
         this.status = status;
         this.abstractUrl = abstractUrl;
@@ -35,8 +45,16 @@ public class Submission extends Idable<Integer> {
         this.idConference = idConference;
     }
 
-    public Submission(String name, StatusTypeSubmission status, String abstractUrl, String fullPaperUrl, Boolean isPaid, ArrayList<Integer> reviewers, ArrayList<Integer> topics, ArrayList<Integer> tags, Integer idConference) {
-        this(0,name,status,abstractUrl,fullPaperUrl,isPaid,reviewers,topics,tags,idConference);
+    public Submission(String name,
+                      StatusTypeSubmission status,
+                      String abstractUrl,
+                      String fullPaperUrl,
+                      Boolean isPaid,
+                      ArrayList<Integer> reviewers,
+                      ArrayList<Integer> topics,
+                      ArrayList<Integer> tags,
+                      Integer idConference) {
+        this(0, name, status, abstractUrl, fullPaperUrl, isPaid, reviewers, topics, tags, idConference);
     }
 
     /**
@@ -113,50 +131,50 @@ public class Submission extends Idable<Integer> {
 
     /**
      * Effect: Add a new review.
-     * @param r : [Review]  the value of the new review.
+     * @param review : [Review]  the value of the new review.
      */
-    public void addReview(Review r){
-        this.reviews.add(r.getId());
+    public void addReview(Review review){
+        this.reviews.add(review.getId());
     }
 
     /**
      * Effect: remove a review.
-     * @param r : [Review]  the value of the review.
+     * @param review : [Review]  the value of the review.
      */
-    public void removeReview(Review r){
-        this.reviews.remove(r.getId());
+    public void removeReview(Review review){
+        this.reviews.remove(review.getId());
     }
 
     /**
      * Effect: Add a new tag.
-     * @param t : [Tag]  the value of the new tag.
+     * @param tag : [Tag]  the value of the new tag.
      */
-    public void addTag(Tag t){
-        this.tags.add(t.getId());
+    public void addTag(Tag tag){
+        this.tags.add(tag.getId());
     }
 
     /**
      * Effect: Remove a tag.
-     * @param t : [Tag]  the value of the tag.
+     * @param tag : [Tag]  the value of the tag.
      */
-    public void removeTag(Tag t){
-        this.tags.remove(t.getId());
+    public void removeTag(Tag tag){
+        this.tags.remove(tag.getId());
     }
 
     /**
      * Effect: Add a new topic.
-     * @param t : [Topic]  the value of the new topic.
+     * @param topic : [Topic]  the value of the new topic.
      */
-    public void addTopic(Topic t) {
-        this.topics.add(t.getId());
+    public void addTopic(Topic topic) {
+        this.topics.add(topic.getId());
     }
 
     /**
      * Effect: Remove a topic.
-     * @param t : [Topic]  the value of the topic.
+     * @param topic : [Topic]  the value of the topic.
      */
-    public void removeTopic(Topic t) {
-        this.topics.remove(t.getId());
+    public void removeTopic(Topic topic) {
+        this.topics.remove(topic.getId());
     }
 
 }

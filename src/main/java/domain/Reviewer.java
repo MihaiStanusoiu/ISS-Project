@@ -13,17 +13,18 @@ import java.util.ArrayList;
  */
 public class Reviewer extends PCMember {
 
-    //  Fields
-
     private ArrayList<Integer> reviews;
 
-
-    //  Constructors
-
-    public Reviewer(
-            Integer id, String username, String password, String email, String name, String website, String bio,
-            String location, Integer idConference, Integer idSection
-    ) {
+    public Reviewer(Integer id,
+                    String username,
+                    String password,
+                    String email,
+                    String name,
+                    String website,
+                    String bio,
+                    String location,
+                    Integer idConference,
+                    Integer idSection) {
         super(id, username, password, email, name, website, bio, location, idConference, idSection);
         this.reviews = new ArrayList<>();
     }
@@ -33,10 +34,13 @@ public class Reviewer extends PCMember {
         this.reviews = new ArrayList<>();
     }
 
-    //  TODO addSubmission(Submission submission)
-
-
-    //  Getters and Setters
+    /**
+     * Effect: Adds a submission in reviewer's list.
+     * @param submission: The wanted submission.
+     */
+    public void addSubmission(Submission submission) {
+        this.reviews.add(submission.getId());
+    }
 
     /**
      * Effect: Returns UserType.REVIEWER

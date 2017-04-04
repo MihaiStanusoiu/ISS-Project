@@ -8,14 +8,13 @@ import static org.junit.Assert.*;
 
 
 public class ReviewTest {
-    Review review;
-    ReviewQualifier reviewQualifier;
-    ReviewResponse reviewResponse;
-    ReviewStatus reviewStatus;
+
+    private Review review;
 
     @Before
     public void setUp() throws Exception {
-        review =new Review(0,1,1,reviewQualifier.fromString("StrongAgree"),reviewStatus.fromString("Reviewed"),reviewResponse.fromString("NotAssigned"),"buna lucrare");
+        review = new Review(0,1,1, ReviewQualifier.fromString("StrongAgree"),
+                ReviewStatus.fromString("Reviewed"), ReviewResponse.fromString("NotAssigned"),"Good Job!");
     }
 
     @After
@@ -35,22 +34,22 @@ public class ReviewTest {
 
     @Test
     public void isGettingReviewQualifier() throws Exception {
-        assertTrue(review.getReviewQualifier().equals(reviewQualifier.STRONG_AGREE));
+        assertTrue(review.getReviewQualifier().equals(ReviewQualifier.STRONG_AGREE));
     }
 
     @Test
     public void isGettingReviewStatus() throws Exception {
-        assertTrue(review.getReviewStatus().equals(reviewStatus.REVIEWED));
+        assertTrue(review.getReviewStatus().equals(ReviewStatus.REVIEWED));
     }
 
     @Test
     public void isGettingReviewResponse() throws Exception {
-        assertTrue(review.getReviewResponse().equals(reviewResponse.NOT_ASSIGNED));
+        assertTrue(review.getReviewResponse().equals(ReviewResponse.NOT_ASSIGNED));
     }
 
     @Test
-    public void isGettingRecommandationUrl() throws Exception {
-        assertTrue(review.getRecommandationUrl().equals("buna lucrare"));
+    public void isGettingRecommendationUrl() throws Exception {
+        assertTrue(review.getRecommendationUrl().equals("Good Job!"));
     }
 
 }

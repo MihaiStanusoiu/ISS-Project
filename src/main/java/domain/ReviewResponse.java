@@ -8,7 +8,9 @@ package domain;
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
+
 public enum ReviewResponse implements StatusTypeInterface {
+
     NOT_ASSIGNED {
         @Override
         public String convertString() {
@@ -28,8 +30,8 @@ public enum ReviewResponse implements StatusTypeInterface {
         public String convertString() {
             return "NotAllowedToReview";
         }
-    }
-    ;
+    };
+
     /**
      * Effect: Return the status of response.
      * @param string : [String]

@@ -1,15 +1,17 @@
 package domain;
 
 /**
- * Name:         Permission
- * Effect:         Enum class for all available permissions
- * Date:           4/2/2017
- * Tested:        True
+ * Name:            Permission
+ * Effect:          Enum for all available permissions.
+ * Date:            4/2/2017
+ * Tested:          True
  *
- * @author {Stanusoiu Mihai-Teodor}
- * @version 1.0
+ * @author          {Stanusoiu Mihai-Teodor}
+ * @version         1.0
  */
+
 public enum Permission {
+
     VIEW_CONFERENCE,
     CREATE_CONFERENCE,
     DELETE_CONFERENCE,
@@ -25,5 +27,6 @@ public enum Permission {
     SEND_MESSAGE,
     GIVE_PERMISSIONS,
     PAY
+
 }
 

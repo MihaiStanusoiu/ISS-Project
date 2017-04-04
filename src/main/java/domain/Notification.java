@@ -8,7 +8,9 @@ package domain;
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
-public class Notification extends Idable<Integer>{
+
+public class Notification extends Idable<Integer> {
+
     private String text;
     private Boolean isPayment;
     private Integer idUser;

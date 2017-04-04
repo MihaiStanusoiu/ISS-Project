@@ -15,52 +15,49 @@ public enum ReviewQualifier implements StatusTypeInterface {
         public String convertString() {
             return "WeakAgree";
         }
-    }
-    ,
+    },
+
     STRONG_AGREE {
         @Override
         public String convertString() {
             return "StrongAgree";
         }
-    }
-    ,
+    },
+
     NEUTRAL_AGREE {
         @Override
         public String convertString() {
             return "NeutralAgree";
         }
-    }
-    ,
+    },
 
     BORDERLINE {
         @Override
         public String convertString() {
             return "Borderline";
         }
-    }
-    ,
+    },
 
     WEAK_REJECT {
         @Override
         public String convertString() {
             return "WeakReject";
         }
-    }
-    ,
+    },
+
     STRONG_REJECT {
         @Override
         public String convertString() {
             return "StrongReject";
         }
-    }
-    ,
+    },
+
     NEUTRAL_REJECT {
         @Override
         public String convertString() {
             return "NeutralReject";
         }
-    }
-    ;
+    };
 
     /**
      * Effect: Return the status .

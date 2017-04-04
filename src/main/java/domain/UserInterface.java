@@ -2,13 +2,14 @@ package domain;
 
 /**
  * Name:         UserInterface
- * Effect:         Inferface for user type
- * Date:           4/2/2017
- * Tested:        True
+ * Effect:       Interface for user's type support.
+ * Date:         4/2/2017
+ * Tested:       True
  *
- * @author {Stanusoiu Mihai-Teodor}
- * @version 1.0
+ * @author       Stanusoiu Mihai-Teodor
+ * @version      1.0
  */
+
 public interface UserInterface {
 
     /**
@@ -16,4 +17,5 @@ public interface UserInterface {
      * @return UserType : returns the corresponding user type.
      */
     UserType getType();
+
 }

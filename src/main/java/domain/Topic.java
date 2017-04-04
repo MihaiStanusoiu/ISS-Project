@@ -1,5 +1,4 @@
 package domain;
-import domain.Idable;
 
 /**
  * Name:         Topic
@@ -9,7 +8,9 @@ import domain.Idable;
  * @author       Tiron Andreea - Ecaterina
  * @version      1.0
  */
+
 public class Topic extends Idable<Integer> {
+
     private String content;
 
     public Topic(String content) {

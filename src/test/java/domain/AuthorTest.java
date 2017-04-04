@@ -2,11 +2,10 @@ package domain;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
-
 public class AuthorTest {
+
     private Author author;
 
     @Before
@@ -21,7 +20,7 @@ public class AuthorTest {
 
     @Test
     public void setOwner() throws Exception {
-        author.setOwnage(true);
+        author.setOwner(true);
         assertTrue(author.isOwner().equals(true));
     }
 

@@ -8,6 +8,7 @@ package domain;
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
+
 public class Review extends Idable<Integer>{
 
     private Integer idSubmission;
@@ -15,20 +16,32 @@ public class Review extends Idable<Integer>{
     private ReviewQualifier reviewQualifier;
     private ReviewStatus reviewStatus;
     private ReviewResponse reviewResponse;
-    private String recommandationUrl;
+    private String recommendationUrl;
 
-    public Review(Integer id,Integer idSubmission, Integer idReviewer, ReviewQualifier reviewQualifier, ReviewStatus reviewStatus, ReviewResponse reviewResponse, String recommandationUrl) {
-        this.id=id;
+    public Review(Integer id,
+                  Integer idSubmission,
+                  Integer idReviewer,
+                  ReviewQualifier reviewQualifier,
+                  ReviewStatus reviewStatus,
+                  ReviewResponse reviewResponse,
+                  String recommendationUrl) {
+        this.id = id;
         this.idSubmission = idSubmission;
         this.idReviewer = idReviewer;
         this.reviewQualifier = reviewQualifier;
         this.reviewStatus = reviewStatus;
         this.reviewResponse = reviewResponse;
-        this.recommandationUrl = recommandationUrl;
+        this.recommendationUrl = recommendationUrl;
     }
 
-    public Review(Integer idSubmission, Integer idReviewer, ReviewQualifier reviewQualifier, ReviewStatus reviewStatus, ReviewResponse reviewResponse, String recommandationUrl){
-        this(0,idSubmission,idReviewer,reviewQualifier,reviewStatus,reviewResponse,recommandationUrl);
+    public Review(Integer idSubmission,
+                  Integer idReviewer,
+                  ReviewQualifier reviewQualifier,
+                  ReviewStatus reviewStatus,
+                  ReviewResponse reviewResponse,
+                  String recommendationUrl){
+        this(0, idSubmission, idReviewer, reviewQualifier,
+                reviewStatus, reviewResponse, recommendationUrl);
     }
 
     /**
@@ -75,7 +88,7 @@ public class Review extends Idable<Integer>{
      * Effect: Return the recommandation url.
      * @return [String] : returns the recommandation url.
      */
-    public String getRecommandationUrl() {
-        return recommandationUrl;
+    public String getRecommendationUrl() {
+        return recommendationUrl;
     }
 }

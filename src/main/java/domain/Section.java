@@ -10,7 +10,9 @@ import java.util.Date;
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
+
 public class Section extends Idable<Integer>{
+
     private String name;
     private Date startDate;
     private Date endDate;
@@ -19,8 +21,15 @@ public class Section extends Idable<Integer>{
     private Integer seats;
     private Integer idConference;
 
-    public Section(Integer id,String name, Date startDate, Date endDate, String location, String bio, Integer seats, Integer idConference) {
-        this.id=id;
+    public Section(Integer id,
+                   String name,
+                   Date startDate,
+                   Date endDate,
+                   String location,
+                   String bio,
+                   Integer seats,
+                   Integer idConference) {
+        this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -30,8 +39,14 @@ public class Section extends Idable<Integer>{
         this.idConference = idConference;
     }
 
-    public Section(String name, Date startDate, Date endDate, String location, String bio, Integer seats, Integer idConference){
-        this(0,name,startDate,endDate,location,bio,seats,idConference);
+    public Section(String name,
+                   Date startDate,
+                   Date endDate,
+                   String location,
+                   String bio,
+                   Integer seats,
+                   Integer idConference){
+        this(0, name, startDate, endDate, location, bio, seats, idConference);
     }
 
     /**

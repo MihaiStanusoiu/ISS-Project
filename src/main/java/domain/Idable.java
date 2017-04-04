@@ -30,4 +30,5 @@ public class Idable<T> implements HasId<T> {
     public void setId(T Id){
         this.id=Id;
     }
+
 }

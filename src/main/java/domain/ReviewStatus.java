@@ -9,20 +9,21 @@ package domain;
  * @version      1.0
  */
 public enum ReviewStatus implements StatusTypeInterface {
+
     REVIEWED {
         @Override
         public String convertString() {
             return "Reviewed";
         }
-    }
-    ,
+    },
+
     NOT_REVIEWED{
         @Override
         public String convertString() {
             return "NotReviewed";
         }
-    }
-    ;
+    };
+
     /**
      * Effect: Return the status of review.
      * @param string : [String]

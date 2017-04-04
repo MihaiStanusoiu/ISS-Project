@@ -1,21 +1,18 @@
 package domain;
 
-import domain.HasId;
-import domain.Idable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
-
 public class IdableTest {
+
     private HasId<Integer> ob;
 
     @Before
     public void setUp() throws Exception {
         ob = new Idable<>();
-        ob.setId(12);
+        ob.setId(1);
     }
 
     @After
@@ -24,13 +21,13 @@ public class IdableTest {
 
     @Test
     public void isGettingId() throws Exception {
-        assertTrue(ob.getId().equals(12));
+        assertTrue(ob.getId().equals(1));
     }
 
     @Test
     public void isSettingId() throws Exception {
-        ob.setId(11);
-        assertTrue(ob.getId().equals(11));
+        ob.setId(2);
+        assertTrue(ob.getId().equals(2));
     }
 
 }

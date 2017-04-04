@@ -3,46 +3,46 @@ package domain;
 import java.util.ArrayList;
 
 /**
- * Name:         ConferenceMember
- * Effect:       Class for ConferenceMember type
- * Date:           4/2/2017
- * Tested:        True
+ * Name:        ConferenceMember
+ * Effect:      Class for ConferenceMember type
+ * Date:        4/2/2017
+ * Tested:      True
  *
- * @author {Stanusoiu Mihai-Teodor}
- * @version 1.0
+ * @author      {Stanusoiu Mihai-Teodor}
+ * @version     1.0
  */
 public class ConferenceMember extends User {
 
-    //  Fields
-
     protected Integer idConference;
 
-
-    //  Constructors
-
-    public ConferenceMember(
-            Integer id, String username, String password, String email, String name, String website, String bio, String location,
-            Integer idConference
-    ) {
+    public ConferenceMember(Integer id,
+                            String username,
+                            String password,
+                            String email,
+                            String name,
+                            String website,
+                            String bio,
+                            String location,
+                            Integer idConference) {
         super(id, username, password, email, name, website, bio, location);
         this.idConference = idConference;
     }
 
-    public ConferenceMember(
-            Integer id, String username, String password, String email, String name, String website, String bio,
-            String location
-    ) {
+    public ConferenceMember(Integer id,
+                            String username,
+                            String password,
+                            String email,
+                            String name,
+                            String website,
+                            String bio,
+                            String location) {
         super(id, username, password, email, name, website, bio, location);
     }
 
-    public ConferenceMember(Integer id, Integer idConference)
-    {
+    public ConferenceMember(Integer id, Integer idConference) {
         this.id = id;
         this.idConference = idConference;
     }
-
-
-    //  Getters and Setters
 
     /**
      * Effect: Getter for the id of the conference.

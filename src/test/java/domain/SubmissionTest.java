@@ -1,6 +1,5 @@
 package domain;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,37 +9,34 @@ import static org.junit.Assert.*;
 
 
 public class SubmissionTest {
+
     private Submission submission;
     private ArrayList<Integer> reviews;
     private ArrayList<Integer> tags;
     private ArrayList<Integer> topics;
-    private StatusTypeSubmission status;
-    private Review rr;
+    private Review review;
     private Tag tag;
     private Topic topic;
-    private ReviewQualifier reviewQualifier;
-    private ReviewResponse reviewResponse;
-    private ReviewStatus reviewStatus;
+    private ArrayList<Integer> list = new ArrayList<>();
 
     @Before
     public void setUp() throws Exception {
-        reviews=new ArrayList<>();
-        tags=new ArrayList<>();
-        topics=new ArrayList<>();
-        rr=new Review(9,1,1,reviewQualifier.fromString("StrongAgree"),reviewStatus.fromString("Reviewed"),reviewResponse.fromString("NotAssigned"),"buna lucrare");
-        tag=new Tag(9,"particule");
-        topic=new Topic(9,"fizica");
+        reviews = new ArrayList<>();
+        tags = new ArrayList<>();
+        topics = new ArrayList<>();
+        review = new Review(9,1,1,
+                ReviewQualifier.fromString("StrongAgree"), ReviewStatus.fromString("Reviewed"),
+                ReviewResponse.fromString("NotAssigned"),"Good Job!");
+        tag = new Tag(9,"Math");
+        topic = new Topic(9,"CS");
         reviews.add(1);
         reviews.add(2);
         tags.add(1);
         tags.add(2);
         topics.add(1);
         topics.add(2);
-        submission=new Submission(0,"Math",status.fromString("Bid"),"a_url","f_url",true,reviews,topics,tags,0);
-    }
-
-    @After
-    public void tearDown() throws Exception {
+        submission=new Submission(0,"Math", StatusTypeSubmission.fromString("Bid"),
+                "a_url","f_url",true, reviews, topics, tags,0);
     }
 
     @Test
@@ -51,7 +47,7 @@ public class SubmissionTest {
 
     @Test
     public void getStatus() throws Exception {
-        assertTrue(submission.getStatus().equals(status.BID_STATUS));
+        assertTrue(submission.getStatus().equals(StatusTypeSubmission.BID_STATUS));
     }
 
     @Test
@@ -76,9 +72,8 @@ public class SubmissionTest {
 
     @Test
     public void getTopics() throws Exception {
-        ArrayList<Integer> lista=new ArrayList<>();
-        lista=submission.getTopics();
-        assertTrue(lista.equals(topics));
+        list = submission.getTopics();
+        assertTrue(list.equals(topics));
     }
 
     @Test
@@ -93,52 +88,47 @@ public class SubmissionTest {
 
     @Test
     public void addReview() throws Exception {
-        ArrayList<Integer> lista=new ArrayList<>();
-        submission.addReview(rr);
-        lista=submission.getReviews();
-        assertTrue(lista.contains(9));
-        assertTrue(lista.contains(1));
-        assertTrue(lista.contains(2));
+        submission.addReview(review);
+        list = submission.getReviews();
+        assertTrue(list.contains(9));
+        assertTrue(list.contains(1));
+        assertTrue(list.contains(2));
     }
 
     @Test
     public void removeReview() throws Exception {
-        ArrayList<Integer> lista=new ArrayList<>();
-        submission.removeReview(rr);
-        lista=submission.getReviews();
-        assertTrue(!lista.contains(9));
+        submission.removeReview(review);
+        list = submission.getReviews();
+        assertTrue(!list.contains(9));
     }
 
     @Test
     public void addTag() throws Exception {
-        ArrayList<Integer> lista=new ArrayList<>();
         submission.addTag(tag);
-        lista=submission.getTags();
-        assertTrue(lista.contains(9));
+        list = submission.getTags();
+        assertTrue(list.contains(9));
     }
 
     @Test
     public void removeTag() throws Exception {
-        ArrayList<Integer> lista=new ArrayList<>();
+
         submission.removeTag(tag);
-        lista=submission.getTags();
-        assertTrue(!lista.contains(9));
+        list = submission.getTags();
+        assertTrue(!list.contains(9));
     }
 
     @Test
     public void addTopic() throws Exception {
-        ArrayList<Integer> lista=new ArrayList<>();
         submission.addTopic(topic);
-        lista=submission.getTopics();
-        assertTrue(lista.contains(9));
+        list = submission.getTopics();
+        assertTrue(list.contains(9));
     }
 
     @Test
     public void removeTopic() throws Exception {
-        ArrayList<Integer> lista=new ArrayList<>();
         submission.removeTopic(topic);
-        lista=submission.getTopics();
-        assertTrue(!lista.contains(9));
+        list = submission.getTopics();
+        assertTrue(!list.contains(9));
     }
 
 }
