@@ -28,12 +28,15 @@
          <children>
             <Button mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: white;" text="Log In" />
             <Button mnemonicParsing="false" onAction="#onSignUpButtonClick" style="-fx-background-color: &quot;white&quot;;" text="Sign Up" />
-            <Label fx:id="usernameLabel" opacity="0.0" />
+            <Label fx:id="usernameLabel" opacity="0.0">
+               <padding>
+                  <Insets right="20.0" />
+               </padding></Label>
             <Button fx:id="userProfileButton" mnemonicParsing="false" onAction="#onProfileButtonClick" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%); -fx-background-radius: 0;">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../png_icons/new_user_icon.png" />
+                        <Image url="@../png_icons/new_user_icon_light.png" />
                      </image></ImageView>
                </graphic>
                <padding>
