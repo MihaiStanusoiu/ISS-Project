@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane fx:id="topBarBorderPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="60.0" minHeight="60.0" prefHeight="60.0" style="-fx-background-color: &quot;white&quot;;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTopBar">
    <left>
-      <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" onMouseClicked="#onLogoButtonClick" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="logoImageView" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="titleLabel" text="Comfery" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../png_icons/logo_icon.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="20.0" right="10.0" />
+               </HBox.margin></ImageView>
+            <Label text="COMFERY" />
          </children>
       </HBox>
    </left>
    <right>
-      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Button fx:id="logInButton" mnemonicParsing="false" text="Log In" />
-            <Button fx:id="signUpButton" mnemonicParsing="false" text="Sign Up" />
-            <Label fx:id="nameLabel" opacity="0.0" />
-            <Button fx:id="userProfileButton" mnemonicParsing="false">
+            <Button mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: white;" text="Log In" />
+            <Button mnemonicParsing="false" onAction="#onSignUpButtonClick" style="-fx-background-color: &quot;white&quot;;" text="Sign Up" />
+            <Label fx:id="usernameLabel" opacity="0.0" />
+            <Button fx:id="userProfileButton" mnemonicParsing="false" onAction="#onProfileButtonClick" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%); -fx-background-radius: 0;">
                <graphic>
-                  <ImageView fx:id="userProfileImageView" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/new_user_icon.png" />
+                     </image></ImageView>
                </graphic>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
             </Button>
          </children>
       </HBox>

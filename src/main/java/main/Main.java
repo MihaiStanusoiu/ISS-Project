@@ -8,8 +8,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import view.ViewType;
 
-
 @SpringBootApplication
+@SuppressWarnings("all")
 public class Main extends Application {
 
     private ConfigurableApplicationContext context;
@@ -45,7 +45,7 @@ public class Main extends Application {
      * Effect: Displays the frame scene of our application.
      */
     private void displayScene() {
-        stageManager.switchScene(ViewType.FRAME);
+        stageManager.switchScene(ViewType.CONFERENCES);
     }
 
     /**

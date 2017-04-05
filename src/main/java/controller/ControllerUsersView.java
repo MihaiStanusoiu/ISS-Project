@@ -6,23 +6,23 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- * Name:        Controller
- * Effect:      The main controller, just for testing.
- * Date:        02/04/2017
+ * Name:        ControllerUsersView
+ * Effect:      Lists all the available users.
+ * Date:        05/04/2017
  * Tested:      False
- * @implNote    To delete in the next iteration.
+ *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
 @Component
-public class Controller implements ControllerInterface {
+public class ControllerUsersView implements ControllerInterface {
 
-    private final StageManager manager;
+    @SuppressWarnings("all")
+    private StageManager manager;
 
-    @Autowired
-    @Lazy
-    public Controller(StageManager manager) {
+    @Autowired @Lazy
+    public ControllerUsersView(StageManager manager) {
         this.manager = manager;
     }
 

@@ -1,6 +1,9 @@
 package main;
 
-import controller.Controller;
+import controller.ControllerConferencesView;
+import controller.ControllerMenu;
+import controller.ControllerTopBar;
+import controller.ControllerUsersView;
 import javafx.stage.Stage;
 import loader.SpringFXMLLoader;
 import manager.StageManager;
@@ -22,6 +25,7 @@ import java.util.ResourceBundle;
 
 @Configuration
 @ComponentScan("loader")
+@SuppressWarnings("all")
 public class SpringConfiguration {
 
     private @Autowired SpringFXMLLoader loader;             // FXML Loader with DI.
@@ -29,8 +33,26 @@ public class SpringConfiguration {
 
     @Bean
     @Lazy
-    public Controller controller() {
-        return new Controller(stageManager);
+    public ControllerConferencesView controllerHome() {
+        return new ControllerConferencesView(stageManager);
+    }
+
+    @Bean
+    @Lazy
+    public ControllerUsersView controllerUsers() {
+        return new ControllerUsersView(stageManager);
+    }
+
+    @Bean
+    @Lazy
+    public ControllerTopBar controllerTopBar() {
+        return new ControllerTopBar(stageManager);
+    }
+
+    @Bean
+    @Lazy
+    public ControllerMenu controllerMenu() {
+        return new ControllerMenu(stageManager);
     }
 
     /** Local Resources Bundle */

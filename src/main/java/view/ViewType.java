@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 public enum ViewType implements ViewTypeInterface {
 
-    FRAME {
+    CONFERENCES {
 
         /** Application's Root Frame */
 
@@ -24,8 +24,25 @@ public enum ViewType implements ViewTypeInterface {
 
         @Override
         public String getFXMLFile() {
-            return "/fxml/ApplicationFrame.fxml";
+            return "/fxml/ConferencesView.fxml";
         }
+
+    },
+
+    USERS {
+
+        /** Application's Root Frame */
+
+        @Override
+        public String getTitle() {
+            return ViewType.getDataFromBundle("application.title");
+        }
+
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/UsersView.fxml";
+        }
+
     };
 
     /**
@@ -33,6 +50,7 @@ public enum ViewType implements ViewTypeInterface {
      * @param key: The data's key in properties file.
      * @return String value from application.properties external files.
      */
+    @SuppressWarnings("all")
     private static String getDataFromBundle(final String key) {
         return ResourceBundle.getBundle("application").getString(key);
     }
