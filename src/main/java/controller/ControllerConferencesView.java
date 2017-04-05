@@ -6,11 +6,11 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- * Name:        Controller
- * Effect:      The main controller, just for testing.
+ * Name:        ControllerConferencesView
+ * Effect:      Lists all the available conferences.
  * Date:        02/04/2017
  * Tested:      False
- * @implNote    To delete in the next iteration.
+ *
  * @author      Alexandru Stoica
  * @version     1.0
  */

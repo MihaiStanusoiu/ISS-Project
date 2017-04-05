@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- * Name:        {ClassName}
- * Effect:      {ClassEffect}
+ * Name:        ControllerUsersView
+ * Effect:      Lists all the available users.
  * Date:        05/04/2017
  * Tested:      False
  *
- * @author Alexandru Stoica
- * @version 1.0
+ * @author      Alexandru Stoica
+ * @version     1.0
  */
 
 @Component

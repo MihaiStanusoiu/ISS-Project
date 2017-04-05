@@ -12,6 +12,7 @@ import view.ViewType;
  * Effect:      Controls the main side navigation system.
  * Date:        05/04/2017
  * Tested:      False
+ *
  * @author      Alexandru Stoica
  * @version     1.0
  */
