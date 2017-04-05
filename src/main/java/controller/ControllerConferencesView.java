@@ -16,13 +16,13 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class Controller implements ControllerInterface {
+public class ControllerConferencesView implements ControllerInterface {
 
-    private final StageManager manager;
+    @SuppressWarnings("all")
+    private StageManager manager;
 
-    @Autowired
-    @Lazy
-    public Controller(StageManager manager) {
+    @Autowired @Lazy
+    public ControllerConferencesView(StageManager manager) {
         this.manager = manager;
     }
 
