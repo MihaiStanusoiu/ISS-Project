@@ -33,6 +33,9 @@ public class ControllerConferencesView implements ControllerInterface {
         this.manager = manager;
     }
 
+    @Override
+    public void initialize() { }
+
     /**
      * Effect: Sorts conferences by popularity
      * based on the number of members that participate at the conference.
@@ -60,4 +63,5 @@ public class ControllerConferencesView implements ControllerInterface {
         String searchTerm = searchTextField.getText();
         System.out.println(searchTerm);
     }
+
 }

@@ -29,9 +29,24 @@ public enum ViewType implements ViewTypeInterface {
 
     },
 
+    LOGIN {
+
+        /** Login View */
+
+        @Override
+        public String getTitle() {
+            return ViewType.getDataFromBundle("application.title");
+        }
+
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/LoginView.fxml";
+        }
+    },
+
     USERS {
 
-        /** Application's Root Frame */
+        /** Users View */
 
         @Override
         public String getTitle() {
