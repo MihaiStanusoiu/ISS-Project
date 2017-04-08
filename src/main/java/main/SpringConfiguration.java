@@ -42,6 +42,12 @@ public class SpringConfiguration {
 
     @Bean
     @Lazy
+    public ControllerConferenceItem controllerConferenceItem() {
+        return new ControllerConferenceItem(stageManager);
+    }
+
+    @Bean
+    @Lazy
     public ControllerTopBar controllerTopBar() {
         return new ControllerTopBar(stageManager);
     }
