@@ -1,11 +1,6 @@
 package database_domain;
 
-import domain.SectionMember;
-
 import javax.persistence.*;
-
-import java.util.ArrayList;
-
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**

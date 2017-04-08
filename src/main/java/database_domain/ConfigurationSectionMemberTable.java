@@ -1,11 +1,7 @@
 package database_domain;
 
-import domain.SectionMember;
-
 import javax.persistence.*;
-
 import java.util.ArrayList;
-
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
@@ -34,13 +30,13 @@ public class ConfigurationSectionMemberTable {
     private Boolean isListener;
 
     @OneToMany(mappedBy = "idConfiguration")
-    private ArrayList<SectionMember> sectionMembers = new ArrayList<>();
+    private ArrayList<SectionMemberTable> sectionMembers = new ArrayList<>();
 
     /**
      * Effect: Return the section members with this configuration.
      * @return [ArrayList<SectionMember>] : returns the list of members.
      */
-    public ArrayList<SectionMember> getSectionMembers() {
+    public ArrayList<SectionMemberTable> getSectionMembers() {
         return this.sectionMembers;
     }
 
@@ -48,7 +44,7 @@ public class ConfigurationSectionMemberTable {
      * Effect: Sets the list of members to a section configuration.
      * @param sectionMembers : new value for section members.
      */
-    public void setSectionMembers(ArrayList<SectionMember> sectionMembers) {
+    public void setSectionMembers(ArrayList<SectionMemberTable> sectionMembers) {
         this.sectionMembers = sectionMembers;
     }
 
