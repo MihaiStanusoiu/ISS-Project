@@ -1,6 +1,10 @@
 package database_domain;
 
+import domain.SectionMember;
+
 import javax.persistence.*;
+
+import java.util.ArrayList;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -15,7 +19,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "ConfigurationSectionMember")
 public class ConfigurationSectionMemberTable {
-
     @Id @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_configuration_section_member")
     private Integer id;
@@ -28,6 +31,17 @@ public class ConfigurationSectionMemberTable {
 
     @Column(name = "is_listener")
     private Boolean isListener;
+
+    @OneToMany(mappedBy = "idConfiguration")
+    private ArrayList<SectionMember> sectionMembers = new ArrayList<>();
+
+    public ArrayList<SectionMember> getSectionMembers() {
+        return this.sectionMembers;
+    }
+
+    public void setSectionMembers(ArrayList<SectionMember> sectionMembers) {
+        this.sectionMembers = sectionMembers;
+    }
 
     public ConfigurationSectionMemberTable(){
     }
