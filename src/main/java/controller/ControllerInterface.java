@@ -12,4 +12,11 @@ package controller;
 
 interface ControllerInterface {
 
+    /**
+     * Effect: Initialises the view by fetching data & setting up UI constraints.
+     * @implNote status: We implement constraints where only
+     * if the necessary constraints are not available in fxml [file/scene-builder].
+     */
+    void initialize();
+
 }

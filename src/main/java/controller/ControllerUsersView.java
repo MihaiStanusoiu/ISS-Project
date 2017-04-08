@@ -30,6 +30,9 @@ public class ControllerUsersView implements ControllerInterface {
         this.manager = manager;
     }
 
+    @Override
+    public void initialize() { }
+
     /**
      * Effect: Search function for users.
      * @implNote status: Unavailable at the moment.
