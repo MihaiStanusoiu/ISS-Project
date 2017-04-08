@@ -50,10 +50,10 @@ public class ControllerTopBar implements ControllerInterface {
     /**
      * Effect: Loads the SignUpView responsible
      * for the user's authentication process.
-     * @implNote status: Unavailable at the moment.
+     * @implNote status: In development
      */
     @FXML private void onSignUpButtonClick() {
-        System.out.println("Sign Up View");
+        manager.switchScene(ViewType.SIGN_UP);
     }
 
     /**

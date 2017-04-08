@@ -54,6 +54,12 @@ public class SpringConfiguration {
 
     @Bean
     @Lazy
+    public ControllerSignUp controllerSignUp() {
+        return new ControllerSignUp(stageManager);
+    }
+
+    @Bean
+    @Lazy
     public ControllerMenu controllerMenu() {
         return new ControllerMenu(stageManager);
     }
