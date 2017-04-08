@@ -22,10 +22,13 @@ import view.ViewType;
  */
 
 @Component
-public class ControllerLogin implements ControllerInterface {
+public class ControllerSignUp implements ControllerInterface {
 
     @FXML TextField usernameTextField;
     @FXML TextField passwordTextField;
+    @FXML TextField emailTextField;
+    @FXML TextField displayNameTextField;
+    @FXML TextField confirmTextField;
     @FXML Label errorLabel;
     @FXML ImageView backgroundImage;
     @FXML StackPane backgroundImagePane;
@@ -35,7 +38,7 @@ public class ControllerLogin implements ControllerInterface {
 
     @Autowired
     @Lazy
-    public ControllerLogin(StageManager manager) {
+    public ControllerSignUp(StageManager manager) {
         this.manager = manager;
     }
 
@@ -57,23 +60,25 @@ public class ControllerLogin implements ControllerInterface {
         manager.switchScene(ViewType.CONFERENCES);
     }
 
-
     /**
-     * Effect: Loads the SignUpView.
+     * Effect: Loads the LoginView.
      * @implNote status: In development.
      */
-    @FXML void onSignUpButtonClick() {
-        manager.switchScene(ViewType.SIGN_UP);
+    @FXML void onLoginButtonClick() {
+        manager.switchScene(ViewType.LOGIN);
     }
 
     /**
-     * Effect: The user logs in the system with account data.
+     * Effect: The user registers in the system with his data.
      * @implNote status: Unavailable at the moment.
      */
-    @FXML void onLoginButtonClick() {
+    @FXML void onSignUpButtonClick() {
+        String email = emailTextField.getText();
+        String displayName = displayNameTextField.getText();
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        System.out.println(username + password);
+        String confirm = confirmTextField.getText();
+        System.out.println(email + displayName + username + password + confirm);
     }
 
 }
