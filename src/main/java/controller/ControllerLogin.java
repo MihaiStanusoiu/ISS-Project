@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 import view.ViewType;
 
 /**
- * Name:        {ClassName}
- * Effect:      {ClassEffect}
+ * Name:        ControllerLogin
+ * Effect:      Controls the login-view.
  * Date:        08/04/2017
  * Tested:      False
  *
- * @author Alexandru Stoica
- * @version 1.0
+ * @author      Alexandru Stoica
+ * @version     1.0
  */
 
 @Component

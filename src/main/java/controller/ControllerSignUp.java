@@ -17,8 +17,8 @@ import view.ViewType;
  * Date:        08/04/2017
  * Tested:      False
  *
- * @author Alexandru Stoica
- * @version 1.0
+ * @author      Alexandru Stoica
+ * @version     1.0
  */
 
 @Component

@@ -15,7 +15,7 @@ public enum ViewType implements ViewTypeInterface {
 
     CONFERENCES {
 
-        /** Application's Root Frame */
+        /** Conferences View */
 
         @Override
         public String getTitle() {
@@ -28,6 +28,23 @@ public enum ViewType implements ViewTypeInterface {
         }
 
     },
+
+    CONFERENCE_ITEM {
+
+        /** Conference Item View */
+
+        @Override
+        public String getTitle() {
+            return ViewType.getDataFromBundle("application.title");
+        }
+
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/ConferenceItemView.fxml";
+        }
+
+    },
+
 
     LOGIN {
 

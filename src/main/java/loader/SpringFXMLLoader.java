@@ -20,8 +20,15 @@ import java.util.ResourceBundle;
 @Component
 public class SpringFXMLLoader {
 
-    private final ResourceBundle resourceBundle;        // local resources
-    private final ApplicationContext context;           // spring application context
+    /**
+     * Local Resource Source
+     */
+    private final ResourceBundle resourceBundle;
+
+    /**
+     * The Spring Application Context.
+     */
+    private final ApplicationContext context;
 
     /**
      * @param context: The spring's application context [ApplicationContext]
