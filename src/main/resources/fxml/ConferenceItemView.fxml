@@ -9,24 +9,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerConferenceItem">
+<BorderPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="item_controller.ControllerConferenceItem">
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
    <center>
-      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to bottom left, #4DE0EB 0%, #6A75D9 100%);">
+      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to bottom left, #4DE0EB 0%, #6A75D9 100%);" BorderPane.alignment="CENTER">
          <graphic>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+            <VBox minHeight="0.0" minWidth="0.0" prefHeight="235.0" prefWidth="235.0">
                <children>
-                  <Label fx:id="date" text="Date" textFill="WHITE">
+                  <Label fx:id="dateLabel" minHeight="0.0" minWidth="0.0" text="Date" textFill="WHITE">
                      <font>
                         <Font name="Proxima Nova Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="location" text="Location" textFill="WHITE">
+                  <Label fx:id="locationLabel" minHeight="0.0" minWidth="0.0" text="Location" textFill="WHITE">
                      <font>
                         <Font name="Proxima Nova Regular" size="16.0" />
                      </font>
                   </Label>
-                  <Pane VBox.vgrow="ALWAYS" />
-                  <Label fx:id="acronym" alignment="BOTTOM_LEFT" contentDisplay="CENTER" opacity="0.4" text="ACRON">
+                  <Pane minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS" />
+                  <Label fx:id="acronymLabel" minHeight="0.0" minWidth="0.0" opacity="0.5" text="ACRON">
                      <font>
                         <Font name="Proxima Nova Bold" size="30.0" />
                      </font>
@@ -34,7 +37,7 @@
                         <Blend mode="OVERLAY" />
                      </effect>
                   </Label>
-                  <Label fx:id="name" alignment="BOTTOM_LEFT" text="Name" textFill="WHITE">
+                  <Label fx:id="nameLabel" minHeight="0.0" minWidth="0.0" text="Name" textFill="WHITE">
                      <font>
                         <Font name="Proxima Nova Regular" size="16.0" />
                      </font>
@@ -44,7 +47,4 @@
          </graphic>
       </Button>
    </center>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
 </BorderPane>
