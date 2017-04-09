@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerSignUp">
+   <children>
+      <VBox alignment="CENTER" minWidth="350.0">
+         <children>
+            <HBox alignment="CENTER" onMouseClicked="#onLogoButtonClick">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/logo_icon.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="20.0" right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="COMFERY">
+                     <font>
+                        <Font name="Proxima Nova Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="70.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
+               <children>
+                  <TextField fx:id="emailTextField" promptText="Email" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Proxima Nova Regular" size="16.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/email_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
+               <children>
+                  <TextField fx:id="displayNameTextField" promptText="Display Name" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Proxima Nova Regular" size="16.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/profile_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
+               <children>
+                  <TextField fx:id="usernameTextField" promptText="Username" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Proxima Nova Regular" size="16.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/profile_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
+               <children>
+                  <TextField fx:id="passwordTextField" promptText="Password" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Proxima Nova Regular" size="16.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/key_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
+               <children>
+                  <TextField fx:id="confirmTextField" promptText="Confirm Password" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Proxima Nova Regular" size="16.0" />
+                     </font>
+                  </TextField>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/key_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </HBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="60.0" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%)(-135deg, #4DE0EB 0%, #6A75D9 100%);" text="SIGN UP" textFill="WHITE">
+               <font>
+                  <Font name="Proxima Nova Bold" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+               <effect>
+                  <DropShadow color="#0044ff33" height="80.0" offsetY="10.0" radius="39.5" width="80.0" />
+               </effect>
+            </Button>
+            <Label fx:id="errorLabel" textFill="#8f8f8f">
+               <font>
+                  <Font name="Proxima Nova Regular" size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER">
+               <children>
+                  <Pane maxHeight="1.0" minHeight="1.0" prefHeight="1.0" prefWidth="100.0" style="-fx-background-color: black;" />
+                  <Label text="or">
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                  </Label>
+                  <Pane maxHeight="1.0" minHeight="1.0" prefHeight="1.0" prefWidth="100.0" style="-fx-background-color: black;" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </HBox>
+            <Label text="Connect with your account on Comfery" textFill="#8f8f8f">
+               <font>
+                  <Font name="Proxima Nova Regular" size="16.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: transparent;" text="Login" textFill="#6586dc">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+      </VBox>
+      <StackPane fx:id="backgroundImagePane" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="SOMETIMES">
+         <children>
+            <ImageView fx:id="backgroundImage" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+               <image>
+                  <Image url="@../images/background_auth.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" prefHeight="132.0" prefWidth="713.0" text="Everything you need to start your conference with confidence." textFill="WHITE" wrapText="true" StackPane.alignment="BOTTOM_LEFT">
+               <font>
+                  <Font name="Proxima Nova Bold" size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="30.0" left="30.0" />
+               </padding>
+            </Label>
+         </children>
+      </StackPane>
+   </children>
+</HBox>

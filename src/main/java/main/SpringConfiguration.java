@@ -1,9 +1,6 @@
 package main;
 
-import controller.ControllerConferencesView;
-import controller.ControllerMenu;
-import controller.ControllerTopBar;
-import controller.ControllerUsersView;
+import controller.*;
 import javafx.stage.Stage;
 import loader.SpringFXMLLoader;
 import manager.StageManager;
@@ -47,6 +44,18 @@ public class SpringConfiguration {
     @Lazy
     public ControllerTopBar controllerTopBar() {
         return new ControllerTopBar(stageManager);
+    }
+
+    @Bean
+    @Lazy
+    public ControllerLogin controllerLogin() {
+        return new ControllerLogin(stageManager);
+    }
+
+    @Bean
+    @Lazy
+    public ControllerSignUp controllerSignUp() {
+        return new ControllerSignUp(stageManager);
     }
 
     @Bean

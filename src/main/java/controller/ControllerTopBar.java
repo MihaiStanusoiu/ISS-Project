@@ -35,22 +35,25 @@ public class ControllerTopBar implements ControllerInterface {
         this.manager = manager;
     }
 
+    @Override
+    public void initialize() { }
+
     /**
      * Effect: Loads the LoginView responsible
      * for the user's authentication process.
-     * @implNote status: Unavailable at the moment.
+     * @implNote status: In development
      */
     @FXML private void onLoginButtonClick() {
-        System.out.println("Login View");
+        manager.switchScene(ViewType.LOGIN);
     }
 
     /**
      * Effect: Loads the SignUpView responsible
      * for the user's authentication process.
-     * @implNote status: Unavailable at the moment.
+     * @implNote status: In development
      */
     @FXML private void onSignUpButtonClick() {
-        System.out.println("Sign Up View");
+        manager.switchScene(ViewType.SIGN_UP);
     }
 
     /**
@@ -68,7 +71,7 @@ public class ControllerTopBar implements ControllerInterface {
      * @implNote status: In development.
      */
     @FXML private void onProfileButtonClick() {
-        System.out.println("Profile View");
+        System.out.println("Profile User View");
     }
 
 }

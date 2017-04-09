@@ -1,12 +1,17 @@
 package controller;
 
+import domain.Conference;
+import item_controller.ControllerConferenceItem;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import loader.LoaderException;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import pagination.PaginationBuilder;
+import view.ViewType;
+import java.util.Date;
 
 /**
  * Name:        ControllerConferencesView
@@ -24,6 +29,7 @@ public class ControllerConferencesView implements ControllerInterface {
     @FXML private Button recentButton;
     @FXML private Button popularButton;
     @FXML private TextField searchTextField;
+    @FXML private Pagination pagination;
 
     @SuppressWarnings("all")
     private StageManager manager;
@@ -31,6 +37,24 @@ public class ControllerConferencesView implements ControllerInterface {
     @Autowired @Lazy
     public ControllerConferencesView(StageManager manager) {
         this.manager = manager;
+    }
+
+    /**
+     * Effect: Builds the pagination and it's data.
+     */
+    @Override
+    public void initialize() {
+        PaginationBuilder<Conference, ControllerConferenceItem> builder = new PaginationBuilder<>(2,4);
+            // This part is for testing the pagination's builder with mocking data.
+        Conference[] conferences = {
+                new Conference(1, "Test", "3232", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date())
+        };
+        builder.setElements(conferences);
+        builder.setView(ViewType.CONFERENCE_ITEM);
+        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+        pagination.setPageFactory(builder::createPage);
+
     }
 
     /**
@@ -60,4 +84,5 @@ public class ControllerConferencesView implements ControllerInterface {
         String searchTerm = searchTextField.getText();
         System.out.println(searchTerm);
     }
+
 }

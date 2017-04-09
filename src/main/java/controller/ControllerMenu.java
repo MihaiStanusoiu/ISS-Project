@@ -27,6 +27,9 @@ public class ControllerMenu implements ControllerInterface {
         this.manager = manager;
     }
 
+    @Override
+    public void initialize() { }
+
     /**
      * Effect: Loads the ConferencesView responsible
      * for listing all the available conferences.
