@@ -12,47 +12,47 @@ import javax.persistence.*;
  */
 
 @Embeddable
-public class SubmissionTopicTableItems
-{
+@SuppressWarnings("unused")
+public class SubmissionTopicTableItems {
+
     @Column(name = "id_submission")
-    private Integer id_submission;
+    private Integer idSubmission;
 
     @Column(name = "id_topic")
-    private Integer id_topic;
+    private Integer idTopic;
 
-    public SubmissionTopicTableItems() {
-    }
+    public SubmissionTopicTableItems() { }
 
     /**
      * Effect: Getter for the id of the topic.
      * @return Integer : returns id_submission.
      */
-    public Integer getId_submission() {
-        return id_submission;
+    public Integer getIdSubmission() {
+        return idSubmission;
     }
 
     /**
      * Effect: Sets the id_submission to the given value
-     * @param id_submission: new value for id_submission
+     * @param idSubmission: new value for id_submission
      */
-    public void setId_submission(Integer id_submission) {
-        this.id_submission = id_submission;
+    public void setIdSubmission(Integer idSubmission) {
+        this.idSubmission = idSubmission;
     }
 
     /**
      * Effect: Getter for the id of the topic.
      * @return Integer : returns id_topic.
      */
-    public Integer getId_topic() {
-        return id_topic;
+    public Integer getIdTopic() {
+        return idTopic;
     }
 
     /**
      * Effect: Sets the id_topic to the given value
-     * @param id_topic: new value for id_topic
+     * @param idTopic: new value for id_topic
      */
-    public void setId_topic(Integer id_topic) {
-        this.id_topic = id_topic;
+    public void setIdTopic(Integer idTopic) {
+        this.idTopic = idTopic;
     }
 
 }

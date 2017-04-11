@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
  */
 
 @Embeddable
+@SuppressWarnings("unused")
 public class ReviewerId {
 
     @ManyToOne

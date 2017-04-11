@@ -1,7 +1,5 @@
 package database_domain;
 
-import domain.Submission;
-
 import javax.persistence.*;
 
 /**
@@ -15,6 +13,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "SubmissionTag")
+@SuppressWarnings("unused")
 public class SubmissionTagTable {
 
     @EmbeddedId
@@ -28,8 +27,7 @@ public class SubmissionTagTable {
     @JoinColumn(name = "id_tag")
     private TagTable idTag;
 
-    public SubmissionTagTable() {
-    }
+    public SubmissionTagTable() { }
 
     /**
      * Effect: Return the id of a submission-tag.
@@ -41,7 +39,7 @@ public class SubmissionTagTable {
 
     /**
      * Effect: Sets the id of a submission-tag.
-     * @param[SubmissionTableId] idSubmission: new value for id
+     * @param id [SubmissionTableId]: new value for id
      */
     public void setId(SubmissionTagTableId id) {
         this.id = id;
@@ -57,7 +55,7 @@ public class SubmissionTagTable {
 
     /**
      * Effect: Sets the submission of a submission-tag.
-     * @param[SubmissionTable] idSubmission: new value for submission
+     * @param idSubmission idSubmission: new value for submission
      */
     public void setIdSubmission(SubmissionTable idSubmission) {
         this.idSubmission = idSubmission;
@@ -73,7 +71,7 @@ public class SubmissionTagTable {
 
     /**
      * Effect: Sets the tag of a submission-tag.
-     * @param[TagTable] idTag: new value for tag
+     * @param idTag [TagTable]: new value for tag
      */
     public void setIdTag(TagTable idTag) {
         this.idTag = idTag;

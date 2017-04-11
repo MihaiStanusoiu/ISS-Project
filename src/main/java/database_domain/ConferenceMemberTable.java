@@ -10,11 +10,14 @@ import javax.persistence.*;
  * @author      Stanusoiu Mihai-Teodor
  * @version     1.0
  */
+
 @Entity
 @Table(name="ConferenceMember")
+@SuppressWarnings("unused")
 public class ConferenceMemberTable {
+
     @EmbeddedId
-    ConferenceMemberTableId PKId;
+    private ConferenceMemberTableId pkId;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -28,19 +31,22 @@ public class ConferenceMemberTable {
     @JoinColumn(name = "id_configuration")
     private ConfigurationConferenceMemberTable configurationConferenceMember;
 
-    public ConferenceMemberTable() {
-    }
+    public ConferenceMemberTable() { }
 
     /**
      * Effect: Returns the composite primary key id of the conference member
      * @return [ConferenceMemberTableId]: composite id of the conference member
      */
-    public ConferenceMemberTableId getPKId() {
-        return PKId;
+    public ConferenceMemberTableId getPkId() {
+        return pkId;
     }
 
+    /**
+     * Effect: Sets the primary key id of the conference member.
+     * @param pkId [ConferenceMemberTableId]: the primary key
+     */
     public void setPkId(ConferenceMemberTableId pkId) {
-        this.PKId = pkId;
+        this.pkId = pkId;
     }
 
     /**
@@ -50,6 +56,7 @@ public class ConferenceMemberTable {
     public UserTable getUser() {
         return user;
     }
+
     /**
      * Effect: Sets the user to the given value
      * @param user [UserTable]: new value for the user
@@ -65,6 +72,7 @@ public class ConferenceMemberTable {
     public ConferenceTable getConferenceTable() {
         return conferenceTable;
     }
+
     /**
      * Effect: Sets the conference to the given value
      * @param conferenceTable [ConferenceTable]: new value for the password

@@ -1,7 +1,5 @@
 package database_domain;
 
-import domain.UserType;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 
@@ -13,9 +11,12 @@ import java.util.ArrayList;
  * @author      Stanusoiu Mihai-Teodor
  * @version     1.0
  */
+
 @Entity
 @Table(name = "User")
+@SuppressWarnings("unused")
 public class UserTable {
+
     @Id
     @GeneratedValue
     @Column(name = "id_user")
@@ -43,7 +44,7 @@ public class UserTable {
     private String location;
 
     @OneToMany(mappedBy = "idUser")
-    private ArrayList<NotificationTable> notifications = new ArrayList<NotificationTable>();
+    private ArrayList<NotificationTable> notifications = new ArrayList<>();
 
     public UserTable() {}
 

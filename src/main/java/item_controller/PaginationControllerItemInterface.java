@@ -28,7 +28,7 @@ public interface PaginationControllerItemInterface<T> {
      * Effect: Adds an element to the item's view.
      *
      * <p>The element is used to populate the date the item's view,
-     * but can also be passed forword from the item's view to
+     * but can also be passed forward from the item's view to
      * another view.</p>
      *
      * @param element: The required element for item's view

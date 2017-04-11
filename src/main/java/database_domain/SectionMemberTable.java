@@ -12,6 +12,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "SectionMember")
+@SuppressWarnings("unused")
 public class SectionMemberTable {
 
     @EmbeddedId
@@ -21,8 +22,7 @@ public class SectionMemberTable {
     @JoinColumn(name = "id_configuration")
     private Integer idConfiguration;
 
-    public SectionMemberTable(){
-    }
+    public SectionMemberTable() { }
 
     /**
      * Effect: Return the id of a section member.

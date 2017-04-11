@@ -79,6 +79,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
      * Effect: Sets the data based on an ArrayList.
      * @param elements: The data we need to set in the pagination.
      */
+    @SuppressWarnings("unused")
     public void setElements(ArrayList<T> elements) {
         this.elements = elements;
     }
@@ -87,6 +88,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
      * Effect: Sets the data based on a Collection.
      * @param elements: The data we need to set in the pagination.
      */
+    @SuppressWarnings("unused")
     public void setElements(Collection<T> elements) {
         elements.forEach(element -> this.elements.add(element));
     }

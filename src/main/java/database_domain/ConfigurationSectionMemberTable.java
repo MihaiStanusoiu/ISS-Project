@@ -15,7 +15,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "ConfigurationSectionMember")
+@SuppressWarnings("unused")
 public class ConfigurationSectionMemberTable {
+
     @Id @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_configuration_section_member")
     private Integer id;

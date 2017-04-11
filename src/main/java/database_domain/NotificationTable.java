@@ -14,6 +14,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Notification")
+@SuppressWarnings("unused")
 public class NotificationTable {
 
     @Id
@@ -43,7 +44,7 @@ public class NotificationTable {
 
     /**
      * Effect: Sets the id of a notification.
-     * @param[Integer] id: new value for id
+     * @param id [Integer] id: new value for id
      */
     public void setId(Integer id) {
         this.id = id;
@@ -59,7 +60,7 @@ public class NotificationTable {
 
     /**
      * Effect: Sets the text of a notification.
-     * @param[String] id: new value for text
+     * @param text [String] id: new value for text
      */
     public void setText(String text) {
         this.text = text;
@@ -67,7 +68,7 @@ public class NotificationTable {
 
     /**
      * Effect: Return the payment type of a notification.
-     * @return [Boolean] : returns the payment type of a notification.
+     * @return [Boolean]: returns the payment type of a notification.
      */
     public Boolean getPaymentType() {
         return paymentType;
@@ -75,7 +76,7 @@ public class NotificationTable {
 
     /**
      * Effect: Sets the payment type of a notification.
-     * @param[Boolean] id: new value for payment type
+     * @param paymentType [Boolean]: new value for payment type
      */
     public void setPaymentType(Boolean paymentType) {
         this.paymentType = paymentType;
@@ -83,7 +84,7 @@ public class NotificationTable {
 
     /**
      * Effect: Return the user of a notification.
-     * @return [UserTable] : returns the user of a notification.
+     * @return [UserTable]: returns the user of a notification.
      */
     public UserTable getUser() {
         return user;
@@ -91,7 +92,7 @@ public class NotificationTable {
 
     /**
      * Effect: Sets the user of a notification.
-     * @param[UserTable] id: new value for user
+     * @param user [UserTable]: new value for user
      */
     public void setUser(UserTable user) {
         this.user = user;
