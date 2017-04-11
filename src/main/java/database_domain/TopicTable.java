@@ -15,33 +15,34 @@ import java.util.ArrayList;
 
 @Entity
 @Table(name = "Topic")
-public class TopicTable
-{
+@SuppressWarnings("unused")
+public class TopicTable {
+
     @Id @GeneratedValue
     @Column(name = "id_topic")
-    private Integer id_topic;
+    private Integer idTopic;
 
     @Column(name = "word")
     private String word;
 
     private ArrayList<SubmissionTopicTable> topicSubmissionTopics = new ArrayList<>();
 
-    public TopicTable() {}
+    public TopicTable() { }
 
     /**
      * Effect: Getter for the id_topic of the topic.
-     * @return Integer : returns id_topic.
+     * @return Integer : returns idTopic.
      */
-    public Integer getId_topic() {
-        return id_topic;
+    public Integer getIdTopic() {
+        return idTopic;
     }
 
     /**
      * Effect: Sets the id_topic to the given value
-     * @param id_topic: new value for id_topic
+     * @param idTopic: new value for idTopic
      */
-    public void setId_topic(Integer id_topic) {
-        this.id_topic = id_topic;
+    public void setIdTopic(Integer idTopic) {
+        this.idTopic = idTopic;
     }
 
     /**
@@ -76,4 +77,5 @@ public class TopicTable
     public void setTopicSubmissionTopics(ArrayList<SubmissionTopicTable> topicSubmissionTopics) {
         this.topicSubmissionTopics = topicSubmissionTopics;
     }
+
 }

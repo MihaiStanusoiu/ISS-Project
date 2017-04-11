@@ -1,6 +1,7 @@
 package database_domain;
 
 import javax.persistence.*;
+
 /**
  * Name:         AuthorSubmissionTable
  * Effect:       Class for database_domain AuthorSubmission table
@@ -13,10 +14,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "AuthorSubmission")
-public class AuthorSubmissionTable
-{
+@SuppressWarnings("unused")
+public class AuthorSubmissionTable {
+
     @EmbeddedId
-    AuthorSubmissionTableItems PKid;
+    private AuthorSubmissionTableItems pkId;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -27,28 +29,27 @@ public class AuthorSubmissionTable
     private SubmissionTable submissionTable;
 
     @Column(name = "is_owner")
-    private Boolean is_owner;
+    private Boolean isOwner;
 
-    @Column(name = "presentation_url")
-    private String presentation_url;
+    @Column(name = "presentation-url")
+    private String presentationUrl;
 
-    public AuthorSubmissionTable() {
-    }
+    public AuthorSubmissionTable() { }
 
     /**
      * Effect: Getter for the primary key.
-     * @return AuthorSubmissionTableItems : returns PKid.
+     * @return AuthorSubmissionTableItems : returns pkId.
      */
-    public AuthorSubmissionTableItems getPKid() {
-        return PKid;
+    public AuthorSubmissionTableItems getPkId() {
+        return pkId;
     }
 
     /**
-     * Effect: Sets the PKid to the given value
-     * @param PKid: new value for PKid
+     * Effect: Sets the pkId to the given value
+     * @param pkId: new value for pkId
      */
-    public void setPKid(AuthorSubmissionTableItems PKid) {
-        this.PKid = PKid;
+    public void setPkId(AuthorSubmissionTableItems pkId) {
+        this.pkId = pkId;
     }
 
     /**
@@ -84,34 +85,34 @@ public class AuthorSubmissionTable
     }
 
     /**
-     * Effect: Getter for the is_owner property.
-     * @return Boolean : returns is_owner.
+     * Effect: Getter for the isOwner property.
+     * @return Boolean : returns isOwner.
      */
-    public Boolean getIs_owner() {
-        return is_owner;
+    public Boolean getIsOwner() {
+        return isOwner;
     }
 
     /**
-     * Effect: Sets the is_owner property to the given value
-     * @param is_owner: new value for is_owner
+     * Effect: Sets the isOwner property to the given value
+     * @param isOwner: new value for isOwner
      */
-    public void setIs_owner(Boolean is_owner) {
-        this.is_owner = is_owner;
+    public void setIsOwner(Boolean isOwner) {
+        this.isOwner = isOwner;
     }
 
     /**
-     * Effect: Getter for the presentation_url.
-     * @return String : returns presentation_url.
+     * Effect: Getter for the presentationUrl.
+     * @return String : returns presentationUrl.
      */
-    public String getPresentation_url() {
-        return presentation_url;
+    public String getPresentationUrl() {
+        return presentationUrl;
     }
 
     /**
-     * Effect: Sets the presentation_url to the given value
-     * @param presentation_url: new value for presentation_url
+     * Effect: Sets the presentationUrl to the given value
+     * @param presentationUrl: new value for presentationUrl
      */
-    public void setPresentation_url(String presentation_url) {
-        this.presentation_url = presentation_url;
+    public void setPresentationUrl(String presentationUrl) {
+        this.presentationUrl = presentationUrl;
     }
 }

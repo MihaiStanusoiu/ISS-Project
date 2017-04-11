@@ -13,6 +13,7 @@ import javax.persistence.Embeddable;
  */
 
 @Embeddable
+@SuppressWarnings("unused")
 public class SubmissionTagTableId {
 
     @Column(name = "id_tag")
@@ -21,7 +22,7 @@ public class SubmissionTagTableId {
     @Column(name = "id_submission")
     private Integer idSubmission;
 
-    public SubmissionTagTableId() {}
+    public SubmissionTagTableId() { }
 
     /**
      * Effect: Return the id of a tag if a submission-tag.
@@ -33,7 +34,7 @@ public class SubmissionTagTableId {
 
     /**
      * Effect: Sets the id of the tag of the submission-tag.
-     * @param[Integer] id_tag: new value for tag id
+     * @param idTag [Integer]: new value for tag id
      */
     public void setIdTag(Integer idTag) {
         this.idTag = idTag;
@@ -41,7 +42,7 @@ public class SubmissionTagTableId {
 
     /**
      * Effect: Return the id of a submission if a submission-tag.
-     * @return [Integer] : returns the id of a submission.
+     * @return [Integer]: returns the id of a submission.
      */
     public Integer getIdSubmission() {
         return idSubmission;
@@ -49,7 +50,7 @@ public class SubmissionTagTableId {
 
     /**
      * Effect: Sets the id of the submission of the submission-tag.
-     * @param[Integer] id_tag: new value for submission id
+     * @param idSubmission [Integer]: new value for submission id
      */
     public void setIdSubmission(Integer idSubmission) {
         this.idSubmission = idSubmission;

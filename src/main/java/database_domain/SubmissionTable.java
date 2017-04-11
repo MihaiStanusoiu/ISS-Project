@@ -17,6 +17,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "Submission")
+@SuppressWarnings("unused")
 public class SubmissionTable {
 
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -46,7 +47,7 @@ public class SubmissionTable {
     private ArrayList<SubmissionTagTable> submissionTags;
 
     @OneToMany(mappedBy = "idSubmission")
-    private ArrayList<SubmissionTpoicTable> submissionTopic;
+    private ArrayList<SubmissionTopicTable> submissionTopic;
 
     @OneToMany(mappedBy = "idSubmission")
     private ArrayList<AuthorSubmissionTable> submissionAuthors;
@@ -191,7 +192,7 @@ public class SubmissionTable {
      * Effect: Return the topics of this submission.
      * @return [ArrayList<SubmissionTopicTable>]: returns the topics of a Submission.
      */
-    public ArrayList<SubmissionTpoicTable> getSubmissionTopic() {
+    public ArrayList<SubmissionTopicTable> getSubmissionTopic() {
         return submissionTopic;
     }
 
@@ -199,7 +200,7 @@ public class SubmissionTable {
      * Effect: Sets the topics of a submission.
      * @param submissionTopic: new value for submission topics.
      */
-    public void setSubmissionTopic(ArrayList<SubmissionTpoicTable> submissionTopic) {
+    public void setSubmissionTopic(ArrayList<SubmissionTopicTable> submissionTopic) {
         this.submissionTopic = submissionTopic;
     }
 
@@ -228,7 +229,7 @@ public class SubmissionTable {
     }
 
     /**
-     * Effect: Sets the revewiers of a submission.
+     * Effect: Sets the reviewers of a submission.
      * @param reviewers: new value for submission reviewers.
      */
     public void setReviewers(ArrayList<ReviewerTable> reviewers) {

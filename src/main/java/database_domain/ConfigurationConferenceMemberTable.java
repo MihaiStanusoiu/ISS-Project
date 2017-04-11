@@ -8,12 +8,13 @@ import static javax.persistence.GenerationType.IDENTITY;
  * Effect:       Class for the db table ConfigurationConferenceMember.
  * Date:         08/04/2017
  * Tested:       False
- * @author       Tiron Andreea- Ecaterina
+ * @author       Tiron Andreea-Ecaterina
  * @version      1.0
  */
 
 @Entity
 @Table(name = "ConfigurationConferenceMember")
+@SuppressWarnings("unused")
 public class ConfigurationConferenceMemberTable {
 
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -24,10 +25,10 @@ public class ConfigurationConferenceMemberTable {
     private Boolean isChair;
 
     @Column(name = "is_cochair")
-    private Boolean isCochair;
+    private Boolean isCoChair;
 
     @Column(name = "is_pcmember")
-    private Boolean isPcmember;
+    private Boolean isPCMember;
 
 
     public ConfigurationConferenceMemberTable(){
@@ -53,6 +54,7 @@ public class ConfigurationConferenceMemberTable {
      * Effect: Return whether the user is a chair.
      * @return [Boolean] : returns true if it is a chair, false otherwise.
      */
+    @SuppressWarnings("unused")
     public Boolean getChair() {
         return isChair;
     }
@@ -61,6 +63,7 @@ public class ConfigurationConferenceMemberTable {
      * Effect: Sets whether the user is a chair.
      * @param chair: new value for chair.
      */
+    @SuppressWarnings("unused")
     public void setChair(Boolean chair) {
         isChair = chair;
     }
@@ -69,32 +72,36 @@ public class ConfigurationConferenceMemberTable {
      * Effect: Return whether the user is a co-chair.
      * @return [Boolean] : returns true if it is a co-chair, false otherwise.
      */
+    @SuppressWarnings("unused")
     public Boolean getCochair() {
-        return isCochair;
+        return isCoChair;
     }
 
     /**
      * Effect: Sets whether the user is a co-chair.
-     * @param cochair: new value for co-chair.
+     * @param coChair: new value for co-chair.
      */
-    public void setCochair(Boolean cochair) {
-        isCochair = cochair;
+    @SuppressWarnings("unused")
+    public void setCoChair(Boolean coChair) {
+        isCoChair = coChair;
     }
 
     /**
      * Effect: Return whether the user is a pc-member.
      * @return [Boolean] : returns true if it is a pc-member, false otherwise.
      */
-    public Boolean getPcmember() {
-        return isPcmember;
+    @SuppressWarnings("unused")
+    public Boolean getPCMember() {
+        return isPCMember;
     }
 
     /**
      * Effect: Sets whether the user is a pc-member.
-     * @param pcmember: new value for pc-member.
+     * @param pcMember: new value for pc-member.
      */
-    public void setPcmember(Boolean pcmember) {
-        isPcmember = pcmember;
+    @SuppressWarnings("unused")
+    public void setPCMember(Boolean pcMember) {
+        isPCMember = pcMember;
     }
 
 }

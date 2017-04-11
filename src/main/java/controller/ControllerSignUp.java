@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import view.ViewType;
 
 /**
- * Name:        {ClassName}
- * Effect:      {ClassEffect}
+ * Name:        ControllerSignUp
+ * Effect:      Controller view for SignUp fxml view.
  * Date:        08/04/2017
  * Tested:      False
  *

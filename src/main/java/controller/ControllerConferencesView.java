@@ -4,7 +4,6 @@ import domain.Conference;
 import item_controller.ControllerConferenceItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import loader.LoaderException;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -54,7 +53,6 @@ public class ControllerConferencesView implements ControllerInterface {
         builder.setView(ViewType.CONFERENCE_ITEM);
         pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
         pagination.setPageFactory(builder::createPage);
-
     }
 
     /**

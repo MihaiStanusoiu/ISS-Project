@@ -19,6 +19,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "Conference")
+@SuppressWarnings("unused")
 public class ConferenceTable {
 
     @Id@GeneratedValue(strategy = IDENTITY)
@@ -67,7 +68,7 @@ public class ConferenceTable {
     /**
      * Empty constructor
      */
-    public ConferenceTable(){}
+    public ConferenceTable() { }
 
     /**
      * Effect: Return the id of this conference.

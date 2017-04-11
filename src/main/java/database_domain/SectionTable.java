@@ -15,6 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "Section")
+@SuppressWarnings("unused")
 public class SectionTable {
 
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -43,8 +44,7 @@ public class SectionTable {
     @Column(name = "seats")
     private Integer seats;
 
-    public SectionTable(){
-    }
+    public SectionTable() { }
 
     /**
      * Effect: Return the id of a section.
