@@ -1,6 +1,6 @@
 package loader;
 
-import item_controller.ControllerItemInterface;
+import itemcontroller.ControllerItemInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import org.springframework.beans.factory.annotation.Autowired;

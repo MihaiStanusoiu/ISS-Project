@@ -1,4 +1,4 @@
-package item_controller;
+package itemcontroller;
 
 import controller.ControllerInterface;
 import domain.Conference;

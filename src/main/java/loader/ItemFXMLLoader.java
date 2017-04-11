@@ -1,6 +1,6 @@
 package loader;
 
-import item_controller.PaginationControllerItemInterface;
+import itemcontroller.PaginationControllerItemInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import manager.StageManager;

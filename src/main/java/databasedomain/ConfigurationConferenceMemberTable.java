@@ -1,4 +1,4 @@
-package database_domain;
+package databasedomain;
 
 import javax.persistence.*;
 import static javax.persistence.GenerationType.IDENTITY;

@@ -1,10 +1,10 @@
-package database_domain;
+package databasedomain;
 
 import javax.persistence.*;
 
 /**
  * Name:         AuthorSubmissionTableItems
- * Effect:       Class for database_domain AuthorSubmission table composite PK
+ * Effect:       Class for databasedomain AuthorSubmission table composite PK
  * Date:         4/8/2017
  * Tested:       False
  *
