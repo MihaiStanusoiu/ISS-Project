@@ -14,7 +14,7 @@
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
    <center>
-      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to bottom left, #4DE0EB 0%, #6A75D9 100%);" BorderPane.alignment="CENTER">
+      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onItemClick" style="-fx-background-color: linear-gradient(to bottom left, #4DE0EB 0%, #6A75D9 100%);" BorderPane.alignment="CENTER">
          <graphic>
             <VBox minHeight="0.0" minWidth="0.0" prefHeight="235.0" prefWidth="235.0">
                <children>

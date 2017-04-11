@@ -14,8 +14,9 @@ import java.util.ArrayList;
 
 @Entity
 @Table(name = "Tag")
-public class TagTable
-{
+@SuppressWarnings("unused")
+public class TagTable {
+
     @Id
     @GeneratedValue
     @Column(name = "id_tag")
@@ -25,13 +26,13 @@ public class TagTable
     private String word;
 
     @OneToMany(mappedBy="idTag")
-    private ArrayList<SubmissionTagTable> tagSubmissionTags = new ArrayList<SubmissionTagTable>();
+    private ArrayList<SubmissionTagTable> tagSubmissionTags = new ArrayList<>();
 
-    public TagTable() {}
+    public TagTable() { }
 
     /**
      * Effect: Return the id of tag.
-     * @return [Integer] : returns the id of tag.
+     * @return [Integer]: returns the id of tag.
      */
     public Integer getId() {
         return id;
@@ -39,15 +40,15 @@ public class TagTable
 
     /**
      * Effect: Sets the id of tag.
-     * @param[Integer] id: new value for id
+     * @param id [Integer]: new value for id
      */
-    public void setId( Integer id ) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     /**
      * Effect: Return the word of the tag.
-     * @return [String] : returns the word of the tag.
+     * @return [String]: returns the word of the tag.
      */
     public String getWord() {
         return word;
@@ -55,7 +56,7 @@ public class TagTable
 
     /**
      * Effect: Sets the word of the tag.
-     * @param[Integer] word: new value for the word
+     * @param word [Integer]: new value for the word
      */
     public void setWord(String word) {
         this.word = word;
@@ -63,7 +64,7 @@ public class TagTable
 
     /**
      * Effect: Return the submission tags of the tag.
-     * @return [ ArrayList<SubmissionTagTable>] : returns the submission tags of the tag.
+     * @return [ArrayList<SubmissionTagTable>]: returns the submission tags of the tag.
      */
     public ArrayList<SubmissionTagTable> getTagSubmissionTags() {
         return tagSubmissionTags;
@@ -71,9 +72,10 @@ public class TagTable
 
     /**
      * Effect: Sets the submission tags of the tag.
-     * @param[ArrayList<SubmissionTagTable>] word: new value for the submission tags
+     * @param tagSubmissionTags [ArrayList<SubmissionTagTable>]: new value for the submission tags
      */
     public void setTagSubmissionTags(ArrayList<SubmissionTagTable> tagSubmissionTags) {
         this.tagSubmissionTags = tagSubmissionTags;
     }
+
 }

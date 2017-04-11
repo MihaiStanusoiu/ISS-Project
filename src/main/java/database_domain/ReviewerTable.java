@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Reviewer")
+@SuppressWarnings("unused")
 public class ReviewerTable {
 
     @EmbeddedId

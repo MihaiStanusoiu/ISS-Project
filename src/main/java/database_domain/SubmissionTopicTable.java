@@ -13,11 +13,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "SubmissionTopic")
-public class SubmissionTopicTable
-{
+@SuppressWarnings("unused")
+public class SubmissionTopicTable {
 
     @EmbeddedId
-    SubmissionTopicTableItems PKid;
+    private SubmissionTopicTableItems pkId;
 
     @ManyToOne
     @JoinColumn(name = "id_topic")
@@ -27,23 +27,22 @@ public class SubmissionTopicTable
     @JoinColumn(name = "id_submission")
     private SubmissionTable submissionTable;
 
-    public SubmissionTopicTable() {
-    }
+    public SubmissionTopicTable() { }
 
     /**
      * Effect: Getter for the primary key.
-     * @return SubmissionTopicTableItems : returns PKid.
+     * @return SubmissionTopicTableItems : returns pkId.
      */
-    public SubmissionTopicTableItems getPKid() {
-        return PKid;
+    public SubmissionTopicTableItems getPkId() {
+        return pkId;
     }
 
     /**
-     * Effect: Sets the PKid to the given value
-     * @param PKid: new value for PKid
+     * Effect: Sets the pkId to the given value
+     * @param pkId: new value for pkId
      */
-    public void setPKid(SubmissionTopicTableItems PKid) {
-        this.PKid = PKid;
+    public void setPkId(SubmissionTopicTableItems pkId) {
+        this.pkId = pkId;
     }
 
     /**
@@ -78,4 +77,5 @@ public class SubmissionTopicTable
     public void setSubmissionTable(SubmissionTable submissionTable) {
         this.submissionTable = submissionTable;
     }
+
 }

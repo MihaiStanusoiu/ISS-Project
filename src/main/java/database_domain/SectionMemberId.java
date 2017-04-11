@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
  */
 
 @Embeddable
+@SuppressWarnings("unused")
 public class SectionMemberId {
 
     @ManyToOne
@@ -24,8 +25,7 @@ public class SectionMemberId {
     @Column(name = "id_user")
     private Integer idUser;
 
-    public SectionMemberId(){
-    }
+    public SectionMemberId() { }
 
     /**
      * Effect: Return the id of a section.

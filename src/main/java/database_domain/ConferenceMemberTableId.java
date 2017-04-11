@@ -11,8 +11,11 @@ import javax.persistence.Embeddable;
  * @author      Stanusoiu Mihai-Teodor
  * @version     1.0
  */
+
 @Embeddable
+@SuppressWarnings("unused")
 public class ConferenceMemberTableId {
+
     @Column(name = "id")
     private Integer id;
 
@@ -25,8 +28,8 @@ public class ConferenceMemberTableId {
     public ConferenceMemberTableId() {}
 
     /**
-     * Effect: Returns the id of the conferencemember record
-     * @return [Integer]: id of the conferencemember record
+     * Effect: Returns the id of the conference member record
+     * @return [Integer]: id of the conference member record
      */
     public Integer getId() {
         return id;
@@ -71,4 +74,5 @@ public class ConferenceMemberTableId {
     public void setIdConference(Integer idConference) {
         this.idConference = idConference;
     }
+
 }

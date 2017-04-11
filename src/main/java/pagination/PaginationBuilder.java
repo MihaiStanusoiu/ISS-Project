@@ -9,6 +9,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import loader.ItemFXMLLoader;
 import loader.LoaderException;
+import manager.StageManager;
 import view.ViewType;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,6 +23,8 @@ import java.util.Collections;
  *                  We load the data in the grid-pane based on the item's view pane.
  *                  The grid-pane is organized in rows and columns, set at initialization.
  *
+ *                  Update 1.1: Support for Stage Manager.
+ *
  *                  T : The data's type (example: Conference -- from domain package)
  *                  E : The view-controller's type, the controller that manages the item's view.
  *              </p>
@@ -30,7 +33,7 @@ import java.util.Collections;
  * Tested:      False
  *
  * @author      Alexandru Stoica
- * @version     1.0
+ * @version     1.1
  */
 
 public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>>{
@@ -56,6 +59,12 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
     private ViewType view;
 
     /**
+     * The item's view requires the main view's stage manager
+     * in order to switch the main view.
+     */
+    private StageManager stageManager;
+
+    /**
      * @param rows The pagination's number of rows.
      * @param columns The pagination's number of columns.
      * @apiNote Currently this is the only place where
@@ -76,9 +85,19 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
     }
 
     /**
+     * Effect: The items in the pagination view may require
+     * the stage manager in order to switch the scene.
+     * @param stageManager The main view's stage manager;
+     */
+    public void setStageManager(StageManager stageManager) {
+        this.stageManager = stageManager;
+    }
+
+    /**
      * Effect: Sets the data based on an ArrayList.
      * @param elements: The data we need to set in the pagination.
      */
+    @SuppressWarnings("unused")
     public void setElements(ArrayList<T> elements) {
         this.elements = elements;
     }
@@ -87,6 +106,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
      * Effect: Sets the data based on a Collection.
      * @param elements: The data we need to set in the pagination.
      */
+    @SuppressWarnings("unused")
     public void setElements(Collection<T> elements) {
         elements.forEach(element -> this.elements.add(element));
     }
@@ -166,6 +186,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
         try {
             ItemFXMLLoader<T, E> loader = new ItemFXMLLoader<>(view);
             loader.setElement(elements.get(indexData));
+            loader.setStageManager(stageManager);
             pane.add(loader.getRootPane(), indexColumn - startingPoint, indexRow - 1);
         } catch (LoaderException error) {
             pane.add(new Label(error.getMessage()), indexColumn - startingPoint, indexRow - 1);

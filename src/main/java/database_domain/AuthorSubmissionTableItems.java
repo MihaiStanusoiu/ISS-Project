@@ -1,6 +1,7 @@
 package database_domain;
 
 import javax.persistence.*;
+
 /**
  * Name:         AuthorSubmissionTableItems
  * Effect:       Class for database_domain AuthorSubmission table composite PK
@@ -12,46 +13,46 @@ import javax.persistence.*;
  */
 
 @Embeddable
-public class AuthorSubmissionTableItems
-{
+@SuppressWarnings("unused")
+public class AuthorSubmissionTableItems {
+
     @Column(name = "id_user")
-    private Integer id_user;
+    private Integer idUser;
 
     @Column(name = "id_submission")
-    private Integer id_submission;
+    private Integer idSubmission;
 
-    public AuthorSubmissionTableItems() {
-    }
+    public AuthorSubmissionTableItems() { }
 
     /**
      * Effect: Getter for the id of the user.
-     * @return Integer : returns id_user.
+     * @return Integer : returns idUser.
      */
-    public Integer getId_user() {
-        return id_user;
+    public Integer getIdUser() {
+        return idUser;
     }
 
     /**
-     * Effect: Sets the id_user to the given value
-     * @param id_user: new value for id_user
+     * Effect: Sets the idUser to the given value
+     * @param idUser: new value for idUser
      */
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 
     /**
      * Effect: Getter for the id of the submission.
-     * @return Integer : returns id_submission.
+     * @return Integer : returns idSubmission.
      */
-    public Integer getId_submission() {
-        return id_submission;
+    public Integer getIdSubmission() {
+        return idSubmission;
     }
 
     /**
-     * Effect: Sets the id_submission to the given value
-     * @param id_submission: new value for id_submission
+     * Effect: Sets the idSubmission to the given value
+     * @param idSubmission: new value for idSubmission
      */
-    public void setId_submission(Integer id_submission) {
-        this.id_submission = id_submission;
+    public void setIdSubmission(Integer idSubmission) {
+        this.idSubmission = idSubmission;
     }
 }

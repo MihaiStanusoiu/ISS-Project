@@ -29,6 +29,22 @@ public enum ViewType implements ViewTypeInterface {
 
     },
 
+    CONFERENCE {
+
+        /** Conference View */
+
+        @Override
+        public String getTitle() {
+            return ViewType.getDataFromBundle("application.title");
+        }
+
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/ConferenceView.fxml";
+        }
+
+    },
+
     CONFERENCE_ITEM {
 
         /** Conference Item View */

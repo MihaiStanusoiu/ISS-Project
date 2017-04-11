@@ -10,6 +10,5 @@ package model;
  * @version     1.0
  */
 
-public class Model {
-
-}
+@SuppressWarnings("unused")
+public class Model { }
