@@ -46,11 +46,14 @@ public class ControllerConferencesView implements ControllerInterface {
         PaginationBuilder<Conference, ControllerConferenceItem> builder = new PaginationBuilder<>(2,4);
             // This part is for testing the pagination's builder with mocking data.
         Conference[] conferences = {
-                new Conference(1, "Test", "3232", new Date(), new Date(),
+                new Conference(1, "Test Conference $1", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(2, "Test Conference $2", "TC2", new Date(), new Date(),
                         "New York", "bio", new Date(), new Date(), new Date(), new Date())
         };
         builder.setElements(conferences);
         builder.setView(ViewType.CONFERENCE_ITEM);
+        builder.setStageManager(manager);
         pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
         pagination.setPageFactory(builder::createPage);
     }

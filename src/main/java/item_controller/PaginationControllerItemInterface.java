@@ -1,6 +1,7 @@
 package item_controller;
 
 import javafx.scene.layout.Pane;
+import manager.StageManager;
 
 /**
  * Name:        PaginationControllerItemInterface
@@ -14,11 +15,13 @@ import javafx.scene.layout.Pane;
  *
  *              Similar Example: TableView needs a TableCell class in order to work.
  *
+ *              Update 1.1: Support for Stage Manager
+ *
  * Date:        08/04/2017
  * Tested:      False
  *
  * @author      Alexandru Stoica
- * @version     1.0
+ * @version     1.1
  */
 
 
@@ -41,5 +44,17 @@ public interface PaginationControllerItemInterface<T> {
      * @return [Pane]: The view's main pane.
      */
     Pane getPane();
+
+    /**
+     * Effect: The item controller may need the stage manager
+     * in order to switch the main scene of the application.
+     * <p>
+     *      If the displayed item is actually a link/button to a view
+     *      that shows details about the item, than this stage manager
+     *      will allow the item's controller to switch the main scene with a new one.
+     * </p>
+     * @param stageManager The main view's stage manager.
+     */
+    void setStageManager(StageManager stageManager);
 
 }

@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import manager.StageManager;
+import view.ViewType;
 
 /**
  * Name:        ControllerConferenceItem
@@ -13,7 +15,7 @@ import javafx.scene.layout.Pane;
  * Tested:      False
  *
  * @author      Alexandru Stoica
- * @version     1.0
+ * @version     1.1
  */
 
 public class ControllerConferenceItem
@@ -45,6 +47,12 @@ public class ControllerConferenceItem
     @FXML private BorderPane pane;
 
     /**
+     * Effect: The manager allows the item to switch the
+     * main scene 'ConferencesView' to the item's main scene 'ConferenceView'.
+     */
+    private StageManager manager;
+
+    /**
      * Effect: The item that needs to be displayed inside the view. [Conference]
      */
     private Conference item;
@@ -58,6 +66,15 @@ public class ControllerConferenceItem
     public void setElement(Conference element) {
         this.item = element;
         build();
+    }
+
+    /**
+     * Effect: Loads the ConferenceView based on item [Conference]
+     * from the current object controller.
+     */
+    @FXML
+    public void onItemClick() {
+        manager.switchScene(ViewType.CONFERENCE, item);
     }
 
     /**
@@ -76,6 +93,15 @@ public class ControllerConferenceItem
     @Override
     public Pane getPane() {
         return pane;
+    }
+
+    /**
+     * Effect: Adds support for scene switching.
+     * @param stageManager The main view's stage manager.
+     */
+    @Override
+    public void setStageManager(StageManager stageManager) {
+        manager = stageManager;
     }
 
 }

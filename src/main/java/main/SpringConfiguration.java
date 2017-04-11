@@ -1,6 +1,8 @@
 package main;
 
 import controller.*;
+import controller.ControllerConferencesView;
+import item_controller.ControllerConferenceView;
 import javafx.stage.Stage;
 import loader.SpringFXMLLoader;
 import manager.StageManager;
@@ -30,7 +32,7 @@ public class SpringConfiguration {
 
     @Bean
     @Lazy
-    public ControllerConferencesView controllerHome() {
+    public ControllerConferencesView controllerConferencesView() {
         return new ControllerConferencesView(stageManager);
     }
 
@@ -62,6 +64,12 @@ public class SpringConfiguration {
     @Lazy
     public ControllerMenu controllerMenu() {
         return new ControllerMenu(stageManager);
+    }
+
+    @Bean
+    @Lazy
+    public ControllerConferenceView controllerConferenceView() {
+        return new ControllerConferenceView(stageManager);
     }
 
     /** Local Resources Bundle */
