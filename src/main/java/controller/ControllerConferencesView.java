@@ -1,14 +1,16 @@
 package controller;
 
 import domain.Conference;
-import item_controller.ControllerConferenceItem;
+import itemcontroller.ControllerConferenceItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
+import pagination.PaginationBuilderInterface;
 import view.ViewType;
 import java.util.Date;
 
@@ -43,7 +45,7 @@ public class ControllerConferencesView implements ControllerInterface {
      */
     @Override
     public void initialize() {
-        PaginationBuilder<Conference, ControllerConferenceItem> builder = new PaginationBuilder<>(2,4);
+        PaginationBuilderInterface<Conference, ControllerConferenceItem, GridPane> builder = new PaginationBuilder<>(2,4);
             // This part is for testing the pagination's builder with mocking data.
         Conference[] conferences = {
                 new Conference(1, "Test Conference $1", "TC1", new Date(), new Date(),

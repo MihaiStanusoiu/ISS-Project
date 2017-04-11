@@ -1,4 +1,4 @@
-package item_controller;
+package itemcontroller;
 
 import javafx.scene.layout.Pane;
 import manager.StageManager;

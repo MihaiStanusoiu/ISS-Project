@@ -2,7 +2,7 @@ package main;
 
 import controller.*;
 import controller.ControllerConferencesView;
-import item_controller.ControllerConferenceView;
+import itemcontroller.ControllerConferenceView;
 import javafx.stage.Stage;
 import loader.SpringFXMLLoader;
 import manager.StageManager;

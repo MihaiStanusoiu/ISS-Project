@@ -1,6 +1,6 @@
 package pagination;
 
-import item_controller.PaginationControllerItemInterface;
+import itemcontroller.PaginationControllerItemInterface;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
@@ -24,6 +24,7 @@ import java.util.Collections;
  *                  The grid-pane is organized in rows and columns, set at initialization.
  *
  *                  Update 1.1: Support for Stage Manager.
+ *                  Update 1.2: Interface Support.
  *
  *                  T : The data's type (example: Conference -- from domain package)
  *                  E : The view-controller's type, the controller that manages the item's view.
@@ -33,10 +34,11 @@ import java.util.Collections;
  * Tested:      False
  *
  * @author      Alexandru Stoica
- * @version     1.1
+ * @version     1.2
  */
 
-public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>>{
+public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>>
+    implements PaginationBuilderInterface<T, E, GridPane> {
 
     /**
      * The number of rows in page's grid-pane.
@@ -122,7 +124,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
     /**
      * @return [Integer] The number of items per page.
      */
-    private Integer getItemsPerPage() {
+    public Integer getItemsPerPage() {
         return rows * columns;
     }
 

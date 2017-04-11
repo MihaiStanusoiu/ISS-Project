@@ -1,11 +1,11 @@
-package database_domain;
+package databasedomain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 
 /**
  * Name:         TopicTable
- * Effect:       Class for database_domain Topic table
+ * Effect:       Class for databasedomain Topic table
  * Date:         4/8/2017
  * Tested:       False
  *

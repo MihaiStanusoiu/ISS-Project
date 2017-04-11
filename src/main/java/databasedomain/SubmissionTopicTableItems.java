@@ -1,9 +1,9 @@
-package database_domain;
+package databasedomain;
 
 import javax.persistence.*;
 /**
  * Name:         SubmissionTopicTableItems
- * Effect:       Class for database_domain SubmissionTopic table composite PK
+ * Effect:       Class for databasedomain SubmissionTopic table composite PK
  * Date:         4/8/2017
  * Tested:       False
  *

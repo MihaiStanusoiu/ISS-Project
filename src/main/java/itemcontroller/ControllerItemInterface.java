@@ -1,4 +1,4 @@
-package item_controller;
+package itemcontroller;
 
 /**
  * Name:        ControllerItemInterface

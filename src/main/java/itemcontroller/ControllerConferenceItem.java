@@ -1,4 +1,4 @@
-package item_controller;
+package itemcontroller;
 
 import domain.Conference;
 import javafx.fxml.FXML;
