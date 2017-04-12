@@ -1,72 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<VBox alignment="CENTER" minHeight="0.0" minWidth="60.0" style="-fx-background-color: &quot;white&quot;;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMenu">
+<StackPane alignment="TOP_CENTER" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMenu">
    <children>
-      <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onConferencesViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../png_icons/home_icon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onAddConferenceViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../png_icons/plus_icon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button alignment="CENTER" contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onNotificationsViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../png_icons/notification_icon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onUsersViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../png_icons/group_icon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onSubmissionsViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../png_icons/files_icon_icon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onMyConferencesViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../png_icons/rings_icon_icon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../png_icons/logout_icon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <VBox alignment="CENTER" maxHeight="420.0" minHeight="0.0" minWidth="60.0" style="-fx-background-color: &quot;white&quot;;" StackPane.alignment="TOP_CENTER">
+         <children>
+            <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onConferencesViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/home_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onAddConferenceViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/plus_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onNotificationsViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/notification_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onUsersViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/group_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onSubmissionsViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/files_icon_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onMyConferencesViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/rings_icon_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../png_icons/logout_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
    </children>
-</VBox>
+</StackPane>

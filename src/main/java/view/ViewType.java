@@ -33,12 +33,32 @@ public enum ViewType implements ViewTypeInterface {
 
     },
 
+    USER {
+
+        /** User View */
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/UserView.fxml";
+        }
+
+    },
+
     CONFERENCE_ITEM {
 
         /** Conference Item View */
         @Override
         public String getFXMLFile() {
             return "/fxml/ConferenceItemView.fxml";
+        }
+
+    },
+
+    USER_ITEM {
+
+        /** User Item View */
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/UserItemView.fxml";
         }
 
     },
