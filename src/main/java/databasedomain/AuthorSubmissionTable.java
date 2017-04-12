@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 /**
  * Name:         AuthorSubmissionTable
- * Effect:       Class for databasedomain AuthorSubmission table
+ * Effect:       Class for database domain AuthorSubmission table
  * Date:         4/8/2017
  * Tested:       False
  *

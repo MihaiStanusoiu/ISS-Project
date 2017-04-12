@@ -3,7 +3,9 @@ package controller;
 import domain.Conference;
 import itemcontroller.ControllerConferenceItem;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Pagination;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
 import pagination.PaginationBuilderInterface;
 import view.ViewType;
+
 import java.util.Date;
 
 /**
@@ -32,7 +35,6 @@ public class ControllerConferencesView implements ControllerInterface {
     @FXML private TextField searchTextField;
     @FXML private Pagination pagination;
 
-    @SuppressWarnings("all")
     private StageManager manager;
 
     @Autowired @Lazy
@@ -49,15 +51,27 @@ public class ControllerConferencesView implements ControllerInterface {
             // This part is for testing the pagination's builder with mocking data.
         Conference[] conferences = {
                 new Conference(1, "Test Conference $1", "TC1", new Date(), new Date(),
+                "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(2, "Test Conference $2", "TC1", new Date(), new Date(),
                         "New York", "bio", new Date(), new Date(), new Date(), new Date()),
-                new Conference(2, "Test Conference $2", "TC2", new Date(), new Date(),
+                new Conference(3, "Test Conference $3", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(4, "Test Conference $4", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(1, "Test Conference $1", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(2, "Test Conference $2", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(3, "Test Conference $3", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(4, "Test Conference $4", "TC1", new Date(), new Date(),
                         "New York", "bio", new Date(), new Date(), new Date(), new Date())
         };
         builder.setElements(conferences);
         builder.setView(ViewType.CONFERENCE_ITEM);
         builder.setStageManager(manager);
+        builder.buildPagination(pagination);
         pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
-        pagination.setPageFactory(builder::createPage);
     }
 
     /**

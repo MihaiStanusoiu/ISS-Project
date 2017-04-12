@@ -1,10 +1,11 @@
 package databasedomain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 /**
  * Name:         AuthorSubmissionTableItems
- * Effect:       Class for databasedomain AuthorSubmission table composite PK
+ * Effect:       Class for database domain AuthorSubmission table composite PK
  * Date:         4/8/2017
  * Tested:       False
  *

@@ -2,10 +2,12 @@ package itemcontroller;
 
 import domain.Conference;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import manager.StageManager;
+import view.GradientGenerator;
 import view.ViewType;
 
 /**
@@ -53,6 +55,16 @@ public class ControllerConferenceItem
     private StageManager manager;
 
     /**
+     * Effect: Defines the background of the item. (gradient)
+     */
+    @FXML private Button background;
+
+    /**
+     * Effect: Generates a gradient color for our element.
+     */
+    private GradientGenerator generator = new GradientGenerator();
+
+    /**
      * Effect: The item that needs to be displayed inside the view. [Conference]
      */
     private Conference item;
@@ -85,6 +97,8 @@ public class ControllerConferenceItem
         locationLabel.setText(item.getLocation());
         acronymLabel.setText(item.getAcronym());
         nameLabel.setText(item.getName());
+        background.setStyle(String.format("-fx-background-color : %s",
+                generator.getGradient().getValue()));   /* sets a random gradient */
     }
 
     /**
@@ -102,6 +116,22 @@ public class ControllerConferenceItem
     @Override
     public void setStageManager(StageManager stageManager) {
         manager = stageManager;
+    }
+
+    /**
+     * @return The width of the main pane [double]
+     */
+    @Override
+    public double getWidth() {
+        return pane.getWidth();
+    }
+
+    /**
+     * @return The height of the main pane [double]
+     */
+    @Override
+    public double getHeight() {
+        return pane.getHeight();
     }
 
 }
