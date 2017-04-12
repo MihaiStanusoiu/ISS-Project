@@ -35,7 +35,6 @@ public class ControllerConferencesView implements ControllerInterface {
     @FXML private TextField searchTextField;
     @FXML private Pagination pagination;
 
-    @SuppressWarnings("all")
     private StageManager manager;
 
     @Autowired @Lazy
@@ -52,6 +51,20 @@ public class ControllerConferencesView implements ControllerInterface {
             // This part is for testing the pagination's builder with mocking data.
         Conference[] conferences = {
                 new Conference(1, "Test Conference $1", "TC1", new Date(), new Date(),
+                "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(2, "Test Conference $2", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(3, "Test Conference $3", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(4, "Test Conference $4", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(1, "Test Conference $1", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(2, "Test Conference $2", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(3, "Test Conference $3", "TC1", new Date(), new Date(),
+                        "New York", "bio", new Date(), new Date(), new Date(), new Date()),
+                new Conference(4, "Test Conference $4", "TC1", new Date(), new Date(),
                         "New York", "bio", new Date(), new Date(), new Date(), new Date())
         };
         builder.setElements(conferences);

@@ -24,7 +24,6 @@ import manager.StageManager;
  * @version     1.1
  */
 
-
 public interface PaginationControllerItemInterface<T> {
 
     /**
