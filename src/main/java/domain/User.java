@@ -22,8 +22,26 @@ public class User extends Idable<Integer> implements UserInterface {
     protected String bio;
     protected String location;
 
-    public User() { }
+    /**
+     * Creates an empty / default User.
+     */
+    @SuppressWarnings("all")
+    public User() {
+        this(0, "", "", "", "", "", "", "");
+    }
 
+    /**
+     * Creates an instance of type User.
+     * @param id The user's id.
+     * @param username The user's name.
+     * @param password The user's password.
+     * @param email The user's email.
+     * @param name The user's real name.
+     * @param website The user's website.
+     * @param bio The user's bio description.
+     * @param location The user's location.
+     */
+    @SuppressWarnings("all")
     public User( Integer id,
                  String username,
                  String password,
