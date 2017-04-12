@@ -40,7 +40,8 @@ public class ControllerUsersView implements ControllerInterface {
 
     @Override
     public void initialize() {
-        PaginationBuilderInterface<User, ControllerUserItem, GridPane> builder = new PaginationBuilder<>(2,4);
+        PaginationBuilderInterface<User, ControllerUserItem, GridPane> builder =
+                new PaginationBuilder<>(2,4);
         // This part is for testing the pagination's builder with mocking data.
         User[] users = {
             new User(1, "UserTest", "password", "user@username.com",

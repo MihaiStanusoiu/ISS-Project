@@ -47,7 +47,8 @@ public class ControllerConferencesView implements ControllerInterface {
      */
     @Override
     public void initialize() {
-        PaginationBuilderInterface<Conference, ControllerConferenceItem, GridPane> builder = new PaginationBuilder<>(2,4);
+        PaginationBuilderInterface<Conference, ControllerConferenceItem, GridPane> builder =
+                new PaginationBuilder<>(2,4);
             // This part is for testing the pagination's builder with mocking data.
         Conference[] conferences = {
                 new Conference(1, "Test Conference $1", "TC1", new Date(), new Date(),
