@@ -51,10 +51,10 @@ public class ControllerMenu implements ControllerInterface {
     /**
      * Effect: Loads the NotificationsView responsible
      * for listing all the user's notifications.
-     * @implNote status: Unavailable at the moment.
+     * @implNote status: In development.
      */
     @FXML private void onNotificationsViewButtonClick() {
-        System.out.println("Notifications View");
+        manager.switchScene(ViewType.NOTIFICATIONS);
     }
 
     /**
