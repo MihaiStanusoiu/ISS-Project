@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" fillHeight="false" minHeight="60.0" minWidth="0.0" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%);">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <Label minWidth="0.0" text="Notifications" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Pane HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <Pagination fx:id="pagination" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" stylesheets="@../css/pagination.css" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin></Pagination>
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <StackPane alignment="TOP_CENTER" style="-fx-background-color: white;" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <fx:include source="Menu.fxml" />
+         </children>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" color="#0000000d" height="0.0" radius="18.4725" width="75.89" />
+         </effect>
+      </StackPane>
+   </right>
+   <top>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <fx:include source="TopBar.fxml" />
+         </children>
+         <effect>
+            <DropShadow color="#0000000d" height="0.0" radius="4.5" spread="0.33" width="20.0" />
+         </effect>
+      </StackPane>
+   </top>
+</BorderPane>

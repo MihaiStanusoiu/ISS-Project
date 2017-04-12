@@ -91,6 +91,16 @@ public enum ViewType implements ViewTypeInterface {
             return "/fxml/UsersView.fxml";
         }
 
+    },
+
+    NOTIFICATIONS {
+
+        /** Notifications View */
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/NotificationsView.fxml";
+        }
+
     };
 
     /**
