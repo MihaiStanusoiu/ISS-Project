@@ -104,4 +104,20 @@ public class ControllerConferenceItem
         manager = stageManager;
     }
 
+    /**
+     * @return The width of the main pane [double]
+     */
+    @Override
+    public double getWidth() {
+        return pane.getWidth();
+    }
+
+    /**
+     * @return The height of the main pane [double]
+     */
+    @Override
+    public double getHeight() {
+        return pane.getHeight();
+    }
+
 }

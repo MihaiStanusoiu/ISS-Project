@@ -1,6 +1,7 @@
 package pagination;
 
 import itemcontroller.PaginationControllerItemInterface;
+import javafx.scene.control.Pagination;
 import javafx.scene.layout.Pane;
 import manager.StageManager;
 import view.ViewType;
@@ -58,6 +59,12 @@ public interface PaginationBuilderInterface<T, E extends PaginationControllerIte
      * @param elements: The data we need to set in the pagination.
      */
     void setElements(T[] elements);
+
+    /**
+     * Builds the view's pagination.
+     * @param pagination The view's pagination.
+     */
+    void buildPagination(Pagination pagination);
 
     /**
      * @return [Integer] The number of items per page.

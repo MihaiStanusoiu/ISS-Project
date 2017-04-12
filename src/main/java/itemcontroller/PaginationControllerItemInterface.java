@@ -57,4 +57,22 @@ public interface PaginationControllerItemInterface<T> {
      */
     void setStageManager(StageManager stageManager);
 
+    /**
+     * @return The main pane's width
+     * or the main value of a double (by default)
+     */
+    @SuppressWarnings("unused")
+    default double getWidth() {
+        return Double.MIN_VALUE;
+    }
+
+    /**
+     * @return The main pane's height
+     * or the main value of a double (by default)
+     */
+    @SuppressWarnings("unused")
+    default double getHeight() {
+        return Double.MIN_VALUE;
+    }
+
 }

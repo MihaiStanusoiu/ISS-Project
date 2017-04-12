@@ -3,6 +3,7 @@ package pagination;
 import itemcontroller.PaginationControllerItemInterface;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -11,6 +12,7 @@ import loader.ItemFXMLLoader;
 import loader.LoaderException;
 import manager.StageManager;
 import view.ViewType;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -48,7 +50,13 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
     /**
      * The number of columns in page's grid-pane.
      */
-    private final Integer columns;
+    private Integer columns;
+
+    /**
+     * The view's pagination.
+     */
+    @SuppressWarnings("all")
+    private Pagination pagination;
 
     /**
      * The elements displayed in the grid-pane's pagination. [the data]
@@ -214,4 +222,12 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
         return pane;
     }
 
+    /**
+     * Builds the view's pagination.
+     * @param pagination The view's pagination.
+     */
+    public void buildPagination(Pagination pagination) {
+        this.pagination = pagination;
+        this.pagination.setPageFactory(this::createPage);
+    }
 }
