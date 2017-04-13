@@ -78,10 +78,10 @@ public class ControllerMenu implements ControllerInterface {
     /**
      * Effect: Loads the MyConferencesView responsible
      * for listing all the user's conferences.
-     * @implNote status: Unavailable at the moment.
+     * @implNote status: In development.
      */
     @FXML private void onMyConferencesViewButtonClick() {
-        System.out.println("My Conferences View");
+        manager.switchScene(ViewType.MY_CONFERENCES);
     }
 
     /**

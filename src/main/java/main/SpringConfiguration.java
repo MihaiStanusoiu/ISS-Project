@@ -39,6 +39,12 @@ public class SpringConfiguration {
 
     @Bean
     @Lazy
+    public ControllerMyConferencesView controllerMyConferencesView() {
+        return new ControllerMyConferencesView(stageManager);
+    }
+
+    @Bean
+    @Lazy
     public ControllerNotificationsView controllerNotificationsView() {
         return new ControllerNotificationsView(stageManager);
     }
