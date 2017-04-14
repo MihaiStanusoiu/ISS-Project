@@ -27,7 +27,7 @@ import java.util.Collection;
  */
 
 @SuppressWarnings("unused")
-public interface PaginationBuilderInterface<T, E extends PaginationControllerItemInterface<T>, U extends Pane> {
+public interface PaginationManagerInterface<T, E extends PaginationControllerItemInterface<T>, U extends Pane> {
 
     /**
      * Effect: Defines the item's view.
@@ -63,8 +63,9 @@ public interface PaginationBuilderInterface<T, E extends PaginationControllerIte
     /**
      * Builds the view's pagination.
      * @param pagination The view's pagination.
+     * @return The pagination with the wanted configuration for pages.
      */
-    void buildPagination(Pagination pagination);
+    Pagination buildPagination(Pagination pagination);
 
     /**
      * @return [Integer] The number of items per page.

@@ -91,7 +91,7 @@ public class SpringConfiguration {
         return new ControllerUserView(stageManager);
     }
 
-    /** Local Resources Bundle */
+    /** Local Resource Bundle */
     @Bean
     public ResourceBundle resourceBundle() {
         return ResourceBundle.getBundle("application");
