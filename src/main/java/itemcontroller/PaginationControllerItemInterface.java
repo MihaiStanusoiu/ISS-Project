@@ -7,11 +7,11 @@ import manager.StageManager;
  * Name:        PaginationControllerItemInterface
  *
  * Effect:      Any view-controller that controls an item view (example: ConferenceItem)
- *              needs to offer a couple of functions to PaginationBuilder in order for the builder
+ *              needs to offer a couple of functions to PaginationManager in order for the builder
  *              to work and the showcase the items in order in a grid-pane
  *
  *              Any view-controller that controls an item view must implement those methods
- *              in other to merge with the PaginationBuilder.
+ *              in other to merge with the PaginationManager.
  *
  *              Similar Example: TableView needs a TableCell class in order to work.
  *
@@ -39,7 +39,7 @@ public interface PaginationControllerItemInterface<T> {
 
     /**
      * Effect: Returns the view's main pane in order for the
-     * PaginationBuilder to add the main pane to the page's grid-pane.
+     * PaginationManager to add the main pane to the page's grid-pane.
      * @return [Pane]: The view's main pane.
      */
     Pane getPane();

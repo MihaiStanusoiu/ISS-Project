@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
-import pagination.PaginationBuilderInterface;
 import view.ViewType;
 
 import java.util.Date;
@@ -46,9 +45,8 @@ public class ControllerConferencesView implements ControllerInterface {
      * Effect: Builds the pagination and it's data.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public void initialize() {
-        PaginationBuilderInterface<Conference, ControllerConferenceItem, GridPane> builder =
-                new PaginationBuilder<>(2,4);
             // This part is for testing the pagination's builder with mocking data.
         Conference[] conferences = {
                 new Conference(1, "Test Conference $1", "TC1", new Date(), new Date(),
@@ -68,10 +66,14 @@ public class ControllerConferencesView implements ControllerInterface {
                 new Conference(4, "Test Conference $4", "TC1", new Date(), new Date(),
                         "New York", "bio", new Date(), new Date(), new Date(), new Date())
         };
-        builder.setElements(conferences);
-        builder.setView(ViewType.CONFERENCE_ITEM);
-        builder.setStageManager(manager);
-        builder.buildPagination(pagination);
+        pagination = new PaginationBuilder<Conference, ControllerConferenceItem, GridPane>()
+                .setRows(2)
+                .setColumns(4)
+                .setElements(conferences)
+                .setView(ViewType.CONFERENCE_ITEM)
+                .setStageManager(this.manager)
+                .setPagination(this.pagination)
+                .build(GridPane.class);
         pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
     }
 

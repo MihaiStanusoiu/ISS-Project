@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
-import pagination.PaginationBuilderInterface;
 import view.ViewType;
 
 /**
@@ -39,9 +38,8 @@ public class ControllerUsersView implements ControllerInterface {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void initialize() {
-        PaginationBuilderInterface<User, ControllerUserItem, GridPane> builder =
-                new PaginationBuilder<>(2,4);
         // This part is for testing the pagination's builder with mocking data.
         User[] users = {
             new User(1, "UserTest", "password", "user@username.com",
@@ -61,10 +59,14 @@ public class ControllerUsersView implements ControllerInterface {
             new User(8, "UserTest", "password", "user@username.com",
                     "Test User", "none", "none", "New York"),
         };
-        builder.setElements(users);
-        builder.setView(ViewType.USER_ITEM);
-        builder.setStageManager(manager);
-        builder.buildPagination(pagination);
+        pagination = new PaginationBuilder<User, ControllerUserItem, GridPane>()
+                .setRows(2)
+                .setColumns(4)
+                .setElements(users)
+                .setView(ViewType.USER_ITEM)
+                .setStageManager(this.manager)
+                .setPagination(this.pagination)
+                .build(GridPane.class);
         pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
     }
 

@@ -5,11 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import manager.StageManager;
 import view.ViewType;
+
 import java.io.IOException;
 
 /**
  * Name:        ItemFXMLLoader
- * Effect:      Loads the view of an item for PaginationBuilder.
+ * Effect:      Loads the view of an item for PaginationManager.
  * Date:        09/04/2017
  * Tested:      False
  *
