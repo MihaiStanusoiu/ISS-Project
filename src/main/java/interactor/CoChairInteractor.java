@@ -25,7 +25,7 @@ public class CoChairInteractor implements InteractorInterface<CoChair>{
   }
 
   @Override
-  public void update(CoChair obj) throws Exception {
+  public void update(CoChair objInit, CoChair objUpd) throws Exception {
   }
 
   @Override

@@ -25,7 +25,7 @@ public class ChairInteractor implements InteractorInterface<Chair>{
   }
 
   @Override
-  public void update(Chair obj) throws Exception {
+  public void update(Chair objInit, Chair objUpd) throws Exception {
 }
 
   @Override

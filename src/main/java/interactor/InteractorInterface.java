@@ -27,8 +27,10 @@ public interface InteractorInterface<T>{
   /**
    * Effect: Returns a bool representing the success or failure of the update operation.
    * @return [boolean] : returns success/failure.
+   * @param objInit
+   * @param objUpd
    */
-  public void update(T obj) throws Exception;
+  public void update(T objInit, T objUpd) throws Exception;
 
   /**
    * Effect: Returns a list of all objects of type T.

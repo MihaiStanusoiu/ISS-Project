@@ -25,7 +25,7 @@ public class SessionInteractor implements InteractorInterface<Session>{
   }
 
   @Override
-  public void update(Session obj) throws Exception {
+  public void update(Session objInit, Session objUpd) throws Exception {
   }
 
   @Override

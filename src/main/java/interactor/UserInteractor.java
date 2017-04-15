@@ -25,7 +25,7 @@ public class UserInteractor implements InteractorInterface<User> {
   }
 
   @Override
-  public void update(User obj) throws Exception {
+  public void update(User objInit, User objUpd) throws Exception {
   }
 
   @Override

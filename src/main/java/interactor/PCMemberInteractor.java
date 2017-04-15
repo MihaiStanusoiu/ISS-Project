@@ -25,7 +25,7 @@ public class PCMemberInteractor implements InteractorInterface <PCMember>{
   }
 
   @Override
-  public void update(PCMember obj) throws Exception {
+  public void update(PCMember objInit, PCMember objUpd) throws Exception {
   }
 
   @Override

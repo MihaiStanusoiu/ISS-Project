@@ -25,7 +25,7 @@ public class SpeakerInteractor implements InteractorInterface<Speaker>{
   }
 
   @Override
-  public void update(Speaker obj) throws Exception {
+  public void update(Speaker objInit, Speaker objUpd) throws Exception {
   }
 
   @Override

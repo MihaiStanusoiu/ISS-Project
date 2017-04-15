@@ -25,7 +25,7 @@ public class NotificationInteractor implements InteractorInterface<Notification>
   }
 
   @Override
-  public void update(Notification obj) throws Exception {
+  public void update(Notification objInit, Notification objUpd) throws Exception {
   }
 
   @Override

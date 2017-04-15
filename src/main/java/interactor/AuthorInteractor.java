@@ -25,7 +25,7 @@ public class AuthorInteractor implements InteractorInterface <Author>{
   }
 
   @Override
-  public void update(Author obj) throws Exception {
+  public void update(Author objInit, Author objUpd) throws Exception {
   }
 
   @Override

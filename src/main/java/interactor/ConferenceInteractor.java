@@ -25,7 +25,7 @@ public class ConferenceInteractor implements InteractorInterface<Conference>{
   }
 
   @Override
-  public void update(Conference obj) throws Exception {
+  public void update(Conference objInit, Conference objUpd) throws Exception {
   }
 
   @Override
