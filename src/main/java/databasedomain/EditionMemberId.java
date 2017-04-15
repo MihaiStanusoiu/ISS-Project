@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
- * Name:        ConferenceMemberTableId
+ * Name:        EditionMemberId
  * Effect:      Class for the EditionMember table composite PK.
  * Date:        4/8/2017
  * Tested:      False
@@ -14,7 +14,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @SuppressWarnings("unused")
-public class ConferenceMemberTableId {
+public class EditionMemberId {
 
     @Column(name = "id")
     private Integer id;
@@ -25,7 +25,7 @@ public class ConferenceMemberTableId {
     @Column(name = "id_conference")
     private Integer idConference;
 
-    public ConferenceMemberTableId() {}
+    public EditionMemberId() {}
 
     /**
      * Effect: Returns the id of the conference member record

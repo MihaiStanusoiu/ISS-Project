@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 /**
- * Name:         SectionMemberId
+ * Name:         SessionMemberId
  * Effect:       Helping class for composite primary key.
  * Date:         08/04/2017
  * Tested:       False
@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 @SuppressWarnings("unused")
-public class SectionMemberId {
+public class SessionMemberId {
 
     @ManyToOne
     @Column(name = "id_section")
@@ -25,7 +25,7 @@ public class SectionMemberId {
     @Column(name = "id_user")
     private Integer idUser;
 
-    public SectionMemberId() { }
+    public SessionMemberId() { }
 
     /**
      * Effect: Return the id of a section.
