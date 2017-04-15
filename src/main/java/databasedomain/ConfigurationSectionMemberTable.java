@@ -36,7 +36,7 @@ public class ConfigurationSectionMemberTable {
 
     /**
      * Effect: Return the section members with this configuration.
-     * @return [ArrayList<SectionMember>] : returns the list of members.
+     * @return [ArrayList<SessionMember>] : returns the list of members.
      */
     public ArrayList<SectionMemberTable> getSectionMembers() {
         return this.sectionMembers;

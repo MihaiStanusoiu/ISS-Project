@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 
 /**
  * Name:        ConferenceMemberTableId
- * Effect:      Class for the ConferenceMember table composite PK.
+ * Effect:      Class for the EditionMember table composite PK.
  * Date:        4/8/2017
  * Tested:      False
  * @author      Stanusoiu Mihai-Teodor

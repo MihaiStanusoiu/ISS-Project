@@ -3,7 +3,7 @@ package domain;
 import java.util.Date;
 
 /**
- * Name:         Section
+ * Name:         Session
  * Effect:       A conference section.
  * Date:         02/04/2017
  * Tested:       True
@@ -11,7 +11,7 @@ import java.util.Date;
  * @version      1.0
  */
 
-public class Section extends Idable<Integer>{
+public class Session extends Idable<Integer>{
 
     private String name;
     private Date startDate;
@@ -21,7 +21,7 @@ public class Section extends Idable<Integer>{
     private Integer seats;
     private Integer idConference;
 
-    public Section(Integer id,
+    public Session(Integer id,
                    String name,
                    Date startDate,
                    Date endDate,
@@ -39,7 +39,7 @@ public class Section extends Idable<Integer>{
         this.idConference = idConference;
     }
 
-    public Section(String name,
+    public Session(String name,
                    Date startDate,
                    Date endDate,
                    String location,

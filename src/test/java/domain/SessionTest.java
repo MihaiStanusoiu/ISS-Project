@@ -11,9 +11,9 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 
-public class SectionTest {
+public class SessionTest {
 
-    private Section section;
+    private Session session;
     private Date dateStart, dateEnd ;
 
     @Before
@@ -21,7 +21,7 @@ public class SectionTest {
         DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         dateStart = formatter.parse("13-03-2017");
         dateEnd = formatter.parse("14-03-2017");
-        section = new Section(0,"mate", dateStart,
+        session = new Session(0,"mate", dateStart,
                 dateEnd,"New York","iss",1,2);
     }
 
@@ -31,37 +31,37 @@ public class SectionTest {
 
     @Test
     public void getName() throws Exception {
-        assertTrue(section.getName().equals("mate"));
+        assertTrue(session.getName().equals("mate"));
     }
 
     @Test
     public void getStartDate() throws Exception {
-        assertTrue(section.getStartDate().equals(dateStart));
+        assertTrue(session.getStartDate().equals(dateStart));
     }
 
     @Test
     public void getEndDate() throws Exception {
-        assertTrue(section.getEndDate().equals(dateEnd));
+        assertTrue(session.getEndDate().equals(dateEnd));
     }
 
     @Test
     public void getLocation() throws Exception {
-        assertTrue(section.getLocation().equals("New York"));
+        assertTrue(session.getLocation().equals("New York"));
     }
 
     @Test
     public void getBio() throws Exception {
-        assertTrue(section.getBio().equals("iss"));
+        assertTrue(session.getBio().equals("iss"));
     }
 
     @Test
     public void getSeats() throws Exception {
-        assertTrue(section.getSeats().equals(1));
+        assertTrue(session.getSeats().equals(1));
     }
 
     @Test
     public void getIdConference() throws Exception {
-        assertTrue(section.getIdConference().equals(2));
+        assertTrue(session.getIdConference().equals(2));
     }
 
 }

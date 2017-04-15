@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 /**
  * Name:        ConferenceMemberTable
- * Effect:      Corresponding class for the ConferenceMember table in the database.
+ * Effect:      Corresponding class for the EditionMember table in the database.
  * Date:        4/8/2017
  * Tested:      False
  * @author      Stanusoiu Mihai-Teodor
@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="ConferenceMember")
+@Table(name="EditionMember")
 @SuppressWarnings("unused")
 public class ConferenceMemberTable {
 

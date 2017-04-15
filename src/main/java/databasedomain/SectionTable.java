@@ -7,14 +7,14 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Name:         SectionTable
- * Effect:       Class for the db table Section.
+ * Effect:       Class for the db table Session.
  * Date:         08/04/2017
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
 
 @Entity
-@Table(name = "Section")
+@Table(name = "Session")
 @SuppressWarnings("unused")
 public class SectionTable {
 

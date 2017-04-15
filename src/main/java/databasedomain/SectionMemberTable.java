@@ -4,14 +4,14 @@ import javax.persistence.*;
 
 /**
  * Name:         SectionMemberTable
- * Effect:       Class for the db table SectionMember.
+ * Effect:       Class for the db table SessionMember.
  * Date:         08/04/2017
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
 
 @Entity
-@Table(name = "SectionMember")
+@Table(name = "SessionMember")
 @SuppressWarnings("unused")
 public class SectionMemberTable {
 

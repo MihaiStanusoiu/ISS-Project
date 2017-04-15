@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Name:    ConferenceTable
- * Effect:  A class for the database table Conference
+ * Effect:  A class for the database table Edition
  * Date:    9/4/2017
  * Tested:  False
  *
@@ -18,7 +18,7 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 
 @Entity
-@Table(name = "Conference")
+@Table(name = "Edition")
 @SuppressWarnings("unused")
 public class ConferenceTable {
 

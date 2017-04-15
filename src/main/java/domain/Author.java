@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author      {Stanusoiu Mihai-Teodor}
  * @version     1.0
  */
-public class Author extends SectionMember {
+public class Author extends SessionMember {
 
     private Boolean isOwner;
     private Integer idSubmission;
