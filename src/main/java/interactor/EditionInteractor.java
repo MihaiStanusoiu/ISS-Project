@@ -15,18 +15,17 @@ import java.util.List;
 public class EditionInteractor implements InteractorInterface<Edition>{
 
   @Override
-  public boolean insert(Edition obj) {
-    return false;
+  public Integer insert(Edition obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Edition obj) {
-    return false;
+  public Edition delete(Edition obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Edition obj) {
-    return false;
+  public void update(Edition obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class EditionInteractor implements InteractorInterface<Edition>{
   }
 
   @Override
-  public Edition selectById(Integer id) {
+  public Edition selectById(Integer id) throws Exception {
     return null;
   }
 }

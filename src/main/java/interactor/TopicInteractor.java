@@ -15,18 +15,17 @@ import java.util.List;
 public class TopicInteractor implements InteractorInterface<Topic> {
 
   @Override
-  public boolean insert(Topic obj) {
-    return false;
+  public Integer insert(Topic obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Topic obj) {
-    return false;
+  public Topic delete(Topic obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Topic obj) {
-    return false;
+  public void update(Topic obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class TopicInteractor implements InteractorInterface<Topic> {
   }
 
   @Override
-  public Topic selectById(Integer id) {
+  public Topic selectById(Integer id) throws Exception {
     return null;
   }
 }

@@ -15,18 +15,17 @@ import java.util.List;
 public class AuthorInteractor implements InteractorInterface <Author>{
 
   @Override
-  public boolean insert(Author obj) {
-    return false;
+  public Integer insert(Author obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Author obj) {
-    return false;
+  public Author delete(Author obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Author obj) {
-    return false;
+  public void update(Author obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class AuthorInteractor implements InteractorInterface <Author>{
   }
 
   @Override
-  public Author selectById(Integer id) {
+  public Author selectById(Integer id) throws Exception {
     return null;
   }
 }

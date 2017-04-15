@@ -15,18 +15,17 @@ import java.util.List;
 public class ReviewInteractor implements InteractorInterface<Review>{
 
   @Override
-  public boolean insert(Review obj) {
-    return false;
+  public Integer insert(Review obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Review obj) {
-    return false;
+  public Review delete(Review obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Review obj) {
-    return false;
+  public void update(Review obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class ReviewInteractor implements InteractorInterface<Review>{
   }
 
   @Override
-  public Review selectById(Integer id) {
+  public Review selectById(Integer id) throws Exception {
     return null;
   }
 }

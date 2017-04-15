@@ -15,19 +15,18 @@ import java.util.List;
 public class ChairInteractor implements InteractorInterface<Chair>{
 
   @Override
-  public boolean insert(Chair obj) {
-    return false;
+  public Integer insert(Chair obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Chair obj) {
-    return false;
+  public Chair delete(Chair obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Chair obj) {
-    return false;
-  }
+  public void update(Chair obj) throws Exception {
+}
 
   @Override
   public List<Chair> selectAll() {
@@ -35,7 +34,7 @@ public class ChairInteractor implements InteractorInterface<Chair>{
   }
 
   @Override
-  public Chair selectById(Integer id) {
+  public Chair selectById(Integer id) throws Exception {
     return null;
   }
 }

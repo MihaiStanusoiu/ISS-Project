@@ -16,18 +16,17 @@ import java.util.List;
 public class ReviewerInteractor implements InteractorInterface<Reviewer>{
 
   @Override
-  public boolean insert(Reviewer obj) {
-    return false;
+  public Integer insert(Reviewer obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Reviewer obj) {
-    return false;
+  public Reviewer delete(Reviewer obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Reviewer obj) {
-    return false;
+  public void update(Reviewer obj) throws Exception {
   }
 
   @Override
@@ -36,7 +35,7 @@ public class ReviewerInteractor implements InteractorInterface<Reviewer>{
   }
 
   @Override
-  public Reviewer selectById(Integer id) {
+  public Reviewer selectById(Integer id) throws Exception {
     return null;
   }
 }

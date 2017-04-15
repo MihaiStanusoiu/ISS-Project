@@ -15,18 +15,17 @@ import java.util.List;
 public class ConferenceInteractor implements InteractorInterface<Conference>{
 
   @Override
-  public boolean insert(Conference obj) {
-    return false;
+  public Integer insert(Conference obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Conference obj) {
-    return false;
+  public Conference delete(Conference obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Conference obj) {
-    return false;
+  public void update(Conference obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class ConferenceInteractor implements InteractorInterface<Conference>{
   }
 
   @Override
-  public Conference selectById(Integer id) {
+  public Conference selectById(Integer id) throws Exception {
     return null;
   }
 }

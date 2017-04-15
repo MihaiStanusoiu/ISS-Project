@@ -15,18 +15,17 @@ import java.util.List;
 public class PCMemberInteractor implements InteractorInterface <PCMember>{
 
   @Override
-  public boolean insert(PCMember obj) {
-    return false;
+  public Integer insert(PCMember obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(PCMember obj) {
-    return false;
+  public PCMember delete(PCMember obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(PCMember obj) {
-    return false;
+  public void update(PCMember obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class PCMemberInteractor implements InteractorInterface <PCMember>{
   }
 
   @Override
-  public PCMember selectById(Integer id) {
+  public PCMember selectById(Integer id) throws Exception {
     return null;
   }
 }

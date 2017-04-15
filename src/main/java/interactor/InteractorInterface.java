@@ -16,19 +16,19 @@ public interface InteractorInterface<T>{
    * Effect: Returns a bool representing the success or failure of the insert operation.
    * @return [boolean] : returns success/failure.
    */
-  public boolean insert(T obj);
+  public Integer insert(T obj) throws Exception;
 
   /**
    * Effect: Returns a bool representing the success or failure of the delete operation.
    * @return [boolean] : returns success/failure.
    */
-  public boolean delete(T obj);
+  public T delete(T obj) throws Exception;
 
   /**
    * Effect: Returns a bool representing the success or failure of the update operation.
    * @return [boolean] : returns success/failure.
    */
-  public boolean update(T obj);
+  public void update(T obj) throws Exception;
 
   /**
    * Effect: Returns a list of all objects of type T.
@@ -40,5 +40,5 @@ public interface InteractorInterface<T>{
    * Effect: Returns an element of type T that has the identifier id.
    * @return [T] : returns T element.
    */
-  public T selectById(Integer id);
+  public T selectById(Integer id) throws Exception;
 }

@@ -15,18 +15,17 @@ import java.util.List;
 public class SessionChairInteractor implements InteractorInterface<SessionChair>{
 
   @Override
-  public boolean insert(SessionChair obj) {
-    return false;
+  public Integer insert(SessionChair obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(SessionChair obj) {
-    return false;
+  public SessionChair delete(SessionChair obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(SessionChair obj) {
-    return false;
+  public void update(SessionChair obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class SessionChairInteractor implements InteractorInterface<SessionChair>
   }
 
   @Override
-  public SessionChair selectById(Integer id) {
+  public SessionChair selectById(Integer id) throws Exception {
     return null;
   }
 }

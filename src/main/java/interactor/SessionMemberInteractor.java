@@ -15,18 +15,17 @@ import java.util.List;
 public class SessionMemberInteractor implements InteractorInterface<SessionMember>{
 
   @Override
-  public boolean insert(SessionMember obj) {
-    return false;
+  public Integer insert(SessionMember obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(SessionMember obj) {
-    return false;
+  public SessionMember delete(SessionMember obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(SessionMember obj) {
-    return false;
+  public void update(SessionMember obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class SessionMemberInteractor implements InteractorInterface<SessionMembe
   }
 
   @Override
-  public SessionMember selectById(Integer id) {
+  public SessionMember selectById(Integer id) throws Exception {
     return null;
   }
 }

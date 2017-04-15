@@ -15,18 +15,17 @@ import java.util.List;
 public class SubmissionInteractor implements InteractorInterface<Submission>{
 
   @Override
-  public boolean insert(Submission obj) {
-    return false;
+  public Integer insert(Submission obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Submission obj) {
-    return false;
+  public Submission delete(Submission obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Submission obj) {
-    return false;
+  public void update(Submission obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class SubmissionInteractor implements InteractorInterface<Submission>{
   }
 
   @Override
-  public Submission selectById(Integer id) {
+  public Submission selectById(Integer id) throws Exception {
     return null;
   }
 }

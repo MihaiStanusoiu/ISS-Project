@@ -15,18 +15,17 @@ import java.util.List;
 public class CoChairInteractor implements InteractorInterface<CoChair>{
 
   @Override
-  public boolean insert(CoChair obj) {
-    return false;
+  public Integer insert(CoChair obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(CoChair obj) {
-    return false;
+  public CoChair delete(CoChair obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(CoChair obj) {
-    return false;
+  public void update(CoChair obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class CoChairInteractor implements InteractorInterface<CoChair>{
   }
 
   @Override
-  public CoChair selectById(Integer id) {
+  public CoChair selectById(Integer id) throws Exception {
     return null;
   }
 }

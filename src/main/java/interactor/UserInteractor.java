@@ -15,18 +15,17 @@ import java.util.List;
 public class UserInteractor implements InteractorInterface<User> {
 
   @Override
-  public boolean insert(User obj) {
-    return false;
+  public Integer insert(User obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(User obj) {
-    return false;
+  public User delete(User obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(User obj) {
-    return false;
+  public void update(User obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class UserInteractor implements InteractorInterface<User> {
   }
 
   @Override
-  public User selectById(Integer id) {
+  public User selectById(Integer id) throws Exception {
     return null;
   }
 }

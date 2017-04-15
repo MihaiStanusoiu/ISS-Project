@@ -15,18 +15,17 @@ import java.util.List;
 public class SpeakerInteractor implements InteractorInterface<Speaker>{
 
   @Override
-  public boolean insert(Speaker obj) {
-    return false;
+  public Integer insert(Speaker obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Speaker obj) {
-    return false;
+  public Speaker delete(Speaker obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Speaker obj) {
-    return false;
+  public void update(Speaker obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class SpeakerInteractor implements InteractorInterface<Speaker>{
   }
 
   @Override
-  public Speaker selectById(Integer id) {
+  public Speaker selectById(Integer id) throws Exception {
     return null;
   }
 }

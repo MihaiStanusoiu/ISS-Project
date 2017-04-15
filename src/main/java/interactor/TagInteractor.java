@@ -15,18 +15,17 @@ import java.util.List;
 public class TagInteractor implements InteractorInterface<Tag>{
 
   @Override
-  public boolean insert(Tag obj) {
-    return false;
+  public Integer insert(Tag obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Tag obj) {
-    return false;
+  public Tag delete(Tag obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Tag obj) {
-    return false;
+  public void update(Tag obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class TagInteractor implements InteractorInterface<Tag>{
   }
 
   @Override
-  public Tag selectById(Integer id) {
+  public Tag selectById(Integer id) throws Exception {
     return null;
   }
 }

@@ -15,18 +15,17 @@ import java.util.List;
 public class SessionInteractor implements InteractorInterface<Session>{
 
   @Override
-  public boolean insert(Session obj) {
-    return false;
+  public Integer insert(Session obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Session obj) {
-    return false;
+  public Session delete(Session obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Session obj) {
-    return false;
+  public void update(Session obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class SessionInteractor implements InteractorInterface<Session>{
   }
 
   @Override
-  public Session selectById(Integer id) {
+  public Session selectById(Integer id) throws Exception {
     return null;
   }
 }

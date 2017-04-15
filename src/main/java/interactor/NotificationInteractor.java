@@ -15,18 +15,17 @@ import java.util.List;
 public class NotificationInteractor implements InteractorInterface<Notification>{
 
   @Override
-  public boolean insert(Notification obj) {
-    return false;
+  public Integer insert(Notification obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean delete(Notification obj) {
-    return false;
+  public Notification delete(Notification obj) throws Exception {
+    return null;
   }
 
   @Override
-  public boolean update(Notification obj) {
-    return false;
+  public void update(Notification obj) throws Exception {
   }
 
   @Override
@@ -35,7 +34,7 @@ public class NotificationInteractor implements InteractorInterface<Notification>
   }
 
   @Override
-  public Notification selectById(Integer id) {
+  public Notification selectById(Integer id) throws Exception {
     return null;
   }
 }
