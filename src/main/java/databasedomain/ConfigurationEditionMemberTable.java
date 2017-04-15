@@ -4,7 +4,7 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:         ConfigurationConferenceMemberTable
+ * Name:         ConfigurationEditionMemberTable
  * Effect:       Class for the db table ConfigurationConferenceMember.
  * Date:         08/04/2017
  * Tested:       False
@@ -13,9 +13,9 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 
 @Entity
-@Table(name = "ConfigurationConferenceMember")
+@Table(name = "ConfigurationEditionMember")
 @SuppressWarnings("unused")
-public class ConfigurationConferenceMemberTable {
+public class ConfigurationEditionMemberTable {
 
     @Id @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_configuration_conference_member")
@@ -31,7 +31,7 @@ public class ConfigurationConferenceMemberTable {
     private Boolean isPCMember;
 
 
-    public ConfigurationConferenceMemberTable(){
+    public ConfigurationEditionMemberTable(){
     }
 
     /**

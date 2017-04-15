@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class SectionMemberTest {
+public class SessionMemberTest {
 
-    private SectionMember sectionMember;
+    private SessionMember sessionMember;
 
     @Before
     public void setUp() throws Exception {
-        sectionMember = new SectionMember(
+        sessionMember = new SessionMember(
                 1,
                 "mike",
                 "1234",
@@ -21,28 +21,28 @@ public class SectionMemberTest {
                 "str...",
                 1
         );
-        sectionMember.setIdSection(1);
+        sessionMember.setIdSection(1);
     }
 
     @Test
     public void isGettingIdSection() throws Exception {
-        assertTrue(sectionMember.getIdSection().equals(1));
+        assertTrue(sessionMember.getIdSection().equals(1));
     }
 
     @Test
     public void isSettingSection() throws Exception {
-        sectionMember.setIdSection(2);
-        assertTrue(sectionMember.getIdSection().equals(2));
+        sessionMember.setIdSection(2);
+        assertTrue(sessionMember.getIdSection().equals(2));
     }
 
     @Test
     public void isGettingType() throws Exception {
-        assertTrue(sectionMember.getType().equals(UserType.SECTION_MEMBER));
+        assertTrue(sessionMember.getType().equals(UserType.SECTION_MEMBER));
     }
 
     @Test
     public void isGettingPermissions() throws Exception {
-        assertTrue(sectionMember.getPermissions().contains(Permission.PAY));
+        assertTrue(sessionMember.getPermissions().contains(Permission.PAY));
     }
 
 }

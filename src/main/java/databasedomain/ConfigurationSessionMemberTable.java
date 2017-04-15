@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:         ConfigurationSectionMemberTable
+ * Name:         ConfigurationSessionMemberTable
  * Effect:       Class for the db table ConfigurationSectionMember
  * Date:         08/04/2017
  * Tested:       False
@@ -14,9 +14,9 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 
 @Entity
-@Table(name = "ConfigurationSectionMember")
+@Table(name = "ConfigurationSessionMember")
 @SuppressWarnings("unused")
-public class ConfigurationSectionMemberTable {
+public class ConfigurationSessionMemberTable {
 
     @Id @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_configuration_section_member")
@@ -32,13 +32,13 @@ public class ConfigurationSectionMemberTable {
     private Boolean isListener;
 
     @OneToMany(mappedBy = "idConfiguration")
-    private ArrayList<SectionMemberTable> sectionMembers = new ArrayList<>();
+    private ArrayList<SessionMemberTable> sectionMembers = new ArrayList<>();
 
     /**
      * Effect: Return the section members with this configuration.
-     * @return [ArrayList<SectionMember>] : returns the list of members.
+     * @return [ArrayList<SessionMember>] : returns the list of members.
      */
-    public ArrayList<SectionMemberTable> getSectionMembers() {
+    public ArrayList<SessionMemberTable> getSectionMembers() {
         return this.sectionMembers;
     }
 
@@ -46,11 +46,11 @@ public class ConfigurationSectionMemberTable {
      * Effect: Sets the list of members to a section configuration.
      * @param sectionMembers : new value for section members.
      */
-    public void setSectionMembers(ArrayList<SectionMemberTable> sectionMembers) {
+    public void setSectionMembers(ArrayList<SessionMemberTable> sectionMembers) {
         this.sectionMembers = sectionMembers;
     }
 
-    public ConfigurationSectionMemberTable(){
+    public ConfigurationSessionMemberTable(){
     }
 
     /**

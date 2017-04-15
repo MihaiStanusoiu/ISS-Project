@@ -3,32 +3,32 @@ package databasedomain;
 import javax.persistence.*;
 
 /**
- * Name:         SectionMemberTable
- * Effect:       Class for the db table SectionMember.
+ * Name:         SessionMemberTable
+ * Effect:       Class for the db table SessionMember.
  * Date:         08/04/2017
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
 
 @Entity
-@Table(name = "SectionMember")
+@Table(name = "SessionMember")
 @SuppressWarnings("unused")
-public class SectionMemberTable {
+public class SessionMemberTable {
 
     @EmbeddedId
-    private SectionMemberId id;
+    private SessionMemberId id;
 
     @ManyToOne
     @JoinColumn(name = "id_configuration")
     private Integer idConfiguration;
 
-    public SectionMemberTable() { }
+    public SessionMemberTable() { }
 
     /**
      * Effect: Return the id of a section member.
      * @return [Integer] : returns the id of a section member.
      */
-    public SectionMemberId getId() {
+    public SessionMemberId getId() {
         return id;
     }
 
@@ -36,7 +36,7 @@ public class SectionMemberTable {
      * Effect: Sets the id of a section member.
      * @param id: new value for id.
      */
-    public void setId(SectionMemberId id) {
+    public void setId(SessionMemberId id) {
         this.id = id;
     }
 

@@ -3,8 +3,8 @@ package domain;
 import java.util.ArrayList;
 
 /**
- * Name:         SectionMember
- * Effect:       Class for SectionMember user
+ * Name:         SessionMember
+ * Effect:       Class for SessionMember user
  * Date:         4/2/2017
  * Tested:       True
  *
@@ -12,11 +12,11 @@ import java.util.ArrayList;
  * @version      1.0
  */
 
-public class SectionMember extends ConferenceMember {
+public class SessionMember extends EditionMember {
 
     private Integer idSection;
 
-    public SectionMember(Integer id,
+    public SessionMember(Integer id,
                          String username,
                          String password,
                          String email,
@@ -30,7 +30,7 @@ public class SectionMember extends ConferenceMember {
         this.idSection = idSection;
     }
 
-    public SectionMember(Integer id,
+    public SessionMember(Integer id,
                          String username,
                          String password,
                          String email,
@@ -42,7 +42,7 @@ public class SectionMember extends ConferenceMember {
         super(id, username, password, email, name, website, bio, location, idConference);
     }
 
-    public SectionMember(Integer id, Integer idConference, Integer idSection) {
+    public SessionMember(Integer id, Integer idConference, Integer idSection) {
         super(id, idConference);
         this.idSection = idSection;
     }

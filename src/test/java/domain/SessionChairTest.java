@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class SectionChairTest {
+public class SessionChairTest {
 
-    private SectionChair sectionChair;
+    private SessionChair sessionChair;
 
     @Before
     public void setUp() throws Exception {
-        sectionChair = new SectionChair(
+        sessionChair = new SessionChair(
                 1,
                 "mike",
                 "1234",
@@ -26,14 +26,14 @@ public class SectionChairTest {
 
     @Test
     public void isGettingType() throws Exception {
-        assertTrue(sectionChair.getType().equals(UserType.SECTION_CHAIR));
+        assertTrue(sessionChair.getType().equals(UserType.SECTION_CHAIR));
     }
 
     @Test
     public void isGettingPermissions() throws Exception {
-        assertTrue(sectionChair.getPermissions().contains(Permission.CREATE_SECTION));
-        assertTrue(sectionChair.getPermissions().contains(Permission.DELETE_SECTION));
-        assertTrue(sectionChair.getPermissions().contains(Permission.UPDATE_SECTION));
+        assertTrue(sessionChair.getPermissions().contains(Permission.CREATE_SECTION));
+        assertTrue(sessionChair.getPermissions().contains(Permission.DELETE_SECTION));
+        assertTrue(sessionChair.getPermissions().contains(Permission.UPDATE_SECTION));
     }
 
 }

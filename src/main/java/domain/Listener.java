@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author {Stanusoiu Mihai-Teodor}
  * @version 1.0
  */
-public class Listener extends SectionMember {
+public class Listener extends SessionMember {
 
     public Listener(Integer id,
                     String username,

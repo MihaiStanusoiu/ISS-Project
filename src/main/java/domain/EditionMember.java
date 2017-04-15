@@ -3,19 +3,19 @@ package domain;
 import java.util.ArrayList;
 
 /**
- * Name:        ConferenceMember
- * Effect:      Class for ConferenceMember type
+ * Name:        EditionMember
+ * Effect:      Class for EditionMember type
  * Date:        4/2/2017
  * Tested:      True
  *
  * @author      {Stanusoiu Mihai-Teodor}
  * @version     1.0
  */
-public class ConferenceMember extends User {
+public class EditionMember extends User {
 
     protected Integer idConference;
 
-    public ConferenceMember(Integer id,
+    public EditionMember(Integer id,
                             String username,
                             String password,
                             String email,
@@ -28,7 +28,7 @@ public class ConferenceMember extends User {
         this.idConference = idConference;
     }
 
-    public ConferenceMember(Integer id,
+    public EditionMember(Integer id,
                             String username,
                             String password,
                             String email,
@@ -39,7 +39,7 @@ public class ConferenceMember extends User {
         super(id, username, password, email, name, website, bio, location);
     }
 
-    public ConferenceMember(Integer id, Integer idConference) {
+    public EditionMember(Integer id, Integer idConference) {
         this.id = id;
         this.idConference = idConference;
     }

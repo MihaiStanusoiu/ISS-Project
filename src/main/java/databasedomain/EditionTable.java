@@ -8,8 +8,8 @@ import java.util.Date;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:    ConferenceTable
- * Effect:  A class for the database table Conference
+ * Name:    EditionTable
+ * Effect:  A class for the database table Edition
  * Date:    9/4/2017
  * Tested:  False
  *
@@ -18,9 +18,9 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 
 @Entity
-@Table(name = "Conference")
+@Table(name = "Edition")
 @SuppressWarnings("unused")
-public class ConferenceTable {
+public class EditionTable {
 
     @Id@GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_conference")
@@ -57,18 +57,18 @@ public class ConferenceTable {
     private Date biddingDeadline;
 
     @OneToMany(mappedBy = "id_conference")
-    private ArrayList<SectionTable> sections;
+    private ArrayList<SessionTable> sections;
 
     @OneToMany(mappedBy = "id_conference")
     private ArrayList<SubmissionTable> submissions;
 
     @OneToMany(mappedBy = "id_conference")
-    private ArrayList<ConferenceMemberTable> members;
+    private ArrayList<EditionMemberTable> members;
 
     /**
      * Empty constructor
      */
-    public ConferenceTable() { }
+    public EditionTable() { }
 
     /**
      * Effect: Return the id of this conference.
@@ -248,9 +248,9 @@ public class ConferenceTable {
 
     /**
      * Effect: Return the sections of this conference.
-     * @return [ArrayList<SectionTable>]: returns the sections of conference.
+     * @return [ArrayList<SessionTable>]: returns the sections of conference.
      */
-    public ArrayList<SectionTable> getSections() {
+    public ArrayList<SessionTable> getSections() {
         return sections;
     }
 
@@ -258,7 +258,7 @@ public class ConferenceTable {
      * Effect: Sets the sections of a conference.
      * @param sections: new value for conference sections.
      */
-    public void setSections(ArrayList<SectionTable> sections) {
+    public void setSections(ArrayList<SessionTable> sections) {
         this.sections = sections;
     }
 
@@ -280,9 +280,9 @@ public class ConferenceTable {
 
     /**
      * Effect: Return the members of this conference.
-     * @return [ArrayList<ConferenceMemberTable>]: returns the members of conference.
+     * @return [ArrayList<EditionMemberTable>]: returns the members of conference.
      */
-    public ArrayList<ConferenceMemberTable> getMembers() {
+    public ArrayList<EditionMemberTable> getMembers() {
         return members;
     }
 
@@ -290,7 +290,7 @@ public class ConferenceTable {
      * Effect: Sets the members of a conference.
      * @param members: new value for conference members.
      */
-    public void setMembers(ArrayList<ConferenceMemberTable> members) {
+    public void setMembers(ArrayList<EditionMemberTable> members) {
         this.members = members;
     }
 }

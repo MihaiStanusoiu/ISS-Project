@@ -6,17 +6,17 @@ import java.util.Date;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:         SectionTable
- * Effect:       Class for the db table Section.
+ * Name:         SessionTable
+ * Effect:       Class for the db table Session.
  * Date:         08/04/2017
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
 
 @Entity
-@Table(name = "Section")
+@Table(name = "Session")
 @SuppressWarnings("unused")
-public class SectionTable {
+public class SessionTable {
 
     @Id @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id_section")
@@ -44,7 +44,7 @@ public class SectionTable {
     @Column(name = "seats")
     private Integer seats;
 
-    public SectionTable() { }
+    public SessionTable() { }
 
     /**
      * Effect: Return the id of a section.

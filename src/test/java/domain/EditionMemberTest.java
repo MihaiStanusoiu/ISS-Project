@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class ConferenceMemberTest {
+public class EditionMemberTest {
 
-    private ConferenceMember user;
+    private EditionMember user;
 
     @Before
     public void setUp() throws Exception {
-        user = new ConferenceMember(
+        user = new EditionMember(
                 1,
                 "mike",
                 "1234",
