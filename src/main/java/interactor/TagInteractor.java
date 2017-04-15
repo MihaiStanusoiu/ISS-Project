@@ -25,7 +25,7 @@ public class TagInteractor implements InteractorInterface<Tag>{
   }
 
   @Override
-  public void update(Tag obj) throws Exception {
+  public void update(Tag objInit, Tag objUpd) throws Exception {
   }
 
   @Override

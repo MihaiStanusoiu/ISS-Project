@@ -25,7 +25,7 @@ public class TopicInteractor implements InteractorInterface<Topic> {
   }
 
   @Override
-  public void update(Topic obj) throws Exception {
+  public void update(Topic objInit, Topic objUpd) throws Exception {
   }
 
   @Override

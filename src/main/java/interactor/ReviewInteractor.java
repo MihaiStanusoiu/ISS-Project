@@ -25,7 +25,7 @@ public class ReviewInteractor implements InteractorInterface<Review>{
   }
 
   @Override
-  public void update(Review obj) throws Exception {
+  public void update(Review objInit, Review objUpd) throws Exception {
   }
 
   @Override

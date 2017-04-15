@@ -25,7 +25,7 @@ public class ListenerInteractor implements InteractorInterface<Listener>{
   }
 
   @Override
-  public void update(Listener obj) throws Exception {
+  public void update(Listener objInit, Listener objUpd) throws Exception {
   }
 
   @Override

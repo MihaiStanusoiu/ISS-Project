@@ -25,7 +25,7 @@ public class EditionMemberInteractor implements InteractorInterface<EditionMembe
   }
 
   @Override
-  public void update(EditionMember obj) throws Exception {
+  public void update(EditionMember objInit, EditionMember objUpd) throws Exception {
   }
 
   @Override

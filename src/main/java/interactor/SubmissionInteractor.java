@@ -25,7 +25,7 @@ public class SubmissionInteractor implements InteractorInterface<Submission>{
   }
 
   @Override
-  public void update(Submission obj) throws Exception {
+  public void update(Submission objInit, Submission objUpd) throws Exception {
   }
 
   @Override
