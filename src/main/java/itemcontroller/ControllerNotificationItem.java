@@ -1,6 +1,5 @@
 package itemcontroller;
 
-import domain.Notification;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,8 +18,8 @@ import view.GradientGenerator;
  * @version     1.1
  */
 
-public class ControllerNotificationItem
-        implements PaginationControllerItemInterface<Notification> {
+public class ControllerNotificationItem<T>
+        implements PaginationControllerItemInterface<T> {
 
     /**
      * Displays the notification's text.
@@ -56,7 +55,7 @@ public class ControllerNotificationItem
     /**
      * Effect: The item that needs to be displayed inside the view. [Notification]
      */
-    private Notification item;
+    private T item;
 
     /**
      * Effect: Sets the element in order to be displayed
@@ -64,7 +63,7 @@ public class ControllerNotificationItem
      * @param element: The required element for item's view
      */
     @Override
-    public void setElement(Notification element) {
+    public void setElement(T element) {
         this.item = element;
         build();
     }
@@ -80,14 +79,14 @@ public class ControllerNotificationItem
      * Effect: Builds the view with the set item.
      */
     private void build() {
-        if (item.getPayment().equals(Boolean.TRUE)) {   /* hides the payment button */
-            payButton.setOpacity(0);                    /* if it's not required */
-            payButton.setMaxWidth(0);
-            payButton.setMaxHeight(0);
-        }
-        textLabel.setText(item.getText());
-        background.setStyle(String.format("-fx-background-color : %s",
-                generator.getGradient().getValue()));   /* sets a random gradient */
+//        if (item.getPayment().equals(Boolean.TRUE)) {   /* hides the payment button */
+//            payButton.setOpacity(0);                    /* if it's not required */
+//            payButton.setMaxWidth(0);
+//            payButton.setMaxHeight(0);
+//        }
+//        textLabel.setText(item.getText());
+//        background.setStyle(String.format("-fx-background-color : %s",
+//                generator.getGradient().getValue()));   /* sets a random gradient */
     }
 
     /**

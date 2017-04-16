@@ -1,41 +1,81 @@
 package domain;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+
 /**
  * Name:         Topic
- * Effect:       Class for the paper topics.
- * Date:         02.04.2017
- * Tested:       True
- * @author       Tiron Andreea - Ecaterina
- * @version      1.0
+ * Effect:       Class for domain Topic table
+ * Date:         4/8/2017
+ * Tested:       False
+ *
+ * @author      {Teodorescu Vlad}
+ * @version     1.0
  */
 
-public class Topic extends Idable<Integer> {
+@Entity
+@Table(name = "Topic")
+@SuppressWarnings("unused")
+public class Topic {
 
-    private String content;
+    @Id @GeneratedValue
+    @Column(name = "id_topic")
+    private Integer idTopic;
 
-    public Topic(String content) {
-        this(0, content);
-    }
+    @Column(name = "word")
+    private String word;
 
-    public Topic(Integer id, String content) {
-        this.id = id;
-        this.content = content;
+    private ArrayList<SubmissionTopic> topicSubmissionTopics = new ArrayList<>();
+
+    public Topic() { }
+
+    /**
+     * Effect: Getter for the id_topic of the topic.
+     * @return Integer : returns idTopic.
+     */
+    public Integer getIdTopic() {
+        return idTopic;
     }
 
     /**
-     * Effect: Get the content of the topic.
-     * @return content: the content.
+     * Effect: Sets the id_topic to the given value
+     * @param idTopic: new value for idTopic
      */
-    public String getContent() {
-        return content;
+    public void setIdTopic(Integer idTopic) {
+        this.idTopic = idTopic;
     }
 
     /**
-     * Effect: Set the content of the topic.
-     * @param content: [String] the new content.
+     * Effect: Getter for the content of the topic.
+     * @return String : returns word.
      */
-    public void setContent(String content) {
-        this.content = content;
+    public String getWord() {
+        return word;
+    }
+
+    /**
+     * Effect: Sets the word to the given value
+     * @param word: new value for word
+     */
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    /**
+     * Effect: Getter for the elements of the relationship of the topic.
+     * @return ArrayList<SubmissionTopic> : returns topicSubmissionTopics.
+     */
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id_topic")
+    public ArrayList<SubmissionTopic> getTopicSubmissionTopics() {
+        return topicSubmissionTopics;
+    }
+
+    /**
+     * Effect: Sets the topicSubmissionTopics to the given value
+     * @param topicSubmissionTopics: new value for topicSubmissionTopics
+     */
+    public void setTopicSubmissionTopics(ArrayList<SubmissionTopic> topicSubmissionTopics) {
+        this.topicSubmissionTopics = topicSubmissionTopics;
     }
 
 }

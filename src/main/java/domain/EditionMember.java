@@ -1,80 +1,99 @@
 package domain;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 
 /**
  * Name:        EditionMember
- * Effect:      Class for EditionMember type
- * Date:        4/2/2017
- * Tested:      True
- *
- * @author      {Stanusoiu Mihai-Teodor}
+ * Effect:      Corresponding class for the EditionMember table in the database.
+ * Date:        4/8/2017
+ * Tested:      False
+ * @author      Stanusoiu Mihai-Teodor
  * @version     1.0
  */
-public class EditionMember extends User {
 
-    protected Integer idConference;
+@Entity
+@Table(name="EditionMember")
+@SuppressWarnings("unused")
+public class EditionMember {
 
-    public EditionMember(Integer id,
-                            String username,
-                            String password,
-                            String email,
-                            String name,
-                            String website,
-                            String bio,
-                            String location,
-                            Integer idConference) {
-        super(id, username, password, email, name, website, bio, location);
-        this.idConference = idConference;
-    }
+    @EmbeddedId
+    private EditionMemberId pkId;
 
-    public EditionMember(Integer id,
-                            String username,
-                            String password,
-                            String email,
-                            String name,
-                            String website,
-                            String bio,
-                            String location) {
-        super(id, username, password, email, name, website, bio, location);
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
-    public EditionMember(Integer id, Integer idConference) {
-        this.id = id;
-        this.idConference = idConference;
+    @ManyToOne
+    @JoinColumn(name = "id_conference")
+    private Edition editionTable;
+
+    @OneToOne
+    @JoinColumn(name = "id_configuration")
+    private ConfigurationEditionMember configurationConferenceMember;
+
+    public EditionMember() { }
+
+    /**
+     * Effect: Returns the composite primary key id of the conference member
+     * @return [EditionMemberId]: composite id of the conference member
+     */
+    public EditionMemberId getPkId() {
+        return pkId;
     }
 
     /**
-     * Effect: Getter for the id of the conference.
-     * @return Integer : returns idConference.
+     * Effect: Sets the primary key id of the conference member.
+     * @param pkId [EditionMemberId]: the primary key
      */
-    public Integer getIdConference() {
-        return idConference;
+    public void setPkId(EditionMemberId pkId) {
+        this.pkId = pkId;
     }
 
     /**
-     * Effect: Sets the idConference to the given value
-     * @param idConference: new value for idSubmission
+     * Effect: Returns the user of the conference member
+     * @return [User]: user that is the conference member
      */
-    public void setIdConference(Integer idConference) {
-        this.idConference = idConference;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * Effect: Gets the permissions assigned to the corresponding user type (UserType.CONFERENCE_MEMBER)
-     * @return ArrayList<Permission>: returns the array of permissions.
+     * Effect: Sets the user to the given value
+     * @param user [User]: new value for the user
      */
-    @Override
-    public ArrayList<Permission> getPermissions() {
-        return UserType.CONFERENCE_MEMBER.getPermissions();
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**
-     * Effect: Returns UserType.CONFERENCE_MEMBER
-     * @return UserType : returns the corresponding user type.
+     * Effect: Returns the conference of the conference member
+     * @return [Edition]: conference of the conference member
      */
-    @Override
-    public UserType getType() {
-        return UserType.CONFERENCE_MEMBER;
+    public Edition getEditionTable() {
+        return editionTable;
+    }
+
+    /**
+     * Effect: Sets the conference to the given value
+     * @param editionTable [Edition]: new value for the password
+     */
+    public void setEditionTable(Edition editionTable) {
+        this.editionTable = editionTable;
+    }
+
+    /**
+     * Effect: Returns the configuration of the conference member
+     * @return [ConfigurationEditionMember]: configuration of the conference member
+     */
+    public ConfigurationEditionMember getConfigurationConferenceMember() {
+        return configurationConferenceMember;
+    }
+    /**
+     * Effect: Sets the configuration to the given value
+     * @param configurationConferenceMember [ConfigurationEditionMember]: new value for the configuration
+     */
+    public void setConfigurationConferenceMember(
+        ConfigurationEditionMember configurationConferenceMember) {
+        this.configurationConferenceMember = configurationConferenceMember;
     }
 }

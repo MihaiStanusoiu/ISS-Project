@@ -1,7 +1,6 @@
 package itemcontroller;
 
 import controller.ControllerInterface;
-import domain.Conference;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import manager.StageManager;
@@ -21,13 +20,13 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class ControllerConferenceView
-        implements ControllerInterface, ControllerItemInterface<Conference> {
+public class ControllerConferenceView<T>
+        implements ControllerInterface, ControllerItemInterface<T> {
 
     @FXML private Label nameLabel;
 
     @SuppressWarnings("all")
-    private Conference element;
+    private T element;
 
     @SuppressWarnings("all")
     private StageManager manager;
@@ -49,9 +48,9 @@ public class ControllerConferenceView
      * @param element The view's element.
      */
     @Override
-    public void setElement(Conference element) {
-        this.element = element;
-        nameLabel.setText(element.getName());
+    public void setElement(T element) {
+       this.element = element;
+//        nameLabel.setText(element.getName());
     }
 
 }

@@ -1,17 +1,12 @@
 package controller;
 
-import domain.User;
-import itemcontroller.ControllerUserItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import pagination.PaginationBuilder;
-import view.ViewType;
 
 /**
  * Name:        ControllerUsersView
@@ -41,33 +36,17 @@ public class ControllerUsersView implements ControllerInterface {
     @SuppressWarnings("unchecked")
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
-        User[] users = {
-            new User(1, "UserTest", "password", "user@username.com",
-                "Test User", "none", "none", "New York"),
-            new User(2, "UserTest", "password", "user@username.com",
-                    "Test User", "none", "none", "New York"),
-            new User(3, "UserTest", "password", "user@username.com",
-                    "Test User", "none", "none", "New York"),
-            new User(4, "UserTest", "password", "user@username.com",
-                    "Test User", "none", "none", "New York"),
-            new User(5, "UserTest", "password", "user@username.com",
-                    "Test User", "none", "none", "New York"),
-            new User(6, "UserTest", "password", "user@username.com",
-                    "Test User", "none", "none", "New York"),
-            new User(7, "UserTest", "password", "user@username.com",
-                    "Test User", "none", "none", "New York"),
-            new User(8, "UserTest", "password", "user@username.com",
-                    "Test User", "none", "none", "New York"),
-        };
-        pagination = new PaginationBuilder<User, ControllerUserItem, GridPane>()
-                .setRows(2)
-                .setColumns(4)
-                .setElements(users)
-                .setView(ViewType.USER_ITEM)
-                .setStageManager(this.manager)
-                .setPagination(this.pagination)
-                .build(GridPane.class);
-        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+//        User[] users = {
+//        };
+//        pagination = new PaginationBuilder<User, ControllerUserItem, GridPane>()
+//                .setRows(2)
+//                .setColumns(4)
+//                .setElements(users)
+//                .setView(ViewType.USER_ITEM)
+//                .setStageManager(this.manager)
+//                .setPagination(this.pagination)
+//                .build(GridPane.class);
+//        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
     }
 
     /**

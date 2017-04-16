@@ -1,108 +1,177 @@
 package domain;
 
+import javax.persistence.*;
 import java.util.Date;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Name:         Session
- * Effect:       A conference section.
- * Date:         02/04/2017
- * Tested:       True
+ * Effect:       Class for the db table Session.
+ * Date:         08/04/2017
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
 
-public class Session extends Idable<Integer>{
+@Entity
+@Table(name = "Session")
+@SuppressWarnings("unused")
+public class Session {
 
-    private String name;
-    private Date startDate;
-    private Date endDate;
-    private String location;
-    private String bio;
-    private Integer seats;
+    @Id @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "id_section")
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_conference")
     private Integer idConference;
 
-    public Session(Integer id,
-                   String name,
-                   Date startDate,
-                   Date endDate,
-                   String location,
-                   String bio,
-                   Integer seats,
-                   Integer idConference) {
-        this.id = id;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.location = location;
-        this.bio = bio;
-        this.seats = seats;
-        this.idConference = idConference;
-    }
+    @Column(name = "name")
+    private String name;
 
-    public Session(String name,
-                   Date startDate,
-                   Date endDate,
-                   String location,
-                   String bio,
-                   Integer seats,
-                   Integer idConference){
-        this(0, name, startDate, endDate, location, bio, seats, idConference);
+    @Column(name = "start_date")
+    private Date startDate;
+
+    @Column(name = "end_date")
+    private Date endDate;
+
+    @Column(name = "location")
+    private String location;
+
+    @Column(name = "bio")
+    private String bio;
+
+    @Column(name = "seats")
+    private Integer seats;
+
+    public Session() { }
+
+    /**
+     * Effect: Return the id of a section.
+     * @return [Integer] : returns the id of a section.
+     */
+    public Integer getId() {
+        return id;
     }
 
     /**
-     * Effect: Return the name of the section.
-     * @return [String] : returns the name.
+     * Effect: Sets the id of a section.
+     * @param id : new value for id.
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * Effect: Return the id of the conference.
+     * @return [Integer] : returns the id of the conference.
+     */
+    public Integer getIdConference() {
+        return idConference;
+    }
+
+    /**
+     * Effect: Sets the id of a conference.
+     * @param idConference : new value for id.
+     */
+    public void setIdConference(Integer idConference) {
+        this.idConference = idConference;
+    }
+
+    /**
+     * Effect: Return the name of a section.
+     * @return [String] : returns the name of a section.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Effect: Return the start date.
-     * @return [Date] : returns the date.
+     * Effect: Sets the name of a section.
+     * @param name : new value for name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Effect: Return the starting date of a section.
+     * @return [Date] : returns the starting date of a section.
      */
     public Date getStartDate() {
         return startDate;
     }
 
     /**
-     * Effect: Return the end date.
-     * @return [Date] : returns the date.
+     * Effect: Sets the starting date of a section.
+     * @param startDate : new value for start date.
+     */
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * Effect: Return the ending date of a section.
+     * @return [Date] : returns the ending date of a section.
      */
     public Date getEndDate() {
         return endDate;
     }
 
     /**
-     * Effect: Return the location of the section.
-     * @return [String] : returns the location.
+     * Effect: Sets the ending date of a section.
+     * @param endDate : new value for end date.
+     */
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
+     * Effect: Return the location of a section.
+     * @return [String] : returns the location of a section.
      */
     public String getLocation() {
         return location;
     }
 
     /**
-     * Effect: Return the details of the section.
-     * @return [String] : returns the bio.
+     * Effect: Sets the location of a section.
+     * @param location : new value for location.
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /**
+     * Effect: Return the bio of a section.
+     * @return [String] : returns the bio of a section.
      */
     public String getBio() {
         return bio;
     }
 
     /**
-     * Effect: Return the number of seats available.
-     * @return [Integer] : returns the seats.
+     * Effect: Sets the bio of a section.
+     * @param bio : new value of bio.
+     */
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    /**
+     * Effect: Return the number of seats of a section.
+     * @return [Integer] : returns the seats of a section.
      */
     public Integer getSeats() {
         return seats;
     }
 
     /**
-     * Effect: Return the id of the conference.
-     * @return [Integer] : returns the id.
+     * Effect: Sets the number of seats of a section.
+     * @param seats : new value for seats.
      */
-    public Integer getIdConference() {
-        return idConference;
+    public void setSeats(Integer seats) {
+        this.seats = seats;
     }
 
 }

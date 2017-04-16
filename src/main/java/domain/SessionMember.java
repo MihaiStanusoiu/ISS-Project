@@ -1,83 +1,60 @@
 package domain;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 
 /**
  * Name:         SessionMember
- * Effect:       Class for SessionMember user
- * Date:         4/2/2017
- * Tested:       True
- *
- * @author       Stanusoiu Mihai-Teodor
+ * Effect:       Class for the db table SessionMember.
+ * Date:         08/04/2017
+ * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
 
-public class SessionMember extends EditionMember {
+@Entity
+@Table(name = "SessionMember")
+@SuppressWarnings("unused")
+public class SessionMember {
 
-    private Integer idSection;
+    @EmbeddedId
+    private SessionMemberId id;
 
-    public SessionMember(Integer id,
-                         String username,
-                         String password,
-                         String email,
-                         String name,
-                         String website,
-                         String bio,
-                         String location,
-                         Integer idConference,
-                         Integer idSection) {
-        super(id, username, password, email, name, website, bio, location, idConference);
-        this.idSection = idSection;
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_configuration")
+    private Integer idConfiguration;
 
-    public SessionMember(Integer id,
-                         String username,
-                         String password,
-                         String email,
-                         String name,
-                         String website,
-                         String bio,
-                         String location,
-                         Integer idConference) {
-        super(id, username, password, email, name, website, bio, location, idConference);
-    }
+    public SessionMember() { }
 
-    public SessionMember(Integer id, Integer idConference, Integer idSection) {
-        super(id, idConference);
-        this.idSection = idSection;
+    /**
+     * Effect: Return the id of a section member.
+     * @return [Integer] : returns the id of a section member.
+     */
+    public SessionMemberId getId() {
+        return id;
     }
 
     /**
-     * Effect: Returns UserType.SECTION_MEMBER
-     * @return UserType : returns the corresponding user type.
+     * Effect: Sets the id of a section member.
+     * @param id: new value for id.
      */
-    @Override
-    public UserType getType() {
-        return UserType.SECTION_MEMBER;
+    public void setId(SessionMemberId id) {
+        this.id = id;
     }
 
     /**
-     * Effect: Getter for the id of the section.
-     * @return Integer : returns idSection.
+     * Effect: Return the id of a section configuration.
+     * @return [Integer] : returns the id of a section configuration.
      */
-    public Integer getIdSection() {
-        return idSection;
+    public Integer getIdConfiguration() {
+        return idConfiguration;
     }
 
     /**
-     * Effect: Gets the permissions assigned to the corresponding user type (UserType.SECTION_MEMBER)
-     * @return ArrayList<Permission>: returns the array of permissions.
+     * Effect: Sets the id of a section configuration.
+     * @param idConfiguration: new value for id configuration.
      */
-    @Override
-    public ArrayList<Permission> getPermissions() {
-        return UserType.SECTION_MEMBER.getPermissions();
+    public void setIdConfiguration(Integer idConfiguration) {
+        this.idConfiguration = idConfiguration;
     }
 
-    /**
-     * Effect: Sets the idSection to the given value
-     * @param idSection: new value for idSubmission
-     */
-    public void setIdSection(Integer idSection) {
-        this.idSection = idSection;
-    }
+
 }

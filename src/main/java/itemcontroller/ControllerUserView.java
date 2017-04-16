@@ -1,7 +1,6 @@
 package itemcontroller;
 
 import controller.ControllerInterface;
-import domain.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import manager.StageManager;
@@ -21,8 +20,8 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class ControllerUserView
-        implements ControllerInterface, ControllerItemInterface<User> {
+public class ControllerUserView<T>
+        implements ControllerInterface, ControllerItemInterface<T> {
 
     /**
      * Displays the user's real name.
@@ -33,7 +32,7 @@ public class ControllerUserView
      * The base user of the view.
      */
     @SuppressWarnings("all")
-    private User element;
+    private T element;
 
     @SuppressWarnings("all")
     private StageManager manager;
@@ -54,9 +53,9 @@ public class ControllerUserView
      * @param element The view's element.
      */
     @Override
-    public void setElement(User element) {
-        this.element = element;
-        nameLabel.setText(element.getName());
+    public void setElement(T element) {
+      //  this.element = element;
+      //  nameLabel.setText(element.getName());
     }
 
 }
