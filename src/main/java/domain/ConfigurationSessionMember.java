@@ -1,7 +1,7 @@
 package domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.List;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
@@ -32,13 +32,13 @@ public class ConfigurationSessionMember {
     private Boolean isListener;
 
     @OneToMany(mappedBy = "idConfiguration")
-    private ArrayList<SessionMember> sectionMembers = new ArrayList<>();
+    private List<SessionMember> sectionMembers;
 
     /**
      * Effect: Return the section members with this configuration.
      * @return [ArrayList<SessionMember>] : returns the list of members.
      */
-    public ArrayList<SessionMember> getSectionMembers() {
+    public List<SessionMember> getSectionMembers() {
         return this.sectionMembers;
     }
 
@@ -46,7 +46,7 @@ public class ConfigurationSessionMember {
      * Effect: Sets the list of members to a section configuration.
      * @param sectionMembers : new value for section members.
      */
-    public void setSectionMembers(ArrayList<SessionMember> sectionMembers) {
+    public void setSectionMembers(List<SessionMember> sectionMembers) {
         this.sectionMembers = sectionMembers;
     }
 

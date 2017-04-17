@@ -1,5 +1,6 @@
 package database;
 
+import domain.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -70,10 +71,38 @@ public class DatabaseLoader
     }
 
     /**
+     * Effect: Sets up the configuration with the domain tables.
+     */
+    private void setUpConfiguration() {
+        configuration.addAnnotatedClass(AuthorSubmission.class);
+        configuration.addAnnotatedClass(AuthorSubmissionItems.class);
+        configuration.addAnnotatedClass(ConfigurationEditionMember.class);
+        configuration.addAnnotatedClass(ConfigurationSessionMember.class);
+        configuration.addAnnotatedClass(Edition.class);
+        configuration.addAnnotatedClass(EditionMember.class);
+        configuration.addAnnotatedClass(EditionMemberId.class);
+        configuration.addAnnotatedClass(Notification.class);
+        configuration.addAnnotatedClass(Reviewer.class);
+        configuration.addAnnotatedClass(ReviewerId.class);
+        configuration.addAnnotatedClass(Session.class);
+        configuration.addAnnotatedClass(SessionMember.class);
+        configuration.addAnnotatedClass(SessionMemberId.class);
+        configuration.addAnnotatedClass(Submission.class);
+        configuration.addAnnotatedClass(SubmissionTag.class);
+        configuration.addAnnotatedClass(SubmissionTagId.class);
+        configuration.addAnnotatedClass(SubmissionTopic.class);
+        configuration.addAnnotatedClass(SubmissionTopicItems.class);
+        configuration.addAnnotatedClass(Tag.class);
+        configuration.addAnnotatedClass(Topic.class);
+        configuration.addAnnotatedClass(User.class);
+    }
+
+    /**
      * Effect: Loads the session factory based on the current configuration.
      */
     private void load() {
-        this.factory = this.configuration.buildSessionFactory();
+        setUpConfiguration();
+        factory = configuration.buildSessionFactory();
     }
 
     /**
@@ -95,7 +124,6 @@ public class DatabaseLoader
     public Configuration getConfiguration() {
         return this.configuration;
     }
-
     /**
      * Effect: Returns the hibernate's factory.
      * Useful is we need to work with multiple databases in the same time.

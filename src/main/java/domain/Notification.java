@@ -1,6 +1,7 @@
 package domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Name:         Notification
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Notification")
 @SuppressWarnings("unused")
-public class Notification {
+public class Notification implements Serializable {
 
     @Id
     @GeneratedValue

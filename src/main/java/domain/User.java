@@ -1,7 +1,9 @@
 package domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Name:        User
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 @Entity
 @Table(name = "User")
 @SuppressWarnings("unused")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue
@@ -43,8 +45,8 @@ public class User {
     @Column(name = "location")
     private String location;
 
-    @OneToMany(mappedBy = "idUser")
-    private ArrayList<Notification> notifications = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Notification> notifications = new ArrayList<>();
 
     public User() {}
 
@@ -179,9 +181,9 @@ public class User {
 
     /**
      * Effect: Returns the notifications of the user
-     * @return [ArrayList<Notification>]: nofitications of the user
+     * @return [ArrayList<Notification>]: notifications of the user
      */
-    public ArrayList<Notification> getNotifications() {
+    public List<Notification> getNotifications() {
         return notifications;
     }
 
