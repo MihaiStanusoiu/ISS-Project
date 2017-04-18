@@ -1,19 +1,21 @@
 package repository;
 
+import domaintest.Idable;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Name:         RepositoryInterface
- * Effect:       Defines how a repository should behave.
- *               WIP: Don't use this interface yet.
+ * Effect:       Defines a generic repository for our system.
  * Date:         4/16/2017
- * Tested:       WIP
+ * Tested:       True
  *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
-public interface RepositoryInterface<T, Id> {
+public interface RepositoryInterface<T extends Idable<Id>, Id extends Serializable> {
 
     /**
      * @param element The element we need to add to database.
@@ -22,9 +24,32 @@ public interface RepositoryInterface<T, Id> {
      */
     Id add(T element) throws RepositoryException;
 
+    /**
+     * @param element The old element from our system.
+     * @param with The element with the updated data.
+     *             (ignore the id primary key property)
+     * @throws RepositoryException If the action fails
+     */
     void update(T element, T with) throws RepositoryException;
+
+    /**
+     * @param id The object's id.
+     * @return The deleted item from our system.
+     * @throws RepositoryException If the action fails.
+     */
     T delete(Id id) throws RepositoryException;
+
+    /**
+     * @return All the items type T from our database.
+     * @throws RepositoryException If the action fails.
+     */
     List<T> getAll() throws RepositoryException;
-    T getElementById() throws RepositoryException;
+
+    /**
+     * @param id The object's id.
+     * @return The wanted object based on the given id.
+     * @throws RepositoryException If the object is not found.
+     */
+    T getElementById(Id id) throws RepositoryException;
 
 }
