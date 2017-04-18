@@ -1,19 +1,21 @@
 package loader;
 
-import item_controller.PaginationControllerItemInterface;
+import itemcontroller.PaginationControllerItemInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
+import manager.StageManager;
 import view.ViewType;
+
 import java.io.IOException;
 
 /**
  * Name:        ItemFXMLLoader
- * Effect:      Loads the view of an item for PaginationBuilder.
+ * Effect:      Loads the view of an item for PaginationManager.
  * Date:        09/04/2017
  * Tested:      False
  *
  * @author      Alexandru Stoica
- * @version     1.0
+ * @version     1.1
  */
 
 public class ItemFXMLLoader<T, Controller extends PaginationControllerItemInterface<T>> {
@@ -51,6 +53,16 @@ public class ItemFXMLLoader<T, Controller extends PaginationControllerItemInterf
      */
     public void setElement(T element) {
         controller.setElement(element);
+    }
+
+    /**
+     * Effect: The item may require the stage manager
+     * in order to switch the main view.
+     * This function offers support for such cases.
+     * @param stageManager The main view's stage manager
+     */
+    public void setStageManager(StageManager stageManager) {
+        controller.setStageManager(stageManager);
     }
 
     /**

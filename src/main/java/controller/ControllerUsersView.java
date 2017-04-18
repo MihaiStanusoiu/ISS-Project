@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class ControllerUsersView implements ControllerInterface {
     private StageManager manager;
 
     @FXML private TextField searchTextField;
+    @FXML private Pagination pagination;
 
     @Autowired @Lazy
     public ControllerUsersView(StageManager manager) {
@@ -31,7 +33,21 @@ public class ControllerUsersView implements ControllerInterface {
     }
 
     @Override
-    public void initialize() { }
+    @SuppressWarnings("unchecked")
+    public void initialize() {
+        // This part is for testing the pagination's builder with mocking data.
+//        User[] users = {
+//        };
+//        pagination = new PaginationBuilder<User, ControllerUserItem, GridPane>()
+//                .setRows(2)
+//                .setColumns(4)
+//                .setElements(users)
+//                .setView(ViewType.USER_ITEM)
+//                .setStageManager(this.manager)
+//                .setPagination(this.pagination)
+//                .build(GridPane.class);
+//        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+    }
 
     /**
      * Effect: Search function for users.

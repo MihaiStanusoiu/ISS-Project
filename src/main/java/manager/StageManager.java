@@ -10,10 +10,14 @@ import java.util.Objects;
 /**
  * Name:        StageManager
  * Effect:      Manages switching scenes on the primary stage.
+ *              <p>
+ *                  Update 1.1: Supports views based on element.
+ *                  @implNote See 'ConferenceView' as an example.
+ *              </p>
  * Date:        31/03/2017
  * Tested:      False
  * @author      Alexandru Stoica
- * @version     1.0
+ * @version     1.1
  */
 
 public class StageManager {
@@ -38,6 +42,18 @@ public class StageManager {
      */
     public void switchScene(final ViewType type) {
         Parent root = getRootNode(type.getFXMLFile());
+        show(root, type.getTitle());
+    }
+
+    /**
+     * Effect: Switches the current scene of the application with another
+     * scene provided by type and sets the view's main element.
+     * @param type: The view's type (provides information about the title and the fxml file) [ViewType]
+     * @param element: The view's main element [T]
+     * @param <T>: The main element's type.
+     */
+    public <T> void switchScene(final ViewType type, T element) {
+        Parent root = getRootNode(type.getFXMLFile(), element);
         show(root, type.getTitle());
     }
 
@@ -80,6 +96,25 @@ public class StageManager {
         Parent root = null;
         try {
             root = loader.load(fxmlFilePath);
+            Objects.requireNonNull(root, "The root FXML should not be null!");
+        } catch (Exception error) {
+            handleErrors(error);
+        }
+        return root;
+    }
+
+    /**
+     * Effect: Loads the provided fxml file using the Spring FXML Loader object
+     * and sets the view's main element.
+     * @param fxmlFilePath: the fxml file's path  [String]
+     * @param element: the view's main element [T]
+     * @param <T>: the main element's type.
+     * @return root: the root node of the fxml file [Parent]
+     */
+    private <T> Parent getRootNode(String fxmlFilePath, T element) {
+        Parent root = null;
+        try {
+            root = loader.load(fxmlFilePath, element);
             Objects.requireNonNull(root, "The root FXML should not be null!");
         } catch (Exception error) {
             handleErrors(error);

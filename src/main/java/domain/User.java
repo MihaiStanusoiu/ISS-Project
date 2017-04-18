@@ -1,165 +1,197 @@
 package domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Name:        User
- * Effect:      Class for basic user type
- * Date:        4/2/2017
- * Tested:      True
- *
- * @author      {Stanusoiu Mihai-Teodor}
+ * Effect:      Corresponding class for the User table in the database.
+ * Date:        4/8/2017
+ * Tested:      False
+ * @author      Stanusoiu Mihai-Teodor
  * @version     1.0
  */
 
-public class User extends Idable<Integer> implements UserInterface {
+@Entity
+@Table(name = "User")
+@SuppressWarnings("unused")
+public class User implements Serializable {
 
-    protected String username;
-    protected String password;
-    protected String email;
-    protected String name;
-    protected String website;
-    protected String bio;
-    protected String location;
+    @Id
+    @GeneratedValue
+    @Column(name = "id_user")
+    private Integer id;
 
-    public User() { }
+    @Column(name = "username")
+    private String username;
 
-    public User( Integer id,
-                 String username,
-                 String password,
-                 String email,
-                 String name,
-                 String website,
-                 String bio,
-                 String location) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.name = name;
-        this.website = website;
-        this.bio = bio;
-        this.location = location;
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "website")
+    private String website;
+
+    @Column(name = "bio")
+    private String bio;
+
+    @Column(name = "location")
+    private String location;
+
+    @OneToMany(mappedBy = "user")
+    private List<Notification> notifications = new ArrayList<>();
+
+    public User() {}
+
+    /**
+     * Effect: Returns the id of the user
+     * @return [Integer]: id of the user
+     */
+    public Integer getId() {
+        return id;
     }
 
     /**
-     * Effect: Return the username.
-     * @return String : returns the username.
+     * Effect: Returns the username of the user
+     * @return [String]: username of the user
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * Effect: Sets the username to the given value
-     * @param username: new value for username
+     * Effect: Returns the password of the user
+     * @return [String]: password of the user
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * Effect: Getter for email.
-     * @return String : returns the email.
+     * Effect: Returns the email of the user
+     * @return [String]: email of the user
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * Effect: Sets the email to the given value
-     * @param email: new value for username
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * Effect: Getter for name.
-     * @return String : returns the name.
+     * Effect: Returns the name of the user
+     * @return [String]: name of the user
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Effect: Sets the name to the given value
-     * @param name: new value for username
+     * Effect: Returns the website of the user
+     * @return [String]: website of the user
      */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Effect: Getter for website link.
-     * @return String : returns the website.
-     */
-    public String getWebsite() {
+    public String getWebsite()
+    {
         return website;
     }
 
     /**
-     * Effect: Sets the website to the given value
-     * @param website: new value for username
-     */
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    /**
-     * Effect: Getter for bio.
-     * @return String : returns the bio.
+     * Effect: Returns the bio of the user
+     * @return [String]: bio of the user
      */
     public String getBio() {
         return bio;
     }
 
     /**
-     * Effect: Sets the bio to the given value
-     * @param bio: new value for username
-     */
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-    /**
-     * Effect: Getter for location.
-     * @return String : returns the location.
+     * Effect: Returns the location of the user
+     * @return [String]: location of the user
      */
     public String getLocation() {
         return location;
     }
 
     /**
-     * Effect: Sets the location to the given value
-     * @param location: new value for username
+     * Effect: Sets the id to the given value
+     * @param id [Integer]: new value for the id
      */
-    public void setLocation(String location) {
-        this.location = location;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * Effect: Sets the username to the given value
+     * @param username [String]: new value for the username
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
      * Effect: Sets the password to the given value
-     * @param password: new value for username
+     * @param password [String]: new value for the password
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
-     * Effect: Returns UserType.USER
-     * @return UserType : returns the corresponding user type.
+     * Effect: Sets the email to the given value
+     * @param email [String]: new value for the email
      */
-    @Override
-    public UserType getType() {
-        return UserType.USER;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
-     * Effect: Gets the permissions assigned to the corresponding user type (UserType.USER)
-     * @return ArrayList<Permission>: returns the array of permissions.
+     * Effect: Sets the name to the given value
+     * @param name [String]: new value for the name
      */
-    public ArrayList<Permission> getPermissions() {
-        return UserType.USER.getPermissions();
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Effect: Sets the website to the given value
+     * @param website [String]: new value for the website
+     */
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    /**
+     * Effect: Sets the bio to the given value
+     * @param bio [String]: new value for the bio
+     */
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    /**
+     * Effect: Sets the location to the given value
+     * @param location [String]: new value for the location
+     */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /**
+     * Effect: Returns the notifications of the user
+     * @return [ArrayList<Notification>]: notifications of the user
+     */
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    /**
+     * Effect: Sets the notifications array to the given value
+     * @param notifications [ArrayList<Notification>]: new value for the notifications array
+     */
+    public void setNotifications(ArrayList<Notification> notifications) {
+        this.notifications = notifications;
     }
 }

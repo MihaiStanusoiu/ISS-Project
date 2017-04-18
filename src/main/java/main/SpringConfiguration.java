@@ -1,6 +1,8 @@
 package main;
 
 import controller.*;
+import itemcontroller.ControllerConferenceView;
+import itemcontroller.ControllerUserView;
 import javafx.stage.Stage;
 import loader.SpringFXMLLoader;
 import manager.StageManager;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+
 import java.util.ResourceBundle;
 
 /**
@@ -30,8 +33,20 @@ public class SpringConfiguration {
 
     @Bean
     @Lazy
-    public ControllerConferencesView controllerHome() {
+    public ControllerConferencesView controllerConferencesView() {
         return new ControllerConferencesView(stageManager);
+    }
+
+    @Bean
+    @Lazy
+    public ControllerMyConferencesView controllerMyConferencesView() {
+        return new ControllerMyConferencesView(stageManager);
+    }
+
+    @Bean
+    @Lazy
+    public ControllerNotificationsView controllerNotificationsView() {
+        return new ControllerNotificationsView(stageManager);
     }
 
     @Bean
@@ -64,7 +79,19 @@ public class SpringConfiguration {
         return new ControllerMenu(stageManager);
     }
 
-    /** Local Resources Bundle */
+    @Bean
+    @Lazy
+    public ControllerConferenceView controllerConferenceView() {
+        return new ControllerConferenceView(stageManager);
+    }
+
+    @Bean
+    @Lazy
+    public ControllerUserView controllerUserView() {
+        return new ControllerUserView(stageManager);
+    }
+
+    /** Local Resource Bundle */
     @Bean
     public ResourceBundle resourceBundle() {
         return ResourceBundle.getBundle("application");

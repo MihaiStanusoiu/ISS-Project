@@ -10,7 +10,7 @@ package controller;
  * @version     1.0
  */
 
-interface ControllerInterface {
+public interface ControllerInterface {
 
     /**
      * Effect: Initialises the view by fetching data & setting up UI constraints.
