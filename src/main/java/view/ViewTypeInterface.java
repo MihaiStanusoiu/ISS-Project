@@ -12,9 +12,7 @@ package view;
 public interface ViewTypeInterface {
 
     /** Effect: Returns the title of the scene. */
-    default String getTitle() {
-        return ViewType.getDataFromBundle("application.title");
-    }
+    String getTitle();
 
     /** Effect: Returns the fxml file's path for the scene. */
     String getFXMLFile();

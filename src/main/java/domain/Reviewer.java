@@ -1,123 +1,62 @@
 package domain;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.util.ArrayList;
 
 /**
- * Name:    Reviewer
- * Effect:  Class for the database table Reviewer
- * Date:    9/4/2017
- * Tested:  False
+ * Name:         Reviewer
+ * Effect:         Class for Reviewer user
+ * Date:           4/3/2017
+ * Tested:        True
  *
- * @author Simion George-Vlad
+ * @author {Stanusoiu Mihai-Teodor}
  * @version 1.0
  */
+public class Reviewer extends PCMember {
 
-@Entity
-@Table(name = "Reviewer")
-@SuppressWarnings("unused")
-public class Reviewer {
+    private ArrayList<Integer> reviews;
 
-    @EmbeddedId
-    private ReviewerId id;
+    public Reviewer(Integer id,
+                    String username,
+                    String password,
+                    String email,
+                    String name,
+                    String website,
+                    String bio,
+                    String location,
+                    Integer idConference,
+                    Integer idSection) {
+        super(id, username, password, email, name, website, bio, location, idConference, idSection);
+        this.reviews = new ArrayList<>();
+    }
 
-    @Column(name = "response")
-    private String response;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "qualifier")
-    private String qualifier;
-
-    @Column(name = "recommendation_url")
-    private String recommendationUrl;
-
-    /**
-     * Empty constructor.
-     */
-    public Reviewer(){}
-
-
-    /**
-     * Effect: Return the id of a reviewer.
-     * @return [ReviewerId] : returns the id of a Reviewer.
-     */
-    public ReviewerId getId() {
-        return id;
+    public Reviewer(Integer id, Integer idConference, Integer idSection) {
+        super(id, idConference, idSection);
+        this.reviews = new ArrayList<>();
     }
 
     /**
-     * Effect: Sets the id of a reviewer.
-     * @param id: new value for reviewer id.
+     * Effect: Adds a submission in reviewer's list.
+     * @param submission: The wanted submission.
      */
-    public void setId(ReviewerId id) {
-        this.id = id;
+    public void addSubmission(Submission submission) {
+        this.reviews.add(submission.getId());
     }
 
     /**
-     * Effect: Return the response of a reviewer.
-     * @return [String] : returns the response of a Reviewer.
+     * Effect: Returns UserType.REVIEWER
+     * @return UserType : returns the corresponding user type.
      */
-    public String getResponse() {
-        return response;
+    @Override
+    public UserType getType() {
+        return UserType.REVIEWER;
     }
 
     /**
-     * Effect: Sets the response of a reviewer.
-     * @param response: new value for reviewer response.
+     * Effect: Gets the permissions assigned to the corresponding user type (UserType.REVIEWER)
+     * @return ArrayList<Permission>: returns the array of permissions.
      */
-    public void setResponse(String response) {
-        this.response = response;
-    }
-
-    /**
-     * Effect: Return the status of a reviewer.
-     * @return [String] : returns the status of a Reviewer.
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     * Effect: Sets the status of a reviewer.
-     * @param status: new value for reviewer status.
-     */
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    /**
-     * Effect: Return the qualifier of a reviewer.
-     * @return [String] : returns the qualifier of a Reviewer.
-     */
-    public String getQualifier() {
-        return qualifier;
-    }
-
-    /**
-     * Effect: Sets the qualifier of a reviewer.
-     * @param qualifier: new value for reviewer qualifier.
-     */
-    public void setQualifier(String qualifier) {
-        this.qualifier = qualifier;
-    }
-
-    /**
-     * Effect: Return the recommendation url of a reviewer.
-     * @return [String] : returns the recommendationUrl of a Reviewer.
-     */
-    public String getRecommendationUrl() {
-        return recommendationUrl;
-    }
-
-    /**
-     * Effect: Sets the recommendation url of a reviewer.
-     * @param recommendationUrl: new value for reviewer recommendationUrl.
-     */
-    public void setRecommendationUrl(String recommendationUrl) {
-        this.recommendationUrl = recommendationUrl;
+    @Override
+    public ArrayList<Permission> getPermissions() {
+        return UserType.REVIEWER.getPermissions();
     }
 }

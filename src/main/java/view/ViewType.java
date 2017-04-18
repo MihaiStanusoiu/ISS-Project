@@ -16,6 +16,12 @@ public enum ViewType implements ViewTypeInterface {
     CONFERENCES {
 
         /** Conferences View */
+
+        @Override
+        public String getTitle() {
+            return ViewType.getDataFromBundle("application.title");
+        }
+
         @Override
         public String getFXMLFile() {
             return "/fxml/ConferencesView.fxml";
@@ -23,39 +29,15 @@ public enum ViewType implements ViewTypeInterface {
 
     },
 
-    MY_CONFERENCES {
-
-        /** My Conferences View */
-        @Override
-        public String getFXMLFile() {
-            return "/fxml/MyConferencesView.fxml";
-        }
-
-    },
-
-    CONFERENCE {
-
-        /** Conference View */
-        @Override
-        public String getFXMLFile() {
-            return "/fxml/ConferenceView.fxml";
-        }
-
-    },
-
-    USER {
-
-        /** User View */
-        @Override
-        public String getFXMLFile() {
-            return "/fxml/UserView.fxml";
-        }
-
-    },
-
     CONFERENCE_ITEM {
 
         /** Conference Item View */
+
+        @Override
+        public String getTitle() {
+            return ViewType.getDataFromBundle("application.title");
+        }
+
         @Override
         public String getFXMLFile() {
             return "/fxml/ConferenceItemView.fxml";
@@ -63,62 +45,49 @@ public enum ViewType implements ViewTypeInterface {
 
     },
 
-    USER_ITEM {
-
-        /** User Item View */
-        @Override
-        public String getFXMLFile() {
-            return "/fxml/UserItemView.fxml";
-        }
-
-    },
 
     LOGIN {
 
         /** Login View */
+
+        @Override
+        public String getTitle() {
+            return ViewType.getDataFromBundle("application.title");
+        }
+
         @Override
         public String getFXMLFile() {
             return "/fxml/LoginView.fxml";
         }
-
     },
 
     SIGN_UP {
 
         /** Sign Up View */
+
+        @Override
+        public String getTitle() {
+            return ViewType.getDataFromBundle("application.title");
+        }
+
         @Override
         public String getFXMLFile() {
             return "/fxml/SignUpView.fxml";
         }
-
     },
 
     USERS {
 
         /** Users View */
+
+        @Override
+        public String getTitle() {
+            return ViewType.getDataFromBundle("application.title");
+        }
+
         @Override
         public String getFXMLFile() {
             return "/fxml/UsersView.fxml";
-        }
-
-    },
-
-    NOTIFICATIONS {
-
-        /** Notifications View */
-        @Override
-        public String getFXMLFile() {
-            return "/fxml/NotificationsView.fxml";
-        }
-
-    },
-
-    NOTIFICATION_ITEM {
-
-        /** Notification Item View */
-        @Override
-        public String getFXMLFile() {
-            return "/fxml/NotificationItemView.fxml";
         }
 
     };
@@ -129,7 +98,7 @@ public enum ViewType implements ViewTypeInterface {
      * @return String value from application.properties external files.
      */
     @SuppressWarnings("all")
-    protected static String getDataFromBundle(final String key) {
+    private static String getDataFromBundle(final String key) {
         return ResourceBundle.getBundle("application").getString(key);
     }
 }

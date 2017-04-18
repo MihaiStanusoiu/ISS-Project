@@ -51,10 +51,10 @@ public class ControllerMenu implements ControllerInterface {
     /**
      * Effect: Loads the NotificationsView responsible
      * for listing all the user's notifications.
-     * @implNote status: In development.
+     * @implNote status: Unavailable at the moment.
      */
     @FXML private void onNotificationsViewButtonClick() {
-        manager.switchScene(ViewType.NOTIFICATIONS);
+        System.out.println("Notifications View");
     }
 
     /**
@@ -78,10 +78,10 @@ public class ControllerMenu implements ControllerInterface {
     /**
      * Effect: Loads the MyConferencesView responsible
      * for listing all the user's conferences.
-     * @implNote status: In development.
+     * @implNote status: Unavailable at the moment.
      */
     @FXML private void onMyConferencesViewButtonClick() {
-        manager.switchScene(ViewType.MY_CONFERENCES);
+        System.out.println("My Conferences View");
     }
 
     /**
