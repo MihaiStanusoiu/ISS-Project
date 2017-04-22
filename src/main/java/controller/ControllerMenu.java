@@ -45,7 +45,7 @@ public class ControllerMenu implements ControllerInterface {
      * @implNote status: Unavailable at the moment.
      */
     @FXML private void onAddConferenceViewButtonClick() {
-        System.out.println("Add Conference View");
+        System.out.println("Add ConferenceEntity View");
     }
 
     /**
@@ -85,7 +85,7 @@ public class ControllerMenu implements ControllerInterface {
     }
 
     /**
-     * Effect: User logout from server's system.
+     * Effect: UserEntity logout from server's system.
      * @implNote status: Unavailable at the moment.
      */
     @FXML private void onLogoutButtonClick() {

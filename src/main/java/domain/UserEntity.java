@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Name:        User
- * Effect:      Corresponding class for the User table in the database.
+ * Name:        UserEntity
+ * Effect:      Corresponding class for the UserEntity table in the database.
  * Date:        4/8/2017
  * Tested:      False
  * @author      Stanusoiu Mihai-Teodor
@@ -15,40 +15,40 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "User")
+@Table(name = "USER")
 @SuppressWarnings("unused")
-public class User implements Serializable {
+public class UserEntity implements Serializable,Idable<Integer> {
 
     @Id
     @GeneratedValue
-    @Column(name = "id_user")
+    @Column(name = "ID_USER")
     private Integer id;
 
-    @Column(name = "username")
+    @Column(name = "USERNAME")
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "website")
+    @Column(name = "WEBSITE")
     private String website;
 
-    @Column(name = "bio")
+    @Column(name = "BIO")
     private String bio;
 
-    @Column(name = "location")
+    @Column(name = "LOCATION")
     private String location;
+//
+//    @OneToMany(mappedBy = "user")
+//    private List<NotificationEntity> notifications = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<Notification> notifications = new ArrayList<>();
-
-    public User() {}
+    public UserEntity() {}
 
     /**
      * Effect: Returns the id of the user
@@ -181,17 +181,17 @@ public class User implements Serializable {
 
     /**
      * Effect: Returns the notifications of the user
-     * @return [ArrayList<Notification>]: notifications of the user
+     * @return [ArrayList<NotificationEntity>]: notifications of the user
      */
-    public List<Notification> getNotifications() {
-        return notifications;
-    }
-
-    /**
-     * Effect: Sets the notifications array to the given value
-     * @param notifications [ArrayList<Notification>]: new value for the notifications array
-     */
-    public void setNotifications(ArrayList<Notification> notifications) {
-        this.notifications = notifications;
-    }
+//    public List<NotificationEntity> getNotifications() {
+//        return notifications;
+//    }
+//
+//    /**
+//     * Effect: Sets the notifications array to the given value
+//     * @param notifications [ArrayList<NotificationEntity>]: new value for the notifications array
+//     */
+//    public void setNotifications(ArrayList<NotificationEntity> notifications) {
+//        this.notifications = notifications;
+//    }
 }

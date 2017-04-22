@@ -4,12 +4,13 @@ import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:    Edition
- * Effect:  A class for the database table Edition
+ * Name:    EditionEntity
+ * Effect:  A class for the database table EditionEntity
  * Date:    9/4/2017
  * Tested:  False
  *
@@ -18,57 +19,66 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 
 @Entity
-@Table(name = "Edition")
+@Table(name = "EDITION")
 @SuppressWarnings("unused")
-public class Edition {
+public class EditionEntity implements Idable<Integer> {
 
     @Id@GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_conference")
+    @Column(name = "ID_CONFERENCE")
     private Integer id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "acronym")
-    private String acronym;
-
-    @Column(name = "start_date")
+    @Column(name = "START_DATE")
     private Date startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "END_DATE")
     private Date endDate;
 
-    @Column(name = "location")
+    @Column(name = "LOCATION")
     private String location;
 
-    @Column(name = "bio")
+    @Column(name = "BIO")
     private String bio;
 
-    @Column(name = "abstract_deadline")
+    @Column(name = "ABSTRACT_DEADLINE")
     private Date abstractDeadline;
 
-    @Column(name = "paper_deadline")
+    @Column(name = "PAPER_DEADLINE")
     private Date paperDeadline;
 
-    @Column(name = "evaluation_deadline")
+    @Column(name = "EVALUATION_DEADLINE")
     private Date evaluationDeadline;
 
-    @Column(name = "bidding_deadline")
+    @Column(name = "BIDDING_DEADLINE")
     private Date biddingDeadline;
 
-    @OneToMany(mappedBy = "id_conference")
-    private ArrayList<Session> sections;
+    @ManyToOne
+    @JoinColumn(name="CONFERENCE_ID")
+    private ConferenceEntity conference;
 
-    @OneToMany(mappedBy = "id_conference")
-    private ArrayList<Submission> submissions;
-
-    @OneToMany(mappedBy = "id_conference")
-    private ArrayList<EditionMember> members;
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "edition",cascade = CascadeType.ALL)
+//    private Set<EditionMemberEntity> editionMembers;
+//
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "edition_session",cascade = CascadeType.ALL)
+    private Set<SessionEntity> sessions;
+//
+//    @OneToMany( mappedBy = "edition_submission",cascade = CascadeType.ALL)
+//    private Set<SubmissionEntity> submissions;
 
     /**
      * Empty constructor
      */
-    public Edition() { }
+    public EditionEntity() { }
+
+    public EditionEntity(Date startDate, Date endDate, String location, String bio, Date abstractDeadline, Date paperDeadline, Date evaluationDeadline, Date biddingDeadline) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+        this.bio = bio;
+        this.abstractDeadline = abstractDeadline;
+        this.paperDeadline = paperDeadline;
+        this.evaluationDeadline = evaluationDeadline;
+        this.biddingDeadline = biddingDeadline;
+    }
 
     /**
      * Effect: Return the id of this conference.
@@ -84,38 +94,6 @@ public class Edition {
      */
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    /**
-     * Effect: Return the name of this conference.
-     * @return [String]: returns the name of conference.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Effect: Sets the name of a conference.
-     * @param name: new value for conference name.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Effect: Return the acronym of this conference.
-     * @return [String]: returns the acronym of conference.
-     */
-    public String getAcronym() {
-        return acronym;
-    }
-
-    /**
-     * Effect: Sets the acronym of a conference.
-     * @param acronym: new value for conference acronym.
-     */
-    public void setAcronym(String acronym) {
-        this.acronym = acronym;
     }
 
     /**
@@ -246,51 +224,36 @@ public class Edition {
         this.biddingDeadline = biddingDeadline;
     }
 
-    /**
-     * Effect: Return the sections of this conference.
-     * @return [ArrayList<Session>]: returns the sections of conference.
-     */
-    public ArrayList<Session> getSections() {
-        return sections;
+    public ConferenceEntity getConference() {
+        return conference;
     }
 
-    /**
-     * Effect: Sets the sections of a conference.
-     * @param sections: new value for conference sections.
-     */
-    public void setSections(ArrayList<Session> sections) {
-        this.sections = sections;
+    public void setConference(ConferenceEntity conference) {
+        this.conference = conference;
     }
 
-    /**
-     * Effect: Return the submissions of this conference.
-     * @return [ArrayList<Submission>]: returns the submissions of conference.
-     */
-    public ArrayList<Submission> getSubmissions() {
-        return submissions;
+//    public Set<EditionMemberEntity> getEditionMembers() {
+//        return editionMembers;
+//    }
+//
+//    public void setEditionMembers(Set<EditionMemberEntity> editionMembers) {
+//        this.editionMembers = editionMembers;
+//    }
+//
+    public Set<SessionEntity> getSessions() {
+        return sessions;
     }
 
-    /**
-     * Effect: Sets the submissions of a conference.
-     * @param submissions: new value for conference Submissions.
-     */
-    public void setSubmissions(ArrayList<Submission> submissions) {
-        this.submissions = submissions;
+    public void setSessions(Set<SessionEntity> sessions) {
+        this.sessions = sessions;
     }
+//
+//    public Set<SubmissionEntity> getSubmissions() {
+//        return submissions;
+//    }
+//
+//    public void setSubmissions(Set<SubmissionEntity> submissions) {
+//        this.submissions = submissions;
+//    }
 
-    /**
-     * Effect: Return the members of this conference.
-     * @return [ArrayList<EditionMember>]: returns the members of conference.
-     */
-    public ArrayList<EditionMember> getMembers() {
-        return members;
-    }
-
-    /**
-     * Effect: Sets the members of a conference.
-     * @param members: new value for conference members.
-     */
-    public void setMembers(ArrayList<EditionMember> members) {
-        this.members = members;
-    }
 }

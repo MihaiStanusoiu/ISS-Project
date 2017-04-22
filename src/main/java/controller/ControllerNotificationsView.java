@@ -37,8 +37,8 @@ public class ControllerNotificationsView implements ControllerInterface {
     @SuppressWarnings("unchecked")
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
-//        Notification[] notifications = {};
-//        pagination = new PaginationBuilder<Notification, ControllerNotificationItem, GridPane>()
+//        NotificationEntity[] notifications = {};
+//        pagination = new PaginationBuilder<NotificationEntity, ControllerNotificationItem, GridPane>()
 //                .setRows(2)
 //                .setColumns(4)
 //                .setElements(notifications)

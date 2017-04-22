@@ -19,11 +19,11 @@ import javax.persistence.ManyToOne;
 public class ReviewerId {
 
     @ManyToOne
-    @Column(name = "id_conference_member")
-    private Integer idConferenceMember;
+    @Column(name = "ID_EDITION_MEMBER")
+    private Integer idEditionMember;
 
     @ManyToOne
-    @Column(name = "id_submission")
+    @Column(name = "ID_SUBMISSION")
     private Integer idSubmission;
 
     /**
@@ -35,16 +35,16 @@ public class ReviewerId {
      * Effect: Return the id of a conference member.
      * @return [Integer]: returns the id of a conference member.
      */
-    public Integer getIdConferenceMember() {
-        return idConferenceMember;
+    public Integer getIdEditionMember() {
+        return idEditionMember;
     }
 
     /**
      * Effect: Sets the id of a conference member.
-     * @param idConferenceMember: new value for conference member id.
+     * @param idEditionMember: new value for conference member id.
      */
-    public void setIdConferenceMember(Integer idConferenceMember) {
-        this.idConferenceMember = idConferenceMember;
+    public void setIdEditionMember(Integer idEditionMember) {
+        this.idEditionMember = idEditionMember;
     }
 
     /**
@@ -56,7 +56,7 @@ public class ReviewerId {
     }
 
     /**
-     * Effect: Sets the id of a Submission.
+     * Effect: Sets the id of a SubmissionEntity.
      * @param idSubmission: new value for submission id.
      */
     public void setIdSubmission(Integer idSubmission) {

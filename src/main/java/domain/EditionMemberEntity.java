@@ -3,8 +3,8 @@ package domain;
 import javax.persistence.*;
 
 /**
- * Name:        EditionMember
- * Effect:      Corresponding class for the EditionMember table in the database.
+ * Name:        EditionMemberEntity
+ * Effect:      Corresponding class for the EditionMemberEntity table in the database.
  * Date:        4/8/2017
  * Tested:      False
  * @author      Stanusoiu Mihai-Teodor
@@ -12,26 +12,26 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="EditionMember")
+@Table(name="EDITION_MEMBER")
 @SuppressWarnings("unused")
-public class EditionMember {
+public class EditionMemberEntity  {
 
     @EmbeddedId
     private EditionMemberId pkId;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
+    @JoinColumn(name = "ID_USER")
+    private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "id_conference")
-    private Edition editionTable;
+    @JoinColumn(name = "ID_CONFERENCE")
+    private EditionEntity edition;
 
-    @OneToOne
-    @JoinColumn(name = "id_configuration")
-    private ConfigurationEditionMember configurationConferenceMember;
+    @ManyToOne
+    @JoinColumn(name = "ID_CONFIGURATION_EDITION_MEMBER")
+    private ConfigurationEditionMemberEntity idConfiguration;
 
-    public EditionMember() { }
+    public EditionMemberEntity() { }
 
     /**
      * Effect: Returns the composite primary key id of the conference member
@@ -51,49 +51,49 @@ public class EditionMember {
 
     /**
      * Effect: Returns the user of the conference member
-     * @return [User]: user that is the conference member
+     * @return [UserEntity]: user that is the conference member
      */
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
     /**
      * Effect: Sets the user to the given value
-     * @param user [User]: new value for the user
+     * @param user [UserEntity]: new value for the user
      */
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 
     /**
      * Effect: Returns the conference of the conference member
-     * @return [Edition]: conference of the conference member
+     * @return [EditionEntity]: conference of the conference member
      */
-    public Edition getEditionTable() {
-        return editionTable;
+    public EditionEntity getEditionTable() {
+        return edition;
     }
 
     /**
      * Effect: Sets the conference to the given value
-     * @param editionTable [Edition]: new value for the password
+     * @param editionTable [EditionEntity]: new value for the password
      */
-    public void setEditionTable(Edition editionTable) {
-        this.editionTable = editionTable;
+    public void setEditionTable(EditionEntity editionTable) {
+        this.edition = editionTable;
     }
 
     /**
      * Effect: Returns the configuration of the conference member
      * @return [ConfigurationEditionMember]: configuration of the conference member
      */
-    public ConfigurationEditionMember getConfigurationConferenceMember() {
-        return configurationConferenceMember;
+    public ConfigurationEditionMemberEntity getConfigurationConferenceMember() {
+        return idConfiguration;
     }
     /**
      * Effect: Sets the configuration to the given value
      * @param configurationConferenceMember [ConfigurationEditionMember]: new value for the configuration
      */
     public void setConfigurationConferenceMember(
-        ConfigurationEditionMember configurationConferenceMember) {
-        this.configurationConferenceMember = configurationConferenceMember;
+        ConfigurationEditionMemberEntity configurationConferenceMember) {
+        this.idConfiguration = configurationConferenceMember;
     }
 }

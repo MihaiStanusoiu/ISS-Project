@@ -3,6 +3,7 @@ package domain;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 /**
  * Name:         SessionMemberId
@@ -15,14 +16,10 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 @SuppressWarnings("unused")
-public class SessionMemberId {
+public class SessionMemberId implements Serializable{
 
-    @ManyToOne
-    @Column(name = "id_section")
-    private Integer idSection;
+    private Integer idSession;
 
-    @ManyToOne
-    @Column(name = "id_user")
     private Integer idUser;
 
     public SessionMemberId() { }
@@ -31,16 +28,16 @@ public class SessionMemberId {
      * Effect: Return the id of a section.
      * @return [Integer] : returns the id of a section.
      */
-    public Integer getIdSection() {
-        return idSection;
+    public Integer getIdSession() {
+        return idSession;
     }
 
     /**
      * Effect: Sets the id of a section.
-     * @param idSection : new value for id.
+     * @param idSession : new value for id.
      */
-    public void setIdSection(Integer idSection) {
-        this.idSection = idSection;
+    public void setIdSession(Integer idSession) {
+        this.idSession = idSession;
     }
 
     /**

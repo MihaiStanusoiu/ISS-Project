@@ -1,6 +1,6 @@
 package repository;
 
-import domaintest.Idable;
+import domain.Idable;
 
 import java.io.Serializable;
 import java.util.List;

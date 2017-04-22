@@ -3,7 +3,7 @@ package domain;
 import javax.persistence.*;
 /**
  * Name:         SubmissionTopicItems
- * Effect:       Class for domain SubmissionTopic table composite PK
+ * Effect:       Class for domain SubmissionTopicEntity table composite PK
  * Date:         4/8/2017
  * Tested:       False
  *
@@ -15,10 +15,10 @@ import javax.persistence.*;
 @SuppressWarnings("unused")
 public class SubmissionTopicItems {
 
-    @Column(name = "id_submission")
+    @Column(name = "ID_SUBMISSION")
     private Integer idSubmission;
 
-    @Column(name = "id_topic")
+    @Column(name = "ID_TOPIC")
     private Integer idTopic;
 
     public SubmissionTopicItems() { }

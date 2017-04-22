@@ -71,7 +71,7 @@ public class ControllerTopBar implements ControllerInterface {
      * @implNote status: In development.
      */
     @FXML private void onProfileButtonClick() {
-        System.out.println("Profile User View");
+        System.out.println("Profile UserEntity View");
     }
 
 }

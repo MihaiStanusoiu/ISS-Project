@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 
 /**
  * Name:         AuthorSubmissionItems
- * Effect:       Class for database domain AuthorSubmission table composite PK
+ * Effect:       Class for database domain AuthorSubmissionEntity table composite PK
  * Date:         4/8/2017
  * Tested:       False
  *
@@ -17,10 +17,10 @@ import javax.persistence.Embeddable;
 @SuppressWarnings("unused")
 public class AuthorSubmissionItems {
 
-    @Column(name = "id_user")
+    @Column(name = "ID_USER")
     private Integer idUser;
 
-    @Column(name = "id_submission")
+    @Column(name = "ID_SUBMISSION")
     private Integer idSubmission;
 
     public AuthorSubmissionItems() { }

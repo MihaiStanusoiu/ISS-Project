@@ -1,11 +1,13 @@
 package domain;
 
 import javax.persistence.*;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Name:         ConfigurationEditionMember
- * Effect:       Class for the db table ConfigurationConferenceMember.
+ * Effect:       Class for the db table ConfigurationEditionMember.
  * Date:         08/04/2017
  * Tested:       False
  * @author       Tiron Andreea-Ecaterina
@@ -13,25 +15,40 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 
 @Entity
-@Table(name = "ConfigurationEditionMember")
+@Table(name = "CONFIGURATION_EDITION_MEMBER")
 @SuppressWarnings("unused")
-public class ConfigurationEditionMember {
+public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     @Id @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_configuration_conference_member")
+    @Column(name = "ID_CONFIGURATION_EDITION_MEMBER")
     private Integer id;
 
-    @Column(name = "is_chair")
+    @Column(name = "IS_CHAIR")
     private Boolean isChair;
 
-    @Column(name = "is_cochair")
+    @Column(name = "IS_COCHAIR")
     private Boolean isCoChair;
 
-    @Column(name = "is_pcmember")
+    @Column(name = "IS_PCMEMBER")
     private Boolean isPCMember;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idConfiguration",cascade = CascadeType.ALL)
+    private Set<EditionMemberEntity> editionMembers;
 
-    public ConfigurationEditionMember(){
+    public ConfigurationEditionMemberEntity(){}
+
+    public ConfigurationEditionMemberEntity(Boolean isChair, Boolean isCoChair, Boolean isPCMember) {
+        this.isChair = isChair;
+        this.isCoChair = isCoChair;
+        this.isPCMember = isPCMember;
+    }
+
+    public Set<EditionMemberEntity> getEditionMembers() {
+        return editionMembers;
+    }
+
+    public void setEditionMembers(Set<EditionMemberEntity> editionMembers) {
+        this.editionMembers = editionMembers;
     }
 
     /**
@@ -73,7 +90,7 @@ public class ConfigurationEditionMember {
      * @return [Boolean] : returns true if it is a co-chair, false otherwise.
      */
     @SuppressWarnings("unused")
-    public Boolean getCochair() {
+    public Boolean getCoChair() {
         return isCoChair;
     }
 

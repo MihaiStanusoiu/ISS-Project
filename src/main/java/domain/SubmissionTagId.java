@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 
 /**
  * Name:         SubmissionTagId
- * Effect:       Corresponding class for the multi-column id of the table SubmissionTag
+ * Effect:       Corresponding class for the multi-column id of the table SubmissionTagEntity
  * Date:         08.04.2017
  * Tested:       False
  * @author       Tanasie Luiza Maria
@@ -16,10 +16,10 @@ import javax.persistence.Embeddable;
 @SuppressWarnings("unused")
 public class SubmissionTagId {
 
-    @Column(name = "id_tag")
+    @Column(name = "ID_TAG")
     private Integer idTag;
 
-    @Column(name = "id_submission")
+    @Column(name = "ID_SUBMISSION")
     private Integer idSubmission;
 
     public SubmissionTagId() { }

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:    Submission
- * Effect:  Class for the database table Submission
+ * Name:    SubmissionEntity
+ * Effect:  Class for the database table SubmissionEntity
  * Date:    9/4/2017
  * Tested:  False
  *
@@ -16,53 +16,53 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 
 @Entity
-@Table(name = "Submission")
+@Table(name = "SUBMISSION")
 @SuppressWarnings("unused")
-public class Submission {
+public class SubmissionEntity implements Idable<Integer> {
 
     @Id @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_submission")
+    @Column(name = "ID_SUBMISSION")
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_conference")
-    private Integer idConference;
+    @JoinColumn(name = "ID_EDITION")
+    private EditionEntity edition_submission;
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "status")
+    @Column(name = "STATUS")
     private String status;
 
-    @Column(name = "abstract_url")
+    @Column(name = "ABSTRACT_URL")
     private String abstractUrl;
 
-    @Column(name = "full_paper_url")
+    @Column(name = "FULL_PAPER_URL")
     private String fullPaperUrl;
 
-    @Column(name = "is_paid")
+    @Column(name = "IS_PAID")
     private boolean isPaid;
 
     @OneToMany(mappedBy = "idSubmission")
-    private ArrayList<SubmissionTag> submissionTags;
+    private ArrayList<SubmissionTagEntity> submissionTags;
 
     @OneToMany(mappedBy = "idSubmission")
-    private ArrayList<SubmissionTopic> submissionTopic;
+    private ArrayList<SubmissionTopicEntity> submissionTopic;
 
     @OneToMany(mappedBy = "idSubmission")
-    private ArrayList<AuthorSubmission> submissionAuthors;
+    private ArrayList<AuthorSubmissionEntity> submissionAuthors;
 
     @OneToMany(mappedBy = "idSubmission")
-    private ArrayList<Reviewer> reviewers;
+    private ArrayList<ReviewerEntity> reviewers;
 
     /**
      * Empty Constructor
      */
-    public Submission(){}
+    public SubmissionEntity(){}
 
     /**
      * Effect: Return the id of this submission.
-     * @return [Integer]: returns the id of Submission.
+     * @return [Integer]: returns the id of SubmissionEntity.
      */
     public Integer getId() {
         return id;
@@ -78,23 +78,23 @@ public class Submission {
 
     /**
      * Effect: Return the id of this submission.
-     * @return [Integer]: returns the id of Submission.
+     * @return [Integer]: returns the id of SubmissionEntity.
      */
-    public Integer getIdConference() {
-        return idConference;
+    public EditionEntity getEdition() {
+        return edition_submission;
     }
 
     /**
      * Effect: Sets the id of the submission's conference.
-     * @param idConference: new value for conference id.
+     * @param edition: new value for conference id.
      */
-    public void setIdConference(Integer idConference) {
-        this.idConference = idConference;
+    public void setEdition(EditionEntity edition) {
+        this.edition_submission = edition;
     }
 
     /**
      * Effect: Return the name of this submission.
-     * @return [String]: returns the name of Submission.
+     * @return [String]: returns the name of SubmissionEntity.
      */
     public String getName() {
         return name;
@@ -110,7 +110,7 @@ public class Submission {
 
     /**
      * Effect: Return the status of this submission.
-     * @return [String]: returns the status of Submission.
+     * @return [String]: returns the status of SubmissionEntity.
      */
     public String getStatus() {
         return status;
@@ -126,7 +126,7 @@ public class Submission {
 
     /**
      * Effect: Return the abstract url of this submission.
-     * @return [String]: returns the abstractUrl of Submission.
+     * @return [String]: returns the abstractUrl of SubmissionEntity.
      */
     public String getAbstractUrl() {
         return abstractUrl;
@@ -142,7 +142,7 @@ public class Submission {
 
     /**
      * Effect: Return the full paper url of this submission.
-     * @return [String]: returns the fullPaperUrl of Submission.
+     * @return [String]: returns the fullPaperUrl of SubmissionEntity.
      */
     public String getFullPaperUrl() {
         return fullPaperUrl;
@@ -158,7 +158,7 @@ public class Submission {
 
     /**
      * Effect: Return the paid status of this submission.
-     * @return [boolean]: returns the paid status of a Submission.
+     * @return [boolean]: returns the paid status of a SubmissionEntity.
      */
     public boolean isPaid() {
         return isPaid;
@@ -174,9 +174,9 @@ public class Submission {
 
     /**
      * Effect: Return the tags of this submission.
-     * @return [ArrayList<SubmissionTag>]: returns the tags of a Submission.
+     * @return [ArrayList<SubmissionTagEntity>]: returns the tags of a SubmissionEntity.
      */
-    public ArrayList<SubmissionTag> getSubmissionTags() {
+    public ArrayList<SubmissionTagEntity> getSubmissionTags() {
         return submissionTags;
     }
 
@@ -184,15 +184,15 @@ public class Submission {
      * Effect: Sets the tags of a submission.
      * @param submissionTags: new value for submission tags.
      */
-    public void setSubmissionTags(ArrayList<SubmissionTag> submissionTags) {
+    public void setSubmissionTags(ArrayList<SubmissionTagEntity> submissionTags) {
         this.submissionTags = submissionTags;
     }
 
     /**
      * Effect: Return the topics of this submission.
-     * @return [ArrayList<SubmissionTopic>]: returns the topics of a Submission.
+     * @return [ArrayList<SubmissionTopicEntity>]: returns the topics of a SubmissionEntity.
      */
-    public ArrayList<SubmissionTopic> getSubmissionTopic() {
+    public ArrayList<SubmissionTopicEntity> getSubmissionTopic() {
         return submissionTopic;
     }
 
@@ -200,15 +200,15 @@ public class Submission {
      * Effect: Sets the topics of a submission.
      * @param submissionTopic: new value for submission topics.
      */
-    public void setSubmissionTopic(ArrayList<SubmissionTopic> submissionTopic) {
+    public void setSubmissionTopic(ArrayList<SubmissionTopicEntity> submissionTopic) {
         this.submissionTopic = submissionTopic;
     }
 
     /**
      * Effect: Return the authors of this submission.
-     * @return [ArrayList<AuthorSubmission>]: returns the authors of Submission.
+     * @return [ArrayList<AuthorSubmissionEntity>]: returns the authors of SubmissionEntity.
      */
-    public ArrayList<AuthorSubmission> getSubmissionAuthors() {
+    public ArrayList<AuthorSubmissionEntity> getSubmissionAuthors() {
         return submissionAuthors;
     }
 
@@ -216,15 +216,15 @@ public class Submission {
      * Effect: Sets the authors of a submission.
      * @param submissionAuthors: new value for submission submissionAuthors.
      */
-    public void setSubmissionAuthors(ArrayList<AuthorSubmission> submissionAuthors) {
+    public void setSubmissionAuthors(ArrayList<AuthorSubmissionEntity> submissionAuthors) {
         this.submissionAuthors = submissionAuthors;
     }
 
     /**
      * Effect: Return the reviewers of this submission.
-     * @return [ArrayList<Reviewer>]: returns the reviewers of a Submission.
+     * @return [ArrayList<ReviewerEntity>]: returns the reviewers of a SubmissionEntity.
      */
-    public ArrayList<Reviewer> getReviewers() {
+    public ArrayList<ReviewerEntity> getReviewers() {
         return reviewers;
     }
 
@@ -232,7 +232,7 @@ public class Submission {
      * Effect: Sets the reviewers of a submission.
      * @param reviewers: new value for submission reviewers.
      */
-    public void setReviewers(ArrayList<Reviewer> reviewers) {
+    public void setReviewers(ArrayList<ReviewerEntity> reviewers) {
         this.reviewers = reviewers;
     }
 }

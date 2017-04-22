@@ -28,7 +28,7 @@ import java.util.Collections;
  *                  Update 1.1: Support for Stage Manager.
  *                  Update 1.2: Interface Support.
  *
- *                  T : The data's type (example: Conference -- from domain package)
+ *                  T : The data's type (example: ConferenceEntity -- from domain package)
  *                  E : The view-controller's type, the controller that manages the item's view.
  *              </p>
  * @apiNote     In the next version of the class the number of rows and columns will be changeable.

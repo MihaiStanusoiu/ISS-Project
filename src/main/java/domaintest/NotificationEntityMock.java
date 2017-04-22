@@ -1,9 +1,11 @@
 package domaintest;
 
+import domain.Idable;
+
 import javax.persistence.*;
 
 /**
- * Name:         NotificationEntity
+ * Name:         NotificationEntityMock
  * Effect:       Ignore this entity (for testing only)
  * Date:         4/17/2017
  * Tested:       False
@@ -13,9 +15,9 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "NOTIFICATION")
+@Table(name = "NOTIFICATION_MOCK")
 @SuppressWarnings("unused")
-public class NotificationEntity
+public class NotificationEntityMock
     implements Idable<Integer> {
 
     @Id
@@ -29,12 +31,12 @@ public class NotificationEntity
     @Column(name = "PAYMENT_TYPE", nullable = false)
     private Boolean paymentType;
 
-    public NotificationEntity(UserEntity user ) {
+    public NotificationEntityMock(UserEntityMock user ) {
         this(user, "", Boolean.FALSE);
     }
 
     @SuppressWarnings("all")
-    public NotificationEntity(UserEntity user, String text, Boolean paymentType) {
+    public NotificationEntityMock(UserEntityMock user, String text, Boolean paymentType) {
         this.user = user;
         this.text = text;
         this.paymentType = paymentType;
@@ -68,13 +70,13 @@ public class NotificationEntity
 
     @ManyToOne
     @JoinColumn(name = "USER_ID", nullable = false)
-    private UserEntity user;
+    private UserEntityMock user;
 
-    public UserEntity getUser() {
+    public UserEntityMock getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(UserEntityMock user) {
         this.user = user;
     }
 
