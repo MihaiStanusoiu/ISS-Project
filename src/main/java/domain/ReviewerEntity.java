@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * Name:    Reviewer
- * Effect:  Class for the database table Reviewer
+ * Name:    ReviewerEntity
+ * Effect:  Class for the database table ReviewerEntity
  * Date:    9/4/2017
  * Tested:  False
  *
@@ -16,34 +16,33 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "Reviewer")
+@Table(name = "REVIEWER")
 @SuppressWarnings("unused")
-public class Reviewer {
+public class ReviewerEntity  {
 
     @EmbeddedId
     private ReviewerId id;
 
-    @Column(name = "response")
+    @Column(name = "RESPONSE")
     private String response;
 
-    @Column(name = "status")
+    @Column(name = "STATUS")
     private String status;
 
-    @Column(name = "qualifier")
+    @Column(name = "QUALIFIER")
     private String qualifier;
 
-    @Column(name = "recommendation_url")
+    @Column(name = "RECOMMENDATION_URL")
     private String recommendationUrl;
 
     /**
      * Empty constructor.
      */
-    public Reviewer(){}
-
+    public ReviewerEntity(){}
 
     /**
      * Effect: Return the id of a reviewer.
-     * @return [ReviewerId] : returns the id of a Reviewer.
+     * @return [ReviewerId] : returns the id of a ReviewerEntity.
      */
     public ReviewerId getId() {
         return id;
@@ -59,7 +58,7 @@ public class Reviewer {
 
     /**
      * Effect: Return the response of a reviewer.
-     * @return [String] : returns the response of a Reviewer.
+     * @return [String] : returns the response of a ReviewerEntity.
      */
     public String getResponse() {
         return response;
@@ -75,7 +74,7 @@ public class Reviewer {
 
     /**
      * Effect: Return the status of a reviewer.
-     * @return [String] : returns the status of a Reviewer.
+     * @return [String] : returns the status of a ReviewerEntity.
      */
     public String getStatus() {
         return status;
@@ -91,7 +90,7 @@ public class Reviewer {
 
     /**
      * Effect: Return the qualifier of a reviewer.
-     * @return [String] : returns the qualifier of a Reviewer.
+     * @return [String] : returns the qualifier of a ReviewerEntity.
      */
     public String getQualifier() {
         return qualifier;
@@ -107,7 +106,7 @@ public class Reviewer {
 
     /**
      * Effect: Return the recommendation url of a reviewer.
-     * @return [String] : returns the recommendationUrl of a Reviewer.
+     * @return [String] : returns the recommendationUrl of a ReviewerEntity.
      */
     public String getRecommendationUrl() {
         return recommendationUrl;

@@ -10,11 +10,6 @@ package repository;
  * @version     1.0
  */
 
-public abstract class RepositoryException extends Throwable {
-
-    /**
-     * @return The exception's message.
-     */
-    public abstract String getMessage();
+public abstract class RepositoryException extends Exception {
 
 }

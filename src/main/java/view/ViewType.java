@@ -35,7 +35,7 @@ public enum ViewType implements ViewTypeInterface {
 
     CONFERENCE {
 
-        /** Conference View */
+        /** ConferenceEntity View */
         @Override
         public String getFXMLFile() {
             return "/fxml/ConferenceView.fxml";
@@ -45,7 +45,7 @@ public enum ViewType implements ViewTypeInterface {
 
     USER {
 
-        /** User View */
+        /** UserEntity View */
         @Override
         public String getFXMLFile() {
             return "/fxml/UserView.fxml";
@@ -55,7 +55,7 @@ public enum ViewType implements ViewTypeInterface {
 
     CONFERENCE_ITEM {
 
-        /** Conference Item View */
+        /** ConferenceEntity Item View */
         @Override
         public String getFXMLFile() {
             return "/fxml/ConferenceItemView.fxml";
@@ -65,7 +65,7 @@ public enum ViewType implements ViewTypeInterface {
 
     USER_ITEM {
 
-        /** User Item View */
+        /** UserEntity Item View */
         @Override
         public String getFXMLFile() {
             return "/fxml/UserItemView.fxml";
@@ -115,7 +115,7 @@ public enum ViewType implements ViewTypeInterface {
 
     NOTIFICATION_ITEM {
 
-        /** Notification Item View */
+        /** NotificationEntity Item View */
         @Override
         public String getFXMLFile() {
             return "/fxml/NotificationItemView.fxml";

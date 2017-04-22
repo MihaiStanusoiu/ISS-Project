@@ -47,7 +47,7 @@ public class ControllerUserItem<T>
     private StageManager manager;
 
     /**
-     * Effect: The item that needs to be displayed inside the view. [User]
+     * Effect: The item that needs to be displayed inside the view. [UserEntity]
      */
     private T item;
 
@@ -63,7 +63,7 @@ public class ControllerUserItem<T>
     }
 
     /**
-     * Effect: Loads the UserView based on item [User]
+     * Effect: Loads the UserView based on item [UserEntity]
      * from the current object controller.
      */
     @FXML

@@ -1,7 +1,8 @@
 package database;
 
-import domaintest.NotificationEntity;
-import domaintest.UserEntity;
+import domain.*;
+import domaintest.NotificationEntityMock;
+import domaintest.UserEntityMock;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -75,8 +76,16 @@ public class DatabaseLoader
      * Effect: Sets up the configuration with the domain tables.
      */
     private void setUpConfiguration() {
+        configuration.addAnnotatedClass(UserEntityMock.class);
+        configuration.addAnnotatedClass(NotificationEntityMock.class);
+        configuration.addAnnotatedClass(ConfigurationEditionMemberEntity.class);
+        configuration.addAnnotatedClass(ConfigurationSessionMemberEntity.class);
+        configuration.addAnnotatedClass(ConferenceEntity.class);
+        configuration.addAnnotatedClass(EditionEntity.class);
+        configuration.addAnnotatedClass(EditionMemberEntity.class);
+        configuration.addAnnotatedClass(SessionEntity.class);
         configuration.addAnnotatedClass(UserEntity.class);
-        configuration.addAnnotatedClass(NotificationEntity.class);
+        configuration.addAnnotatedClass(SessionMemberEntity.class);
     }
 
     /**

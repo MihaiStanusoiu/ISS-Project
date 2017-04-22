@@ -15,7 +15,7 @@ import java.util.Collection;
  *              <p>
  *                  The pagination is organized in a U [Pane].
  *
- *                  T : The data's type (example: Conference -- from domain package)
+ *                  T : The data's type (example: ConferenceEntity -- from domain package)
  *                  E : The view-controller's type, the controller that manages the item's view.
  *                  U : The pane used to display a page.
  *              </p>

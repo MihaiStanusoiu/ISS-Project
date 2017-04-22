@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Name:         Notification
+ * Name:         NotificationEntity
  * Effect:       Corresponding class for the notification table in the database.
  * Date:         08.04.2017
  * Tested:       False
@@ -14,26 +14,26 @@ import java.io.Serializable;
 
 
 @Entity
-@Table(name = "Notification")
+@Table(name = "NOTIFICATION")
 @SuppressWarnings("unused")
-public class Notification implements Serializable {
+public class NotificationEntity implements Serializable,Idable<Integer> {
 
     @Id
     @GeneratedValue
-    @Column(name = "id_notification")
+    @Column(name = "ID_NOTIFICATION")
     private Integer id;
 
-    @Column(name = "text")
+    @Column(name = "TEXT")
     private String text;
 
-    @Column(name = "payment_type")
+    @Column(name = "PAYMENT_TYPE")
     private Boolean paymentType;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
+    @JoinColumn(name = "ID_USER")
+    private UserEntity user;
 
-    public Notification() {}
+    public NotificationEntity() {}
 
     /**
      * Effect: Return the id of a notification.
@@ -85,17 +85,17 @@ public class Notification implements Serializable {
 
     /**
      * Effect: Return the user of a notification.
-     * @return [User]: returns the user of a notification.
+     * @return [UserEntity]: returns the user of a notification.
      */
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
     /**
      * Effect: Sets the user of a notification.
-     * @param user [User]: new value for user
+     * @param user [UserEntity]: new value for user
      */
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 }

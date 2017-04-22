@@ -64,7 +64,7 @@ public class ControllerConferenceItem<T>
     private GradientGenerator generator = new GradientGenerator();
 
     /**
-     * Effect: The item that needs to be displayed inside the view. [Conference]
+     * Effect: The item that needs to be displayed inside the view. [ConferenceEntity]
      */
     private T item;
 
@@ -80,7 +80,7 @@ public class ControllerConferenceItem<T>
     }
 
     /**
-     * Effect: Loads the ConferenceView based on item [Conference]
+     * Effect: Loads the ConferenceView based on item [ConferenceEntity]
      * from the current object controller.
      */
     @FXML

@@ -10,13 +10,11 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- * Name:        ControllerConferencesView
- * Effect:      Lists all the available conferences.
- * Date:        02/04/2017
- * Tested:      False
+ * <p> Lists all the available conferences. </p>
+ * <p> Tested: False </p>
  *
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 @Component
@@ -41,17 +39,17 @@ public class ControllerConferencesView implements ControllerInterface {
     @SuppressWarnings("unchecked")
     public void initialize() {
             // This part is for testing the pagination's builder with mocking data.
-//        Conference[] conferences = {
-//                new Conference()
+//        ConferenceEntity[] conferences = {
+//              new ConferenceEntity()
 //        };
-//        pagination = new PaginationBuilder<Conference, ControllerConferenceItem, GridPane>()
-//                .setRows(2)
-//                .setColumns(4)
-//                .setElements(conferences)
-//                .setView(ViewType.CONFERENCE_ITEM)
-//                .setStageManager(this.manager)
-//                .setPagination(this.pagination)
-//                .build(GridPane.class);
+//        pagination = new PaginationBuilder<ConferenceEntity, ControllerConferenceItem, GridPane>()
+//              .setRows(2)
+//              .setColumns(4)
+//              .setElements(conferences)
+//              .setView(ViewType.CONFERENCE_ITEM)
+//              .setStageManager(this.manager)
+//              .setPagination(this.pagination)
+//              .build(GridPane.class);
 //        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
     }
 

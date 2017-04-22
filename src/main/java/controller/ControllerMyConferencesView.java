@@ -38,9 +38,9 @@ public class ControllerMyConferencesView implements ControllerInterface {
     @SuppressWarnings("unchecked")
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
-//        Conference[] conferences = {
+//        ConferenceEntity[] conferences = {
 //        };
-//        pagination = new PaginationBuilder<Conference, ControllerConferenceItem, GridPane>()
+//        pagination = new PaginationBuilder<ConferenceEntity, ControllerConferenceItem, GridPane>()
 //                .setRows(2)
 //                .setColumns(4)
 //                .setElements(conferences)

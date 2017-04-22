@@ -36,9 +36,9 @@ public class ControllerUsersView implements ControllerInterface {
     @SuppressWarnings("unchecked")
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
-//        User[] users = {
+//        UserEntity[] users = {
 //        };
-//        pagination = new PaginationBuilder<User, ControllerUserItem, GridPane>()
+//        pagination = new PaginationBuilder<UserEntity, ControllerUserItem, GridPane>()
 //                .setRows(2)
 //                .setColumns(4)
 //                .setElements(users)

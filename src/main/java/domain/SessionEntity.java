@@ -2,49 +2,62 @@ package domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:         Session
- * Effect:       Class for the db table Session.
+ * Name:         SessionEntity
+ * Effect:       Class for the db table SessionEntity.
  * Date:         08/04/2017
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
 
 @Entity
-@Table(name = "Session")
+@Table(name = "SESSION")
 @SuppressWarnings("unused")
-public class Session {
+public class SessionEntity implements Idable<Integer> {
 
     @Id @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_section")
+    @Column(name = "ID_SESSION")
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_conference")
-    private Integer idConference;
-
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "start_date")
+    @Column(name = "START_DATE")
     private Date startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "END_DATE")
     private Date endDate;
 
-    @Column(name = "location")
+    @Column(name = "LOCATION")
     private String location;
 
-    @Column(name = "bio")
+    @Column(name = "BIO")
     private String bio;
 
-    @Column(name = "seats")
+    @Column(name = "SEATS")
     private Integer seats;
 
-    public Session() { }
+    @ManyToOne
+    @JoinColumn(name = "ID_EDITION")
+    private EditionEntity edition_session;
+
+    @OneToMany(mappedBy = "session",cascade = CascadeType.ALL)
+    private Set<SessionMemberEntity> sessionMembers;
+
+    public SessionEntity() { }
+
+    public SessionEntity(String name, Date startDate, Date endDate, String location, String bio, Integer seats) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+        this.bio = bio;
+        this.seats = seats;
+    }
 
     /**
      * Effect: Return the id of a section.
@@ -60,22 +73,6 @@ public class Session {
      */
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    /**
-     * Effect: Return the id of the conference.
-     * @return [Integer] : returns the id of the conference.
-     */
-    public Integer getIdConference() {
-        return idConference;
-    }
-
-    /**
-     * Effect: Sets the id of a conference.
-     * @param idConference : new value for id.
-     */
-    public void setIdConference(Integer idConference) {
-        this.idConference = idConference;
     }
 
     /**
@@ -174,4 +171,27 @@ public class Session {
         this.seats = seats;
     }
 
+    /**
+     * Effect: Return the edition.
+     * @return [Integer] : returns the edition.
+     */
+    public EditionEntity getEdition() {
+        return edition_session;
+    }
+
+    /**
+     * Effect: Sets the id of an edition.
+     * @param edition : new value for id.
+     */
+    public void setEdition(EditionEntity edition) {
+        this.edition_session = edition;
+    }
+
+    public Set<SessionMemberEntity> getSessionMembers() {
+        return sessionMembers;
+    }
+
+    public void setSessionMembers(Set<SessionMemberEntity> sessionMembers) {
+        this.sessionMembers = sessionMembers;
+    }
 }

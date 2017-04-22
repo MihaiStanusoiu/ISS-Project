@@ -2,10 +2,11 @@ package domain;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * Name:        EditionMemberId
- * Effect:      Class for the EditionMember table composite PK.
+ * Effect:      Class for the EditionMemberEntity table composite PK.
  * Date:        4/8/2017
  * Tested:      False
  * @author      Stanusoiu Mihai-Teodor
@@ -14,15 +15,15 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @SuppressWarnings("unused")
-public class EditionMemberId {
+public class EditionMemberId implements Serializable{
 
-    @Column(name = "id")
+   // @Column(name = "ID_EDITION_MEMBER")
     private Integer id;
 
-    @Column(name = "id_user")
+   // @Column(name = "ID_USER")
     private Integer idUser;
 
-    @Column(name = "id_conference")
+   // @Column(name = "ID_CONFERENCE")
     private Integer idConference;
 
     public EditionMemberId() {}
