@@ -12,8 +12,6 @@ import org.junit.Test;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
-
 /**
  * Name:         {ClassName}
  * Effect:       {ClassEffect}
@@ -23,6 +21,7 @@ import static org.junit.Assert.*;
  * @author Tiron Andreea- Ecaterina
  * @version 1.0
  */
+
 public class ConferenceEntityTest {
 
     private RepositoryInterface<ConferenceEntity, Integer> repositoryEditionConfiguration;
@@ -42,12 +41,12 @@ public class ConferenceEntityTest {
     @Test
     @Transactional
     public void add() throws Exception {
-        ConferenceEntity user = new ConferenceEntity("International Engineering Conference","IEC");
+        ConferenceEntity conference = new ConferenceEntity("International Engineering Conference", "IEC");
         try {
-            Integer idUser = repositoryEditionConfiguration.add(user);
-            Assert.assertTrue(idUser.equals(1) &&
-                    user.getName().equals("International Engineering Conference") &&
-                    user.getAcronym().equals("IEC")
+            Integer idConference = repositoryEditionConfiguration.add(conference);
+            Assert.assertTrue(idConference.equals(1) &&
+                    conference.getName().equals("International Engineering Conference") &&
+                    conference.getAcronym().equals("IEC")
             );
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -56,12 +55,12 @@ public class ConferenceEntityTest {
 
     @Test
     public void update() throws Exception {
-        ConferenceEntity user = new ConferenceEntity("International Engineering Conference","IEC");
-        ConferenceEntity update = new ConferenceEntity("Artificial Intelligence","AI");
+        ConferenceEntity conference = new ConferenceEntity("International Engineering Conference", "IEC");
+        ConferenceEntity update = new ConferenceEntity("Artificial Intelligence", "AI");
         try {
-            repositoryEditionConfiguration.add(user);
-            repositoryEditionConfiguration.update(user, update);
-            ConferenceEntity result = repositoryEditionConfiguration.getElementById(user.getId());
+            repositoryEditionConfiguration.add(conference);
+            repositoryEditionConfiguration.update(conference, update);
+            ConferenceEntity result = repositoryEditionConfiguration.getElementById(conference.getId());
             Assert.assertTrue(result.getAcronym().equals("AI"));
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -70,13 +69,13 @@ public class ConferenceEntityTest {
 
     @Test
     public void delete() throws Exception {
-        ConferenceEntity user = new ConferenceEntity("International Engineering Conference","IEC");
+        ConferenceEntity conference = new ConferenceEntity("International Engineering Conference", "IEC");
         try {
-            repositoryEditionConfiguration.add(user);
+            repositoryEditionConfiguration.add(conference);
 
             // This test is here only to make sure that we have something in repository in order to delete.
-            Assert.assertTrue(user.getAcronym().equals(repositoryEditionConfiguration.getElementById(1).getAcronym()));
-            repositoryEditionConfiguration.delete(user.getId());
+            Assert.assertTrue(conference.getAcronym().equals(repositoryEditionConfiguration.getElementById(1).getAcronym()));
+            repositoryEditionConfiguration.delete(conference.getId());
             Assert.assertTrue(repositoryEditionConfiguration.getAll().isEmpty());
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -85,13 +84,13 @@ public class ConferenceEntityTest {
 
     @Test
     public void getAll() throws Exception {
-        ConferenceEntity user = new ConferenceEntity("International Engineering Conference","IEC");
-        ConferenceEntity test = new ConferenceEntity("Artificial Intelligence","AI");
+        ConferenceEntity conference = new ConferenceEntity("International Engineering Conference", "IEC");
+        ConferenceEntity test = new ConferenceEntity("Artificial Intelligence", "AI");
         try {
-            repositoryEditionConfiguration.add(user);
+            repositoryEditionConfiguration.add(conference);
             repositoryEditionConfiguration.add(test);
             ArrayList<ConferenceEntity> result = new ArrayList<>(repositoryEditionConfiguration.getAll());
-            Assert.assertTrue(result.get(0).getId().equals(user.getId()) &&
+            Assert.assertTrue(result.get(0).getId().equals(conference.getId()) &&
                     result.get(1).getId().equals(test.getId()));
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -100,14 +99,14 @@ public class ConferenceEntityTest {
 
     @Test
     public void getElementById() throws Exception {
-        ConferenceEntity user = new ConferenceEntity("International Engineering Conference","IEC");
-        ConferenceEntity test = new ConferenceEntity("Artificial Intelligence","AI");
+        ConferenceEntity conference = new ConferenceEntity("International Engineering Conference", "IEC");
+        ConferenceEntity test = new ConferenceEntity("Artificial Intelligence", "AI");
         try {
-            repositoryEditionConfiguration.add(user);
+            repositoryEditionConfiguration.add(conference);
             repositoryEditionConfiguration.add(test);
             ConferenceEntity result = repositoryEditionConfiguration.getElementById(1);
-            Assert.assertTrue(result.getId().equals(user.getId()) &&
-                    result.getName().equals(user.getName()));
+            Assert.assertTrue(result.getId().equals(conference.getId()) &&
+                    result.getName().equals(conference.getName()));
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }

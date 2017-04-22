@@ -13,14 +13,14 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
+ * Name:         ConfigurationEditionMemberTest
+ * Effect:       Test for Configuration Edition Member
  * Date:         21/04/2017
- * Tested:       False
  *
  * @author Tiron Andreea- Ecaterina
  * @version 1.0
  */
+
 public class ConfigurationEditionMemberTest {
     
     private RepositoryInterface<ConfigurationEditionMemberEntity, Integer> repositoryEditionConfiguration;
@@ -56,7 +56,7 @@ public class ConfigurationEditionMemberTest {
     @Test
     public void update() throws Exception {
         ConfigurationEditionMemberEntity user = new ConfigurationEditionMemberEntity(false, true, true);
-        ConfigurationEditionMemberEntity update = new ConfigurationEditionMemberEntity(true, true ,true);
+        ConfigurationEditionMemberEntity update = new ConfigurationEditionMemberEntity(true, true, true);
         try {
             repositoryEditionConfiguration.add(user);
             repositoryEditionConfiguration.update(user, update);
@@ -69,13 +69,13 @@ public class ConfigurationEditionMemberTest {
 
     @Test
     public void delete() throws Exception {
-        ConfigurationEditionMemberEntity user = new ConfigurationEditionMemberEntity(false,true,true);
+        ConfigurationEditionMemberEntity member = new ConfigurationEditionMemberEntity(false, true, true);
         try {
-            repositoryEditionConfiguration.add(user);
-
+            repositoryEditionConfiguration.add(member);
             // This test is here only to make sure that we have something in repository in order to delete.
-            Assert.assertTrue(user.getChair().equals(repositoryEditionConfiguration.getElementById(1).getChair()));
-            repositoryEditionConfiguration.delete(user.getId());
+            Assert.assertTrue(member.getChair()
+                    .equals(repositoryEditionConfiguration.getElementById(1).getChair()));
+            repositoryEditionConfiguration.delete(member.getId());
             Assert.assertTrue(repositoryEditionConfiguration.getAll().isEmpty());
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -84,8 +84,8 @@ public class ConfigurationEditionMemberTest {
 
     @Test
     public void getAll() throws Exception {
-        ConfigurationEditionMemberEntity user = new ConfigurationEditionMemberEntity(false,true,true);
-        ConfigurationEditionMemberEntity test = new ConfigurationEditionMemberEntity(true,true,true);
+        ConfigurationEditionMemberEntity user = new ConfigurationEditionMemberEntity(false, true, true);
+        ConfigurationEditionMemberEntity test = new ConfigurationEditionMemberEntity(true, true, true);
         try {
             repositoryEditionConfiguration.add(user);
             repositoryEditionConfiguration.add(test);
@@ -99,8 +99,8 @@ public class ConfigurationEditionMemberTest {
 
     @Test
     public void getElementById() throws Exception {
-        ConfigurationEditionMemberEntity user = new ConfigurationEditionMemberEntity(false,true,true);
-        ConfigurationEditionMemberEntity test = new ConfigurationEditionMemberEntity(true,true,true);
+        ConfigurationEditionMemberEntity user = new ConfigurationEditionMemberEntity(false, true, true);
+        ConfigurationEditionMemberEntity test = new ConfigurationEditionMemberEntity(true, true, true);
         try {
             repositoryEditionConfiguration.add(user);
             repositoryEditionConfiguration.add(test);

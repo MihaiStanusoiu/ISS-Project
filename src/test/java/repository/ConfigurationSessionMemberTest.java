@@ -14,15 +14,16 @@ import java.util.ArrayList;
 
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
+ * Name:         ConfigurationSessionMemberTest
+ * Effect:       Test for ConfigurationSessionMember
  * Date:         22/04/2017
- * Tested:       False
  *
  * @author Tiron Andreea- Ecaterina
  * @version 1.0
  */
+
 public class ConfigurationSessionMemberTest {
+
     private RepositoryInterface<ConfigurationSessionMemberEntity, Integer> repositorySessionMemberConfiguration;
     private DatabaseLoaderInterface loader;
 
@@ -40,13 +41,13 @@ public class ConfigurationSessionMemberTest {
     @Test
     @Transactional
     public void add() throws Exception {
-        ConfigurationSessionMemberEntity user = new ConfigurationSessionMemberEntity(false, false, true);
+        ConfigurationSessionMemberEntity configuration = new ConfigurationSessionMemberEntity(false, false, true);
         try {
-            Integer idUser = repositorySessionMemberConfiguration.add(user);
-            Assert.assertTrue(idUser.equals(1) &&
-                    user.getChair().equals(false) &&
-                    user.getSpeaker().equals(false) &&
-                    user.getListener().equals(true)
+            Integer idConfiguration = repositorySessionMemberConfiguration.add(configuration);
+            Assert.assertTrue(idConfiguration.equals(1) &&
+                    configuration.getChair().equals(false) &&
+                    configuration.getSpeaker().equals(false) &&
+                    configuration.getListener().equals(true)
             );
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -56,7 +57,7 @@ public class ConfigurationSessionMemberTest {
     @Test
     public void update() throws Exception {
         ConfigurationSessionMemberEntity user = new ConfigurationSessionMemberEntity(false, false, true);
-        ConfigurationSessionMemberEntity update = new ConfigurationSessionMemberEntity(false, true ,false);
+        ConfigurationSessionMemberEntity update = new ConfigurationSessionMemberEntity(false, true , false);
         try {
             repositorySessionMemberConfiguration.add(user);
             repositorySessionMemberConfiguration.update(user, update);
@@ -69,14 +70,14 @@ public class ConfigurationSessionMemberTest {
 
     @Test
     public void delete() throws Exception {
-        ConfigurationSessionMemberEntity user = new ConfigurationSessionMemberEntity(false,true,true);
+        ConfigurationSessionMemberEntity member = new ConfigurationSessionMemberEntity(false, true, true);
         try {
-            repositorySessionMemberConfiguration.add(user);
-
+            repositorySessionMemberConfiguration.add(member);
             // This test is here only to make sure that we have something in repository in order to delete.
-            Assert.assertTrue(user.getChair().equals(repositorySessionMemberConfiguration.getElementById(1).getChair()));
-            repositorySessionMemberConfiguration.delete(user.getId());
-            Assert.assertTrue(repositorySessionMemberConfiguration.getAll().isEmpty());
+            Assert.assertTrue(member.getChair()
+                    .equals(repositorySessionMemberConfiguration.getElementById(1).getChair()));
+            repositorySessionMemberConfiguration.delete(member.getId());
+            Assert.assertEquals(repositorySessionMemberConfiguration.getAll().isEmpty(), true);
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
@@ -84,13 +85,13 @@ public class ConfigurationSessionMemberTest {
 
     @Test
     public void getAll() throws Exception {
-        ConfigurationSessionMemberEntity user = new ConfigurationSessionMemberEntity(false,true,true);
-        ConfigurationSessionMemberEntity test = new ConfigurationSessionMemberEntity(true,true,true);
+        ConfigurationSessionMemberEntity configuration = new ConfigurationSessionMemberEntity(false, true, true);
+        ConfigurationSessionMemberEntity test = new ConfigurationSessionMemberEntity(true, true, true);
         try {
-            repositorySessionMemberConfiguration.add(user);
+            repositorySessionMemberConfiguration.add(configuration);
             repositorySessionMemberConfiguration.add(test);
             ArrayList<ConfigurationSessionMemberEntity> result = new ArrayList<>(repositorySessionMemberConfiguration.getAll());
-            Assert.assertTrue(result.get(0).getId().equals(user.getId()) &&
+            Assert.assertTrue(result.get(0).getId().equals(configuration.getId()) &&
                     result.get(1).getId().equals(test.getId()));
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -99,14 +100,14 @@ public class ConfigurationSessionMemberTest {
 
     @Test
     public void getElementById() throws Exception {
-        ConfigurationSessionMemberEntity user = new ConfigurationSessionMemberEntity(false,true,true);
-        ConfigurationSessionMemberEntity test = new ConfigurationSessionMemberEntity(true,true,true);
+        ConfigurationSessionMemberEntity configuration = new ConfigurationSessionMemberEntity(false, true, true);
+        ConfigurationSessionMemberEntity test = new ConfigurationSessionMemberEntity(true, true, true);
         try {
-            repositorySessionMemberConfiguration.add(user);
+            repositorySessionMemberConfiguration.add(configuration);
             repositorySessionMemberConfiguration.add(test);
             ConfigurationSessionMemberEntity result = repositorySessionMemberConfiguration.getElementById(1);
-            Assert.assertTrue(result.getId().equals(user.getId()) &&
-                    result.getChair().equals(user.getChair()));
+            Assert.assertTrue(result.getId().equals(configuration.getId()) &&
+                    result.getChair().equals(configuration.getChair()));
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
