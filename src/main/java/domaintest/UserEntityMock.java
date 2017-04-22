@@ -1,11 +1,13 @@
 package domaintest;
 
+import domain.Idable;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Name:         UserEntity
+ * Name:         UserEntityMock
  * Effect:       Ignore this entity (for testing only)
  * Date:         4/17/2017
  *
@@ -14,13 +16,13 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "USER")
+@Table(name = "USER_MOCK")
 @SuppressWarnings("unused")
-public class UserEntity
+public class UserEntityMock
             implements Idable<Integer> {
 
     /**
-     * User's ID in our database system. [auto-generated]
+     * UserEntity's ID in our database system. [auto-generated]
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,51 +30,51 @@ public class UserEntity
     private Integer userId;
 
     /**
-     * User's unique name in our database system. [required]
+     * UserEntity's unique name in our database system. [required]
      */
     @Column(name = "USERNAME", nullable = false)
     private String username;
 
     /**
-     * User's password in our database system. [required]
+     * UserEntity's password in our database system. [required]
      */
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
     /**
-     * User's email in our database system. [required]
+     * UserEntity's email in our database system. [required]
      */
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
     /**
-     * User's real name in our database system. [required]
+     * UserEntity's real name in our database system. [required]
      */
     @Column(name = "NAME", nullable = false)
     private String name;
 
     /**
-     * User's website in our database system.
+     * UserEntity's website in our database system.
      * [not required] [default = '']
      */
     @Column(name = "WEBSITE", nullable = false)
     private String website;
 
     /**
-     * User's bio in our database system.
+     * UserEntity's bio in our database system.
      * [not required] [default = '']
      */
     @Column(name = "BIO", nullable = false)
     private String bio;
 
     /**
-     * User's location in our database system.
+     * UserEntity's location in our database system.
      * [not required] [default = '']
      */
     @Column(name = "LOCATION", nullable = false)
     private String location;
 
-    public UserEntity() { }
+    public UserEntityMock() { }
 
     /**
      * @param username The user's unique username
@@ -81,10 +83,10 @@ public class UserEntity
      * @param name The user's name
      */
     @SuppressWarnings("all")
-    public UserEntity(String username,
-                      String password,
-                      String email,
-                      String name) {
+    public UserEntityMock(String username,
+                          String password,
+                          String email,
+                          String name) {
         this(username, password, email,name, "", "", "");
     }
 
@@ -98,13 +100,13 @@ public class UserEntity
      * @param location The user's location
      */
     @SuppressWarnings("all")
-    public UserEntity(String username,
-                      String password,
-                      String email,
-                      String name,
-                      String website,
-                      String bio,
-                      String location) {
+    public UserEntityMock(String username,
+                          String password,
+                          String email,
+                          String name,
+                          String website,
+                          String bio,
+                          String location) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -116,7 +118,7 @@ public class UserEntity
     }
 
     /**
-     * @return The user's id (primary key in User table)
+     * @return The user's id (primary key in UserEntity table)
      */
     public Integer getId() {
         return userId;
@@ -234,9 +236,9 @@ public class UserEntity
 
     @SuppressWarnings("all")
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    public Set<NotificationEntity> notifications;
+    public Set<NotificationEntityMock> notifications;
 
-    public Set<NotificationEntity> getNotifications() {
+    public Set<NotificationEntityMock> getNotifications() {
         return notifications;
     }
 

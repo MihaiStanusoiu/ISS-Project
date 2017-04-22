@@ -1,7 +1,8 @@
 package domain;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
@@ -14,31 +15,37 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 
 @Entity
-@Table(name = "ConfigurationSessionMember")
+@Table(name = "CONFIGURATION_SESSION_MEMBER")
 @SuppressWarnings("unused")
-public class ConfigurationSessionMember {
+public class ConfigurationSessionMemberEntity implements Idable<Integer>{
 
     @Id @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "id_configuration_section_member")
+    @Column(name = "ID_CONFIGURATION_SESSION_MEMBER")
     private Integer id;
 
-    @Column(name = "is_chair")
+    @Column(name = "IS_CHAIR")
     private Boolean isChair;
 
-    @Column(name = "is_speaker")
+    @Column(name = "IS_SPEAKER")
     private Boolean isSpeaker;
 
-    @Column(name = "is_listener")
+    @Column(name = "IS_LISTENER")
     private Boolean isListener;
 
-    @OneToMany(mappedBy = "idConfiguration")
-    private List<SessionMember> sectionMembers;
+    public ConfigurationSessionMemberEntity(Boolean isChair, Boolean isSpeaker, Boolean isListener) {
+        this.isChair = isChair;
+        this.isSpeaker = isSpeaker;
+        this.isListener = isListener;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "idConfigurationSession",cascade = CascadeType.ALL)
+    private Set<SessionMemberEntity> sectionMembers;
 
     /**
      * Effect: Return the section members with this configuration.
-     * @return [ArrayList<SessionMember>] : returns the list of members.
+     * @return [ArrayList<SessionMemberEntity>] : returns the list of members.
      */
-    public List<SessionMember> getSectionMembers() {
+    public Set<SessionMemberEntity> getSectionMembers() {
         return this.sectionMembers;
     }
 
@@ -46,11 +53,11 @@ public class ConfigurationSessionMember {
      * Effect: Sets the list of members to a section configuration.
      * @param sectionMembers : new value for section members.
      */
-    public void setSectionMembers(List<SessionMember> sectionMembers) {
+    public void setSectionMembers(Set<SessionMemberEntity> sectionMembers) {
         this.sectionMembers = sectionMembers;
     }
 
-    public ConfigurationSessionMember(){
+    public ConfigurationSessionMemberEntity(){
     }
 
     /**

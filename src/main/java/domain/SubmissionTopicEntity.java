@@ -2,8 +2,8 @@ package domain;
 
 import javax.persistence.*;
 /**
- * Name:         SubmissionTopic
- * Effect:       Class for domain SubmissionTopic table
+ * Name:         SubmissionTopicEntity
+ * Effect:       Class for domain SubmissionTopicEntity table
  * Date:         4/8/2017
  * Tested:       False
  *
@@ -12,22 +12,22 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "SubmissionTopic")
+@Table(name = "SUBMISSION_TOPIC")
 @SuppressWarnings("unused")
-public class SubmissionTopic {
+public class SubmissionTopicEntity {
 
     @EmbeddedId
     private SubmissionTopicItems pkId;
 
     @ManyToOne
-    @JoinColumn(name = "id_topic")
-    private Topic topicTable;
+    @JoinColumn(name = "ID_TOPIC")
+    private TopicEntity topicTable;
 
     @ManyToOne
-    @JoinColumn(name = "id_submission")
-    private Submission submission;
+    @JoinColumn(name = "ID_SUBMISSION")
+    private SubmissionEntity submission;
 
-    public SubmissionTopic() { }
+    public SubmissionTopicEntity() { }
 
     /**
      * Effect: Getter for the primary key.
@@ -47,9 +47,9 @@ public class SubmissionTopic {
 
     /**
      * Effect: Getter for the topic created by join.
-     * @return Topic : returns topicTable.
+     * @return TopicEntity : returns topicTable.
      */
-    public Topic getTopicTable() {
+    public TopicEntity getTopicTable() {
         return topicTable;
     }
 
@@ -57,16 +57,16 @@ public class SubmissionTopic {
      * Effect: Sets the topicTable to the given value
      * @param topicTable: new value for topicTable
      */
-    public void setTopicTable(Topic topicTable) {
+    public void setTopicTable(TopicEntity topicTable) {
         this.topicTable = topicTable;
     }
 
 
     /**
      * Effect: Getter for the submission created by join.
-     * @return Submission : returns submission.
+     * @return SubmissionEntity : returns submission.
      */
-    public Submission getSubmission() {
+    public SubmissionEntity getSubmission() {
         return submission;
     }
 
@@ -74,7 +74,7 @@ public class SubmissionTopic {
      * Effect: Sets the submission to the given value
      * @param submission: new value for submission
      */
-    public void setSubmission(Submission submission) {
+    public void setSubmission(SubmissionEntity submission) {
         this.submission = submission;
     }
 

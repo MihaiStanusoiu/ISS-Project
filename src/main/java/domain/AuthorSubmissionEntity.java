@@ -3,8 +3,8 @@ package domain;
 import javax.persistence.*;
 
 /**
- * Name:         AuthorSubmission
- * Effect:       Class for database domain AuthorSubmission table
+ * Name:         AuthorSubmissionEntity
+ * Effect:       Class for database domain AuthorSubmissionEntity table
  * Date:         4/8/2017
  * Tested:       False
  *
@@ -13,34 +13,34 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "AuthorSubmission")
+@Table(name = "AUTHOR_SUBMISSION")
 @SuppressWarnings("unused")
-public class AuthorSubmission {
+public class AuthorSubmissionEntity {
 
     @EmbeddedId
     private AuthorSubmissionItems pkId;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User userTable;
+    @JoinColumn(name = "ID_USER")
+    private UserEntity userTable;
 
     @ManyToOne
-    @JoinColumn(name = "id_submission")
-    private Submission submission;
+    @JoinColumn(name = "ID_SUBMISSION")
+    private SubmissionEntity submission;
 
-    @Column(name = "is_owner")
+    @Column(name = "IS_OWNER")
     private Boolean isOwner;
 
-    @Column(name = "presentation-url")
+    @Column(name = "PRESENTATION_URL")
     private String presentationUrl;
 
-    public AuthorSubmission() { }
+    public AuthorSubmissionEntity() { }
 
     /**
      * Effect: Getter for the primary key.
      * @return AuthorSubmissionItems : returns pkId.
      */
-    public AuthorSubmissionItems getPkId() {
+    public AuthorSubmissionItems getId() {
         return pkId;
     }
 
@@ -48,15 +48,15 @@ public class AuthorSubmission {
      * Effect: Sets the pkId to the given value
      * @param pkId: new value for pkId
      */
-    public void setPkId(AuthorSubmissionItems pkId) {
+    public void setId(AuthorSubmissionItems pkId) {
         this.pkId = pkId;
     }
 
     /**
      * Effect: Getter for the user created by join.
-     * @return User : returns userTable.
+     * @return UserEntity : returns userTable.
      */
-    public User getUserTable() {
+    public UserEntity getUserTable() {
         return userTable;
     }
 
@@ -64,15 +64,15 @@ public class AuthorSubmission {
      * Effect: Sets the userTable to the given value
      * @param userTable: new value for userTable
      */
-    public void setUserTable(User userTable) {
+    public void setUserTable(UserEntity userTable) {
         this.userTable = userTable;
     }
 
     /**
      * Effect: Getter for the submission created by join.
-     * @return Submission : returns submission.
+     * @return SubmissionEntity : returns submission.
      */
-    public Submission getSubmission() {
+    public SubmissionEntity getSubmission() {
         return submission;
     }
 
@@ -80,7 +80,7 @@ public class AuthorSubmission {
      * Effect: Sets the submission to the given value
      * @param submission: new value for submission
      */
-    public void setSubmission(Submission submission) {
+    public void setSubmission(SubmissionEntity submission) {
         this.submission = submission;
     }
 

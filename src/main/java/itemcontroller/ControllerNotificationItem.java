@@ -53,7 +53,7 @@ public class ControllerNotificationItem<T>
     private GradientGenerator generator = new GradientGenerator();
 
     /**
-     * Effect: The item that needs to be displayed inside the view. [Notification]
+     * Effect: The item that needs to be displayed inside the view. [NotificationEntity]
      */
     private T item;
 

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 
 /**
- * Name:         Tag
+ * Name:         TagEntity
  * Effect:       Corresponding class for the paper tags table in the database.
  * Date:         08.04.2017
  * Tested:       False
@@ -13,22 +13,22 @@ import java.util.ArrayList;
  */
 
 @Entity
-@Table(name = "Tag")
+@Table(name = "TAG")
 @SuppressWarnings("unused")
-public class Tag {
+public class TagEntity implements Idable<Integer> {
 
     @Id
     @GeneratedValue
-    @Column(name = "id_tag")
+    @Column(name = "ID_TAG")
     private Integer id;
 
-    @Column(name = "word")
+    @Column(name = "WORD")
     private String word;
 
     @OneToMany(mappedBy="idTag")
-    private ArrayList<SubmissionTag> tagSubmissionTags = new ArrayList<>();
+    private ArrayList<SubmissionTagEntity> tagSubmissionTags = new ArrayList<>();
 
-    public Tag() { }
+    public TagEntity() { }
 
     /**
      * Effect: Return the id of tag.
@@ -64,17 +64,17 @@ public class Tag {
 
     /**
      * Effect: Return the submission tags of the tag.
-     * @return [ArrayList<SubmissionTag>]: returns the submission tags of the tag.
+     * @return [ArrayList<SubmissionTagEntity>]: returns the submission tags of the tag.
      */
-    public ArrayList<SubmissionTag> getTagSubmissionTags() {
+    public ArrayList<SubmissionTagEntity> getTagSubmissionTags() {
         return tagSubmissionTags;
     }
 
     /**
      * Effect: Sets the submission tags of the tag.
-     * @param tagSubmissionTags [ArrayList<SubmissionTag>]: new value for the submission tags
+     * @param tagSubmissionTags [ArrayList<SubmissionTagEntity>]: new value for the submission tags
      */
-    public void setTagSubmissionTags(ArrayList<SubmissionTag> tagSubmissionTags) {
+    public void setTagSubmissionTags(ArrayList<SubmissionTagEntity> tagSubmissionTags) {
         this.tagSubmissionTags = tagSubmissionTags;
     }
 

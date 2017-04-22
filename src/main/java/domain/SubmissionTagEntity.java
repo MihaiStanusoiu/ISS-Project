@@ -3,7 +3,7 @@ package domain;
 import javax.persistence.*;
 
 /**
- * Name:         SubmissionTag
+ * Name:         SubmissionTagEntity
  * Effect:       Corresponding class for the paper tags and submission many-to-many relationship.
  * Date:         08.04.2017
  * Tested:       False
@@ -12,22 +12,22 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "SubmissionTag")
+@Table(name = "SUBMISSION_TAG")
 @SuppressWarnings("unused")
-public class SubmissionTag {
+public class SubmissionTagEntity  {
 
     @EmbeddedId
     SubmissionTagId id;
 
     @ManyToOne
-    @JoinColumn(name = "id_submission")
-    private Submission idSubmission;
+    @JoinColumn(name = "ID_SUBMISSION")
+    private SubmissionEntity idSubmission;
 
     @ManyToOne
-    @JoinColumn(name = "id_tag")
-    private Tag idTag;
+    @JoinColumn(name = "ID_TAG")
+    private TagEntity idTag;
 
-    public SubmissionTag() { }
+    public SubmissionTagEntity() { }
 
     /**
      * Effect: Return the id of a submission-tag.
@@ -47,9 +47,9 @@ public class SubmissionTag {
 
     /**
      * Effect: Return the submission of a submission-tag.
-     * @return [Submission] : returns the  submission of a submission-tag.
+     * @return [SubmissionEntity] : returns the  submission of a submission-tag.
      */
-    public Submission getIdSubmission() {
+    public SubmissionEntity getIdSubmission() {
         return idSubmission;
     }
 
@@ -57,23 +57,23 @@ public class SubmissionTag {
      * Effect: Sets the submission of a submission-tag.
      * @param idSubmission idSubmission: new value for submission
      */
-    public void setIdSubmission(Submission idSubmission) {
+    public void setIdSubmission(SubmissionEntity idSubmission) {
         this.idSubmission = idSubmission;
     }
 
     /**
      * Effect: Return the tag of a submission-tag.
-     * @return [Tag] : returns the tag.
+     * @return [TagEntity] : returns the tag.
      */
-    public Tag getIdTag() {
+    public TagEntity getIdTag() {
         return idTag;
     }
 
     /**
      * Effect: Sets the tag of a submission-tag.
-     * @param idTag [Tag]: new value for tag
+     * @param idTag [TagEntity]: new value for tag
      */
-    public void setIdTag(Tag idTag) {
+    public void setIdTag(TagEntity idTag) {
         this.idTag = idTag;
     }
 }

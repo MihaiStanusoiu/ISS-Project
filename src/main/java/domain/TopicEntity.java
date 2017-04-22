@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 
 /**
- * Name:         Topic
- * Effect:       Class for domain Topic table
+ * Name:         TopicEntity
+ * Effect:       Class for domain TopicEntity table
  * Date:         4/8/2017
  * Tested:       False
  *
@@ -14,26 +14,26 @@ import java.util.ArrayList;
  */
 
 @Entity
-@Table(name = "Topic")
+@Table(name = "TOPIC")
 @SuppressWarnings("unused")
-public class Topic {
+public class TopicEntity implements Idable<Integer>{
 
     @Id @GeneratedValue
-    @Column(name = "id_topic")
+    @Column(name = "ID_TOPIC")
     private Integer idTopic;
 
-    @Column(name = "word")
+    @Column(name = "WORD")
     private String word;
 
-    private ArrayList<SubmissionTopic> topicSubmissionTopics = new ArrayList<>();
+    private ArrayList<SubmissionTopicEntity> topicSubmissionTopics = new ArrayList<>();
 
-    public Topic() { }
+    public TopicEntity() { }
 
     /**
      * Effect: Getter for the id_topic of the topic.
      * @return Integer : returns idTopic.
      */
-    public Integer getIdTopic() {
+    public Integer getId() {
         return idTopic;
     }
 
@@ -41,7 +41,7 @@ public class Topic {
      * Effect: Sets the id_topic to the given value
      * @param idTopic: new value for idTopic
      */
-    public void setIdTopic(Integer idTopic) {
+    public void setId(Integer idTopic) {
         this.idTopic = idTopic;
     }
 
@@ -63,10 +63,10 @@ public class Topic {
 
     /**
      * Effect: Getter for the elements of the relationship of the topic.
-     * @return ArrayList<SubmissionTopic> : returns topicSubmissionTopics.
+     * @return ArrayList<SubmissionTopicEntity> : returns topicSubmissionTopics.
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "id_topic")
-    public ArrayList<SubmissionTopic> getTopicSubmissionTopics() {
+    public ArrayList<SubmissionTopicEntity> getTopicSubmissionTopics() {
         return topicSubmissionTopics;
     }
 
@@ -74,7 +74,7 @@ public class Topic {
      * Effect: Sets the topicSubmissionTopics to the given value
      * @param topicSubmissionTopics: new value for topicSubmissionTopics
      */
-    public void setTopicSubmissionTopics(ArrayList<SubmissionTopic> topicSubmissionTopics) {
+    public void setTopicSubmissionTopics(ArrayList<SubmissionTopicEntity> topicSubmissionTopics) {
         this.topicSubmissionTopics = topicSubmissionTopics;
     }
 

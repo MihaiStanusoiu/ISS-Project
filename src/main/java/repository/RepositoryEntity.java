@@ -1,7 +1,7 @@
 package repository;
 
 import database.DatabaseLoaderInterface;
-import domaintest.Idable;
+import domain.Idable;
 import org.hibernate.Session;
 
 import javax.persistence.Query;
