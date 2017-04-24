@@ -1,6 +1,8 @@
 package domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
+
 /**
  * Name:         SubmissionTopicItems
  * Effect:       Class for domain SubmissionTopicEntity table composite PK
@@ -13,12 +15,12 @@ import javax.persistence.*;
 
 @Embeddable
 @SuppressWarnings("unused")
-public class SubmissionTopicItems {
+public class SubmissionTopicItems implements Serializable {
 
-    @Column(name = "ID_SUBMISSION")
+  //  @Column(name = "ID_SUBMISSION")
     private Integer idSubmission;
 
-    @Column(name = "ID_TOPIC")
+  //  @Column(name = "ID_TOPIC")
     private Integer idTopic;
 
     public SubmissionTopicItems() { }

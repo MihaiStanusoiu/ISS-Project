@@ -1,7 +1,8 @@
 package domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Name:         TagEntity
@@ -25,10 +26,15 @@ public class TagEntity implements Idable<Integer> {
     @Column(name = "WORD")
     private String word;
 
-    @OneToMany(mappedBy="idTag")
-    private ArrayList<SubmissionTagEntity> tagSubmissionTags = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER,mappedBy="tag",cascade = CascadeType.ALL)
+    private Set<SubmissionTagEntity> submissionTags;
 
     public TagEntity() { }
+
+    public TagEntity(String word) {
+        this.word = word;
+        submissionTags = new HashSet<>();
+    }
 
     /**
      * Effect: Return the id of tag.
@@ -66,16 +72,16 @@ public class TagEntity implements Idable<Integer> {
      * Effect: Return the submission tags of the tag.
      * @return [ArrayList<SubmissionTagEntity>]: returns the submission tags of the tag.
      */
-    public ArrayList<SubmissionTagEntity> getTagSubmissionTags() {
-        return tagSubmissionTags;
+    public Set<SubmissionTagEntity> getSubmissionTags() {
+        return submissionTags;
     }
 
     /**
      * Effect: Sets the submission tags of the tag.
-     * @param tagSubmissionTags [ArrayList<SubmissionTagEntity>]: new value for the submission tags
+     * @param submissionTags [ArrayList<SubmissionTagEntity>]: new value for the submission tags
      */
-    public void setTagSubmissionTags(ArrayList<SubmissionTagEntity> tagSubmissionTags) {
-        this.tagSubmissionTags = tagSubmissionTags;
+    public void setSubmissionTags(Set<SubmissionTagEntity> submissionTags) {
+        this.submissionTags = submissionTags;
     }
 
 }

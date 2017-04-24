@@ -3,6 +3,7 @@ package domain;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 /**
  * Name:    ReviewerId
@@ -16,14 +17,14 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 @SuppressWarnings("unused")
-public class ReviewerId {
+public class ReviewerId implements Serializable{
 
-    @ManyToOne
-    @Column(name = "ID_EDITION_MEMBER")
+  //  @ManyToOne
+  //  @Column(name = "ID_EDITION_MEMBER")
     private Integer idEditionMember;
 
-    @ManyToOne
-    @Column(name = "ID_SUBMISSION")
+//    @ManyToOne
+   // @Column(name = "ID_SUBMISSION")
     private Integer idSubmission;
 
     /**

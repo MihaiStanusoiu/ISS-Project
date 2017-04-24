@@ -1,9 +1,6 @@
 package domain;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Name:    ReviewerEntity
@@ -21,7 +18,7 @@ import javax.persistence.Table;
 public class ReviewerEntity  {
 
     @EmbeddedId
-    private ReviewerId id;
+    private ReviewerId idReviewer;
 
     @Column(name = "RESPONSE")
     private String response;
@@ -35,25 +32,37 @@ public class ReviewerEntity  {
     @Column(name = "RECOMMENDATION_URL")
     private String recommendationUrl;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_SUBMISSION")
+    private SubmissionEntity submission;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "id", insertable = false, updatable = false),
+            @JoinColumn(name = "idEditionMember", insertable = false, updatable = false),
+            @JoinColumn(name = "submission", insertable = false, updatable = false)
+    })
+    private EditionMemberEntity idEditionMember;
+
     /**
      * Empty constructor.
      */
     public ReviewerEntity(){}
 
     /**
-     * Effect: Return the id of a reviewer.
-     * @return [ReviewerId] : returns the id of a ReviewerEntity.
+     * Effect: Return the idReviewer of a reviewer.
+     * @return [ReviewerId] : returns the idReviewer of a ReviewerEntity.
      */
-    public ReviewerId getId() {
-        return id;
+    public ReviewerId getIdReviewer() {
+        return idReviewer;
     }
 
     /**
-     * Effect: Sets the id of a reviewer.
-     * @param id: new value for reviewer id.
+     * Effect: Sets the idReviewer of a reviewer.
+     * @param idReviewer: new value for reviewer idReviewer.
      */
-    public void setId(ReviewerId id) {
-        this.id = id;
+    public void setIdReviewer(ReviewerId idReviewer) {
+        this.idReviewer = idReviewer;
     }
 
     /**

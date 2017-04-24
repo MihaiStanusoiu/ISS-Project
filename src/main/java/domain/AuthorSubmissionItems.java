@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * Name:         AuthorSubmissionItems
@@ -15,12 +16,12 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @SuppressWarnings("unused")
-public class AuthorSubmissionItems {
+public class AuthorSubmissionItems implements Serializable {
 
-    @Column(name = "ID_USER")
+  //  @Column(name = "ID_USER")
     private Integer idUser;
 
-    @Column(name = "ID_SUBMISSION")
+   // @Column(name = "ID_SUBMISSION")
     private Integer idSubmission;
 
     public AuthorSubmissionItems() { }

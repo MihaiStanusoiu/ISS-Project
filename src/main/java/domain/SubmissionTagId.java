@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * Name:         SubmissionTagId
@@ -14,7 +15,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @SuppressWarnings("unused")
-public class SubmissionTagId {
+public class SubmissionTagId implements Serializable {
 
     @Column(name = "ID_TAG")
     private Integer idTag;
@@ -23,6 +24,11 @@ public class SubmissionTagId {
     private Integer idSubmission;
 
     public SubmissionTagId() { }
+
+    public SubmissionTagId(Integer idTag, Integer idSubmission) {
+        this.idTag = idTag;
+        this.idSubmission = idSubmission;
+    }
 
     /**
      * Effect: Return the id of a tag if a submission-tag.

@@ -2,8 +2,8 @@ package domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Name:        UserEntity
@@ -44,9 +44,9 @@ public class UserEntity implements Serializable,Idable<Integer> {
 
     @Column(name = "LOCATION")
     private String location;
-//
-//    @OneToMany(mappedBy = "user")
-//    private List<NotificationEntity> notifications = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<NotificationEntity> notifications = new HashSet<>();
 
     public UserEntity() {}
 
@@ -181,17 +181,19 @@ public class UserEntity implements Serializable,Idable<Integer> {
 
     /**
      * Effect: Returns the notifications of the user
-     * @return [ArrayList<NotificationEntity>]: notifications of the user
+     * @return [Set<NotificationEntity>]: notifications of the user
      */
-//    public List<NotificationEntity> getNotifications() {
-//        return notifications;
-//    }
-//
-//    /**
-//     * Effect: Sets the notifications array to the given value
-//     * @param notifications [ArrayList<NotificationEntity>]: new value for the notifications array
-//     */
-//    public void setNotifications(ArrayList<NotificationEntity> notifications) {
-//        this.notifications = notifications;
-//    }
+    public Set<NotificationEntity> getNotifications() {
+        return notifications;
+    }
+
+    /**
+     * Effect: Sets the notifications array to the given value
+     * @param notifications [ArrayList<NotificationEntity>]: new value for the notifications array
+     */
+    public void setNotifications(Set<NotificationEntity> notifications) {
+        this.notifications = notifications;
+    }
+
+
 }

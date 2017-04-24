@@ -1,7 +1,8 @@
 package domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Name:         TopicEntity
@@ -25,7 +26,8 @@ public class TopicEntity implements Idable<Integer>{
     @Column(name = "WORD")
     private String word;
 
-    private ArrayList<SubmissionTopicEntity> topicSubmissionTopics = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "submission")
+    private Set<SubmissionTopicEntity> topicSubmissionTopics = new HashSet<>();
 
     public TopicEntity() { }
 
@@ -65,8 +67,8 @@ public class TopicEntity implements Idable<Integer>{
      * Effect: Getter for the elements of the relationship of the topic.
      * @return ArrayList<SubmissionTopicEntity> : returns topicSubmissionTopics.
      */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id_topic")
-    public ArrayList<SubmissionTopicEntity> getTopicSubmissionTopics() {
+
+    public Set<SubmissionTopicEntity> getTopicSubmissionTopics() {
         return topicSubmissionTopics;
     }
 
@@ -74,7 +76,7 @@ public class TopicEntity implements Idable<Integer>{
      * Effect: Sets the topicSubmissionTopics to the given value
      * @param topicSubmissionTopics: new value for topicSubmissionTopics
      */
-    public void setTopicSubmissionTopics(ArrayList<SubmissionTopicEntity> topicSubmissionTopics) {
+    public void setTopicSubmissionTopics(Set<SubmissionTopicEntity> topicSubmissionTopics) {
         this.topicSubmissionTopics = topicSubmissionTopics;
     }
 

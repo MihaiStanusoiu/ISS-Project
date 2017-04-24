@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -43,22 +44,30 @@ public class SubmissionEntity implements Idable<Integer> {
     @Column(name = "IS_PAID")
     private boolean isPaid;
 
-    @OneToMany(mappedBy = "idSubmission")
-    private ArrayList<SubmissionTagEntity> submissionTags;
+    @OneToMany(mappedBy = "submission",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<SubmissionTagEntity> submissionTags;
 
-    @OneToMany(mappedBy = "idSubmission")
-    private ArrayList<SubmissionTopicEntity> submissionTopic;
+    @OneToMany(mappedBy = "submission")
+    private Set<SubmissionTopicEntity> submissionTopic;
 
-    @OneToMany(mappedBy = "idSubmission")
-    private ArrayList<AuthorSubmissionEntity> submissionAuthors;
+    @OneToMany(mappedBy = "submission")
+    private Set<AuthorSubmissionEntity> submissionAuthors;
 
-    @OneToMany(mappedBy = "idSubmission")
-    private ArrayList<ReviewerEntity> reviewers;
+    @OneToMany(mappedBy = "submission")
+    private Set<ReviewerEntity> reviewers;
 
     /**
      * Empty Constructor
      */
     public SubmissionEntity(){}
+
+    public SubmissionEntity(String name, String status, String abstractUrl, String fullPaperUrl) {
+        this.name = name;
+        this.status = status;
+        this.abstractUrl = abstractUrl;
+        this.fullPaperUrl = fullPaperUrl;
+        this.isPaid = false;
+    }
 
     /**
      * Effect: Return the id of this submission.
@@ -176,7 +185,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * Effect: Return the tags of this submission.
      * @return [ArrayList<SubmissionTagEntity>]: returns the tags of a SubmissionEntity.
      */
-    public ArrayList<SubmissionTagEntity> getSubmissionTags() {
+    public Set<SubmissionTagEntity> getSubmissionTags() {
         return submissionTags;
     }
 
@@ -184,7 +193,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * Effect: Sets the tags of a submission.
      * @param submissionTags: new value for submission tags.
      */
-    public void setSubmissionTags(ArrayList<SubmissionTagEntity> submissionTags) {
+    public void setSubmissionTags(Set<SubmissionTagEntity> submissionTags) {
         this.submissionTags = submissionTags;
     }
 
@@ -192,7 +201,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * Effect: Return the topics of this submission.
      * @return [ArrayList<SubmissionTopicEntity>]: returns the topics of a SubmissionEntity.
      */
-    public ArrayList<SubmissionTopicEntity> getSubmissionTopic() {
+    public Set<SubmissionTopicEntity> getSubmissionTopic() {
         return submissionTopic;
     }
 
@@ -200,7 +209,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * Effect: Sets the topics of a submission.
      * @param submissionTopic: new value for submission topics.
      */
-    public void setSubmissionTopic(ArrayList<SubmissionTopicEntity> submissionTopic) {
+    public void setSubmissionTopic(Set<SubmissionTopicEntity> submissionTopic) {
         this.submissionTopic = submissionTopic;
     }
 
@@ -208,7 +217,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * Effect: Return the authors of this submission.
      * @return [ArrayList<AuthorSubmissionEntity>]: returns the authors of SubmissionEntity.
      */
-    public ArrayList<AuthorSubmissionEntity> getSubmissionAuthors() {
+    public Set<AuthorSubmissionEntity> getSubmissionAuthors() {
         return submissionAuthors;
     }
 
@@ -216,7 +225,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * Effect: Sets the authors of a submission.
      * @param submissionAuthors: new value for submission submissionAuthors.
      */
-    public void setSubmissionAuthors(ArrayList<AuthorSubmissionEntity> submissionAuthors) {
+    public void setSubmissionAuthors(Set<AuthorSubmissionEntity> submissionAuthors) {
         this.submissionAuthors = submissionAuthors;
     }
 
@@ -224,7 +233,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * Effect: Return the reviewers of this submission.
      * @return [ArrayList<ReviewerEntity>]: returns the reviewers of a SubmissionEntity.
      */
-    public ArrayList<ReviewerEntity> getReviewers() {
+    public Set<ReviewerEntity> getReviewers() {
         return reviewers;
     }
 
@@ -232,7 +241,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * Effect: Sets the reviewers of a submission.
      * @param reviewers: new value for submission reviewers.
      */
-    public void setReviewers(ArrayList<ReviewerEntity> reviewers) {
+    public void setReviewers(Set<ReviewerEntity> reviewers) {
         this.reviewers = reviewers;
     }
 }

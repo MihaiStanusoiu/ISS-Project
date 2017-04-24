@@ -17,14 +17,14 @@ import java.io.Serializable;
 @SuppressWarnings("unused")
 public class EditionMemberId implements Serializable{
 
-   // @Column(name = "ID_EDITION_MEMBER")
+    @Column(name = "ID_EDITION_MEMBER" )
     private Integer id;
 
    // @Column(name = "ID_USER")
     private Integer idUser;
 
    // @Column(name = "ID_CONFERENCE")
-    private Integer idConference;
+    private Integer idEdition;
 
     public EditionMemberId() {}
 
@@ -65,7 +65,7 @@ public class EditionMemberId implements Serializable{
      * @return [Integer]: id of the conference
      */
     public Integer getIdConference() {
-        return idConference;
+        return idEdition;
     }
 
     /**
@@ -73,7 +73,7 @@ public class EditionMemberId implements Serializable{
      * @param idConference [Integer]: new value for the conference id
      */
     public void setIdConference(Integer idConference) {
-        this.idConference = idConference;
+        this.idEdition = idConference;
     }
 
 }

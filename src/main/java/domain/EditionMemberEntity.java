@@ -1,6 +1,7 @@
 package domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Name:        EditionMemberEntity
@@ -21,17 +22,28 @@ public class EditionMemberEntity  {
 
     @ManyToOne
     @JoinColumn(name = "ID_USER")
-    private UserEntity user;
+    private UserEntity idUser;
 
     @ManyToOne
-    @JoinColumn(name = "ID_CONFERENCE")
-    private EditionEntity edition;
+    @JoinColumn(name = "ID_EDITION")
+    private EditionEntity idEdition;
 
     @ManyToOne
     @JoinColumn(name = "ID_CONFIGURATION_EDITION_MEMBER")
     private ConfigurationEditionMemberEntity idConfiguration;
 
+    @OneToMany(mappedBy = "idEditionMember")
+    private Set<ReviewerEntity> reviewers;
+
     public EditionMemberEntity() { }
+
+    public Set<ReviewerEntity> getReviewers() {
+        return reviewers;
+    }
+
+    public void setReviewers(Set<ReviewerEntity> reviewers) {
+        this.reviewers = reviewers;
+    }
 
     /**
      * Effect: Returns the composite primary key id of the conference member
@@ -50,19 +62,19 @@ public class EditionMemberEntity  {
     }
 
     /**
-     * Effect: Returns the user of the conference member
-     * @return [UserEntity]: user that is the conference member
+     * Effect: Returns the idUser of the conference member
+     * @return [UserEntity]: idUser that is the conference member
      */
-    public UserEntity getUser() {
-        return user;
+    public UserEntity getIdUser() {
+        return idUser;
     }
 
     /**
-     * Effect: Sets the user to the given value
-     * @param user [UserEntity]: new value for the user
+     * Effect: Sets the idUser to the given value
+     * @param idUser [UserEntity]: new value for the idUser
      */
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setIdUser(UserEntity idUser) {
+        this.idUser = idUser;
     }
 
     /**
@@ -70,7 +82,7 @@ public class EditionMemberEntity  {
      * @return [EditionEntity]: conference of the conference member
      */
     public EditionEntity getEditionTable() {
-        return edition;
+        return idEdition;
     }
 
     /**
@@ -78,7 +90,7 @@ public class EditionMemberEntity  {
      * @param editionTable [EditionEntity]: new value for the password
      */
     public void setEditionTable(EditionEntity editionTable) {
-        this.edition = editionTable;
+        this.idEdition = editionTable;
     }
 
     /**

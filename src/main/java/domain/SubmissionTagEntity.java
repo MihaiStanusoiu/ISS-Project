@@ -14,66 +14,73 @@ import javax.persistence.*;
 @Entity
 @Table(name = "SUBMISSION_TAG")
 @SuppressWarnings("unused")
-public class SubmissionTagEntity  {
+public class SubmissionTagEntity implements Idable<SubmissionTagId>  {
 
-    @EmbeddedId
-    SubmissionTagId id;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_SUBMISSION")
-    private SubmissionEntity idSubmission;
+    SubmissionTagId id = new SubmissionTagId();
 
-    @ManyToOne
-    @JoinColumn(name = "ID_TAG")
-    private TagEntity idTag;
+    private SubmissionEntity submission;
+
+    private TagEntity tag;
 
     public SubmissionTagEntity() { }
+
+    public SubmissionTagEntity(SubmissionEntity idSubmission, TagEntity idTag) {
+        this.submission = idSubmission;
+        this.tag = idTag;
+    }
 
     /**
      * Effect: Return the id of a submission-tag.
      * @return [SubmissionTableId] : returns the id of a submission-tag.
      */
-    public SubmissionTagId getId() {
-        return id;
-    }
+    @Override
+    @EmbeddedId
+    public SubmissionTagId getId() { return id; }
+
 
     /**
      * Effect: Sets the id of a submission-tag.
      * @param id [SubmissionTableId]: new value for id
      */
-    public void setId(SubmissionTagId id) {
-        this.id = id;
-    }
+    @Override
+    public void setId(SubmissionTagId id) { this.id = id; }
+
 
     /**
      * Effect: Return the submission of a submission-tag.
      * @return [SubmissionEntity] : returns the  submission of a submission-tag.
      */
-    public SubmissionEntity getIdSubmission() {
-        return idSubmission;
+    @ManyToOne
+    @JoinColumn(name = "ID_SUBMISSION")
+    public SubmissionEntity getSubmission() {
+        return submission;
     }
 
     /**
      * Effect: Sets the submission of a submission-tag.
-     * @param idSubmission idSubmission: new value for submission
+     * @param submission submission: new value for submission
      */
-    public void setIdSubmission(SubmissionEntity idSubmission) {
-        this.idSubmission = idSubmission;
+    public void setSubmission(SubmissionEntity submission) {
+        this.submission = submission;
     }
 
     /**
      * Effect: Return the tag of a submission-tag.
      * @return [TagEntity] : returns the tag.
      */
-    public TagEntity getIdTag() {
-        return idTag;
+    @ManyToOne
+    @JoinColumn(name = "ID_TAG")
+    public TagEntity getTag() {
+        return tag;
     }
 
     /**
      * Effect: Sets the tag of a submission-tag.
-     * @param idTag [TagEntity]: new value for tag
+     * @param tag [TagEntity]: new value for tag
      */
-    public void setIdTag(TagEntity idTag) {
-        this.idTag = idTag;
+    public void setTag(TagEntity tag) {
+        this.tag = tag;
     }
+
 }
