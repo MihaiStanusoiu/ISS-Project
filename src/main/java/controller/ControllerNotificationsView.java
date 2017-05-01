@@ -1,11 +1,16 @@
 package controller;
 
+import data.Notification;
+import itemcontroller.ControllerNotificationItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
+import javafx.scene.layout.GridPane;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import pagination.PaginationBuilder;
+import view.ViewType;
 
 /**
  * Name:        ControllerNotificationsView
@@ -37,16 +42,25 @@ public class ControllerNotificationsView implements ControllerInterface {
     @SuppressWarnings("unchecked")
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
-//        NotificationEntity[] notifications = {};
-//        pagination = new PaginationBuilder<NotificationEntity, ControllerNotificationItem, GridPane>()
-//                .setRows(2)
-//                .setColumns(4)
-//                .setElements(notifications)
-//                .setView(ViewType.NOTIFICATION_ITEM)
-//                .setStageManager(this.manager)
-//                .setPagination(this.pagination)
-//                .build(GridPane.class);
-//        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+        Notification[] notifications = {
+                new Notification("TestA", Boolean.FALSE),
+                new Notification("TestB", Boolean.TRUE),
+                new Notification("TestB", Boolean.TRUE),
+                new Notification("TestB", Boolean.TRUE),
+                new Notification("TestB", Boolean.TRUE),
+                new Notification("TestB", Boolean.TRUE),
+                new Notification("TestB", Boolean.TRUE),
+                new Notification("TestB", Boolean.TRUE)
+        };
+        pagination = new PaginationBuilder<Notification, ControllerNotificationItem, GridPane>()
+                .setRows(2)
+                .setColumns(4)
+                .setElements(notifications)
+                .setView(ViewType.NOTIFICATION_ITEM)
+                .setStageManager(this.manager)
+                .setPagination(this.pagination)
+                .build(GridPane.class);
+        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
     }
 
 }

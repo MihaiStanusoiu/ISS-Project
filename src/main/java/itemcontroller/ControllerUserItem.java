@@ -1,5 +1,6 @@
 package itemcontroller;
 
+import data.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -17,8 +18,8 @@ import view.ViewType;
  * @version     1.1
  */
 
-public class ControllerUserItem<T>
-        implements PaginationControllerItemInterface<T> {
+public class ControllerUserItem
+        implements PaginationControllerItemInterface<User> {
 
     /**
      * Displays the user's location.
@@ -49,7 +50,7 @@ public class ControllerUserItem<T>
     /**
      * Effect: The item that needs to be displayed inside the view. [UserEntity]
      */
-    private T item;
+    private User item;
 
     /**
      * Effect: Sets the element in order to be displayed
@@ -57,7 +58,7 @@ public class ControllerUserItem<T>
      * @param element: The required element for item's view
      */
     @Override
-    public void setElement(T element) {
+    public void setElement(User element) {
         this.item = element;
         build();
     }
@@ -75,9 +76,9 @@ public class ControllerUserItem<T>
      * Effect: Builds the view with the set item.
      */
     private void build() {
-//        locationLabel.setText(item.getLocation());
-//        nameLabel.setText(item.getName());
-//        usernameLabel.setText("@" + item.getUsername());
+        locationLabel.setText(item.getLocation());
+        nameLabel.setText(item.getName());
+        usernameLabel.setText("@" + item.getUsername());
     }
 
     /**

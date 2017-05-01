@@ -1,12 +1,17 @@
 package controller;
 
+import data.User;
+import itemcontroller.ControllerUserItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import pagination.PaginationBuilder;
+import view.ViewType;
 
 /**
  * Name:        ControllerUsersView
@@ -36,17 +41,25 @@ public class ControllerUsersView implements ControllerInterface {
     @SuppressWarnings("unchecked")
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
-//        UserEntity[] users = {
-//        };
-//        pagination = new PaginationBuilder<UserEntity, ControllerUserItem, GridPane>()
-//                .setRows(2)
-//                .setColumns(4)
-//                .setElements(users)
-//                .setView(ViewType.USER_ITEM)
-//                .setStageManager(this.manager)
-//                .setPagination(this.pagination)
-//                .build(GridPane.class);
-//        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+        User[] users = {
+                new User("test_user", "test", "test@test.com", "Test User"),
+                new User("test_user", "test", "test@test.com", "Test User"),
+                new User("test_user", "test", "test@test.com", "Test User"),
+                new User("test_user", "test", "test@test.com", "Test User"),
+                new User("test_user", "test", "test@test.com", "Test User"),
+                new User("test_user", "test", "test@test.com", "Test User"),
+                new User("test_user", "test", "test@test.com", "Test User"),
+                new User("test_user", "test", "test@test.com", "Test User")
+        };
+        pagination = new PaginationBuilder<User, ControllerUserItem, GridPane>()
+                .setRows(2)
+                .setColumns(4)
+                .setElements(users)
+                .setView(ViewType.USER_ITEM)
+                .setStageManager(this.manager)
+                .setPagination(this.pagination)
+                .build(GridPane.class);
+        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
     }
 
     /**

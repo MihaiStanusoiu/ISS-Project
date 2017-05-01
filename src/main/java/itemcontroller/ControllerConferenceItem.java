@@ -1,5 +1,6 @@
 package itemcontroller;
 
+import data.Conference;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,8 +20,8 @@ import view.ViewType;
  * @version     1.1
  */
 
-public class ControllerConferenceItem<T>
-        implements PaginationControllerItemInterface<T> {
+public class ControllerConferenceItem
+        implements PaginationControllerItemInterface<Conference> {
 
     /**
      * Effect: Displays the conference's starting date.
@@ -66,7 +67,7 @@ public class ControllerConferenceItem<T>
     /**
      * Effect: The item that needs to be displayed inside the view. [ConferenceEntity]
      */
-    private T item;
+    private Conference item;
 
     /**
      * Effect: Sets the element in order to be displayed
@@ -74,7 +75,7 @@ public class ControllerConferenceItem<T>
      * @param element: The required element for item's view
      */
     @Override
-    public void setElement(T element) {
+    public void setElement(Conference element) {
         this.item = element;
         build();
     }
@@ -92,12 +93,12 @@ public class ControllerConferenceItem<T>
      * Effect: Builds the view with the set item.
      */
     private void build() {
-//        dateLabel.setText(item.getStartDate().toString());
-//        locationLabel.setText(item.getLocation());
-//        acronymLabel.setText(item.getAcronym());
-//        nameLabel.setText(item.getName());
-//        background.setStyle(String.format("-fx-background-color : %s",
-//                generator.getGradient().getValue()));   /* sets a random gradient */
+        dateLabel.setText(item.getEdition().getStartDate().toString());
+        locationLabel.setText(item.getEdition().getLocation());
+        acronymLabel.setText(item.getAcronym());
+        nameLabel.setText(item.getName());
+        background.setStyle(String.format("-fx-background-color : %s",
+                generator.getGradient().getValue()));   /* sets a random gradient */
     }
 
     /**
