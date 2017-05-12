@@ -44,6 +44,14 @@ public class AuthorSubmissionEntity implements Idable<Integer>{
         this.presentationUrl = presentationUrl;
     }
 
+    public AuthorSubmissionEntity(Integer id, Boolean isOwner, String presentationUrl) {
+        this.id = id;
+        this.userSubmission = new UserEntity("a","b","c","d","e","f","g");
+        this.submissionAuthor = new SubmissionEntity("x","y","z","w");
+        this.isOwner = isOwner;
+        this.presentationUrl = presentationUrl;
+    }
+
     /**
      * Effect: Getter for the primary key.
      * @return Integer : returns id.

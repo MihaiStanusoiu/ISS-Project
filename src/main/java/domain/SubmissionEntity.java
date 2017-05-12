@@ -41,7 +41,7 @@ public class SubmissionEntity implements Idable<Integer> {
     private String fullPaperUrl;
 
     @Column(name = "IS_PAID")
-    private boolean isPaid;
+    private Boolean isPaid;
 
     @OneToMany(mappedBy = "submissionTag", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<SubmissionTagEntity> submissionTags;
@@ -166,9 +166,9 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the paid status of this submission.
-     * @return [boolean]: returns the paid status of a SubmissionEntity.
+     * @return [Boolean]: returns the paid status of a SubmissionEntity.
      */
-    public boolean isPaid() {
+    public Boolean isPaid() {
         return isPaid;
     }
 
@@ -176,7 +176,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * Effect: Sets the paid status of a submission.
      * @param paid: new value for submission isPaid.
      */
-    public void setPaid(boolean paid) {
+    public void setPaid(Boolean paid) {
         isPaid = paid;
     }
 
