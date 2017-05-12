@@ -7,9 +7,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Name:         ConfigurationSessionMember
- * Effect:       Class for the db table ConfigurationSectionMember
+ * Effect:       Class for the db table ConfigurationSessionMember
  * Date:         08/04/2017
- * Tested:       False
+ * Tested:       True
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
@@ -38,7 +38,7 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
         this.isListener = isListener;
     }
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "idConfigurationSession",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idConfigurationSession", cascade = CascadeType.ALL)
     private Set<SessionMemberEntity> sectionMembers;
 
     /**

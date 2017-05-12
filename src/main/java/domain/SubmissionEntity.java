@@ -10,9 +10,8 @@ import static javax.persistence.GenerationType.IDENTITY;
  * Name:    SubmissionEntity
  * Effect:  Class for the database table SubmissionEntity
  * Date:    9/4/2017
- * Tested:  False
- *
- * @author Simion George-Vlad
+ * Tested:  True
+ * @author  Simion George-Vlad
  * @version 1.0
  */
 
@@ -27,7 +26,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     @ManyToOne
     @JoinColumn(name = "ID_EDITION")
-    private EditionEntity edition_submission;
+    private EditionEntity editionSubmission;
 
     @Column(name = "NAME")
     private String name;
@@ -44,16 +43,16 @@ public class SubmissionEntity implements Idable<Integer> {
     @Column(name = "IS_PAID")
     private boolean isPaid;
 
-    @OneToMany(mappedBy = "submission",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "submissionTag", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<SubmissionTagEntity> submissionTags;
 
-    @OneToMany(mappedBy = "submission")
-    private Set<SubmissionTopicEntity> submissionTopic;
+    @OneToMany(mappedBy = "submissionTopic", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<SubmissionTopicEntity> submissionTopics;
 
-    @OneToMany(mappedBy = "submission")
+    @OneToMany(mappedBy = "submissionAuthor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<AuthorSubmissionEntity> submissionAuthors;
 
-    @OneToMany(mappedBy = "submission")
+    @OneToMany(mappedBy = "submissionReview", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<ReviewerEntity> reviewers;
 
     /**
@@ -90,7 +89,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * @return [Integer]: returns the id of SubmissionEntity.
      */
     public EditionEntity getEdition() {
-        return edition_submission;
+        return editionSubmission;
     }
 
     /**
@@ -98,7 +97,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * @param edition: new value for conference id.
      */
     public void setEdition(EditionEntity edition) {
-        this.edition_submission = edition;
+        this.editionSubmission = edition;
     }
 
     /**
@@ -202,7 +201,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * @return [ArrayList<SubmissionTopicEntity>]: returns the topics of a SubmissionEntity.
      */
     public Set<SubmissionTopicEntity> getSubmissionTopic() {
-        return submissionTopic;
+        return submissionTopics;
     }
 
     /**
@@ -210,7 +209,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * @param submissionTopic: new value for submission topics.
      */
     public void setSubmissionTopic(Set<SubmissionTopicEntity> submissionTopic) {
-        this.submissionTopic = submissionTopic;
+        this.submissionTopics = submissionTopic;
     }
 
     /**

@@ -9,13 +9,12 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:    EditionEntity
- * Effect:  A class for the database table EditionEntity
- * Date:    9/4/2017
- * Tested:  False
- *
- * @author Simion George-Vlad
- * @version 1.0
+ * Name:     EditionEntity
+ * Effect:   A class for the database table EditionEntity
+ * Date:     9/4/2017
+ * Tested:   True
+ * @author   Simion George-Vlad
+ * @version  1.0
  */
 
 @Entity
@@ -24,7 +23,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class EditionEntity implements Idable<Integer> {
 
     @Id@GeneratedValue(strategy = IDENTITY)
-    @Column(name = "ID_CONFERENCE")
+    @Column(name = "ID_EDITION")
     private Integer id;
 
     @Column(name = "START_DATE")
@@ -52,17 +51,17 @@ public class EditionEntity implements Idable<Integer> {
     private Date biddingDeadline;
 
     @ManyToOne
-    @JoinColumn(name="CONFERENCE_ID")
+    @JoinColumn(name="ID_CONFERENCE")
     private ConferenceEntity conference;
 
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "edition",cascade = CascadeType.ALL)
-//    private Set<EditionMemberEntity> editionMembers;
-//
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "edition_session",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idEdition", cascade = CascadeType.ALL)
+    private Set<EditionMemberEntity> editionMembers;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "editionSession", cascade = CascadeType.ALL)
     private Set<SessionEntity> sessions;
-//
-//    @OneToMany( mappedBy = "edition_submission",cascade = CascadeType.ALL)
-//    private Set<SubmissionEntity> submissions;
+
+    @OneToMany( fetch = FetchType.EAGER, mappedBy = "editionSubmission", cascade = CascadeType.ALL)
+    private Set<SubmissionEntity> submissions;
 
     /**
      * Empty constructor
@@ -224,36 +223,68 @@ public class EditionEntity implements Idable<Integer> {
         this.biddingDeadline = biddingDeadline;
     }
 
+    /**
+     * Effect: Return the conference of a Edition.
+     * @return [ConferenceEntity]: returns the conference of an Edition.
+     */
     public ConferenceEntity getConference() {
         return conference;
     }
 
+    /**
+     * Effect: Sets the conference of an Edition.
+     * @param conference: new value for conference
+     */
     public void setConference(ConferenceEntity conference) {
         this.conference = conference;
     }
 
-//    public Set<EditionMemberEntity> getEditionMembers() {
-//        return editionMembers;
-//    }
-//
-//    public void setEditionMembers(Set<EditionMemberEntity> editionMembers) {
-//        this.editionMembers = editionMembers;
-//    }
-//
+    /**
+     * Effect: Return the editionMembers of an Edition.
+     * @return [Set<EditionMemberEntity>]: returns the editionMembers of an Edition.
+     */
+    public Set<EditionMemberEntity> getEditionMembers() {
+        return editionMembers;
+    }
+
+    /**
+     * Effect: Sets the editionMembers of an Edition.
+     * @param editionMembers: new value for editionMembers.
+     */
+    public void setEditionMembers(Set<EditionMemberEntity> editionMembers) {
+        this.editionMembers = editionMembers;
+    }
+
+    /**
+     * Effect: Returns the sessions of an Edition.
+     * @return [Set<SessionEntity>]: returns the sessions of an Edition.
+     */
     public Set<SessionEntity> getSessions() {
         return sessions;
     }
 
+    /**
+     * Effect: Sets the sessions of an Edition.
+     * @param sessions: new value for sessions.
+     */
     public void setSessions(Set<SessionEntity> sessions) {
         this.sessions = sessions;
     }
-//
-//    public Set<SubmissionEntity> getSubmissions() {
-//        return submissions;
-//    }
-//
-//    public void setSubmissions(Set<SubmissionEntity> submissions) {
-//        this.submissions = submissions;
-//    }
+
+    /**
+     * Effect: Returns the submissions of an Edition.
+     * @return [Set<SubmissionEntity>]: returns the submissions of an Edition.
+     */
+    public Set<SubmissionEntity> getSubmissions() {
+         return submissions;
+    }
+
+    /**
+     * Effect: Sets the submissions of an Edition.
+     * @param submissions: new value for submissions.
+     */
+    public void setSubmissions(Set<SubmissionEntity> submissions) {
+        this.submissions = submissions;
+    }
 
 }

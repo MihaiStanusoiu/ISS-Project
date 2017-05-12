@@ -2,12 +2,13 @@ package domain;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 /**
  * Name:         AuthorSubmissionEntity
  * Effect:       Class for database domain AuthorSubmissionEntity table
  * Date:         4/8/2017
- * Tested:       False
- *
+ * Tested:       True
  * @author      {Teodorescu Vlad}
  * @version     1.0
  */
@@ -15,18 +16,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "AUTHOR_SUBMISSION")
 @SuppressWarnings("unused")
-public class AuthorSubmissionEntity {
+public class AuthorSubmissionEntity implements Idable<Integer>{
 
-    @EmbeddedId
-    private AuthorSubmissionItems pkId;
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "ID_AUTHOR_SUBMISSION")
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "ID_USER")
-    private UserEntity userTable;
+    private UserEntity userSubmission;
 
     @ManyToOne
     @JoinColumn(name = "ID_SUBMISSION")
-    private SubmissionEntity submission;
+    private SubmissionEntity submissionAuthor;
 
     @Column(name = "IS_OWNER")
     private Boolean isOwner;
@@ -36,68 +39,25 @@ public class AuthorSubmissionEntity {
 
     public AuthorSubmissionEntity() { }
 
+    public AuthorSubmissionEntity(Boolean isOwner, String presentationUrl) {
+        this.isOwner = isOwner;
+        this.presentationUrl = presentationUrl;
+    }
+
     /**
      * Effect: Getter for the primary key.
-     * @return AuthorSubmissionItems : returns pkId.
+     * @return Integer : returns id.
      */
-    public AuthorSubmissionItems getId() {
-        return pkId;
+    public Integer getId() {
+        return id;
     }
 
     /**
      * Effect: Sets the pkId to the given value
-     * @param pkId: new value for pkId
+     * @param id: new value for pkId
      */
-    public void setId(AuthorSubmissionItems pkId) {
-        this.pkId = pkId;
-    }
-
-    /**
-     * Effect: Getter for the user created by join.
-     * @return UserEntity : returns userTable.
-     */
-    public UserEntity getUserTable() {
-        return userTable;
-    }
-
-    /**
-     * Effect: Sets the userTable to the given value
-     * @param userTable: new value for userTable
-     */
-    public void setUserTable(UserEntity userTable) {
-        this.userTable = userTable;
-    }
-
-    /**
-     * Effect: Getter for the submission created by join.
-     * @return SubmissionEntity : returns submission.
-     */
-    public SubmissionEntity getSubmission() {
-        return submission;
-    }
-
-    /**
-     * Effect: Sets the submission to the given value
-     * @param submission: new value for submission
-     */
-    public void setSubmission(SubmissionEntity submission) {
-        this.submission = submission;
-    }
-
-    /**
-     * Effect: Getter for the isOwner property.
-     * @return Boolean : returns isOwner.
-     */
-    public Boolean getIsOwner() {
-        return isOwner;
-    }
-
-    /**
-     * Effect: Sets the isOwner property to the given value
-     * @param isOwner: new value for isOwner
-     */
-    public void setIsOwner(Boolean isOwner) {
-        this.isOwner = isOwner;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**
@@ -109,10 +69,58 @@ public class AuthorSubmissionEntity {
     }
 
     /**
-     * Effect: Sets the presentationUrl to the given value
-     * @param presentationUrl: new value for presentationUrl
+     * Effect: Sets the presentationUrl to the given value.
+     * @param presentationUrl: new value for presentationUrl.
      */
     public void setPresentationUrl(String presentationUrl) {
         this.presentationUrl = presentationUrl;
+    }
+
+    /**
+     * Effect: Getter for the userSubmission.
+     * @return UserEntity: returns userSubmission.
+     */
+    public UserEntity getUserSubmission() {
+        return userSubmission;
+    }
+
+    /**
+     * Effect: Sets the userSubmission to the given value.
+     * @param userSubmission: new value for userSubmission.
+     */
+    public void setUserSubmission(UserEntity userSubmission) {
+        this.userSubmission = userSubmission;
+    }
+
+    /**
+     * Effect: Getter for the submissionAuthor.
+     * @return SubmissionEntity: returns submissionAuthor.
+     */
+    public SubmissionEntity getSubmissionAuthor() {
+        return submissionAuthor;
+    }
+
+    /**
+     * Effect: Sets the submissionAuthor to the given value.
+     * @param submissionAuthor: new value for submissionAuthor.
+     */
+    public void setSubmissionAuthor(SubmissionEntity submissionAuthor) {
+        this.submissionAuthor = submissionAuthor;
+    }
+
+    /**
+     * Effect: Getter for the isOwner.
+     * @return Boolean: returns isOwner.
+     */
+    public Boolean getOwner() {
+        return isOwner;
+    }
+
+    /**
+     * Effect: Sets the isOwner to the given value.
+     * @param owner: new value for isOwner.
+     */
+    public void setOwner(Boolean owner) {
+        isOwner = owner;
     }
 }

@@ -4,6 +4,7 @@ import database.DatabaseLoaderFactory;
 import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.ConfigurationEditionMemberEntity;
+import domain.EditionMemberEntity;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,18 +12,18 @@ import org.junit.Test;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Name:         ConfigurationEditionMemberTest
  * Effect:       Test for Configuration Edition Member
  * Date:         21/04/2017
- *
- * @author Tiron Andreea- Ecaterina
- * @version 1.0
+ * @author       Tiron Andreea- Ecaterina
+ * @version      1.0
  */
 
 public class ConfigurationEditionMemberTest {
-    
+    private RepositoryInterface<EditionMemberEntity, Integer> repositoryEdition;
     private RepositoryInterface<ConfigurationEditionMemberEntity, Integer> repositoryEditionConfiguration;
     private DatabaseLoaderInterface loader;
 
@@ -30,6 +31,7 @@ public class ConfigurationEditionMemberTest {
     public void setUp() throws Exception {
         loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
         repositoryEditionConfiguration = new RepositoryEntity<>(ConfigurationEditionMemberEntity.class, loader);
+        repositoryEdition = new RepositoryEntity<>(EditionMemberEntity.class, loader);
     }
 
     @After
@@ -107,6 +109,26 @@ public class ConfigurationEditionMemberTest {
             ConfigurationEditionMemberEntity result = repositoryEditionConfiguration.getElementById(1);
             Assert.assertTrue(result.getId().equals(user.getId()) &&
                     result.getChair().equals(user.getChair()));
+        } catch (RepositoryException exception) {
+            Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
+        }
+    }
+
+    @Test
+    public void getAllEditionMemberConfigurations() throws Exception {
+        EditionMemberEntity memberSession1 = new EditionMemberEntity();
+        EditionMemberEntity memberSession2 = new EditionMemberEntity();
+        ConfigurationEditionMemberEntity config = new ConfigurationEditionMemberEntity(true,true,true);
+        try {
+            repositoryEditionConfiguration.add(config);
+            memberSession1.setConfigurationEditionMember(repositoryEditionConfiguration.getElementById(1));
+            memberSession2.setConfigurationEditionMember(repositoryEditionConfiguration.getElementById(1));
+            repositoryEdition.add(memberSession1);
+            repositoryEdition.add(memberSession2);
+
+            ConfigurationEditionMemberEntity newConfig = repositoryEditionConfiguration.getElementById(1);
+            Set<EditionMemberEntity> sessions = newConfig.getEditionMembers();
+            Assert.assertTrue(sessions.size() == 2);
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }

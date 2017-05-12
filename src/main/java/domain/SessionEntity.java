@@ -10,6 +10,7 @@ import static javax.persistence.GenerationType.IDENTITY;
  * Name:         SessionEntity
  * Effect:       Class for the db table SessionEntity.
  * Date:         08/04/2017
+ * Tested:       True
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
@@ -43,9 +44,9 @@ public class SessionEntity implements Idable<Integer> {
 
     @ManyToOne
     @JoinColumn(name = "ID_EDITION")
-    private EditionEntity edition_session;
+    private EditionEntity editionSession;
 
-    @OneToMany(mappedBy = "session",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "session", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<SessionMemberEntity> sessionMembers;
 
     public SessionEntity() { }
@@ -176,7 +177,7 @@ public class SessionEntity implements Idable<Integer> {
      * @return [Integer] : returns the edition.
      */
     public EditionEntity getEdition() {
-        return edition_session;
+        return editionSession;
     }
 
     /**
@@ -184,13 +185,21 @@ public class SessionEntity implements Idable<Integer> {
      * @param edition : new value for id.
      */
     public void setEdition(EditionEntity edition) {
-        this.edition_session = edition;
+        this.editionSession = edition;
     }
 
+    /**
+     * Effect: Return the sessionMembers of a Session.
+     * @return [Set<SessionMemberEntity>]: returns the sessionMembers.
+     */
     public Set<SessionMemberEntity> getSessionMembers() {
         return sessionMembers;
     }
 
+    /**
+     * Effect: Sets the sessionMembers of a Session.
+     * @param sessionMembers: new value for the sessionMembers.
+     */
     public void setSessionMembers(Set<SessionMemberEntity> sessionMembers) {
         this.sessionMembers = sessionMembers;
     }

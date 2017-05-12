@@ -3,7 +3,7 @@ package repository;
 import database.DatabaseLoaderFactory;
 import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
-import domain.TagEntity;
+import domain.TopicEntity;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,14 +19,14 @@ import java.util.ArrayList;
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
-public class TagTest {
-    private RepositoryInterface<TagEntity, Integer> repositoryTag;
+public class TopicTest {
+    private RepositoryInterface<TopicEntity, Integer> repositoryTopic;
     private DatabaseLoaderInterface loader;
 
     @Before
     public void setUp() throws Exception {
         loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
-        repositoryTag = new RepositoryEntity<>(TagEntity.class, loader);
+        repositoryTopic = new RepositoryEntity<>(TopicEntity.class, loader);
     }
 
     @After
@@ -37,10 +37,10 @@ public class TagTest {
     @Test
     @Transactional
     public void add() throws Exception {
-        TagEntity user = new TagEntity("test");
+        TopicEntity user = new TopicEntity("test");
         try {
-            Integer idTag = repositoryTag.add(user);
-            Assert.assertTrue(idTag.equals(1) &&
+            Integer idTopic = repositoryTopic.add(user);
+            Assert.assertTrue(idTopic.equals(1) &&
                     user.getWord().equals("test")
             );
         } catch (RepositoryException exception) {
@@ -50,12 +50,12 @@ public class TagTest {
 
     @Test
     public void update() throws Exception {
-        TagEntity tag = new TagEntity("test");
-        TagEntity update = new TagEntity("testUpdate");
+        TopicEntity topic = new TopicEntity("test");
+        TopicEntity update = new TopicEntity("testUpdate");
         try {
-            repositoryTag.add(tag);
-            repositoryTag.update(tag, update);
-            TagEntity result = repositoryTag.getElementById(tag.getId());
+            repositoryTopic.add(topic);
+            repositoryTopic.update(topic, update);
+            TopicEntity result = repositoryTopic.getElementById(topic.getId());
             Assert.assertTrue(result.getWord().equals(update.getWord()));
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -64,13 +64,13 @@ public class TagTest {
 
     @Test
     public void delete() throws Exception {
-        TagEntity tag = new TagEntity("test");
+        TopicEntity topic = new TopicEntity("test");
         try {
-            repositoryTag.add(tag);
+            repositoryTopic.add(topic);
             // This test is here only to make sure that we have something in repository in order to delete.
-            Assert.assertTrue(tag.getWord().equals(repositoryTag.getElementById(1).getWord()));
-            repositoryTag.delete(tag.getId());
-            Assert.assertTrue(repositoryTag.getAll().isEmpty());
+            Assert.assertTrue(topic.getWord().equals(repositoryTopic.getElementById(1).getWord()));
+            repositoryTopic.delete(topic.getId());
+            Assert.assertTrue(repositoryTopic.getAll().isEmpty());
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
@@ -78,13 +78,13 @@ public class TagTest {
 
     @Test
     public void getAll() throws Exception {
-        TagEntity tag = new TagEntity("test");
-        TagEntity test = new TagEntity("test");
+        TopicEntity topic = new TopicEntity("test");
+        TopicEntity test = new TopicEntity("test");
         try {
-            repositoryTag.add(tag);
-            repositoryTag.add(test);
-            ArrayList<TagEntity> result = new ArrayList<>(repositoryTag.getAll());
-            Assert.assertTrue(result.get(0).getId().equals(tag.getId()) &&
+            repositoryTopic.add(topic);
+            repositoryTopic.add(test);
+            ArrayList<TopicEntity> result = new ArrayList<>(repositoryTopic.getAll());
+            Assert.assertTrue(result.get(0).getId().equals(topic.getId()) &&
                     result.get(1).getId().equals(test.getId()));
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -93,14 +93,14 @@ public class TagTest {
 
     @Test
     public void getElementById() throws Exception {
-        TagEntity tag = new TagEntity("test");
-        TagEntity test = new TagEntity("word");
+        TopicEntity topic = new TopicEntity("test");
+        TopicEntity test = new TopicEntity("word");
         try {
-            repositoryTag.add(tag);
-            repositoryTag.add(test);
-            TagEntity result = repositoryTag.getElementById(1);
-            Assert.assertTrue(result.getId().equals(tag.getId()) &&
-                    result.getWord().equals(tag.getWord())
+            repositoryTopic.add(topic);
+            repositoryTopic.add(test);
+            TopicEntity result = repositoryTopic.getElementById(1);
+            Assert.assertTrue(result.getId().equals(topic.getId()) &&
+                    result.getWord().equals(topic.getWord())
             );
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");

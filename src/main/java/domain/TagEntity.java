@@ -8,7 +8,7 @@ import java.util.Set;
  * Name:         TagEntity
  * Effect:       Corresponding class for the paper tags table in the database.
  * Date:         08.04.2017
- * Tested:       False
+ * Tested:       True
  * @author       Tanasie Luiza Maria
  * @version      1.0
  */
@@ -26,7 +26,7 @@ public class TagEntity implements Idable<Integer> {
     @Column(name = "WORD")
     private String word;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy="tag",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="tag", cascade = CascadeType.ALL)
     private Set<SubmissionTagEntity> submissionTags;
 
     public TagEntity() { }

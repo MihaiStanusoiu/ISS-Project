@@ -8,10 +8,9 @@ import java.util.Set;
  * Name:         TopicEntity
  * Effect:       Class for domain TopicEntity table
  * Date:         4/8/2017
- * Tested:       False
- *
- * @author      {Teodorescu Vlad}
- * @version     1.0
+ * Tested:       True
+ * @author       {Teodorescu Vlad}
+ * @version      1.0
  */
 
 @Entity
@@ -26,10 +25,15 @@ public class TopicEntity implements Idable<Integer>{
     @Column(name = "WORD")
     private String word;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "submission")
-    private Set<SubmissionTopicEntity> topicSubmissionTopics = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="topic", cascade = CascadeType.ALL)
+    private Set<SubmissionTopicEntity> submissionTopics;
 
     public TopicEntity() { }
+
+    public TopicEntity(String word) {
+        this.word = word;
+        submissionTopics = new HashSet<>();
+    }
 
     /**
      * Effect: Getter for the id_topic of the topic.
@@ -68,16 +72,16 @@ public class TopicEntity implements Idable<Integer>{
      * @return ArrayList<SubmissionTopicEntity> : returns topicSubmissionTopics.
      */
 
-    public Set<SubmissionTopicEntity> getTopicSubmissionTopics() {
-        return topicSubmissionTopics;
+    public Set<SubmissionTopicEntity> getSubmissionTopics() {
+        return submissionTopics;
     }
 
     /**
      * Effect: Sets the topicSubmissionTopics to the given value
-     * @param topicSubmissionTopics: new value for topicSubmissionTopics
+     * @param submissionTopics: new value for topicSubmissionTopics
      */
-    public void setTopicSubmissionTopics(Set<SubmissionTopicEntity> topicSubmissionTopics) {
-        this.topicSubmissionTopics = topicSubmissionTopics;
+    public void setSubmissionTopics(Set<SubmissionTopicEntity> submissionTopics) {
+        this.submissionTopics = submissionTopics;
     }
 
 }

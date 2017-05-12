@@ -2,10 +2,13 @@ package domain;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 /**
  * Name:         SessionMemberEntity
  * Effect:       Class for the db table SessionMemberEntity.
  * Date:         08/04/2017
+ * Tested:       True
  * @author       Tiron Andreea- Ecaterina
  * @version      1.0
  */
@@ -13,10 +16,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "SESSION_MEMBER")
 @SuppressWarnings("unused")
-public class SessionMemberEntity implements Idable<SessionMemberId>{
+public class SessionMemberEntity implements Idable<Integer>{
 
-    @EmbeddedId
-    private SessionMemberId id;
+    @Id @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "ID_SESSION_MEMBER")
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "ID_SESSION")
@@ -24,10 +28,10 @@ public class SessionMemberEntity implements Idable<SessionMemberId>{
 
     @ManyToOne
     @JoinColumn(name = "ID_USER")
-    private UserEntity user;
+    private UserEntity userSession;
 
     @ManyToOne
-    @JoinColumn(name = "ID_CONFIGURATION_SESSION_MEMBER ")
+    @JoinColumn(name = "ID_CONFIGURATION_SESSION_MEMBER")
     private ConfigurationSessionMemberEntity idConfigurationSession;
 
     public SessionMemberEntity() { }
@@ -36,7 +40,7 @@ public class SessionMemberEntity implements Idable<SessionMemberId>{
      * Effect: Return the id of a section member.
      * @return [Integer] : returns the id of a section member.
      */
-    public SessionMemberId getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -44,7 +48,7 @@ public class SessionMemberEntity implements Idable<SessionMemberId>{
      * Effect: Sets the id of a section member.
      * @param id: new value for id.
      */
-    public void setId(SessionMemberId id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -52,7 +56,7 @@ public class SessionMemberEntity implements Idable<SessionMemberId>{
      * Effect: Return the id of a section configuration.
      * @return [ConfigurationSessionMemberEntity] : returns the id of a section configuration.
      */
-    public ConfigurationSessionMemberEntity getIdConfiguration() {
+    public ConfigurationSessionMemberEntity getIdConfigurationSession() {
         return idConfigurationSession;
     }
 
@@ -60,24 +64,40 @@ public class SessionMemberEntity implements Idable<SessionMemberId>{
      * Effect: Sets the id of a section configuration.
      * @param idConfiguration: new value for id configuration.
      */
-    public void setIdConfiguration(ConfigurationSessionMemberEntity idConfiguration) {
+    public void setIdConfigurationSession(ConfigurationSessionMemberEntity idConfiguration) {
         this.idConfigurationSession = idConfiguration;
     }
 
+    /**
+     * Effect: Returns the session of a SessionMember.
+     * @return [SessionEntity]: returns the session of a session member.
+     */
     public SessionEntity getSession() {
         return session;
     }
 
+    /**
+     * Effect: Sets the session of a Session Member.
+     * @param session: new value for the session.
+     */
     public void setSession(SessionEntity session) {
         this.session = session;
     }
 
+    /**
+     * Effect: Returns the user of a SessionMemberEntity.
+     * @return [UserEntity]: returns the userSession of a session member.
+     */
     public UserEntity getUser() {
-        return user;
+        return userSession;
     }
 
+    /**
+     * Effect: Sets the user of a SessionMemberEntity.
+     * @param user: new value for userSession.
+     */
     public void setUser(UserEntity user) {
-        this.user = user;
+        this.userSession = user;
     }
 
 }

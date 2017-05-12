@@ -4,6 +4,7 @@ import database.DatabaseLoaderFactory;
 import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.ConferenceEntity;
+import domain.EditionEntity;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,26 +12,27 @@ import org.junit.Test;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Name:         {ClassName}
  * Effect:       {ClassEffect}
  * Date:         22/04/2017
- * Tested:       False
- *
- * @author Tiron Andreea- Ecaterina
- * @version 1.0
+ * @author       Tiron Andreea- Ecaterina
+ * @version      1.0
  */
 
-public class ConferenceEntityTest {
-
+public class ConferenceTest {
+    private RepositoryInterface<EditionEntity, Integer> repositoryEdition;
     private RepositoryInterface<ConferenceEntity, Integer> repositoryEditionConfiguration;
     private DatabaseLoaderInterface loader;
+    private Date date;
 
     @Before
     public void setUp() throws Exception {
         loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
         repositoryEditionConfiguration = new RepositoryEntity<>(ConferenceEntity.class, loader);
+        repositoryEdition = new RepositoryEntity<>(EditionEntity.class, loader);
     }
 
     @After
@@ -112,4 +114,37 @@ public class ConferenceEntityTest {
         }
     }
 
+    @Test
+    public void getAllEditions() throws Exception {
+        ConferenceEntity conference = new ConferenceEntity("International Engineering Conference", "IEC");
+        EditionEntity edition1 = new EditionEntity(date, date, "location1", "bio1", date, date, date, date);
+        EditionEntity edition2 = new EditionEntity(date, date, "location2", "bio2", date, date, date, date);
+        EditionEntity edition3 = new EditionEntity(date, date, "location3", "bio3", date, date, date, date);
+        try{
+            repositoryEditionConfiguration.add(conference);
+            edition1.setConference(conference);
+            repositoryEdition.add(edition1);
+            edition2.setConference(conference);
+            repositoryEdition.add(edition2);
+            edition3.setConference(conference);
+            repositoryEdition.add(edition3);
+
+            Boolean isNote = false;
+            Boolean isNote2 = false;
+            Boolean isNote3 = false;
+            ArrayList<EditionEntity> editions = new ArrayList<>(repositoryEditionConfiguration.getElementById(1).getEditions());
+            for(Integer index = 0; index < editions.size(); index++) {
+                if (editions.get(index).getBio().equals("bio1"))
+                    isNote = true;
+                if (editions.get(index).getBio().equals("bio2"))
+                    isNote2 = true;
+                if (editions.get(index).getBio().equals("bio3"))
+                    isNote3 = true;
+            }
+            Assert.assertTrue(isNote.equals(true) && isNote2.equals(true) && isNote3.equals(true));
+            Assert.assertTrue(editions.size() == 3);
+        }catch(RepositoryException exception) {
+            Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
+        }
+    }
 }

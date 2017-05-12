@@ -72,7 +72,7 @@ public class EditionTest {
 
     @Test
     public void update() throws Exception {
-        EditionEntity edition = new EditionEntity(date, date,"location","bio", date, date, date, date);
+        EditionEntity edition = new EditionEntity(date, date, "location", "bio", date, date, date, date);
         EditionEntity update = new EditionEntity(date, date, "new location", "bio", date, date, date, date);
         try {
             repositoryEdition.add(edition);
@@ -115,7 +115,7 @@ public class EditionTest {
             );
             ConferenceEntity sameConference = repositoryConference.getElementById(1);
             Set<EditionEntity> editions = sameConference.getEditions();
-            Assert.assertTrue(editions.size()==2);
+            Assert.assertTrue(editions.size() == 2);
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
