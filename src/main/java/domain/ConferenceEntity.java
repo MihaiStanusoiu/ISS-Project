@@ -9,10 +9,9 @@ import static javax.persistence.GenerationType.IDENTITY;
  * Name:         The conference class that can hold multiple editions.
  * Effect:       ConferenceEntity with general data.
  * Date:         22/04/2017
- * Tested:       False
- *
- * @author Tiron Andreea- Ecaterina
- * @version 1.0
+ * Tested:       True
+ * @author       Tiron Andreea- Ecaterina
+ * @version      1.0
  */
 @Entity
 @Table(name = "CONFERENCE")
@@ -30,7 +29,7 @@ public class ConferenceEntity implements Idable<Integer>{
     @Column(name = "ACRONYM")
     private String acronym;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "conference",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "conference", cascade = CascadeType.ALL)
     private Set<EditionEntity> editions;
 
     /**
@@ -91,10 +90,18 @@ public class ConferenceEntity implements Idable<Integer>{
         this.acronym = acronym;
     }
 
+    /**
+     * Effect: Return the editions of a conference.
+     * @return Set<EditionEntity>: returns the editions of a conference.
+     */
     public Set<EditionEntity> getEditions() {
         return editions;
     }
 
+    /**
+     * Effect: Sets the editions of this conference.
+     * @param editions: new value for conference editions.
+     */
     public void setEditions(Set<EditionEntity> editions) {
         this.editions = editions;
     }

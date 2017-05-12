@@ -1,16 +1,16 @@
 package domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Name:         TopicEntity
  * Effect:       Class for domain TopicEntity table
  * Date:         4/8/2017
- * Tested:       False
- *
- * @author      {Teodorescu Vlad}
- * @version     1.0
+ * Tested:       True
+ * @author       {Teodorescu Vlad}
+ * @version      1.0
  */
 
 @Entity
@@ -25,9 +25,15 @@ public class TopicEntity implements Idable<Integer>{
     @Column(name = "WORD")
     private String word;
 
-    private ArrayList<SubmissionTopicEntity> topicSubmissionTopics = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="topic", cascade = CascadeType.ALL)
+    private Set<SubmissionTopicEntity> submissionTopics;
 
     public TopicEntity() { }
+
+    public TopicEntity(String word) {
+        this.word = word;
+        submissionTopics = new HashSet<>();
+    }
 
     /**
      * Effect: Getter for the id_topic of the topic.
@@ -65,17 +71,17 @@ public class TopicEntity implements Idable<Integer>{
      * Effect: Getter for the elements of the relationship of the topic.
      * @return ArrayList<SubmissionTopicEntity> : returns topicSubmissionTopics.
      */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id_topic")
-    public ArrayList<SubmissionTopicEntity> getTopicSubmissionTopics() {
-        return topicSubmissionTopics;
+
+    public Set<SubmissionTopicEntity> getSubmissionTopics() {
+        return submissionTopics;
     }
 
     /**
      * Effect: Sets the topicSubmissionTopics to the given value
-     * @param topicSubmissionTopics: new value for topicSubmissionTopics
+     * @param submissionTopics: new value for topicSubmissionTopics
      */
-    public void setTopicSubmissionTopics(ArrayList<SubmissionTopicEntity> topicSubmissionTopics) {
-        this.topicSubmissionTopics = topicSubmissionTopics;
+    public void setSubmissionTopics(Set<SubmissionTopicEntity> submissionTopics) {
+        this.submissionTopics = submissionTopics;
     }
 
 }

@@ -18,14 +18,12 @@ import java.util.Set;
 /**
  * Name:         {ClassName}
  * Effect:       {ClassEffect}
- * Date:         22/04/2017
- * Tested:       False
- *
- * @author Tiron Andreea- Ecaterina
- * @version 1.0
+ * Date:         12/05/2017
+ * @author       Tiron Andreea- Ecaterina
+ * @version      1.0
  */
 
-public class SessionEntityTest {
+public class SessionTest {
 
     private RepositoryInterface<EditionEntity, Integer> repositoryEdition;
     private RepositoryInterface<SessionEntity,Integer> repositorySession;
@@ -38,7 +36,7 @@ public class SessionEntityTest {
         loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
         repositoryEdition = new RepositoryEntity<>(EditionEntity.class, loader);
         repositorySession = new RepositoryEntity<>(SessionEntity.class,loader);
-        EditionEntity newEdition = new EditionEntity(date, date,"location","bio", date, date, date, date);
+        EditionEntity newEdition = new EditionEntity(date, date, "location", "bio", date, date, date, date);
         repositoryEdition.add(newEdition);
     }
 
@@ -111,9 +109,6 @@ public class SessionEntityTest {
             Assert.assertTrue(result.get(0).getId().equals(session.getId()) &&
                     result.get(1).getId().equals(test.getId())
             );
-            EditionEntity sameEdition = repositoryEdition.getElementById(1);
-            Set<SessionEntity> sessions = sameEdition.getSessions();
-            Assert.assertTrue(sessions.size()==2);
         } catch (RepositoryException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
@@ -134,5 +129,22 @@ public class SessionEntityTest {
         }
     }
 
-
+    @Test
+    public void getAllSessions() throws Exception {
+        SessionEntity session = new SessionEntity("session", date, date, "room_1", "bio", 100);
+        SessionEntity test = new SessionEntity("session", date, date, "room_2", "bio", 100);
+        EditionEntity newEdition = new EditionEntity(date, date, "location", "bio", date, date, date, date);
+        try {
+            repositoryEdition.add(newEdition);
+            session.setEdition(repositoryEdition.getElementById(1));
+            test.setEdition(repositoryEdition.getElementById(1));
+            repositorySession.add(session);
+            repositorySession.add(test);
+            EditionEntity sameEdition = repositoryEdition.getElementById(1);
+            Set<SessionEntity> sessions = sameEdition.getSessions();
+            Assert.assertTrue(sessions.size()==2);
+        } catch (RepositoryException exception) {
+            Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
+        }
+    }
 }

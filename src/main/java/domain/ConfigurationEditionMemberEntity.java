@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
  * Name:         ConfigurationEditionMember
  * Effect:       Class for the db table ConfigurationEditionMember.
  * Date:         08/04/2017
- * Tested:       False
+ * Tested:       True
  * @author       Tiron Andreea-Ecaterina
  * @version      1.0
  */
@@ -32,7 +32,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
     @Column(name = "IS_PCMEMBER")
     private Boolean isPCMember;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idConfiguration",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idConfiguration", cascade = CascadeType.ALL)
     private Set<EditionMemberEntity> editionMembers;
 
     public ConfigurationEditionMemberEntity(){}
@@ -43,10 +43,18 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
         this.isPCMember = isPCMember;
     }
 
+    /**
+     * Effect: Returns the editionMembers of a ConfigurationEditionMemberEntity
+     * @return [editionMembers] : return the editionMembers
+     */
     public Set<EditionMemberEntity> getEditionMembers() {
         return editionMembers;
     }
 
+    /**
+     * Effect: Sets the editionMembers of the conference member.
+     * @param editionMembers : new value for editionMembers
+     */
     public void setEditionMembers(Set<EditionMemberEntity> editionMembers) {
         this.editionMembers = editionMembers;
     }

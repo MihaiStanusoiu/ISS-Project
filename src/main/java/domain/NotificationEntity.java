@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Name:         NotificationEntity
  * Effect:       Corresponding class for the notification table in the database.
  * Date:         08.04.2017
- * Tested:       False
+ * Tested:       True
  * @author       Tanasie Luiza Maria
  * @version      1.0
  */
@@ -34,6 +34,11 @@ public class NotificationEntity implements Serializable,Idable<Integer> {
     private UserEntity user;
 
     public NotificationEntity() {}
+
+    public NotificationEntity(String text, Boolean paymentType) {
+        this.text = text;
+        this.paymentType = paymentType;
+    }
 
     /**
      * Effect: Return the id of a notification.

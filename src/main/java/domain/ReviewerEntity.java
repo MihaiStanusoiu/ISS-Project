@@ -1,27 +1,25 @@
 package domain;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Name:    ReviewerEntity
  * Effect:  Class for the database table ReviewerEntity
- * Date:    9/4/2017
- * Tested:  False
- *
- * @author Simion George-Vlad
+ * Date:    12/5/2017
+ * Tested:  True
+ * @author  Tiron Andreea-Ecaterina
  * @version 1.0
  */
 
 @Entity
 @Table(name = "REVIEWER")
 @SuppressWarnings("unused")
-public class ReviewerEntity  {
-
-    @EmbeddedId
-    private ReviewerId id;
+public class ReviewerEntity implements Idable<Integer>{
+    @Id @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "ID_REVIEW")
+    private Integer id;
 
     @Column(name = "RESPONSE")
     private String response;
@@ -35,25 +33,40 @@ public class ReviewerEntity  {
     @Column(name = "RECOMMENDATION_URL")
     private String recommendationUrl;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_SUBMISSION")
+    private SubmissionEntity submissionReview;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_EDITION_MEMBER")
+    private EditionMemberEntity idEditionMember;
+
     /**
      * Empty constructor.
      */
     public ReviewerEntity(){}
 
+    public ReviewerEntity(String response, String status, String qualifier, String recommendationUrl) {
+        this.response = response;
+        this.status = status;
+        this.qualifier = qualifier;
+        this.recommendationUrl = recommendationUrl;
+    }
+
     /**
-     * Effect: Return the id of a reviewer.
-     * @return [ReviewerId] : returns the id of a ReviewerEntity.
+     * Effect: Return the idReviewer of a reviewer.
+     * @return [Integer] : returns the idReviewer of a ReviewerEntity.
      */
-    public ReviewerId getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
-     * Effect: Sets the id of a reviewer.
-     * @param id: new value for reviewer id.
+     * Effect: Sets the idReviewer of a reviewer.
+     * @param idReviewer: new value for reviewer idReviewer.
      */
-    public void setId(ReviewerId id) {
-        this.id = id;
+    public void setId(Integer idReviewer) {
+        this.id = idReviewer;
     }
 
     /**
@@ -119,4 +132,37 @@ public class ReviewerEntity  {
     public void setRecommendationUrl(String recommendationUrl) {
         this.recommendationUrl = recommendationUrl;
     }
+
+    /**
+     * Effect: Returns the submission of the ReviewerEntity.
+     * @return [SubmissionEntity]: returns the submissionReview of a ReviewerEntity.
+     */
+    public SubmissionEntity getSubmission() {
+        return submissionReview;
+    }
+
+    /**
+     * Effect: Sets the submission of the ReviewerEntity.
+     * @param submission: new value for submission.
+     */
+    public void setSubmission(SubmissionEntity submission) {
+        this.submissionReview = submission;
+    }
+
+    /**
+     * Effect: Returns the idEditionMember of the ReviewerEntity.
+     * @return [EditionMemberEntity]: returns the id of the EditionMemberEntity.
+     */
+    public EditionMemberEntity getIdEditionMember() {
+        return idEditionMember;
+    }
+
+    /**
+     * Effect: Sets the idEditionMember of the ReviewerEntity.
+     * @param idEditionMember: new value for idEditionMember
+     */
+    public void setIdEditionMember(EditionMemberEntity idEditionMember) {
+        this.idEditionMember = idEditionMember;
+    }
+
 }

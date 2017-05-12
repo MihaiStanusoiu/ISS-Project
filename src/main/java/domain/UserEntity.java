@@ -2,14 +2,14 @@ package domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Name:        UserEntity
  * Effect:      Corresponding class for the UserEntity table in the database.
  * Date:        4/8/2017
- * Tested:      False
+ * Tested:      True
  * @author      Stanusoiu Mihai-Teodor
  * @version     1.0
  */
@@ -44,11 +44,30 @@ public class UserEntity implements Serializable,Idable<Integer> {
 
     @Column(name = "LOCATION")
     private String location;
-//
-//    @OneToMany(mappedBy = "user")
-//    private List<NotificationEntity> notifications = new ArrayList<>();
 
     public UserEntity() {}
+
+    public UserEntity(String username, String password, String email, String name, String website, String bio, String location) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.website = website;
+        this.bio = bio;
+        this.location = location;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<NotificationEntity> notifications = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "userSession", cascade = CascadeType.ALL)
+    private Set<SessionMemberEntity> sessionMembers = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idUser", cascade = CascadeType.ALL)
+    private Set<EditionMemberEntity> editionMembers = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "userSubmission", cascade = CascadeType.ALL)
+    private Set<AuthorSubmissionEntity> authorSubmissions = new HashSet<>();
 
     /**
      * Effect: Returns the id of the user
@@ -181,17 +200,65 @@ public class UserEntity implements Serializable,Idable<Integer> {
 
     /**
      * Effect: Returns the notifications of the user
-     * @return [ArrayList<NotificationEntity>]: notifications of the user
+     * @return [Set<NotificationEntity>]: notifications of the user
      */
-//    public List<NotificationEntity> getNotifications() {
-//        return notifications;
-//    }
-//
-//    /**
-//     * Effect: Sets the notifications array to the given value
-//     * @param notifications [ArrayList<NotificationEntity>]: new value for the notifications array
-//     */
-//    public void setNotifications(ArrayList<NotificationEntity> notifications) {
-//        this.notifications = notifications;
-//    }
+    public Set<NotificationEntity> getNotifications() {
+        return notifications;
+    }
+
+    /**
+     * Effect: Sets the notifications array to the given value
+     * @param notifications [Set<NotificationEntity>]: new value for the notifications array
+     */
+    public void setNotifications(Set<NotificationEntity> notifications) {
+        this.notifications = notifications;
+    }
+
+    /**
+     * Effect: Returns the sessionMembers of a UserEntity.
+     * @return [Set<SessionMemberEntity>]: sessionMembers of the UserEntity.
+     */
+    public Set<SessionMemberEntity> getSessionMembers() {
+        return sessionMembers;
+    }
+
+    /**
+     * Effect: Sets the sessionMembers of a UserEntity.
+     * @param sessionMembers: new value for the sessionMembers.
+     */
+    public void setSessionMembers(Set<SessionMemberEntity> sessionMembers) {
+        this.sessionMembers = sessionMembers;
+    }
+
+    /**
+     * Effect: Returns the author submissions of a UserEntity.
+     * @return [Set<AuthorSubmissionEntity>]: authorSubmissions of the UserEntity.
+     */
+    public Set<AuthorSubmissionEntity> getAuthorSubmissions() {
+        return authorSubmissions;
+    }
+
+    /**
+     * Effect: Sets the author submission of a UserEntity.
+     * @param authorSubmissions: new value for authorSubmissions.
+     */
+    public void setAuthorSubmissions(Set<AuthorSubmissionEntity> authorSubmissions) {
+        this.authorSubmissions = authorSubmissions;
+    }
+
+    /**
+     * Effect: Returns the edition members of a UserEntity.
+     * @return [Set<EditionMemberEntity>]: editionMembers of the UserEntity.
+     */
+    public Set<EditionMemberEntity> getEditionMembers() {
+        return editionMembers;
+    }
+
+    /**
+     * Effect: Sets the edition members of a UserEntity.
+     * @param editionMembers: new value for editionMembers.
+     */
+    public void setEditionMembers(Set<EditionMemberEntity> editionMembers) {
+        this.editionMembers = editionMembers;
+    }
 }

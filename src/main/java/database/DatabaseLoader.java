@@ -86,6 +86,15 @@ public class DatabaseLoader
         configuration.addAnnotatedClass(SessionEntity.class);
         configuration.addAnnotatedClass(UserEntity.class);
         configuration.addAnnotatedClass(SessionMemberEntity.class);
+        configuration.addAnnotatedClass(TagEntity.class);
+        configuration.addAnnotatedClass(SubmissionTagEntity.class);
+        configuration.addAnnotatedClass(SubmissionEntity.class);
+        configuration.addAnnotatedClass(SubmissionTopicEntity.class);
+        configuration.addAnnotatedClass(ReviewerEntity.class);
+        configuration.addAnnotatedClass(TopicEntity.class);
+        configuration.addAnnotatedClass(AuthorSubmissionEntity.class);
+        configuration.addAnnotatedClass(NotificationEntity.class);
+
     }
 
     /**
