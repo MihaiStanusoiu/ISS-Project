@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.confery.network.iml" filepath="$PROJECT_DIR$/.idea/modules/org.confery.network.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.confery.network_main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.confery.network_main.iml" group="org.confery.network" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.confery.network_test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.confery.network_test.iml" group="org.confery.network" />
+    </modules>
+  </component>
+</project>
