@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
 
 /**
  * Name:        ControllerInterface
@@ -19,6 +20,6 @@ public interface ControllerInterface extends Serializable {
      * @implNote status: We implement constraints where only
      * if the necessary constraints are not available in fxml [file/scene-builder].
      */
-    void initialize();
+    void initialize() throws RemoteException;
 
 }

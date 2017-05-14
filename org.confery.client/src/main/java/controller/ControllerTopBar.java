@@ -50,7 +50,13 @@ public class ControllerTopBar implements ControllerInterface, SubscriberService 
     }
 
     @Override
-    public void initialize() { }
+    public void initialize() throws RemoteException {
+        if (listener.getActiveUser() != null) {
+            this.showActiveUser();
+        } else {
+            this.showRegistrationButtons();
+        }
+    }
 
     /**
      * Effect: Loads the LoginView responsible

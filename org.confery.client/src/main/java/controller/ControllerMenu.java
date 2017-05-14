@@ -1,11 +1,16 @@
 package controller;
 
 import javafx.fxml.FXML;
+import listener.Listener;
 import manager.StageManager;
+import notification.Notification;
+import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import view.ViewType;
+
+import java.rmi.RemoteException;
 
 /**
  * Name:        ControllerMenu
@@ -21,10 +26,12 @@ import view.ViewType;
 public class ControllerMenu implements ControllerInterface {
 
     private final StageManager manager;
+    private final Listener listener;
 
     @Autowired @Lazy
-    public ControllerMenu(StageManager manager) {
+    public ControllerMenu(StageManager manager, Listener listener) {
         this.manager = manager;
+        this.listener = listener;
     }
 
     @Override
@@ -88,8 +95,9 @@ public class ControllerMenu implements ControllerInterface {
      * Effect: UserEntity logout from server's system.
      * @implNote status: Unavailable at the moment.
      */
-    @FXML private void onLogoutButtonClick() {
-        System.out.println("Logout View");
+    @FXML private void onLogoutButtonClick() throws RemoteException {
+        listener.setActiveUser(null);
+        listener.notifyAll(new Notification(NotificationType.SIGNAL_LOGOUT));
     }
 
 }
