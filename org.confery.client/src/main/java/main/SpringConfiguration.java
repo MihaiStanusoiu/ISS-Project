@@ -95,8 +95,9 @@ public class SpringConfiguration {
 
     @Bean
     @Lazy
-    public ControllerMenu controllerMenu() {
-        return new ControllerMenu(stageManager);
+    public ControllerMenu controllerMenu()
+            throws RemoteException, NotBoundException, MalformedURLException {
+        return new ControllerMenu(stageManager, listener());
     }
 
     @Bean
