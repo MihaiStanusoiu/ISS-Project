@@ -24,4 +24,14 @@ public class UserModel implements UserProtocol {
         return repository.getAll();
     }
 
+    @Override
+    public Integer addUser(UserEntity user) throws RepositoryException {
+        return repository.add(user);
+    }
+
+    @Override
+    public UserEntity getUserById(Integer id) throws RepositoryException {
+        return repository.getElementById(id);
+    }
+
 }

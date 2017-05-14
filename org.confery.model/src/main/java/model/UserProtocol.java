@@ -13,5 +13,7 @@ import java.util.List;
 public interface UserProtocol {
 
     List<UserEntity> getUsers() throws RepositoryException;
+    Integer addUser(UserEntity user) throws RepositoryException;
+    UserEntity getUserById(Integer id) throws RepositoryException;
 
 }

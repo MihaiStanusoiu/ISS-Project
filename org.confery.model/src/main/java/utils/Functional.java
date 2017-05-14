@@ -1,5 +1,7 @@
 package utils;
 
+import java.rmi.RemoteException;
+
 /**
  * @author Alexandru Stoica
  * @version 1.0
@@ -20,6 +22,11 @@ public class Functional {
     @FunctionalInterface
     public interface SimpleMethod {
         void accept() throws Exception;
+    }
+
+    @FunctionalInterface
+    public interface MethodProtocol {
+        void accept() throws RemoteException;
     }
 
     @FunctionalInterface

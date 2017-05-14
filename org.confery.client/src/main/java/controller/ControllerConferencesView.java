@@ -6,15 +6,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import listener.Listener;
 import manager.StageManager;
+import notification.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
+import service.SubscriberService;
 import transferable.Conference;
 import transferable.Edition;
 import view.ViewType;
 
+import java.rmi.RemoteException;
 import java.util.Date;
 
 /**
@@ -26,18 +30,21 @@ import java.util.Date;
  */
 
 @Component
-public class ControllerConferencesView implements ControllerInterface {
+public class ControllerConferencesView implements ControllerInterface, SubscriberService {
 
     @FXML private Button recentButton;
     @FXML private Button popularButton;
     @FXML private TextField searchTextField;
     @FXML private Pagination pagination;
 
-    private StageManager manager;
+    private final StageManager manager;
+    private final Listener listener;
 
     @Autowired @Lazy
-    public ControllerConferencesView(StageManager manager) {
+    public ControllerConferencesView(StageManager manager, Listener listener) throws RemoteException {
         this.manager = manager;
+        this.listener = listener;
+        this.listener.addSubscriber(this);
     }
 
     /**
@@ -106,4 +113,8 @@ public class ControllerConferencesView implements ControllerInterface {
         System.out.println(searchTerm);
     }
 
+    @Override
+    public void update(Notification notification) throws RemoteException {
+        System.out.print("Test");
+    }
 }

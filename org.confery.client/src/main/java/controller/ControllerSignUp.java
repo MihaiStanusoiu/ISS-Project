@@ -1,15 +1,24 @@
 package controller;
 
+import exception.RepositoryException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import listener.Listener;
 import manager.StageManager;
+import notification.Notification;
+import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import service.SignUpService;
+import service.SubscriberService;
+import transferable.User;
 import view.ViewType;
+
+import java.rmi.RemoteException;
 
 /**
  * Name:        ControllerSignUp
@@ -22,7 +31,7 @@ import view.ViewType;
  */
 
 @Component
-public class ControllerSignUp implements ControllerInterface {
+public class ControllerSignUp implements ControllerInterface, SubscriberService {
 
     @FXML TextField usernameTextField;
     @FXML TextField passwordTextField;
@@ -35,11 +44,16 @@ public class ControllerSignUp implements ControllerInterface {
 
     @SuppressWarnings("all")
     private final StageManager manager;
+    private final SignUpService signUpService;
+    private Listener listener;
 
     @Autowired
     @Lazy
-    public ControllerSignUp(StageManager manager) {
+    public ControllerSignUp(StageManager manager, SignUpService signUpService, Listener listener) throws RemoteException {
         this.manager = manager;
+        this.signUpService = signUpService;
+        this.listener = listener;
+        this.listener.addSubscriber(this);
     }
 
     /**
@@ -56,7 +70,8 @@ public class ControllerSignUp implements ControllerInterface {
      * Effect: Loads the ConferencesView.
      * @implNote status: In development.
      */
-    @FXML void onLogoButtonClick() {
+    @FXML void onLogoButtonClick() throws RemoteException {
+        this.listener.removeSubscriber(this);
         manager.switchScene(ViewType.CONFERENCES);
     }
 
@@ -64,7 +79,8 @@ public class ControllerSignUp implements ControllerInterface {
      * Effect: Loads the LoginView.
      * @implNote status: In development.
      */
-    @FXML void onLoginButtonClick() {
+    @FXML void onLoginButtonClick() throws RemoteException {
+        this.listener.removeSubscriber(this);
         manager.switchScene(ViewType.LOGIN);
     }
 
@@ -72,13 +88,25 @@ public class ControllerSignUp implements ControllerInterface {
      * Effect: The user registers in the system with his data.
      * @implNote status: Unavailable at the moment.
      */
-    @FXML void onSignUpButtonClick() {
+    @FXML void onSignUpButtonClick() throws RemoteException {
         String email = emailTextField.getText();
         String displayName = displayNameTextField.getText();
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         String confirm = confirmTextField.getText();
-        System.out.println(email + displayName + username + password + confirm);
+        try {
+            User user = this.signUpService.signUp(username, password, confirm, email, displayName);
+            this.listener.setActiveUser(user);
+            this.listener.notifyAll(new Notification(NotificationType.SIGNAL_SIGN_UP));
+            this.listener.removeSubscriber(this);
+            manager.switchScene(ViewType.CONFERENCES);
+        } catch (RepositoryException exception) {
+            errorLabel.setText(exception.getCause().getMessage());
+        }
     }
 
+    @Override
+    public void update(Notification notification) throws RemoteException {
+        System.out.print(notification);
+    }
 }

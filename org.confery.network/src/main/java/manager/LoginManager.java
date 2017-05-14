@@ -19,6 +19,7 @@ import java.util.Optional;
 
 public class LoginManager implements LoginService {
 
+    @SuppressWarnings("all")
     private NotificationCenter notificationCenter;
     private UserProtocol userModel;
 

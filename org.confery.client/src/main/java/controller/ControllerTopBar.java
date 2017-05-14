@@ -1,13 +1,21 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import listener.Listener;
 import manager.StageManager;
+import notification.Notification;
+import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import service.SubscriberService;
+import utils.ThrowPipe;
 import view.ViewType;
+
+import java.rmi.RemoteException;
 
 /**
  * Name:        ControllerTopBar
@@ -20,7 +28,7 @@ import view.ViewType;
  */
 
 @Component
-public class ControllerTopBar implements ControllerInterface {
+public class ControllerTopBar implements ControllerInterface, SubscriberService {
 
     @SuppressWarnings("all")
     @FXML private Label usernameLabel;
@@ -28,11 +36,17 @@ public class ControllerTopBar implements ControllerInterface {
     @SuppressWarnings("all")
     @FXML private Button userProfileButton;
 
-    private StageManager manager;
+    @FXML private Button signUpButton;
+    @FXML private Button loginButton;
+
+    private final StageManager manager;
+    private final Listener listener;
 
     @Autowired @Lazy
-    public ControllerTopBar(StageManager manager) {
+    public ControllerTopBar(StageManager manager, Listener listener) throws RemoteException {
         this.manager = manager;
+        this.listener = listener;
+        this.listener.addSubscriber(this);
     }
 
     @Override
@@ -71,7 +85,37 @@ public class ControllerTopBar implements ControllerInterface {
      * @implNote status: In development.
      */
     @FXML private void onProfileButtonClick() {
+        // TODO: Make Profile User View & MyProfile View
         System.out.println("Profile UserEntity View");
     }
 
+    private void setButton(Button button, String text, Double opacity) {
+        button.setText(text);
+        button.setOpacity(opacity);
+    }
+
+    private void showActiveUser() throws RemoteException {
+        usernameLabel.setText(listener.getActiveUser().getName());
+        usernameLabel.setOpacity(1.0);
+        setButton(signUpButton, "", 0.0);
+        setButton(loginButton, "", 0.0);
+    }
+
+    private void showRegistrationButtons() {
+        usernameLabel.setText("");
+        usernameLabel.setOpacity(0.0);
+        setButton(signUpButton, "Sign Up", 1.0);
+        setButton(loginButton, "Login", 1.0);
+    }
+
+    @Override
+    public void update(Notification notification) throws RemoteException {
+        if (notification.getType().equals(NotificationType.SIGNAL_LOGIN) ||
+                notification.getType().equals(NotificationType.SIGNAL_SIGN_UP)) {
+            Platform.runLater(() -> ThrowPipe.wrap(this::showActiveUser));
+        }
+        if (notification.getType().equals(NotificationType.SIGNAL_LOGOUT)) {
+            Platform.runLater(this::showRegistrationButtons);
+        }
+    }
 }
