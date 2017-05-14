@@ -1,2 +1,5 @@
 rootProject.name = 'iss.project.3ts.ubb.cluj'
-
+include 'org.confery.model'
+include 'org.confery.network'
+include 'org.confery.server'
+include 'org.confery.client'
