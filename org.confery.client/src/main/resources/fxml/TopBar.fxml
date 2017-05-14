@@ -23,8 +23,8 @@
    <right>
       <HBox alignment="CENTER_RIGHT" minHeight="60.0" minWidth="60.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Button minWidth="0.0" mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: white;" text="Log In" />
-            <Button minWidth="0.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" style="-fx-background-color: &quot;white&quot;;" text="Sign Up" />
+            <Button fx:id="loginButton" minWidth="0.0" mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: white;" text="Log In" />
+            <Button fx:id="signUpButton" minWidth="0.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" style="-fx-background-color: &quot;white&quot;;" text="Sign Up" />
             <Label fx:id="usernameLabel" minWidth="0.0" opacity="0.0">
                <padding>
                   <Insets right="20.0" />

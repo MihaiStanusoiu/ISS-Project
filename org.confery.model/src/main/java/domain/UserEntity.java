@@ -57,6 +57,10 @@ public class UserEntity implements Serializable,Idable<Integer> {
         this.location = location;
     }
 
+    public UserEntity(String username, String password) {
+        this(username, password, "", "", "", "", "");
+    }
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     private Set<NotificationEntity> notifications = new HashSet<>();
 

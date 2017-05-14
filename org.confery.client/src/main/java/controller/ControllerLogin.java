@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import listener.Listener;
 import manager.StageManager;
 import notification.Notification;
+import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -64,7 +65,8 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
      * Effect: Loads the ConferencesView.
      * @implNote status: In development.
      */
-    @FXML void onLogoButtonClick() {
+    @FXML void onLogoButtonClick() throws RemoteException {
+        listener.removeSubscriber(this);
         manager.switchScene(ViewType.CONFERENCES);
     }
 
@@ -73,7 +75,8 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
      * Effect: Loads the SignUpView.
      * @implNote status: In development.
      */
-    @FXML void onSignUpButtonClick() {
+    @FXML void onSignUpButtonClick() throws RemoteException {
+        listener.removeSubscriber(this);
         manager.switchScene(ViewType.SIGN_UP);
     }
 
@@ -87,6 +90,8 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         try {
             User user = loginService.login(username, password);
             listener.setActiveUser(user);
+            listener.notifyAll(new Notification(NotificationType.SIGNAL_LOGIN));
+            listener.removeSubscriber(this);
             manager.switchScene(ViewType.CONFERENCES);
         } catch (RemoteException exception) {
             errorLabel.setText(exception.getCause().getMessage());
