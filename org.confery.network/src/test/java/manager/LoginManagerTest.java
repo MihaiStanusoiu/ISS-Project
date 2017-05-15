@@ -32,7 +32,7 @@ public class LoginManagerTest {
         UserModel model = PowerMockito.mock(UserModel.class);
         List<UserEntity> result = new ArrayList<>();
         result.add(new UserEntity("test", "pass", "", "", "", "", ""));
-        when(model.getUsers()).thenReturn(result);
+        when(model.getAll()).thenReturn(result);
         LoginManager manager = new LoginManager(center, model);
         Assert.assertTrue(manager.login("test", "pass").getUsername().equals("test"));
         try {

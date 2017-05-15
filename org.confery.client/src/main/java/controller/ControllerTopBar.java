@@ -51,11 +51,12 @@ public class ControllerTopBar implements ControllerInterface, SubscriberService 
 
     @Override
     public void initialize() throws RemoteException {
-        if (listener.getActiveUser() != null) {
-            this.showActiveUser();
-        } else {
-            this.showRegistrationButtons();
-        }
+        if (existsActiveUser()) { this.showActiveUser(); }
+        else { this.showRegistrationButtons(); }
+    }
+
+    private Boolean existsActiveUser() throws RemoteException {
+        return listener.getActiveUser() != null;
     }
 
     /**
@@ -90,9 +91,12 @@ public class ControllerTopBar implements ControllerInterface, SubscriberService 
      * for updating the active user's profile information.
      * @implNote status: In development.
      */
-    @FXML private void onProfileButtonClick() {
+    @FXML private void onProfileButtonClick() throws RemoteException {
+        if (existsActiveUser()) {
+            manager.switchScene(ViewType.PROFILE, listener.getActiveUser());
+        }
         // TODO: Make Profile User View & MyProfile View
-        System.out.println("Profile UserEntity View");
+        // System.out.println("Profile UserEntity View");
     }
 
     private void setButton(Button button, String text, Double opacity) {
@@ -117,7 +121,8 @@ public class ControllerTopBar implements ControllerInterface, SubscriberService 
     @Override
     public void update(Notification notification) throws RemoteException {
         if (notification.getType().equals(NotificationType.SIGNAL_LOGIN) ||
-                notification.getType().equals(NotificationType.SIGNAL_SIGN_UP)) {
+                notification.getType().equals(NotificationType.SIGNAL_SIGN_UP) ||
+                notification.getType().equals(NotificationType.UPDATE_USER)) {
             Platform.runLater(() -> ThrowPipe.wrap(this::showActiveUser));
         }
         if (notification.getType().equals(NotificationType.SIGNAL_LOGOUT)) {

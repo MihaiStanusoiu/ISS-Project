@@ -1,6 +1,6 @@
 package manager;
 
-import convertor.UserConvertor;
+import convertor.UserConverter;
 import domain.UserEntity;
 import model.UserModel;
 import notification.NotificationCenter;
@@ -44,8 +44,9 @@ public class SignUpManagerTest {
         List<UserEntity> result = new ArrayList<>();
         result.add(userEntity);
         User user = new User("test", "passwordTest", "try@gmail.com", "Test");
-        PowerMockito.doReturn(result).when(model, "getUsers");
-        PowerMockito.doReturn(new UserConvertor().convertUser(user)).when(model, "getUserById", 0);
+        User userFail = new User("username", "passwordTest", "try@gmail.com", "Test");
+        PowerMockito.doReturn(result).when(model, "getAll");
+        PowerMockito.doReturn(UserConverter.convertUser(user)).when(model, "getElementById", null);
         SignUpManager manager = new SignUpManager(center, model);
         Assert.assertTrue(manager.signUp("test", "passwordTest", "passwordTest", "try@gmail.com", "Test")
                 .getUsername().equals("test"));
