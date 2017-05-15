@@ -17,7 +17,7 @@ public interface UserService extends Remote {
     Integer add(User user) throws RemoteException, RepositoryException;
     User delete(User user) throws RemoteException, RepositoryException;
     void update(User user, User with) throws RemoteException, RepositoryException;
-    User getUserById(Integer id) throws RemoteException, RepositoryException;
+    User getEntityById(Integer id) throws RemoteException, RepositoryException;
     List<User> getAll() throws RemoteException, RepositoryException;
 
 }
