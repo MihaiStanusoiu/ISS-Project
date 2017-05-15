@@ -1,6 +1,6 @@
 package manager;
 
-import convertor.UserConvertor;
+import convertor.UserConverter;
 import exception.RepositoryException;
 import model.UserProtocol;
 import notification.NotificationCenter;
@@ -54,7 +54,7 @@ public class SignUpManager implements SignUpService {
     }
 
     private Boolean isUsernameUnique(String username) throws RepositoryException {
-        return userModel.getUsers().stream().noneMatch(user ->
+        return userModel.getAll().stream().noneMatch(user ->
                 user.getUsername().equals(username));
     }
 
@@ -67,8 +67,8 @@ public class SignUpManager implements SignUpService {
             throws RemoteException, RepositoryException {
         if (isUsernameUnique(username) && isPasswordValid(password, confirm) && isEmailValid(email)) {
             User user = new User(username, password, email, name);
-            Integer id = userModel.addUser(new UserConvertor().convertUser(user));
-            return new UserConvertor().convertUserEntity(userModel.getUserById(id));
+            Integer id = userModel.add(UserConverter.convertUser(user));
+            return UserConverter.convertUserEntity(userModel.getElementById(id));
         }
         throw new RemoteException("Invalid Username or Password");
     }

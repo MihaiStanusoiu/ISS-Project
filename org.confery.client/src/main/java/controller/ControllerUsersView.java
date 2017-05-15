@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
 import transferable.User;
-import view.ViewType;
 
 /**
  * Name:        ControllerUsersView
@@ -55,7 +54,6 @@ public class ControllerUsersView implements ControllerInterface {
                 .setRows(2)
                 .setColumns(4)
                 .setElements(users)
-                .setView(ViewType.USER_ITEM)
                 .setStageManager(this.manager)
                 .setPagination(this.pagination)
                 .build(GridPane.class);

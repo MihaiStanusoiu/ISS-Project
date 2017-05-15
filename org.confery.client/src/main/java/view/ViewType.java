@@ -113,6 +113,16 @@ public enum ViewType implements ViewTypeInterface {
 
     },
 
+    PROFILE {
+
+        /** Profile View */
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/ProfileView.fxml";
+        }
+
+    },
+
     NOTIFICATION_ITEM {
 
         /** NotificationEntity Item View */

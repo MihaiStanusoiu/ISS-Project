@@ -2,6 +2,7 @@ package main;
 
 import controller.*;
 import itemcontroller.ControllerConferenceView;
+import itemcontroller.ControllerProfileView;
 import itemcontroller.ControllerUserView;
 import javafx.stage.Stage;
 import listener.ListenerHelper;
@@ -13,6 +14,7 @@ import org.springframework.remoting.rmi.RmiProxyFactoryBean;
 import service.LoginService;
 import service.SignUpService;
 import service.SubscriptionService;
+import service.UserService;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -106,6 +108,15 @@ public class SpringConfiguration {
         return new ControllerConferenceView(stageManager);
     }
 
+
+    @Bean
+    @Lazy
+    public ControllerProfileView controllerProfileView()
+            throws RemoteException, NotBoundException, MalformedURLException {
+        return new ControllerProfileView(stageManager, listener(), userService());
+    }
+
+
     @Bean
     @Lazy
     public ControllerUserView controllerUserView() {
@@ -135,34 +146,37 @@ public class SpringConfiguration {
         return stageManager;
     }
 
+    private static final Integer port = 1192;
+
+    private RmiProxyFactoryBean getService(Class<?> serviceClass, String serviceName, Integer port) {
+        RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
+        rmiProxyFactoryBean.setServiceUrl("rmi://localhost:" + port + "/" + serviceName);
+        rmiProxyFactoryBean.setServiceInterface(serviceClass);
+        rmiProxyFactoryBean.afterPropertiesSet();
+        return rmiProxyFactoryBean;
+    }
+
     @Bean
     public LoginService loginService()
             throws RemoteException, NotBoundException, MalformedURLException {
-        RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
-        rmiProxyFactoryBean.setServiceUrl("rmi://localhost:1192/LoginService");
-        rmiProxyFactoryBean.setServiceInterface(LoginService.class);
-        rmiProxyFactoryBean.afterPropertiesSet();
-        return (LoginService) rmiProxyFactoryBean.getObject();
+        return (LoginService) getService(LoginService.class, "LoginService", port).getObject();
     }
-
 
     @Bean
     public SubscriptionService subscriptionService()
             throws RemoteException, NotBoundException, MalformedURLException {
-        RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
-        rmiProxyFactoryBean.setServiceUrl("rmi://localhost:1192/SubscriptionService");
-        rmiProxyFactoryBean.setServiceInterface(SubscriptionService.class);
-        rmiProxyFactoryBean.afterPropertiesSet();
-        return (SubscriptionService) rmiProxyFactoryBean.getObject();
+        return (SubscriptionService) getService(SubscriptionService.class, "SubscriptionService", port).getObject();
     }
 
     @Bean
     public SignUpService signUpService()
             throws RemoteException, NotBoundException, MalformedURLException {
-        RmiProxyFactoryBean rmiProxyFactoryBean = new RmiProxyFactoryBean();
-        rmiProxyFactoryBean.setServiceUrl("rmi://localhost:1192/SignUpService");
-        rmiProxyFactoryBean.setServiceInterface(SignUpService.class);
-        rmiProxyFactoryBean.afterPropertiesSet();
-        return (SignUpService) rmiProxyFactoryBean.getObject();
+        return (SignUpService) getService(SignUpService.class, "SignUpService", port).getObject();
+    }
+
+    @Bean
+    public UserService userService()
+            throws RemoteException, NotBoundException, MalformedURLException {
+        return (UserService) getService(UserService.class, "UserService", port).getObject();
     }
 }

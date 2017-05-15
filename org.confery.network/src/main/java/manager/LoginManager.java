@@ -1,6 +1,6 @@
 package manager;
 
-import convertor.UserConvertor;
+import convertor.UserConverter;
 import domain.UserEntity;
 import exception.RepositoryException;
 import model.UserProtocol;
@@ -29,13 +29,13 @@ public class LoginManager implements LoginService {
     }
 
     private Optional<UserEntity> findUser(String username, String password) throws RepositoryException {
-        return userModel.getUsers().stream().filter(user ->
+        return userModel.getAll().stream().filter(user ->
                 user.getUsername().equals(username) && user.getPassword().equals(password)).findFirst();
     }
 
     @Override
     public User login(String username, String password) throws RemoteException, RepositoryException {
-        return new UserConvertor().convertUserEntity(findUser(username, password)
+        return UserConverter.convertUserEntity(findUser(username, password)
                 .orElseThrow(() -> new RemoteException("Wrong Username or Password!")));
     }
 }
