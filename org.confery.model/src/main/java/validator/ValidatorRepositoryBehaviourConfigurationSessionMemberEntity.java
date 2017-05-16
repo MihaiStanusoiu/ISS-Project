@@ -3,6 +3,9 @@ package validator;
 import domain.ConfigurationSessionMemberEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for SessionMember
@@ -14,30 +17,25 @@ import java.util.List;
  * @version 1.0
  */
 @SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourConfigurationSessionMemberEntity extends ValidatorRepositoryBehaviour<ConfigurationSessionMemberEntity> {
+public class ValidatorRepositoryBehaviourConfigurationSessionMemberEntity
+        extends ValidatorRepositoryBehaviour<ConfigurationSessionMemberEntity> {
+
     /**
      * @param object : the session member to validate
      * @return [List<String>] : list of error messages found
      */
-
-
     @Override
     public List<String> check(ConfigurationSessionMemberEntity object) {
-        if (object.getChair() == null) {
-            accumulator.add("SessionMember chair is not set.");
-        }
-        if (object.getId() == null) {
-            accumulator.add("SessionMember id is null.");
-        }
-        if (object.getListener() == null) {
-            accumulator.add("SessionMember listener is not set.");
-        }
-        if (object.getSectionMembers() == null) {
-            accumulator.add("SessionMember section member is null.");
-        }
-        if (object.getSpeaker() == null) {
-            accumulator.add("SessionMember speaker is not set.");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Conference's configuration is NULL!");
+        basedOn(Objects.isNull(object.getChair()))
+                .runTrue(accumulator::add, "Conference configuration's  chair is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Conference configuration's chair is NULL!");
+        basedOn(Objects.isNull(object.getListener()))
+                .runTrue(accumulator::add, "Conference configuration's chair is NULL!");
+        basedOn(Objects.isNull(object.getSpeaker()))
+                .runTrue(accumulator::add, "Conference configuration's chair is NULL!");
         return accumulator;
     }
 }

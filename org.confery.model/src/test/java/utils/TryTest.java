@@ -74,22 +74,22 @@ public class TryTest {
         UserEntity user =  new UserEntity("username","password");
         UserEntity with =  new UserEntity("username2","password");
 
-        Assert.assertTrue(Try.run(model::add, user)
+        Assert.assertTrue(Try.runFunction(model::add, user)
                 .orThrow(exception -> new RemoteException(exception.getMessage())).equals(1));
 
-        Assert.assertTrue(Try.run(model::update, user, with)
+        Assert.assertTrue(Try.runFunction(model::update, user, with)
                 .orThrow(exception -> new RemoteException(exception.getMessage())).equals(true));
 
-        Assert.assertTrue(Try.run(model::getAll)
+        Assert.assertTrue(Try.runFunction(model::getAll)
                 .orThrow(exception -> new RemoteException(exception.getMessage()))
                 .get(0).getUsername().equals("username2"));
 
         // Model Test Get Element By Id
-        Assert.assertTrue(Try.run(model::getElementById, user.getId())
+        Assert.assertTrue(Try.runFunction(model::getElementById, user.getId())
                 .orThrow(exception -> new RemoteException(exception.getMessage()))
                 .getUsername().equals("username2"));
         try {
-            Try.run(this::function, 2).orThrow(exception ->
+            Try.runFunction(this::function, 2).orThrow(exception ->
                     new RemoteException(exception.getMessage()));
         } catch (RemoteException exception) {
             Assert.assertTrue(exception.getMessage().equals(this.exception.getMessage()));

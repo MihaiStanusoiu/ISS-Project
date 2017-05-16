@@ -50,7 +50,7 @@ public class Try<T, E extends Throwable> {
         return element != null ? (X) element: (X) exception;
     }
 
-    public <X extends Exception>T orThrow(Function<E, X> converter) throws X {
+    public <X extends Exception> T orThrow(Function<E, X> converter) throws X {
         if (element != null) {
             return element;
         }
@@ -58,8 +58,17 @@ public class Try<T, E extends Throwable> {
     }
 
     @SuppressWarnings("unchecked")
+    public T orHandle(SimpleMethod<E> handler) {
+        if (element != null) {
+            return element;
+        }
+        handler.accept(exception);
+        return null;
+    }
+
+    @SuppressWarnings("unchecked")
     public static <E extends Throwable> Try<Boolean, E>
-    run(ThrowEmptyMethod<E> method) {
+    runFunction(ThrowEmptyMethod<E> method) {
         try {
             method.accept();
             return new Try(true);
@@ -69,7 +78,7 @@ public class Try<T, E extends Throwable> {
     }
     @SuppressWarnings("unchecked")
     public static <T, E extends Throwable> Try<Boolean, E>
-    run(ThrowMethod<T, E> method, T param) {
+    runFunction(ThrowMethod<T, E> method, T param) {
         try {
             method.accept(param);
             return new Try(true);
@@ -80,7 +89,7 @@ public class Try<T, E extends Throwable> {
 
     @SuppressWarnings("unchecked")
     public static <T1, T2, E extends Throwable> Try<Boolean, E>
-    run(ThrowBiMethod<T1, T2, E> method, T1 param1, T2 param2) {
+    runFunction(ThrowBiMethod<T1, T2, E> method, T1 param1, T2 param2) {
         try {
             method.accept(param1, param2);
             return new Try(true);
@@ -91,7 +100,7 @@ public class Try<T, E extends Throwable> {
 
     @SuppressWarnings("unchecked")
     public static <T, R, E extends Throwable> Try<R, E>
-    run(ThrowFunction<T, R, E> function, T param) {
+    runFunction(ThrowFunction<T, R, E> function, T param) {
         try {
             return new Try(function.apply(param));
         } catch (Throwable exception) {
@@ -101,17 +110,17 @@ public class Try<T, E extends Throwable> {
 
     @SuppressWarnings("unchecked")
     public static <R, E extends Throwable> Try<R, E>
-    run(ThrowEmptyFunction<R, E> function) {
+    runFunction(ThrowEmptyFunction<R, E> function) {
         try {
             return new Try(function.apply());
-        } catch (Throwable exception) {
+    } catch (Throwable exception) {
             return new Try(exception);
         }
     }
 
     @SuppressWarnings("unchecked")
     public static <T1, T2, R, E extends Throwable> Try<R, E>
-    run(ThrowBiFunction<T1, T2, R, E> function, T1 param1, T2 param2) {
+    runFunction(ThrowBiFunction<T1, T2, R, E> function, T1 param1, T2 param2) {
         try {
             return new Try(function.apply(param1, param2));
         } catch (Throwable exception) {
