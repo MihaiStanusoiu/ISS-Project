@@ -2,7 +2,6 @@ package notification;
 
 import service.SubscriberService;
 import service.SubscriptionService;
-import utils.ThrowPipe;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -32,7 +31,13 @@ public class NotificationCenter implements SubscriptionService {
 
     @Override
     public void notifyAll(Notification notification) {
-        subscribers.forEach(subscriberService -> ThrowPipe.wrap(() -> subscriberService.update(notification)));
+        subscribers.forEach(subscriberService -> {
+            try {
+                subscriberService.update(notification);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 }

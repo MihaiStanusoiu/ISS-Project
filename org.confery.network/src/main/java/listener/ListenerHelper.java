@@ -3,7 +3,6 @@ package listener;
 import notification.Notification;
 import service.SubscriberService;
 import transferable.User;
-import utils.ThrowPipe;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -50,7 +49,13 @@ public class ListenerHelper extends UnicastRemoteObject implements Listener {
 
     @Override
     public void notifyAll(Notification notification) throws RemoteException {
-        subscribers.forEach(subscriberService -> ThrowPipe.wrap(() -> subscriberService.update(notification)));
+        subscribers.forEach(subscriberService -> {
+            try {
+                subscriberService.update(notification);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 }
