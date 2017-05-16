@@ -3,7 +3,10 @@ package repository;
 import database.DatabaseLoaderInterface;
 import domain.Idable;
 import exception.RepositoryException;
+import exception.ValidatorRepositoryException;
+import functions.ThrowMethod;
 import org.hibernate.Session;
+import validator.ValidatorRepository;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -11,6 +14,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
+
+import static utils.Try.runFunction;
 
 /**
  * Name:         RepositoryEntity
@@ -38,6 +43,12 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
     private Class<T> repositoryClass;
 
     /**
+     * The repository's validator
+     * Needed to validate data.
+     */
+    private final ValidatorRepository<T> validator;
+
+    /**
      * This generic repository needs to know
      * the item's class in order to comunitate with Hibernate.
      * @param repositoryClass The item's class.
@@ -47,6 +58,8 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
     public RepositoryEntity(Class<T> repositoryClass, final DatabaseLoaderInterface loader) {
         this.loader = loader;
         this.repositoryClass = repositoryClass;
+        this.validator = new ValidatorRepository<>(repositoryClass);
+
     }
 
     /**
@@ -54,6 +67,7 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
      */
     @Override
     public Id add(T element) throws RepositoryException {
+        runFunction(validator::validate, element).orThrow(exception -> exception);
         Session session = loader.getFactory().openSession();
         session.beginTransaction();
         session.save(element);
@@ -67,6 +81,7 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
      */
     @Override
     public void update(T element, T with) throws RepositoryException {
+        runFunction(validator::validate, with).orThrow(exception -> exception);
         Session session = loader.getFactory().openSession();
         with.setId(element.getId());
         session.beginTransaction();
@@ -83,7 +98,8 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
         Session session = loader.getFactory().openSession();
         session.beginTransaction();
         T element = this.getElementById(id);
-        session.delete(element);
+        runFunction((ThrowMethod<T, RuntimeException>)session::delete, element)
+                .orThrow(exception -> new ValidatorRepositoryException(exception.getMessage()));
         session.getTransaction().commit();
         session.close();
         return element;

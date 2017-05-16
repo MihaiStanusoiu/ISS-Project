@@ -43,7 +43,7 @@ public class UserManager implements UserService {
     }
 
     @Override
-    public User getUserById(Integer id) throws RemoteException, RepositoryException {
+    public User getEntityById(Integer id) throws RemoteException, RepositoryException {
         return UserConverter.convertUserEntity(userModel.getElementById(id));
     }
 

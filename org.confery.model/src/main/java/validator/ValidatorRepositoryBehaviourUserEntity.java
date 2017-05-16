@@ -3,6 +3,9 @@ package validator;
 import domain.UserEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for UserEntity
@@ -13,13 +16,10 @@ import java.util.List;
  * @author Teodorescu Vlad
  * @version 1.0
  */
-@SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourUserEntity extends ValidatorRepositoryBehaviour<UserEntity> {
 
-    public ValidatorRepositoryBehaviourUserEntity()
-    {
-        super();
-    }
+@SuppressWarnings("all")
+public class ValidatorRepositoryBehaviourUserEntity
+        extends ValidatorRepositoryBehaviour<UserEntity> {
 
     /**
      * @param object : the user to validate
@@ -27,69 +27,22 @@ public class ValidatorRepositoryBehaviourUserEntity extends ValidatorRepositoryB
      */
     @Override
     public List<String> check(UserEntity object) {
-        if(object.getName() != null) {
-            if (object.getName().equals("")) {
-                accumulator.add("User name is empty");
-            }
-        }
-        else{
-            accumulator.add("User name is null");
-        }
-        if(object.getBio() != null) {
-            if (object.getBio().equals("")) {
-                accumulator.add("User bio is empty");
-            }
-        }
-        else
-        {
-            accumulator.add("User bio is null");
-        }
-        if(object.getEmail() != null) {
-            if (object.getEmail().equals("")) {
-                accumulator.add("User email is empty");
-            }
-        }
-        else{
-            accumulator.add("User email is null");
-        }
-        if (object.getId() == null)
-        {
-            accumulator.add("User id is null");
-        }
-        if(object.getLocation() != null) {
-            if (object.getLocation().equals("")) {
-                accumulator.add("User location is empty");
-            }
-        }
-        else{
-            accumulator.add("User location is null");
-        }
-        if(object.getPassword() != null) {
-            if (object.getPassword().equals("")) {
-                accumulator.add("User password is empty");
-            }
-        }
-        else{
-            accumulator.add("User password is null");
-        }
-        if(object.getUsername() != null) {
-            if (object.getUsername().equals("")) {
-                accumulator.add("User username is empty");
-            }
-        }
-        else
-        {
-            accumulator.add("User username is null");
-        }
-        if(object.getWebsite() != null) {
-            if (object.getWebsite().equals("")) {
-                accumulator.add("User website is empty");
-            }
-        }
-        else
-        {
-            accumulator.add("User website is null");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "User is NULL!");
+        basedOn(Objects.isNull(object.getPassword()) || object.getPassword().equals(""))
+                .runTrue(accumulator::add, "User's password is invalid!");
+        basedOn(Objects.isNull(object.getUsername()) || object.getUsername().equals(""))
+                .runTrue(accumulator::add, "User's username is invalid!");
+        basedOn(Objects.isNull(object.getName()))
+                .runTrue(accumulator::add, "User's name is NULL!");
+        basedOn(Objects.isNull(object.getBio()))
+                .runTrue(accumulator::add, "User's bio is NULL!");
+        basedOn(Objects.isNull(object.getEmail()))
+                .runTrue(accumulator::add, "User's email is NULL!");
+        basedOn(Objects.isNull(object.getLocation()))
+                .runTrue(accumulator::add, "User's location is NULL!");
+        basedOn(Objects.isNull(object.getWebsite()))
+                .runTrue(accumulator::add, "User's website is NULL!");
         return accumulator;
     }
 }

@@ -3,6 +3,9 @@ package validator;
 import domain.ConferenceEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for ConferenceEntity
@@ -14,7 +17,8 @@ import java.util.List;
  * @version 1.0
  */
 @SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourConferenceEntity extends ValidatorRepositoryBehaviour<ConferenceEntity> {
+public class ValidatorRepositoryBehaviourConferenceEntity
+        extends ValidatorRepositoryBehaviour<ConferenceEntity> {
 
     /**
      * @param object : the conference to validate
@@ -22,29 +26,16 @@ public class ValidatorRepositoryBehaviourConferenceEntity extends ValidatorRepos
      */
     @Override
     public List<String> check(ConferenceEntity object) {
-
-        if(object.getAcronym() != null) {
-            if (object.getAcronym().equals("")) {
-                accumulator.add("Conference acronym is empty.");
-            }
-        }
-        else{
-            accumulator.add("Conference acronym is null.");
-        }
-        if (object.getEditions() == null) {
-            accumulator.add("Conference editions is null.");
-        }
-        if (object.getId() == null) {
-            accumulator.add("Conference id is null.");
-        }
-        if(object.getName() != null) {
-            if (object.getName().equals("")) {
-                accumulator.add("Conference name is empty.");
-            }
-        }
-        else{
-            accumulator.add("Conference name is null.");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Conference is NULL!");
+        basedOn(Objects.isNull(object.getAcronym()))
+                .runTrue(accumulator::add, "Conference's acronym is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Conference's id is NULL!");
+        basedOn(Objects.isNull(object.getName()))
+                .runTrue(accumulator::add, "Conference's name is NULL!");
+        basedOn(object.getName().equals(""))
+                .runTrue(accumulator::add, "Conference's name is empty!");
         return accumulator;
     }
 }

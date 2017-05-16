@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id=":org.confery.client:test" external.linked.project.path="$MODULE_DIR$/../../../org.confery.client" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="org.confery.client" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output-test url="file://$MODULE_DIR$/../../../org.confery.client/build/classes/test" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../org.confery.client/src/test">
@@ -18,11 +18,14 @@
     <orderEntry type="library" name="Gradle: org.testfx:testfx-junit:4.0.6-alpha" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.11" level="project" />
     <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:5.1.41" level="project" />
-    <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.0.12.Final" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:21.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.0.12.Final" level="project" />
     <orderEntry type="library" name="Gradle: org.powermock:powermock-core:1.5.6" level="project" />
     <orderEntry type="library" name="Gradle: org.powermock:powermock-module-junit4:1.5.6" level="project" />
     <orderEntry type="library" name="Gradle: org.powermock:powermock-api-mockito:1.5.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.0.0-M3" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.0.0-M3" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-runner:1.0.0-M3" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-servlets:9.4.2.v20170220" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-webapp:9.4.2.v20170220" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty.websocket:websocket-server:9.4.2.v20170220" level="project" />
@@ -44,6 +47,10 @@
     <orderEntry type="library" name="Gradle: org.powermock:powermock-module-junit4-common:1.5.6" level="project" />
     <orderEntry type="library" name="Gradle: org.mockito:mockito-all:1.9.5" level="project" />
     <orderEntry type="library" name="Gradle: org.powermock:powermock-api-support:1.5.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.opentest4j:opentest4j:1.0.0-M1" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-commons:1.0.0-M3" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-engine:1.0.0-M3" level="project" />
+    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-launcher:1.0.0-M3" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-continuation:9.4.2.v20170220" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-http:9.4.2.v20170220" level="project" />
     <orderEntry type="library" name="Gradle: org.eclipse.jetty:jetty-util:9.4.2.v20170220" level="project" />

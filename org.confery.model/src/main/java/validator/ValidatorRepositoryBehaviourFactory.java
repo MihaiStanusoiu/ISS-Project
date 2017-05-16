@@ -20,7 +20,7 @@ public class ValidatorRepositoryBehaviourFactory {
      * @return [ValidatorRepositoryBehaviour] : returns specific validation behaviour
      * @throws RepositoryException : when behaviour can't be retrieved for given class
      */
-    public static ValidatorRepositoryBehaviour getBehaviour(Class type) throws RepositoryException {
+    public static ValidatorRepositoryBehaviour getBehaviour(Class type) {
         if (type.equals(UserEntity.class)){
             return new ValidatorRepositoryBehaviourUserEntity();
         }
@@ -70,9 +70,8 @@ public class ValidatorRepositoryBehaviourFactory {
             return new ValidatorRepositoryBehaviourTopicEntity();
         }
         else{
-            throw new ValidatorRepositoryTypeException("Cannot get behaviour for given class type");
+            throw new RuntimeException("Cannot get behaviour for given class type");
         }
-
     }
 }
 

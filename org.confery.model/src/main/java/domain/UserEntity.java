@@ -17,7 +17,7 @@ import java.util.Set;
 @Entity
 @Table(name = "USER")
 @SuppressWarnings("unused")
-public class UserEntity implements Serializable,Idable<Integer> {
+public class UserEntity implements Serializable, Idable<Integer> {
 
     @Id
     @GeneratedValue

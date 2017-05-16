@@ -3,6 +3,9 @@ package validator;
 import domain.ConfigurationEditionMemberEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for ConferenceEditionMemberEntity
@@ -14,29 +17,23 @@ import java.util.List;
  * @version 1.0
  */
 @SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourConfigurationEditionMemberEntity extends ValidatorRepositoryBehaviour<ConfigurationEditionMemberEntity> {
+public class ValidatorRepositoryBehaviourConfigurationEditionMemberEntity
+        extends ValidatorRepositoryBehaviour<ConfigurationEditionMemberEntity> {
+
     /**
      * @param object : the configurationEditionMember to validate
      * @return [List<String>] : list of error messages found
      */
-
     @Override
     public List<String> check(ConfigurationEditionMemberEntity object) {
-        if (object.getChair() == null) {
-            accumulator.add("ConferenceEditionMemeber chair is not set.");
-        }
-        if (object.getCoChair() == null) {
-            accumulator.add("ConferenceEditionMemeber coChair is not set.");
-        }
-        if (object.getEditionMembers() == null) {
-            accumulator.add("ConferenceEditionMemeber edition memebers is null.");
-        }
-        if (object.getId() == null) {
-            accumulator.add("ConferenceEditionMemeber id is null.");
-        }
-        if (object.getPCMember() == null) {
-            accumulator.add("ConferenceEditionMemeber pcMember is not set.");
-        }
+        basedOn(Objects.isNull(object.getChair()))
+                .runTrue(accumulator::add, "Conference's chair is NULL!");
+        basedOn(Objects.isNull(object.getCoChair()))
+                .runTrue(accumulator::add, "Conference's co-chair is NULL!");
+        basedOn(Objects.isNull(object.getPCMember()))
+                .runTrue(accumulator::add, "Conference's pc-member is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Conference's id is NULL!");
         return accumulator;
     }
 }

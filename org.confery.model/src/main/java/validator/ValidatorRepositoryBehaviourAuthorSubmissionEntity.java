@@ -3,6 +3,9 @@ package validator;
 import domain.AuthorSubmissionEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for AuthorSubmissionEntity
@@ -14,7 +17,8 @@ import java.util.List;
  * @version 1.0
  */
 @SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourAuthorSubmissionEntity extends ValidatorRepositoryBehaviour<AuthorSubmissionEntity> {
+public class ValidatorRepositoryBehaviourAuthorSubmissionEntity
+        extends ValidatorRepositoryBehaviour<AuthorSubmissionEntity> {
 
     /**
      * @param object : the author submission to validate
@@ -22,26 +26,14 @@ public class ValidatorRepositoryBehaviourAuthorSubmissionEntity extends Validato
      */
     @Override
     public List<String> check(AuthorSubmissionEntity object) {
-        if (object.getId() == null) {
-            accumulator.add("AuthorSubmission id is null.");
-        }
-        if (object.getOwner() == null) {
-            accumulator.add("AuthorSubmission owner is null.");
-        }
-        if(object.getPresentationUrl() != null) {
-            if (object.getPresentationUrl().equals("")) {
-                accumulator.add("AuthorSubmission presentation url is empty.");
-            }
-        }
-        else {
-            accumulator.add("AuthorSubmission presentation url is null.");
-        }
-        if (object.getSubmissionAuthor() == null) {
-            accumulator.add("AuthorSubmission submissionAuthor is empty.");
-        }
-        if (object.getUserSubmission() == null) {
-            accumulator.add("AuthorSubmission userSubmission is empty.");
-        }
-         return accumulator;
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Author is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Author's ID is NULL!");
+        basedOn(Objects.isNull(object.getOwner()))
+                .runTrue(accumulator::add, "Author's owner flag is NULL!");
+        basedOn(Objects.isNull(object.getPresentationUrl()))
+                .runTrue(accumulator::add, "Author's presentation is NULL!");
+        return accumulator;
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id=":org.confery.model:main" external.linked.project.path="$MODULE_DIR$/../../../org.confery.model" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="org.confery.model" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/../../../org.confery.model/build/classes/main" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../org.confery.model/src/main">
@@ -10,6 +10,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:5.1.23" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.guava:guava:21.0" level="project" />
     <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.2.9.Final" level="project" />
     <orderEntry type="library" name="Gradle: org.jboss.logging:jboss-logging:3.3.0.Final" level="project" />
     <orderEntry type="library" name="Gradle: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" level="project" />

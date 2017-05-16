@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.SubscriberService;
-import utils.ThrowPipe;
 import view.ViewType;
 
 import java.rmi.RemoteException;
@@ -123,7 +122,13 @@ public class ControllerTopBar implements ControllerInterface, SubscriberService 
         if (notification.getType().equals(NotificationType.SIGNAL_LOGIN) ||
                 notification.getType().equals(NotificationType.SIGNAL_SIGN_UP) ||
                 notification.getType().equals(NotificationType.UPDATE_USER)) {
-            Platform.runLater(() -> ThrowPipe.wrap(this::showActiveUser));
+            Platform.runLater(() -> {
+                try {
+                    showActiveUser();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            });
         }
         if (notification.getType().equals(NotificationType.SIGNAL_LOGOUT)) {
             Platform.runLater(this::showRegistrationButtons);

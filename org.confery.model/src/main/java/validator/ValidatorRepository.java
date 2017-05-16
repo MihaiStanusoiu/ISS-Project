@@ -23,7 +23,7 @@ public class ValidatorRepository<T> {
      * @param entityClass : class of the object given to validate
      * @throws RepositoryException : When object of given class cannot be validated
      */
-    public ValidatorRepository(Class<T> entityClass) throws RepositoryException {
+    public ValidatorRepository(Class<T> entityClass) {
         this.entityClass = entityClass;
         this.behaviour = ValidatorRepositoryBehaviourFactory.getBehaviour(entityClass);
     }
@@ -37,8 +37,6 @@ public class ValidatorRepository<T> {
         if(behaviour.check(object).size()==0){
             return true;
         }
-        else{
-            throw new ValidatorRepositoryException(behaviour.getAccumulator());
-        }
+        throw new ValidatorRepositoryException(behaviour.getAccumulator());
     }
 }
