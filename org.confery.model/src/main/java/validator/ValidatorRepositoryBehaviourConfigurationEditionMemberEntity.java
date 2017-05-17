@@ -26,14 +26,16 @@ public class ValidatorRepositoryBehaviourConfigurationEditionMemberEntity
      */
     @Override
     public List<String> check(ConfigurationEditionMemberEntity object) {
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Edition's configuration is NULL!");
         basedOn(Objects.isNull(object.getChair()))
-                .runTrue(accumulator::add, "Conference's chair is NULL!");
+                .runTrue(accumulator::add, "Edition configuration's chair is NULL!");
         basedOn(Objects.isNull(object.getCoChair()))
-                .runTrue(accumulator::add, "Conference's co-chair is NULL!");
+                .runTrue(accumulator::add, "Edition configuration's co-chair is NULL!");
         basedOn(Objects.isNull(object.getPCMember()))
-                .runTrue(accumulator::add, "Conference's pc-member is NULL!");
+                .runTrue(accumulator::add, "Edition configuration's pc-member is NULL!");
         basedOn(Objects.isNull(object.getId()))
-                .runTrue(accumulator::add, "Conference's id is NULL!");
+                .runTrue(accumulator::add, "Edition configuration's id is NULL!");
         return accumulator;
     }
 }

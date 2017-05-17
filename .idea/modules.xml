@@ -16,8 +16,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.confery.network/org.confery.network_main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.confery.network/org.confery.network_main.iml" group="org.confery.network" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.confery.network/org.confery.network_test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.confery.network/org.confery.network_test.iml" group="org.confery.network" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.confery.server/org.confery.server.iml" filepath="$PROJECT_DIR$/.idea/modules/org.confery.server/org.confery.server.iml" group="org.confery.server" />
+      <module fileurl="file://D:\Facultate\An 2\Semestrul 2\ISS\Iss nou\ISS-Project\.idea\modules\org.confery.server\org.confery.server.iml" filepath="D:\Facultate\An 2\Semestrul 2\ISS\Iss nou\ISS-Project\.idea\modules\org.confery.server\org.confery.server.iml" group="org.confery.server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.confery.server/org.confery.server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.confery.server/org.confery.server_main.iml" group="org.confery.server" />
+      <module fileurl="file://D:\Facultate\An 2\Semestrul 2\ISS\Iss nou\ISS-Project\.idea\modules\org.confery.server\org.confery.server_main.iml" filepath="D:\Facultate\An 2\Semestrul 2\ISS\Iss nou\ISS-Project\.idea\modules\org.confery.server\org.confery.server_main.iml" group="org.confery.server" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.confery.server/org.confery.server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.confery.server/org.confery.server_test.iml" group="org.confery.server" />
+      <module fileurl="file://D:\Facultate\An 2\Semestrul 2\ISS\Iss nou\ISS-Project\.idea\modules\org.confery.server\org.confery.server_test.iml" filepath="D:\Facultate\An 2\Semestrul 2\ISS\Iss nou\ISS-Project\.idea\modules\org.confery.server\org.confery.server_test.iml" group="org.confery.server" />
     </modules>
   </component>
 </project>

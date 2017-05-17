@@ -31,11 +31,11 @@ public class ValidatorRepositoryBehaviourConfigurationSessionMemberEntity
         basedOn(Objects.isNull(object.getChair()))
                 .runTrue(accumulator::add, "Conference configuration's  chair is NULL!");
         basedOn(Objects.isNull(object.getId()))
-                .runTrue(accumulator::add, "Conference configuration's chair is NULL!");
+                .runTrue(accumulator::add, "Conference configuration's id is NULL!");
         basedOn(Objects.isNull(object.getListener()))
-                .runTrue(accumulator::add, "Conference configuration's chair is NULL!");
+                .runTrue(accumulator::add, "Conference configuration's listener is NULL!");
         basedOn(Objects.isNull(object.getSpeaker()))
-                .runTrue(accumulator::add, "Conference configuration's chair is NULL!");
+                .runTrue(accumulator::add, "Conference configuration's speaker is NULL!");
         return accumulator;
     }
 }

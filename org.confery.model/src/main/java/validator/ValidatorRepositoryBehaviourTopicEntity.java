@@ -3,6 +3,9 @@ package validator;
 import domain.TopicEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for TopicEntity
@@ -22,20 +25,14 @@ public class ValidatorRepositoryBehaviourTopicEntity extends ValidatorRepository
 
     @Override
     public List<String> check(TopicEntity object) {
-        if (object.getId() == null) {
-            accumulator.add("Topic id is null.");
-        }
-        if (object.getSubmissionTopics() == null) {
-            accumulator.add("Topic submissionTopics is null.");
-        }
-        if(object.getWord() != null) {
-            if (object.getWord().equals("")) {
-                accumulator.add("Topic word is empty.");
-            }
-        }
-        else{
-            accumulator.add("Topic word is null.");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Topic is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Topic;s id is NULL!");
+        basedOn(Objects.isNull(object.getSubmissionTopics()))
+                .runTrue(accumulator::add, "Topic's submission topics is NULL!");
+        basedOn(Objects.isNull(object.getWord()) || object.getWord().equals(""))
+                .runTrue(accumulator::add, "Topic's word is INVALID!");
         return accumulator;
     }
 }
