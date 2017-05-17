@@ -33,7 +33,7 @@ public class ValidatorRepositoryBehaviourAuthorSubmissionEntityTest {
             validator.validate(invalidAuthorSubmission);
             Assert.fail();
         } catch (RepositoryException e) {
-            Assert.assertTrue(e.getMessage().contains ("AuthorSubmission id is null."));
+            Assert.assertTrue(e.getMessage().contains ("Author's ID is NULL!"));
         }
 
     }

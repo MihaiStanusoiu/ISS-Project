@@ -21,7 +21,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviourUser = new ValidatorRepositoryBehaviourFactory().getBehaviour(UserEntity.class);
             Assert.assertTrue(behaviourUser.getClass().equals(ValidatorRepositoryBehaviourUserEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -32,7 +32,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviourEdition = new ValidatorRepositoryBehaviourFactory().getBehaviour(EditionEntity.class);
             Assert.assertTrue(behaviourEdition.getClass().equals(ValidatorRepositoryBehaviourEditionEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -43,7 +43,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(AuthorSubmissionEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourAuthorSubmissionEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -54,7 +54,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(ConferenceEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourConferenceEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -65,7 +65,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(ConfigurationEditionMemberEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourConfigurationEditionMemberEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -76,7 +76,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(ConfigurationSessionMemberEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourConfigurationSessionMemberEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -87,7 +87,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(EditionMemberEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourEditionMemberEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
 
         }
     }
@@ -98,7 +98,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(NotificationEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourNotificationEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -109,7 +109,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(ReviewerEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourReviewerEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -120,7 +120,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(SessionEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourSessionEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -131,7 +131,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(SessionMemberEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourSessionMemberEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -142,7 +142,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(SubmissionEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourSubmissionEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -153,7 +153,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(SubmissionTagEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourSubmissionTagEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -164,7 +164,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(SubmissionTopicEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourSubmissionTopicEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -175,7 +175,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(TagEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourTagEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -186,7 +186,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(TopicEntity.class);
             Assert.assertTrue(behaviour.getClass().equals(ValidatorRepositoryBehaviourTopicEntity.class));
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
@@ -198,7 +198,7 @@ public class ValidatorRepositoryBehaviourFactoryTest {
         try {
             behaviour = new ValidatorRepositoryBehaviourFactory().getBehaviour(Object.class);
             Assert.fail();
-        } catch (RepositoryException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
