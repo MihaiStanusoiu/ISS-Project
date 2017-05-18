@@ -27,7 +27,6 @@ buildscript {
 dependencies {
     compile project(':org.confery.model')
     compile project(':org.confery.network')
-
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile("org.springframework.boot:spring-boot-starter-actuator")
     testCompile "org.testfx:testfx-core:4.0.+"

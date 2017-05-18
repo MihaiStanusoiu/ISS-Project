@@ -1,5 +1,6 @@
 package exception;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,6 +11,7 @@ import java.util.List;
  * @author Tanasie Luiza Maria
  * @version 1.0
  */
+
 @SuppressWarnings("all")
 public class ValidatorRepositoryException extends RepositoryException {
     private List<String> messages;
@@ -18,8 +20,18 @@ public class ValidatorRepositoryException extends RepositoryException {
         this.messages = messages;
     }
 
+    public ValidatorRepositoryException() {
+        messages = new ArrayList<>();
+    }
+
+    public ValidatorRepositoryException(String message) {
+        messages = new ArrayList<>();
+        messages.add(message);
+    }
+
     @Override
     public String getMessage() {
-        return messages.stream().reduce("", (accumulator, message) -> accumulator + System.lineSeparator() + message);
+        return messages.stream().reduce("", (accumulator, message)
+                -> accumulator + System.lineSeparator() + message);
     }
 }

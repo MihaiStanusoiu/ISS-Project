@@ -3,6 +3,9 @@ package validator;
 import domain.SubmissionTopicEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for SubmissionTopicEntity
@@ -22,15 +25,14 @@ public class ValidatorRepositoryBehaviourSubmissionTopicEntity extends Validator
      */
     @Override
     public List<String> check(SubmissionTopicEntity object) {
-        if (object.getId() == null) {
-            accumulator.add("Submission topic id is null.");
-        }
-        if (object.getSubmissionTopic() == null) {
-            accumulator.add("Submission topic submission is null.");
-        }
-        if (object.getTopic() == null) {
-            accumulator.add("Submission topic topic is null.");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Submission topic is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Submission topic's id is NULL!");
+        basedOn(Objects.isNull(object.getSubmissionTopic()))
+                .runTrue(accumulator::add, "Submission topic's submission is NULL!");
+        basedOn(Objects.isNull(object.getTopic()))
+                .runTrue(accumulator::add, "Submission topic's topic is NULL!");
         return accumulator;
     }
 }

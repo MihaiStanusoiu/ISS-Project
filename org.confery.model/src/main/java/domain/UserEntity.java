@@ -17,7 +17,7 @@ import java.util.Set;
 @Entity
 @Table(name = "USER")
 @SuppressWarnings("unused")
-public class UserEntity implements Serializable,Idable<Integer> {
+public class UserEntity implements Serializable, Idable<Integer> {
 
     @Id
     @GeneratedValue
@@ -47,7 +47,14 @@ public class UserEntity implements Serializable,Idable<Integer> {
 
     public UserEntity() {}
 
-    public UserEntity(String username, String password, String email, String name, String website, String bio, String location) {
+    public UserEntity(String username, String password, String email,
+                      String name, String website, String bio, String location) {
+        this(0, username, password, email, name, website, bio, location);
+    }
+
+    public UserEntity(Integer id, String username, String password, String email,
+                      String name, String website, String bio, String location) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -55,6 +62,10 @@ public class UserEntity implements Serializable,Idable<Integer> {
         this.website = website;
         this.bio = bio;
         this.location = location;
+    }
+
+    public UserEntity(String username, String password) {
+        this(username, password, "", "", "", "", "");
     }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)

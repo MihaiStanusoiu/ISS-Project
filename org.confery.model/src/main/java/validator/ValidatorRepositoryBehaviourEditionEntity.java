@@ -3,6 +3,9 @@ package validator;
 import domain.EditionEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for EditionEntity
@@ -22,49 +25,30 @@ public class ValidatorRepositoryBehaviourEditionEntity extends ValidatorReposito
      */
     @Override
     public List<String> check(EditionEntity object) {
-        if(object.getBio() != null) {
-            if (object.getBio().equals("")) {
-                accumulator.add("Edition bio is empty");
-            }
-        }
-        else{
-            accumulator.add("Edition bio is null");
-        }
-        if (object.getAbstractDeadline() == null) {
-            accumulator.add("Edition abstract deadline is null");
-        }
-        if (object.getBiddingDeadline() == null) {
-            accumulator.add("Edition bidding deadline is null");
-        }
-        if (object.getConference() == null) {
-            accumulator.add("Edition conference is null");
-        }
-        if (object.getEndDate() == null) {
-            accumulator.add("Edition end date is null");
-        }
-        if (object.getEvaluationDeadline() == null) {
-            accumulator.add("Edition evaluation deadline is null");
-        }
-        if (object.getId() == null) {
-            accumulator.add("Edition id is null");
-        }
-        if(object.getLocation() != null) {
-            if (object.getLocation().equals("")) {
-                accumulator.add("Edition location is empty");
-            }
-        }
-        else{
-            accumulator.add("Edition location is null");
-        }
-        if (object.getPaperDeadline() == null) {
-            accumulator.add("Edition location is null");
-        }
-        if (object.getSessions() == null) {
-            accumulator.add("Edition sessions is null");
-        }
-        if (object.getStartDate() == null) {
-            accumulator.add("Edition start date is null");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Edition is NULL!");
+        basedOn(Objects.isNull(object.getBio()))
+                .runTrue(accumulator::add, "Edition's bio is NULL!");
+        basedOn(Objects.isNull(object.getAbstractDeadline()))
+                .runTrue(accumulator::add, "Edition's abstract deadline is NULL!");
+        basedOn(Objects.isNull(object.getBiddingDeadline()))
+                .runTrue(accumulator::add, "Edition's bidding deadline is NULL!");
+        basedOn(Objects.isNull(object.getConference()))
+                .runTrue(accumulator::add, "Edition's conference is NULL!");
+        basedOn(Objects.isNull(object.getEndDate()))
+                .runTrue(accumulator::add, "Edition's end date is NULL!");
+        basedOn(Objects.isNull(object.getEvaluationDeadline()))
+                .runTrue(accumulator::add, "Edition's evaluation date is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Edition's id is NULL!");
+        basedOn(Objects.isNull(object.getLocation()) || object.getLocation().equals(""))
+                .runTrue(accumulator::add, "Edition's location is INVALID!");
+        basedOn(Objects.isNull(object.getPaperDeadline()))
+                .runTrue(accumulator::add, "Edition's paper deadline is NULL!");
+        basedOn(Objects.isNull(object.getSessions()))
+                .runTrue(accumulator::add, "Edition's sessions is NULL!");
+        basedOn(Objects.isNull(object.getStartDate()))
+                .runTrue(accumulator::add, "Edition's start date is NULL!");
         return accumulator;
     }
 }

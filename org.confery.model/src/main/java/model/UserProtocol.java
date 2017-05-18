@@ -1,17 +1,10 @@
 package model;
 
 import domain.UserEntity;
-import exception.RepositoryException;
-
-import java.util.List;
 
 /**
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-public interface UserProtocol {
-
-    List<UserEntity> getUsers() throws RepositoryException;
-
-}
+public interface UserProtocol extends ModelInterface<UserEntity, Integer> { }

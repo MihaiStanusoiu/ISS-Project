@@ -3,6 +3,9 @@ package validator;
 import domain.ReviewerEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for ReviewerEntity
@@ -22,43 +25,18 @@ public class ValidatorRepositoryBehaviourReviewerEntity extends ValidatorReposit
 
     @Override
     public List<String> check(ReviewerEntity object) {
-        if (object.getId() == null) {
-            accumulator.add("Reviewer id is null.");
-        }
-        if(object.getQualifier() != null) {
-            if (object.getQualifier().equals("")) {
-                accumulator.add("Reviewer qualifier is empty.");
-            }
-        }
-        else{
-            accumulator.add("Reviewer qualifier is null.");
-        }
-        if(object.getRecommendationUrl() != null) {
-            if (object.getRecommendationUrl().equals("")) {
-                accumulator.add("Reviewer recommendation url is empty.");
-            }
-        }
-        else
-        {
-            accumulator.add("Reviewer recommendation url is null.");
-        }
-        if(object.getResponse() != null) {
-            if (object.getResponse().equals("")) {
-                accumulator.add("Reviewer response is empty.");
-            }
-        }
-        else{
-            accumulator.add("Reviewer response is null.");
-        }
-        if(object.getStatus() != null) {
-            if (object.getStatus().equals("")) {
-                accumulator.add("Reviewer status is empty.");
-            }
-        }
-        else
-        {
-            accumulator.add("Reviewer status is null.");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Reviewer is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Reviewer's id is NULL!");
+        basedOn(Objects.isNull(object.getQualifier()))
+                .runTrue(accumulator::add, "Reviewer's qualifier is NULL!");
+        basedOn(Objects.isNull(object.getRecommendationUrl()))
+                .runTrue(accumulator::add, "Reviewer's recommendation url is NULL!");
+        basedOn(Objects.isNull(object.getResponse()))
+                .runTrue(accumulator::add, "Reviewer's response is NULL!");
+        basedOn(Objects.isNull(object.getStatus()) || object.getStatus().equals(""))
+                .runTrue(accumulator::add, "Reviewer's status is INVALID!");
         return accumulator;
     }
 }

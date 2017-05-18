@@ -3,6 +3,6 @@
 **Dependencies**
 - [Spring](https://spring.io/)
 - [Hibernate](http://hibernate.org/)
-- [Mockito](http://site.mockito.org/)
+- [PowerMockito](https://github.com/powermock/powermock/wiki/MockitoUsage)
 
 **Build with [Gradle](https://gradle.org/)**

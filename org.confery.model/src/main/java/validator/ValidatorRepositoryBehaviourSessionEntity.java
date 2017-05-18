@@ -3,6 +3,9 @@ package validator;
 import domain.SessionEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for SessionEntity
@@ -22,51 +25,26 @@ public class ValidatorRepositoryBehaviourSessionEntity extends ValidatorReposito
 
     @Override
     public List<String> check(SessionEntity object) {
-        if (object.getId() == null) {
-            accumulator.add("Session id is null.");
-        }
-        if(object.getBio() != null) {
-            if (object.getBio().equals("")) {
-                accumulator.add("Session bio is empty.");
-            }
-        }
-        else
-        {
-            accumulator.add("Session bio is null.");
-        }
-        if (object.getEdition() == null) {
-            accumulator.add("Session edition is null.");
-        }
-        if (object.getEndDate() == null) {
-            accumulator.add("Session end date is null.");
-        }
-        if(object.getLocation() != null) {
-            if (object.getLocation().equals("")) {
-                accumulator.add("Session location is empty.");
-            }
-        }
-        else
-        {
-            accumulator.add("Session location is null.");
-        }
-        if(object.getName() != null) {
-            if (object.getName().equals("")) {
-                accumulator.add("Session name is empty.");
-            }
-        }
-        else
-        {
-            accumulator.add("Session name is null.");
-        }
-        if (object.getSeats() == null) {
-            accumulator.add("Session seats is null.");
-        }
-        if (object.getSessionMembers() == null) {
-            accumulator.add("Session sessionMembers is null.");
-        }
-        if (object.getStartDate() == null) {
-            accumulator.add("Session start date is null.");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Session is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Session's id is NULL!");
+        basedOn(Objects.isNull(object.getBio()))
+                .runTrue(accumulator::add, "Session's bio is NULL!");
+        basedOn(Objects.isNull(object.getEdition()))
+                .runTrue(accumulator::add, "Session's edition is NULL!");
+        basedOn(Objects.isNull(object.getEndDate()))
+                .runTrue(accumulator::add, "Session's end date is NULL!");
+        basedOn(Objects.isNull(object.getLocation()) || object.getLocation().equals(""))
+                .runTrue(accumulator::add, "Session's location is INVALID!");
+        basedOn(Objects.isNull(object.getName()) || object.getName().equals(""))
+                .runTrue(accumulator::add, "Session's name is INVALID!");
+        basedOn(Objects.isNull(object.getSeats()))
+                .runTrue(accumulator::add, "Session's seats is NULL!");
+        basedOn(Objects.isNull(object.getSessionMembers()))
+                .runTrue(accumulator::add, "Session's session members is NULL!");
+        basedOn(Objects.isNull(object.getStartDate()))
+                .runTrue(accumulator::add, "Session's start date is NULL!");
         return accumulator;
     }
 }

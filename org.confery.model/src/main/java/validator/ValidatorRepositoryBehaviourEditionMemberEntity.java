@@ -3,6 +3,9 @@ package validator;
 import domain.EditionMemberEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for EditionMemberEntity
@@ -22,22 +25,18 @@ public class ValidatorRepositoryBehaviourEditionMemberEntity extends ValidatorRe
      */
     @Override
     public List<String> check(EditionMemberEntity object) {
-
-        if (object.getConfigurationEditionMember() == null) {
-            accumulator.add("SessionMember configuration edition member is null.");
-        }
-        if (object.getId() == null) {
-            accumulator.add("SessionMember id is null.");
-        }
-        if (object.getIdEdition() == null) {
-            accumulator.add("SessionMember edition id is null.");
-        }
-        if (object.getIdUser() == null) {
-            accumulator.add("SessionMember user id is null.");
-        }
-        if (object.getReviewers() == null) {
-            accumulator.add("SessionMember reviewers set is null.");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Edition member is NULL!");
+        basedOn(Objects.isNull(object.getConfigurationEditionMember()))
+                .runTrue(accumulator::add, "Edition's member configuration is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Edition's member id is NULL!");
+        basedOn(Objects.isNull(object.getIdEdition()))
+                .runTrue(accumulator::add, "Edition's member edition id is NULL!");
+        basedOn(Objects.isNull(object.getIdUser()))
+                .runTrue(accumulator::add, "Edition's member user id is NULL!");
+        basedOn(Objects.isNull(object.getReviewers()))
+                .runTrue(accumulator::add, "Edition's member reviewers is NULL!");
         return accumulator;
     }
 }

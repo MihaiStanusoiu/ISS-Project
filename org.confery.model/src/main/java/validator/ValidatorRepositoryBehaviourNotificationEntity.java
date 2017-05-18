@@ -3,6 +3,9 @@ package validator;
 import domain.NotificationEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for NotificationEntity
@@ -22,23 +25,16 @@ public class ValidatorRepositoryBehaviourNotificationEntity extends ValidatorRep
      */
     @Override
     public List<String> check(NotificationEntity object) {
-        if (object.getId() == null) {
-            accumulator.add("Notification id is null.");
-        }
-        if (object.getPaymentType() == null) {
-            accumulator.add("Notification payment type is null.");
-        }
-        if(object.getText() != null) {
-            if (object.getText().equals("")) {
-                accumulator.add("Notification text is empty.");
-            }
-        }
-        else{
-            accumulator.add("Notification text is null.");
-        }
-        if (object.getUser() == null) {
-            accumulator.add("Notification user is null.");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Notification is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Notification's id is NULL!");
+        basedOn(Objects.isNull(object.getPaymentType()))
+                .runTrue(accumulator::add, "Notification's payment type is NULL!");
+        basedOn(Objects.isNull(object.getText()) || object.getText().equals(""))
+                .runTrue(accumulator::add, "Notification's text is INVALID!");
+        basedOn(Objects.isNull(object.getUser()))
+                .runTrue(accumulator::add, "Notification's user is NULL!");
         return accumulator;
     }
 }
