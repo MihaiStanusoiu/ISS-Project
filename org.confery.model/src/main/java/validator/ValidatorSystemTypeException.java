@@ -1,9 +1,9 @@
 package validator;
 
-import exception.RepositoryException;
+import exception.SystemException;
 
 /**
- * Name:         ValidatorRepositoryTypeException
+ * Name:         ValidatorSystemTypeException
  * Effect:       The exception thrown when validation behaviour cannot be retrieved for given object
  * Date:         06/05/2017
  *
@@ -11,11 +11,11 @@ import exception.RepositoryException;
  * @version 1.0
  */
 @SuppressWarnings("all")
-public class ValidatorRepositoryTypeException extends RepositoryException {
+public class ValidatorSystemTypeException extends SystemException {
 
     private String message;
 
-    public ValidatorRepositoryTypeException(String message){
+    public ValidatorSystemTypeException(String message){
         this.message = message;
     }
     @Override

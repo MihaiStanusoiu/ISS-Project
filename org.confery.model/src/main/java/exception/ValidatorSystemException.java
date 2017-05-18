@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Name:         ValidatorRepositoryException
+ * Name:         ValidatorSystemException
  * Effect:       The exception thrown when object to be validated is invalid.
  * Date:         06/05/2017
  *
@@ -13,18 +13,18 @@ import java.util.List;
  */
 
 @SuppressWarnings("all")
-public class ValidatorRepositoryException extends RepositoryException {
+public class ValidatorSystemException extends SystemException {
     private List<String> messages;
 
-    public ValidatorRepositoryException(List<String> messages) {
+    public ValidatorSystemException(List<String> messages) {
         this.messages = messages;
     }
 
-    public ValidatorRepositoryException() {
+    public ValidatorSystemException() {
         messages = new ArrayList<>();
     }
 
-    public ValidatorRepositoryException(String message) {
+    public ValidatorSystemException(String message) {
         messages = new ArrayList<>();
         messages.add(message);
     }

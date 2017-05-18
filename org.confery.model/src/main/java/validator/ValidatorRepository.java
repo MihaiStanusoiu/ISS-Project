@@ -1,7 +1,7 @@
 package validator;
 
-import exception.RepositoryException;
-import exception.ValidatorRepositoryException;
+import exception.SystemException;
+import exception.ValidatorSystemException;
 
 
 /**
@@ -21,7 +21,7 @@ public class ValidatorRepository<T> {
 
     /**
      * @param entityClass : class of the object given to validate
-     * @throws RepositoryException : When object of given class cannot be validated
+     * @throws SystemException : When object of given class cannot be validated
      */
     public ValidatorRepository(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -31,12 +31,12 @@ public class ValidatorRepository<T> {
     /**
      * @param object : object to validate
      * @return [Boolean] : Returns true if given object is valid
-     * @throws RepositoryException : When given object isn't valid
+     * @throws SystemException : When given object isn't valid
      */
-    public Boolean validate(T object) throws RepositoryException {
+    public Boolean validate(T object) throws SystemException {
         if(behaviour.check(object).size()==0){
             return true;
         }
-        throw new ValidatorRepositoryException(behaviour.getAccumulator());
+        throw new ValidatorSystemException(behaviour.getAccumulator());
     }
 }

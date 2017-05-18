@@ -1,7 +1,8 @@
 package model;
 
-import database.DatabaseLoader;
+import database.DatabaseLoaderInterface;
 import domain.UserEntity;
+import protocol.UserProtocol;
 
 /**
  * @author Alexandru Stoica
@@ -10,7 +11,7 @@ import domain.UserEntity;
 
 public class UserModel extends Model<UserEntity, Integer> implements UserProtocol {
 
-    public UserModel(DatabaseLoader loader) {
+    public UserModel(DatabaseLoaderInterface loader) {
         super(UserEntity.class, loader);
     }
 

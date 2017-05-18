@@ -1,4 +1,4 @@
-package model;
+package protocol;
 
 import domain.UserEntity;
 

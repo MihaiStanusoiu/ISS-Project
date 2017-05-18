@@ -65,7 +65,7 @@ public class UserEntity implements Serializable, Idable<Integer> {
     }
 
     public UserEntity(String username, String password) {
-        this(username, password, "", "", "", "", "");
+        this(0, username, password, "", "", "", "", "");
     }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)

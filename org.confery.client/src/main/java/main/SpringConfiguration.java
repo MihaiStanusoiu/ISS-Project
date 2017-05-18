@@ -70,8 +70,9 @@ public class SpringConfiguration {
 
     @Bean
     @Lazy
-    public ControllerUsersView controllerUsers() {
-        return new ControllerUsersView(stageManager);
+    public ControllerUsersView controllerUsers()
+            throws RemoteException, NotBoundException, MalformedURLException {
+        return new ControllerUsersView(stageManager, listener());
     }
 
     @Bean
@@ -100,6 +101,13 @@ public class SpringConfiguration {
     public ControllerMenu controllerMenu()
             throws RemoteException, NotBoundException, MalformedURLException {
         return new ControllerMenu(stageManager, listener());
+    }
+
+    @Bean
+    @Lazy
+    public ControllerAddConferenceView controllerAddConferenceVoew()
+            throws RemoteException, NotBoundException, MalformedURLException {
+        return new ControllerAddConferenceView(stageManager, listener());
     }
 
     @Bean

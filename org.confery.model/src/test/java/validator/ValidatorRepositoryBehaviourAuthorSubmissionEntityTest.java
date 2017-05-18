@@ -1,7 +1,7 @@
 package validator;
 
 import domain.AuthorSubmissionEntity;
-import exception.RepositoryException;
+import exception.SystemException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ public class ValidatorRepositoryBehaviourAuthorSubmissionEntityTest {
         try {
             ValidatorRepository<AuthorSubmissionEntity> validator = new ValidatorRepository<>(AuthorSubmissionEntity.class);
             Assert.assertTrue(validator.validate(validAuthorSubmission));
-        } catch (RepositoryException e) {
+        } catch (SystemException e) {
             e.printStackTrace();
         }
     }
@@ -32,7 +32,7 @@ public class ValidatorRepositoryBehaviourAuthorSubmissionEntityTest {
             ValidatorRepository<AuthorSubmissionEntity> validator = new ValidatorRepository<>(AuthorSubmissionEntity.class);
             validator.validate(invalidAuthorSubmission);
             Assert.fail();
-        } catch (RepositoryException e) {
+        } catch (SystemException e) {
             Assert.assertTrue(e.getMessage().contains ("Author's ID is NULL!"));
         }
 

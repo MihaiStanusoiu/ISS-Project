@@ -1,7 +1,7 @@
 package validator;
 
 import domain.*;
-import exception.RepositoryException;
+import exception.SystemException;
 
 /**
  * Name:         Validator behaviour factory
@@ -18,7 +18,7 @@ public class ValidatorRepositoryBehaviourFactory {
     /**
      * @param type : class of the given object
      * @return [ValidatorRepositoryBehaviour] : returns specific validation behaviour
-     * @throws RepositoryException : when behaviour can't be retrieved for given class
+     * @throws SystemException : when behaviour can't be retrieved for given class
      */
     public static ValidatorRepositoryBehaviour getBehaviour(Class type) {
         if (type.equals(UserEntity.class)){

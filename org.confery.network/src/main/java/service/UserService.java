@@ -1,6 +1,6 @@
 package service;
 
-import exception.RepositoryException;
+import exception.SystemException;
 import transferable.User;
 
 import java.rmi.Remote;
@@ -14,10 +14,10 @@ import java.util.List;
 
 public interface UserService extends Remote {
 
-    Integer add(User user) throws RemoteException, RepositoryException;
-    User delete(User user) throws RemoteException, RepositoryException;
-    void update(User user, User with) throws RemoteException, RepositoryException;
-    User getEntityById(Integer id) throws RemoteException, RepositoryException;
-    List<User> getAll() throws RemoteException, RepositoryException;
+    Integer add(User user) throws RemoteException, SystemException;
+    User delete(User user) throws RemoteException, SystemException;
+    void update(User user, User with) throws RemoteException, SystemException;
+    User getEntityById(Integer id) throws RemoteException, SystemException;
+    List<User> getAll() throws RemoteException, SystemException;
 
 }

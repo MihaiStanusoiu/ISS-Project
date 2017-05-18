@@ -29,9 +29,12 @@ public class TagEntity implements Idable<Integer> {
     @OneToMany(fetch = FetchType.EAGER, mappedBy="tag", cascade = CascadeType.ALL)
     private Set<SubmissionTagEntity> submissionTags;
 
-    public TagEntity() { }
+    public TagEntity() {
+        this("");
+    }
 
     public TagEntity(String word) {
+        this.id = 0;
         this.word = word;
         submissionTags = new HashSet<>();
     }

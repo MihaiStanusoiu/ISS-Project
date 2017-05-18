@@ -4,7 +4,7 @@ import database.DatabaseLoaderFactory;
 import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.TagEntity;
-import exception.RepositoryException;
+import exception.SystemException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -44,7 +44,7 @@ public class TagTest {
             Assert.assertTrue(idTag.equals(1) &&
                     user.getWord().equals("test")
             );
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -58,7 +58,7 @@ public class TagTest {
             repositoryTag.update(tag, update);
             TagEntity result = repositoryTag.getElementById(tag.getId());
             Assert.assertTrue(result.getWord().equals(update.getWord()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -72,7 +72,7 @@ public class TagTest {
             Assert.assertTrue(tag.getWord().equals(repositoryTag.getElementById(1).getWord()));
             repositoryTag.delete(tag.getId());
             Assert.assertTrue(repositoryTag.getAll().isEmpty());
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -87,7 +87,7 @@ public class TagTest {
             ArrayList<TagEntity> result = new ArrayList<>(repositoryTag.getAll());
             Assert.assertTrue(result.get(0).getId().equals(tag.getId()) &&
                     result.get(1).getId().equals(test.getId()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -103,7 +103,7 @@ public class TagTest {
             Assert.assertTrue(result.getId().equals(tag.getId()) &&
                     result.getWord().equals(tag.getWord())
             );
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }

@@ -23,6 +23,16 @@ public enum ViewType implements ViewTypeInterface {
 
     },
 
+    ADD_CONFERENCE {
+
+        /** My Conferences View */
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/AddConferenceView.fxml";
+        }
+
+    },
+
     MY_CONFERENCES {
 
         /** My Conferences View */
