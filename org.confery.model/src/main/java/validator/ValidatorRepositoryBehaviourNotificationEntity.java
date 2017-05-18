@@ -33,8 +33,6 @@ public class ValidatorRepositoryBehaviourNotificationEntity extends ValidatorRep
                 .runTrue(accumulator::add, "Notification's payment type is NULL!");
         basedOn(Objects.isNull(object.getText()) || object.getText().equals(""))
                 .runTrue(accumulator::add, "Notification's text is INVALID!");
-        basedOn(Objects.isNull(object.getUser()))
-                .runTrue(accumulator::add, "Notification's user is NULL!");
         return accumulator;
     }
 }

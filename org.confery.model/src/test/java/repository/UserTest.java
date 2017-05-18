@@ -5,7 +5,7 @@ import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.NotificationEntity;
 import domain.UserEntity;
-import exception.RepositoryException;
+import exception.SystemException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -59,7 +59,7 @@ public class UserTest {
                     user.getWebsite().equals("website") &&
                     user.getEmail().equals("email")
             );
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -73,7 +73,7 @@ public class UserTest {
             repositoryUser.update(user, user2);
             UserEntity result = repositoryUser.getElementById(user.getId());
             Assert.assertTrue(result.getUsername().equals("username2"));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -87,7 +87,7 @@ public class UserTest {
             Assert.assertTrue(user.getEmail().equals(repositoryUser.getElementById(1).getEmail()));
             repositoryUser.delete(user.getId());
             Assert.assertTrue(repositoryUser.getAll().isEmpty());
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -102,7 +102,7 @@ public class UserTest {
             ArrayList<UserEntity> result = new ArrayList<>(repositoryUser.getAll());
             Assert.assertTrue(result.get(0).getId().equals(user.getId()) &&
                     result.get(1).getId().equals(user2.getId()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -117,7 +117,7 @@ public class UserTest {
             UserEntity result = repositoryUser.getElementById(1);
             Assert.assertTrue(result.getId().equals(user.getId()) &&
                     result.getName().equals(user.getName()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -151,7 +151,7 @@ public class UserTest {
             }
             Assert.assertTrue(isNote.equals(true) && isNote2.equals(true) && isNote3.equals(true));
             Assert.assertTrue(notifications.size() == 3);
-        }catch(RepositoryException exception) {
+        }catch(SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }

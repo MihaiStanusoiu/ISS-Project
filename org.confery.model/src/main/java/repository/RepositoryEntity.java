@@ -2,8 +2,8 @@ package repository;
 
 import database.DatabaseLoaderInterface;
 import domain.Idable;
-import exception.RepositoryException;
-import exception.ValidatorRepositoryException;
+import exception.SystemException;
+import exception.ValidatorSystemException;
 import functions.ThrowMethod;
 import org.hibernate.Session;
 import validator.ValidatorRepository;
@@ -66,7 +66,7 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
      * {@inheritDoc}
      */
     @Override
-    public Id add(T element) throws RepositoryException {
+    public Id add(T element) throws SystemException {
         runFunction(validator::validate, element).orThrow(exception -> exception);
         Session session = loader.getFactory().openSession();
         session.beginTransaction();
@@ -80,7 +80,7 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
      * {@inheritDoc}
      */
     @Override
-    public void update(T element, T with) throws RepositoryException {
+    public void update(T element, T with) throws SystemException {
         runFunction(validator::validate, with).orThrow(exception -> exception);
         Session session = loader.getFactory().openSession();
         with.setId(element.getId());
@@ -94,12 +94,12 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
      * {@inheritDoc}
      */
     @Override
-    public T delete(Id id) throws RepositoryException {
+    public T delete(Id id) throws SystemException {
         Session session = loader.getFactory().openSession();
         session.beginTransaction();
         T element = this.getElementById(id);
         runFunction((ThrowMethod<T, RuntimeException>)session::delete, element)
-                .orThrow(exception -> new ValidatorRepositoryException(exception.getMessage()));
+                .orThrow(exception -> new ValidatorSystemException(exception.getMessage()));
         session.getTransaction().commit();
         session.close();
         return element;
@@ -110,7 +110,7 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<T> getAll() throws RepositoryException {
+    public List<T> getAll() {
         Session session = loader.getFactory().openSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = builder.createQuery(repositoryClass);
@@ -126,7 +126,7 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
      * {@inheritDoc}
      */
     @Override
-    public T getElementById(Id id) throws RepositoryException {
+    public T getElementById(Id id) throws SystemException {
         Session session = loader.getFactory().openSession();
         T element = session.get(repositoryClass, id);
         session.close();

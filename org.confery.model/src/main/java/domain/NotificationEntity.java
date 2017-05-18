@@ -36,6 +36,7 @@ public class NotificationEntity implements Serializable,Idable<Integer> {
     public NotificationEntity() {}
 
     public NotificationEntity(String text, Boolean paymentType) {
+        this.id = 0;
         this.text = text;
         this.paymentType = paymentType;
     }

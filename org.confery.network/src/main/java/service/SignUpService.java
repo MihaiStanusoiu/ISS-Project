@@ -1,6 +1,6 @@
 package service;
 
-import exception.RepositoryException;
+import exception.SystemException;
 import transferable.User;
 
 import java.rmi.Remote;
@@ -13,6 +13,6 @@ import java.rmi.RemoteException;
 
 public interface SignUpService extends Remote {
 
-    User signUp(String username, String password, String confirm, String email, String name) throws RemoteException, RepositoryException;
+    User signUp(String username, String password, String confirm, String email, String name) throws RemoteException, SystemException;
 
 }

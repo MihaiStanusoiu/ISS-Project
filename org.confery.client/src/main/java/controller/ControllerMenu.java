@@ -52,7 +52,7 @@ public class ControllerMenu implements ControllerInterface {
      * @implNote status: Unavailable at the moment.
      */
     @FXML private void onAddConferenceViewButtonClick() {
-        System.out.println("Add ConferenceEntity View");
+        manager.switchScene(ViewType.ADD_CONFERENCE);
     }
 
     /**

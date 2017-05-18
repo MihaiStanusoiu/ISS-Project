@@ -5,7 +5,7 @@ import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.ConfigurationSessionMemberEntity;
 import domain.SessionMemberEntity;
-import exception.RepositoryException;
+import exception.SystemException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -52,7 +52,7 @@ public class ConfigurationSessionMemberTest {
                     configuration.getSpeaker().equals(false) &&
                     configuration.getListener().equals(true)
             );
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -66,7 +66,7 @@ public class ConfigurationSessionMemberTest {
             repositorySessionMemberConfiguration.update(user, update);
             ConfigurationSessionMemberEntity result = repositorySessionMemberConfiguration.getElementById(user.getId());
             Assert.assertTrue(result.getListener().equals(false));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -81,7 +81,7 @@ public class ConfigurationSessionMemberTest {
                     .equals(repositorySessionMemberConfiguration.getElementById(1).getChair()));
             repositorySessionMemberConfiguration.delete(member.getId());
             Assert.assertEquals(repositorySessionMemberConfiguration.getAll().isEmpty(), true);
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -96,7 +96,7 @@ public class ConfigurationSessionMemberTest {
             ArrayList<ConfigurationSessionMemberEntity> result = new ArrayList<>(repositorySessionMemberConfiguration.getAll());
             Assert.assertTrue(result.get(0).getId().equals(configuration.getId()) &&
                     result.get(1).getId().equals(test.getId()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -111,7 +111,7 @@ public class ConfigurationSessionMemberTest {
             ConfigurationSessionMemberEntity result = repositorySessionMemberConfiguration.getElementById(1);
             Assert.assertTrue(result.getId().equals(configuration.getId()) &&
                     result.getChair().equals(configuration.getChair()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -131,7 +131,7 @@ public class ConfigurationSessionMemberTest {
             ConfigurationSessionMemberEntity newConfig = repositorySessionMemberConfiguration.getElementById(1);
             Set<SessionMemberEntity> sessions = newConfig.getSectionMembers();
             Assert.assertTrue(sessions.size() == 2);
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }

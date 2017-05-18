@@ -1,6 +1,6 @@
 package controller;
 
-import exception.RepositoryException;
+import exception.SystemException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -100,7 +100,7 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
             this.listener.notifyAll(new Notification(NotificationType.SIGNAL_SIGN_UP));
             this.listener.removeSubscriber(this);
             manager.switchScene(ViewType.CONFERENCES);
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             errorLabel.setText(exception.getCause().getMessage());
         }
     }

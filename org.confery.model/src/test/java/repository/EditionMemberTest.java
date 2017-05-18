@@ -4,7 +4,7 @@ import database.DatabaseLoaderFactory;
 import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.*;
-import exception.RepositoryException;
+import exception.SystemException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -79,7 +79,7 @@ public class EditionMemberTest {
                     member.getIdUser().getUsername().equals("user") &&
                     member.getConfigurationEditionMember().getCoChair().equals(true)
             );
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -99,7 +99,7 @@ public class EditionMemberTest {
             repositoryEditionMember.update(member, update);
             EditionMemberEntity result = repositoryEditionMember.getElementById(member.getId());
             Assert.assertTrue(result.getIdUser().getUsername().equals("username"));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -116,7 +116,7 @@ public class EditionMemberTest {
             Assert.assertTrue(member.getIdEdition().getLocation().equals(repositoryEditionMember.getElementById(1).getIdEdition().getLocation()));
             repositoryEditionMember.delete(member.getId());
             Assert.assertTrue(repositoryEditionMember.getAll().isEmpty());
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -137,7 +137,7 @@ public class EditionMemberTest {
             ArrayList<EditionMemberEntity> result = new ArrayList<>(repositoryEditionMember.getAll());
             Assert.assertTrue(result.get(0).getId().equals(member.getId()) &&
                     result.get(1).getId().equals(test.getId()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -158,7 +158,7 @@ public class EditionMemberTest {
             EditionMemberEntity result = repositoryEditionMember.getElementById(1);
             Assert.assertTrue(result.getId().equals(member.getId()) &&
                     result.getIdUser().getUsername().equals(member.getIdUser().getUsername()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -178,7 +178,7 @@ public class EditionMemberTest {
             UserEntity user0 = repositoryUser.getElementById(1);
             Set<EditionMemberEntity> editionMembers = user0.getEditionMembers();
             Assert.assertTrue(editionMembers.size() == 3);
-        }catch (RepositoryException exception) {
+        }catch (SystemException exception) {
         Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -198,7 +198,7 @@ public class EditionMemberTest {
             ConfigurationEditionMemberEntity configuration0 = repositoryEditionConfiguration.getElementById(1);
             Set<EditionMemberEntity> editionMembers = configuration0.getEditionMembers();
             Assert.assertTrue(editionMembers.size() == 3);
-        }catch (RepositoryException exception) {
+        }catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -218,7 +218,7 @@ public class EditionMemberTest {
             EditionEntity edition0 = repositoryEdition.getElementById(1);
             Set<EditionMemberEntity> editionMembers = edition0.getEditionMembers();
             Assert.assertTrue(editionMembers.size() == 3);
-        }catch (RepositoryException exception) {
+        }catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }

@@ -5,7 +5,7 @@ import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.ConferenceEntity;
 import domain.EditionEntity;
-import exception.RepositoryException;
+import exception.SystemException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -66,7 +66,7 @@ public class EditionTest {
                     edition.getStartDate().equals(date) &&
                     edition.getConference().getAcronym().equals("IEC")
             );
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -80,7 +80,7 @@ public class EditionTest {
             repositoryEdition.update(edition, update);
             EditionEntity result = repositoryEdition.getElementById(edition.getId());
             Assert.assertTrue(result.getLocation().equals("new location"));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -94,7 +94,7 @@ public class EditionTest {
             Assert.assertTrue(edition.getBio().equals(repositoryEdition.getElementById(1).getBio()));
             repositoryEdition.delete(edition.getId());
             Assert.assertTrue(repositoryEdition.getAll().isEmpty());
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -117,7 +117,7 @@ public class EditionTest {
             ConferenceEntity sameConference = repositoryConference.getElementById(1);
             Set<EditionEntity> editions = sameConference.getEditions();
             Assert.assertTrue(editions.size() == 2);
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -132,7 +132,7 @@ public class EditionTest {
             EditionEntity result = repositoryEdition.getElementById(1);
             Assert.assertTrue(result.getId().equals(edition.getId()) &&
                     result.getLocation().equals(edition.getLocation()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }

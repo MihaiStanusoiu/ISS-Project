@@ -1,6 +1,6 @@
 package controller;
 
-import exception.RepositoryException;
+import exception.SystemException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -84,7 +84,7 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
      * Effect: The user logs in the system with account data.
      * @implNote status: Unavailable at the moment.
      */
-    @FXML void onLoginButtonClick() throws RemoteException, RepositoryException {
+    @FXML void onLoginButtonClick() throws RemoteException, SystemException {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         try {

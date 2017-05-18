@@ -6,7 +6,7 @@ import database.DatabaseLoaderType;
 import domain.EditionMemberEntity;
 import domain.ReviewerEntity;
 import domain.SubmissionEntity;
-import exception.RepositoryException;
+import exception.SystemException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -57,7 +57,7 @@ public class ReviewerTest {
                 review.getQualifier().equals("qualifier") &&
                 review.getRecommendationUrl().equals("recommendationUrl")
             );
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -71,7 +71,7 @@ public class ReviewerTest {
             repositoryReview.update(review, update);
             ReviewerEntity result = repositoryReview.getElementById(review.getId());
             Assert.assertTrue(result.getResponse().equals("response2") && result.getQualifier().equals("qualifier2"));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -86,7 +86,7 @@ public class ReviewerTest {
             Assert.assertTrue(review.getRecommendationUrl().equals(repositoryReview.getElementById(1).getRecommendationUrl()));
             repositoryReview.delete(review.getId());
             Assert.assertTrue(repositoryReview.getAll().isEmpty());
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -101,7 +101,7 @@ public class ReviewerTest {
             ArrayList<ReviewerEntity> result = new ArrayList<>(repositoryReview.getAll());
             Assert.assertTrue(result.get(0).getId().equals(review.getId()) &&
                     result.get(1).getId().equals(test.getId()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -116,7 +116,7 @@ public class ReviewerTest {
             ReviewerEntity result = repositoryReview.getElementById(1);
             Assert.assertTrue(result.getId().equals(review.getId()) &&
                     result.getQualifier().equals(review.getQualifier()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -139,7 +139,7 @@ public class ReviewerTest {
             EditionMemberEntity edition0 = repositoryEditionMember.getElementById(1);
             Set<ReviewerEntity> reviews = edition0.getReviewers();
             Assert.assertTrue(reviews.size() == 3);
-        }catch (RepositoryException exception) {
+        }catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -158,7 +158,7 @@ public class ReviewerTest {
             SubmissionEntity submission0 = repositorySubmission.getElementById(1);
             Set<ReviewerEntity> reviews = submission0.getReviewers();
             Assert.assertTrue(reviews.size() == 2);
-        }catch (RepositoryException exception) {
+        }catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }

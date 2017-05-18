@@ -1,9 +1,9 @@
 package manager;
 
 import convertor.UserConverter;
-import exception.RepositoryException;
-import model.UserProtocol;
+import exception.SystemException;
 import notification.NotificationCenter;
+import protocol.UserProtocol;
 import service.SignUpService;
 import transferable.User;
 
@@ -53,7 +53,7 @@ public class SignUpManager implements SignUpService {
         return password.equals(confirm) && getPasswordScore(password) > 48;
     }
 
-    private Boolean isUsernameUnique(String username) throws RepositoryException {
+    private Boolean isUsernameUnique(String username) throws SystemException {
         return userModel.getAll().stream().noneMatch(user ->
                 user.getUsername().equals(username));
     }
@@ -64,7 +64,7 @@ public class SignUpManager implements SignUpService {
 
     @Override
     public User signUp(String username, String password, String confirm, String email, String name)
-            throws RemoteException, RepositoryException {
+            throws RemoteException, SystemException {
         if (isUsernameUnique(username) && isPasswordValid(password, confirm) && isEmailValid(email)) {
             User user = new User(username, password, email, name);
             Integer id = userModel.add(UserConverter.convertUser(user));

@@ -1,6 +1,6 @@
 package service;
 
-import exception.RepositoryException;
+import exception.SystemException;
 import transferable.User;
 
 import java.rmi.Remote;
@@ -13,6 +13,6 @@ import java.rmi.RemoteException;
 
 public interface LoginService extends Remote {
 
-    User login(String username, String password) throws RemoteException, RepositoryException;
+    User login(String username, String password) throws RemoteException, SystemException;
 
 }
