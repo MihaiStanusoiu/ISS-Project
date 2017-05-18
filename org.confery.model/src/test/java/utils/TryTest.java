@@ -4,8 +4,8 @@ import database.DatabaseLoader;
 import database.DatabaseLoaderFactory;
 import database.DatabaseLoaderType;
 import domain.UserEntity;
-import exception.RepositoryException;
-import exception.ValidatorRepositoryException;
+import exception.SystemException;
+import exception.ValidatorSystemException;
 import javassist.tools.rmi.RemoteException;
 import model.UserModel;
 import org.junit.Assert;
@@ -19,15 +19,15 @@ import org.junit.Test;
 
 public class TryTest {
 
-    private Try<UserEntity, RepositoryException> tryUser;
-    private Try<UserEntity, RepositoryException> tryException;
+    private Try<UserEntity, SystemException> tryUser;
+    private Try<UserEntity, SystemException> tryException;
     private UserEntity user;
-    private RepositoryException exception;
+    private SystemException exception;
 
     @Before
     public void setUp() throws Exception {
         user = new UserEntity("username", "password");
-        exception = new ValidatorRepositoryException("Test");
+        exception = new ValidatorSystemException("Test");
         tryUser = new Try<>(user);
         tryException = new Try<>(exception);
     }
@@ -57,13 +57,13 @@ public class TryTest {
         }
     }
 
-    private Integer function(Integer input) throws RepositoryException {
-        if (input % 2 == 0) throw new ValidatorRepositoryException("Test");
+    private Integer function(Integer input) throws SystemException {
+        if (input % 2 == 0) throw new ValidatorSystemException("Test");
         return input + 1;
     }
 
-    private Integer sum(Integer left, Integer right) throws RepositoryException {
-        if (left + right == 0) throw new ValidatorRepositoryException("Test");
+    private Integer sum(Integer left, Integer right) throws SystemException {
+        if (left + right == 0) throw new ValidatorSystemException("Test");
         return left + right;
     }
 

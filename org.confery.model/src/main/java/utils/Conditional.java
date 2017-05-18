@@ -21,6 +21,14 @@ public class Conditional {
         return new Conditional(condition);
     }
 
+    public <X extends Throwable> Boolean orThrow(X exception) throws X {
+        if (condition == Boolean.FALSE) {
+            throw exception;
+        }
+        return true;
+    }
+
+
     @SuppressWarnings("unchecked")
     public <E extends Throwable> Conditional runTrue(ThrowEmptyMethod<E> method) throws E {
         try {
@@ -44,7 +52,6 @@ public class Conditional {
             throw (E) exception;
         }
     }
-
 
     @SuppressWarnings("unchecked")
     public <T, E extends Throwable> Conditional

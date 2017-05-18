@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import listener.Listener;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -25,15 +26,16 @@ import transferable.User;
 @Component
 public class ControllerUsersView implements ControllerInterface {
 
-    @SuppressWarnings("all")
-    private StageManager manager;
+    private final StageManager manager;
+    private final Listener listener;
 
     @FXML private TextField searchTextField;
     @FXML private Pagination pagination;
 
     @Autowired @Lazy
-    public ControllerUsersView(StageManager manager) {
+    public ControllerUsersView(StageManager manager, Listener listener) {
         this.manager = manager;
+        this.listener = listener;
     }
 
     @Override

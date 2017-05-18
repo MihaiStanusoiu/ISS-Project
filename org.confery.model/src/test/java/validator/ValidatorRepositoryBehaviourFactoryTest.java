@@ -1,7 +1,6 @@
 package validator;
 
 import domain.*;
-import exception.RepositoryException;
 import org.junit.Assert;
 import org.junit.Test;
 

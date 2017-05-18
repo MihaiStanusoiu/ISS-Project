@@ -2,9 +2,9 @@ package manager;
 
 import convertor.UserConverter;
 import domain.UserEntity;
-import exception.RepositoryException;
-import model.UserProtocol;
+import exception.SystemException;
 import notification.NotificationCenter;
+import protocol.UserProtocol;
 import service.LoginService;
 import transferable.User;
 
@@ -28,13 +28,13 @@ public class LoginManager implements LoginService {
         this.userModel = userModel;
     }
 
-    private Optional<UserEntity> findUser(String username, String password) throws RepositoryException {
+    private Optional<UserEntity> findUser(String username, String password) throws SystemException {
         return userModel.getAll().stream().filter(user ->
                 user.getUsername().equals(username) && user.getPassword().equals(password)).findFirst();
     }
 
     @Override
-    public User login(String username, String password) throws RemoteException, RepositoryException {
+    public User login(String username, String password) throws RemoteException, SystemException {
         return UserConverter.convertUserEntity(findUser(username, password)
                 .orElseThrow(() -> new RemoteException("Wrong Username or Password!")));
     }

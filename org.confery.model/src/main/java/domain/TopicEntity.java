@@ -28,9 +28,12 @@ public class TopicEntity implements Idable<Integer>{
     @OneToMany(fetch = FetchType.EAGER, mappedBy="topic", cascade = CascadeType.ALL)
     private Set<SubmissionTopicEntity> submissionTopics;
 
-    public TopicEntity() { }
+    public TopicEntity() {
+        this("");
+    }
 
     public TopicEntity(String word) {
+        this.idTopic = 0;
         this.word = word;
         submissionTopics = new HashSet<>();
     }

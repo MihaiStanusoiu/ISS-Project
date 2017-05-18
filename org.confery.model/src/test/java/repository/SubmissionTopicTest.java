@@ -7,7 +7,7 @@ import database.DatabaseLoaderType;
 import domain.SubmissionEntity;
 import domain.SubmissionTopicEntity;
 import domain.TopicEntity;
-import exception.RepositoryException;
+import exception.SystemException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -50,7 +50,7 @@ public class SubmissionTopicTest {
             Integer id = repositoryTopicSubmission.add(tagSubmission);
             Assert.assertTrue(id.equals(1)
             );
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -63,7 +63,7 @@ public class SubmissionTopicTest {
             // This test is here only to make sure that we have something in repository in order to delete.
             repositoryTopicSubmission.delete(tagSubmission.getId());
             Assert.assertTrue(repositoryTopicSubmission.getAll().isEmpty());
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -78,7 +78,7 @@ public class SubmissionTopicTest {
             ArrayList<SubmissionTopicEntity> result = new ArrayList<>(repositoryTopicSubmission.getAll());
             Assert.assertTrue(result.get(0).getId().equals(tagSubmission.getId()) &&
                     result.get(1).getId().equals(tagSubmission2.getId()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -92,7 +92,7 @@ public class SubmissionTopicTest {
             repositoryTopicSubmission.add(tagSubmission2);
             SubmissionTopicEntity result = repositoryTopicSubmission.getElementById(1);
             Assert.assertTrue(result.getId().equals(tagSubmission.getId()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -114,7 +114,7 @@ public class SubmissionTopicTest {
             repositoryTopicSubmission.add(tagSubmission3);
             ArrayList<SubmissionTopicEntity> submissionTopics = new ArrayList<>(repositoryTopic.getElementById(1).getSubmissionTopics());
             Assert.assertTrue(submissionTopics.size() == 3);
-        }catch (RepositoryException exception) {
+        }catch (SystemException exception) {
         Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -135,7 +135,7 @@ public class SubmissionTopicTest {
             repositoryTopicSubmission.add(tagSubmission3);
             ArrayList<SubmissionTopicEntity> submissionTopics = new ArrayList<>(repositorySubmission.getElementById(1).getSubmissionTopic());
             Assert.assertTrue(submissionTopics.size() == 3);
-        }catch (RepositoryException exception) {
+        }catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }

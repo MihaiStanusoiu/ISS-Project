@@ -4,7 +4,7 @@ import database.DatabaseLoaderFactory;
 import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.UserEntity;
-import exception.RepositoryException;
+import exception.SystemException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +63,7 @@ class ModelPowerTest {
         UserEntity with = new UserEntity("with", "password");
         runFunction(model::add, user).orThrow(exception -> new RemoteException(exception.getMessage()));
         runFunction(model::delete, user).orThrow(exception -> new RemoteException(exception.getMessage()));
-        assertThrows(RepositoryException.class, () -> model.delete(with));
+        assertThrows(SystemException.class, () -> model.delete(with));
     }
 
 }

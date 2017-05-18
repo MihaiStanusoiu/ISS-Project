@@ -5,7 +5,7 @@ import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.EditionEntity;
 import domain.SessionEntity;
-import exception.RepositoryException;
+import exception.SystemException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -62,7 +62,7 @@ public class SessionTest {
                     session.getEdition().getBio().equals("bio") &&
                     session.getSeats().equals(100)
             );
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -76,7 +76,7 @@ public class SessionTest {
             repositorySession.update(user, update);
             SessionEntity result = repositorySession.getElementById(user.getId());
             Assert.assertTrue(result.getLocation().equals("room_2"));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -90,7 +90,7 @@ public class SessionTest {
             Assert.assertTrue(session.getLocation().equals(repositorySession.getElementById(1).getLocation()));
             repositorySession.delete(session.getId());
             Assert.assertTrue(repositorySession.getAll().isEmpty());
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -110,7 +110,7 @@ public class SessionTest {
             Assert.assertTrue(result.get(0).getId().equals(session.getId()) &&
                     result.get(1).getId().equals(test.getId())
             );
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -125,7 +125,7 @@ public class SessionTest {
             SessionEntity result = repositorySession.getElementById(1);
             Assert.assertTrue(result.getId().equals(session.getId()) &&
                     result.getLocation().equals(session.getLocation()));
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
@@ -144,7 +144,7 @@ public class SessionTest {
             EditionEntity sameEdition = repositoryEdition.getElementById(1);
             Set<SessionEntity> sessions = sameEdition.getSessions();
             Assert.assertTrue(sessions.size()==2);
-        } catch (RepositoryException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
