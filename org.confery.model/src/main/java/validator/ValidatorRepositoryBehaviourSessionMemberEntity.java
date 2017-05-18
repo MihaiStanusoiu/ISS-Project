@@ -3,6 +3,9 @@ package validator;
 import domain.SessionMemberEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for SessionMemberEntity
@@ -22,19 +25,16 @@ public class ValidatorRepositoryBehaviourSessionMemberEntity extends ValidatorRe
      */
     @Override
     public List<String> check(SessionMemberEntity object) {
-
-        if (object.getId() == null) {
-            accumulator.add("Session member id is null.");
-        }
-        if (object.getIdConfigurationSession() == null) {
-            accumulator.add("Session member configuration is null.");
-        }
-        if (object.getSession() == null) {
-            accumulator.add("Session member session is null.");
-        }
-        if (object.getUser() == null) {
-            accumulator.add("Session member user is null.");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Session member is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Session member's id is NULL!");
+        basedOn(Objects.isNull(object.getIdConfigurationSession()))
+                .runTrue(accumulator::add, "Session member's configuration id is NULL!");
+        basedOn(Objects.isNull(object.getSession()))
+                .runTrue(accumulator::add, "Session member's session is NULL!");
+        basedOn(Objects.isNull(object.getUser()))
+                .runTrue(accumulator::add, "Session member's user is NULL!");
         return accumulator;
     }
 }

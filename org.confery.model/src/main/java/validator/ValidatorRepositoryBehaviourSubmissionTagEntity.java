@@ -3,6 +3,9 @@ package validator;
 import domain.SubmissionTagEntity;
 
 import java.util.List;
+import java.util.Objects;
+
+import static utils.Conditional.basedOn;
 
 /**
  * Name:         Validator behaviour for SubmissionTagEntity
@@ -21,15 +24,14 @@ public class ValidatorRepositoryBehaviourSubmissionTagEntity extends ValidatorRe
      */
     @Override
     public List<String> check(SubmissionTagEntity object) {
-        if (object.getId() == null) {
-            accumulator.add("SubmissionTag id is null.");
-        }
-        if (object.getTag() == null) {
-            accumulator.add("SubmissionTag tag is null.");
-        }
-        if (object.getSubmissionTag() == null) {
-            accumulator.add("SubmissionTag submission is null.");
-        }
+        basedOn(Objects.isNull(object))
+                .runTrue(accumulator::add, "Submission tag is NULL!");
+        basedOn(Objects.isNull(object.getId()))
+                .runTrue(accumulator::add, "Submission tag's id is NULL!");
+        basedOn(Objects.isNull(object.getTag()))
+                .runTrue(accumulator::add, "Submission tag's tag is NULL!");
+        basedOn(Objects.isNull(object.getSubmissionTag()))
+                .runTrue(accumulator::add, "Submission tag's submission is NULL!");
         return accumulator;
     }
 }
