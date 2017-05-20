@@ -8,15 +8,12 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for ConferenceEditionMemberEntity
- * Effect:       Validates a conference edition member
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
  * @author Teodorescu Vlad
  * @version 1.0
  */
-@SuppressWarnings("all")
+
 public class ValidatorRepositoryBehaviourConfigurationEditionMemberEntity
         extends ValidatorRepositoryBehaviour<ConfigurationEditionMemberEntity> {
 
@@ -32,7 +29,7 @@ public class ValidatorRepositoryBehaviourConfigurationEditionMemberEntity
                 .runTrue(accumulator::add, "Edition configuration's chair is NULL!");
         basedOn(Objects.isNull(object.getCoChair()))
                 .runTrue(accumulator::add, "Edition configuration's co-chair is NULL!");
-        basedOn(Objects.isNull(object.getPCMember()))
+        basedOn(Objects.isNull(object.getPcMember()))
                 .runTrue(accumulator::add, "Edition configuration's pc-member is NULL!");
         basedOn(Objects.isNull(object.getId()))
                 .runTrue(accumulator::add, "Edition configuration's id is NULL!");

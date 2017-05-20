@@ -8,16 +8,15 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for SessionMemberEntity
- * Effect:       Validates a session member
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
  * @author Teodorescu Vlad
  * @version 1.0
  */
+
 @SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourSessionMemberEntity extends ValidatorRepositoryBehaviour<SessionMemberEntity> {
+public class ValidatorRepositoryBehaviourSessionMemberEntity
+        extends ValidatorRepositoryBehaviour<SessionMemberEntity> {
 
     /**
      * @param object : the session member to validate
@@ -29,12 +28,6 @@ public class ValidatorRepositoryBehaviourSessionMemberEntity extends ValidatorRe
                 .runTrue(accumulator::add, "Session member is NULL!");
         basedOn(Objects.isNull(object.getId()))
                 .runTrue(accumulator::add, "Session member's id is NULL!");
-        basedOn(Objects.isNull(object.getIdConfigurationSession()))
-                .runTrue(accumulator::add, "Session member's configuration id is NULL!");
-        basedOn(Objects.isNull(object.getSession()))
-                .runTrue(accumulator::add, "Session member's session is NULL!");
-        basedOn(Objects.isNull(object.getUser()))
-                .runTrue(accumulator::add, "Session member's user is NULL!");
         return accumulator;
     }
 }

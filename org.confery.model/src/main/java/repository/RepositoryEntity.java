@@ -14,17 +14,15 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import static utils.Try.runFunction;
 
 /**
- * Name:         RepositoryEntity
- * Effect:       Generic repository for entity objects.
- * Date:         4/16/2017
- * Tested:       True
+ * Tested: True
  *
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
@@ -50,16 +48,15 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
 
     /**
      * This generic repository needs to know
-     * the item's class in order to comunitate with Hibernate.
+     * the item's class in order to communicate with Hibernate.
+     *
      * @param repositoryClass The item's class.
-     * @param loader The database loader.
+     * @param loader          The database loader.
      */
-    @SuppressWarnings("all")
     public RepositoryEntity(Class<T> repositoryClass, final DatabaseLoaderInterface loader) {
         this.loader = loader;
         this.repositoryClass = repositoryClass;
         this.validator = new ValidatorRepository<>(repositoryClass);
-
     }
 
     /**
@@ -98,7 +95,7 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
         Session session = loader.getFactory().openSession();
         session.beginTransaction();
         T element = this.getElementById(id);
-        runFunction((ThrowMethod<T, RuntimeException>)session::delete, element)
+        runFunction((ThrowMethod<T, RuntimeException>) session::delete, element)
                 .orThrow(exception -> new ValidatorSystemException(exception.getMessage()));
         session.getTransaction().commit();
         session.close();
@@ -130,7 +127,8 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
         Session session = loader.getFactory().openSession();
         T element = session.get(repositoryClass, id);
         session.close();
-        return element;
+        return Optional.of(element).orElseThrow(() ->
+                new ValidatorSystemException("Element Not Found!"));
     }
 
 }

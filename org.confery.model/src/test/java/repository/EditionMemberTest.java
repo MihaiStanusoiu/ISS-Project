@@ -68,15 +68,15 @@ public class EditionMemberTest {
     @Transactional
     public void add() throws Exception {
         EditionMemberEntity member = new EditionMemberEntity();
-        member.setIdEdition(edition);
-        member.setIdUser(user);
+        member.setEdition(edition);
+        member.setUser(user);
         member.setConfigurationEditionMember(userConfiguration);
         try {
             Integer idMember = repositoryEditionMember.add(member);
             Assert.assertTrue(idMember.equals(1) &&
-                    member.getIdEdition().getLocation().equals("location") &&
-                    member.getIdUser().getPassword().equals("password") &&
-                    member.getIdUser().getUsername().equals("user") &&
+                    member.getEdition().getLocation().equals("location") &&
+                    member.getUser().getPassword().equals("password") &&
+                    member.getUser().getUsername().equals("user") &&
                     member.getConfigurationEditionMember().getCoChair().equals(true)
             );
         } catch (SystemException exception) {
@@ -87,18 +87,18 @@ public class EditionMemberTest {
     @Test
     public void update() throws Exception {
         EditionMemberEntity member = new EditionMemberEntity();
-        member.setIdEdition(edition);
-        member.setIdUser(user);
+        member.setEdition(edition);
+        member.setUser(user);
         member.setConfigurationEditionMember(userConfiguration);
         EditionMemberEntity update = new EditionMemberEntity();
-        update.setIdEdition(edition);
-        update.setIdUser(user2);
+        update.setEdition(edition);
+        update.setUser(user2);
         update.setConfigurationEditionMember(userConfiguration);
         try {
             repositoryEditionMember.add(member);
             repositoryEditionMember.update(member, update);
             EditionMemberEntity result = repositoryEditionMember.getElementById(member.getId());
-            Assert.assertTrue(result.getIdUser().getUsername().equals("username"));
+            Assert.assertTrue(result.getUser().getUsername().equals("username"));
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
@@ -107,13 +107,13 @@ public class EditionMemberTest {
     @Test
     public void delete() throws Exception {
         EditionMemberEntity member = new EditionMemberEntity();
-        member.setIdEdition(edition);
-        member.setIdUser(user);
+        member.setEdition(edition);
+        member.setUser(user);
         member.setConfigurationEditionMember(userConfiguration);
         try {
             repositoryEditionMember.add(member);
             // This test is here only to make sure that we have something in repository in order to delete.
-            Assert.assertTrue(member.getIdEdition().getLocation().equals(repositoryEditionMember.getElementById(1).getIdEdition().getLocation()));
+            Assert.assertTrue(member.getEdition().getLocation().equals(repositoryEditionMember.getElementById(1).getEdition().getLocation()));
             repositoryEditionMember.delete(member.getId());
             Assert.assertTrue(repositoryEditionMember.getAll().isEmpty());
         } catch (SystemException exception) {
@@ -124,12 +124,12 @@ public class EditionMemberTest {
     @Test
     public void getAll() throws Exception {
         EditionMemberEntity member = new EditionMemberEntity();
-        member.setIdEdition(edition);
-        member.setIdUser(user);
+        member.setEdition(edition);
+        member.setUser(user);
         member.setConfigurationEditionMember(userConfiguration);
         EditionMemberEntity test = new EditionMemberEntity();
-        test.setIdEdition(edition);
-        test.setIdUser(user2);
+        test.setEdition(edition);
+        test.setUser(user2);
         test.setConfigurationEditionMember(userConfiguration);
         try {
             repositoryEditionMember.add(member);
@@ -145,19 +145,19 @@ public class EditionMemberTest {
     @Test
     public void getElementById() throws Exception {
         EditionMemberEntity member = new EditionMemberEntity();
-        member.setIdEdition(edition);
-        member.setIdUser(user);
+        member.setEdition(edition);
+        member.setUser(user);
         member.setConfigurationEditionMember(userConfiguration);
         EditionMemberEntity test = new EditionMemberEntity();
-        test.setIdEdition(edition);
-        test.setIdUser(user2);
+        test.setEdition(edition);
+        test.setUser(user2);
         test.setConfigurationEditionMember(userConfiguration);
         try {
             repositoryEditionMember.add(member);
             repositoryEditionMember.add(test);
             EditionMemberEntity result = repositoryEditionMember.getElementById(1);
             Assert.assertTrue(result.getId().equals(member.getId()) &&
-                    result.getIdUser().getUsername().equals(member.getIdUser().getUsername()));
+                    result.getUser().getUsername().equals(member.getUser().getUsername()));
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
@@ -169,9 +169,9 @@ public class EditionMemberTest {
         EditionMemberEntity member2 = new EditionMemberEntity();
         EditionMemberEntity member3 = new EditionMemberEntity();
         try{
-            member1.setIdUser(repositoryUser.getElementById(1));
-            member2.setIdUser(repositoryUser.getElementById(1));
-            member3.setIdUser(repositoryUser.getElementById(1));
+            member1.setUser(repositoryUser.getElementById(1));
+            member2.setUser(repositoryUser.getElementById(1));
+            member3.setUser(repositoryUser.getElementById(1));
             repositoryEditionMember.add(member1);
             repositoryEditionMember.add(member2);
             repositoryEditionMember.add(member3);
@@ -209,14 +209,14 @@ public class EditionMemberTest {
         EditionMemberEntity member2 = new EditionMemberEntity();
         EditionMemberEntity member3 = new EditionMemberEntity();
         try{
-            member1.setIdEdition(repositoryEdition.getElementById(1));
-            member2.setIdEdition(repositoryEdition.getElementById(1));
-            member3.setIdEdition(repositoryEdition.getElementById(1));
+            member1.setEdition(repositoryEdition.getElementById(1));
+            member2.setEdition(repositoryEdition.getElementById(1));
+            member3.setEdition(repositoryEdition.getElementById(1));
             repositoryEditionMember.add(member1);
             repositoryEditionMember.add(member2);
             repositoryEditionMember.add(member3);
             EditionEntity edition0 = repositoryEdition.getElementById(1);
-            Set<EditionMemberEntity> editionMembers = edition0.getEditionMembers();
+            Set<EditionMemberEntity> editionMembers = edition0.getMembers();
             Assert.assertTrue(editionMembers.size() == 3);
         }catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");

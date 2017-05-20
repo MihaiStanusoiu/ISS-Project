@@ -8,21 +8,19 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for TopicEntity
- * Effect:       Validates a topic
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
  * @author Teodorescu Vlad
  * @version 1.0
  */
-@SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourTopicEntity extends ValidatorRepositoryBehaviour<TopicEntity> {
+
+public class ValidatorRepositoryBehaviourTopicEntity
+        extends ValidatorRepositoryBehaviour<TopicEntity> {
+
     /**
      * @param object : the topic to validate
      * @return [List<String>] : list of error messages found
      */
-
     @Override
     public List<String> check(TopicEntity object) {
         basedOn(Objects.isNull(object))

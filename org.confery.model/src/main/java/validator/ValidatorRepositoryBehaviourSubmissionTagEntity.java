@@ -8,16 +8,15 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for SubmissionTagEntity
- * Effect:       Validates a submission tag
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
  * @author Teodorescu Vlad
  * @version 1.0
  */
-@SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourSubmissionTagEntity extends ValidatorRepositoryBehaviour<SubmissionTagEntity> {
+
+public class ValidatorRepositoryBehaviourSubmissionTagEntity
+        extends ValidatorRepositoryBehaviour<SubmissionTagEntity> {
+
     /**
      * @param object : the submission tag to validate
      * @return [List<String>] : list of error messages found
@@ -28,10 +27,6 @@ public class ValidatorRepositoryBehaviourSubmissionTagEntity extends ValidatorRe
                 .runTrue(accumulator::add, "Submission tag is NULL!");
         basedOn(Objects.isNull(object.getId()))
                 .runTrue(accumulator::add, "Submission tag's id is NULL!");
-        basedOn(Objects.isNull(object.getTag()))
-                .runTrue(accumulator::add, "Submission tag's tag is NULL!");
-        basedOn(Objects.isNull(object.getSubmissionTag()))
-                .runTrue(accumulator::add, "Submission tag's submission is NULL!");
         return accumulator;
     }
 }

@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.*;
@@ -7,12 +8,10 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:     EditionEntity
- * Effect:   A class for the database table EditionEntity
- * Date:     9/4/2017
- * Tested:   True
- * @author   Simion George-Vlad
- * @version  1.0
+ * Tested: True
+ *
+ * @author Simion George-Vlad & Alexandru Stoica
+ * @version 1.1
  */
 
 @Entity
@@ -20,7 +19,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @SuppressWarnings("unused")
 public class EditionEntity implements Idable<Integer> {
 
-    @Id@GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_EDITION")
     private Integer id;
 
@@ -48,25 +48,54 @@ public class EditionEntity implements Idable<Integer> {
     @Column(name = "BIDDING_DEADLINE")
     private Date biddingDeadline;
 
-    @ManyToOne
-    @JoinColumn(name="ID_CONFERENCE")
+    @ManyToOne(targetEntity = ConferenceEntity.class)
+    @JoinColumn(name = "ID_CONFERENCE")
     private ConferenceEntity conference;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idEdition", cascade = CascadeType.ALL)
-    private Set<EditionMemberEntity> editionMembers;
+    @OneToMany(targetEntity = EditionMemberEntity.class, fetch = FetchType.EAGER,
+            mappedBy = "edition", cascade = CascadeType.ALL)
+    private Set<EditionMemberEntity> members;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "editionSession", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = SessionEntity.class, fetch = FetchType.EAGER,
+            mappedBy = "edition", cascade = CascadeType.ALL)
     private Set<SessionEntity> sessions;
 
-    @OneToMany( fetch = FetchType.EAGER, mappedBy = "editionSubmission", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = SubmissionEntity.class, fetch = FetchType.EAGER,
+            mappedBy = "edition", cascade = CascadeType.ALL)
     private Set<SubmissionEntity> submissions;
 
-    /**
-     * Empty constructor
-     */
-    public EditionEntity() { }
+    private static final Integer DEFAULT_ID = 0;
+    private static final Date DEFAULT_DATE = new Date();
+    private static final String DEFAULT_LOCATION = "Unknown";
+    private static final String DEFAULT_BIO = "";
 
-    public EditionEntity(Date startDate, Date endDate, String location, String bio, Date abstractDeadline, Date paperDeadline, Date evaluationDeadline, Date biddingDeadline) {
+
+    public EditionEntity() {
+        this(DEFAULT_ID, DEFAULT_DATE, DEFAULT_DATE, DEFAULT_LOCATION,
+                DEFAULT_BIO, DEFAULT_DATE, DEFAULT_DATE, DEFAULT_DATE, DEFAULT_DATE);
+    }
+
+    /**
+     * @param id                 The object's id
+     * @param startDate          The stating date
+     * @param endDate            The ending date
+     * @param location           The edition's location
+     * @param bio                The edition's bio
+     * @param abstractDeadline   The abstract deadline [optional]
+     * @param paperDeadline      The paper deadline [optional]
+     * @param evaluationDeadline The evaluation deadline [optional]
+     * @param biddingDeadline    The bidding deadline [optional]
+     */
+    public EditionEntity(Integer id,
+                         Date startDate,
+                         Date endDate,
+                         String location,
+                         String bio,
+                         Date abstractDeadline,
+                         Date paperDeadline,
+                         Date evaluationDeadline,
+                         Date biddingDeadline) {
+        this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
@@ -78,7 +107,59 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
+     * @param startDate          The stating date
+     * @param endDate            The ending date
+     * @param location           The edition's location
+     * @param bio                The edition's bio
+     * @param abstractDeadline   The abstract deadline [optional]
+     * @param paperDeadline      The paper deadline [optional]
+     * @param evaluationDeadline The evaluation deadline [optional]
+     * @param biddingDeadline    The bidding deadline [optional]
+     */
+    public EditionEntity(Date startDate,
+                         Date endDate,
+                         String location,
+                         String bio,
+                         Date abstractDeadline,
+                         Date paperDeadline,
+                         Date evaluationDeadline,
+                         Date biddingDeadline) {
+        this(DEFAULT_ID, startDate, endDate, location, bio, abstractDeadline,
+                paperDeadline, evaluationDeadline, biddingDeadline);
+    }
+
+    /**
+     * @param startDate The stating date
+     * @param endDate   The ending date
+     * @param location  The edition's location
+     * @param bio       The edition's bio
+     */
+    public EditionEntity(Date startDate, Date endDate, String location, String bio) {
+        this(DEFAULT_ID, startDate, endDate, location, bio,
+                DEFAULT_DATE, DEFAULT_DATE, DEFAULT_DATE, DEFAULT_DATE);
+    }
+
+    /**
+     * @param startDate The stating date
+     * @param endDate   The ending date
+     * @param location  The edition's location
+     */
+    public EditionEntity(Date startDate, Date endDate, String location) {
+        this(DEFAULT_ID, startDate, endDate, location, DEFAULT_BIO,
+                DEFAULT_DATE, DEFAULT_DATE, DEFAULT_DATE, DEFAULT_DATE);
+    }
+
+    /**
+     * @param location The edition's location
+     */
+    public EditionEntity(String location) {
+        this(DEFAULT_ID, DEFAULT_DATE, DEFAULT_DATE, location, DEFAULT_BIO,
+                DEFAULT_DATE, DEFAULT_DATE, DEFAULT_DATE, DEFAULT_DATE);
+    }
+
+    /**
      * Effect: Return the id of this conference.
+     *
      * @return [Integer]: returns the id of conference.
      */
     public Integer getId() {
@@ -87,6 +168,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the id of a conference.
+     *
      * @param id: new value for conference id.
      */
     public void setId(Integer id) {
@@ -95,6 +177,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the start date of this conference.
+     *
      * @return [Date]: returns the startDate of conference.
      */
     public Date getStartDate() {
@@ -103,6 +186,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the start date of a conference.
+     *
      * @param startDate: new value for conference startDate.
      */
     public void setStartDate(Date startDate) {
@@ -111,6 +195,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the end date of this conference.
+     *
      * @return [Date]: returns the endDate of conference.
      */
     public Date getEndDate() {
@@ -119,6 +204,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the end date of a conference.
+     *
      * @param endDate: new value for conference endDate.
      */
     public void setEndDate(Date endDate) {
@@ -127,6 +213,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the location of this conference.
+     *
      * @return [String]: returns the location of conference.
      */
     public String getLocation() {
@@ -135,6 +222,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the location of a conference.
+     *
      * @param location: new value for conference location.
      */
     public void setLocation(String location) {
@@ -143,6 +231,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the bio of this conference.
+     *
      * @return [String]: returns the bio of conference.
      */
     public String getBio() {
@@ -151,6 +240,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the bio of a conference.
+     *
      * @param bio: new value for conference bio.
      */
     public void setBio(String bio) {
@@ -159,6 +249,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the abstract deadline of this conference.
+     *
      * @return [Date]: returns the abstractDeadline of conference.
      */
     public Date getAbstractDeadline() {
@@ -167,6 +258,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the abstract deadline of a conference.
+     *
      * @param abstractDeadline: new value for conference abstractDeadline.
      */
     public void setAbstractDeadline(Date abstractDeadline) {
@@ -175,6 +267,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the paper deadline of this conference.
+     *
      * @return [Date]: returns the paperDeadline of conference.
      */
     public Date getPaperDeadline() {
@@ -183,6 +276,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the paper deadline of a conference.
+     *
      * @param paperDeadline: new value for conference paperDeadline.
      */
     public void setPaperDeadline(Date paperDeadline) {
@@ -191,6 +285,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the evaluation deadline of this conference.
+     *
      * @return [Date]: returns the evaluationDeadline of conference.
      */
     public Date getEvaluationDeadline() {
@@ -199,6 +294,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the evaluation deadline of a conference.
+     *
      * @param evaluationDeadline: new value for conference evaluationDeadline.
      */
     public void setEvaluationDeadline(Date evaluationDeadline) {
@@ -207,6 +303,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the bidding deadline of this conference.
+     *
      * @return [Date]: returns the biddingDeadline of conference.
      */
     public Date getBiddingDeadline() {
@@ -215,6 +312,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the bidding deadline of a conference.
+     *
      * @param biddingDeadline: new value for conference biddingDeadline.
      */
     public void setBiddingDeadline(Date biddingDeadline) {
@@ -223,6 +321,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the conference of a Edition.
+     *
      * @return [ConferenceEntity]: returns the conference of an Edition.
      */
     public ConferenceEntity getConference() {
@@ -231,6 +330,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the conference of an Edition.
+     *
      * @param conference: new value for conference
      */
     public void setConference(ConferenceEntity conference) {
@@ -238,23 +338,26 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Return the editionMembers of an Edition.
-     * @return [Set<EditionMemberEntity>]: returns the editionMembers of an Edition.
+     * Effect: Return the members of an Edition.
+     *
+     * @return [Set<EditionMemberEntity>]: returns the members of an Edition.
      */
-    public Set<EditionMemberEntity> getEditionMembers() {
-        return editionMembers;
+    public Set<EditionMemberEntity> getMembers() {
+        return members;
     }
 
     /**
-     * Effect: Sets the editionMembers of an Edition.
-     * @param editionMembers: new value for editionMembers.
+     * Effect: Sets the members of an Edition.
+     *
+     * @param members: new value for members.
      */
-    public void setEditionMembers(Set<EditionMemberEntity> editionMembers) {
-        this.editionMembers = editionMembers;
+    public void setMembers(Set<EditionMemberEntity> members) {
+        this.members = members;
     }
 
     /**
      * Effect: Returns the sessions of an Edition.
+     *
      * @return [Set<SessionEntity>]: returns the sessions of an Edition.
      */
     public Set<SessionEntity> getSessions() {
@@ -262,7 +365,17 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
+     * Effect: Returns the submissions of an Edition.
+     *
+     * @return [Set<SubmissionEntity>]: returns the submissions of an Edition.
+     */
+    public Set<SubmissionEntity> getSubmissions() {
+        return submissions;
+    }
+
+    /**
      * Effect: Sets the sessions of an Edition.
+     *
      * @param sessions: new value for sessions.
      */
     public void setSessions(Set<SessionEntity> sessions) {
@@ -270,19 +383,45 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Returns the submissions of an Edition.
-     * @return [Set<SubmissionEntity>]: returns the submissions of an Edition.
-     */
-    public Set<SubmissionEntity> getSubmissions() {
-         return submissions;
-    }
-
-    /**
      * Effect: Sets the submissions of an Edition.
+     *
      * @param submissions: new value for submissions.
      */
     public void setSubmissions(Set<SubmissionEntity> submissions) {
         this.submissions = submissions;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EditionEntity that = (EditionEntity) o;
+        return id.equals(that.id) && (startDate != null ? startDate.equals(that.startDate) : that.startDate == null) &&
+                (endDate != null ? endDate.equals(that.endDate) : that.endDate == null) &&
+                (location != null ? location.equals(that.location) : that.location == null) &&
+                (bio != null ? bio.equals(that.bio) : that.bio == null) &&
+                (abstractDeadline != null ? abstractDeadline.equals(that.abstractDeadline) :
+                        that.abstractDeadline == null) &&
+                (paperDeadline != null ? paperDeadline.equals(that.paperDeadline) : that.paperDeadline == null) &&
+                (evaluationDeadline != null ? evaluationDeadline.equals(that.evaluationDeadline) :
+                        that.evaluationDeadline == null) &&
+                (biddingDeadline != null ? biddingDeadline.equals(that.biddingDeadline) :
+                        that.biddingDeadline == null) &&
+                (conference != null ? conference.equals(that.conference) : that.conference == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + (bio != null ? bio.hashCode() : 0);
+        result = 31 * result + (abstractDeadline != null ? abstractDeadline.hashCode() : 0);
+        result = 31 * result + (paperDeadline != null ? paperDeadline.hashCode() : 0);
+        result = 31 * result + (evaluationDeadline != null ? evaluationDeadline.hashCode() : 0);
+        result = 31 * result + (biddingDeadline != null ? biddingDeadline.hashCode() : 0);
+        result = 31 * result + (conference != null ? conference.hashCode() : 0);
+        return result;
+    }
 }

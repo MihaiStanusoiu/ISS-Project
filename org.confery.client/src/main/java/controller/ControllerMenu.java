@@ -8,6 +8,8 @@ import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import transferable.Conference;
+import transferable.Edition;
 import view.ViewType;
 
 import java.rmi.RemoteException;
@@ -52,7 +54,7 @@ public class ControllerMenu implements ControllerInterface {
      * @implNote status: Unavailable at the moment.
      */
     @FXML private void onAddConferenceViewButtonClick() {
-        manager.switchScene(ViewType.ADD_CONFERENCE);
+        manager.switchScene(ViewType.ADD_CONFERENCE, new Conference(new Edition()));
     }
 
     /**

@@ -1,9 +1,7 @@
 package main;
 
 import controller.*;
-import itemcontroller.ControllerConferenceView;
-import itemcontroller.ControllerProfileView;
-import itemcontroller.ControllerUserView;
+import itemcontroller.*;
 import javafx.stage.Stage;
 import listener.ListenerHelper;
 import loader.SpringFXMLLoader;
@@ -112,10 +110,16 @@ public class SpringConfiguration {
 
     @Bean
     @Lazy
+    public ControllerMembersConferenceView controllerMembersConferenceVoew()
+            throws RemoteException, NotBoundException, MalformedURLException {
+        return new ControllerMembersConferenceView(stageManager, listener());
+    }
+
+    @Bean
+    @Lazy
     public ControllerConferenceView controllerConferenceView() {
         return new ControllerConferenceView(stageManager);
     }
-
 
     @Bean
     @Lazy

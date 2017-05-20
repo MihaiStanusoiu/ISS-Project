@@ -8,16 +8,14 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for ReviewerEntity
- * Effect:       Validates a notification
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
  * @author Teodorescu Vlad
  * @version 1.0
  */
-@SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourReviewerEntity extends ValidatorRepositoryBehaviour<ReviewerEntity> {
+
+public class ValidatorRepositoryBehaviourReviewerEntity
+        extends ValidatorRepositoryBehaviour<ReviewerEntity> {
     /**
      * @param object : the reviewer to validate
      * @return [List<String>] : list of error messages found

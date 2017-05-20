@@ -8,21 +8,22 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- * Name:         DatabaseLoaderBuilder
- * Effect:       Builder for database loader.
- *               <p>
- *                   The builder returns the loader based on the configuration's URL.
- *                   We set this URL by giving the builder a file of properties
- *                   and a key (the wanted property value in the file).
+ * Builder for database loader.
  *
- *                   The builder creates the wanted configuration and builds
- *                   a loader using that configuration.
+ * <p>
+ *      The builder returns the loader based on the configuration's URL.
+ *      We set this URL by giving the builder a file of properties
+ *      and a key (the wanted property value in the file).
+ * </p>
+ * <p>
+ *     The builder creates the wanted configuration and builds a loader using that configuration.
+ * </p>
+ * <p>
+ *      You can also use the factory if it's more convenient,
+ *      but the factory is also using this builder.
+ *      -- because the factory just returns a loader based on type.
+ * </p>
  *
- *                   You can also use the factory if it's more convenient,
- *                   but the factory is also using this builder.
- *                   -- because the factory just returns a loader based on type.
- *               </p>
- * Date:         4/16/2017
  * Tested:       True
  *
  * @author       Alexandru Stoica

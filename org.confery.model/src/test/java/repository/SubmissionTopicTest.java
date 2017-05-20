@@ -127,9 +127,9 @@ public class SubmissionTopicTest {
         SubmissionEntity submission = new SubmissionEntity("thesis", "status", "abstractUrl", "fullPaperUrl");
         try{
             repositorySubmission.add(submission);
-            tagSubmission1.setSubmissionTopic(repositorySubmission.getElementById(1));
-            tagSubmission2.setSubmissionTopic(repositorySubmission.getElementById(1));
-            tagSubmission3.setSubmissionTopic(repositorySubmission.getElementById(1));
+            tagSubmission1.setSubmission(repositorySubmission.getElementById(1));
+            tagSubmission2.setSubmission(repositorySubmission.getElementById(1));
+            tagSubmission3.setSubmission(repositorySubmission.getElementById(1));
             repositoryTopicSubmission.add(tagSubmission1);
             repositoryTopicSubmission.add(tagSubmission2);
             repositoryTopicSubmission.add(tagSubmission3);

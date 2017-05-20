@@ -20,6 +20,11 @@ public class UniqueChecker<T> implements Checker<T> {
         this.elements = elements;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws SystemException if the element is not unique in list
+     */
     @Override
     public Boolean check(T element) throws SystemException {
         return basedOn(elements.stream().noneMatch(item -> item.equals(element)))

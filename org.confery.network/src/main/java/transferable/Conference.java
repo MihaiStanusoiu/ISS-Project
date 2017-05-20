@@ -47,6 +47,10 @@ public class Conference extends Idable<Integer> {
         this.edition = edition;
     }
 
+    public Conference(Edition edition) {
+        this(0, "", "", edition);
+    }
+
     /**
      * @return The conference's name [String] -- not null
      */

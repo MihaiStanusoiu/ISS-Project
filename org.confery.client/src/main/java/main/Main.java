@@ -10,7 +10,7 @@ import view.ViewType;
 
 @SpringBootApplication
 @SuppressWarnings("all")
-public class Main extends Application {
+public class  Main extends Application {
 
     private ConfigurableApplicationContext context;
     private StageManager stageManager;

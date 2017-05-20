@@ -15,13 +15,13 @@ import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 
 /**
+ * Tested: True
+ *
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-public class NotificationModel
-        extends Model<NotificationEntity, Integer>
-        implements NotificationProtocol {
+public class NotificationModel extends Model<NotificationEntity, Integer> implements NotificationProtocol {
 
     private RepositoryInterface<UserEntity, Integer> userRepository;
 
@@ -30,19 +30,27 @@ public class NotificationModel
         userRepository = new RepositoryEntity<>(UserEntity.class, loader);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void sendNotificationTo(UserEntity user, NotificationEntity notification)
             throws SystemException {
-        basedOn(userRepository.getAll().stream().anyMatch(item -> item.getId().equals(user.getId())))
+        basedOn(userRepository.getAll().stream()
+                .anyMatch(item -> item.getId().equals(user.getId())))
                 .orThrow(new ModelException("404! User Not Found!"));
         notification.setUser(user);
         this.add(notification);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void sendNotificationToUsers(List<UserEntity> users, NotificationEntity notification)
             throws SystemException {
-        users.forEach(user -> runFunction(this::sendNotificationTo, user, notification).or(Boolean.FALSE));
+        users.forEach(user -> runFunction(this::sendNotificationTo, user, notification)
+                .or(Boolean.FALSE));
     }
 
 }

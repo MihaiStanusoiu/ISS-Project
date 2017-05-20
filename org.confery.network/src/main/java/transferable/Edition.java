@@ -112,6 +112,10 @@ public class Edition extends Idable<Integer> {
         this(0, startDate, endDate, location, "", null, null, null, null);
     }
 
+    public Edition() {
+        this(new Date(), new Date(), "");
+    }
+
     /**
      * @return The starting date for the conference's events. [Date]
      */
