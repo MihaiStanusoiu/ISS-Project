@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Name:         ValidatorSystemException
- * Effect:       The exception thrown when object to be validated is invalid.
- * Date:         06/05/2017
+ * Tested: True
  *
  * @author Tanasie Luiza Maria
  * @version 1.0

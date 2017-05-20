@@ -1,9 +1,6 @@
 package database;
 
 /**
- * Name:         DatabaseLoaderType
- * Effect:       Defines the type of database loader we need from our factory class.
- * Date:         4/16/2017
  * Tested:       True
  *
  * @author       Alexandru Stoica

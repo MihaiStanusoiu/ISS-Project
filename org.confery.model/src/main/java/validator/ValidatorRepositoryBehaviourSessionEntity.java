@@ -8,21 +8,18 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for SessionEntity
- * Effect:       Validates a session
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
  * @author Teodorescu Vlad
  * @version 1.0
  */
-@SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourSessionEntity extends ValidatorRepositoryBehaviour<SessionEntity> {
+
+public class ValidatorRepositoryBehaviourSessionEntity
+        extends ValidatorRepositoryBehaviour<SessionEntity> {
     /**
      * @param object : the session to validate
      * @return [List<String>] : list of error messages found
      */
-
     @Override
     public List<String> check(SessionEntity object) {
         basedOn(Objects.isNull(object))

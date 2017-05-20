@@ -16,13 +16,12 @@ import static utils.Try.runFunction;
 
 /**
  * Tested: True
+ *
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-public class NotificationModel
-        extends Model<NotificationEntity, Integer>
-        implements NotificationProtocol {
+public class NotificationModel extends Model<NotificationEntity, Integer> implements NotificationProtocol {
 
     private RepositoryInterface<UserEntity, Integer> userRepository;
 
@@ -33,9 +32,6 @@ public class NotificationModel
 
     /**
      * {@inheritDoc}
-     * @param user         The destination user
-     * @param notification The notification we want to send
-     * @throws SystemException
      */
     @Override
     public void sendNotificationTo(UserEntity user, NotificationEntity notification)
@@ -49,9 +45,6 @@ public class NotificationModel
 
     /**
      * {@inheritDoc}
-     * @param users        The list of users
-     * @param notification The target notification
-     * @throws SystemException
      */
     @Override
     public void sendNotificationToUsers(List<UserEntity> users, NotificationEntity notification)

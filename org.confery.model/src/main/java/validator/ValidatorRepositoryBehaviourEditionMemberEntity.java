@@ -10,6 +10,7 @@ import static utils.Conditional.basedOn;
 
 /**
  * Tested: True
+ *
  * @author Teodorescu Vlad
  * @version 1.0
  */

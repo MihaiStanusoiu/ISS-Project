@@ -8,6 +8,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Tested: True
+ *
  * @author Tiron Andreea-Ecaterina & Alexandru Stoica
  * @version 1.1
  */
@@ -45,8 +46,8 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
     }
 
     /**
-     * @param isChair true if the edition member is chair
-     * @param isCoChair true if the edition member is co-chair
+     * @param isChair    true if the edition member is chair
+     * @param isCoChair  true if the edition member is co-chair
      * @param isPcMember true if the edition member if pc-member
      */
     public ConfigurationEditionMemberEntity(Boolean isChair, Boolean isCoChair, Boolean isPcMember) {
@@ -54,9 +55,9 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
     }
 
     /**
-     * @param id The object's id
-     * @param isChair true if the edition member is chair
-     * @param isCoChair true if the edition member is co-chair
+     * @param id         The object's id
+     * @param isChair    true if the edition member is chair
+     * @param isCoChair  true if the edition member is co-chair
      * @param isPcMember true if the edition member if pc-member
      */
     public ConfigurationEditionMemberEntity(Integer id, Boolean isChair, Boolean isCoChair, Boolean isPcMember) {
@@ -68,6 +69,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Returns the editionMembers of a ConfigurationEditionMemberEntity
+     *
      * @return [editionMembers] : return the editionMembers
      */
     public Set<EditionMemberEntity> getEditionMembers() {
@@ -76,6 +78,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the editionMembers of the conference member.
+     *
      * @param editionMembers : new value for editionMembers
      */
     public void setEditionMembers(Set<EditionMemberEntity> editionMembers) {
@@ -84,6 +87,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Returns the id of the conference member.
+     *
      * @return [Integer] : returns the id.
      */
     public Integer getId() {
@@ -92,6 +96,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the id of a configuration conference member.
+     *
      * @param id: new value for id.
      */
     public void setId(Integer id) {
@@ -100,6 +105,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Return whether the user is a chair.
+     *
      * @return [Boolean] : returns true if it is a chair, false otherwise.
      */
     @SuppressWarnings("unused")
@@ -109,6 +115,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets whether the user is a chair.
+     *
      * @param chair: new value for chair.
      */
     @SuppressWarnings("unused")
@@ -118,6 +125,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Return whether the user is a co-chair.
+     *
      * @return [Boolean] : returns true if it is a co-chair, false otherwise.
      */
     @SuppressWarnings("unused")
@@ -127,6 +135,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets whether the user is a co-chair.
+     *
      * @param coChair: new value for co-chair.
      */
     @SuppressWarnings("unused")
@@ -136,6 +145,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Return whether the user is a pc-member.
+     *
      * @return [Boolean] : returns true if it is a pc-member, false otherwise.
      */
     @SuppressWarnings("unused")
@@ -145,6 +155,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets whether the user is a pc-member.
+     *
      * @param pcMember: new value for pc-member.
      */
     @SuppressWarnings("unused")

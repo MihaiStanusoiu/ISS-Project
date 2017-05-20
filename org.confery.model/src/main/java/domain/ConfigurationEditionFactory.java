@@ -8,6 +8,7 @@ import static utils.Try.runFunction;
 
 /**
  * Tested: True
+ *
  * @author Alexandru Stoica
  * @version 1.0
  */
@@ -26,6 +27,7 @@ public class ConfigurationEditionFactory {
 
     /**
      * Returns the configuration from database, or adds the given configuration to database and returns it.
+     *
      * @param configuration The given configuration
      * @return The given configuration (from database // because we need the id of the configuration)
      */
@@ -34,14 +36,15 @@ public class ConfigurationEditionFactory {
                 .stream()
                 .filter(item -> item.toString().equals(configuration.toString()))
                 .findFirst().orElseGet(() -> {
-            // if the configuration is not already in the database, we will add it
-            runFunction(configurations::add, configuration);
-            return configuration;
-        });
+                    // if the configuration is not already in the database, we will add it
+                    runFunction(configurations::add, configuration);
+                    return configuration;
+                });
     }
 
     /**
      * Returns the configuration for a specific MemberRole :role:
+     *
      * @param role The target role
      * @return The wanted configuration
      * @throws ModelException If the role is not supported.

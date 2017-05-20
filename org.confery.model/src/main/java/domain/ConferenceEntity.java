@@ -10,6 +10,7 @@ import static utils.Comparator.checkObjects;
 
 /**
  * Tested True
+ *
  * @author Tiron Andreea-Ecaterina & Alexandru Stoica
  * @version 1.1
  */
@@ -41,8 +42,8 @@ public class ConferenceEntity implements Idable<Integer> {
         this(DEFAULT_ID, DEFAULT_NAME, DEFAULT_ACRONYM);
     }
 
-     /**
-     * @param name The conference's name
+    /**
+     * @param name    The conference's name
      * @param acronym The conference's acronym
      */
     public ConferenceEntity(String name, String acronym) {
@@ -57,8 +58,8 @@ public class ConferenceEntity implements Idable<Integer> {
     }
 
     /**
-     * @param id The conference's id
-     * @param name The conference's name
+     * @param id      The conference's id
+     * @param name    The conference's name
      * @param acronym The conference's acronym
      */
     public ConferenceEntity(Integer id, String name, String acronym) {
@@ -69,6 +70,7 @@ public class ConferenceEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the id of this conference.
+     *
      * @return [Integer]: returns the id of conference.
      */
     public Integer getId() {
@@ -77,6 +79,7 @@ public class ConferenceEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the id of a conference.
+     *
      * @param id: new value for conference id.
      */
     public void setId(Integer id) {
@@ -85,6 +88,7 @@ public class ConferenceEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the name of this conference.
+     *
      * @return [String]: returns the name of conference.
      */
     public String getName() {
@@ -93,6 +97,7 @@ public class ConferenceEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the name of a conference.
+     *
      * @param name: new value for conference name.
      */
     public void setName(String name) {
@@ -101,6 +106,7 @@ public class ConferenceEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the acronym of this conference.
+     *
      * @return [String]: returns the acronym of conference.
      */
     public String getAcronym() {
@@ -109,6 +115,7 @@ public class ConferenceEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the acronym of a conference.
+     *
      * @param acronym: new value for conference acronym.
      */
     public void setAcronym(String acronym) {
@@ -117,6 +124,7 @@ public class ConferenceEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the editions of a conference.
+     *
      * @return Set<EditionEntity>: returns the editions of a conference.
      */
     public Set<EditionEntity> getEditions() {
@@ -125,6 +133,7 @@ public class ConferenceEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the editions of this conference.
+     *
      * @param editions: new value for conference editions.
      */
     public void setEditions(Set<EditionEntity> editions) {
@@ -134,7 +143,7 @@ public class ConferenceEntity implements Idable<Integer> {
     @Override
     public boolean equals(Object obj) {
         return checkObjects((left, right) -> left.getId().equals(right.getId()) &&
-                left.getName().equals(right.getName()) && left.getAcronym().equals(right.getAcronym()),
+                        left.getName().equals(right.getName()) && left.getAcronym().equals(right.getAcronym()),
                 this, checkClass(obj, this.getClass()));
     }
 

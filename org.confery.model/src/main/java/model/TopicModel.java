@@ -13,13 +13,12 @@ import static utils.Try.runFunction;
 
 /**
  * Tested: True
+ *
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-public class TopicModel
-        extends Model<TopicEntity, Integer>
-        implements TopicProtocol {
+public class TopicModel extends Model<TopicEntity, Integer> implements TopicProtocol {
 
     public TopicModel(DatabaseLoaderInterface loader) {
         super(TopicEntity.class, loader);
@@ -27,6 +26,7 @@ public class TopicModel
 
     /**
      * Adds a topic only if the word inside is unique in our system.
+     *
      * @param element The target topic
      * @return The topic's id
      * @throws SystemException If the word exists in our systems

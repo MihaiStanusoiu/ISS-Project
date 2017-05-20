@@ -8,16 +8,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Tested: True
+ *
  * @author Stanusoiu Mihai-Teodor & Alexandru Stoica
  * @version 1.0
  */
 
 @Entity
-@Table(name="EDITION_MEMBER")
+@Table(name = "EDITION_MEMBER")
 @SuppressWarnings("unused")
 public class EditionMemberEntity implements Idable<Integer> {
 
-    @Id@GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_EDITION_MEMBER")
     private Integer id;
 
@@ -42,6 +44,7 @@ public class EditionMemberEntity implements Idable<Integer> {
     public EditionMemberEntity() {
         this(DEFAULT_ID, null, null, null);
     }
+
     public EditionMemberEntity(Integer id, UserEntity user, EditionEntity edition,
                                ConfigurationEditionMemberEntity configuration) {
         this.id = id;
@@ -75,6 +78,7 @@ public class EditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Returns the reviewers of the EditionMemberEntity.
+     *
      * @return [Set<ReviewerEntity>]: reviewers of an EditionMemberEntity.
      */
     public Set<ReviewerEntity> getReviewers() {
@@ -83,6 +87,7 @@ public class EditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the reviewers of the EditionMemberEntity.
+     *
      * @param reviewers: new value for the reviewers.
      */
     public void setReviewers(Set<ReviewerEntity> reviewers) {
@@ -91,6 +96,7 @@ public class EditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Returns the composite primary key id of the conference member
+     *
      * @return [Integer]: id of the conference member
      */
     public Integer getId() {
@@ -99,6 +105,7 @@ public class EditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the primary key id of the conference member.
+     *
      * @param id [Integer] : the primary key
      */
     public void setId(Integer id) {
@@ -107,6 +114,7 @@ public class EditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Returns the user of the conference member
+     *
      * @return [UserEntity]: user that is the conference member
      */
     public UserEntity getUser() {
@@ -115,6 +123,7 @@ public class EditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the user to the given value
+     *
      * @param user [UserEntity]: new value for the user
      */
     public void setUser(UserEntity user) {
@@ -123,6 +132,7 @@ public class EditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Returns the conference of the conference member
+     *
      * @return [EditionEntity]: conference of the conference member
      */
     public EditionEntity getEdition() {
@@ -131,6 +141,7 @@ public class EditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the conference to the given value
+     *
      * @param editionTable [EditionEntity]: new value for the password
      */
     public void setEdition(EditionEntity editionTable) {
@@ -139,17 +150,20 @@ public class EditionMemberEntity implements Idable<Integer> {
 
     /**
      * Effect: Returns the configuration of the conference member
+     *
      * @return [ConfigurationEditionMember]: configuration of the conference member
      */
     public ConfigurationEditionMemberEntity getConfigurationEditionMember() {
         return configuration;
     }
+
     /**
      * Effect: Sets the configuration to the given value
+     *
      * @param configurationConferenceMember [ConfigurationEditionMember]: new value for the configuration
      */
     public void setConfigurationEditionMember(
-        ConfigurationEditionMemberEntity configurationConferenceMember) {
+            ConfigurationEditionMemberEntity configurationConferenceMember) {
         this.configuration = configurationConferenceMember;
     }
 

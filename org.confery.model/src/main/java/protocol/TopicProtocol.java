@@ -3,6 +3,8 @@ package protocol;
 import domain.TopicEntity;
 
 /**
+ * Tested: True
+ *
  * @author Alexandru Stoica
  * @version 1.0
  */

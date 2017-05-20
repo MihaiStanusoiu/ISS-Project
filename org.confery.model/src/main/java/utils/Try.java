@@ -5,10 +5,11 @@ import functions.*;
 import java.util.function.Function;
 
 /**
+ * Tested: True
+ *
  * @author Alexandru Stoica
  * @version 1.0
  */
-
 
 public class Try<T, E extends Throwable> {
 
@@ -57,7 +58,7 @@ public class Try<T, E extends Throwable> {
         throw converter.apply(exception);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("all")
     public T orHandle(SimpleMethod<E> handler) {
         if (element != null) {
             return element;

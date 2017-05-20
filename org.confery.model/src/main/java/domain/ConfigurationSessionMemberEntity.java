@@ -8,16 +8,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Tested:       True
- * @author       Tiron Andreea-Ecaterina & Alexandru Stoica
- * @version      1.1
+ *
+ * @author Tiron Andreea-Ecaterina & Alexandru Stoica
+ * @version 1.1
  */
 
 @Entity
 @Table(name = "CONFIGURATION_SESSION_MEMBER")
 @SuppressWarnings("unused")
-public class ConfigurationSessionMemberEntity implements Idable<Integer>{
+public class ConfigurationSessionMemberEntity implements Idable<Integer> {
 
-    @Id @GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_CONFIGURATION_SESSION_MEMBER")
     private Integer id;
 
@@ -40,9 +42,9 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
     private static final Boolean DEFAULT_LISTENER = Boolean.FALSE;
 
     /**
-     * @param id The object's id
-     * @param isChair If member is the chair of the session
-     * @param isSpeaker If member is a speaker at the session
+     * @param id         The object's id
+     * @param isChair    If member is the chair of the session
+     * @param isSpeaker  If member is a speaker at the session
      * @param isListener If member is a listener at the session
      */
     public ConfigurationSessionMemberEntity(Integer id, Boolean isChair, Boolean isSpeaker, Boolean isListener) {
@@ -53,8 +55,8 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
     }
 
     /**
-     * @param isChair If member is the chair of the session
-     * @param isSpeaker If member is a speaker at the session
+     * @param isChair    If member is the chair of the session
+     * @param isSpeaker  If member is a speaker at the session
      * @param isListener If member is a listener at the session
      */
     public ConfigurationSessionMemberEntity(Boolean isChair, Boolean isSpeaker, Boolean isListener) {
@@ -67,6 +69,7 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Return the section members with this configuration.
+     *
      * @return [ArrayList<SessionMemberEntity>] : returns the list of members.
      */
     public Set<SessionMemberEntity> getSectionMembers() {
@@ -75,6 +78,7 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets the list of members to a section configuration.
+     *
      * @param sectionMembers : new value for section members.
      */
     public void setSectionMembers(Set<SessionMemberEntity> sectionMembers) {
@@ -83,6 +87,7 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Return the id of a configuration section member.
+     *
      * @return [Integer] : returns the id.
      */
     public Integer getId() {
@@ -91,6 +96,7 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets the id of a configuration section member.
+     *
      * @param id : new value for id.
      */
     public void setId(Integer id) {
@@ -99,6 +105,7 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Return whether the user is a chair.
+     *
      * @return [Boolean] : returns true if it is a chair, false otherwise.
      */
     public Boolean getChair() {
@@ -107,6 +114,7 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets whether the user is a chair.
+     *
      * @param chair: new value for chair.
      */
     public void setChair(Boolean chair) {
@@ -115,6 +123,7 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Return whether the user is a speaker.
+     *
      * @return [Boolean] : returns true if it is a speaker, false otherwise.
      */
     public Boolean getSpeaker() {
@@ -123,6 +132,7 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets whether the user is a speaker.
+     *
      * @param speaker: new value for speaker.
      */
     public void setSpeaker(Boolean speaker) {
@@ -131,6 +141,7 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Return whether the user is a listener.
+     *
      * @return [Boolean] : returns true if it is a listener, false otherwise.
      */
     public Boolean getListener() {
@@ -139,6 +150,7 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets whether the user is a listener.
+     *
      * @param listener: new value for listener.
      */
     public void setListener(Boolean listener) {

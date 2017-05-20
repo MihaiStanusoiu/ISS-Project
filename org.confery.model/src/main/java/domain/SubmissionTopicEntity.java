@@ -7,6 +7,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Tested: True
+ *
  * @author Teodorescu Vlad & Alexandru Stoica
  * @version 1.1
  */
@@ -14,7 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "SUBMISSION_TOPIC")
 @SuppressWarnings("unused")
-public class SubmissionTopicEntity implements Idable<Integer>{
+public class SubmissionTopicEntity implements Idable<Integer> {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -53,20 +54,27 @@ public class SubmissionTopicEntity implements Idable<Integer>{
 
     /**
      * Effect: Return the id of a submission-topic.
+     *
      * @return [Integer] : returns the id of a submission-topic.
      */
     @Override
-    public Integer getId() { return id; }
+    public Integer getId() {
+        return id;
+    }
 
     /**
      * Effect: Sets the id of a submission-topic.
+     *
      * @param id : new value for id.
      */
     @Override
-    public void setId(Integer id) { this.id = id; }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     /**
      * Effect: Returns the submission of a SubmissionTopicEntity
+     *
      * @return [SubmissionEntity]: returns the submission.
      */
     public SubmissionEntity getSubmission() {
@@ -75,6 +83,7 @@ public class SubmissionTopicEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets the submission of a SubmissionTopicEntity.
+     *
      * @param submission: new value for submission.
      */
     public void setSubmission(SubmissionEntity submission) {
@@ -83,6 +92,7 @@ public class SubmissionTopicEntity implements Idable<Integer>{
 
     /**
      * Effect: Returns the topic of a SubmissionTopicEntity.
+     *
      * @return [TopicEntity]: returns the TopicEntity.
      */
     public TopicEntity getTopic() {
@@ -91,6 +101,7 @@ public class SubmissionTopicEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets the topic of a SubmissionTopicEntity.
+     *
      * @param topic: new value for topic.
      */
     public void setTopic(TopicEntity topic) {

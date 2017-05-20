@@ -7,6 +7,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Tested: True
+ *
  * @author Tiron Andreea-Ecaterina & Alexandru Stoica
  * @version 1.1
  */
@@ -52,6 +53,7 @@ public class ReviewerEntity implements Idable<Integer> {
                 DEFAULT_RECOMMENDATION_URL, null, null);
     }
 
+
     public ReviewerEntity(Integer id,
                           String response,
                           String status,
@@ -92,6 +94,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the idReviewer of a reviewer.
+     *
      * @return [Integer] : returns the idReviewer of a ReviewerEntity.
      */
     public Integer getId() {
@@ -100,6 +103,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the idReviewer of a reviewer.
+     *
      * @param idReviewer: new value for reviewer idReviewer.
      */
     public void setId(Integer idReviewer) {
@@ -108,6 +112,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the response of a reviewer.
+     *
      * @return [String] : returns the response of a ReviewerEntity.
      */
     public String getResponse() {
@@ -116,6 +121,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the response of a reviewer.
+     *
      * @param response: new value for reviewer response.
      */
     public void setResponse(String response) {
@@ -124,6 +130,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the status of a reviewer.
+     *
      * @return [String] : returns the status of a ReviewerEntity.
      */
     public String getStatus() {
@@ -132,6 +139,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the status of a reviewer.
+     *
      * @param status: new value for reviewer status.
      */
     public void setStatus(String status) {
@@ -140,6 +148,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the qualifier of a reviewer.
+     *
      * @return [String] : returns the qualifier of a ReviewerEntity.
      */
     public String getQualifier() {
@@ -148,6 +157,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the qualifier of a reviewer.
+     *
      * @param qualifier: new value for reviewer qualifier.
      */
     public void setQualifier(String qualifier) {
@@ -156,6 +166,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the recommendation url of a reviewer.
+     *
      * @return [String] : returns the recommendationUrl of a ReviewerEntity.
      */
     public String getRecommendationUrl() {
@@ -164,6 +175,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the recommendation url of a reviewer.
+     *
      * @param recommendationUrl: new value for reviewer recommendationUrl.
      */
     public void setRecommendationUrl(String recommendationUrl) {
@@ -172,6 +184,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Returns the submission of the ReviewerEntity.
+     *
      * @return [SubmissionEntity]: returns the submission of a ReviewerEntity.
      */
     public SubmissionEntity getSubmission() {
@@ -180,6 +193,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the submission of the ReviewerEntity.
+     *
      * @param submission: new value for submission.
      */
     public void setSubmission(SubmissionEntity submission) {
@@ -188,6 +202,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Returns the member of the ReviewerEntity.
+     *
      * @return [EditionMemberEntity]: returns the id of the EditionMemberEntity.
      */
     public EditionMemberEntity getMember() {
@@ -196,6 +211,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the member of the ReviewerEntity.
+     *
      * @param member: new value for member
      */
     public void setMember(EditionMemberEntity member) {

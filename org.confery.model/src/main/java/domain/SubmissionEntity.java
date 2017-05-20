@@ -8,6 +8,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Tested: True
+ *
  * @author Simion George-Vlad & Alexandru Stoica
  * @version 1.1
  */
@@ -89,6 +90,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the id of this submission.
+     *
      * @return [Integer]: returns the id of SubmissionEntity.
      */
     public Integer getId() {
@@ -97,6 +99,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the id of a submission.
+     *
      * @param id: new value for submission id.
      */
     public void setId(Integer id) {
@@ -105,6 +108,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the id of this submission.
+     *
      * @return [Integer]: returns the id of SubmissionEntity.
      */
     public EditionEntity getEdition() {
@@ -113,6 +117,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the id of the submission's conference.
+     *
      * @param edition: new value for conference id.
      */
     public void setEdition(EditionEntity edition) {
@@ -121,6 +126,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the name of this submission.
+     *
      * @return [String]: returns the name of SubmissionEntity.
      */
     public String getName() {
@@ -129,6 +135,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the name of a submission.
+     *
      * @param name: new value for submission name.
      */
     public void setName(String name) {
@@ -137,6 +144,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the status of this submission.
+     *
      * @return [String]: returns the status of SubmissionEntity.
      */
     public String getStatus() {
@@ -145,6 +153,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the status of a submission.
+     *
      * @param status: new value for submission status.
      */
     public void setStatus(String status) {
@@ -153,6 +162,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the abstract url of this submission.
+     *
      * @return [String]: returns the abstractUrl of SubmissionEntity.
      */
     public String getAbstractUrl() {
@@ -161,6 +171,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the abstract url of a submission.
+     *
      * @param abstractUrl: new value for submission abstractUrl.
      */
     public void setAbstractUrl(String abstractUrl) {
@@ -169,6 +180,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the full paper url of this submission.
+     *
      * @return [String]: returns the fullPaperUrl of SubmissionEntity.
      */
     public String getFullPaperUrl() {
@@ -177,6 +189,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the full paper url of a submission.
+     *
      * @param fullPaperUrl: new value for submission fullPaperUrl.
      */
     public void setFullPaperUrl(String fullPaperUrl) {
@@ -185,6 +198,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the paid status of this submission.
+     *
      * @return [Boolean]: returns the paid status of a SubmissionEntity.
      */
     public Boolean isPaid() {
@@ -193,6 +207,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the paid status of a submission.
+     *
      * @param paid: new value for submission isPaid.
      */
     public void setPaid(Boolean paid) {
@@ -201,6 +216,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the tags of this submission.
+     *
      * @return [ArrayList<SubmissionTagEntity>]: returns the tags of a SubmissionEntity.
      */
     public Set<SubmissionTagEntity> getSubmissionTags() {
@@ -209,6 +225,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the tags of a submission.
+     *
      * @param submissionTags: new value for submission tags.
      */
     public void setSubmissionTags(Set<SubmissionTagEntity> submissionTags) {
@@ -217,6 +234,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the topics of this submission.
+     *
      * @return [ArrayList<SubmissionTopicEntity>]: returns the topics of a SubmissionEntity.
      */
     public Set<SubmissionTopicEntity> getSubmissionTopic() {
@@ -225,6 +243,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the topics of a submission.
+     *
      * @param submissionTopic: new value for submission topics.
      */
     public void setSubmissionTopic(Set<SubmissionTopicEntity> submissionTopic) {
@@ -233,6 +252,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the authors of this submission.
+     *
      * @return [ArrayList<AuthorSubmissionEntity>]: returns the authors of SubmissionEntity.
      */
     public Set<AuthorSubmissionEntity> getSubmissionAuthors() {
@@ -241,6 +261,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the authors of a submission.
+     *
      * @param submissionAuthors: new value for submission submissionAuthors.
      */
     public void setSubmissionAuthors(Set<AuthorSubmissionEntity> submissionAuthors) {
@@ -249,6 +270,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the reviewers of this submission.
+     *
      * @return [ArrayList<ReviewerEntity>]: returns the reviewers of a SubmissionEntity.
      */
     public Set<ReviewerEntity> getReviewers() {
@@ -257,6 +279,7 @@ public class SubmissionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the reviewers of a submission.
+     *
      * @param reviewers: new value for submission reviewers.
      */
     public void setReviewers(Set<ReviewerEntity> reviewers) {

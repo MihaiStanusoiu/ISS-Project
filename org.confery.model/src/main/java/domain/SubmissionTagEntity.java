@@ -7,6 +7,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Tested: True
+ *
  * @author Tanasie Luiza Maria & Alexandru Stoica
  * @version 1.1
  */
@@ -14,7 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "SUBMISSION_TAG")
 @SuppressWarnings("unused")
-public class SubmissionTagEntity implements Idable<Integer>  {
+public class SubmissionTagEntity implements Idable<Integer> {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -62,6 +63,7 @@ public class SubmissionTagEntity implements Idable<Integer>  {
 
     /**
      * Effect: Returns the submission of a SubmissionTagEntity.
+     *
      * @return [SubmissionEntity]: returns the submission.
      */
     public SubmissionEntity getSubmission() {
@@ -70,6 +72,7 @@ public class SubmissionTagEntity implements Idable<Integer>  {
 
     /**
      * Effect: Sets the submission of a SubmissionTagEntity.
+     *
      * @param submission: new value for submission.
      */
     public void setSubmission(SubmissionEntity submission) {
@@ -78,6 +81,7 @@ public class SubmissionTagEntity implements Idable<Integer>  {
 
     /**
      * Effect: Returns the tag of a SubmissionTagEntity.
+     *
      * @return [TagEntity]: returns the tag.
      */
     public TagEntity getTag() {
@@ -86,6 +90,7 @@ public class SubmissionTagEntity implements Idable<Integer>  {
 
     /**
      * Effect: Sets the tag of a SubmissionTagEntity.
+     *
      * @param tag: new value for tag.
      */
     public void setTag(TagEntity tag) {

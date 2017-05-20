@@ -3,28 +3,22 @@ package validator;
 import exception.SystemException;
 import exception.ValidatorSystemException;
 
-
 /**
- * Name:         Validator for Repository
- * Effect:       Validates an object
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
  * @author Tanasie Luiza Maria
  * @version 1.0
  */
-@SuppressWarnings("all")
+
 public class ValidatorRepository<T> {
 
     private ValidatorRepositoryBehaviour<T> behaviour;
-    private final Class<T> entityClass;
 
     /**
      * @param entityClass : class of the object given to validate
-     * @throws SystemException : When object of given class cannot be validated
      */
+    @SuppressWarnings("all")
     public ValidatorRepository(Class<T> entityClass) {
-        this.entityClass = entityClass;
         this.behaviour = ValidatorRepositoryBehaviourFactory.getBehaviour(entityClass);
     }
 
@@ -34,7 +28,7 @@ public class ValidatorRepository<T> {
      * @throws SystemException : When given object isn't valid
      */
     public Boolean validate(T object) throws SystemException {
-        if(behaviour.check(object).size()==0){
+        if (behaviour.check(object).size() == 0) {
             return true;
         }
         throw new ValidatorSystemException(behaviour.getAccumulator());

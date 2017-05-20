@@ -7,13 +7,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Name:         RepositoryInterface
- * Effect:       Defines a generic repository for our system.
- * Date:         4/16/2017
- * Tested:       True
+ * Tested: True
  *
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 public interface RepositoryInterface<T extends Idable<Id>, Id extends Serializable> {
@@ -27,8 +24,8 @@ public interface RepositoryInterface<T extends Idable<Id>, Id extends Serializab
 
     /**
      * @param element The old element from our system.
-     * @param with The element with the updated data.
-     *             (ignore the id primary key property)
+     * @param with    The element with the updated data.
+     *                (ignore the id primary key property)
      * @throws SystemException If the action fails
      */
     void update(T element, T with) throws SystemException;

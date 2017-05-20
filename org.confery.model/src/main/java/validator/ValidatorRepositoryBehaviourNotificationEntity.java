@@ -8,16 +8,14 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for NotificationEntity
- * Effect:       Validates a notification
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
  * @author Teodorescu Vlad
  * @version 1.0
  */
-@SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourNotificationEntity extends ValidatorRepositoryBehaviour<NotificationEntity> {
+
+public class ValidatorRepositoryBehaviourNotificationEntity
+        extends ValidatorRepositoryBehaviour<NotificationEntity> {
 
     /**
      * @param object : the notification to validate

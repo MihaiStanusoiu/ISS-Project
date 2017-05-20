@@ -8,16 +8,15 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for SubmissionTagEntity
- * Effect:       Validates a submission tag
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
  * @author Teodorescu Vlad
  * @version 1.0
  */
-@SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourSubmissionTagEntity extends ValidatorRepositoryBehaviour<SubmissionTagEntity> {
+
+public class ValidatorRepositoryBehaviourSubmissionTagEntity
+        extends ValidatorRepositoryBehaviour<SubmissionTagEntity> {
+
     /**
      * @param object : the submission tag to validate
      * @return [List<String>] : list of error messages found
