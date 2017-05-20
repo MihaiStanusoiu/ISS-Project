@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <HBox xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerSignUp">
    <children>
       <VBox alignment="CENTER" minWidth="350.0" style="-fx-background-color: white;">
@@ -137,7 +130,7 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="signUpButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="60.0" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%)(-135deg, #4DE0EB 0%, #6A75D9 100%);" text="SIGN UP" textFill="WHITE">
+            <Button fx:id="signUpButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="60.0" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%);(-135deg, #4DE0EB 0%, #6A75D9 100%);" text="SIGN UP" textFill="WHITE">
                <font>
                   <Font name="Proxima Nova Bold" size="16.0" />
                </font>

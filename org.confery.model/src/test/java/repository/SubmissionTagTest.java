@@ -130,9 +130,9 @@ public class SubmissionTagTest {
         SubmissionEntity submission = new SubmissionEntity("thesis","status","abstractUrl","fullPaperUrl");
         try{
             repositorySubmission.add(submission);
-            tagSubmission1.setSubmissionTag(repositorySubmission.getElementById(1));
-            tagSubmission2.setSubmissionTag(repositorySubmission.getElementById(1));
-            tagSubmission3.setSubmissionTag(repositorySubmission.getElementById(1));
+            tagSubmission1.setSubmission(repositorySubmission.getElementById(1));
+            tagSubmission2.setSubmission(repositorySubmission.getElementById(1));
+            tagSubmission3.setSubmission(repositorySubmission.getElementById(1));
             repositoryTagSubmission.add(tagSubmission1);
             repositoryTagSubmission.add(tagSubmission2);
             repositoryTagSubmission.add(tagSubmission3);

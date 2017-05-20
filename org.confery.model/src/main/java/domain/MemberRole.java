@@ -1,11 +1,13 @@
+
 package domain;
 
 /**
+ * Tested: True
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-public enum UserRole {
+public enum MemberRole {
     SESSION_CHAIR,
     SESSION_SPEAKER,
     SESSION_LISTENER,

@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.*;
@@ -6,12 +7,9 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:    SubmissionEntity
- * Effect:  Class for the database table SubmissionEntity
- * Date:    9/4/2017
- * Tested:  True
- * @author  Simion George-Vlad
- * @version 1.0
+ * Tested: True
+ * @author Simion George-Vlad & Alexandru Stoica
+ * @version 1.1
  */
 
 @Entity
@@ -19,13 +17,10 @@ import static javax.persistence.GenerationType.IDENTITY;
 @SuppressWarnings("unused")
 public class SubmissionEntity implements Idable<Integer> {
 
-    @Id @GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_SUBMISSION")
     private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "ID_EDITION")
-    private EditionEntity editionSubmission;
 
     @Column(name = "NAME")
     private String name;
@@ -42,29 +37,54 @@ public class SubmissionEntity implements Idable<Integer> {
     @Column(name = "IS_PAID")
     private Boolean isPaid;
 
-    @OneToMany(mappedBy = "submissionTag", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = EditionEntity.class)
+    @JoinColumn(name = "ID_EDITION")
+    private EditionEntity edition;
+
+    @OneToMany(targetEntity = SubmissionTagEntity.class, mappedBy = "submission",
+            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<SubmissionTagEntity> submissionTags;
 
-    @OneToMany(mappedBy = "submissionTopic", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = SubmissionTopicEntity.class, mappedBy = "submission",
+            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<SubmissionTopicEntity> submissionTopics;
 
-    @OneToMany(mappedBy = "submissionAuthor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = AuthorSubmissionEntity.class, mappedBy = "submission",
+            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<AuthorSubmissionEntity> submissionAuthors;
 
-    @OneToMany(mappedBy = "submissionReview", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = ReviewerEntity.class, mappedBy = "submission",
+            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<ReviewerEntity> reviewers;
 
+    private static final Integer DEFAULT_ID = 0;
+    private static final String DEFAULT_URL = "";
+    private static final Boolean DEFAULT_FLAG_PAID = Boolean.FALSE;
+
     /**
-     * Empty Constructor
+     * @apiNote Don't use this constructor [it's for testing only]
      */
-    public SubmissionEntity(){}
+    @Deprecated
+    public SubmissionEntity() {
+        this(DEFAULT_ID, DEFAULT_URL, DEFAULT_URL, DEFAULT_URL, DEFAULT_URL, DEFAULT_FLAG_PAID);
+    }
 
     public SubmissionEntity(String name, String status, String abstractUrl, String fullPaperUrl) {
+        this(DEFAULT_ID, name, status, abstractUrl, fullPaperUrl, DEFAULT_FLAG_PAID);
+    }
+
+    public SubmissionEntity(String name, String abstractUrl, String fullPaperUrl) {
+        this(name, DEFAULT_URL, abstractUrl, fullPaperUrl);
+    }
+
+    public SubmissionEntity(Integer id, String name, String status,
+                            String abstractUrl, String fullPaperUrl, Boolean isPaid) {
+        this.id = id;
         this.name = name;
         this.status = status;
         this.abstractUrl = abstractUrl;
         this.fullPaperUrl = fullPaperUrl;
-        this.isPaid = false;
+        this.isPaid = isPaid;
     }
 
     /**
@@ -88,7 +108,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * @return [Integer]: returns the id of SubmissionEntity.
      */
     public EditionEntity getEdition() {
-        return editionSubmission;
+        return edition;
     }
 
     /**
@@ -96,7 +116,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * @param edition: new value for conference id.
      */
     public void setEdition(EditionEntity edition) {
-        this.editionSubmission = edition;
+        this.edition = edition;
     }
 
     /**
@@ -241,6 +261,29 @@ public class SubmissionEntity implements Idable<Integer> {
      */
     public void setReviewers(Set<ReviewerEntity> reviewers) {
         this.reviewers = reviewers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SubmissionEntity that = (SubmissionEntity) o;
+        return id.equals(that.id) && (name != null ? name.equals(that.name) : that.name == null) &&
+                (status != null ? status.equals(that.status) : that.status == null) &&
+                (abstractUrl != null ? abstractUrl.equals(that.abstractUrl) : that.abstractUrl == null) &&
+                (fullPaperUrl != null ? fullPaperUrl.equals(that.fullPaperUrl) : that.fullPaperUrl == null) &&
+                (isPaid != null ? isPaid.equals(that.isPaid) : that.isPaid == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (abstractUrl != null ? abstractUrl.hashCode() : 0);
+        result = 31 * result + (fullPaperUrl != null ? fullPaperUrl.hashCode() : 0);
+        result = 31 * result + (isPaid != null ? isPaid.hashCode() : 0);
+        return result;
     }
 }
 

@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.*;
@@ -6,12 +7,9 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:         ConfigurationSessionMember
- * Effect:       Class for the db table ConfigurationSessionMember
- * Date:         08/04/2017
  * Tested:       True
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author       Tiron Andreea-Ecaterina & Alexandru Stoica
+ * @version      1.1
  */
 
 @Entity
@@ -32,14 +30,40 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
     @Column(name = "IS_LISTENER")
     private Boolean isListener;
 
-    public ConfigurationSessionMemberEntity(Boolean isChair, Boolean isSpeaker, Boolean isListener) {
+    @OneToMany(targetEntity = SessionMemberEntity.class, fetch = FetchType.EAGER,
+            mappedBy = "configuration", cascade = CascadeType.ALL)
+    private Set<SessionMemberEntity> sectionMembers;
+
+    private static final Integer DEFAULT_ID = 0;
+    private static final Boolean DEFAULT_CHAIR = Boolean.FALSE;
+    private static final Boolean DEFAULT_SPEAKER = Boolean.FALSE;
+    private static final Boolean DEFAULT_LISTENER = Boolean.FALSE;
+
+    /**
+     * @param id The object's id
+     * @param isChair If member is the chair of the session
+     * @param isSpeaker If member is a speaker at the session
+     * @param isListener If member is a listener at the session
+     */
+    public ConfigurationSessionMemberEntity(Integer id, Boolean isChair, Boolean isSpeaker, Boolean isListener) {
+        this.id = id;
         this.isChair = isChair;
         this.isSpeaker = isSpeaker;
         this.isListener = isListener;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idConfigurationSession", cascade = CascadeType.ALL)
-    private Set<SessionMemberEntity> sectionMembers;
+    /**
+     * @param isChair If member is the chair of the session
+     * @param isSpeaker If member is a speaker at the session
+     * @param isListener If member is a listener at the session
+     */
+    public ConfigurationSessionMemberEntity(Boolean isChair, Boolean isSpeaker, Boolean isListener) {
+        this(DEFAULT_ID, isChair, isSpeaker, isListener);
+    }
+
+    public ConfigurationSessionMemberEntity() {
+        this(DEFAULT_ID, DEFAULT_CHAIR, DEFAULT_SPEAKER, DEFAULT_LISTENER);
+    }
 
     /**
      * Effect: Return the section members with this configuration.
@@ -55,9 +79,6 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
      */
     public void setSectionMembers(Set<SessionMemberEntity> sectionMembers) {
         this.sectionMembers = sectionMembers;
-    }
-
-    public ConfigurationSessionMemberEntity(){
     }
 
     /**
@@ -122,5 +143,30 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer>{
      */
     public void setListener(Boolean listener) {
         isListener = listener;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConfigurationSessionMemberEntity that = (ConfigurationSessionMemberEntity) o;
+        return isChair.equals(that.isChair) &&
+                isSpeaker.equals(that.isSpeaker) &&
+                isListener.equals(that.isListener);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + isChair.hashCode();
+        result = 31 * result + isSpeaker.hashCode();
+        result = 31 * result + isListener.hashCode();
+        return result;
+    }
+
+    public String toString() {
+        return (this.getChair() ? "1" : "0") +
+                (this.getListener() ? "1" : "0") +
+                (this.getSpeaker() ? "1" : "0");
     }
 }

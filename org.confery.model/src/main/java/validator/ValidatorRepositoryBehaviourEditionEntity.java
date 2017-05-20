@@ -33,20 +33,16 @@ public class ValidatorRepositoryBehaviourEditionEntity extends ValidatorReposito
                 .runTrue(accumulator::add, "Edition's abstract deadline is NULL!");
         basedOn(Objects.isNull(object.getBiddingDeadline()))
                 .runTrue(accumulator::add, "Edition's bidding deadline is NULL!");
-        basedOn(Objects.isNull(object.getConference()))
-                .runTrue(accumulator::add, "Edition's conference is NULL!");
         basedOn(Objects.isNull(object.getEndDate()))
                 .runTrue(accumulator::add, "Edition's end date is NULL!");
         basedOn(Objects.isNull(object.getEvaluationDeadline()))
                 .runTrue(accumulator::add, "Edition's evaluation date is NULL!");
         basedOn(Objects.isNull(object.getId()))
                 .runTrue(accumulator::add, "Edition's id is NULL!");
-        basedOn(Objects.isNull(object.getLocation()) || object.getLocation().equals(""))
+        basedOn(Objects.isNull(object.getLocation()))
                 .runTrue(accumulator::add, "Edition's location is INVALID!");
         basedOn(Objects.isNull(object.getPaperDeadline()))
                 .runTrue(accumulator::add, "Edition's paper deadline is NULL!");
-        basedOn(Objects.isNull(object.getSessions()))
-                .runTrue(accumulator::add, "Edition's sessions is NULL!");
         basedOn(Objects.isNull(object.getStartDate()))
                 .runTrue(accumulator::add, "Edition's start date is NULL!");
         return accumulator;

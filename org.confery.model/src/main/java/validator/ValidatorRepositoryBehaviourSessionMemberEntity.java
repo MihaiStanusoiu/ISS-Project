@@ -16,6 +16,7 @@ import static utils.Conditional.basedOn;
  * @author Teodorescu Vlad
  * @version 1.0
  */
+
 @SuppressWarnings("all")
 public class ValidatorRepositoryBehaviourSessionMemberEntity extends ValidatorRepositoryBehaviour<SessionMemberEntity> {
 
@@ -29,12 +30,6 @@ public class ValidatorRepositoryBehaviourSessionMemberEntity extends ValidatorRe
                 .runTrue(accumulator::add, "Session member is NULL!");
         basedOn(Objects.isNull(object.getId()))
                 .runTrue(accumulator::add, "Session member's id is NULL!");
-        basedOn(Objects.isNull(object.getIdConfigurationSession()))
-                .runTrue(accumulator::add, "Session member's configuration id is NULL!");
-        basedOn(Objects.isNull(object.getSession()))
-                .runTrue(accumulator::add, "Session member's session is NULL!");
-        basedOn(Objects.isNull(object.getUser()))
-                .runTrue(accumulator::add, "Session member's user is NULL!");
         return accumulator;
     }
 }

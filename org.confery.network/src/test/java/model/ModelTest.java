@@ -20,7 +20,7 @@ import static utils.Try.runFunction;
  */
 
 
-class ModelPowerTest {
+class ModelTest {
 
     private Model<UserEntity, Integer> model;
 

@@ -31,6 +31,7 @@ public class ConferenceTest {
 
     @Before
     public void setUp() throws Exception {
+        date = new Date();
         loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
         repositoryEditionConfiguration = new RepositoryEntity<>(ConferenceEntity.class, loader);
         repositoryEdition = new RepositoryEntity<>(EditionEntity.class, loader);
@@ -144,7 +145,7 @@ public class ConferenceTest {
             }
             Assert.assertTrue(isNote.equals(true) && isNote2.equals(true) && isNote3.equals(true));
             Assert.assertTrue(editions.size() == 3);
-        }catch(SystemException exception) {
+        } catch(SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }

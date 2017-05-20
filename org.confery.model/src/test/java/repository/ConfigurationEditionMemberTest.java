@@ -49,7 +49,7 @@ public class ConfigurationEditionMemberTest {
             Assert.assertTrue(idUser.equals(1) &&
                     user.getChair().equals(false) &&
                     user.getCoChair().equals(true) &&
-                    user.getPCMember().equals(true)
+                    user.getPcMember().equals(true)
             );
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");

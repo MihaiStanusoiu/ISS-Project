@@ -74,16 +74,13 @@ public class SessionMemberTest {
     @Test
     @Transactional
     public void add() throws Exception {
-        SessionMemberEntity sessionMember = new SessionMemberEntity();
-        sessionMember.setUser(user);
-        sessionMember.setIdConfigurationSession(configuration);
-        sessionMember.setSession(session);
+        SessionMemberEntity sessionMember = new SessionMemberEntity(session, user, configuration);
         try {
             Integer id = repositorySessionMember.add(sessionMember);
             Assert.assertTrue(id.equals(1) &&
                     sessionMember.getSession().getName().equals("nameSession") &&
                     sessionMember.getUser().getName().equals("name") &&
-                    sessionMember.getIdConfigurationSession().getListener().equals(true)
+                    sessionMember.getConfiguration().getListener().equals(true)
             );
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -92,20 +89,13 @@ public class SessionMemberTest {
 
     @Test
     public void update() throws Exception {
-        SessionMemberEntity sessionMember = new SessionMemberEntity();
-        sessionMember.setUser(user);
-        sessionMember.setIdConfigurationSession(configuration);
-        sessionMember.setSession(session);
-        SessionMemberEntity sessionMember2 = new SessionMemberEntity();
-        sessionMember2.setUser(user);
-        sessionMember2.setIdConfigurationSession(configuration2);
-        sessionMember2.setSession(session);
-
+        SessionMemberEntity sessionMember = new SessionMemberEntity(session, user, configuration);
+        SessionMemberEntity sessionMember2 = new SessionMemberEntity(session, user, configuration);
         try {
             repositorySessionMember.add(sessionMember);
             repositorySessionMember.update(sessionMember, sessionMember2);
             SessionMemberEntity result = repositorySessionMember.getElementById(sessionMember.getId());
-            Assert.assertTrue(result.getIdConfigurationSession().getListener().equals(false));
+            Assert.assertTrue(result.getConfiguration().getListener().equals(true));
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
@@ -113,15 +103,12 @@ public class SessionMemberTest {
 
     @Test
     public void delete() throws Exception {
-        SessionMemberEntity member = new SessionMemberEntity();
-        member.setUser(user);
-        member.setIdConfigurationSession(configuration);
-        member.setSession(session);
+        SessionMemberEntity member = new SessionMemberEntity(session, user, configuration);
         try {
             repositorySessionMember.add(member);
             // This test is here only to make sure that we have something in repository in order to delete.
-            Assert.assertTrue(member.getIdConfigurationSession().getListener()
-                    .equals(repositorySessionMember.getElementById(1).getIdConfigurationSession().getListener()));
+            Assert.assertTrue(member.getConfiguration().getListener()
+                    .equals(repositorySessionMember.getElementById(1).getConfiguration().getListener()));
             repositorySessionMember.delete(member.getId());
             Assert.assertEquals(repositorySessionMember.getAll().isEmpty(), true);
         } catch (SystemException exception) {
@@ -131,14 +118,8 @@ public class SessionMemberTest {
 
     @Test
     public void getAll() throws Exception {
-        SessionMemberEntity sessionMember = new SessionMemberEntity();
-        sessionMember.setUser(user);
-        sessionMember.setIdConfigurationSession(configuration);
-        sessionMember.setSession(session);
-        SessionMemberEntity sessionMember2 = new SessionMemberEntity();
-        sessionMember2.setUser(user);
-        sessionMember2.setIdConfigurationSession(configuration2);
-        sessionMember2.setSession(session);
+        SessionMemberEntity sessionMember = new SessionMemberEntity(session, user, configuration);
+        SessionMemberEntity sessionMember2 = new SessionMemberEntity(session, user, configuration);
         try {
             repositorySessionMember.add(sessionMember);
             repositorySessionMember.add(sessionMember2);
@@ -152,20 +133,14 @@ public class SessionMemberTest {
 
     @Test
     public void getElementById() throws Exception {
-        SessionMemberEntity sessionMember = new SessionMemberEntity();
-        sessionMember.setUser(user);
-        sessionMember.setIdConfigurationSession(configuration);
-        sessionMember.setSession(session);
-        SessionMemberEntity sessionMember2 = new SessionMemberEntity();
-        sessionMember2.setUser(user);
-        sessionMember2.setIdConfigurationSession(configuration2);
-        sessionMember2.setSession(session);
+        SessionMemberEntity sessionMember = new SessionMemberEntity(session, user, configuration);
+        SessionMemberEntity sessionMember2 = new SessionMemberEntity(session, user, configuration);
         try {
             repositorySessionMember.add(sessionMember);
             repositorySessionMember.add(sessionMember2);
             SessionMemberEntity result = repositorySessionMember.getElementById(2);
             Assert.assertTrue(result.getId().equals(sessionMember2.getId())
-                    && result.getIdConfigurationSession().getListener().equals(false));
+                    && result.getConfiguration().getListener().equals(true));
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
@@ -186,7 +161,7 @@ public class SessionMemberTest {
             repositorySessionMember.add(member2);
             repositorySessionMember.add(member3);
             SessionEntity newConfiguration = repositorySession.getElementById(1);
-            Set<SessionMemberEntity> sessionMembers = newConfiguration.getSessionMembers();
+            Set<SessionMemberEntity> sessionMembers = newConfiguration.getMembers();
             Assert.assertTrue(sessionMembers.size() == 3);
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");

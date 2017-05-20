@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.*;
@@ -7,12 +8,9 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:         SessionEntity
- * Effect:       Class for the db table SessionEntity.
- * Date:         08/04/2017
- * Tested:       True
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * Tested: True
+ * @author Tiron Andreea-Ecaterina & Alexandru Stoica
+ * @version 1.0
  */
 
 @Entity
@@ -20,7 +18,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @SuppressWarnings("unused")
 public class SessionEntity implements Idable<Integer> {
 
-    @Id @GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_SESSION")
     private Integer id;
 
@@ -42,16 +41,41 @@ public class SessionEntity implements Idable<Integer> {
     @Column(name = "SEATS")
     private Integer seats;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = EditionEntity.class)
     @JoinColumn(name = "ID_EDITION")
-    private EditionEntity editionSession;
+    private EditionEntity edition;
 
-    @OneToMany(mappedBy = "session", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<SessionMemberEntity> sessionMembers;
+    @OneToMany(targetEntity = SessionMemberEntity.class, mappedBy = "session",
+            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<SessionMemberEntity> members;
 
-    public SessionEntity() { }
+    private static final Integer DEFAULT_ID = 0;
+    private static final Date DEFAULT_DATE = new Date();
+    private static final String DEFAULT_LOCATION = "Unknown";
+    private static final String DEFAULT_BIO = "";
+    private static final Integer DEFAULT_SEATS = 0;
 
-    public SessionEntity(String name, Date startDate, Date endDate, String location, String bio, Integer seats) {
+    /**
+     * @apiNote Don't use this constructor [it's for testing only]
+     */
+    @Deprecated
+    public SessionEntity() {
+        this("");
+    }
+
+    public SessionEntity(String name) {
+        this(name, DEFAULT_DATE, DEFAULT_DATE,
+                DEFAULT_LOCATION, DEFAULT_BIO, DEFAULT_SEATS);
+    }
+
+    public SessionEntity(String name, Date startDate, Date endDate,
+                         String location, String bio, Integer seats) {
+        this(DEFAULT_ID, name, startDate, endDate, location, bio, seats);
+    }
+
+    public SessionEntity(Integer id, String name, Date startDate, Date endDate,
+                         String location, String bio, Integer seats) {
+        this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -177,7 +201,7 @@ public class SessionEntity implements Idable<Integer> {
      * @return [Integer] : returns the edition.
      */
     public EditionEntity getEdition() {
-        return editionSession;
+        return edition;
     }
 
     /**
@@ -185,22 +209,48 @@ public class SessionEntity implements Idable<Integer> {
      * @param edition : new value for id.
      */
     public void setEdition(EditionEntity edition) {
-        this.editionSession = edition;
+        this.edition = edition;
     }
 
     /**
-     * Effect: Return the sessionMembers of a Session.
-     * @return [Set<SessionMemberEntity>]: returns the sessionMembers.
+     * Effect: Return the members of a Session.
+     * @return [Set<SessionMemberEntity>]: returns the members.
      */
-    public Set<SessionMemberEntity> getSessionMembers() {
-        return sessionMembers;
+    public Set<SessionMemberEntity> getMembers() {
+        return members;
     }
 
     /**
-     * Effect: Sets the sessionMembers of a Session.
-     * @param sessionMembers: new value for the sessionMembers.
+     * Effect: Sets the members of a Session.
+     * @param members: new value for the members.
      */
-    public void setSessionMembers(Set<SessionMemberEntity> sessionMembers) {
-        this.sessionMembers = sessionMembers;
+    public void setMembers(Set<SessionMemberEntity> members) {
+        this.members = members;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SessionEntity that = (SessionEntity) o;
+        return id.equals(that.id) && (name != null ? name.equals(that.name) : that.name == null) &&
+                (startDate != null ? startDate.equals(that.startDate) : that.startDate == null) &&
+                (endDate != null ? endDate.equals(that.endDate) : that.endDate == null) &&
+                (location != null ? location.equals(that.location) : that.location == null) &&
+                (bio != null ? bio.equals(that.bio) : that.bio == null) &&
+                (seats != null ? seats.equals(that.seats) : that.seats == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + (bio != null ? bio.hashCode() : 0);
+        result = 31 * result + (seats != null ? seats.hashCode() : 0);
+        return result;
     }
 }

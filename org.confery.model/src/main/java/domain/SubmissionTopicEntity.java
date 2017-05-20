@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.*;
@@ -5,12 +6,9 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:         SubmissionTopicEntity
- * Effect:       Class for domain SubmissionTopicEntity table
- * Date:         4/8/2017
- * Tested:       True
- * @author      {Teodorescu Vlad}
- * @version     1.0
+ * Tested: True
+ * @author Teodorescu Vlad & Alexandru Stoica
+ * @version 1.1
  */
 
 @Entity
@@ -23,15 +21,35 @@ public class SubmissionTopicEntity implements Idable<Integer>{
     @Column(name = "ID_SUBMISSION_TOPIC")
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = SubmissionEntity.class)
     @JoinColumn(name = "ID_SUBMISSION")
-    private SubmissionEntity submissionTopic;
+    private SubmissionEntity submission;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = TopicEntity.class)
     @JoinColumn(name = "ID_TOPIC")
     private TopicEntity topic;
 
-    public SubmissionTopicEntity() { }
+    private static final Integer DEFAULT_ID = 0;
+
+    /**
+     * @apiNote Don't use this constructor [it's for testing only]
+     */
+    @Deprecated
+    public SubmissionTopicEntity() {
+        this(DEFAULT_ID, null, null);
+    }
+
+    public SubmissionTopicEntity(SubmissionEntity submission, TopicEntity topic) {
+        this(DEFAULT_ID, submission, topic);
+    }
+
+    @SuppressWarnings("All")
+    public SubmissionTopicEntity(Integer id, SubmissionEntity submission,
+                                 TopicEntity topic) {
+        this.id = id;
+        this.submission = submission;
+        this.topic = topic;
+    }
 
     /**
      * Effect: Return the id of a submission-topic.
@@ -49,18 +67,18 @@ public class SubmissionTopicEntity implements Idable<Integer>{
 
     /**
      * Effect: Returns the submission of a SubmissionTopicEntity
-     * @return [SubmissionEntity]: returns the submissionTopic.
+     * @return [SubmissionEntity]: returns the submission.
      */
-    public SubmissionEntity getSubmissionTopic() {
-        return submissionTopic;
+    public SubmissionEntity getSubmission() {
+        return submission;
     }
 
     /**
      * Effect: Sets the submission of a SubmissionTopicEntity.
-     * @param submissionTopic: new value for submissionTopic.
+     * @param submission: new value for submission.
      */
-    public void setSubmissionTopic(SubmissionEntity submissionTopic) {
-        this.submissionTopic = submissionTopic;
+    public void setSubmission(SubmissionEntity submission) {
+        this.submission = submission;
     }
 
     /**
@@ -79,4 +97,16 @@ public class SubmissionTopicEntity implements Idable<Integer>{
         this.topic = topic;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SubmissionTopicEntity that = (SubmissionTopicEntity) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

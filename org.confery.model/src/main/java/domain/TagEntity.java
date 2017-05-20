@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.*;
@@ -5,12 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Name:         TagEntity
- * Effect:       Corresponding class for the paper tags table in the database.
- * Date:         08.04.2017
- * Tested:       True
- * @author       Tanasie Luiza Maria
- * @version      1.0
+ * Tested: True
+ * @author Tanasie Luiza Maria & Alexandru Stoica
+ * @version 1.1
  */
 
 @Entity
@@ -26,15 +24,27 @@ public class TagEntity implements Idable<Integer> {
     @Column(name = "WORD")
     private String word;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="tag", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = SubmissionTagEntity.class, fetch = FetchType.EAGER,
+            mappedBy="tag", cascade = CascadeType.ALL)
     private Set<SubmissionTagEntity> submissionTags;
 
+    private static final Integer DEFAULT_ID = 0;
+    private static final String DEFAULT_WORD = "";
+
+    /**
+     * @apiNote Don't use this constructor [it's for testing only]
+     */
+    @Deprecated
     public TagEntity() {
-        this("");
+        this(DEFAULT_WORD);
     }
 
     public TagEntity(String word) {
-        this.id = 0;
+        this(DEFAULT_ID, word);
+    }
+
+    public TagEntity(Integer id, String word) {
+        this.id = id;
         this.word = word;
         submissionTags = new HashSet<>();
     }
@@ -87,4 +97,19 @@ public class TagEntity implements Idable<Integer> {
         this.submissionTags = submissionTags;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TagEntity tagEntity = (TagEntity) o;
+        return id.equals(tagEntity.id) && (word != null ? word.equals(tagEntity.word) :
+                tagEntity.word == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + (word != null ? word.hashCode() : 0);
+        return result;
+    }
 }
