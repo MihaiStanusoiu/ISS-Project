@@ -8,17 +8,15 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for SessionMemberEntity
- * Effect:       Validates a session member
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
  * @author Teodorescu Vlad
  * @version 1.0
  */
 
 @SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourSessionMemberEntity extends ValidatorRepositoryBehaviour<SessionMemberEntity> {
+public class ValidatorRepositoryBehaviourSessionMemberEntity
+        extends ValidatorRepositoryBehaviour<SessionMemberEntity> {
 
     /**
      * @param object : the session member to validate

@@ -7,6 +7,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Tested: True
+ *
  * @author Tiron Andreea-Ecaterina & Alexandru Stoica
  * @version 1.0
  */
@@ -14,7 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "SESSION_MEMBER")
 @SuppressWarnings("unused")
-public class SessionMemberEntity implements Idable<Integer>{
+public class SessionMemberEntity implements Idable<Integer> {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -58,6 +59,7 @@ public class SessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Return the id of a section member.
+     *
      * @return [Integer] : returns the id of a section member.
      */
     public Integer getId() {
@@ -66,6 +68,7 @@ public class SessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets the id of a section member.
+     *
      * @param id: new value for id.
      */
     public void setId(Integer id) {
@@ -74,6 +77,7 @@ public class SessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Return the id of a section configuration.
+     *
      * @return [ConfigurationSessionMemberEntity] : returns the id of a section configuration.
      */
     public ConfigurationSessionMemberEntity getConfiguration() {
@@ -82,6 +86,7 @@ public class SessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets the id of a section configuration.
+     *
      * @param idConfiguration: new value for id configuration.
      */
     public void setConfiguration(ConfigurationSessionMemberEntity idConfiguration) {
@@ -90,6 +95,7 @@ public class SessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Returns the session of a SessionMember.
+     *
      * @return [SessionEntity]: returns the session of a session member.
      */
     public SessionEntity getSession() {
@@ -98,6 +104,7 @@ public class SessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets the session of a Session Member.
+     *
      * @param session: new value for the session.
      */
     public void setSession(SessionEntity session) {
@@ -106,6 +113,7 @@ public class SessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Returns the user of a SessionMemberEntity.
+     *
      * @return [UserEntity]: returns the user of a session member.
      */
     public UserEntity getUser() {
@@ -114,6 +122,7 @@ public class SessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets the user of a SessionMemberEntity.
+     *
      * @param user: new value for user.
      */
     public void setUser(UserEntity user) {

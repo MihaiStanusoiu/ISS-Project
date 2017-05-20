@@ -8,16 +8,14 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for EditionEntity
- * Effect:       Validates an edition
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
- * @author Tanasie Luiza Maria/Teodorescu Vlad
+ * @author Tanasie Luiza Maria & Teodorescu Vlad
  * @version 1.0
  */
-@SuppressWarnings("all")
-public class ValidatorRepositoryBehaviourEditionEntity extends ValidatorRepositoryBehaviour<EditionEntity> {
+
+public class ValidatorRepositoryBehaviourEditionEntity
+        extends ValidatorRepositoryBehaviour<EditionEntity> {
 
     /**
      * @param object : the edition to validate

@@ -6,13 +6,12 @@ import protocol.UserProtocol;
 
 /**
  * Tested: True
+ *
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-public class UserModel
-        extends Model<UserEntity, Integer>
-        implements UserProtocol {
+public class UserModel extends Model<UserEntity, Integer> implements UserProtocol {
 
     public UserModel(DatabaseLoaderInterface loader) {
         super(UserEntity.class, loader);

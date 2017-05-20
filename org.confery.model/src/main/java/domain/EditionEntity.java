@@ -9,6 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Tested: True
+ *
  * @author Simion George-Vlad & Alexandru Stoica
  * @version 1.1
  */
@@ -18,7 +19,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @SuppressWarnings("unused")
 public class EditionEntity implements Idable<Integer> {
 
-    @Id@GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_EDITION")
     private Integer id;
 
@@ -47,7 +49,7 @@ public class EditionEntity implements Idable<Integer> {
     private Date biddingDeadline;
 
     @ManyToOne(targetEntity = ConferenceEntity.class)
-    @JoinColumn(name="ID_CONFERENCE")
+    @JoinColumn(name = "ID_CONFERENCE")
     private ConferenceEntity conference;
 
     @OneToMany(targetEntity = EditionMemberEntity.class, fetch = FetchType.EAGER,
@@ -74,15 +76,15 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
-     * @param id The object's id
-     * @param startDate The stating date
-     * @param endDate The ending date
-     * @param location The edition's location
-     * @param bio The edition's bio
-     * @param abstractDeadline The abstract deadline [optional]
-     * @param paperDeadline The paper deadline [optional]
+     * @param id                 The object's id
+     * @param startDate          The stating date
+     * @param endDate            The ending date
+     * @param location           The edition's location
+     * @param bio                The edition's bio
+     * @param abstractDeadline   The abstract deadline [optional]
+     * @param paperDeadline      The paper deadline [optional]
      * @param evaluationDeadline The evaluation deadline [optional]
-     * @param biddingDeadline The bidding deadline [optional]
+     * @param biddingDeadline    The bidding deadline [optional]
      */
     public EditionEntity(Integer id,
                          Date startDate,
@@ -105,14 +107,14 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
-     * @param startDate The stating date
-     * @param endDate The ending date
-     * @param location The edition's location
-     * @param bio The edition's bio
-     * @param abstractDeadline The abstract deadline [optional]
-     * @param paperDeadline The paper deadline [optional]
+     * @param startDate          The stating date
+     * @param endDate            The ending date
+     * @param location           The edition's location
+     * @param bio                The edition's bio
+     * @param abstractDeadline   The abstract deadline [optional]
+     * @param paperDeadline      The paper deadline [optional]
      * @param evaluationDeadline The evaluation deadline [optional]
-     * @param biddingDeadline The bidding deadline [optional]
+     * @param biddingDeadline    The bidding deadline [optional]
      */
     public EditionEntity(Date startDate,
                          Date endDate,
@@ -128,9 +130,9 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * @param startDate The stating date
-     * @param endDate The ending date
-     * @param location The edition's location
-     * @param bio The edition's bio
+     * @param endDate   The ending date
+     * @param location  The edition's location
+     * @param bio       The edition's bio
      */
     public EditionEntity(Date startDate, Date endDate, String location, String bio) {
         this(DEFAULT_ID, startDate, endDate, location, bio,
@@ -139,8 +141,8 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * @param startDate The stating date
-     * @param endDate The ending date
-     * @param location The edition's location
+     * @param endDate   The ending date
+     * @param location  The edition's location
      */
     public EditionEntity(Date startDate, Date endDate, String location) {
         this(DEFAULT_ID, startDate, endDate, location, DEFAULT_BIO,
@@ -157,6 +159,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the id of this conference.
+     *
      * @return [Integer]: returns the id of conference.
      */
     public Integer getId() {
@@ -165,6 +168,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the id of a conference.
+     *
      * @param id: new value for conference id.
      */
     public void setId(Integer id) {
@@ -173,6 +177,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the start date of this conference.
+     *
      * @return [Date]: returns the startDate of conference.
      */
     public Date getStartDate() {
@@ -181,6 +186,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the start date of a conference.
+     *
      * @param startDate: new value for conference startDate.
      */
     public void setStartDate(Date startDate) {
@@ -189,6 +195,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the end date of this conference.
+     *
      * @return [Date]: returns the endDate of conference.
      */
     public Date getEndDate() {
@@ -197,6 +204,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the end date of a conference.
+     *
      * @param endDate: new value for conference endDate.
      */
     public void setEndDate(Date endDate) {
@@ -205,6 +213,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the location of this conference.
+     *
      * @return [String]: returns the location of conference.
      */
     public String getLocation() {
@@ -213,6 +222,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the location of a conference.
+     *
      * @param location: new value for conference location.
      */
     public void setLocation(String location) {
@@ -221,6 +231,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the bio of this conference.
+     *
      * @return [String]: returns the bio of conference.
      */
     public String getBio() {
@@ -229,6 +240,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the bio of a conference.
+     *
      * @param bio: new value for conference bio.
      */
     public void setBio(String bio) {
@@ -237,6 +249,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the abstract deadline of this conference.
+     *
      * @return [Date]: returns the abstractDeadline of conference.
      */
     public Date getAbstractDeadline() {
@@ -245,6 +258,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the abstract deadline of a conference.
+     *
      * @param abstractDeadline: new value for conference abstractDeadline.
      */
     public void setAbstractDeadline(Date abstractDeadline) {
@@ -253,6 +267,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the paper deadline of this conference.
+     *
      * @return [Date]: returns the paperDeadline of conference.
      */
     public Date getPaperDeadline() {
@@ -261,6 +276,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the paper deadline of a conference.
+     *
      * @param paperDeadline: new value for conference paperDeadline.
      */
     public void setPaperDeadline(Date paperDeadline) {
@@ -269,6 +285,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the evaluation deadline of this conference.
+     *
      * @return [Date]: returns the evaluationDeadline of conference.
      */
     public Date getEvaluationDeadline() {
@@ -277,6 +294,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the evaluation deadline of a conference.
+     *
      * @param evaluationDeadline: new value for conference evaluationDeadline.
      */
     public void setEvaluationDeadline(Date evaluationDeadline) {
@@ -285,6 +303,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the bidding deadline of this conference.
+     *
      * @return [Date]: returns the biddingDeadline of conference.
      */
     public Date getBiddingDeadline() {
@@ -293,6 +312,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the bidding deadline of a conference.
+     *
      * @param biddingDeadline: new value for conference biddingDeadline.
      */
     public void setBiddingDeadline(Date biddingDeadline) {
@@ -301,6 +321,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the conference of a Edition.
+     *
      * @return [ConferenceEntity]: returns the conference of an Edition.
      */
     public ConferenceEntity getConference() {
@@ -309,6 +330,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the conference of an Edition.
+     *
      * @param conference: new value for conference
      */
     public void setConference(ConferenceEntity conference) {
@@ -317,6 +339,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the members of an Edition.
+     *
      * @return [Set<EditionMemberEntity>]: returns the members of an Edition.
      */
     public Set<EditionMemberEntity> getMembers() {
@@ -325,6 +348,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the members of an Edition.
+     *
      * @param members: new value for members.
      */
     public void setMembers(Set<EditionMemberEntity> members) {
@@ -333,6 +357,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Returns the sessions of an Edition.
+     *
      * @return [Set<SessionEntity>]: returns the sessions of an Edition.
      */
     public Set<SessionEntity> getSessions() {
@@ -341,6 +366,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Returns the submissions of an Edition.
+     *
      * @return [Set<SubmissionEntity>]: returns the submissions of an Edition.
      */
     public Set<SubmissionEntity> getSubmissions() {
@@ -349,6 +375,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the sessions of an Edition.
+     *
      * @param sessions: new value for sessions.
      */
     public void setSessions(Set<SessionEntity> sessions) {
@@ -357,6 +384,7 @@ public class EditionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the submissions of an Edition.
+     *
      * @param submissions: new value for submissions.
      */
     public void setSubmissions(Set<SubmissionEntity> submissions) {

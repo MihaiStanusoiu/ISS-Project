@@ -9,6 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * Tested: True
+ *
  * @author Tiron Andreea-Ecaterina & Alexandru Stoica
  * @version 1.0
  */
@@ -86,6 +87,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the id of a section.
+     *
      * @return [Integer] : returns the id of a section.
      */
     public Integer getId() {
@@ -94,6 +96,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the id of a section.
+     *
      * @param id : new value for id.
      */
     public void setId(Integer id) {
@@ -102,6 +105,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the name of a section.
+     *
      * @return [String] : returns the name of a section.
      */
     public String getName() {
@@ -110,6 +114,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the name of a section.
+     *
      * @param name : new value for name.
      */
     public void setName(String name) {
@@ -118,6 +123,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the starting date of a section.
+     *
      * @return [Date] : returns the starting date of a section.
      */
     public Date getStartDate() {
@@ -126,6 +132,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the starting date of a section.
+     *
      * @param startDate : new value for start date.
      */
     public void setStartDate(Date startDate) {
@@ -134,6 +141,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the ending date of a section.
+     *
      * @return [Date] : returns the ending date of a section.
      */
     public Date getEndDate() {
@@ -142,6 +150,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the ending date of a section.
+     *
      * @param endDate : new value for end date.
      */
     public void setEndDate(Date endDate) {
@@ -150,6 +159,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the location of a section.
+     *
      * @return [String] : returns the location of a section.
      */
     public String getLocation() {
@@ -158,6 +168,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the location of a section.
+     *
      * @param location : new value for location.
      */
     public void setLocation(String location) {
@@ -166,6 +177,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the bio of a section.
+     *
      * @return [String] : returns the bio of a section.
      */
     public String getBio() {
@@ -174,6 +186,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the bio of a section.
+     *
      * @param bio : new value of bio.
      */
     public void setBio(String bio) {
@@ -182,6 +195,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the number of seats of a section.
+     *
      * @return [Integer] : returns the seats of a section.
      */
     public Integer getSeats() {
@@ -190,6 +204,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the number of seats of a section.
+     *
      * @param seats : new value for seats.
      */
     public void setSeats(Integer seats) {
@@ -198,6 +213,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the edition.
+     *
      * @return [Integer] : returns the edition.
      */
     public EditionEntity getEdition() {
@@ -206,6 +222,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the id of an edition.
+     *
      * @param edition : new value for id.
      */
     public void setEdition(EditionEntity edition) {
@@ -214,6 +231,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the members of a Session.
+     *
      * @return [Set<SessionMemberEntity>]: returns the members.
      */
     public Set<SessionMemberEntity> getMembers() {
@@ -222,6 +240,7 @@ public class SessionEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the members of a Session.
+     *
      * @param members: new value for the members.
      */
     public void setMembers(Set<SessionMemberEntity> members) {

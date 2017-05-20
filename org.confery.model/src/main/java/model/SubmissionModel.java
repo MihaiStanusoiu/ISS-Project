@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 /**
  * Tested: True
+ *
  * @author Alexandru Stoica
  * @version 1.0
  */
@@ -85,9 +86,9 @@ public class SubmissionModel
     @Override
     public void changeOwnerOf(SubmissionEntity submission, UserEntity owner) throws SystemException {
         repositorySubmissionAuthor.update(repositorySubmissionAuthor.getAll().stream()
-                .filter(author -> author.getSubmission().equals(submission)
-                        && author.getOwner().equals(Boolean.TRUE))
-                .findFirst().orElseThrow(() -> new ModelException("404 Owner Not Found!")),
+                        .filter(author -> author.getSubmission().equals(submission)
+                                && author.getOwner().equals(Boolean.TRUE))
+                        .findFirst().orElseThrow(() -> new ModelException("404 Owner Not Found!")),
                 new AuthorSubmissionEntity(submission, owner, Boolean.TRUE));
     }
 
@@ -183,10 +184,10 @@ public class SubmissionModel
     @Override
     public UserEntity getOwnerFrom(SubmissionEntity submission) throws SystemException {
         return repositorySubmissionAuthor.getAll().stream()
-            .filter(author -> author.getSubmission().equals(submission) &&
-                    author.getOwner().equals(Boolean.TRUE))
-            .map(AuthorSubmissionEntity::getAuthor)
-            .findFirst().orElseThrow(() -> new ModelException("404 Owner Not Found!"));
+                .filter(author -> author.getSubmission().equals(submission) &&
+                        author.getOwner().equals(Boolean.TRUE))
+                .map(AuthorSubmissionEntity::getAuthor)
+                .findFirst().orElseThrow(() -> new ModelException("404 Owner Not Found!"));
     }
 
 }

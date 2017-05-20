@@ -7,6 +7,7 @@ import java.util.Set;
 
 /**
  * Tested: True
+ *
  * @author Tanasie Luiza Maria & Alexandru Stoica
  * @version 1.1
  */
@@ -25,7 +26,7 @@ public class TagEntity implements Idable<Integer> {
     private String word;
 
     @OneToMany(targetEntity = SubmissionTagEntity.class, fetch = FetchType.EAGER,
-            mappedBy="tag", cascade = CascadeType.ALL)
+            mappedBy = "tag", cascade = CascadeType.ALL)
     private Set<SubmissionTagEntity> submissionTags;
 
     private static final Integer DEFAULT_ID = 0;
@@ -51,6 +52,7 @@ public class TagEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the id of tag.
+     *
      * @return [Integer]: returns the id of tag.
      */
     public Integer getId() {
@@ -59,6 +61,7 @@ public class TagEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the id of tag.
+     *
      * @param id [Integer]: new value for id
      */
     public void setId(Integer id) {
@@ -67,6 +70,7 @@ public class TagEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the word of the tag.
+     *
      * @return [String]: returns the word of the tag.
      */
     public String getWord() {
@@ -75,6 +79,7 @@ public class TagEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the word of the tag.
+     *
      * @param word [Integer]: new value for the word
      */
     public void setWord(String word) {
@@ -83,6 +88,7 @@ public class TagEntity implements Idable<Integer> {
 
     /**
      * Effect: Return the submission tags of the tag.
+     *
      * @return [ArrayList<SubmissionTagEntity>]: returns the submission tags of the tag.
      */
     public Set<SubmissionTagEntity> getSubmissionTags() {
@@ -91,6 +97,7 @@ public class TagEntity implements Idable<Integer> {
 
     /**
      * Effect: Sets the submission tags of the tag.
+     *
      * @param submissionTags [ArrayList<SubmissionTagEntity>]: new value for the submission tags
      */
     public void setSubmissionTags(Set<SubmissionTagEntity> submissionTags) {

@@ -8,15 +8,12 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for ConferenceEditionMemberEntity
- * Effect:       Validates a conference edition member
- * Date:         06/05/2017
- * Tested:       False
+ * Tested: True
  *
  * @author Teodorescu Vlad
  * @version 1.0
  */
-@SuppressWarnings("all")
+
 public class ValidatorRepositoryBehaviourConfigurationEditionMemberEntity
         extends ValidatorRepositoryBehaviour<ConfigurationEditionMemberEntity> {
 

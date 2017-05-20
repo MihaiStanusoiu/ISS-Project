@@ -10,28 +10,26 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- * Name:         DatabaseLoader
- * Effect:       Loads the database using a Hibernate configuration.
- *               <p>
- *                   The configuration is preset by default
- *                   if you're using the empty constructor.
+ * Loads the database using a Hibernate configuration.
+ * <p>
+ *      The configuration is preset by default if you're using the empty constructor.
+ * </p>
+ * <p>
+ *      If you need to test the system the loader needs
+ *      another configuration (for testing) and you can
+ *      set it up using the constructor with configuration DI
+ *      or by using the setConfiguration method.
+ * </p>
+ * <p>  Recommended: Use the constructor when you test the database. </p>
+ * <p>
+ *      If you use the setConfiguration method, by default you will
+ *      force the loader to use the default configuration and the whole
+ *      loading process will slow down your test / code.
+ * </p>
+ * Tested: True
  *
- *                   If you need to test the system the loader needs
- *                   another configuration (for testing) and you can
- *                   set it up using the constructor with configuration DI
- *                   or by using the setConfiguration method.
- *
- *                   Recommended: Use the constructor when you test the database.
- *
- *                   If you use the setConfiguration method, by default you will
- *                   force the loader to use the default configuration and the whole
- *                   loading process will slow down your test / code.
- *               </p>
- * Date:         4/16/2017
- * Tested:       True
- *
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 public class DatabaseLoader implements DatabaseLoaderInterface {
@@ -54,8 +52,9 @@ public class DatabaseLoader implements DatabaseLoaderInterface {
 
     /**
      * Effect: Creates the database loader with a default configuration for your system.
+     *
      * @throws IOException If you don't have the default database
-     * configuration file set up. (as a property file in your resources)
+     *                     configuration file set up. (as a property file in your resources)
      */
     @SuppressWarnings("unused")
     public DatabaseLoader() throws IOException {
@@ -101,6 +100,7 @@ public class DatabaseLoader implements DatabaseLoaderInterface {
 
     /**
      * {@inheritDoc}
+     *
      * @param configuration The hibernate configuration
      */
     @Override
@@ -112,15 +112,18 @@ public class DatabaseLoader implements DatabaseLoaderInterface {
     /**
      * Effect: Returns the hibernate configuration of our loader.
      * Useful if we need to test the current configuration.
+     *
      * @return The hibernate configuration.
      */
     @Override
     public Configuration getConfiguration() {
         return this.configuration;
     }
+
     /**
      * Effect: Returns the hibernate's factory.
      * Useful is we need to work with multiple databases in the same time.
+     *
      * @return The hibernate's database factory.
      */
     @Override

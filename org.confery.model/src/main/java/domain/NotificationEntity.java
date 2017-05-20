@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 /**
  * Tested True
+ *
  * @author Tanasie Luiza Maria & Alexandru Stoica
  * @version 1.1
  */
@@ -13,7 +14,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "NOTIFICATION")
 @SuppressWarnings("unused")
-public class NotificationEntity implements Serializable,Idable<Integer> {
+public class NotificationEntity implements Serializable, Idable<Integer> {
 
     @Id
     @GeneratedValue
@@ -57,6 +58,7 @@ public class NotificationEntity implements Serializable,Idable<Integer> {
 
     /**
      * Effect: Return the id of a notification.
+     *
      * @return [Integer] : returns the id of a notification.
      */
     public Integer getId() {
@@ -65,6 +67,7 @@ public class NotificationEntity implements Serializable,Idable<Integer> {
 
     /**
      * Effect: Sets the id of a notification.
+     *
      * @param id [Integer] id: new value for id
      */
     public void setId(Integer id) {
@@ -73,6 +76,7 @@ public class NotificationEntity implements Serializable,Idable<Integer> {
 
     /**
      * Effect: Return the text of a notification.
+     *
      * @return [String] : returns the text of a notification.
      */
     public String getText() {
@@ -81,6 +85,7 @@ public class NotificationEntity implements Serializable,Idable<Integer> {
 
     /**
      * Effect: Sets the text of a notification.
+     *
      * @param text [String] id: new value for text
      */
     public void setText(String text) {
@@ -89,6 +94,7 @@ public class NotificationEntity implements Serializable,Idable<Integer> {
 
     /**
      * Effect: Return the payment type of a notification.
+     *
      * @return [Boolean]: returns the payment type of a notification.
      */
     public Boolean getPaymentType() {
@@ -97,6 +103,7 @@ public class NotificationEntity implements Serializable,Idable<Integer> {
 
     /**
      * Effect: Sets the payment type of a notification.
+     *
      * @param paymentType [Boolean]: new value for payment type
      */
     public void setPaymentType(Boolean paymentType) {
@@ -105,6 +112,7 @@ public class NotificationEntity implements Serializable,Idable<Integer> {
 
     /**
      * Effect: Return the user of a notification.
+     *
      * @return [UserEntity]: returns the user of a notification.
      */
     public UserEntity getUser() {
@@ -113,6 +121,7 @@ public class NotificationEntity implements Serializable,Idable<Integer> {
 
     /**
      * Effect: Sets the user of a notification.
+     *
      * @param user [UserEntity]: new value for user
      */
     public void setUser(UserEntity user) {

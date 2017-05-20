@@ -8,15 +8,12 @@ import java.util.Objects;
 import static utils.Conditional.basedOn;
 
 /**
- * Name:         Validator behaviour for AuthorSubmissionEntity
- * Effect:       Validates an author submission
- * Date:         06/05/2017
- * Tested:       Tested
+ * Tested: True
  *
  * @author Teodorescu Vlad
  * @version 1.0
  */
-@SuppressWarnings("all")
+
 public class ValidatorRepositoryBehaviourAuthorSubmissionEntity
         extends ValidatorRepositoryBehaviour<AuthorSubmissionEntity> {
 

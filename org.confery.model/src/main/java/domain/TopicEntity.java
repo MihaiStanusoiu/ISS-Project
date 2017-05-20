@@ -7,6 +7,7 @@ import java.util.Set;
 
 /**
  * Tested: True
+ *
  * @author Teodorescu Vlad & Alexandru Stoica
  * @version 1.1
  */
@@ -14,7 +15,7 @@ import java.util.Set;
 @Entity
 @Table(name = "TOPIC")
 @SuppressWarnings("unused")
-public class TopicEntity implements Idable<Integer>{
+public class TopicEntity implements Idable<Integer> {
 
     @Id
     @GeneratedValue
@@ -25,7 +26,7 @@ public class TopicEntity implements Idable<Integer>{
     private String word;
 
     @OneToMany(targetEntity = SubmissionTopicEntity.class, fetch = FetchType.EAGER,
-            mappedBy="topic", cascade = CascadeType.ALL)
+            mappedBy = "topic", cascade = CascadeType.ALL)
     private Set<SubmissionTopicEntity> submissionTopics;
 
     private static final Integer DEFAULT_ID = 0;
@@ -51,6 +52,7 @@ public class TopicEntity implements Idable<Integer>{
 
     /**
      * Effect: Getter for the id_topic of the topic.
+     *
      * @return Integer : returns idTopic.
      */
     public Integer getId() {
@@ -59,6 +61,7 @@ public class TopicEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets the id_topic to the given value
+     *
      * @param idTopic: new value for idTopic
      */
     public void setId(Integer idTopic) {
@@ -67,6 +70,7 @@ public class TopicEntity implements Idable<Integer>{
 
     /**
      * Effect: Getter for the content of the topic.
+     *
      * @return String : returns word.
      */
     public String getWord() {
@@ -75,6 +79,7 @@ public class TopicEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets the word to the given value
+     *
      * @param word: new value for word
      */
     public void setWord(String word) {
@@ -83,6 +88,7 @@ public class TopicEntity implements Idable<Integer>{
 
     /**
      * Effect: Getter for the elements of the relationship of the topic.
+     *
      * @return ArrayList<SubmissionTopicEntity> : returns topicSubmissionTopics.
      */
 
@@ -92,6 +98,7 @@ public class TopicEntity implements Idable<Integer>{
 
     /**
      * Effect: Sets the topicSubmissionTopics to the given value
+     *
      * @param submissionTopics: new value for topicSubmissionTopics
      */
     public void setSubmissionTopics(Set<SubmissionTopicEntity> submissionTopics) {

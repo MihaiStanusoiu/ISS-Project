@@ -8,6 +8,7 @@ import static utils.Try.runFunction;
 
 /**
  * Tested: True
+ *
  * @author Alexandru Stoica
  * @version 1.0
  */
@@ -32,13 +33,14 @@ public class ConfigurationSessionFactory {
                 .stream()
                 .filter(item -> item.toString().equals(configuration.toString()))
                 .findFirst().orElseGet(() -> {
-            runFunction(configurations::add, configuration);
-            return configuration;
-        });
+                    runFunction(configurations::add, configuration);
+                    return configuration;
+                });
     }
 
     /**
      * Returns a configuration based on a :MemberRole: role
+     *
      * @param role The target role
      * @return The wanted configuration
      * @throws ModelException If the role is not supported
