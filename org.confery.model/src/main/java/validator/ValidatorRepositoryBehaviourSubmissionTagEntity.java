@@ -28,10 +28,6 @@ public class ValidatorRepositoryBehaviourSubmissionTagEntity extends ValidatorRe
                 .runTrue(accumulator::add, "Submission tag is NULL!");
         basedOn(Objects.isNull(object.getId()))
                 .runTrue(accumulator::add, "Submission tag's id is NULL!");
-        basedOn(Objects.isNull(object.getTag()))
-                .runTrue(accumulator::add, "Submission tag's tag is NULL!");
-        basedOn(Objects.isNull(object.getSubmissionTag()))
-                .runTrue(accumulator::add, "Submission tag's submission is NULL!");
         return accumulator;
     }
 }

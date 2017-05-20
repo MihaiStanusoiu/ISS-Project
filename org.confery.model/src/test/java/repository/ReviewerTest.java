@@ -130,9 +130,9 @@ public class ReviewerTest {
         EditionMemberEntity member = new EditionMemberEntity();
         try{
             repositoryEditionMember.add(member);
-            review1.setIdEditionMember(repositoryEditionMember.getElementById(1));
-            review2.setIdEditionMember(repositoryEditionMember.getElementById(1));
-            review3.setIdEditionMember(repositoryEditionMember.getElementById(1));
+            review1.setMember(repositoryEditionMember.getElementById(1));
+            review2.setMember(repositoryEditionMember.getElementById(1));
+            review3.setMember(repositoryEditionMember.getElementById(1));
             repositoryReview.add(review1);
             repositoryReview.add(review2);
             repositoryReview.add(review3);

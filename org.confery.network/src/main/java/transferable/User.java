@@ -111,6 +111,14 @@ public class User extends Idable<Integer> {
         this(0, username, password, email, name, "", "", "", UserType.REGULAR);
     }
 
+    public User(String username, String password) {
+        this(0, username, password, "", "", "", "", "", UserType.REGULAR);
+    }
+
+    public User(String username, String password, String name) {
+        this(0, username, password, "", name, "", "", "", UserType.REGULAR);
+    }
+
     /**
      * @return The user's name in the system. [unique] [not null]
      */

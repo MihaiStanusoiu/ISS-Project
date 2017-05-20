@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.*;
@@ -6,12 +7,9 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:         ConfigurationEditionMember
- * Effect:       Class for the db table ConfigurationEditionMember.
- * Date:         08/04/2017
- * Tested:       True
- * @author       Tiron Andreea-Ecaterina
- * @version      1.0
+ * Tested: True
+ * @author Tiron Andreea-Ecaterina & Alexandru Stoica
+ * @version 1.1
  */
 
 @Entity
@@ -19,7 +17,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @SuppressWarnings("unused")
 public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
-    @Id @GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_CONFIGURATION_EDITION_MEMBER")
     private Integer id;
 
@@ -30,17 +29,41 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
     private Boolean isCoChair;
 
     @Column(name = "IS_PCMEMBER")
-    private Boolean isPCMember;
+    private Boolean isPcMember;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "idConfiguration", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = EditionMemberEntity.class, fetch = FetchType.EAGER,
+            mappedBy = "configuration", cascade = CascadeType.ALL)
     private Set<EditionMemberEntity> editionMembers;
 
-    public ConfigurationEditionMemberEntity(){}
+    private static final Boolean DEFAULT_CHAIR = Boolean.FALSE;
+    private static final Boolean DEFAULT_CO_CHAIR = Boolean.FALSE;
+    private static final Boolean DEFAULT_PC_MEMBER = Boolean.TRUE;
+    private static final Integer DEFAULT_ID = 0;
 
-    public ConfigurationEditionMemberEntity(Boolean isChair, Boolean isCoChair, Boolean isPCMember) {
+    public ConfigurationEditionMemberEntity() {
+        this(DEFAULT_ID, DEFAULT_CHAIR, DEFAULT_CO_CHAIR, DEFAULT_CO_CHAIR);
+    }
+
+    /**
+     * @param isChair true if the edition member is chair
+     * @param isCoChair true if the edition member is co-chair
+     * @param isPcMember true if the edition member if pc-member
+     */
+    public ConfigurationEditionMemberEntity(Boolean isChair, Boolean isCoChair, Boolean isPcMember) {
+        this(DEFAULT_ID, isChair, isCoChair, isPcMember);
+    }
+
+    /**
+     * @param id The object's id
+     * @param isChair true if the edition member is chair
+     * @param isCoChair true if the edition member is co-chair
+     * @param isPcMember true if the edition member if pc-member
+     */
+    public ConfigurationEditionMemberEntity(Integer id, Boolean isChair, Boolean isCoChair, Boolean isPcMember) {
+        this.id = id;
         this.isChair = isChair;
         this.isCoChair = isCoChair;
-        this.isPCMember = isPCMember;
+        this.isPcMember = isPcMember;
     }
 
     /**
@@ -116,8 +139,8 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
      * @return [Boolean] : returns true if it is a pc-member, false otherwise.
      */
     @SuppressWarnings("unused")
-    public Boolean getPCMember() {
-        return isPCMember;
+    public Boolean getPcMember() {
+        return isPcMember;
     }
 
     /**
@@ -125,8 +148,26 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
      * @param pcMember: new value for pc-member.
      */
     @SuppressWarnings("unused")
-    public void setPCMember(Boolean pcMember) {
-        isPCMember = pcMember;
+    public void setPcMember(Boolean pcMember) {
+        isPcMember = pcMember;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConfigurationEditionMemberEntity that = (ConfigurationEditionMemberEntity) o;
+        return isChair.equals(that.isChair) &&
+                isCoChair.equals(that.isCoChair) &&
+                isPcMember.equals(that.isPcMember);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + isChair.hashCode();
+        result = 31 * result + isCoChair.hashCode();
+        result = 31 * result + isPcMember.hashCode();
+        return result;
+    }
 }

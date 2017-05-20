@@ -122,19 +122,17 @@ public class AuthorSubmissionTest {
         AuthorSubmissionEntity author1 = new AuthorSubmissionEntity(false, "presentation1");
         AuthorSubmissionEntity author2 = new AuthorSubmissionEntity(true, "presentation2");
         AuthorSubmissionEntity author3 = new AuthorSubmissionEntity(false, "presentation3");
-        try {
-            repositoryUser.add(user);
-            author1.setUserSubmission(repositoryUser.getElementById(1));
-            author2.setUserSubmission(repositoryUser.getElementById(1));
-            author3.setUserSubmission(repositoryUser.getElementById(1));
-            repositoryAuthorSubmission.add(author1);
-            repositoryAuthorSubmission.add(author2);
-            repositoryAuthorSubmission.add(author3);
-            ArrayList<AuthorSubmissionEntity> submissions = new ArrayList<>(repositoryUser.getElementById(1).getAuthorSubmissions());
-            Assert.assertTrue(submissions.size() == 3);
-        } catch (SystemException exception) {
-            Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
-        }
+        repositoryUser.add(user);
+        author1.setAuthor(repositoryUser.getElementById(1));
+        author2.setAuthor(repositoryUser.getElementById(1));
+        author3.setAuthor(repositoryUser.getElementById(1));
+        repositoryAuthorSubmission.add(author1);
+        repositoryAuthorSubmission.add(author2);
+        repositoryAuthorSubmission.add(author3);
+        ArrayList<AuthorSubmissionEntity> submissions = new ArrayList<>(repositoryUser.getElementById(1).getAuthorSubmissions());
+        Assert.assertTrue(submissions.size() == 3);
+
+
     }
 
     @Test
@@ -143,18 +141,15 @@ public class AuthorSubmissionTest {
         AuthorSubmissionEntity author1 = new AuthorSubmissionEntity(false, "presentation1");
         AuthorSubmissionEntity author2 = new AuthorSubmissionEntity(true, "presentation2");
         AuthorSubmissionEntity author3 = new AuthorSubmissionEntity(false, "presentation3");
-        try {
-            repositorySubmission.add(submission);
-            author1.setSubmissionAuthor(repositorySubmission.getElementById(1));
-            author2.setSubmissionAuthor(repositorySubmission.getElementById(1));
-            author3.setSubmissionAuthor(repositorySubmission.getElementById(1));
+        repositorySubmission.add(submission);
+            author1.setSubmission(repositorySubmission.getElementById(1));
+            author2.setSubmission(repositorySubmission.getElementById(1));
+            author3.setSubmission(repositorySubmission.getElementById(1));
             repositoryAuthorSubmission.add(author1);
             repositoryAuthorSubmission.add(author2);
             repositoryAuthorSubmission.add(author3);
-            ArrayList<AuthorSubmissionEntity> submissions0 = new ArrayList<>(repositorySubmission.getElementById(1).getSubmissionAuthors());
-            Assert.assertTrue(submissions0.size() == 3);
-        } catch (SystemException exception) {
-            Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
-        }
+            Assert.assertTrue(repositorySubmission
+                    .getElementById(1).getSubmissionAuthors().size() == 3);
+
     }
 }

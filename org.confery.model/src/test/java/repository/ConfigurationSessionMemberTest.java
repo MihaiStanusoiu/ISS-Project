@@ -123,8 +123,8 @@ public class ConfigurationSessionMemberTest {
         ConfigurationSessionMemberEntity config = new ConfigurationSessionMemberEntity(true, true, true);
         try {
             repositorySessionMemberConfiguration.add(config);
-            memberSession1.setIdConfigurationSession(repositorySessionMemberConfiguration.getElementById(1));
-            memberSession2.setIdConfigurationSession(repositorySessionMemberConfiguration.getElementById(1));
+            memberSession1.setConfiguration(repositorySessionMemberConfiguration.getElementById(1));
+            memberSession2.setConfiguration(repositorySessionMemberConfiguration.getElementById(1));
             repositorySessionMember.add(memberSession1);
             repositorySessionMember.add(memberSession2);
 

@@ -12,11 +12,14 @@ import java.util.stream.Collectors;
 import static utils.Try.runFunction;
 
 /**
+ * Tested: True
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-public class TagModel extends Model<TagEntity, Integer> implements TagProtocol {
+public class TagModel
+        extends Model<TagEntity, Integer>
+        implements TagProtocol {
 
     public TagModel(DatabaseLoaderInterface loader) {
         super(TagEntity.class, loader);

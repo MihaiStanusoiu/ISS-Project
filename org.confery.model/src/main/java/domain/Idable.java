@@ -1,14 +1,12 @@
+
 package domain;
 
 import java.io.Serializable;
 
 /**
- * Name:         Idable
- * Effect:       Defines the id property for a concrete domain class.
- * Date:         4/17/2017
- * Tested:       True
- * @author       Alexandru Stoica
- * @version      1.0
+ * Tested True
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 public interface Idable<T> extends Serializable {

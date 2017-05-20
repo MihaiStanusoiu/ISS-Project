@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.*;
@@ -5,12 +6,9 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:         SessionMemberEntity
- * Effect:       Class for the db table SessionMemberEntity.
- * Date:         08/04/2017
- * Tested:       True
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * Tested: True
+ * @author Tiron Andreea-Ecaterina & Alexandru Stoica
+ * @version 1.0
  */
 
 @Entity
@@ -18,23 +16,45 @@ import static javax.persistence.GenerationType.IDENTITY;
 @SuppressWarnings("unused")
 public class SessionMemberEntity implements Idable<Integer>{
 
-    @Id @GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_SESSION_MEMBER")
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = SessionEntity.class)
     @JoinColumn(name = "ID_SESSION")
     private SessionEntity session;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = UserEntity.class)
     @JoinColumn(name = "ID_USER")
-    private UserEntity userSession;
+    private UserEntity user;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = ConfigurationSessionMemberEntity.class)
     @JoinColumn(name = "ID_CONFIGURATION_SESSION_MEMBER")
-    private ConfigurationSessionMemberEntity idConfigurationSession;
+    private ConfigurationSessionMemberEntity configuration;
 
-    public SessionMemberEntity() { }
+    private static final Integer DEFAULT_ID = 0;
+
+    /**
+     * @apiNote Don't user this constructor [it's for testing only]
+     */
+    @Deprecated
+    public SessionMemberEntity() {
+        this(DEFAULT_ID, null, null, null);
+    }
+
+    public SessionMemberEntity(SessionEntity session, UserEntity user,
+                               ConfigurationSessionMemberEntity configuration) {
+        this(DEFAULT_ID, session, user, configuration);
+    }
+
+    public SessionMemberEntity(Integer id, SessionEntity session, UserEntity user,
+                               ConfigurationSessionMemberEntity configuration) {
+        this.id = id;
+        this.session = session;
+        this.user = user;
+        this.configuration = configuration;
+    }
 
     /**
      * Effect: Return the id of a section member.
@@ -56,16 +76,16 @@ public class SessionMemberEntity implements Idable<Integer>{
      * Effect: Return the id of a section configuration.
      * @return [ConfigurationSessionMemberEntity] : returns the id of a section configuration.
      */
-    public ConfigurationSessionMemberEntity getIdConfigurationSession() {
-        return idConfigurationSession;
+    public ConfigurationSessionMemberEntity getConfiguration() {
+        return configuration;
     }
 
     /**
      * Effect: Sets the id of a section configuration.
      * @param idConfiguration: new value for id configuration.
      */
-    public void setIdConfigurationSession(ConfigurationSessionMemberEntity idConfiguration) {
-        this.idConfigurationSession = idConfiguration;
+    public void setConfiguration(ConfigurationSessionMemberEntity idConfiguration) {
+        this.configuration = idConfiguration;
     }
 
     /**
@@ -86,18 +106,30 @@ public class SessionMemberEntity implements Idable<Integer>{
 
     /**
      * Effect: Returns the user of a SessionMemberEntity.
-     * @return [UserEntity]: returns the userSession of a session member.
+     * @return [UserEntity]: returns the user of a session member.
      */
     public UserEntity getUser() {
-        return userSession;
+        return user;
     }
 
     /**
      * Effect: Sets the user of a SessionMemberEntity.
-     * @param user: new value for userSession.
+     * @param user: new value for user.
      */
     public void setUser(UserEntity user) {
-        this.userSession = user;
+        this.user = user;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SessionMemberEntity that = (SessionMemberEntity) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

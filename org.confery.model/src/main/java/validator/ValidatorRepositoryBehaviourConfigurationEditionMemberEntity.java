@@ -32,7 +32,7 @@ public class ValidatorRepositoryBehaviourConfigurationEditionMemberEntity
                 .runTrue(accumulator::add, "Edition configuration's chair is NULL!");
         basedOn(Objects.isNull(object.getCoChair()))
                 .runTrue(accumulator::add, "Edition configuration's co-chair is NULL!");
-        basedOn(Objects.isNull(object.getPCMember()))
+        basedOn(Objects.isNull(object.getPcMember()))
                 .runTrue(accumulator::add, "Edition configuration's pc-member is NULL!");
         basedOn(Objects.isNull(object.getId()))
                 .runTrue(accumulator::add, "Edition configuration's id is NULL!");

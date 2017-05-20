@@ -1,3 +1,4 @@
+
 package domain;
 
 import javax.persistence.*;
@@ -6,12 +7,9 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
- * Name:        EditionMemberEntity
- * Effect:      Corresponding class for the EditionMemberEntity table in the database.
- * Date:        4/8/2017
- * Tested:      True
- * @author      Stanusoiu Mihai-Teodor
- * @version     1.0
+ * Tested: True
+ * @author Stanusoiu Mihai-Teodor & Alexandru Stoica
+ * @version 1.0
  */
 
 @Entity
@@ -23,22 +21,57 @@ public class EditionMemberEntity implements Idable<Integer> {
     @Column(name = "ID_EDITION_MEMBER")
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = UserEntity.class)
     @JoinColumn(name = "ID_USER")
-    private UserEntity idUser;
+    private UserEntity user;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = EditionEntity.class)
     @JoinColumn(name = "ID_EDITION")
-    private EditionEntity idEdition;
+    private EditionEntity edition;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = ConfigurationEditionMemberEntity.class)
     @JoinColumn(name = "ID_CONFIGURATION_EDITION_MEMBER")
-    private ConfigurationEditionMemberEntity idConfiguration;
+    private ConfigurationEditionMemberEntity configuration;
 
-    @OneToMany(mappedBy = "idEditionMember", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = ReviewerEntity.class, mappedBy = "member",
+            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<ReviewerEntity> reviewers;
 
-    public EditionMemberEntity() { }
+    private static final Integer DEFAULT_ID = 0;
+
+    public EditionMemberEntity() {
+        this(DEFAULT_ID, null, null, null);
+    }
+    public EditionMemberEntity(Integer id, UserEntity user, EditionEntity edition,
+                               ConfigurationEditionMemberEntity configuration) {
+        this.id = id;
+        this.user = user;
+        this.edition = edition;
+        this.configuration = configuration;
+    }
+
+    public EditionMemberEntity(UserEntity user, EditionEntity edition,
+                               ConfigurationEditionMemberEntity configuration) {
+        this(DEFAULT_ID, user, edition, configuration);
+    }
+
+    public EditionMemberEntity(UserEntity user,
+                               ConfigurationEditionMemberEntity configuration) {
+        this(DEFAULT_ID, user, null, configuration);
+    }
+
+    public EditionMemberEntity(UserEntity user) {
+        this(DEFAULT_ID, user, null, null);
+    }
+
+    public EditionMemberEntity(Integer id, UserEntity user) {
+        this(id, user, null, null);
+    }
+
+    public EditionMemberEntity(Integer id, UserEntity user,
+                               ConfigurationEditionMemberEntity configuration) {
+        this(id, user, null, configuration);
+    }
 
     /**
      * Effect: Returns the reviewers of the EditionMemberEntity.
@@ -73,35 +106,35 @@ public class EditionMemberEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Returns the idUser of the conference member
-     * @return [UserEntity]: idUser that is the conference member
+     * Effect: Returns the user of the conference member
+     * @return [UserEntity]: user that is the conference member
      */
-    public UserEntity getIdUser() {
-        return idUser;
+    public UserEntity getUser() {
+        return user;
     }
 
     /**
-     * Effect: Sets the idUser to the given value
-     * @param idUser [UserEntity]: new value for the idUser
+     * Effect: Sets the user to the given value
+     * @param user [UserEntity]: new value for the user
      */
-    public void setIdUser(UserEntity idUser) {
-        this.idUser = idUser;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     /**
      * Effect: Returns the conference of the conference member
      * @return [EditionEntity]: conference of the conference member
      */
-    public EditionEntity getIdEdition() {
-        return idEdition;
+    public EditionEntity getEdition() {
+        return edition;
     }
 
     /**
      * Effect: Sets the conference to the given value
      * @param editionTable [EditionEntity]: new value for the password
      */
-    public void setIdEdition(EditionEntity editionTable) {
-        this.idEdition = editionTable;
+    public void setEdition(EditionEntity editionTable) {
+        this.edition = editionTable;
     }
 
     /**
@@ -109,7 +142,7 @@ public class EditionMemberEntity implements Idable<Integer> {
      * @return [ConfigurationEditionMember]: configuration of the conference member
      */
     public ConfigurationEditionMemberEntity getConfigurationEditionMember() {
-        return idConfiguration;
+        return configuration;
     }
     /**
      * Effect: Sets the configuration to the given value
@@ -117,6 +150,19 @@ public class EditionMemberEntity implements Idable<Integer> {
      */
     public void setConfigurationEditionMember(
         ConfigurationEditionMemberEntity configurationConferenceMember) {
-        this.idConfiguration = configurationConferenceMember;
+        this.configuration = configurationConferenceMember;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EditionMemberEntity that = (EditionMemberEntity) o;
+        return id != null ? id.equals(that.id) : that.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }
