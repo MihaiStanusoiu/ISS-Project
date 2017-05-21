@@ -3,8 +3,6 @@ package protocol;
 import domain.*;
 import exception.SystemException;
 
-import java.util.List;
-
 /**
  * Tested: True
  *
@@ -15,110 +13,93 @@ import java.util.List;
 public interface SubmissionProtocol extends ModelInterface<SubmissionEntity, Integer> {
 
     /**
-     * Adds a tag to a target submission.
+     * Adds a tag to a submission.
      *
-     * @param submission The target submission
-     * @param tag        The added tag
+     * @param submission The target submission [already in the database]
+     * @param tag The target tag [already in the database]
+     * @return The submission after we added the tag.
+     * @throws SystemException If the tag already exists in the submission.
      */
-    void addTagTo(SubmissionEntity submission, TagEntity tag) throws SystemException;
+    SubmissionEntity addTagTo(SubmissionEntity submission, TagEntity tag) throws SystemException;
 
     /**
-     * Adds a topic to a target submission.
+     * Adds a topic to submission.
      *
-     * @param submission The target submission
-     * @param topic      The added tag
+     * @param submission The target submission [already in the database]
+     * @param topic The target topic [already in the database]
+     * @return The submission after we added the topic.
+     * @throws SystemException If the topic already exists in the submission.
      */
-    void addTopicTo(SubmissionEntity submission, TopicEntity topic) throws SystemException;
+    SubmissionEntity addTopicTo(SubmissionEntity submission, TopicEntity topic) throws SystemException;
 
     /**
-     * @param submission The target submission
-     * @param author     The added author
-     */
-    void addAuthorTo(SubmissionEntity submission, UserEntity author) throws SystemException;
-
-    /**
-     * @param submission The target submission
-     * @param owner      The added owner
-     */
-    void addOwnerTo(SubmissionEntity submission, UserEntity owner) throws SystemException;
-
-    /**
-     * @param submission The target submission
-     * @param member     Member of the edition.
-     */
-    void addReviewerTo(SubmissionEntity submission, EditionMemberEntity member) throws SystemException;
-
-    /**
-     * @param submission The target submission
-     * @param owner      The new owner
-     */
-    void changeOwnerOf(SubmissionEntity submission, UserEntity owner) throws SystemException;
-
-    /**
-     * @param submission The target submission
-     * @param author     The author we need to remove
-     * @return The author removed
-     */
-    UserEntity removeAuthorFrom(SubmissionEntity submission, UserEntity author) throws SystemException;
-
-    /**
-     * @param submission The target submission
-     * @param tag        The tag we want to remove
-     * @return The tag removed
-     */
-    TagEntity removeTagFrom(SubmissionEntity submission, TagEntity tag) throws SystemException;
-
-    /**
-     * @param submission The target submission
-     * @param topic      The topic we want to remove
-     * @return The topic removed
-     */
-    TopicEntity removeTopicFrom(SubmissionEntity submission, TopicEntity topic) throws SystemException;
-
-    /**
-     * @param submission The target submission
-     * @param member     The reviewer we want to remove [member of the edition]
-     * @return The reviewer removed
-     */
-    EditionMemberEntity removeReviewerFrom(SubmissionEntity submission, EditionMemberEntity member) throws SystemException;
-
-    /**
-     * Returns all the tags from the target submission.
+     * Adds an author to a submission.
      *
-     * @param submission The target submission
-     * @return All the tags from the target submission
+     * @param submission The target submission [already in the database]
+     * @param author The target author [already int he database]
+     * @return The submission after we added the author.
+     * @throws SystemException If the author is already in the submission.
      */
-    List<TagEntity> getTagsForm(SubmissionEntity submission) throws SystemException;
+    SubmissionEntity addAuthorTo(SubmissionEntity submission, UserEntity author) throws SystemException;
 
     /**
-     * Returns all the topics from the target submission.
+     * Adds an owner to a submission.
      *
-     * @param submission The target submission
-     * @return All the topics from the target submission
+     * @param submission The target submission [already in the database]
+     * @param owner The target owner [already in the database]
+     * @return The submission after we added the owner
+     * @throws SystemException If the owner is already set
      */
-    List<TopicEntity> getTopicsFrom(SubmissionEntity submission) throws SystemException;
+    SubmissionEntity addOwnerTo(SubmissionEntity submission, UserEntity owner) throws SystemException;
 
     /**
-     * Returns all the reviewers from the target submission.
+     * Adds a reviewer to submission
      *
-     * @param submission The target submission
-     * @return All the reviewers from the target submission
+     * @param submission The target submission [already in the database]
+     * @param member The target member [already in the database]
+     * @return The submission after we added the reviewer
+     * @throws SystemException If the reviewer is already a part of the submission
      */
-    List<EditionMemberEntity> getReviewersFrom(SubmissionEntity submission) throws SystemException;
+    SubmissionEntity addReviewerTo(SubmissionEntity submission, EditionMemberEntity member) throws SystemException;
 
     /**
-     * Returns all the authors from the target submission.
+     * Removes an author from a submission.
      *
-     * @param submission The target submission
-     * @return All the authors from the target submission
+     * @param submission The target submission [already in the database]
+     * @param author The target author [already in the database]
+     * @return The submission after we remove the author.
+     * @throws SystemException If the author is not a part of the submission.
      */
-    List<UserEntity> getAuthorsFrom(SubmissionEntity submission) throws SystemException;
+    SubmissionEntity removeAuthorFrom(SubmissionEntity submission, UserEntity author) throws SystemException;
 
     /**
-     * Returns the owner of the target submission.
+     * Removes an tag from a submission.
      *
-     * @param submission The target submission
-     * @return The owner of the target submission
+     * @param submission The target submission [already in the database]
+     * @param tag The target tag [already in the database]
+     * @return The submission after we remove the tag.
+     * @throws SystemException If the tag is not a part of the submission.
      */
-    UserEntity getOwnerFrom(SubmissionEntity submission) throws SystemException;
+    SubmissionEntity removeTagFrom(SubmissionEntity submission, TagEntity tag) throws SystemException;
+
+    /**
+     * Removes an topic from a submission.
+     *
+     * @param submission The target submission [already in the database]
+     * @param topic The target topic [already in the database]
+     * @return The submission after we remove the topic.
+     * @throws SystemException If the topic is not a part of the submission.
+            */
+    SubmissionEntity removeTopicFrom(SubmissionEntity submission, TopicEntity topic) throws SystemException;
+
+    /**
+     * Removes an member from a submission.
+     *
+     * @param submission The target submission [already in the database]
+     * @param member The target member [already in the database]
+     * @return The submission after we remove the member.
+     * @throws SystemException If the member is not a part of the submission.
+     */
+    SubmissionEntity removeReviewerFrom(SubmissionEntity submission, EditionMemberEntity member) throws SystemException;
+
 }
