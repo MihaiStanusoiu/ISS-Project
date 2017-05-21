@@ -181,4 +181,5 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer> {
                 (this.getListener() ? "1" : "0") +
                 (this.getSpeaker() ? "1" : "0");
     }
+
 }

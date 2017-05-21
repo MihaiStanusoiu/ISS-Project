@@ -8,7 +8,6 @@ package domain;
  * @version 1.0
  */
 
-@SuppressWarnings("unused")
 public enum StatusEntityType {
     REVIEWED,
     NOT_REVIEWED

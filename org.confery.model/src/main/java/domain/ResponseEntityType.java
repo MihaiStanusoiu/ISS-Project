@@ -8,7 +8,6 @@ package domain;
  * @version 1.0
  */
 
-@SuppressWarnings("unused")
 public enum ResponseEntityType {
     NOT_ASSIGNED,
     ALLOWED_TO_REVIEW,

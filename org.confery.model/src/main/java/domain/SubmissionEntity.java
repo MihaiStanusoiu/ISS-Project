@@ -2,7 +2,9 @@
 package domain;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -61,6 +63,10 @@ public class SubmissionEntity implements Idable<Integer> {
     private static final Integer DEFAULT_ID = 0;
     private static final String DEFAULT_URL = "";
     private static final Boolean DEFAULT_FLAG_PAID = Boolean.FALSE;
+
+    public SubmissionEntity(String name, String status) {
+        this(name, status, DEFAULT_URL, DEFAULT_URL);
+    }
 
     /**
      * @apiNote Don't use this constructor [it's for testing only]
@@ -148,16 +154,7 @@ public class SubmissionEntity implements Idable<Integer> {
      * @return [String]: returns the status of SubmissionEntity.
      */
     public String getStatus() {
-        return status;
-    }
-
-    /**
-     * Effect: Sets the status of a submission.
-     *
-     * @param status: new value for submission status.
-     */
-    public void setStatus(String status) {
-        this.status = status;
+        return calculateStatus().toString();
     }
 
     /**
@@ -273,7 +270,7 @@ public class SubmissionEntity implements Idable<Integer> {
      *
      * @return [ArrayList<ReviewerEntity>]: returns the reviewers of a SubmissionEntity.
      */
-    public Set<ReviewerEntity> getReviewers() {
+    public Set<ReviewerEntity> getReviewerEntities() {
         return reviewers;
     }
 
@@ -284,6 +281,149 @@ public class SubmissionEntity implements Idable<Integer> {
      */
     public void setReviewers(Set<ReviewerEntity> reviewers) {
         this.reviewers = reviewers;
+    }
+
+    /**
+     * Returns all the reviews for this submission.
+     *
+     * @return All the reviews for this submission.
+     * @implNote This function will return all the reviews
+     * (even the ones who are not allowed by the chair to review the submission)
+     */
+    public List<UserEntity> getReviewers() {
+        return reviewers.stream()
+                .map(reviewer -> reviewer.getMember().getUser())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the authors of the submission (including the owner)
+     *
+     * @return All the authors of the submission.
+     */
+    public List<UserEntity> getAuthors() {
+        return submissionAuthors.stream()
+                .map(AuthorSubmissionEntity::getAuthor)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the owner of the submission.
+     *
+     * @return The owner of the submission.
+     * @implNote This function can return null if the owner is not set,
+     * but if this function returns null, check the database
+     * or the application's logic
+     * -- because a submission can't exist without a owner
+     */
+    public UserEntity getOwner() {
+        return submissionAuthors.stream()
+                .filter(author -> author.getOwner().equals(Boolean.TRUE))
+                .map(AuthorSubmissionEntity::getAuthor)
+                .findFirst().orElseGet(null);
+    }
+
+    /**
+     * Returns all the topics for this submission.
+     *
+     * @return All the topics for this submission
+     */
+    public List<TopicEntity> getTopics() {
+        return submissionTopics.stream()
+                .map(SubmissionTopicEntity::getTopic)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the tags for this submission.
+     *
+     * @return All the tags for this submission
+     */
+    public List<TagEntity> getTags() {
+        return submissionTags.stream()
+                .map(SubmissionTagEntity::getTag)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the binding reviewers.
+     *
+     * @return All the binding reviewers for this submission.
+     * @apiNote A reviewer is in BINDING state when
+     * it's not assigned to review the submission.
+     */
+    public List<UserEntity> getBindingReviewers() {
+        return reviewers.stream()
+                .filter(reviewer -> reviewer.getResponse()
+                        .equals(ResponseEntityType.NOT_ASSIGNED.toString()))
+                .map(reviewer -> reviewer.getMember().getUser())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the reviewers that are allowed to review the submission.
+     *
+     * @return All the reviewers that are allowed to review the submission
+     */
+    public List<UserEntity> getAllowedReviewers() {
+        return reviewers.stream()
+                .filter(reviewer -> reviewer.getResponse()
+                        .equals(ResponseEntityType.ALLOWED_TO_REVIEW.toString()))
+                .map(reviewer -> reviewer.getMember().getUser())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the reviewers that are rejected by the chair
+     * and by definition are not allowed to review the submission
+     *
+     * @return The reviewers that are not allowed to review the submission.
+     */
+    public List<UserEntity> getRejectedReviewers() {
+        return reviewers.stream()
+                .filter(reviewer -> reviewer.getResponse()
+                        .equals(ResponseEntityType.NOT_ALLOWED_TO_REVIEW.toString()))
+                .map(reviewer -> reviewer.getMember().getUser())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the current status of the submission
+     *
+     * @return The current status of the submission.
+     */
+    private StatusEntityType calculateStatus() {
+        return reviewers.stream()
+                .anyMatch(reviewerEntity -> reviewerEntity.getStatus()
+                        .equals(StatusEntityType.NOT_REVIEWED.toString())) ?
+                StatusEntityType.NOT_REVIEWED : StatusEntityType.REVIEWED;
+    }
+
+    /**
+     * Returns the result of the submission,
+     * by checking all the qualifiers from the allowed reviewers.
+     *
+     * @return The result of the submission.
+     */
+    private ResultTypeEntity calculateResult() {
+        return getAllowedReviewers().size() == 0 ? ResultTypeEntity.CONTRADICTORY : reviewers.stream()
+                .filter(reviewer -> reviewer.getResponse().equals(ResponseEntityType.ALLOWED_TO_REVIEW.toString()))
+                .map(reviewer -> QualifierTypeEntity.fromString(reviewer.getQualifier()).getValue())
+                .reduce(0, (accumulator, item) -> accumulator + item) / getAllowedReviewers().size() == 0 ?
+                ResultTypeEntity.CONTRADICTORY : ResultTypeEntity.ACCEPTED;
+    }
+
+    /**
+     * Returns the result of the submission, aka this function will tell you
+     * if the submission is ACCEPTED or REJECTED or CONTRADICTORY. [based on the allowed reviewers qualifiers]
+     *
+     * @return The result of the submission.
+     */
+    public ResultTypeEntity getResult() {
+        return reviewers.stream().noneMatch(reviewerEntity ->
+                reviewerEntity.getQualifier().equals(QualifierTypeEntity.AGREE.toString()) ||
+                        reviewerEntity.getQualifier().equals(QualifierTypeEntity.STRONG_AGREE.toString())) ?
+                ResultTypeEntity.REJECTED : calculateResult();
     }
 
     @Override

@@ -4,7 +4,9 @@ package domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Tested: True
@@ -61,6 +63,7 @@ public class UserEntity implements Serializable, Idable<Integer> {
     private Set<AuthorSubmissionEntity> authorSubmissions = new HashSet<>();
 
     private static final Integer DEFAULT_ID = 0;
+
     private static final String DEFAULT_STRING = "";
 
     /**
@@ -323,6 +326,75 @@ public class UserEntity implements Serializable, Idable<Integer> {
      */
     public void setEditionMembers(Set<EditionMemberEntity> editionMembers) {
         this.editionMembers = editionMembers;
+    }
+
+    /**
+     * Returns all the sessions where user is a participant.
+     *
+     * @return All the user's sessions
+     */
+    public List<SessionEntity> getSessions() {
+        return sessionMembers.stream()
+                .map(SessionMemberEntity::getSession)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the editions where user is a participant.
+     *
+     * @return All the editions where user is a participant.
+     */
+    public List<EditionEntity> getEditions() {
+        return editionMembers.stream()
+                .map(EditionMemberEntity::getEdition)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the user's submissions (including the ones in witch he's just an author)
+     *
+     * @return All the user's submissions
+     */
+    public List<SubmissionEntity> getSubmissions() {
+        return authorSubmissions.stream()
+                .map(AuthorSubmissionEntity::getSubmission)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the submissions where user is the owner.
+     *
+     * @return All the submissions where user is the owner.
+     */
+    public List<SubmissionEntity> getSubmissionsByOwnership() {
+        return authorSubmissions.stream()
+                .filter(submission -> submission.getOwner().equals(Boolean.TRUE))
+                .map(AuthorSubmissionEntity::getSubmission)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the submissions where user is the author. [but not the owner]
+     *
+     * @return All the submissions where user is the author. [but not the owner]
+     */
+    public List<SubmissionEntity> getSubmissionsByAuthorship() {
+        return authorSubmissions.stream()
+                .filter(submission -> submission.getOwner().equals(Boolean.FALSE))
+                .map(AuthorSubmissionEntity::getSubmission)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the user's personal editions [over with he's chair]
+     *
+     * @return All the user's personal editions.
+     */
+    public List<EditionEntity> getMyEditions() {
+        return editionMembers.stream()
+                .filter(edition -> edition.getConfigurationEditionMember().getChair().equals(Boolean.TRUE))
+                .map(EditionMemberEntity::getEdition)
+                .collect(Collectors.toList());
     }
 
     @Override

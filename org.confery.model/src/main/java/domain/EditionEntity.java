@@ -3,7 +3,9 @@ package domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -69,11 +71,11 @@ public class EditionEntity implements Idable<Integer> {
     private static final String DEFAULT_LOCATION = "Unknown";
     private static final String DEFAULT_BIO = "";
 
-
     public EditionEntity() {
         this(DEFAULT_ID, DEFAULT_DATE, DEFAULT_DATE, DEFAULT_LOCATION,
                 DEFAULT_BIO, DEFAULT_DATE, DEFAULT_DATE, DEFAULT_DATE, DEFAULT_DATE);
     }
+
 
     /**
      * @param id                 The object's id
@@ -389,6 +391,63 @@ public class EditionEntity implements Idable<Integer> {
      */
     public void setSubmissions(Set<SubmissionEntity> submissions) {
         this.submissions = submissions;
+    }
+
+    /**
+     * Returns all the pc-members of the edition.
+     *
+     * @return All the pc-members of the edition
+     */
+    public List<UserEntity> getPcMembers() {
+        return members.stream()
+                .filter(member -> member.getConfigurationEditionMember().getPcMember().equals(Boolean.TRUE))
+                .map(EditionMemberEntity::getUser)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the co-chairs of the edition.
+     *
+     * @return All the co-chairs of the edition
+     */
+    public List<UserEntity> getCoChairs() {
+        return members.stream()
+                .filter(member -> member.getConfigurationEditionMember().getCoChair().equals(Boolean.TRUE))
+                .map(EditionMemberEntity::getUser)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the chair of the edition.
+     *
+     * @return The chair of the edition (if the chair is not set will return null).
+     *         <p>If this function returns null, search for a bug in the database or app. logic!</p>
+     * @apiNote This function can return a null if the chair is not set,
+     *          but if this function returns a null than something went wrong in our system.
+     *          <p>You can't have a edition without a chair to act as an admin!</p>
+     */
+    public UserEntity getChair() {
+        return members.stream().findFirst()
+                .filter(member -> member.getConfigurationEditionMember().getChair().equals(Boolean.TRUE))
+                .map(EditionMemberEntity::getUser).orElseGet(null);
+    }
+
+    /**
+     * Returns the conference's name.
+     *
+     * @return The conference's name
+     */
+    public String getName() {
+        return conference.getName();
+    }
+
+    /**
+     * Returns the conference's acronym.
+     *
+     * @return The conference's acronym
+     */
+    public String getAcronym() {
+        return conference.getAcronym();
     }
 
     @Override

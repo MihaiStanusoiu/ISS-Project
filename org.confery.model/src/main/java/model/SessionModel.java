@@ -53,8 +53,8 @@ public class SessionModel extends Model<SessionEntity, Integer> implements Sessi
     public SessionEntity removeMemberFrom(SessionEntity session, UserEntity user) throws SystemException {
         repositoryMember.delete(session.getMembers().stream()
                 .filter(member -> member.getUser().getId().equals(user.getId()))
-                .findFirst().orElseThrow(() -> new ModelException("404! Memeber Not Found!"))
-                .getId()).getUser();
+                .findFirst().orElseThrow(() -> new ModelException("404! Member Not Found!"))
+                .getId());
         return getElementById(session.getId());
     }
 

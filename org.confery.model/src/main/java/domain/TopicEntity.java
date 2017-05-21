@@ -3,7 +3,9 @@ package domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Tested: True
@@ -103,6 +105,17 @@ public class TopicEntity implements Idable<Integer> {
      */
     public void setSubmissionTopics(Set<SubmissionTopicEntity> submissionTopics) {
         this.submissionTopics = submissionTopics;
+    }
+
+    /**
+     * Returns all the submissions in the system that have this topic.
+     *
+     * @return Return all the submissions in the system that have this topic
+     */
+    public List<SubmissionEntity> getSubmissions() {
+        return submissionTopics.stream()
+                .map(SubmissionTopicEntity::getSubmission)
+                .collect(Collectors.toList());
     }
 
     @Override
