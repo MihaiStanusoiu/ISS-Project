@@ -14,7 +14,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
 import static utils.Try.runFunction;
 
@@ -127,8 +126,7 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
         Session session = loader.getFactory().openSession();
         T element = session.get(repositoryClass, id);
         session.close();
-        return Optional.of(element).orElseThrow(() ->
-                new ValidatorSystemException("Element Not Found!"));
+        return element;
     }
 
 }

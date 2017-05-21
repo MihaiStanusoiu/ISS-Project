@@ -8,8 +8,7 @@ import protocol.SubmissionProtocol;
 import repository.RepositoryEntity;
 import repository.RepositoryInterface;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import static utils.Conditional.basedOn;
 
 /**
  * Tested: True
@@ -18,8 +17,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 
-public class SubmissionModel
-        extends Model<SubmissionEntity, Integer>
+public class SubmissionModel extends Model<SubmissionEntity, Integer>
         implements SubmissionProtocol {
 
     private RepositoryInterface<SubmissionTagEntity, Integer> repositorySubmissionTag;
@@ -39,155 +37,104 @@ public class SubmissionModel
      * {@inheritDoc}
      */
     @Override
-    public void addTagTo(SubmissionEntity submission, TagEntity tag) throws SystemException {
+    public SubmissionEntity addTagTo(SubmissionEntity submission, TagEntity tag) throws SystemException {
+        basedOn(submission.getTags().stream().noneMatch(item -> item.getId().equals(tag.getId())))
+                .orThrow(new ModelException("The Tag Already Exists In The Submission!"));
         SubmissionTagEntity submissionTag = new SubmissionTagEntity(submission, tag);
         repositorySubmissionTag.add(submissionTag);
+        return getElementById(submission.getId());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addTopicTo(SubmissionEntity submission, TopicEntity topic) throws SystemException {
+    public SubmissionEntity addTopicTo(SubmissionEntity submission, TopicEntity topic) throws SystemException {
+        basedOn(submission.getTopics().stream().noneMatch(item -> item.getId().equals(topic.getId())))
+                .orThrow(new ModelException("The Topic Already Exists In The Submission!"));
         SubmissionTopicEntity submissionTopic = new SubmissionTopicEntity(submission, topic);
         repositorySubmissionTopic.add(submissionTopic);
+        return getElementById(submission.getId());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addAuthorTo(SubmissionEntity submission, UserEntity author) throws SystemException {
+    public SubmissionEntity addAuthorTo(SubmissionEntity submission, UserEntity author) throws SystemException {
+        basedOn(submission.getAuthors().stream().noneMatch(item -> item.getId().equals(author.getId())))
+                .orThrow(new ModelException("The Author Already Exists In The Submission!"));
         AuthorSubmissionEntity authorSubmission = new AuthorSubmissionEntity(submission, author);
         repositorySubmissionAuthor.add(authorSubmission);
+        return getElementById(submission.getId());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addOwnerTo(SubmissionEntity submission, UserEntity owner) throws SystemException {
+    public SubmissionEntity addOwnerTo(SubmissionEntity submission, UserEntity owner) throws SystemException {
+        basedOn(submission.getOwner().getId().equals(owner.getId()))
+                .orThrow(new ModelException("The owner is already set!"));
         AuthorSubmissionEntity authorSubmission = new AuthorSubmissionEntity(submission, owner, Boolean.TRUE);
         repositorySubmissionAuthor.add(authorSubmission);
+        return getElementById(submission.getId());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addReviewerTo(SubmissionEntity submission, EditionMemberEntity member) throws SystemException {
+    public SubmissionEntity addReviewerTo(SubmissionEntity submission, EditionMemberEntity member) throws SystemException {
+        basedOn(submission.getReviewers().stream().noneMatch(item -> item.getId().equals(member.getId())))
+                .orThrow(new ModelException("The Reviewer Already Exists In The Submission!"));
         ReviewerEntity reviewerSubmission = new ReviewerEntity(submission, member);
         repositoryReviewer.add(reviewerSubmission);
+        return getElementById(submission.getId());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void changeOwnerOf(SubmissionEntity submission, UserEntity owner) throws SystemException {
-        repositorySubmissionAuthor.update(repositorySubmissionAuthor.getAll().stream()
-                        .filter(author -> author.getSubmission().equals(submission)
-                                && author.getOwner().equals(Boolean.TRUE))
-                        .findFirst().orElseThrow(() -> new ModelException("404 Owner Not Found!")),
-                new AuthorSubmissionEntity(submission, owner, Boolean.TRUE));
+    public SubmissionEntity removeAuthorFrom(SubmissionEntity submission, UserEntity author) throws SystemException {
+        repositorySubmissionAuthor.delete(submission.getAuthors().stream()
+                .findFirst().filter(item -> item.getId().equals(author.getId()))
+                .orElseThrow(() -> new ModelException("404 Author Not Found!")).getId());
+        return getElementById(submission.getId());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public UserEntity removeAuthorFrom(SubmissionEntity submission, UserEntity author) throws SystemException {
-        return repositorySubmissionAuthor.delete(repositorySubmissionAuthor.getAll().stream()
-                .filter(item -> item.getSubmission().equals(submission) &&
-                        item.getAuthor().equals(author))
-                .findFirst().orElseThrow(() -> new ModelException("404 Author Not Found!"))
-                .getId()).getAuthor();
+    public SubmissionEntity removeTagFrom(SubmissionEntity submission, TagEntity tag) throws SystemException {
+        repositorySubmissionTag.delete(submission.getTags().stream()
+            .findFirst().filter(item -> item.getId().equals(tag.getId()))
+            .orElseThrow(() -> new ModelException("404 Tag Not Found!")).getId());
+        return getElementById(submission.getId());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public TagEntity removeTagFrom(SubmissionEntity submission, TagEntity tag) throws SystemException {
-        return repositorySubmissionTag.delete(repositorySubmissionTag.getAll().stream()
-                .filter(item -> item.getSubmission().equals(submission) && item.getTag().equals(tag))
-                .findFirst().orElseThrow(() -> new ModelException("404 Tag Not Found!")).getId()).getTag();
+    public SubmissionEntity removeTopicFrom(SubmissionEntity submission, TopicEntity topic) throws SystemException {
+        repositorySubmissionTopic.delete(submission.getTopics().stream()
+                .findFirst().filter(item -> item.getId().equals(topic.getId()))
+                .orElseThrow(() -> new ModelException("404 Topic Not Found!")).getId());
+        return getElementById(submission.getId());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public TopicEntity removeTopicFrom(SubmissionEntity submission, TopicEntity topic) throws SystemException {
-        return repositorySubmissionTopic.delete(repositorySubmissionTopic.getAll().stream()
-                .filter(item -> item.getSubmission().equals(submission) && item.getTopic().equals(topic))
-                .findFirst().orElseThrow(() -> new ModelException("404 Topic Not Found!")).getId()).getTopic();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public EditionMemberEntity removeReviewerFrom(SubmissionEntity submission, EditionMemberEntity member) throws SystemException {
-        return repositoryReviewer.delete(repositoryReviewer.getAll().stream()
-                .filter(item -> item.getSubmission().equals(submission) && item.getMember().equals(member))
-                .findFirst().orElseThrow(() -> new ModelException("404 Reviewer Not Found!")).getId()).getMember();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<TagEntity> getTagsForm(SubmissionEntity submission) throws SystemException {
-        return repositorySubmissionTag.getAll().stream()
-                .filter(tag -> tag.getSubmission().equals(submission))
-                .map(SubmissionTagEntity::getTag)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<TopicEntity> getTopicsFrom(SubmissionEntity submission) throws SystemException {
-        return repositorySubmissionTopic.getAll().stream()
-                .filter(topic -> topic.getSubmission().equals(submission))
-                .map(SubmissionTopicEntity::getTopic)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<EditionMemberEntity> getReviewersFrom(SubmissionEntity submission) throws SystemException {
-        return repositoryReviewer.getAll().stream()
-                .filter(reviewer -> reviewer.getSubmission().equals(submission))
-                .map(ReviewerEntity::getMember)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<UserEntity> getAuthorsFrom(SubmissionEntity submission) throws SystemException {
-        return repositorySubmissionAuthor.getAll().stream()
-                .filter(author -> author.getSubmission().equals(submission))
-                .map(AuthorSubmissionEntity::getAuthor)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UserEntity getOwnerFrom(SubmissionEntity submission) throws SystemException {
-        return repositorySubmissionAuthor.getAll().stream()
-                .filter(author -> author.getSubmission().equals(submission) &&
-                        author.getOwner().equals(Boolean.TRUE))
-                .map(AuthorSubmissionEntity::getAuthor)
-                .findFirst().orElseThrow(() -> new ModelException("404 Owner Not Found!"));
+    public SubmissionEntity removeReviewerFrom(SubmissionEntity submission, EditionMemberEntity member) throws SystemException {
+        repositorySubmissionAuthor.delete(submission.getReviewerEntities().stream()
+                .findFirst().filter(item -> item.getId().equals(member.getId()))
+                .orElseThrow(() -> new ModelException("404 Reviewer Not Found!")).getId());
+        return getElementById(submission.getId());
     }
 
 }

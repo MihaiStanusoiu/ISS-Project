@@ -156,7 +156,7 @@ public class ReviewerTest {
             repositoryReview.add(review1);
             repositoryReview.add(review2);
             SubmissionEntity submission0 = repositorySubmission.getElementById(1);
-            Set<ReviewerEntity> reviews = submission0.getReviewers();
+            Set<ReviewerEntity> reviews = submission0.getReviewerEntities();
             Assert.assertTrue(reviews.size() == 2);
         }catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");

@@ -2,7 +2,9 @@
 package domain;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -41,6 +43,10 @@ public class EditionMemberEntity implements Idable<Integer> {
 
     private static final Integer DEFAULT_ID = 0;
 
+    /**
+     * @implNote Don't use this constructor [it's for testing only]
+     */
+    @Deprecated
     public EditionMemberEntity() {
         this(DEFAULT_ID, null, null, null);
     }
@@ -165,6 +171,17 @@ public class EditionMemberEntity implements Idable<Integer> {
     public void setConfigurationEditionMember(
             ConfigurationEditionMemberEntity configurationConferenceMember) {
         this.configuration = configurationConferenceMember;
+    }
+
+    /**
+     * Returns the member's submissions.
+     *
+     * @return All the submissions.
+     */
+    public List<SubmissionEntity> getSubmissions() {
+        return reviewers.stream()
+                .map(ReviewerEntity::getSubmission)
+                .collect(Collectors.toList());
     }
 
     @Override
