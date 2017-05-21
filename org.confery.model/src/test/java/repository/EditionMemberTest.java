@@ -16,11 +16,8 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
- * Date:         08/05/2017
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author Tiron Andreea-Ecaterina
+ * @version 1.0
  */
 public class EditionMemberTest {
 

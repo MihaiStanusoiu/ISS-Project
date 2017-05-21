@@ -16,11 +16,8 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
- * Date:         12/05/2017
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author Tiron Andreea- Ecaterina
+ * @version 1.0
  */
 public class SubmissionTagTest {
     private RepositoryInterface<SubmissionEntity, Integer> repositorySubmission;
@@ -107,7 +104,7 @@ public class SubmissionTagTest {
         SubmissionTagEntity tagSubmission3 = new SubmissionTagEntity();
         TagEntity topic = new TagEntity("topic");
 
-        try{
+        try {
             repositoryTag.add(topic);
             tagSubmission1.setTag(repositoryTag.getElementById(1));
             tagSubmission2.setTag(repositoryTag.getElementById(1));
@@ -117,18 +114,18 @@ public class SubmissionTagTest {
             repositoryTagSubmission.add(tagSubmission3);
             ArrayList<SubmissionTagEntity> submissionTopics = new ArrayList<>(repositoryTag.getElementById(1).getSubmissionTags());
             Assert.assertTrue(submissionTopics.size() == 3);
-        }catch (SystemException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }
 
     @Test
-    public void getAllFromSubmissions() throws Exception{
+    public void getAllFromSubmissions() throws Exception {
         SubmissionTagEntity tagSubmission1 = new SubmissionTagEntity();
         SubmissionTagEntity tagSubmission2 = new SubmissionTagEntity();
         SubmissionTagEntity tagSubmission3 = new SubmissionTagEntity();
-        SubmissionEntity submission = new SubmissionEntity("thesis","status","abstractUrl","fullPaperUrl");
-        try{
+        SubmissionEntity submission = new SubmissionEntity("thesis", "status", "abstractUrl", "fullPaperUrl");
+        try {
             repositorySubmission.add(submission);
             tagSubmission1.setSubmission(repositorySubmission.getElementById(1));
             tagSubmission2.setSubmission(repositorySubmission.getElementById(1));
@@ -138,7 +135,7 @@ public class SubmissionTagTest {
             repositoryTagSubmission.add(tagSubmission3);
             ArrayList<SubmissionTagEntity> submissionTopics = new ArrayList<>(repositorySubmission.getElementById(1).getSubmissionTags());
             Assert.assertTrue(submissionTopics.size() == 3);
-        }catch (SystemException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }

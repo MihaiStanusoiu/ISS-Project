@@ -1,8 +1,12 @@
 
 package domain;
 
+import exception.ModelException;
+import exception.SystemException;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -106,6 +110,9 @@ public class EditionEntity implements Idable<Integer> {
         this.paperDeadline = paperDeadline;
         this.evaluationDeadline = evaluationDeadline;
         this.biddingDeadline = biddingDeadline;
+        this.members = new HashSet<>();
+        this.submissions = new HashSet<>();
+        this.sessions = new HashSet<>();
     }
 
     /**
@@ -431,16 +438,14 @@ public class EditionEntity implements Idable<Integer> {
     /**
      * Returns the chair of the edition.
      *
-     * @return The chair of the edition (if the chair is not set will return null).
-     * <p>If this function returns null, search for a bug in the database or app. logic!</p>
-     * @apiNote This function can return a null if the chair is not set,
-     * but if this function returns a null than something went wrong in our system.
+     * @return The chair of the edition.
      * <p>You can't have a edition without a chair to act as an admin!</p>
+     * @throws SystemException If the chair is not set.
      */
-    public UserEntity getChair() {
+    public UserEntity getChair() throws SystemException {
         return members.stream().findFirst()
                 .filter(member -> member.getConfigurationEditionMember().getChair().equals(Boolean.TRUE))
-                .map(EditionMemberEntity::getUser).orElseGet(null);
+                .map(EditionMemberEntity::getUser).orElseThrow(() -> new ModelException("The chair is not set!"));
     }
 
     /**

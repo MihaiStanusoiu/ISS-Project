@@ -100,7 +100,7 @@ public class SessionModelTest {
         // preconditions:
         userModel.add(user);
         userModel.add(test);
-        Integer idSession = sessionModel.add(session);
+        sessionModel.add(session);
         // when:
         session = sessionModel.addMemberTo(session, user, MemberRole.SESSION_CHAIR);
         // then:

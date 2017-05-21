@@ -35,13 +35,10 @@ public class NotificationModelTest {
         // declarations:
         NotificationEntity notification = new NotificationEntity("Test", Boolean.FALSE);
         UserEntity user = new UserEntity("username", "password");
-
         // preconditions:
         userModel.add(user);
-
         // when:
         notificationModel.sendNotificationTo(user, notification);
-
         // then:
         Assert.assertTrue(userModel.getElementById(user.getId())
                 .getNotifications().stream()
@@ -55,16 +52,13 @@ public class NotificationModelTest {
         UserEntity first = new UserEntity("username", "password");
         UserEntity second = new UserEntity("username", "password");
         List<UserEntity> list = new ArrayList<>();
-
         // preconditions:
         userModel.add(first);
         userModel.add(second);
         list.add(first);
         list.add(second);
-
         // when:
         notificationModel.sendNotificationToUsers(list, notification);
-
         // than:
         Assert.assertTrue(userModel.getElementById(first.getId())
                 .getNotifications().stream()

@@ -16,19 +16,17 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
- * Date:         12/05/2017
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author Tiron Andreea- Ecaterina
+ * @version 1.0
  */
 
 public class AuthorSubmissionTest {
+
     private RepositoryInterface<SubmissionEntity, Integer> repositorySubmission;
     private RepositoryInterface<AuthorSubmissionEntity, Integer> repositoryAuthorSubmission;
     private RepositoryInterface<UserEntity, Integer> repositoryUser;
     private DatabaseLoaderInterface loader;
-    
+
     @Before
     public void setUp() throws Exception {
         loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
@@ -142,14 +140,13 @@ public class AuthorSubmissionTest {
         AuthorSubmissionEntity author2 = new AuthorSubmissionEntity(true, "presentation2");
         AuthorSubmissionEntity author3 = new AuthorSubmissionEntity(false, "presentation3");
         repositorySubmission.add(submission);
-            author1.setSubmission(repositorySubmission.getElementById(1));
-            author2.setSubmission(repositorySubmission.getElementById(1));
-            author3.setSubmission(repositorySubmission.getElementById(1));
-            repositoryAuthorSubmission.add(author1);
-            repositoryAuthorSubmission.add(author2);
-            repositoryAuthorSubmission.add(author3);
-            Assert.assertTrue(repositorySubmission
-                    .getElementById(1).getSubmissionAuthors().size() == 3);
-
+        author1.setSubmission(repositorySubmission.getElementById(1));
+        author2.setSubmission(repositorySubmission.getElementById(1));
+        author3.setSubmission(repositorySubmission.getElementById(1));
+        repositoryAuthorSubmission.add(author1);
+        repositoryAuthorSubmission.add(author2);
+        repositoryAuthorSubmission.add(author3);
+        Assert.assertTrue(repositorySubmission
+                .getElementById(1).getSubmissionAuthors().size() == 3);
     }
 }

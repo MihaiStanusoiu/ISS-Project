@@ -96,12 +96,12 @@ public class SessionEntityTest {
         UserEntity speaker = new UserEntity("Speaker", "password");
         // preconditions:
         Integer idSession = sessionModel.add(session);
-        Integer idChair = userModel.add(chair);
-        Integer idSpeaker = userModel.add(speaker);
+        userModel.add(chair);
+        userModel.add(speaker);
         // when:
         sessionModel.addMemberTo(session, chair, MemberRole.SESSION_CHAIR);
         sessionModel.addMemberTo(session, speaker, MemberRole.SESSION_SPEAKER);
         // then:
-        assertEquals((long)sessionModel.getElementById(idSession).getAvailableSets(), 2L);
+        assertEquals((long) sessionModel.getElementById(idSession).getAvailableSets(), 2L);
     }
 }
