@@ -394,6 +394,17 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
+     * Returns all the members as UserEntity.
+     *
+     * @return All the members.
+     */
+    public List<UserEntity> getUsers() {
+        return members.stream()
+                .map(EditionMemberEntity::getUser)
+                .collect(Collectors.toList());
+    }
+
+    /**
      * Returns all the pc-members of the edition.
      *
      * @return All the pc-members of the edition
@@ -421,10 +432,10 @@ public class EditionEntity implements Idable<Integer> {
      * Returns the chair of the edition.
      *
      * @return The chair of the edition (if the chair is not set will return null).
-     *         <p>If this function returns null, search for a bug in the database or app. logic!</p>
+     * <p>If this function returns null, search for a bug in the database or app. logic!</p>
      * @apiNote This function can return a null if the chair is not set,
-     *          but if this function returns a null than something went wrong in our system.
-     *          <p>You can't have a edition without a chair to act as an admin!</p>
+     * but if this function returns a null than something went wrong in our system.
+     * <p>You can't have a edition without a chair to act as an admin!</p>
      */
     public UserEntity getChair() {
         return members.stream().findFirst()
