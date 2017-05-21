@@ -48,11 +48,14 @@ public class ReviewerEntity implements Idable<Integer> {
     private static final String DEFAULT_RECOMMENDATION_URL = "";
 
 
+    /**
+     * @implNote Don't use this constructor [it's for testing only]
+     */
+    @Deprecated
     public ReviewerEntity() {
         this(DEFAULT_ID, DEFAULT_RESPONSE, DEFAULT_STATUS, null,
                 DEFAULT_RECOMMENDATION_URL, null, null);
     }
-
 
     public ReviewerEntity(Integer id,
                           String response,
@@ -70,6 +73,7 @@ public class ReviewerEntity implements Idable<Integer> {
         this.member = reviewer;
     }
 
+
     public ReviewerEntity(String response,
                           String status,
                           String qualifier,
@@ -78,7 +82,6 @@ public class ReviewerEntity implements Idable<Integer> {
                           EditionMemberEntity reviewer) {
         this(DEFAULT_ID, response, status, qualifier, recommendationUrl, submission, reviewer);
     }
-
 
     public ReviewerEntity(String response,
                           String status,
@@ -91,6 +94,7 @@ public class ReviewerEntity implements Idable<Integer> {
     public ReviewerEntity(SubmissionEntity submission, EditionMemberEntity reviewer) {
         this(DEFAULT_ID, DEFAULT_RESPONSE, DEFAULT_STATUS, "", "", null, null);
     }
+
 
     /**
      * Effect: Return the idReviewer of a reviewer.
@@ -216,6 +220,15 @@ public class ReviewerEntity implements Idable<Integer> {
      */
     public void setMember(EditionMemberEntity member) {
         this.member = member;
+    }
+
+    /**
+     * Returns the user reviewer as UserEntity. [not as EditionMember]
+     *
+     * @return The user reviewer
+     */
+    public UserEntity getReviewer() {
+        return member.getUser();
     }
 
     @Override

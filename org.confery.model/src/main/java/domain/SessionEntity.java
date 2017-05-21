@@ -1,11 +1,18 @@
 
 package domain;
 
+import exception.ModelException;
+import exception.SystemException;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static javax.persistence.GenerationType.IDENTITY;
+import static utils.Try.runFunction;
 
 /**
  * Tested: True
@@ -72,6 +79,11 @@ public class SessionEntity implements Idable<Integer> {
     public SessionEntity(String name, Date startDate, Date endDate,
                          String location, String bio, Integer seats) {
         this(DEFAULT_ID, name, startDate, endDate, location, bio, seats);
+    }
+
+    public SessionEntity(String name, Integer seats) {
+        this(DEFAULT_ID, name, DEFAULT_DATE, DEFAULT_DATE,
+                DEFAULT_LOCATION, DEFAULT_BIO, seats);
     }
 
     public SessionEntity(Integer id, String name, Date startDate, Date endDate,
@@ -246,6 +258,54 @@ public class SessionEntity implements Idable<Integer> {
     public void setMembers(Set<SessionMemberEntity> members) {
         this.members = members;
     }
+
+    /**
+     * Returns all the speakers at the session.
+     *
+     * @return All the speakers attending the session.
+     */
+    public List<UserEntity> getSpeakers() {
+        return members.stream()
+                .filter(member -> member.getConfiguration().getSpeaker().equals(true))
+                .map(SessionMemberEntity::getUser)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the listeners at the session.
+     *
+     * @return All the listeners attending the session
+     */
+    public List<UserEntity> getListeners() {
+        return members.stream()
+                .filter(member -> member.getConfiguration().getListener().equals(true))
+                .map(SessionMemberEntity::getUser)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the chair of the session.
+     *
+     * @return The chair of the session or null if the chair is not set
+     */
+    public UserEntity getChair() throws SystemException {
+        return members.stream()
+                .filter(member -> member.getConfiguration().getChair().equals(true))
+                .findFirst()
+                .map(SessionMemberEntity::getUser)
+                .orElseThrow(() -> new ModelException("Chair Not Set!"));
+    }
+
+    /**
+     * Returns the number of available sets at the current moment.
+     *
+     * @return The number of available seats
+     */
+    public Integer getAvailableSets() {
+        return seats - getListeners().size() - getSpeakers().size() -
+                (Objects.nonNull(runFunction(this::getChair).or(null)) ? 1 : 0);
+    }
+
 
     @Override
     public boolean equals(Object o) {

@@ -6,6 +6,7 @@ import database.DatabaseLoaderType;
 import domain.MemberRole;
 import domain.SessionEntity;
 import domain.UserEntity;
+import exception.ModelException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,110 +23,93 @@ public class SessionModelTest {
 
     @Before
     public void setUp() throws Exception {
-        DatabaseLoaderInterface loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
+        DatabaseLoaderInterface loader =
+                new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
         sessionModel = new SessionModel(loader);
         userModel = new UserModel(loader);
     }
 
     @Test
     public void isAddingMember() throws Exception {
+        // declarations:
         SessionEntity session = new SessionEntity("Test");
         UserEntity user = new UserEntity("username", "test");
+        // preconditions:
         userModel.add(user);
         sessionModel.add(session);
-        sessionModel.addMemberTo(session, user, MemberRole.SESSION_CHAIR);
-        Assert.assertTrue(sessionModel.getAll().get(0).getMembers().size() == 1);
+        // when:
+        session = sessionModel.addMemberTo(session, user, MemberRole.SESSION_CHAIR);
+        // then:
+        Assert.assertEquals(session.getChair(), user);
     }
 
-    @Test
-    public void isGettingAllSpeakers() throws Exception {
+    @Test(expected = ModelException.class)
+    public void isNotAddingMember() throws Exception {
+        // declarations:
         SessionEntity session = new SessionEntity("Test");
         UserEntity user = new UserEntity("username", "test");
-        UserEntity test = new UserEntity("username", "test");
-        userModel.add(user);
-        userModel.add(test);
+        // preconditions:
         sessionModel.add(session);
-        sessionModel.addMemberTo(session, test, MemberRole.SESSION_SPEAKER);
+        // when:
         sessionModel.addMemberTo(session, user, MemberRole.SESSION_CHAIR);
-        Assert.assertTrue(sessionModel.getAllSpeakers(sessionModel
-                .getElementById(session.getId())).get(0).equals(test));
-    }
-
-    @Test
-    public void isGettingAllListeners() throws Exception {
-        SessionEntity session = new SessionEntity("Test");
-        UserEntity user = new UserEntity("username", "test");
-        UserEntity test = new UserEntity("username", "test");
-        userModel.add(user);
-        userModel.add(test);
-        sessionModel.add(session);
-        sessionModel.addMemberTo(session, test, MemberRole.SESSION_LISTENER);
-        sessionModel.addMemberTo(session, user, MemberRole.SESSION_LISTENER);
-        Assert.assertTrue(sessionModel.getAllListeners(sessionModel
-                .getElementById(session.getId())).get(0).equals(test) &&
-                sessionModel.getAllListeners(sessionModel.getElementById(session.getId())).size() == 2);
-    }
-
-    @Test
-    public void isGettingChair() throws Exception {
-        SessionEntity session = new SessionEntity("Test");
-        UserEntity user = new UserEntity("username", "test");
-        UserEntity test = new UserEntity("username", "test");
-        userModel.add(user);
-        userModel.add(test);
-        sessionModel.add(session);
-        sessionModel.addMemberTo(session, test, MemberRole.SESSION_SPEAKER);
-        sessionModel.addMemberTo(session, user, MemberRole.SESSION_CHAIR);
-        Assert.assertTrue(sessionModel.getChair(sessionModel
-                .getElementById(session.getId())).equals(user));
     }
 
     @Test
     public void isRemovingMember() throws Exception {
+        // declarations:
         SessionEntity session = new SessionEntity("Test");
-        UserEntity user = new UserEntity("username", "test");
         UserEntity test = new UserEntity("username", "test");
-        userModel.add(user);
-        userModel.add(test);
-        sessionModel.add(session);
+        // preconditions:
+        Integer idUser = userModel.add(test);
+        Integer idSession = sessionModel.add(session);
+        // when:
         sessionModel.addMemberTo(session, test, MemberRole.SESSION_SPEAKER);
-        Assert.assertTrue(sessionModel.getElementById(session.getId()).getMembers().size() == 1);
-        sessionModel.removeMemberFrom(sessionModel.getElementById(session.getId()), test);
-        Assert.assertTrue(sessionModel.getElementById(session.getId()).getMembers().size() == 0);
+        // then:
+        Assert.assertEquals(sessionModel.getElementById(idSession).getSpeakers().get(0).getId(), idUser);
+        // when:
+        session = sessionModel.removeMemberFrom(sessionModel.getElementById(session.getId()), test);
+        // then:
+        Assert.assertEquals(session.getSpeakers().size(), 0);
     }
 
     @Test
     public void isChangingMemberRole() throws Exception {
+        // declarations:
         SessionEntity session = new SessionEntity("Test");
         UserEntity test = new UserEntity(1, "username", "test");
+        // preconditions:
         userModel.add(test);
         sessionModel.add(session);
-        sessionModel.addMemberTo(session, test, MemberRole.SESSION_LISTENER);
-        Assert.assertTrue(sessionModel.getAllListeners(sessionModel
-                .getElementById(session.getId())).size() == 1);
-        sessionModel.changeMemberRoleIn(sessionModel
-                .getElementById(session.getId()), test, MemberRole.SESSION_SPEAKER);
-        Assert.assertTrue(sessionModel.getAllListeners(sessionModel
-                .getElementById(session.getId())).size() == 0 &&
-                sessionModel.getAllSpeakers(sessionModel.getElementById(session.getId())).size() == 1);
+        // when:
+        session = sessionModel.addMemberTo(session, test, MemberRole.SESSION_LISTENER);
+        // then:
+        Assert.assertEquals(session.getListeners().size(), 1);
+        // when:
+        session = sessionModel.changeMemberRoleIn(session, test, MemberRole.SESSION_SPEAKER);
+        // then
+        Assert.assertTrue(session.getListeners().size() == 0 &&
+                session.getSpeakers().size() == 1);
     }
 
     @Test
     public void isChangingChair() throws Exception {
+        // declarations:
         SessionEntity session = new SessionEntity("Test");
         UserEntity user = new UserEntity("username", "test");
         UserEntity test = new UserEntity("username", "test");
+        // preconditions:
         userModel.add(user);
         userModel.add(test);
-        sessionModel.add(session);
-        sessionModel.addMemberTo(session, user, MemberRole.SESSION_CHAIR);
-        Assert.assertTrue(sessionModel.getChair(sessionModel
-                .getElementById(session.getId())).equals(user));
-        sessionModel.changeChairIn(sessionModel.getElementById(session.getId()), test);
-        Assert.assertTrue(sessionModel.getChair(sessionModel
-                .getElementById(session.getId())).equals(test));
-        Assert.assertTrue(sessionModel.getElementById(session.getId()).getMembers().size() == 1);
-
+        Integer idSession = sessionModel.add(session);
+        // when:
+        session = sessionModel.addMemberTo(session, user, MemberRole.SESSION_CHAIR);
+        // then:
+        Assert.assertTrue(session.getChair().equals(user));
+        // when:
+        session = sessionModel.changeChairIn(sessionModel.getElementById(session.getId()), test);
+        // then:
+        Assert.assertTrue(session.getChair().equals(test));
+        Assert.assertTrue(session.getMembers().size() == 1);
     }
 
 }

@@ -6,6 +6,7 @@ import database.DatabaseLoaderType;
 import domain.NotificationEntity;
 import domain.UserEntity;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -18,25 +19,56 @@ import java.util.List;
 
 public class NotificationModelTest {
 
+    private UserModel userModel;
+    private NotificationModel notificationModel;
+
+    @Before
+    public void setUp() throws Exception {
+        DatabaseLoaderInterface loader =
+                new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
+        userModel = new UserModel(loader);
+        notificationModel = new NotificationModel(loader);
+    }
+
     @Test
     public void isSendingNotificationToUser() throws Exception {
-        DatabaseLoaderInterface loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
-        UserModel userModel = new UserModel(loader);
-        NotificationModel notificationModel = new NotificationModel(loader);
+        // declarations:
+        NotificationEntity notification = new NotificationEntity("Test", Boolean.FALSE);
+        UserEntity user = new UserEntity("username", "password");
+
+        // preconditions:
+        userModel.add(user);
+
+        // when:
+        notificationModel.sendNotificationTo(user, notification);
+
+        // then:
+        Assert.assertTrue(userModel.getElementById(user.getId())
+                .getNotifications().stream()
+                .anyMatch(item -> item.getText().equals(notification.getText())));
+    }
+
+    @Test
+    public void isSendingNotificationToUsers() throws Exception {
+        // declarations:
+        NotificationEntity notification = new NotificationEntity("Test", Boolean.FALSE);
         UserEntity first = new UserEntity("username", "password");
         UserEntity second = new UserEntity("username", "password");
         List<UserEntity> list = new ArrayList<>();
-        NotificationEntity notification = new NotificationEntity("Test", Boolean.FALSE);
+
+        // preconditions:
         userModel.add(first);
         userModel.add(second);
         list.add(first);
         list.add(second);
-        notificationModel.sendNotificationTo(second, notification);
-        Assert.assertTrue(userModel.getElementById(second.getId())
-                .getNotifications().stream().anyMatch(item-> item.getText().equals(notification.getText())));
-        notificationModel.sendNotificationToUsers(list, notification);
-        Assert.assertTrue(userModel.getElementById(first.getId())
-                .getNotifications().stream().anyMatch(item-> item.getText().equals(notification.getText())));
-    }
 
+        // when:
+        notificationModel.sendNotificationToUsers(list, notification);
+
+        // than:
+        Assert.assertTrue(userModel.getElementById(first.getId())
+                .getNotifications().stream()
+                .anyMatch(item -> item.getText().equals(notification.getText())));
+
+    }
 }

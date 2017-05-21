@@ -3,7 +3,9 @@ package domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Tested: True
@@ -102,6 +104,17 @@ public class TagEntity implements Idable<Integer> {
      */
     public void setSubmissionTags(Set<SubmissionTagEntity> submissionTags) {
         this.submissionTags = submissionTags;
+    }
+
+    /**
+     * Return all the submissions in the system that have this tag.
+     *
+     * @return Returns all the submissions in the system that have this tag.
+     */
+    public List<SubmissionEntity> getSubmissions() {
+        return submissionTags.stream()
+                .map(SubmissionTagEntity::getSubmission)
+                .collect(Collectors.toList());
     }
 
     @Override
