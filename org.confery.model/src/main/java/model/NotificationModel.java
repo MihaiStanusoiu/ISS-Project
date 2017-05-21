@@ -10,6 +10,7 @@ import repository.RepositoryEntity;
 import repository.RepositoryInterface;
 
 import java.util.List;
+import java.util.Objects;
 
 import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
@@ -34,23 +35,23 @@ public class NotificationModel extends Model<NotificationEntity, Integer> implem
      * {@inheritDoc}
      */
     @Override
-    public void sendNotificationTo(UserEntity user, NotificationEntity notification)
+    public NotificationEntity sendNotificationTo(UserEntity user, NotificationEntity notification)
             throws SystemException {
-        basedOn(userRepository.getAll().stream()
-                .anyMatch(item -> item.getId().equals(user.getId())))
-                .orThrow(new ModelException("404! User Not Found!"));
+        basedOn(Objects.nonNull(userRepository.getElementById(user.getId())))
+                .orThrow(new ModelException("404 Used Not Found!"));
         notification.setUser(user);
         this.add(notification);
+        return getElementById(notification.getId());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void sendNotificationToUsers(List<UserEntity> users, NotificationEntity notification)
+    public NotificationEntity sendNotificationToUsers(List<UserEntity> users, NotificationEntity notification)
             throws SystemException {
-        users.forEach(user -> runFunction(this::sendNotificationTo, user, notification)
-                .or(Boolean.FALSE));
+        users.forEach(user -> runFunction(this::sendNotificationTo, user, notification));
+        return getElementById(notification.getId());
     }
 
 }
