@@ -63,6 +63,5 @@ public class NotificationModelTest {
         Assert.assertTrue(userModel.getElementById(first.getId())
                 .getNotifications().stream()
                 .anyMatch(item -> item.getText().equals(notification.getText())));
-
     }
 }
