@@ -7,7 +7,7 @@ import manager.StageManager;
  * Name:        PaginationControllerItemInterface
  *
  * Effect:      Any view-controller that controls an item view (example: ConferenceItem)
- *              needs to offer a couple of functions to PaginationManager in order for the builder
+ *              needs to offer a couple of function to PaginationManager in order for the builder
  *              to work and the showcase the items in order in a grid-pane
  *
  *              Any view-controller that controls an item view must implement those methods

@@ -17,17 +17,14 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
- * Date:         12/05/2017
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author Tiron Andreea- Ecaterina
+ * @version 1.0
  */
 
 public class SessionTest {
 
     private RepositoryInterface<EditionEntity, Integer> repositoryEdition;
-    private RepositoryInterface<SessionEntity,Integer> repositorySession;
+    private RepositoryInterface<SessionEntity, Integer> repositorySession;
     private DatabaseLoaderInterface loader;
     private Date date;
 
@@ -36,7 +33,7 @@ public class SessionTest {
         date = new Date();
         loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
         repositoryEdition = new RepositoryEntity<>(EditionEntity.class, loader);
-        repositorySession = new RepositoryEntity<>(SessionEntity.class,loader);
+        repositorySession = new RepositoryEntity<>(SessionEntity.class, loader);
         EditionEntity newEdition = new EditionEntity(date, date, "location", "bio", date, date, date, date);
         repositoryEdition.add(newEdition);
     }
@@ -143,7 +140,7 @@ public class SessionTest {
             repositorySession.add(test);
             EditionEntity sameEdition = repositoryEdition.getElementById(1);
             Set<SessionEntity> sessions = sameEdition.getSessions();
-            Assert.assertTrue(sessions.size()==2);
+            Assert.assertTrue(sessions.size() == 2);
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }

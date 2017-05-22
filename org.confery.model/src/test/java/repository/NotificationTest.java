@@ -15,10 +15,7 @@ import java.util.ArrayList;
 
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
- * Date:         07/05/2017
- * @author Tiron Andreea- Ecaterina
+ * @author Tiron Andreea-Ecaterina
  * @version 1.0
  */
 public class NotificationTest {

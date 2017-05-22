@@ -16,11 +16,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
- * Date:         22/04/2017
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author Tiron Andreea-Ecaterina
+ * @version 1.0
  */
 
 public class ConferenceTest {
@@ -122,7 +119,7 @@ public class ConferenceTest {
         EditionEntity edition1 = new EditionEntity(date, date, "location1", "bio1", date, date, date, date);
         EditionEntity edition2 = new EditionEntity(date, date, "location2", "bio2", date, date, date, date);
         EditionEntity edition3 = new EditionEntity(date, date, "location3", "bio3", date, date, date, date);
-        try{
+        try {
             repositoryEditionConfiguration.add(conference);
             edition1.setConference(conference);
             repositoryEdition.add(edition1);
@@ -145,7 +142,7 @@ public class ConferenceTest {
             }
             Assert.assertTrue(isNote.equals(true) && isNote2.equals(true) && isNote3.equals(true));
             Assert.assertTrue(editions.size() == 3);
-        } catch(SystemException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }

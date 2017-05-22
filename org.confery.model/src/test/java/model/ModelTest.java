@@ -4,14 +4,12 @@ import database.DatabaseLoaderFactory;
 import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.UserEntity;
-import exception.SystemException;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.rmi.RemoteException;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 import static utils.Try.runFunction;
 
 /**
@@ -19,51 +17,53 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
-
-class ModelTest {
+public class ModelTest {
 
     private Model<UserEntity, Integer> model;
 
-    @BeforeEach
+    @Before
     public void setUp() throws Exception {
         DatabaseLoaderInterface loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
         model = new Model<>(UserEntity.class, loader);
     }
 
-    @Test
+    @Test(expected = RemoteException.class)
     public void isAddingObject() throws Exception {
+        // declarations:
         UserEntity user = new UserEntity("username", "password");
         UserEntity except = new UserEntity("username", "");
-        try {
-            assertTrue(runFunction(model::add, user)
-                    .orThrow(exception -> new RemoteException(exception.getMessage())).equals(1));
-            runFunction(model::add, except).orThrow(exception -> new RemoteException(exception.getMessage()));
-        } catch (RemoteException exception) {
-            assertTrue(exception.getMessage().equals("\nUser's password is invalid!"));
-        }
+        // then:
+        assertTrue(runFunction(model::add, user)
+                .orThrow(exception -> new RemoteException(exception.getMessage())).equals(1));
+        // when:
+        runFunction(model::add, except).orThrow(exception -> new RemoteException(exception.getMessage()));
     }
 
-    @Test
+    @Test(expected = RemoteException.class)
     public void isUpdatingObject() throws Exception {
+        // declarations:
         UserEntity user = new UserEntity("username", "password");
         UserEntity with = new UserEntity("with", "password");
         UserEntity except = new UserEntity("with", null);
+        // preconditions:
         runFunction(model::add, user).orThrow(exception -> new RemoteException(exception.getMessage()));
+        // then:
         assertTrue(runFunction(model::update, user, with)
                 .orThrow(exception -> new RemoteException(exception.getMessage())));
-        try {
-            runFunction(model::update, user, except).orThrow(exception -> new RemoteException(exception.getMessage()));
-        } catch (RemoteException exception) {
-            assertTrue(exception.getMessage().equals("\nUser's password is invalid!"));
-        }
+        // then: [test exceptions]
+        runFunction(model::update, user, except).orThrow(exception -> new RemoteException(exception.getMessage()));
     }
-    @Test
+    @Test(expected = RemoteException.class)
     public void isDeletingObject() throws Exception {
+        // declarations:
         UserEntity user = new UserEntity("username", "password");
         UserEntity with = new UserEntity("with", "password");
-        runFunction(model::add, user).orThrow(exception -> new RemoteException(exception.getMessage()));
+        // preconditions:
+        model.add(user);
+        // then:
         runFunction(model::delete, user).orThrow(exception -> new RemoteException(exception.getMessage()));
-        assertThrows(SystemException.class, () -> model.delete(with));
+        // then: [test exceptions]
+        runFunction(model::delete, with).orThrow(exception -> new RemoteException(exception.getMessage()));
     }
 
 }

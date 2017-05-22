@@ -15,13 +15,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 
-
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
- * Date:         01/05/2017
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author Tiron Andreea-Ecaterina
+ * @version 1.0
  */
 public class SessionMemberTest {
 

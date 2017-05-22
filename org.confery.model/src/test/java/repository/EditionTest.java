@@ -17,12 +17,7 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
- * Date:         22/04/2017
- * Tested:       False
- *
- * @author Tiron Andreea- Ecaterina
+ * @author Tiron Andreea-Ecaterina
  * @version 1.0
  */
 
