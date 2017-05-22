@@ -1,8 +1,8 @@
 package utils;
 
-import functions.ThrowBiMethod;
-import functions.ThrowEmptyMethod;
-import functions.ThrowMethod;
+import method.ThrowBiMethod;
+import method.ThrowEmptyMethod;
+import method.ThrowMethod;
 
 /**
  * Tested: True
