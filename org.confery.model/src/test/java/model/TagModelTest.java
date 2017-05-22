@@ -18,11 +18,13 @@ public class TagModelTest {
 
     @Test
     public void isAddingTag() throws Exception {
+        // declaration:
         DatabaseLoaderInterface loader =
                 new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
         TagModel model = new TagModel(loader);
         TagEntity first = new TagEntity("test");
         TagEntity second = new TagEntity("test");
+        // then:
         Assert.assertTrue(model.add(first).equals(1));
         runFunction(() -> Assert.assertTrue(model.add(second).equals(2)))
                 .orHandle(exception -> Assert.assertTrue(exception

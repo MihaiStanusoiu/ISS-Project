@@ -5,21 +5,20 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Name:         ValidatorRepositoryBehaviourFactoryTest
- * Effect:       Test for behaviour factory
- * Date:         05/06/2017
- *
  * @author Tanasie Luiza Maria
  * @version 1.0
  */
+
 @SuppressWarnings("all")
 public class ValidatorRepositoryBehaviourFactoryTest {
+
     @Test
     public void getBehaviourUser(){
         ValidatorRepositoryBehaviour behaviourUser = null;
         try {
             behaviourUser = new ValidatorRepositoryBehaviourFactory().getBehaviour(UserEntity.class);
-            Assert.assertTrue(behaviourUser.getClass().equals(ValidatorRepositoryBehaviourUserEntity.class));
+            Assert.assertTrue(behaviourUser.getClass()
+                    .equals(ValidatorRepositoryBehaviourUserEntity.class));
         } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
@@ -201,4 +200,5 @@ public class ValidatorRepositoryBehaviourFactoryTest {
             Assert.assertTrue(e.getMessage().contains("Cannot get behaviour for given class type"));
         }
     }
+
 }

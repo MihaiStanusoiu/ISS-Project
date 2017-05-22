@@ -4,7 +4,7 @@ import database.DatabaseLoaderInterface;
 import domain.Idable;
 import exception.SystemException;
 import exception.ValidatorSystemException;
-import functions.ThrowMethod;
+import method.ThrowMethod;
 import org.hibernate.Session;
 import validator.ValidatorRepository;
 

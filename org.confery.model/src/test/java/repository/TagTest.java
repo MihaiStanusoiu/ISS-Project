@@ -14,11 +14,8 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
- * Date:         01/05/2017
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author Tiron Andreea- Ecaterina
+ * @version 1.0
  */
 public class TagTest {
     private RepositoryInterface<TagEntity, Integer> repositoryTag;

@@ -12,12 +12,8 @@ import java.util.ResourceBundle;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Name:         DatabaseLoaderTest
- * Effect:       Generic test for Database Loader.
- * Date:         4/16/2017
- *
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 public class DatabaseLoaderTest {
@@ -38,26 +34,34 @@ public class DatabaseLoaderTest {
 
     @Test
     public void setConfiguration() throws Exception {
+        // declaration:
         Properties properties = new Properties();
         String databaseUrl = ResourceBundle
                 .getBundle("database_url")
                 .getString("test_database");
         InputStream stream = getClass().getResourceAsStream(databaseUrl);
+        // preconditions:
         properties.load(stream);
         Configuration configuration = new Configuration().addProperties(properties);
+        // when:
         loader.setConfiguration(configuration);
+        // then:
         assertTrue(loader.getConfiguration().equals(configuration));
     }
 
     @Test
     public void getConfiguration() throws Exception {
+        // declaration:
         Configuration configuration = loader.getConfiguration();
+        // when:
         assertTrue(configuration != null);
     }
 
     @Test
     public void getFactory() throws Exception {
+        // declaration:
         SessionFactory factory = loader.getFactory();
+        // when:
         assertTrue(factory != null);
     }
 

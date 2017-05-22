@@ -74,8 +74,7 @@ public class SubmissionModel extends Model<SubmissionEntity, Integer>
      */
     @Override
     public SubmissionEntity addOwnerTo(SubmissionEntity submission, UserEntity owner) throws SystemException {
-        basedOn(submission.getOwner().getId().equals(owner.getId()))
-                .orThrow(new ModelException("The owner is already set!"));
+        basedOn(submission.getOwner() == null).orThrow(new ModelException("Owner Already Set!"));
         AuthorSubmissionEntity authorSubmission = new AuthorSubmissionEntity(submission, owner, Boolean.TRUE);
         repositorySubmissionAuthor.add(authorSubmission);
         return getElementById(submission.getId());
@@ -88,8 +87,8 @@ public class SubmissionModel extends Model<SubmissionEntity, Integer>
     public SubmissionEntity addReviewerTo(SubmissionEntity submission, EditionMemberEntity member) throws SystemException {
         basedOn(submission.getReviewers().stream().noneMatch(item -> item.getId().equals(member.getId())))
                 .orThrow(new ModelException("The Reviewer Already Exists In The Submission!"));
-        ReviewerEntity reviewerSubmission = new ReviewerEntity(submission, member);
-        repositoryReviewer.add(reviewerSubmission);
+        ReviewerEntity reviewer = new ReviewerEntity(submission, member);
+        repositoryReviewer.add(reviewer);
         return getElementById(submission.getId());
     }
 
@@ -131,7 +130,7 @@ public class SubmissionModel extends Model<SubmissionEntity, Integer>
      */
     @Override
     public SubmissionEntity removeReviewerFrom(SubmissionEntity submission, EditionMemberEntity member) throws SystemException {
-        repositorySubmissionAuthor.delete(submission.getReviewerEntities().stream()
+        repositoryReviewer.delete(submission.getReviewerEntities().stream()
                 .findFirst().filter(item -> item.getId().equals(member.getId()))
                 .orElseThrow(() -> new ModelException("404 Reviewer Not Found!")).getId());
         return getElementById(submission.getId());

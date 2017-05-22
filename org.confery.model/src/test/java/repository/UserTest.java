@@ -15,11 +15,8 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
- * Date:         08/05/2017
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author Tiron Andreea- Ecaterina
+ * @version 1.0
  */
 public class UserTest {
     private RepositoryInterface<UserEntity, Integer> repositoryUser;
@@ -128,7 +125,7 @@ public class UserTest {
         note = new NotificationEntity("payment", false);
         note2 = new NotificationEntity("subscription", true);
         note3 = new NotificationEntity("late", true);
-        try{
+        try {
             repositoryUser.add(user);
             note.setUser(user);
             repositoryNotification.add(note);
@@ -151,7 +148,7 @@ public class UserTest {
             }
             Assert.assertTrue(isNote.equals(true) && isNote2.equals(true) && isNote3.equals(true));
             Assert.assertTrue(notifications.size() == 3);
-        }catch(SystemException exception) {
+        } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
     }

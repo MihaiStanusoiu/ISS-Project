@@ -16,11 +16,8 @@ import java.util.ArrayList;
 import java.util.Set;
 
 /**
- * Name:         ConfigurationEditionMemberTest
- * Effect:       Test for Configuration Edition Member
- * Date:         21/04/2017
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author Tiron Andreea-Ecaterina
+ * @version 1.0
  */
 
 public class ConfigurationEditionMemberTest {

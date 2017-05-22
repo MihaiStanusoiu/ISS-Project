@@ -17,11 +17,8 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * Name:         {ClassName}
- * Effect:       {ClassEffect}
- * Date:         12/05/2017
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author Tiron Andreea- Ecaterina
+ * @version 1.0
  */
 public class SubmissionTest {
     private RepositoryInterface<EditionEntity, Integer> repositoryEdition;
@@ -133,7 +130,7 @@ public class SubmissionTest {
             repositorySubmission.add(submission3);
             EditionEntity sameEdition = repositoryEdition.getElementById(1);
             Set<SubmissionEntity> submissions = sameEdition.getSubmissions();
-            Assert.assertTrue(submissions.size()==3);
+            Assert.assertTrue(submissions.size() == 3);
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }

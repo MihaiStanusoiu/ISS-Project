@@ -17,11 +17,8 @@ import java.util.Set;
 
 
 /**
- * Name:         ConfigurationSessionMemberTest
- * Effect:       Test for ConfigurationSessionMember
- * Date:         22/04/2017
- * @author       Tiron Andreea- Ecaterina
- * @version      1.0
+ * @author Tiron Andreea-Ecaterina
+ * @version 1.0
  */
 
 public class ConfigurationSessionMemberTest {

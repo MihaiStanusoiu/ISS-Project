@@ -21,11 +21,14 @@ public class PerformTest {
 
     @Test
     public void isRunningSlow() throws Exception {
+        // declaration:
         DatabaseLoaderInterface loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
         RepositoryInterface<UserEntity, Integer> repository = new RepositoryEntity<>(UserEntity.class, loader);
         UserEntity user = new UserEntity("username", "password");
+        // when:
         IntStream.range(0, 10000).forEach(index -> runFunction(repository::add, user).or(0));
-        //repository.getAll().forEach(item -> System.out.print(item.getUsername() + System.lineSeparator()));
+        // then:
+        repository.getAll().forEach(item -> System.out.print(item.getUsername() + System.lineSeparator()));
     }
 
 }
