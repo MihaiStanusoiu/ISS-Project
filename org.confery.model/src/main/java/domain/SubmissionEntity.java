@@ -2,6 +2,7 @@
 package domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -92,6 +93,10 @@ public class SubmissionEntity implements Idable<Integer> {
         this.abstractUrl = abstractUrl;
         this.fullPaperUrl = fullPaperUrl;
         this.isPaid = isPaid;
+        this.submissionAuthors = new HashSet<>();
+        this.submissionTags = new HashSet<>();
+        this.submissionTopics = new HashSet<>();
+        this.reviewers = new HashSet<>();
     }
 
     /**
@@ -310,17 +315,15 @@ public class SubmissionEntity implements Idable<Integer> {
     /**
      * Returns the owner of the submission.
      *
-     * @return The owner of the submission.
-     * @implNote This function can return null if the owner is not set,
-     * but if this function returns null, check the database
-     * or the application's logic
-     * -- because a submission can't exist without a owner
+     * @return The owner of the submission
+     * @implNote If this function returns null,
+     * check the logic of the application.
      */
     public UserEntity getOwner() {
         return submissionAuthors.stream()
                 .filter(author -> author.getOwner().equals(Boolean.TRUE))
                 .map(AuthorSubmissionEntity::getAuthor)
-                .findFirst().orElseGet(null);
+                .findFirst().orElse(null);
     }
 
     /**

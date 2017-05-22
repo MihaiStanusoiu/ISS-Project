@@ -436,6 +436,28 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
+     * Returns all the pc-members of the edition as EditionMemberEntity.
+     *
+     * @return All the pc-members of the edition
+     */
+    public List<EditionMemberEntity> getPcMemberEntities() {
+        return members.stream()
+                .filter(member -> member.getConfigurationEditionMember().getPcMember().equals(Boolean.TRUE))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns all the co-chairs of the edition as EditionMemberEntity
+     *
+     * @return All the co-chairs of the edition
+     */
+    public List<EditionMemberEntity> getCoChairEntities() {
+        return members.stream()
+                .filter(member -> member.getConfigurationEditionMember().getCoChair().equals(Boolean.TRUE))
+                .collect(Collectors.toList());
+    }
+
+    /**
      * Returns the chair of the edition.
      *
      * @return The chair of the edition.
@@ -445,7 +467,21 @@ public class EditionEntity implements Idable<Integer> {
     public UserEntity getChair() throws SystemException {
         return members.stream().findFirst()
                 .filter(member -> member.getConfigurationEditionMember().getChair().equals(Boolean.TRUE))
-                .map(EditionMemberEntity::getUser).orElseThrow(() -> new ModelException("The chair is not set!"));
+                .map(EditionMemberEntity::getUser)
+                .orElseThrow(() -> new ModelException("The chair is not set!"));
+    }
+
+    /**
+     * Returns the chair of the edition as EditionMemberEntity
+     *
+     * @return The chair of the edition.
+     * <p>You can't have a edition without a chair to act as an admin!</p>
+     * @throws SystemException If the chair is not set.
+     */
+    public EditionMemberEntity getChairEntity() throws SystemException {
+        return members.stream().findFirst()
+                .filter(member -> member.getConfigurationEditionMember().getChair().equals(Boolean.TRUE))
+                .orElseThrow(() -> new ModelException("The chair is not set!"));
     }
 
     /**

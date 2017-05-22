@@ -15,7 +15,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "REVIEWER")
 @SuppressWarnings("unused")
-public class ReviewerEntity implements Idable<Integer> {
+public class
+ReviewerEntity implements Idable<Integer> {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -92,7 +93,7 @@ public class ReviewerEntity implements Idable<Integer> {
 
 
     public ReviewerEntity(SubmissionEntity submission, EditionMemberEntity reviewer) {
-        this(DEFAULT_ID, DEFAULT_RESPONSE, DEFAULT_STATUS, "", "", null, null);
+        this(DEFAULT_ID, DEFAULT_RESPONSE, DEFAULT_STATUS, "", "", submission, reviewer);
     }
 
 
