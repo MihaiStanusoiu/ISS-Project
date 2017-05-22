@@ -34,7 +34,7 @@ public class SubmissionModelTest {
     }
 
     @Test
-    public void addTagTo() throws Exception {
+    public void isAddingTagToSubmission() throws Exception {
         // declarations:
         SubmissionEntity submission = new SubmissionEntity("Test", "REVIEWED");
         TagEntity tag = new TagEntity("TagTest");
@@ -49,7 +49,7 @@ public class SubmissionModelTest {
     }
 
     @Test
-    public void addTopicTo() throws Exception {
+    public void isAddingTopicToSubmission() throws Exception {
         // declarations:
         SubmissionEntity submission = new SubmissionEntity("Test", "REVIEWED");
         TopicEntity topic = new TopicEntity("Test");
@@ -64,7 +64,7 @@ public class SubmissionModelTest {
     }
 
     @Test
-    public void addAuthorTo() throws Exception {
+    public void isAddingAuthorToSubmission() throws Exception {
         // declarations:
         SubmissionEntity submission = new SubmissionEntity("Test", "REVIEWED");
         UserEntity user = new UserEntity("Test", "password");
@@ -79,7 +79,7 @@ public class SubmissionModelTest {
     }
 
     @Test
-    public void addOwnerTo() throws Exception {
+    public void isAddingOwnerToSubmission() throws Exception {
         // declarations:
         SubmissionEntity submission = new SubmissionEntity("Test", "REVIEWED");
         UserEntity user = new UserEntity("Test", "password");
@@ -93,7 +93,7 @@ public class SubmissionModelTest {
     }
 
     @Test
-    public void addReviewerTo() throws Exception {
+    public void isAddingReviewerToSubmission() throws Exception {
         // declarations:
         UserEntity user = new UserEntity("Test", "password");
         EditionEntity edition =  new EditionEntity("New York");
@@ -112,7 +112,7 @@ public class SubmissionModelTest {
     }
 
     @Test
-    public void removeAuthorFrom() throws Exception {
+    public void isRemovingAuthorFromSubmission() throws Exception {
         // declarations:
         SubmissionEntity submission = new SubmissionEntity("Test", "REVIEWED");
         UserEntity user = new UserEntity("Test", "password");
@@ -130,7 +130,7 @@ public class SubmissionModelTest {
     }
 
     @Test
-    public void removeTagFrom() throws Exception {
+    public void isRemovingTagFromSubmission() throws Exception {
         // declarations:
         SubmissionEntity submission = new SubmissionEntity("Test", "REVIEWED");
         TagEntity tag = new TagEntity("TagTest");
@@ -148,7 +148,7 @@ public class SubmissionModelTest {
     }
 
     @Test
-    public void removeTopicFrom() throws Exception {
+    public void isRemovingTopicFromSubmission() throws Exception {
         // declarations:
         SubmissionEntity submission = new SubmissionEntity("Test", "REVIEWED");
         TopicEntity topic = new TopicEntity("Test");
@@ -166,7 +166,7 @@ public class SubmissionModelTest {
     }
 
     @Test
-    public void removeReviewerFrom() throws Exception {
+    public void isRemovingReviewerFromSubmission() throws Exception {
         // declarations:
         UserEntity user = new UserEntity("Test", "password");
         EditionEntity edition =  new EditionEntity("New York");

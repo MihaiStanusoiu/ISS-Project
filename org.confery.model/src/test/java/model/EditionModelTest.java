@@ -34,7 +34,7 @@ public class EditionModelTest {
     }
 
     @Test
-    public void addMemberTo() throws Exception {
+    public void isAddingMemberToEdition() throws Exception {
         // declarations:
         UserEntity user = new UserEntity("username", "password");
         EditionEntity edition = new EditionEntity("New York");
@@ -48,7 +48,7 @@ public class EditionModelTest {
     }
 
     @Test(expected = SystemException.class)
-    public void deleteMemberOf() throws Exception {
+    public void isDeletingMemberFromEdition() throws Exception {
         // declarations:
         UserEntity user = new UserEntity("username", "password");
         EditionEntity edition = new EditionEntity("New York");
@@ -66,7 +66,7 @@ public class EditionModelTest {
     }
 
     @Test
-    public void addSessionTo() throws Exception {
+    public void isAddingSessionToEdition() throws Exception {
         // declarations:
         SessionEntity session = new SessionEntity("Test");
         EditionEntity edition = new EditionEntity("New York");
@@ -81,7 +81,7 @@ public class EditionModelTest {
     }
 
     @Test
-    public void deleteSessionOf() throws Exception {
+    public void isDeletingSessionFromEdition() throws Exception {
         // declarations:
         SessionEntity session = new SessionEntity("Test");
         EditionEntity edition = new EditionEntity("New York");
@@ -98,7 +98,7 @@ public class EditionModelTest {
     }
 
     @Test
-    public void addSubmissionTo() throws Exception {
+    public void isAddingSubmissionToEdition() throws Exception {
         // declarations:
         SubmissionEntity submission = new SubmissionEntity("Test", "NOT_REVIEWED");
         EditionEntity edition = new EditionEntity("New York");
@@ -113,7 +113,7 @@ public class EditionModelTest {
     }
 
     @Test
-    public void deleteSubmissionOf() throws Exception {
+    public void isDeletingSubmissionFromEdition() throws Exception {
         // declarations:
         SubmissionEntity submission = new SubmissionEntity("Test", "NOT_REVIEWED");
         EditionEntity edition = new EditionEntity("New York");
