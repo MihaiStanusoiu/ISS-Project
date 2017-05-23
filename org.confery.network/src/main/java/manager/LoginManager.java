@@ -22,6 +22,7 @@ public class LoginManager implements LoginService {
     @SuppressWarnings("all")
     private NotificationCenter notificationCenter;
     private UserProtocol userModel;
+    private UserEntity activeUser;
 
     public LoginManager(NotificationCenter notificationCenter, UserProtocol userModel) throws RemoteException {
         this.notificationCenter = notificationCenter;
@@ -37,5 +38,10 @@ public class LoginManager implements LoginService {
     public User login(String username, String password) throws RemoteException, SystemException {
         return UserConverter.convertUserEntity(findUser(username, password)
                 .orElseThrow(() -> new RemoteException("Wrong Username or Password!")));
+    }
+
+    @Override
+    public void setActiveUser(UserEntity user) {
+        activeUser = user;
     }
 }
