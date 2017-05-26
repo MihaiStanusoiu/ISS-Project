@@ -1,8 +1,9 @@
 package manager;
 
-import domain.SessionEntity;
+import domain.TagEntity;
 import exception.ModelException;
-import model.SessionModel;
+import model.SubmissionModel;
+import model.TagModel;
 import notification.NotificationCenter;
 import org.junit.Before;
 import org.junit.Rule;
@@ -22,10 +23,10 @@ import static org.junit.Assert.assertEquals;
  * @version 1.0
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(SessionManager.class)
-public class SessionManagerTest {
-    private SessionModel model;
-    private SessionManager manager;
+@PrepareForTest(TagManager.class)
+public class TagManagerTest {
+    private TagModel model;
+    private TagManager manager;
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -33,18 +34,18 @@ public class SessionManagerTest {
     @Before
     public void setUp() throws Exception {
         NotificationCenter center = PowerMockito.mock(NotificationCenter.class);
-        model = PowerMockito.mock(SessionModel.class);
-        manager = new SessionManager(model,center);
+        model = PowerMockito.mock(TagModel.class);
+        manager = new TagManager(model,center);
     }
 
     @Test
     public void isAddingEdition() throws Exception {
         // declarations:
-        SessionEntity session =  new SessionEntity("Test");
+        TagEntity tag =  new TagEntity("test");
         // when:
-        PowerMockito.doReturn(1).when(model, "add", session);
+        PowerMockito.doReturn(1).when(model, "add", tag);
         // then:
-        assertEquals((long)manager.add(session),1L);
+        assertEquals((long)manager.add(tag),1L);
     }
 
     @Test
@@ -52,21 +53,21 @@ public class SessionManagerTest {
         // expect:
         expectedException.expect(RemoteException.class);
         // declarations:
-        SessionEntity session =  new SessionEntity(null);
+        TagEntity tag =  new TagEntity(null);
         // when:
-        PowerMockito.doThrow(new ModelException("Session's name is NULL!")).when(model, "add", session);
+        PowerMockito.doThrow(new ModelException("Tag's word is NULL!")).when(model, "add", tag);
         // then: [test exceptions]
-        manager.add(session);
+        manager.add(tag);
     }
 
     @Test
     public void isDeletingEdition() throws Exception {
         // declarations:
-        SessionEntity session =  new SessionEntity("Test");
+        TagEntity tag =  new TagEntity("test");
         // when:
-        PowerMockito.doReturn(session).when(model, "delete", session);
+        PowerMockito.doReturn(tag).when(model, "delete", tag);
         // then:
-        assertEquals(manager.delete(session), session);
+        assertEquals(manager.delete(tag), tag);
     }
 
     @Test
@@ -74,22 +75,22 @@ public class SessionManagerTest {
         // expect:
         expectedException.expect(RemoteException.class);
         // declarations:
-        SessionEntity session = new SessionEntity("Test");
+        TagEntity tag = new TagEntity("test");
         // when:
-        PowerMockito.doThrow(new ModelException("Notification does not exist in the database.")).when(model, "delete", session);
+        PowerMockito.doThrow(new ModelException("Tag does not exist in the database.")).when(model, "delete", tag);
         // then: [test exceptions]
-        manager.delete(session);
+        manager.delete(tag);
     }
 
     @Test
     public void isUpdatingEdition() throws Exception {
         // declarations:
-        SessionEntity session =  new SessionEntity("Test");
-        SessionEntity update =   new SessionEntity("Updated");
+        TagEntity tag =  new TagEntity("test");
+        TagEntity update =   new TagEntity("updated");
         // when:
-        PowerMockito.doNothing().when(model, "update", session, update);
+        PowerMockito.doNothing().when(model, "update", tag, update);
         // then:
-        manager.update(session, update);
+        manager.update(tag, update);
     }
 
     @Test
@@ -97,22 +98,22 @@ public class SessionManagerTest {
         // expect:
         expectedException.expect(RemoteException.class);
         // declarations:
-        SessionEntity session = new SessionEntity("Test");
-        SessionEntity update =  new SessionEntity("Test");
+        TagEntity tag = new TagEntity("test");
+        TagEntity update = new TagEntity("updated");
         // when:
-        PowerMockito.doThrow(new ModelException("Update failed.")).when(model, "update", session, update);
+        PowerMockito.doThrow(new ModelException("Update failed.")).when(model, "update", tag, update);
         // then:
-        manager.update(session, update);
+        manager.update(tag, update);
     }
 
     @Test
     public void isGettingById() throws Exception {
         // declarations:
-        SessionEntity session =  new SessionEntity("Test");
+        TagEntity tag =  new TagEntity("test");
         // when:
-        PowerMockito.doReturn(session).when(model, "getElementById", 1);
+        PowerMockito.doReturn(tag).when(model, "getElementById", 1);
         // then:
-        assertEquals(manager.getElementById(1), session);
+        assertEquals(manager.getElementById(1), tag);
     }
 
     @Test
@@ -126,3 +127,5 @@ public class SessionManagerTest {
         manager.getElementById(1);
     }
 }
+
+
