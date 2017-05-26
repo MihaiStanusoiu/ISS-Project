@@ -5,6 +5,7 @@ import context.ContextClass;
 import context.ContextType;
 import context.CoreContext;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import listener.ListenerHelper;
 import manager.StageManager;
@@ -31,11 +32,10 @@ import java.rmi.RemoteException;
 public class ControllerMenu implements ControllerInterface {
 
     @FXML
-    @Context({ContextType.REGULAR})
+    @Context({ContextType.GUEST})
     public Button logoutButton;
 
     @FXML
-    @Context({ContextType.GUEST})
     public Button myConferencesButton;
 
     @Lazy
@@ -53,9 +53,8 @@ public class ControllerMenu implements ControllerInterface {
 
     @Override
     public void initialize() {
-        context.perform("setVisible", boolean.class)
-                .withParameters(Boolean.FALSE)
-                .forType(ContextType.GUEST).in(this).run();
+        context.forType(ContextType.GUEST).in(this)
+            .run(item -> ((Node)item).setVisible(Boolean.FALSE));
     }
 
     /**

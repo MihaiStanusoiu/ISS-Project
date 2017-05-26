@@ -1,6 +1,7 @@
 package context;
 
 import function.ThrowBiFunction;
+import method.SimpleMethod;
 import method.ThrowBiMethod;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
@@ -40,6 +41,7 @@ public class CoreContext {
         fields = reflections.getFieldsAnnotatedWith(Context.class);
     }
 
+    @SuppressWarnings("unused")
     public CoreContext basedOn(Boolean condition) {
         this.condition = condition;
         return this;
@@ -55,6 +57,19 @@ public class CoreContext {
         return this;
     }
 
+    @SuppressWarnings("unused")
+    public CoreContext perform(String methodName, Class<?>... paramTypes) {
+        this.methodName = methodName;
+        this.types = paramTypes;
+        return this;
+    }
+
+    public void run(SimpleMethod<Object> function) {
+        Conditional.basedOn(condition).runTrue(() -> fields.stream().filter(this::isType).filter(this::inObject)
+                .forEach(field -> function.accept(getObject(field, object))));
+    }
+
+    @SuppressWarnings("unused")
     public CoreContext withParameters(Object... parameters) {
         this.parameters = parameters;
         return this;
@@ -83,14 +98,13 @@ public class CoreContext {
                 .orHandle(this::handleExceptions);
     }
 
-    public CoreContext perform(String methodName, Class<?>... paramTypes) {
-        this.methodName = methodName;
-        this.types = paramTypes;
-        return this;
+    private Boolean inObject(Field field) {
+        return field.getDeclaringClass().equals(object.getClass());
     }
 
+    @SuppressWarnings("unused")
     public void run() {
-        Conditional.basedOn(condition).runTrue(() -> fields.stream().filter(this::isType)
+        Conditional.basedOn(condition).runTrue(() -> fields.stream().filter(this::isType).filter(this::inObject)
                 .forEach(field -> execute(field, methodName, types)));
     }
 
