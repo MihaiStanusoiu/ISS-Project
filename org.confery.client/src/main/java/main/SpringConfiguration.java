@@ -32,21 +32,6 @@ public class SpringConfiguration {
     private @Autowired SpringFXMLLoader loader;
     private StageManager stageManager;
 
-//    public @Autowired ControllerMenu controllerMenu;
-//    public @Autowired ControllerConferencesView controllerConferencesView;
-//    public @Autowired ControllerLogin controllerLogin;
-//    public @Autowired ControllerMyConferencesView controllerMyConferencesView;
-//    public @Autowired ControllerNotificationsView controllerNotificationsView;
-//    public @Autowired ControllerSignUp controllerSignUp;
-//    public @Autowired ControllerTopBar controllerTopBar;
-//    public @Autowired ControllerUsersView controllerUsersView;
-//    public @Autowired ControllerAddConferenceView controllerAddConferenceView;
-//    public @Autowired ControllerMembersConferenceView controllerMembersConferenceView;
-//    public @Autowired ControllerConferenceView controllerConferenceView;
-//    public @Autowired ControllerProfileView controllerProfileView;
-//    public @Autowired ControllerUserView controllerUserView;
-
-
     @Bean
     @Lazy
     @Scope("singleton")

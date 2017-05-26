@@ -3,6 +3,7 @@ package manager;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import loader.SpringFXMLLoader;
 import view.ViewType;
 
@@ -19,6 +20,11 @@ public class StageManager implements Serializable {
 
     private final Stage primaryStage;           // the application's primary stage
     private final SpringFXMLLoader loader;      // the fxml loader with DI
+
+    @Getter
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
 
     /**
      * Effect: Manages the load process of the scenes (fxml files).

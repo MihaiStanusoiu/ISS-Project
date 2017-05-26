@@ -3,7 +3,6 @@ package itemcontroller;
 import controller.ControllerInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import listener.Listener;
 import manager.StageManager;
 import notification.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ public class ControllerAddConferenceView
     @Autowired
     private StageManager manager;
 
-    @Lazy
-    @Autowired
-    private Listener listener;
 
     private Conference conference;
 

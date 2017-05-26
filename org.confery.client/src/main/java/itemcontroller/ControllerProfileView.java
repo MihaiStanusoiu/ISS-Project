@@ -18,6 +18,8 @@ import view.ViewType;
 
 import java.rmi.RemoteException;
 
+import static utils.Try.runFunction;
+
 /**
  * @author Alexandru Stoica
  * @version 1.0
@@ -51,7 +53,11 @@ public class ControllerProfileView implements ControllerInterface,
     /**
      * Effect: Builds the pagination and it's data.
      */
-    public void initialize() { }
+    public void initialize() {
+        manager.getPrimaryStage().setOnCloseRequest(event ->
+                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
+    }
 
     @FXML
     public void onSaveButtonClick() throws RemoteException, SystemException {

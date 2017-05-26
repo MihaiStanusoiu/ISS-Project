@@ -1,7 +1,7 @@
 package controller;
 
 import javafx.fxml.FXML;
-import listener.Listener;
+import listener.ListenerHelper;
 import manager.StageManager;
 import notification.Notification;
 import notification.NotificationType;
@@ -13,6 +13,7 @@ import transferable.Edition;
 import view.ViewType;
 
 import java.rmi.RemoteException;
+
 
 /**
  * @author      Alexandru Stoica
@@ -29,10 +30,11 @@ public class ControllerMenu implements ControllerInterface {
 
     @Lazy
     @Autowired
-    private Listener listener;
+    private ListenerHelper listener;
 
     @Override
-    public void initialize() { }
+    public void initialize() {
+    }
 
     /**
      * Effect: Loads the ConferencesView responsible

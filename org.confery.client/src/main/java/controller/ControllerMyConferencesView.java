@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import listener.ListenerHelper;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -32,6 +33,10 @@ public class ControllerMyConferencesView
     @Lazy
     @Autowired
     private StageManager manager;
+
+    @Lazy
+    @Autowired
+    private ListenerHelper listener;
 
     /**
      * Effect: Builds the pagination and it's data.

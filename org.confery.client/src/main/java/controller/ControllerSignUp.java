@@ -20,6 +20,8 @@ import view.ViewType;
 
 import java.rmi.RemoteException;
 
+import static utils.Try.runFunction;
+
 /**
  * @author      Alexandru Stoica
  * @version     1.0
@@ -58,6 +60,9 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
     public void initialize() {
         backgroundImage.fitWidthProperty().bind(backgroundImagePane.widthProperty());
         backgroundImage.fitHeightProperty().bind(backgroundImagePane.heightProperty());
+        manager.getPrimaryStage().setOnCloseRequest(event ->
+                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
     }
 
     /**
@@ -65,7 +70,6 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
      * @implNote status: In development.
      */
     @FXML void onLogoButtonClick() throws RemoteException {
-        this.listener.removeSubscriber(this);
         manager.switchScene(ViewType.CONFERENCES);
     }
 
@@ -74,7 +78,6 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
      * @implNote status: In development.
      */
     @FXML void onLoginButtonClick() throws RemoteException {
-        this.listener.removeSubscriber(this);
         manager.switchScene(ViewType.LOGIN);
     }
 
@@ -92,7 +95,6 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
             User user = this.signUpService.signUp(username, password, confirm, email, displayName);
             this.listener.setActiveUser(user);
             this.listener.notifyAll(new Notification(NotificationType.SIGNAL_SIGN_UP));
-            this.listener.removeSubscriber(this);
             manager.switchScene(ViewType.CONFERENCES);
         } catch (SystemException exception) {
             errorLabel.setText(exception.getCause().getMessage());

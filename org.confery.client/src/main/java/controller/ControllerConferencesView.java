@@ -82,8 +82,13 @@ public class ControllerConferencesView
               .setPagination(this.pagination)
               .build(GridPane.class);
         pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+        manager.getPrimaryStage().setOnCloseRequest(event -> {
+            System.out.print("mere");
+            runFunction(listener::removeSubscriber, this).orHandle(System.out::print);
+                });
         runFunction(listener::addSubscriber, this).orHandle(System.out::println);
     }
+
 
     /**
      * Effect: Sorts conferences by popularity

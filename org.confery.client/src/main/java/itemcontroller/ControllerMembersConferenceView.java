@@ -5,7 +5,6 @@ import controller.ControllerInterface;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import listener.Listener;
 import manager.StageManager;
 import notification.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +33,6 @@ public class ControllerMembersConferenceView
     @Lazy
     @Autowired
     private StageManager manager;
-
-    @Lazy
-    @Autowired
-    private Listener listener;
 
     private Conference conference;
 

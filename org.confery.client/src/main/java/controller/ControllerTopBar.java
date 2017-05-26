@@ -16,6 +16,8 @@ import view.ViewType;
 
 import java.rmi.RemoteException;
 
+import static utils.Try.runFunction;
+
 /**
  * @author      Alexandru Stoica
  * @version     1.0
@@ -41,8 +43,13 @@ public class ControllerTopBar
 
     @Override
     public void initialize() throws RemoteException {
+        // TODO
         if (existsActiveUser()) { this.showActiveUser(); }
         else { this.showRegistrationButtons(); }
+
+        manager.getPrimaryStage().setOnCloseRequest(event ->
+                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
     }
 
     private Boolean existsActiveUser() throws RemoteException {
@@ -110,6 +117,7 @@ public class ControllerTopBar
 
     @Override
     public void update(Notification notification) throws RemoteException {
+        // TODO
         if (notification.getType().equals(NotificationType.SIGNAL_LOGIN) ||
                 notification.getType().equals(NotificationType.SIGNAL_SIGN_UP) ||
                 notification.getType().equals(NotificationType.UPDATE_USER)) {
