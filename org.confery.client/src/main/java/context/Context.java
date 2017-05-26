@@ -12,6 +12,6 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 public @interface Context {
 
-    UserType[] value();
+    ContextType[] value();
 
 }

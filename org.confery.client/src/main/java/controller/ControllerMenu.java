@@ -1,6 +1,11 @@
 package controller;
 
+import context.Context;
+import context.ContextClass;
+import context.ContextType;
+import context.CoreContext;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import listener.ListenerHelper;
 import manager.StageManager;
 import notification.Notification;
@@ -22,7 +27,16 @@ import java.rmi.RemoteException;
 
 @Lazy
 @Component
+@ContextClass
 public class ControllerMenu implements ControllerInterface {
+
+    @FXML
+    @Context({ContextType.REGULAR})
+    public Button logoutButton;
+
+    @FXML
+    @Context({ContextType.GUEST})
+    public Button myConferencesButton;
 
     @Lazy
     @Autowired
@@ -32,8 +46,16 @@ public class ControllerMenu implements ControllerInterface {
     @Autowired
     private ListenerHelper listener;
 
+    @Lazy
+    @Autowired
+    private CoreContext context;
+
+
     @Override
     public void initialize() {
+        context.perform("setVisible", boolean.class)
+                .withParameters(Boolean.FALSE)
+                .forType(ContextType.GUEST).in(this).run();
     }
 
     /**

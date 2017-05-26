@@ -1,5 +1,6 @@
 package main;
 
+import context.CoreContext;
 import javafx.stage.Stage;
 import listener.ListenerHelper;
 import loader.SpringFXMLLoader;
@@ -26,10 +27,16 @@ import java.util.ResourceBundle;
 @ComponentScan("loader")
 @ComponentScan("itemcontroller")
 @ComponentScan("controller")
+@ComponentScan("context")
 @SuppressWarnings("all")
 public class SpringConfiguration {
 
-    private @Autowired SpringFXMLLoader loader;
+    @Autowired
+    private CoreContext coreContext;
+
+    @Autowired
+    private SpringFXMLLoader loader;
+
     private StageManager stageManager;
 
     @Bean
