@@ -14,29 +14,24 @@ import pagination.PaginationBuilder;
 import transferable.User;
 
 /**
- * Name:        ControllerUsersView
- * Effect:      Lists all the available users.
- * Date:        05/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
 public class ControllerUsersView implements ControllerInterface {
 
-    private final StageManager manager;
-    private final Listener listener;
+    @Lazy
+    @Autowired
+    private StageManager manager;
+
+    @Lazy
+    @Autowired
+    private Listener listener;
 
     @FXML private TextField searchTextField;
     @FXML private Pagination pagination;
-
-    @Autowired @Lazy
-    public ControllerUsersView(StageManager manager, Listener listener) {
-        this.manager = manager;
-        this.listener = listener;
-    }
 
     @Override
     @SuppressWarnings("unchecked")

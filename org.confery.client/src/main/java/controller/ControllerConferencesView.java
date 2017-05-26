@@ -21,31 +21,30 @@ import view.ViewType;
 import java.rmi.RemoteException;
 import java.util.Date;
 
+import static utils.Try.runFunction;
+
 /**
- * <p> Lists all the available conferences. </p>
- * <p> Tested: False </p>
- *
  * @author Alexandru Stoica
  * @version 1.0
  */
 
+@Lazy
 @Component
-public class ControllerConferencesView implements ControllerInterface, SubscriberService {
+public class ControllerConferencesView
+        implements ControllerInterface, SubscriberService {
 
     @FXML private Button recentButton;
     @FXML private Button popularButton;
     @FXML private TextField searchTextField;
     @FXML private Pagination pagination;
 
-    private final StageManager manager;
-    private final Listener listener;
+    @Lazy
+    @Autowired
+    private StageManager manager;
 
-    @Autowired @Lazy
-    public ControllerConferencesView(StageManager manager, Listener listener) throws RemoteException {
-        this.manager = manager;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-    }
+    @Lazy
+    @Autowired
+    private Listener listener;
 
     /**
      * Effect: Builds the pagination and it's data.
@@ -83,6 +82,7 @@ public class ControllerConferencesView implements ControllerInterface, Subscribe
               .setPagination(this.pagination)
               .build(GridPane.class);
         pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
     }
 
     /**

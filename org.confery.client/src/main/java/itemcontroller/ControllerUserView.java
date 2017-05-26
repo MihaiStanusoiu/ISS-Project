@@ -10,38 +10,21 @@ import org.springframework.stereotype.Component;
 import transferable.User;
 
 /**
- * Name:        ControllerUserView
- * Effect:      Displays a user in a main view and shows
- *              all it's details to the application's user.
- * Date:        02/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
 public class ControllerUserView
         implements ControllerInterface, ControllerItemInterface<User> {
 
-    /**
-     * Displays the user's real name.
-     */
     @FXML private Label nameLabel;
-
-    /**
-     * The base user of the view.
-     */
-    @SuppressWarnings("all")
     private User element;
 
-    @SuppressWarnings("all")
+    @Lazy
+    @Autowired
     private StageManager manager;
-
-    @Autowired @Lazy
-    public ControllerUserView(StageManager manager) {
-        this.manager = manager;
-    }
 
     /**
      * {@inheritDoc}

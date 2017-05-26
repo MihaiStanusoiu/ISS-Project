@@ -1,4 +1,4 @@
-package corecontext;
+package context;
 
 /**
  * @author Alexandru Stoica

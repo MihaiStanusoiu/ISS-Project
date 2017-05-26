@@ -21,40 +21,34 @@ import view.ViewType;
 import java.rmi.RemoteException;
 
 /**
- * Name:        ControllerSignUp
- * Effect:      Controller view for SignUp fxml view.
- * Date:        08/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
 public class ControllerSignUp implements ControllerInterface, SubscriberService {
 
-    @FXML TextField usernameTextField;
-    @FXML TextField passwordTextField;
-    @FXML TextField emailTextField;
-    @FXML TextField displayNameTextField;
-    @FXML TextField confirmTextField;
-    @FXML Label errorLabel;
-    @FXML ImageView backgroundImage;
-    @FXML StackPane backgroundImagePane;
+    @FXML private TextField usernameTextField;
+    @FXML private TextField passwordTextField;
+    @FXML private TextField emailTextField;
+    @FXML private TextField displayNameTextField;
+    @FXML private TextField confirmTextField;
+    @FXML private Label errorLabel;
+    @FXML private ImageView backgroundImage;
+    @FXML private StackPane backgroundImagePane;
 
-    @SuppressWarnings("all")
-    private final StageManager manager;
-    private final SignUpService signUpService;
-    private Listener listener;
-
-    @Autowired
     @Lazy
-    public ControllerSignUp(StageManager manager, SignUpService signUpService, Listener listener) throws RemoteException {
-        this.manager = manager;
-        this.signUpService = signUpService;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-    }
+    @Autowired
+    private StageManager manager;
+
+    @Lazy
+    @Autowired
+    private SignUpService signUpService;
+
+    @Lazy
+    @Autowired
+    private Listener listener;
 
     /**
      * Effect: Adds width & height constraints on the

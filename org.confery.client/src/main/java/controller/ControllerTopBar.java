@@ -17,36 +17,27 @@ import view.ViewType;
 import java.rmi.RemoteException;
 
 /**
- * Name:        ControllerTopBar
- * Effect:      Controls the top-bar navigation system.
- * Date:        05/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
-public class ControllerTopBar implements ControllerInterface, SubscriberService {
+public class ControllerTopBar
+        implements ControllerInterface, SubscriberService {
 
-    @SuppressWarnings("all")
     @FXML private Label usernameLabel;
-
-    @SuppressWarnings("all")
     @FXML private Button userProfileButton;
-
     @FXML private Button signUpButton;
     @FXML private Button loginButton;
 
-    private final StageManager manager;
-    private final Listener listener;
+    @Lazy
+    @Autowired
+    private StageManager manager;
 
-    @Autowired @Lazy
-    public ControllerTopBar(StageManager manager, Listener listener) throws RemoteException {
-        this.manager = manager;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-    }
+    @Lazy
+    @Autowired
+    private Listener listener;
 
     @Override
     public void initialize() throws RemoteException {

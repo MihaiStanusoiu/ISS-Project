@@ -25,12 +25,22 @@ buildscript {
 }
 
 dependencies {
+    // Project
     compile project(':org.confery.model')
     compile project(':org.confery.network')
+
+    // Reflections
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
+
+    // Spring
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile("org.springframework.boot:spring-boot-starter-actuator")
+
+    // TestFX
     testCompile "org.testfx:testfx-core:4.0.+"
     testCompile "org.testfx:testfx-junit:4.0.+"
     compile group: 'org.jfxtras', name: 'openjfx-monocle', version: '1.8.0_20'
+
+    // JUnit
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }

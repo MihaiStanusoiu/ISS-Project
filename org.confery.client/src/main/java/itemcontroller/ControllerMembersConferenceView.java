@@ -24,26 +24,22 @@ import java.util.List;
  * @version 1.0
  */
 
-
+@Lazy
 @Component
 public class ControllerMembersConferenceView
         implements ControllerInterface, ControllerItemInterface<Conference>, SubscriberService {
 
     @FXML private ListView<User> chairListView;
 
-    private final StageManager manager;
-    private final Listener listener;
+    @Lazy
+    @Autowired
+    private StageManager manager;
+
+    @Lazy
+    @Autowired
+    private Listener listener;
+
     private Conference conference;
-
-
-    @Autowired @Lazy
-    public ControllerMembersConferenceView(StageManager manager, Listener listener)
-            throws RemoteException {
-        this.manager = manager;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-        this.chairListView = new ListView<>();
-    }
 
     @Override
     public void setElement(Conference element) {
@@ -73,7 +69,7 @@ public class ControllerMembersConferenceView
     /**
      * Effect: Builds the pagination and it's data.
      */
-    public void initialize() { }
+    public void initialize() {}
 
     @Override
     public void update(Notification notification) throws RemoteException { }

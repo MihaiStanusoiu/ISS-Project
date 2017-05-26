@@ -6,52 +6,56 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import manager.StageManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import transferable.Conference;
 import view.GradientGenerator;
 import view.ViewType;
 
 /**
- * Name:        ControllerConferenceItem
- * Effect:      Controls a conference item view.
- * Date:        08/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.1
  */
 
+@Lazy
+@Component
 public class ControllerConferenceItem
         implements PaginationControllerItemInterface<Conference> {
 
     /**
-     * Effect: Displays the conference's starting date.
+     * Displays the conference's starting date.
      */
-
     @FXML private Label dateLabel;
+
     /**
-     * Effect: Displays the conference's location.
+     * Displays the conference's location.
      */
 
     @FXML private Label locationLabel;
+
     /**
-     * Effect: Displays the conference's acronym.
+     * Displays the conference's acronym.
      */
 
     @FXML private Label acronymLabel;
+
     /**
-     * Effect: Displays the conference's name.
+     * Displays the conference's name.
      */
     @FXML private Label nameLabel;
 
     /**
-     * Effect: The item's root pane.
+     * The item's root pane.
      */
     @FXML private BorderPane pane;
 
     /**
-     * Effect: The manager allows the item to switch the
-     * main scene 'ConferencesView' to the item's main scene 'ConferenceView'.
+     * The manager allows the item to switch the main scene
+     * 'ConferencesView' to the item's main scene 'ConferenceView'.
      */
+    @Lazy
+    @Autowired
     private StageManager manager;
 
     /**

@@ -15,26 +15,21 @@ import view.ViewType;
 import java.rmi.RemoteException;
 
 /**
- * Name:        ControllerMenu
- * Effect:      Controls the main side navigation system.
- * Date:        05/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
 public class ControllerMenu implements ControllerInterface {
 
-    private final StageManager manager;
-    private final Listener listener;
+    @Lazy
+    @Autowired
+    private StageManager manager;
 
-    @Autowired @Lazy
-    public ControllerMenu(StageManager manager, Listener listener) {
-        this.manager = manager;
-        this.listener = listener;
-    }
+    @Lazy
+    @Autowired
+    private Listener listener;
 
     @Override
     public void initialize() { }

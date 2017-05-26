@@ -1,4 +1,4 @@
-package corecontext;
+package context;
 
 import java.lang.annotation.*;
 
@@ -9,9 +9,5 @@ import java.lang.annotation.*;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
-public @interface Context {
-
-    UserType[] value();
-
-}
+@Target({ElementType.TYPE})
+public @interface ContextClass { }

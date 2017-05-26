@@ -13,27 +13,19 @@ import transferable.Notification;
 import view.ViewType;
 
 /**
- * Name:        ControllerNotificationsView
- * Effect:      Lists all the available notifications.
- * Date:        02/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
 public class ControllerNotificationsView implements ControllerInterface {
 
     @FXML private Pagination pagination;
 
-    private StageManager manager;
-
-    @Autowired
     @Lazy
-    public ControllerNotificationsView(StageManager manager) {
-        this.manager = manager;
-    }
+    @Autowired
+    private StageManager manager;
 
     /**
      * Effect: Builds the pagination and it's data.

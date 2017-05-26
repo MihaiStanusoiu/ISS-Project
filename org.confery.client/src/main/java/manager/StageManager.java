@@ -10,16 +10,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Name:        StageManager
- * Effect:      Manages switching scenes on the primary stage.
- *              <p>
- *                  Update 1.1: Supports views based on element.
- *                  @implNote See 'ConferenceView' as an example.
- *              </p>
- * Date:        31/03/2017
- * Tested:      False
- * @author      Alexandru Stoica
- * @version     1.1
+ * Manages switching scenes on the primary stage.
+ * @author Alexandru Stoica
+ * @version 1.1
  */
 
 public class StageManager implements Serializable {

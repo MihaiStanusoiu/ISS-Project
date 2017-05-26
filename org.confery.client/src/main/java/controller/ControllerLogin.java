@@ -21,35 +21,31 @@ import view.ViewType;
 import java.rmi.RemoteException;
 
 /**
- * Name:        ControllerLogin
- * Effect:      Controls the login-view.
- * Date:        08/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
 public class ControllerLogin implements ControllerInterface, SubscriberService {
 
-    @FXML TextField usernameTextField;
-    @FXML TextField passwordTextField;
-    @FXML Label errorLabel;
-    @FXML ImageView backgroundImage;
-    @FXML StackPane backgroundImagePane;
+    @FXML private TextField usernameTextField;
+    @FXML private TextField passwordTextField;
+    @FXML private Label errorLabel;
+    @FXML private ImageView backgroundImage;
+    @FXML private StackPane backgroundImagePane;
 
-    private final StageManager manager;
-    private final LoginService loginService;
-    private final Listener listener;
+    @Lazy
+    @Autowired
+    private StageManager manager;
 
-    @Autowired @Lazy
-    public ControllerLogin(StageManager manager, LoginService loginService, Listener listener) throws RemoteException {
-        this.manager = manager;
-        this.loginService = loginService;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-    }
+    @Lazy
+    @Autowired
+    private LoginService loginService;
+
+    @Lazy
+    @Autowired
+    private Listener listener;
 
     /**
      * Effect: Adds width & height constraints on the
