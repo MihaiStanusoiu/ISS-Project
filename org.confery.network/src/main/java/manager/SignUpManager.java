@@ -1,6 +1,7 @@
 package manager;
 
 import convertor.UserConverter;
+import domain.UserEntity;
 import exception.SystemException;
 import notification.NotificationCenter;
 import protocol.UserProtocol;
@@ -21,6 +22,7 @@ public class SignUpManager implements SignUpService {
     @SuppressWarnings("all")
     private NotificationCenter notificationCenter;
     private UserProtocol userModel;
+    private UserEntity activeUser;
 
     public SignUpManager(NotificationCenter notificationCenter, UserProtocol userModel) {
         this.notificationCenter = notificationCenter;
@@ -71,5 +73,10 @@ public class SignUpManager implements SignUpService {
             return UserConverter.convertUserEntity(userModel.getElementById(id));
         }
         throw new RemoteException("Invalid Username or Password");
+    }
+
+    @Override
+    public void setActiveUser(UserEntity user) {
+        activeUser = user;
     }
 }

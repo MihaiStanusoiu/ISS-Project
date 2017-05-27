@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
  * @version 1.0
  */
 
-public interface LoginService extends Remote {
+public interface LoginService extends Remote, Service {
 
     User login(String username, String password) throws RemoteException, SystemException;
 
