@@ -1,12 +1,14 @@
 package listener;
 
+import domain.UserEntity;
 import notification.Notification;
 import service.SubscriberService;
-import transferable.User;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+
+import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 
 public class ListenerHelper extends UnicastRemoteObject implements Listener {
 
-    private User activeUser;
+    private UserEntity activeUser;
     private ArrayList<SubscriberService> subscribers;
 
     public ListenerHelper() throws RemoteException {
@@ -23,12 +25,12 @@ public class ListenerHelper extends UnicastRemoteObject implements Listener {
     }
 
     @Override
-    public void setActiveUser(User user) throws RemoteException {
+    public void setActiveUser(UserEntity user) throws RemoteException {
         activeUser = user;
     }
 
     @Override
-    public User getActiveUser() throws RemoteException {
+    public UserEntity getActiveUser() throws RemoteException {
         return activeUser;
     }
 
@@ -49,13 +51,7 @@ public class ListenerHelper extends UnicastRemoteObject implements Listener {
 
     @Override
     public void notifyAll(Notification notification) throws RemoteException {
-        subscribers.forEach(subscriberService -> {
-            try {
-                subscriberService.update(notification);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        });
+        subscribers.forEach(subscriberService -> runFunction(subscriberService::update, notification));
     }
 
 }

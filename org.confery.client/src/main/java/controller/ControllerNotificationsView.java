@@ -1,5 +1,6 @@
 package controller;
 
+import domain.NotificationEntity;
 import itemcontroller.ControllerNotificationItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
-import transferable.Notification;
 import view.ViewType;
 
 /**
@@ -34,17 +34,17 @@ public class ControllerNotificationsView implements ControllerInterface {
     @SuppressWarnings("unchecked")
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
-        Notification[] notifications = {
-                new Notification("TestA", Boolean.FALSE),
-                new Notification("TestB", Boolean.TRUE),
-                new Notification("TestB", Boolean.TRUE),
-                new Notification("TestB", Boolean.TRUE),
-                new Notification("TestB", Boolean.TRUE),
-                new Notification("TestB", Boolean.TRUE),
-                new Notification("TestB", Boolean.TRUE),
-                new Notification("TestB", Boolean.TRUE)
+        NotificationEntity[] notifications = {
+                new NotificationEntity("TestA", Boolean.FALSE),
+                new NotificationEntity("TestB", Boolean.TRUE),
+                new NotificationEntity("TestB", Boolean.TRUE),
+                new NotificationEntity("TestB", Boolean.TRUE),
+                new NotificationEntity("TestB", Boolean.TRUE),
+                new NotificationEntity("TestB", Boolean.TRUE),
+                new NotificationEntity("TestB", Boolean.TRUE),
+                new NotificationEntity("TestB", Boolean.TRUE)
         };
-        pagination = new PaginationBuilder<Notification, ControllerNotificationItem, GridPane>()
+        pagination = new PaginationBuilder<NotificationEntity, ControllerNotificationItem, GridPane>()
                 .setRows(2)
                 .setColumns(4)
                 .setElements(notifications)

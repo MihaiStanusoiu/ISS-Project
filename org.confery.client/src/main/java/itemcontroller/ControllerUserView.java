@@ -1,13 +1,13 @@
 package itemcontroller;
 
 import controller.ControllerInterface;
+import domain.UserEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import transferable.User;
 
 /**
  * @author      Alexandru Stoica
@@ -17,10 +17,10 @@ import transferable.User;
 @Lazy
 @Component
 public class ControllerUserView
-        implements ControllerInterface, ControllerItemInterface<User> {
+        implements ControllerInterface, ControllerItemInterface<UserEntity> {
 
     @FXML private Label nameLabel;
-    private User element;
+    private UserEntity element;
 
     @Lazy
     @Autowired
@@ -37,7 +37,7 @@ public class ControllerUserView
      * @param element The view's element.
      */
     @Override
-    public void setElement(User element) {
+    public void setElement(UserEntity element) {
         this.element = element;
         nameLabel.setText(element.getName());
     }

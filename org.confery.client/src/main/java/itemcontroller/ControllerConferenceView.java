@@ -1,13 +1,13 @@
 package itemcontroller;
 
 import controller.ControllerInterface;
+import domain.ConferenceEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import transferable.Conference;
 
 /**
  * @author      Alexandru Stoica
@@ -17,11 +17,11 @@ import transferable.Conference;
 @Lazy
 @Component
 public class ControllerConferenceView
-        implements ControllerInterface, ControllerItemInterface<Conference> {
+        implements ControllerInterface, ControllerItemInterface<ConferenceEntity> {
 
     @FXML private Label nameLabel;
 
-    private Conference element;
+    private ConferenceEntity element;
 
     @Lazy
     @Autowired
@@ -39,7 +39,7 @@ public class ControllerConferenceView
      * @param element The view's element.
      */
     @Override
-    public void setElement(Conference element) {
+    public void setElement(ConferenceEntity element) {
         this.element = element;
         nameLabel.setText(element.getName());
     }

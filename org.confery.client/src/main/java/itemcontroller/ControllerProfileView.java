@@ -1,6 +1,7 @@
 package itemcontroller;
 
 import controller.ControllerInterface;
+import domain.UserEntity;
 import exception.SystemException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -12,8 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.SubscriberService;
-import service.UserService;
-import transferable.User;
+
 import view.ViewType;
 
 import java.rmi.RemoteException;
@@ -28,7 +28,7 @@ import static utils.Try.runFunction;
 @Lazy
 @Component
 public class ControllerProfileView implements ControllerInterface,
-        ControllerItemInterface<User>, SubscriberService {
+        ControllerItemInterface<UserEntity>, SubscriberService {
 
     @FXML private TextField nameTextField;
     @FXML private TextField websiteTextField;
@@ -36,7 +36,7 @@ public class ControllerProfileView implements ControllerInterface,
     @FXML private TextField bioTextField;
     @FXML private TextField emailTextField;
 
-    private User user;
+    private UserEntity user;
 
     @Lazy
     @Autowired
@@ -46,9 +46,6 @@ public class ControllerProfileView implements ControllerInterface,
     @Autowired
     private Listener listener;
 
-    @Lazy
-    @Autowired
-    private UserService userService;
 
     /**
      * Effect: Builds the pagination and it's data.
@@ -61,18 +58,17 @@ public class ControllerProfileView implements ControllerInterface,
 
     @FXML
     public void onSaveButtonClick() throws RemoteException, SystemException {
-        User other = new User(user.getId(), user.getUsername(),
+        UserEntity other = new UserEntity(user.getId(), user.getUsername(),
                 user.getPassword(), emailTextField.getText(),
                 nameTextField.getText(), websiteTextField.getText(),
-                bioTextField.getText(), locationTextField.getText(), user.getType());
-        userService.update(user, other);
+                bioTextField.getText(), locationTextField.getText());
         listener.setActiveUser(other);
         listener.notifyAll(new Notification(NotificationType.UPDATE_USER));
     }
 
     @FXML
     public void onDeleteButtonClick() throws RemoteException, SystemException {
-        userService.delete(user);
+        //userService.delete(user);
         listener.notifyAll(new Notification(NotificationType.SIGNAL_LOGOUT));
         listener.setActiveUser(null);
         listener.removeSubscriber(this);
@@ -95,7 +91,7 @@ public class ControllerProfileView implements ControllerInterface,
     }
 
     @Override
-    public void setElement(User element) {
+    public void setElement(UserEntity element) {
         user = element;
         updateUserData();
     }

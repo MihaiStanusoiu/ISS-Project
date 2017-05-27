@@ -1,5 +1,6 @@
 package itemcontroller;
 
+import domain.UserEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -8,7 +9,6 @@ import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import transferable.User;
 import view.ViewType;
 
 /**
@@ -19,7 +19,7 @@ import view.ViewType;
 @Lazy
 @Component
 public class ControllerUserItem
-        implements PaginationControllerItemInterface<User> {
+        implements PaginationControllerItemInterface<UserEntity> {
 
     @FXML private Label locationLabel;
     @FXML private Label nameLabel;
@@ -37,7 +37,7 @@ public class ControllerUserItem
     /**
      * Effect: The item that needs to be displayed inside the view. [UserEntity]
      */
-    private User item;
+    private UserEntity item;
 
     /**
      * Effect: Sets the element in order to be displayed
@@ -45,7 +45,7 @@ public class ControllerUserItem
      * @param element: The required element for item's view
      */
     @Override
-    public void setElement(User element) {
+    public void setElement(UserEntity element) {
         this.item = element;
         build();
     }

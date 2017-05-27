@@ -1,6 +1,6 @@
 package controller;
 
-import exception.SystemException;
+import domain.UserEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.SignUpService;
 import service.SubscriberService;
-import transferable.User;
 import view.ViewType;
 
 import java.rmi.RemoteException;
@@ -91,14 +90,10 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         String confirm = confirmTextField.getText();
-        try {
-            User user = this.signUpService.signUp(username, password, confirm, email, displayName);
-            this.listener.setActiveUser(user);
-            this.listener.notifyAll(new Notification(NotificationType.SIGNAL_SIGN_UP));
-            manager.switchScene(ViewType.CONFERENCES);
-        } catch (SystemException exception) {
-            errorLabel.setText(exception.getCause().getMessage());
-        }
+        UserEntity user = this.signUpService.signUp(username, password, confirm, email, displayName);
+        this.listener.setActiveUser(user);
+        this.listener.notifyAll(new Notification(NotificationType.SIGNAL_SIGN_UP));
+        manager.switchScene(ViewType.CONFERENCES);
     }
 
     @Override

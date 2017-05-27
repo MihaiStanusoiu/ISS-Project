@@ -2,19 +2,22 @@ package service;
 
 import domain.UserEntity;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-public interface CollectionService {
+public interface CollectionService extends Remote {
 
-    LoginService getLoginService();
+    LoginService getLoginService() throws RemoteException;
 
-    SignUpService getSignUpService();
+    SignUpService getSignUpService() throws RemoteException;
 
-    UserEntity getActiveUser();
+    UserEntity getActiveUser() throws RemoteException;
 
-    void setActiveUser(UserEntity activeUser);
+    void setActiveUser(UserEntity activeUser) throws RemoteException;
 
 }

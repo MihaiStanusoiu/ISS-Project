@@ -1,6 +1,7 @@
 package itemcontroller;
 
 import controller.ControllerInterface;
+import domain.ConferenceEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import manager.StageManager;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.SubscriberService;
-import transferable.Conference;
 import view.ViewType;
 
 import java.rmi.RemoteException;
@@ -22,7 +22,7 @@ import java.rmi.RemoteException;
 @Lazy
 @Component
 public class ControllerAddConferenceView
-        implements ControllerInterface, ControllerItemInterface<Conference>, SubscriberService {
+        implements ControllerInterface, ControllerItemInterface<ConferenceEntity>, SubscriberService {
 
     @FXML private TextField nameTextField;
     @FXML private TextField acronymTextField;
@@ -34,10 +34,10 @@ public class ControllerAddConferenceView
     private StageManager manager;
 
 
-    private Conference conference;
+    private ConferenceEntity conference;
 
     @Override
-    public void setElement(Conference element) {
+    public void setElement(ConferenceEntity element) {
         this.conference = element;
     }
 

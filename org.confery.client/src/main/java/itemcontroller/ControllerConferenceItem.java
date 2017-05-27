@@ -1,5 +1,6 @@
 package itemcontroller;
 
+import domain.ConferenceEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,7 +10,6 @@ import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import transferable.Conference;
 import view.GradientGenerator;
 import view.ViewType;
 
@@ -21,7 +21,7 @@ import view.ViewType;
 @Lazy
 @Component
 public class ControllerConferenceItem
-        implements PaginationControllerItemInterface<Conference> {
+        implements PaginationControllerItemInterface<ConferenceEntity> {
 
     /**
      * Displays the conference's starting date.
@@ -71,7 +71,7 @@ public class ControllerConferenceItem
     /**
      * Effect: The item that needs to be displayed inside the view. [ConferenceEntity]
      */
-    private Conference item;
+    private ConferenceEntity item;
 
     /**
      * Effect: Sets the element in order to be displayed
@@ -79,7 +79,7 @@ public class ControllerConferenceItem
      * @param element: The required element for item's view
      */
     @Override
-    public void setElement(Conference element) {
+    public void setElement(ConferenceEntity element) {
         this.item = element;
         build();
     }
@@ -97,8 +97,8 @@ public class ControllerConferenceItem
      * Effect: Builds the view with the set item.
      */
     private void build() {
-        dateLabel.setText(item.getEdition().getStartDate().toString());
-        locationLabel.setText(item.getEdition().getLocation());
+        dateLabel.setText(item.getLatestEdition().getStartDate().toString());
+        locationLabel.setText(item.getLatestEdition().getLocation());
         acronymLabel.setText(item.getAcronym());
         nameLabel.setText(item.getName());
         background.setStyle(String.format("-fx-background-color : %s",

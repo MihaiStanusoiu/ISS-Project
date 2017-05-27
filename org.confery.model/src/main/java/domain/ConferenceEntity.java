@@ -140,6 +140,11 @@ public class ConferenceEntity implements Idable<Integer> {
         this.editions = editions;
     }
 
+    public EditionEntity getLatestEdition() {
+        // TODO
+        return editions.stream().findFirst().orElse(new EditionEntity());
+    }
+
     @Override
     public boolean equals(Object obj) {
         return checkObjects((left, right) -> left.getId().equals(right.getId()) &&

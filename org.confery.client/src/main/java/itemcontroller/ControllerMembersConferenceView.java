@@ -2,6 +2,8 @@ package itemcontroller;
 
 import cells.UserListCell;
 import controller.ControllerInterface;
+import domain.ConferenceEntity;
+import domain.UserEntity;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -11,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.SubscriberService;
-import transferable.Conference;
-import transferable.User;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -26,18 +26,18 @@ import java.util.List;
 @Lazy
 @Component
 public class ControllerMembersConferenceView
-        implements ControllerInterface, ControllerItemInterface<Conference>, SubscriberService {
+        implements ControllerInterface, ControllerItemInterface<ConferenceEntity>, SubscriberService {
 
-    @FXML private ListView<User> chairListView;
+    @FXML private ListView<UserEntity> chairListView;
 
     @Lazy
     @Autowired
     private StageManager manager;
 
-    private Conference conference;
+    private ConferenceEntity conference;
 
     @Override
-    public void setElement(Conference element) {
+    public void setElement(ConferenceEntity element) {
         this.conference = element;
         setUpChairList();
         updateData();
@@ -52,8 +52,8 @@ public class ControllerMembersConferenceView
     }
 
     private void updateChairList() {
-        List<User> chairs = new ArrayList<>();
-        chairs.add(new User("john-snow", "test", "John Snow"));
+        List<UserEntity> chairs = new ArrayList<>();
+        chairs.add(new UserEntity("test", "John Snow"));
         updateListView(chairListView, chairs);
     }
 

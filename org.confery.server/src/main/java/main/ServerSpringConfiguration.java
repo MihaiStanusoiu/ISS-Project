@@ -4,7 +4,6 @@ import database.DatabaseLoader;
 import manager.LoginManager;
 import manager.SignUpManager;
 import manager.SubscriptionManager;
-import manager.UserManager;
 import model.UserModel;
 import notification.NotificationCenter;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +14,6 @@ import protocol.UserProtocol;
 import service.LoginService;
 import service.SignUpService;
 import service.SubscriptionService;
-import service.UserService;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -82,15 +80,5 @@ public class ServerSpringConfiguration {
         return rmiServiceExporter;
     }
 
-    @Bean
-    public RmiServiceExporter userService() throws IOException {
-        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
-        UserService userService = new UserManager(notificationCenter(), userModel());
-        rmiServiceExporter.setServiceName("UserService");
-        rmiServiceExporter.setService(userService);
-        rmiServiceExporter.setServiceInterface(UserService.class);
-        rmiServiceExporter.setRegistryPort(port);
-        return rmiServiceExporter;
-    }
 
 }

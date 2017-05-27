@@ -1,5 +1,6 @@
 package controller;
 
+import domain.UserEntity;
 import exception.SystemException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,7 +16,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.LoginService;
 import service.SubscriberService;
-import transferable.User;
 import view.ViewType;
 
 import java.rmi.RemoteException;
@@ -88,7 +88,7 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         try {
-            User user = loginService.login(username, password);
+            UserEntity user = loginService.login(username, password);
             listener.setActiveUser(user);
             listener.notifyAll(new Notification(NotificationType.SIGNAL_LOGIN));
             manager.switchScene(ViewType.CONFERENCES);

@@ -6,9 +6,11 @@ import service.LoginService;
 import service.Service;
 import service.SignUpService;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -21,9 +23,7 @@ public class CollectionManager implements CollectionService {
     private SignUpService signUpService;
     private UserEntity activeUser;
 
-    public CollectionManager() {
-
-    }
+    public CollectionManager() { }
 
     public CollectionManager setLoginService(final LoginService loginService) {
         this.loginService = loginService;
@@ -51,9 +51,9 @@ public class CollectionManager implements CollectionService {
     }
 
     @Override
-    public void setActiveUser(UserEntity activeUser) {
+    public void setActiveUser(UserEntity activeUser) throws RemoteException {
         this.activeUser = activeUser;
         List<Service> list = asList(loginService, signUpService);
-        list.forEach(service -> service.setActiveUser(activeUser));
+        list.forEach(service -> runFunction(service::setActiveUser, activeUser));
     }
 }

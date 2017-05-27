@@ -1,5 +1,6 @@
 package controller;
 
+import domain.UserEntity;
 import itemcontroller.ControllerUserItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
-import transferable.User;
 
 /**
  * @author      Alexandru Stoica
@@ -32,17 +32,17 @@ public class ControllerUsersView implements ControllerInterface {
     @SuppressWarnings("unchecked")
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
-        User[] users = {
-                new User("test_user", "test", "test@test.com", "Test User"),
-                new User("test_user", "test", "test@test.com", "Test User"),
-                new User("test_user", "test", "test@test.com", "Test User"),
-                new User("test_user", "test", "test@test.com", "Test User"),
-                new User("test_user", "test", "test@test.com", "Test User"),
-                new User("test_user", "test", "test@test.com", "Test User"),
-                new User("test_user", "test", "test@test.com", "Test User"),
-                new User("test_user", "test", "test@test.com", "Test User")
+        UserEntity[] users = {
+                new UserEntity("test_user", "test", "test@test.com", "Test User"),
+                new UserEntity("test_user", "test", "test@test.com", "Test User"),
+                new UserEntity("test_user", "test", "test@test.com", "Test User"),
+                new UserEntity("test_user", "test", "test@test.com", "Test User"),
+                new UserEntity("test_user", "test", "test@test.com", "Test User"),
+                new UserEntity("test_user", "test", "test@test.com", "Test User"),
+                new UserEntity("test_user", "test", "test@test.com", "Test User"),
+                new UserEntity("test_user", "test", "test@test.com", "Test User")
         };
-        pagination = new PaginationBuilder<User, ControllerUserItem, GridPane>()
+        pagination = new PaginationBuilder<UserEntity, ControllerUserItem, GridPane>()
                 .setRows(2)
                 .setColumns(4)
                 .setElements(users)

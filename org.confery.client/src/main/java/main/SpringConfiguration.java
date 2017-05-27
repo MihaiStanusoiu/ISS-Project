@@ -11,7 +11,6 @@ import org.springframework.remoting.rmi.RmiProxyFactoryBean;
 import service.LoginService;
 import service.SignUpService;
 import service.SubscriptionService;
-import service.UserService;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -101,9 +100,4 @@ public class SpringConfiguration {
         return (SignUpService) getService(SignUpService.class, "SignUpService", port).getObject();
     }
 
-    @Bean
-    public UserService userService()
-            throws RemoteException, NotBoundException, MalformedURLException {
-        return (UserService) getService(UserService.class, "UserService", port).getObject();
-    }
 }
