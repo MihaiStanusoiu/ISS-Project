@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import listener.ListenerHelper;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -17,27 +18,25 @@ import view.ViewType;
 import java.util.Date;
 
 /**
- * Name:        ControllerMyConferencesView
- * Effect:      Lists all the user's conferences.
- * Date:        02/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
-public class ControllerMyConferencesView implements ControllerInterface {
+public class ControllerMyConferencesView
+        implements ControllerInterface {
 
     @FXML private TextField searchTextField;
     @FXML private Pagination pagination;
 
+    @Lazy
+    @Autowired
     private StageManager manager;
 
-    @Autowired @Lazy
-    public ControllerMyConferencesView(StageManager manager) {
-        this.manager = manager;
-    }
+    @Lazy
+    @Autowired
+    private ListenerHelper listener;
 
     /**
      * Effect: Builds the pagination and it's data.

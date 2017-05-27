@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import listener.Listener;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -14,29 +13,20 @@ import pagination.PaginationBuilder;
 import transferable.User;
 
 /**
- * Name:        ControllerUsersView
- * Effect:      Lists all the available users.
- * Date:        05/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
 public class ControllerUsersView implements ControllerInterface {
 
-    private final StageManager manager;
-    private final Listener listener;
+    @Lazy
+    @Autowired
+    private StageManager manager;
 
     @FXML private TextField searchTextField;
     @FXML private Pagination pagination;
-
-    @Autowired @Lazy
-    public ControllerUsersView(StageManager manager, Listener listener) {
-        this.manager = manager;
-        this.listener = listener;
-    }
 
     @Override
     @SuppressWarnings("unchecked")

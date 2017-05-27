@@ -20,36 +20,34 @@ import view.ViewType;
 
 import java.rmi.RemoteException;
 
+import static utils.Try.runFunction;
+
 /**
- * Name:        ControllerLogin
- * Effect:      Controls the login-view.
- * Date:        08/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
 public class ControllerLogin implements ControllerInterface, SubscriberService {
 
-    @FXML TextField usernameTextField;
-    @FXML TextField passwordTextField;
-    @FXML Label errorLabel;
-    @FXML ImageView backgroundImage;
-    @FXML StackPane backgroundImagePane;
+    @FXML private TextField usernameTextField;
+    @FXML private TextField passwordTextField;
+    @FXML private Label errorLabel;
+    @FXML private ImageView backgroundImage;
+    @FXML private StackPane backgroundImagePane;
 
-    private final StageManager manager;
-    private final LoginService loginService;
-    private final Listener listener;
+    @Lazy
+    @Autowired
+    private StageManager manager;
 
-    @Autowired @Lazy
-    public ControllerLogin(StageManager manager, LoginService loginService, Listener listener) throws RemoteException {
-        this.manager = manager;
-        this.loginService = loginService;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-    }
+    @Lazy
+    @Autowired
+    private LoginService loginService;
+
+    @Lazy
+    @Autowired
+    private Listener listener;
 
     /**
      * Effect: Adds width & height constraints on the
@@ -59,14 +57,17 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
     public void initialize() {
         backgroundImage.fitWidthProperty().bind(backgroundImagePane.widthProperty());
         backgroundImage.fitHeightProperty().bind(backgroundImagePane.heightProperty());
+        manager.getPrimaryStage().setOnCloseRequest(event ->
+                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
     }
+
 
     /**
      * Effect: Loads the ConferencesView.
      * @implNote status: In development.
      */
     @FXML void onLogoButtonClick() throws RemoteException {
-        listener.removeSubscriber(this);
         manager.switchScene(ViewType.CONFERENCES);
     }
 
@@ -76,7 +77,6 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
      * @implNote status: In development.
      */
     @FXML void onSignUpButtonClick() throws RemoteException {
-        listener.removeSubscriber(this);
         manager.switchScene(ViewType.SIGN_UP);
     }
 
@@ -91,7 +91,6 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
             User user = loginService.login(username, password);
             listener.setActiveUser(user);
             listener.notifyAll(new Notification(NotificationType.SIGNAL_LOGIN));
-            listener.removeSubscriber(this);
             manager.switchScene(ViewType.CONFERENCES);
         } catch (RemoteException exception) {
             errorLabel.setText(exception.getCause().getMessage());

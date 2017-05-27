@@ -11,14 +11,6 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**
- * Name:        SpringFXMLLoader
- * Effect:      Loads a fxml file.
- *              <p>
- *                  Update 1.1: Supports Views based on an element.
- *                  @implNote See 'ConferenceView' as an example.
- *              </p>
- * Date:        31/03/2017
- * Tested:      False
  * @author      Alexandru Stoica
  * @version     1.1
  */

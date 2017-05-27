@@ -9,11 +9,6 @@ import view.ViewType;
 import java.io.IOException;
 
 /**
- * Name:        ItemFXMLLoader
- * Effect:      Loads the view of an item for PaginationManager.
- * Date:        09/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.1
  */

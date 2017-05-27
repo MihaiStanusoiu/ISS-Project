@@ -3,7 +3,6 @@ package itemcontroller;
 import controller.ControllerInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import listener.Listener;
 import manager.StageManager;
 import notification.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ import java.rmi.RemoteException;
  * @version 1.0
  */
 
-
+@Lazy
 @Component
 public class ControllerAddConferenceView
         implements ControllerInterface, ControllerItemInterface<Conference>, SubscriberService {
@@ -30,18 +29,12 @@ public class ControllerAddConferenceView
     @FXML private TextField locationTextField;
     @FXML private TextField bioTextField;
 
-    private final StageManager manager;
-    private final Listener listener;
+    @Lazy
+    @Autowired
+    private StageManager manager;
+
+
     private Conference conference;
-
-
-    @Autowired @Lazy
-    public ControllerAddConferenceView(StageManager manager, Listener listener)
-            throws RemoteException {
-        this.manager = manager;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-    }
 
     @Override
     public void setElement(Conference element) {

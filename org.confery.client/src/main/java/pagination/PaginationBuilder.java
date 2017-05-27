@@ -11,18 +11,14 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- * Name:        PaginationBuilder
- * Effect:      Special builder for pagination manager. [based on Builder Pattern]
+ *  Special builder for pagination manager. [based on Builder Pattern]
  *
- *              Checks if all the manager's requirements are respected
- *              and creates the wanted configuration for the view's pagination.
+ *  Checks if all the manager's requirements are respected
+ *  and creates the wanted configuration for the view's pagination.
  *
- *              T: The domain element
- *              E: The item's view controller
- *              U: The pagination's pane (the page's pane)
- *
- * Date:        14/04/2017
- * Tested:      False
+ *  T: The domain element
+ *  E: The item's view controller
+ *  U: The pagination's pane (the page's pane)
  *
  * @author      Alexandru Stoica
  * @version     1.0
@@ -38,7 +34,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
     private Pagination pagination;
 
     /**
-     * Effect: Sets the item's view and returns the builder for later chaining.
+     * Sets the item's view and returns the builder for later chaining.
      * @param view The item's view.
      * @return the builder for later chaining.
      */

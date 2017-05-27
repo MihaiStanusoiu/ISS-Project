@@ -1,7 +1,6 @@
 package main;
 
-import controller.*;
-import itemcontroller.*;
+import context.CoreContext;
 import javafx.stage.Stage;
 import listener.ListenerHelper;
 import loader.SpringFXMLLoader;
@@ -20,20 +19,24 @@ import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
 /**
- * Name:        SpringConfiguration
- * Effect:      Beans configuration for Spring context application.
- * Date:        31/03/2017
- * Tested:      False
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
 @Configuration
 @ComponentScan("loader")
+@ComponentScan("itemcontroller")
+@ComponentScan("controller")
+@ComponentScan("context")
 @SuppressWarnings("all")
 public class SpringConfiguration {
 
-    private @Autowired SpringFXMLLoader loader;
+    @Autowired
+    private CoreContext coreContext;
+
+    @Autowired
+    private SpringFXMLLoader loader;
+
     private StageManager stageManager;
 
     @Bean
@@ -45,94 +48,6 @@ public class SpringConfiguration {
         SubscriptionService service = subscriptionService();
         service.addSubscriber(listener);
         return listener;
-    }
-
-    @Bean
-    @Lazy
-    public ControllerConferencesView controllerConferencesView()
-            throws RemoteException, NotBoundException, MalformedURLException {
-        return new ControllerConferencesView(stageManager, listener());
-    }
-
-    @Bean
-    @Lazy
-    public ControllerMyConferencesView controllerMyConferencesView() {
-        return new ControllerMyConferencesView(stageManager);
-    }
-
-    @Bean
-    @Lazy
-    public ControllerNotificationsView controllerNotificationsView() {
-        return new ControllerNotificationsView(stageManager);
-    }
-
-    @Bean
-    @Lazy
-    public ControllerUsersView controllerUsers()
-            throws RemoteException, NotBoundException, MalformedURLException {
-        return new ControllerUsersView(stageManager, listener());
-    }
-
-    @Bean
-    @Lazy
-    public ControllerLogin controllerLogin()
-            throws RemoteException, MalformedURLException, NotBoundException {
-        return new ControllerLogin(stageManager, loginService(), listener());
-    }
-
-    @Bean
-    @Lazy
-    public ControllerTopBar controllerTopBar()
-            throws RemoteException, NotBoundException, MalformedURLException {
-        return new ControllerTopBar(stageManager, listener());
-    }
-
-    @Bean
-    @Lazy
-    public ControllerSignUp controllerSignUp()
-            throws RemoteException, NotBoundException, MalformedURLException {
-        return new ControllerSignUp(stageManager, signUpService(), listener());
-    }
-
-    @Bean
-    @Lazy
-    public ControllerMenu controllerMenu()
-            throws RemoteException, NotBoundException, MalformedURLException {
-        return new ControllerMenu(stageManager, listener());
-    }
-
-    @Bean
-    @Lazy
-    public ControllerAddConferenceView controllerAddConferenceVoew()
-            throws RemoteException, NotBoundException, MalformedURLException {
-        return new ControllerAddConferenceView(stageManager, listener());
-    }
-
-    @Bean
-    @Lazy
-    public ControllerMembersConferenceView controllerMembersConferenceVoew()
-            throws RemoteException, NotBoundException, MalformedURLException {
-        return new ControllerMembersConferenceView(stageManager, listener());
-    }
-
-    @Bean
-    @Lazy
-    public ControllerConferenceView controllerConferenceView() {
-        return new ControllerConferenceView(stageManager);
-    }
-
-    @Bean
-    @Lazy
-    public ControllerProfileView controllerProfileView()
-            throws RemoteException, NotBoundException, MalformedURLException {
-        return new ControllerProfileView(stageManager, listener(), userService());
-    }
-
-
-    @Bean
-    @Lazy
-    public ControllerUserView controllerUserView() {
-        return new ControllerUserView(stageManager);
     }
 
     /** Local Resource Bundle */

@@ -1,5 +1,8 @@
 package controller;
 
+import context.Context;
+import context.ContextType;
+import context.CoreContext;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,42 +19,58 @@ import view.ViewType;
 
 import java.rmi.RemoteException;
 
+import static utils.Conditional.basedOn;
+import static utils.Try.runFunction;
+
 /**
- * Name:        ControllerTopBar
- * Effect:      Controls the top-bar navigation system.
- * Date:        05/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
-public class ControllerTopBar implements ControllerInterface, SubscriberService {
+public class ControllerTopBar
+        implements ControllerInterface, SubscriberService {
 
-    @SuppressWarnings("all")
-    @FXML private Label usernameLabel;
+    @FXML
+    @Context({ContextType.REGULAR})
+    public Label usernameLabel;
 
-    @SuppressWarnings("all")
-    @FXML private Button userProfileButton;
+    @FXML
+    private Button userProfileButton;
 
-    @FXML private Button signUpButton;
-    @FXML private Button loginButton;
+    @FXML
+    @Context({ContextType.GUEST})
+    public Button signUpButton;
 
-    private final StageManager manager;
-    private final Listener listener;
+    @FXML
+    @Context({ContextType.GUEST})
+    public Button loginButton;
 
-    @Autowired @Lazy
-    public ControllerTopBar(StageManager manager, Listener listener) throws RemoteException {
-        this.manager = manager;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-    }
+    @Lazy
+    @Autowired
+    private StageManager manager;
+
+    @Lazy
+    @Autowired
+    private Listener listener;
+
+    @Lazy
+    @Autowired
+    private CoreContext context;
 
     @Override
     public void initialize() throws RemoteException {
-        if (existsActiveUser()) { this.showActiveUser(); }
-        else { this.showRegistrationButtons(); }
+        context.in(this).forType(ContextType.REGULAR)
+                .run(item -> ((Label)item).setText(""));
+        context.basedOn(listener.getActiveUser() != null)
+                .in(this)
+                .forType(ContextType.GUEST)
+                .run(item -> ((Button)item).setText(runFunction(
+                        listener::getActiveUser).or(null).getName()));
+        manager.getPrimaryStage().setOnCloseRequest(event ->
+                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
     }
 
     private Boolean existsActiveUser() throws RemoteException {
@@ -91,11 +110,8 @@ public class ControllerTopBar implements ControllerInterface, SubscriberService 
      * @implNote status: In development.
      */
     @FXML private void onProfileButtonClick() throws RemoteException {
-        if (existsActiveUser()) {
-            manager.switchScene(ViewType.PROFILE, listener.getActiveUser());
-        }
-        // TODO: Make Profile User View & MyProfile View
-        // System.out.println("Profile UserEntity View");
+        basedOn(existsActiveUser())
+                .runTrue(manager::switchScene, ViewType.PROFILE, listener.getActiveUser());
     }
 
     private void setButton(Button button, String text, Double opacity) {
@@ -122,13 +138,7 @@ public class ControllerTopBar implements ControllerInterface, SubscriberService 
         if (notification.getType().equals(NotificationType.SIGNAL_LOGIN) ||
                 notification.getType().equals(NotificationType.SIGNAL_SIGN_UP) ||
                 notification.getType().equals(NotificationType.UPDATE_USER)) {
-            Platform.runLater(() -> {
-                try {
-                    showActiveUser();
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-            });
+            Platform.runLater(() -> runFunction(this::showActiveUser).orHandle(System.out::println));
         }
         if (notification.getType().equals(NotificationType.SIGNAL_LOGOUT)) {
             Platform.runLater(this::showRegistrationButtons);

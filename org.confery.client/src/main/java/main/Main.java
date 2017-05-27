@@ -1,5 +1,6 @@
 package main;
 
+import context.CoreContext;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import manager.StageManager;
@@ -14,6 +15,7 @@ public class  Main extends Application {
 
     private ConfigurableApplicationContext context;
     private StageManager stageManager;
+    private CoreContext coreContext;
 
     public static void main(String[] args) {
         Application.launch();
@@ -38,6 +40,8 @@ public class  Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stageManager = context.getBean(StageManager.class, stage);
+        coreContext = context.getBean(CoreContext.class);
+        coreContext.init();
         displayScene();
     }
 
@@ -59,6 +63,7 @@ public class  Main extends Application {
     @Override
     public void stop() throws Exception {
         context.close();
+        System.exit(0);
     }
 
     /**

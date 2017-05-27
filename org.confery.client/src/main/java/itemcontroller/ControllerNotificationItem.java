@@ -6,41 +6,28 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import manager.StageManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import transferable.Notification;
 import view.GradientGenerator;
 
 /**
- * Name:        ControllerNotificationItem
- * Effect:      Controls a notification item view.
- * Date:        08/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.1
  */
 
+@Lazy
+@Component
 public class ControllerNotificationItem
         implements PaginationControllerItemInterface<Notification> {
 
-    /**
-     * Displays the notification's text.
-     */
     @FXML private Label textLabel;
-
-    /**
-     * Button to perform payment action.
-     */
     @FXML private Button payButton;
-
-    /**
-     * Effect: The item's root pane.
-     */
     @FXML private BorderPane pane;
 
-    /**
-     * Support for future development.
-     */
-    @SuppressWarnings("all")
+    @Lazy
+    @Autowired
     private StageManager manager;
 
     /**

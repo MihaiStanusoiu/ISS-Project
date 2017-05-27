@@ -7,6 +7,7 @@ task wrapper(type: Wrapper) {
 }
 
 apply plugin: 'java'
+apply plugin: 'kotlin'
 apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
@@ -16,21 +17,34 @@ repositories {
 }
 
 buildscript {
+    ext.kotlin_version = '1.1.2-4'
     repositories {
         mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 dependencies {
+    // Project
     compile project(':org.confery.model')
     compile project(':org.confery.network')
+
+    // Reflections
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
+
+    // Spring
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile("org.springframework.boot:spring-boot-starter-actuator")
+
+    // TestFX
     testCompile "org.testfx:testfx-core:4.0.+"
     testCompile "org.testfx:testfx-junit:4.0.+"
     compile group: 'org.jfxtras', name: 'openjfx-monocle', version: '1.8.0_20'
+
+    // JUnit
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
 }

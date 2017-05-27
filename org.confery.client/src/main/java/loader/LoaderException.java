@@ -1,11 +1,6 @@
 package loader;
 
 /**
- * Name:        LoaderException
- * Effect:      Special exception for the fxml loader.
- * Date:        09/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */

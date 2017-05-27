@@ -18,12 +18,14 @@ import view.ViewType;
 
 import java.rmi.RemoteException;
 
+import static utils.Try.runFunction;
+
 /**
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-
+@Lazy
 @Component
 public class ControllerProfileView implements ControllerInterface,
         ControllerItemInterface<User>, SubscriberService {
@@ -36,23 +38,26 @@ public class ControllerProfileView implements ControllerInterface,
 
     private User user;
 
-    private final StageManager manager;
-    private final Listener listener;
-    private final UserService userService;
+    @Lazy
+    @Autowired
+    private StageManager manager;
 
-    @Autowired @Lazy
-    public ControllerProfileView(StageManager manager, Listener listener, UserService userService)
-            throws RemoteException {
-        this.manager = manager;
-        this.userService = userService;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-    }
+    @Lazy
+    @Autowired
+    private Listener listener;
+
+    @Lazy
+    @Autowired
+    private UserService userService;
 
     /**
      * Effect: Builds the pagination and it's data.
      */
-    public void initialize() { }
+    public void initialize() {
+        manager.getPrimaryStage().setOnCloseRequest(event ->
+                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
+    }
 
     @FXML
     public void onSaveButtonClick() throws RemoteException, SystemException {
