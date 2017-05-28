@@ -88,7 +88,7 @@ public enum ViewType implements ViewTypeInterface {
         /** ConferenceEntity Item View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/ConferenceItemView.fxml";
+            return "/fxml/pagination/ConferenceItemView.fxml";
         }
 
     },

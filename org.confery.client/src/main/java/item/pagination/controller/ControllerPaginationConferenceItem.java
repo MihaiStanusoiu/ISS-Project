@@ -1,6 +1,6 @@
-package itemcontroller;
+package item.pagination.controller;
 
-import domain.ConferenceEntity;
+import itemcontroller.PaginationControllerItemInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,6 +10,7 @@ import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import transfarable.Conference;
 import view.GradientGenerator;
 import view.ViewType;
 
@@ -20,23 +21,10 @@ import view.ViewType;
 
 @Lazy
 @Component
-public class ControllerConferenceItem
-        implements PaginationControllerItemInterface<ConferenceEntity> {
+public class ControllerPaginationConferenceItem
+        implements PaginationControllerItemInterface<Conference> {
 
-    /**
-     * Displays the conference's starting date.
-     */
-    @FXML private Label dateLabel;
-
-    /**
-     * Displays the conference's location.
-     */
-
-    @FXML private Label locationLabel;
-
-    /**
-     * Displays the conference's acronym.
-     */
+    @FXML private Label editionNumberLabel;
 
     @FXML private Label acronymLabel;
 
@@ -71,7 +59,7 @@ public class ControllerConferenceItem
     /**
      * Effect: The item that needs to be displayed inside the view. [ConferenceEntity]
      */
-    private ConferenceEntity item;
+    private Conference item;
 
     /**
      * Effect: Sets the element in order to be displayed
@@ -79,7 +67,7 @@ public class ControllerConferenceItem
      * @param element: The required element for item's view
      */
     @Override
-    public void setElement(ConferenceEntity element) {
+    public void setElement(Conference element) {
         this.item = element;
         build();
     }
@@ -97,8 +85,7 @@ public class ControllerConferenceItem
      * Effect: Builds the view with the set item.
      */
     private void build() {
-        dateLabel.setText(item.getLatestEdition().getStartDate().toString());
-        locationLabel.setText(item.getLatestEdition().getLocation());
+        editionNumberLabel.setText("1");
         acronymLabel.setText(item.getAcronym());
         nameLabel.setText(item.getName());
         background.setStyle(String.format("-fx-background-color : %s",

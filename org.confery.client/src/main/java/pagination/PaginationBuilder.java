@@ -1,6 +1,8 @@
 package pagination;
 
 import itemcontroller.PaginationControllerItemInterface;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.Pane;
 import manager.StageManager;
@@ -27,7 +29,7 @@ import java.util.Collections;
 public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>, U extends Pane> {
 
     private ViewType view;
-    private ArrayList<T> elements = new ArrayList<>();
+    private ObservableList<T> elements;
     private Integer rows;
     private Integer columns;
     private StageManager stageManager;
@@ -50,7 +52,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
      */
     @SuppressWarnings("unused")
     public PaginationBuilder setElements(ArrayList<T> elements) {
-        this.elements = elements;
+        this.elements = FXCollections.observableArrayList(elements);
         return this;
     }
 
@@ -62,6 +64,11 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
     @SuppressWarnings("unused")
     public PaginationBuilder setElements(Collection<T> elements) {
         elements.forEach(element -> this.elements.add(element));
+        return this;
+    }
+
+    public PaginationBuilder setElements(ObservableList<T> elements) {
+        this.elements = elements;
         return this;
     }
 
