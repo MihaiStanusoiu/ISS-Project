@@ -27,13 +27,12 @@ buildscript {
 dependencies {
     compile project(':org.confery.model')
     compile project(':org.confery.network')
-
+    compile("org.hibernate:hibernate-core:5.2.9.Final")
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile("org.springframework.boot:spring-boot-starter-actuator")
-    compile("org.hibernate:hibernate-core:5.2.9.Final")
     compile project(':org.confery.model')
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }

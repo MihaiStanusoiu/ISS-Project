@@ -35,6 +35,8 @@ dependencies {
     // Reflections
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
 
+    compile("org.hibernate:hibernate-core:5.2.9.Final")
+
     // Spring
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile("org.springframework.boot:spring-boot-starter-actuator")

@@ -71,10 +71,8 @@ public class SignUpManager implements SignUpService {
                 .orThrow(new RemoteException("Username already used in our system"));
         UserEntity user = (isPasswordValid(password, confirm) && isEmailValid(email)) ?
                 new UserEntity(username, password, email, name) : null;
-        return user != null ?
-                runFunction(userModel::getElementById,
-                (runFunction(userModel::add, user).orThrow(exception -> new RemoteException(exception.getMessage()))))
-                .orThrow(exception -> new RemoteException(exception.getMessage())) : null;
+        Integer id = runFunction(userModel::add, user).orThrow(exception -> new RemoteException(exception.getMessage()));
+        return runFunction(userModel::getElementById, id).orThrow(exception -> new RemoteException(exception.getMessage()));
     }
 
     @Override

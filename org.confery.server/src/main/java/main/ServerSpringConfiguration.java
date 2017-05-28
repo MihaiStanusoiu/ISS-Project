@@ -1,19 +1,16 @@
 package main;
 
 import database.DatabaseLoader;
-import manager.LoginManager;
-import manager.SignUpManager;
-import manager.SubscriptionManager;
+import manager.*;
 import model.UserModel;
 import notification.NotificationCenter;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.remoting.rmi.RmiServiceExporter;
 import protocol.UserProtocol;
-import service.LoginService;
-import service.SignUpService;
-import service.SubscriptionService;
+import service.*;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -23,6 +20,7 @@ import java.rmi.RemoteException;
  * @version 1.0
  */
 
+@ComponentScan("org.confery.network")
 @Configuration
 @SuppressWarnings("all")
 public class ServerSpringConfiguration {
@@ -46,6 +44,29 @@ public class ServerSpringConfiguration {
     public NotificationCenter notificationCenter() throws RemoteException {
         return new NotificationCenter();
     }
+
+    @Bean
+    public RmiServiceExporter collectionService() throws IOException {
+        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
+        CollectionService collectionService = new CollectionManager(userService());
+        rmiServiceExporter.setServiceName("CollectionService");
+        rmiServiceExporter.setService(collectionService);
+        rmiServiceExporter.setServiceInterface(CollectionService.class);
+        rmiServiceExporter.setRegistryPort(port);
+        return rmiServiceExporter;
+    }
+
+    @Bean
+    public UserService userService() throws IOException {
+        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
+        UserService userService = new UserManager(userModel());
+        rmiServiceExporter.setServiceName("UserService");
+        rmiServiceExporter.setService(userService);
+        rmiServiceExporter.setServiceInterface(UserService.class);
+        rmiServiceExporter.setRegistryPort(port);
+        return (UserService) rmiServiceExporter.getService();
+    }
+
 
     @Bean
     public RmiServiceExporter subscriptionService() throws RemoteException {

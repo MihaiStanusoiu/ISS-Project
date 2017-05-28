@@ -13,9 +13,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
 import java.rmi.RemoteException;
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -50,10 +52,11 @@ public class SignUpManagerTest {
         // declarations:
         UserEntity userEntity = new UserEntity("username", "password");
         UserEntity user = new UserEntity("test", "passwordTest", "try@gmail.com", "Test");
-        List<UserEntity> result = asList(userEntity);
+        List<UserEntity> result = singletonList(userEntity);
         // when:
         PowerMockito.doReturn(result).when(model, "getAll");
-        PowerMockito.doReturn(user).when(model, "getElementById", null);
+        PowerMockito.doReturn(1).when(model, "add", user);
+        PowerMockito.doReturn(user).when(model, "getElementById", 1);
         // then:
         assertEquals(manager.signUp("test", "passwordTest", "passwordTest", "try@gmail.com", "Test").getUsername(), "test");
     }
@@ -63,7 +66,7 @@ public class SignUpManagerTest {
         // declarations:
         UserEntity userEntity = new UserEntity("username", "password");
         UserEntity user = new UserEntity("test", "passwordTest", "try@gmail.com", "Test");
-        List<UserEntity> result = asList(userEntity);
+        List<UserEntity> result = singletonList(userEntity);
         // when:
         PowerMockito.doReturn(result).when(model, "getAll");
         PowerMockito.doReturn(user).when(model, "getElementById", null);

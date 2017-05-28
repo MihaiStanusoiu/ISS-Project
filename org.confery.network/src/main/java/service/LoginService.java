@@ -10,8 +10,10 @@ import java.rmi.RemoteException;
  * @version 1.0
  */
 
-public interface LoginService extends Remote, Service {
+public interface LoginService extends Remote {
 
     UserEntity login(String username, String password) throws RemoteException;
+
+    void setActiveUser(UserEntity activeUser) throws RemoteException;
 
 }

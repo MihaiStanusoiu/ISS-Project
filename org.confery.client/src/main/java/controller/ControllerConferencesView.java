@@ -1,18 +1,23 @@
 package controller;
 
+import domain.UserEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import listener.Listener;
 import manager.StageManager;
+import service.UserService;
+import method.SimpleMethod;
 import notification.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import service.CollectionService;
 import service.SubscriberService;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import static utils.Try.runFunction;
 
@@ -39,6 +44,10 @@ public class ControllerConferencesView
     @Autowired
     private Listener listener;
 
+    @Lazy
+    @Autowired
+    private CollectionService service;
+
     /**
      * Effect: Builds the pagination and it's data.
      */
@@ -47,6 +56,10 @@ public class ControllerConferencesView
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
         // TODO
+        SimpleMethod<RemoteException> handler = exception -> System.out.print(exception.getMessage());
+        UserService userService = runFunction(service::userService).orHandle(handler);
+        List<UserEntity> users = runFunction(userService::getAll).orHandle(handler);
+        users.forEach(System.out::println);
         manager.getPrimaryStage().setOnCloseRequest(event ->
                 runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
         runFunction(listener::addSubscriber, this).orHandle(System.out::println);

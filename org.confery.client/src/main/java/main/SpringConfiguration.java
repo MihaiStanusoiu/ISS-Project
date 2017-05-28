@@ -8,9 +8,7 @@ import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.remoting.rmi.RmiProxyFactoryBean;
-import service.LoginService;
-import service.SignUpService;
-import service.SubscriptionService;
+import service.*;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -80,6 +78,12 @@ public class SpringConfiguration {
         rmiProxyFactoryBean.setServiceInterface(serviceClass);
         rmiProxyFactoryBean.afterPropertiesSet();
         return rmiProxyFactoryBean;
+    }
+
+    @Bean
+    public CollectionService collectionService()
+            throws RemoteException, NotBoundException, MalformedURLException {
+        return (CollectionService) getService(CollectionService.class, "CollectionService", port).getObject();
     }
 
     @Bean

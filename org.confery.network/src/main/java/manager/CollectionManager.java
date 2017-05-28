@@ -1,10 +1,8 @@
 package manager;
 
 import domain.UserEntity;
-import service.CollectionService;
-import service.LoginService;
+import service.*;
 import service.Service;
-import service.SignUpService;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -21,9 +19,12 @@ public class CollectionManager implements CollectionService {
 
     private LoginService loginService;
     private SignUpService signUpService;
+    private UserService userService;
     private UserEntity activeUser;
 
-    public CollectionManager() { }
+    public CollectionManager(UserService userService) {
+        this.userService = userService;
+    }
 
     public CollectionManager setLoginService(final LoginService loginService) {
         this.loginService = loginService;
@@ -36,13 +37,18 @@ public class CollectionManager implements CollectionService {
     }
 
     @Override
-    public LoginService getLoginService() {
+    public LoginService loginService() {
         return loginService;
     }
 
     @Override
-    public SignUpService getSignUpService() {
+    public SignUpService signUpService() {
         return signUpService;
+    }
+
+    @Override
+    public UserService userService() throws RemoteException {
+        return userService;
     }
 
     @Override
@@ -51,9 +57,9 @@ public class CollectionManager implements CollectionService {
     }
 
     @Override
-    public void setActiveUser(UserEntity activeUser) throws RemoteException {
-        this.activeUser = activeUser;
-        List<Service> list = asList(loginService, signUpService);
-        list.forEach(service -> runFunction(service::setActiveUser, activeUser));
+    public void activeUser(UserEntity user) throws RemoteException {
+        this.activeUser = user;
+       // List<Service> list = asList(loginService, signUpService);
+       // list.forEach(service -> runFunction(service::setActiveUser, user));
     }
 }

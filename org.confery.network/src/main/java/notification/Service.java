@@ -1,7 +1,6 @@
-package service;
+package notification;
 
 import domain.Idable;
-import domain.UserEntity;
 
 import java.io.Serializable;
 import java.rmi.Remote;
@@ -12,6 +11,7 @@ import java.util.List;
  * @author Alexandru Stoica
  * @version 1.0
  */
+
 public interface Service<T extends Idable<Id>, Id extends Serializable> extends Remote {
 
     Id add(T element) throws RemoteException;

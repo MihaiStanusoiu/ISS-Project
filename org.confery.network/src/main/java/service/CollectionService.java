@@ -12,12 +12,14 @@ import java.rmi.RemoteException;
 
 public interface CollectionService extends Remote {
 
-    LoginService getLoginService() throws RemoteException;
+    LoginService loginService() throws RemoteException;
 
-    SignUpService getSignUpService() throws RemoteException;
+    SignUpService signUpService() throws RemoteException;
+
+    UserService userService() throws RemoteException;
 
     UserEntity getActiveUser() throws RemoteException;
 
-    void setActiveUser(UserEntity activeUser) throws RemoteException;
+    void activeUser(UserEntity user) throws RemoteException;
 
 }
