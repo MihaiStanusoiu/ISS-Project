@@ -9,7 +9,7 @@ import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import transfarable.User;
+import transfarable.Submission;
 import view.ViewType;
 
 /**
@@ -19,13 +19,14 @@ import view.ViewType;
 
 @Lazy
 @Component
-public class ControllerPaginationUserItem
-        implements PaginationControllerItemInterface<User> {
+public class ControllerPaginationSubmissionItem
+        implements PaginationControllerItemInterface<Submission> {
 
-    @FXML private Label locationLabel;
+    @FXML private Label acronymLabel;
+    @FXML private Label statusLabel;
     @FXML private Label nameLabel;
-    @FXML private Label usernameLabel;
     @FXML private BorderPane pane;
+    @FXML private Pane statusIndicator;
 
     /**
      * Effect: The manager allows the item to switch the
@@ -38,7 +39,7 @@ public class ControllerPaginationUserItem
     /**
      * Effect: The item that needs to be displayed inside the view. [UserEntity]
      */
-    private User item;
+    private Submission item;
 
     /**
      * Effect: Sets the element in order to be displayed
@@ -46,7 +47,7 @@ public class ControllerPaginationUserItem
      * @param element: The required element for item's view
      */
     @Override
-    public void setElement(User element) {
+    public void setElement(Submission element) {
         this.item = element;
         build();
     }
@@ -64,9 +65,11 @@ public class ControllerPaginationUserItem
      * Effect: Builds the view with the set item.
      */
     private void build() {
-        locationLabel.setText(item.getLocation());
         nameLabel.setText(item.getName());
-        usernameLabel.setText("@" + item.getUsername());
+        statusLabel.setText(item.getStatus());
+        acronymLabel.setText(item.getName());
+        statusIndicator.setStyle(statusIndicator.getStyle() +
+                "-fx-background-color: " + getStatusColorValue());
     }
 
     /**
@@ -102,4 +105,7 @@ public class ControllerPaginationUserItem
         return pane.getHeight();
     }
 
+    private String getStatusColorValue() {
+        return item.getStatus().toLowerCase().equals("reviewed") ? "#40FD8A" : "#FA7A92";
+    }
 }

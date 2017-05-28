@@ -78,7 +78,7 @@ public enum ViewType implements ViewTypeInterface {
         /** UserEntity View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/UserView.fxml";
+            return "/fxml/entity/UserView.fxml";
         }
 
     },
@@ -173,6 +173,13 @@ public enum ViewType implements ViewTypeInterface {
         @Override
         public String getFXMLFile() {
             return "/fxml/entity/EditionView.fxml";
+        }
+
+    }, SUBMISSION_ITEM {
+
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/pagination/SubmissionItemView.fxml";
         }
 
     };

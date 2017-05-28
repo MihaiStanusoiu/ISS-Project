@@ -17,11 +17,11 @@
 }
 
 .pagination .toggle-button {
-
+   -fx-opacity: 0%;
 }
 
-.pagination .button{
-
+.pagination .button {
+   -fx-background-color: white;
 }
 
 .pagination .label {

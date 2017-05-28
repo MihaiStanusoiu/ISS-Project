@@ -41,7 +41,7 @@ public class ControllerUsersView
     @Override
     public void initialize() {
         User[] usersList = {
-                new User("Test", "password", "email@email", "Test Name"),
+                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
                 new User("Test", "password", "email@email", "Test Name"),
                 new User("Test", "password", "email@email", "Test Name"),
                 new User("Test", "password", "email@email", "Test Name"),

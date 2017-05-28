@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itemcontroller.ControllerUserView">
+   <top>
+      <fx:include source="../TopBar.fxml" />
+   </top>
+   <center>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" fillHeight="false" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%);">
+               <children>
+                  <Label fx:id="nameLabel" text="Name" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Pane HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+            <HBox>
+               <children>
+                  <AnchorPane>
+                     <children>
+                        <HBox alignment="CENTER" minHeight="50.0" style="-fx-background-color: white;">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <Label text="Basic" />
+                              <Pane prefWidth="40.0" HBox.hgrow="ALWAYS" />
+                              <Pane maxHeight="10.0" maxWidth="10.0" minHeight="10.0" minWidth="10.0" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: #6BFF6D; -fx-background-radius: 10;" />
+                           </children>
+                           <effect>
+                              <InnerShadow choke="1.0" color="#0000001a" height="1.0" offsetY="-1.0" radius="0.0" width="0.0" />
+                           </effect>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </HBox.margin>
+                  </AnchorPane>
+                  <VBox>
+                     <children>
+                        <VBox maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Bio">
+                                 <font>
+                                    <Font name="Proxima Nova Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Text fx:id="bioText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Proxima Nova Regular" size="16.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <HBox>
+                           <children>
+                              <VBox maxWidth="1.7976931348623157E308">
+                                 <children>
+                                    <Label text="Location">
+                                       <font>
+                                          <Font name="Proxima Nova Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="locationText" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="Proxima Nova Regular" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </VBox>
+                              <VBox maxWidth="1.7976931348623157E308">
+                                 <children>
+                                    <Label text="Email">
+                                       <font>
+                                          <Font name="Proxima Nova Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="emailText" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="Proxima Nova Regular" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="60.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox maxWidth="1.7976931348623157E308">
+                                 <children>
+                                    <Label text="Website">
+                                       <font>
+                                          <Font name="Proxima Nova Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="websiteText" strokeType="OUTSIDE" strokeWidth="0.0" text="Website">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="Proxima Nova Regular" size="16.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="60.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <VBox maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Conferences">
+                                 <font>
+                                    <Font name="Proxima Nova Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Pagination fx:id="paginationConferences" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../css/white_pagination.css">
+                                 <padding>
+                                    <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0" />
+                                 </padding></Pagination>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Submissions">
+                                 <font>
+                                    <Font name="Proxima Nova Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Pagination fx:id="paginationSubmissions" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                 <stylesheets>
+                                    <URL value="@../../css/pagination.css" />
+                                    <URL value="@../../css/white_pagination.css" />
+                                 </stylesheets>
+                                 <padding>
+                                    <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0" />
+                                 </padding></Pagination>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="20.0" right="20.0" top="20.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <StackPane alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <fx:include source="../Menu.fxml" />
+         </children>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" color="#0000000d" height="0.0" radius="18.4725" width="75.89" />
+         </effect>
+      </StackPane>
+   </right>
+</BorderPane>

@@ -84,8 +84,8 @@ public class ControllerConferencesView
                 .setColumns(4)
                 .setElements(items)
                 .setView(ViewType.CONFERENCE_ITEM)
-                .setStageManager(this.manager)
-                .setPagination(this.pagination)
+                .setStageManager(manager)
+                .setPagination(pagination)
                 .build(GridPane.class);
     }
 
