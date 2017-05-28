@@ -1,6 +1,6 @@
 package manager;
 
-import notification.Notification;
+import notification.NotificationUpdate;
 import notification.NotificationCenter;
 import service.SubscriberService;
 import service.SubscriptionService;
@@ -31,7 +31,7 @@ public class SubscriptionManager implements SubscriptionService {
     }
 
     @Override
-    public void notifyAll(Notification notification) throws RemoteException {
+    public void notifyAll(NotificationUpdate notification) throws RemoteException {
         notificationCenter.notifyAll(notification);
     }
 

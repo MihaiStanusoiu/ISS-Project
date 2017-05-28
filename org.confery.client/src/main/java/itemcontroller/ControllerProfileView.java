@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import listener.Listener;
 import manager.StageManager;
-import notification.Notification;
+import notification.NotificationUpdate;
 import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -63,13 +63,13 @@ public class ControllerProfileView implements ControllerInterface,
                 nameTextField.getText(), websiteTextField.getText(),
                 bioTextField.getText(), locationTextField.getText());
         listener.setActiveUser(other);
-        listener.notifyAll(new Notification(NotificationType.UPDATE_USER));
+        listener.notifyAll(new NotificationUpdate(NotificationType.UPDATE_USER));
     }
 
     @FXML
     public void onDeleteButtonClick() throws RemoteException, SystemException {
         //userService.delete(user);
-        listener.notifyAll(new Notification(NotificationType.SIGNAL_LOGOUT));
+        listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGOUT));
         listener.setActiveUser(null);
         listener.removeSubscriber(this);
         manager.switchScene(ViewType.CONFERENCES);
@@ -84,7 +84,7 @@ public class ControllerProfileView implements ControllerInterface,
     }
 
     @Override
-    public void update(Notification notification) throws RemoteException {
+    public void update(NotificationUpdate notification) throws RemoteException {
         if(notification.getType().equals(NotificationType.UPDATE_USER)) {
             updateUserData();
         }

@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import listener.Listener;
 import manager.StageManager;
-import notification.Notification;
+import notification.NotificationUpdate;
 import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -92,12 +92,12 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
         String confirm = confirmTextField.getText();
         UserEntity user = service.signUpService().signUp(username, password, confirm, email, displayName);
         this.listener.setActiveUser(user);
-        this.listener.notifyAll(new Notification(NotificationType.SIGNAL_SIGN_UP));
+        this.listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_SIGN_UP));
         manager.switchScene(ViewType.CONFERENCES);
     }
 
     @Override
-    public void update(Notification notification) throws RemoteException {
+    public void update(NotificationUpdate notification) throws RemoteException {
         System.out.print(notification);
     }
 }

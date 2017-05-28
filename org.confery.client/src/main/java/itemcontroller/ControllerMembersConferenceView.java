@@ -8,7 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import manager.StageManager;
-import notification.Notification;
+import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -67,7 +67,7 @@ public class ControllerMembersConferenceView
     public void initialize() {}
 
     @Override
-    public void update(Notification notification) throws RemoteException { }
+    public void update(NotificationUpdate notification) throws RemoteException { }
 
     @FXML private void onPublishButtonClick() {
         System.out.print("Publish Button Click" +  conference.getName());

@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import listener.Listener;
 import manager.StageManager;
-import notification.Notification;
+import notification.NotificationUpdate;
 import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -134,7 +134,7 @@ public class ControllerTopBar
     }
 
     @Override
-    public void update(Notification notification) throws RemoteException {
+    public void update(NotificationUpdate notification) throws RemoteException {
         if (notification.getType().equals(NotificationType.SIGNAL_LOGIN) ||
                 notification.getType().equals(NotificationType.SIGNAL_SIGN_UP) ||
                 notification.getType().equals(NotificationType.UPDATE_USER)) {

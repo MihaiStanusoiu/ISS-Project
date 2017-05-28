@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import listener.Listener;
 import manager.StageManager;
-import notification.Notification;
+import notification.NotificationUpdate;
 import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -90,7 +90,7 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         try {
             UserEntity user = service.loginService().login(username, password);
             listener.setActiveUser(user);
-            listener.notifyAll(new Notification(NotificationType.SIGNAL_LOGIN));
+            listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGIN));
             manager.switchScene(ViewType.CONFERENCES);
         } catch (RemoteException exception) {
             errorLabel.setText(exception.getCause().getMessage());
@@ -98,7 +98,7 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
     }
 
     @Override
-    public void update(Notification notification) throws RemoteException {
+    public void update(NotificationUpdate notification) throws RemoteException {
         System.out.print(notification.getType());
     }
 }

@@ -7,11 +7,11 @@ import java.io.Serializable;
  * @version 1.0
  */
 
-public class Notification implements Serializable {
+public class NotificationUpdate implements Serializable {
 
     private NotificationType type;
 
-    public Notification(NotificationType type) {
+    public NotificationUpdate(NotificationType type) {
         this.type = type;
     }
 

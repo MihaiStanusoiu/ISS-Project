@@ -9,7 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import listener.ListenerHelper;
 import manager.StageManager;
-import notification.Notification;
+import notification.NotificationUpdate;
 import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -115,7 +115,7 @@ public class ControllerMenu implements ControllerInterface {
      */
     @FXML private void onLogoutButtonClick() throws RemoteException {
         listener.setActiveUser(null);
-        listener.notifyAll(new Notification(NotificationType.SIGNAL_LOGOUT));
+        listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGOUT));
     }
 
 }

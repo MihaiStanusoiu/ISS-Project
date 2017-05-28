@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import listener.Listener;
 import manager.StageManager;
 import method.SimpleMethod;
-import notification.Notification;
+import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -105,7 +105,7 @@ public class ControllerConferencesView
     }
 
     @Override
-    public void update(Notification notification) throws RemoteException {
+    public void update(NotificationUpdate notification) throws RemoteException {
         System.out.print("Test");
     }
 }
