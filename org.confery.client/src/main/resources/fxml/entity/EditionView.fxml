@@ -45,7 +45,7 @@
             </HBox>
             <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <children>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                      <children>
                         <VBox maxWidth="1.7976931348623157E308">
                            <children>
@@ -86,7 +86,7 @@
                         </VBox>
                         <HBox maxWidth="1.7976931348623157E308">
                            <children>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="SOMETIMES">
                                  <children>
                                     <Label text="Starts On">
                                        <font>
@@ -103,7 +103,7 @@
                                     </Text>
                                  </children>
                               </VBox>
-                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="SOMETIMES">
                                  <children>
                                     <Label text="Ends On">
                                        <font>
@@ -128,6 +128,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </HBox>
+                        <Pane VBox.vgrow="ALWAYS" />
                         <HBox maxWidth="1.7976931348623157E308">
                            <children>
                               <VBox maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">

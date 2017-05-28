@@ -27,7 +27,8 @@ import java.util.List;
 public class ControllerMembersConferenceView
         implements ControllerInterface, ControllerItemInterface<ConferenceEntity>, SubscriberService {
 
-    @FXML private ListView<UserEntity> chairListView;
+    @FXML
+    private ListView<UserEntity> chairListView;
 
     @Lazy
     @Autowired
@@ -42,9 +43,7 @@ public class ControllerMembersConferenceView
         updateData();
     }
 
-    private void setUpChairList() {
-        //chairListView.setCellFactory(param -> new UserListCell(manager));
-    }
+    private void setUpChairList() { }
 
     private void updateData() {
         updateChairList();
@@ -63,38 +62,38 @@ public class ControllerMembersConferenceView
     /**
      * Effect: Builds the pagination and it's data.
      */
-    public void initialize() {}
+    public void initialize() { }
 
     @Override
     public void update(NotificationUpdate notification) throws RemoteException { }
 
-    @FXML private void onPublishButtonClick() {
-        System.out.print("Publish Button Click" +  conference.getName());
+    @FXML
+    private void onPublishButtonClick() {
         // TODO
     }
 
-    @FXML private void onSaveButtonClick() {
-        System.out.print("Save Button Click" +  conference.getName());
+    @FXML
+    private void onSaveButtonClick() {
         // TODO
     }
 
-    @FXML private void onMembersButtonClick() {
-        System.out.print("Members Button Click" +  conference.getName());
+    @FXML
+    private void onMembersButtonClick() {
         // TODO
     }
 
-    @FXML private void onBasicButtonClick() {
-        System.out.print("Basic Button Click" +  conference.getName());
+    @FXML
+    private void onBasicButtonClick() {
         // TODO
     }
 
-    @FXML private void onSessionsButtonClick() {
-        System.out.print("Session Button Click" +  conference.getName());
+    @FXML
+    private void onSessionsButtonClick() {
         // TODO
     }
 
-    @FXML private void onSubmissionsButtonClick() {
-        System.out.print("Submission Button Click" +  conference.getName());
+    @FXML
+    private void onSubmissionsButtonClick() {
         // TODO
     }
 

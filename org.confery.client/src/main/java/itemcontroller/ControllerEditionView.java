@@ -18,8 +18,8 @@ import static java.util.Arrays.asList;
 
 
 /**
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 @Lazy
@@ -27,19 +27,41 @@ import static java.util.Arrays.asList;
 public class ControllerEditionView
         implements ControllerInterface, ControllerItemInterface<Edition> {
 
-    @FXML private Label locationLabel;
-    @FXML private Text bioText;
-    @FXML private Text locationText;
-    @FXML private Text startingDateText;
-    @FXML private Text endingDateText;
-    @FXML private Label abstractDeadlineLabel;
-    @FXML private Label evaluationDeadlineLabel;
-    @FXML private Label biddingDeadlineLabel;
-    @FXML private Label papersDeadlineLabel;
+    @FXML
+    private Label locationLabel;
 
-    @FXML private ListView<User> chairs;
-    @FXML private ListView<User> pcMembers;
-    @FXML private ListView<User> coChairs;
+    @FXML
+    private Text bioText;
+
+    @FXML
+    private Text locationText;
+
+    @FXML
+    private Text startingDateText;
+
+    @FXML
+    private Text endingDateText;
+
+    @FXML
+    private Label abstractDeadlineLabel;
+
+    @FXML
+    private Label evaluationDeadlineLabel;
+
+    @FXML
+    private Label biddingDeadlineLabel;
+
+    @FXML
+    private Label papersDeadlineLabel;
+
+    @FXML
+    private ListView<User> chairs;
+
+    @FXML
+    private ListView<User> pcMembers;
+
+    @FXML
+    private ListView<User> coChairs;
 
     private Edition edition;
 
@@ -52,28 +74,7 @@ public class ControllerEditionView
      */
     @Override
     public void initialize() {
-
-    }
-
-    @FXML private void onSubmitPaperButtonClick() {
-        System.out.println("Submit Paper");
-        // TODO Create Submit Paper FXML
-    }
-
-    /**
-     * Sets the element in the controller's view
-     * and builds the UI data based on the conference's attributes.
-     * @param element The view's element.
-     */
-    @Override
-    public void setElement(Edition element) {
-        this.edition = element;
-        build();
-        setUpLists();
-    }
-
-    private void setUpLists() {
-        User[] chairsList = { new User("Test", "password", "test@test", "Test") };
+        User[] chairsList = {new User("Test", "password", "test@test", "Test")};
         User[] coChairsList = {
                 new User("Test", "password", "test@test", "Test"),
                 new User("Test", "password", "test@test", "Test"),
@@ -89,6 +90,27 @@ public class ControllerEditionView
         chairs.setItems(FXCollections.observableArrayList(chairsList));
         coChairs.setItems(FXCollections.observableArrayList(coChairsList));
         pcMembers.setItems(FXCollections.observableArrayList(pcMembersList));
+    }
+
+    @FXML
+    private void onSubmitPaperButtonClick() {
+        // TODO Create Submit Paper FXML
+    }
+
+    /**
+     * Sets the element in the controller's view
+     * and builds the UI data based on the conference's attributes.
+     *
+     * @param element The view's element.
+     */
+    @Override
+    public void setElement(Edition element) {
+        this.edition = element;
+        build();
+        setUpLists();
+    }
+
+    private void setUpLists() {
         asList(chairs, pcMembers, coChairs).forEach(this::setUpListViewCell);
     }
 

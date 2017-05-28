@@ -36,6 +36,7 @@
     <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.2.9.Final" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-jetty:1.5.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-actuator:1.5.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: eu.lestard:advanced-bindings:0.4.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jfxtras:openjfx-monocle:1.8.0_20" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jre8:1.1.2-4" level="project" />
     <orderEntry type="library" name="Gradle: org.testfx:testfx-core:4.0.6-alpha" level="project" />

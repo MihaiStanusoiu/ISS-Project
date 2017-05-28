@@ -20,8 +20,8 @@ import view.ViewType;
 import java.util.Date;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 @Lazy
@@ -29,9 +29,11 @@ import java.util.Date;
 public class ControllerConferenceView
         implements ControllerInterface, ControllerItemInterface<Conference> {
 
-    @FXML private Label nameLabel;
+    @FXML
+    private Label nameLabel;
 
     private Conference element;
+
     private ObservableList<Edition> editions;
 
     @FXML
@@ -62,8 +64,7 @@ public class ControllerConferenceView
     @SuppressWarnings("unchecked")
     private Pagination updatePagination(ObservableList<Edition> items) {
         return new PaginationBuilder<Edition, ControllerPaginationEditionItem, GridPane>()
-                .setRows(2)
-                .setColumns(4)
+                .setRows(2).setColumns(4)
                 .setElements(items)
                 .setView(ViewType.EDITION_ITEM)
                 .setStageManager(this.manager)
@@ -71,10 +72,10 @@ public class ControllerConferenceView
                 .build(GridPane.class);
     }
 
-
     /**
      * Sets the element in the controller's view
      * and builds the UI data based on the conference's attributes.
+     *
      * @param element The view's element.
      */
     @Override

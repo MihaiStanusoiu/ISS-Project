@@ -89,7 +89,7 @@ public class CoreContext {
     }
 
     private Boolean isType(Field field) {
-        return Arrays.stream(field.getAnnotation(Context.class).value()).anyMatch(value->value.equals(type));
+        return Arrays.stream(field.getAnnotation(Context.class).value()).anyMatch(value -> value.equals(type));
     }
 
     private void execute(Field field, String methodName, Class<?>... types) {

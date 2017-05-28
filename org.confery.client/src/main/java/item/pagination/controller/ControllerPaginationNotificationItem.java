@@ -1,6 +1,6 @@
-package itemcontroller;
+package item.pagination.controller;
 
-import domain.NotificationEntity;
+import itemcontroller.PaginationControllerItemInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,7 +10,11 @@ import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import transfarable.Notification;
 import view.GradientGenerator;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * @author      Alexandru Stoica
@@ -19,8 +23,8 @@ import view.GradientGenerator;
 
 @Lazy
 @Component
-public class ControllerNotificationItem
-        implements PaginationControllerItemInterface<NotificationEntity> {
+public class ControllerPaginationNotificationItem
+        implements PaginationControllerItemInterface<Notification> {
 
     @FXML private Label textLabel;
     @FXML private Button payButton;
@@ -43,7 +47,7 @@ public class ControllerNotificationItem
     /**
      * Effect: The item that needs to be displayed inside the view. [NotificationEntity]
      */
-    private NotificationEntity item;
+    private Notification item;
 
     /**
      * Effect: Sets the element in order to be displayed
@@ -51,7 +55,7 @@ public class ControllerNotificationItem
      * @param element: The required element for item's view
      */
     @Override
-    public void setElement(NotificationEntity element) {
+    public void setElement(Notification element) {
         this.item = element;
         build();
     }
@@ -113,7 +117,8 @@ public class ControllerNotificationItem
     /**
      * Effect: Starts the payment process. [In development]
      */
-    @FXML public void onPayButtonClick() {
+    @FXML public void onPayButtonClick() throws URISyntaxException, IOException {
+
         System.out.println("Pay Button Click");
     }
 }

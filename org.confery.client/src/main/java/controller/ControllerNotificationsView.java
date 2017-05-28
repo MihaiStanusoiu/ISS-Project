@@ -1,7 +1,8 @@
 package controller;
 
-import domain.NotificationEntity;
-import itemcontroller.ControllerNotificationItem;
+import item.pagination.controller.ControllerPaginationNotificationItem;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.GridPane;
@@ -10,49 +11,54 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
+import transfarable.Notification;
 import view.ViewType;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 @Lazy
 @Component
 public class ControllerNotificationsView implements ControllerInterface {
 
-    @FXML private Pagination pagination;
+    @FXML
+    private Pagination pagination;
 
     @Lazy
     @Autowired
     private StageManager manager;
 
+    private ObservableList<Notification> notifications;
+
+
     /**
      * Effect: Builds the pagination and it's data.
      */
     @Override
-    @SuppressWarnings("unchecked")
     public void initialize() {
-        // This part is for testing the pagination's builder with mocking data.
-        NotificationEntity[] notifications = {
-                new NotificationEntity("TestA", Boolean.FALSE),
-                new NotificationEntity("TestB", Boolean.TRUE),
-                new NotificationEntity("TestB", Boolean.TRUE),
-                new NotificationEntity("TestB", Boolean.TRUE),
-                new NotificationEntity("TestB", Boolean.TRUE),
-                new NotificationEntity("TestB", Boolean.TRUE),
-                new NotificationEntity("TestB", Boolean.TRUE),
-                new NotificationEntity("TestB", Boolean.TRUE)
+        Notification[] items = {
+                new Notification(1, "Test", Boolean.TRUE),
+                new Notification(1, "Test", Boolean.FALSE),
+                new Notification(1, "Test", Boolean.FALSE),
+                new Notification(1, "Test", Boolean.TRUE),
+                new Notification(1, "Test", Boolean.TRUE),
+                new Notification(1, "Test", Boolean.TRUE),
         };
-        pagination = new PaginationBuilder<NotificationEntity, ControllerNotificationItem, GridPane>()
-                .setRows(2)
-                .setColumns(4)
-                .setElements(notifications)
-                .setView(ViewType.NOTIFICATION_ITEM)
-                .setStageManager(this.manager)
-                .setPagination(this.pagination)
-                .build(GridPane.class);
+        notifications = FXCollections.observableArrayList(items);
+        pagination = updatePagination(notifications);
         pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
     }
 
+    @SuppressWarnings("unchecked")
+    private Pagination updatePagination(ObservableList<Notification> items) {
+        return new PaginationBuilder<Notification, ControllerPaginationNotificationItem, GridPane>()
+                .setRows(2).setColumns(4)
+                .setElements(items)
+                .setView(ViewType.NOTIFICATION_ITEM)
+                .setStageManager(manager)
+                .setPagination(pagination)
+                .build(GridPane.class);
+    }
 }

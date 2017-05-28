@@ -13,17 +13,17 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- *  Special builder for pagination manager. [based on Builder Pattern]
+ * Special builder for pagination manager. [based on Builder Pattern]
+ * <p>
+ * Checks if all the manager's requirements are respected
+ * and creates the wanted configuration for the view's pagination.
+ * <p>
+ * T: The domain element
+ * E: The item's view controller
+ * U: The pagination's pane (the page's pane)
  *
- *  Checks if all the manager's requirements are respected
- *  and creates the wanted configuration for the view's pagination.
- *
- *  T: The domain element
- *  E: The item's view controller
- *  U: The pagination's pane (the page's pane)
- *
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>, U extends Pane> {
@@ -37,6 +37,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
 
     /**
      * Sets the item's view and returns the builder for later chaining.
+     *
      * @param view The item's view.
      * @return the builder for later chaining.
      */
@@ -47,6 +48,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
 
     /**
      * Effect: Sets the pagination's elements and returns the builder for later chaining.
+     *
      * @param elements The pagination's elements
      * @return the builder for later chaining.
      */
@@ -58,6 +60,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
 
     /**
      * Effect: Sets the pagination's elements and returns the builder for later chaining.
+     *
      * @param elements The pagination's elements
      * @return the builder for later chaining.
      */
@@ -74,6 +77,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
 
     /**
      * Effect: Sets the pagination's elements and returns the builder for later chaining.
+     *
      * @param elements The pagination's elements
      * @return the builder for later chaining.
      */
@@ -84,6 +88,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
 
     /**
      * Effect: Sets the pagination's number of rows and returns the builder for later chaining.
+     *
      * @param rows The pagination's number of rows.
      * @return the builder for later chaining.
      */
@@ -95,6 +100,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
 
     /**
      * Effect: Sets the pagination's number of columns and returns the builder for later chaining.
+     *
      * @param rows The pagination's number of columns.
      * @return the builder for later chaining.
      */
@@ -106,6 +112,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
 
     /**
      * Effect: Sets the pagination's stage manager and returns the builder for later chaining.
+     *
      * @param stageManager The main view's stage manager.
      * @return the builder for later chaining.
      */
@@ -116,6 +123,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
 
     /**
      * Effect: Sets the main view's pagination and returns the builder for later chaining.
+     *
      * @param pagination The main view's pagination.
      * @return the builder for later chaining.
      */
@@ -126,6 +134,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
 
     /**
      * Effect: Builds the pagination.
+     *
      * @param paneType The base pane class for each page. [example: GridPane.class]
      * @return the wanted pagination.
      * @throws IllegalStateException If you forget an important element for the pagination's manager.

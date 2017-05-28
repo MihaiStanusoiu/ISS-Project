@@ -34,10 +34,14 @@ import static utils.Try.runFunction;
 public class ControllerConferencesView
         implements ControllerInterface, SubscriberService {
 
-    @FXML private Button recentButton;
-    @FXML private Button popularButton;
-    @FXML private TextField searchTextField;
-    @FXML private Pagination pagination;
+    @FXML
+    private Button recentButton;
+    @FXML
+    private Button popularButton;
+    @FXML
+    private TextField searchTextField;
+    @FXML
+    private Pagination pagination;
 
     @Lazy
     @Autowired
@@ -60,10 +64,10 @@ public class ControllerConferencesView
     @SuppressWarnings("unchecked")
     public void initialize() {
         Conference[] items = {
-                    new Conference("Conference Name", "TEST"),
-                    new Conference("Conference Name", "TEST"),
-                    new Conference("Conference Name", "TEST"),
-                    new Conference("Conference Name", "TEST"),
+                new Conference("Conference Name", "TEST"),
+                new Conference("Conference Name", "TEST"),
+                new Conference("Conference Name", "TEST"),
+                new Conference("Conference Name", "TEST"),
         };
         conferences = FXCollections.observableArrayList(items);
         pagination = updatePagination(conferences);
@@ -92,18 +96,22 @@ public class ControllerConferencesView
     /**
      * Effect: Sorts conferences by popularity
      * based on the number of members that participate at the conference.
+     *
      * @implNote status: Unavailable at the moment.
      */
-    @FXML private void onPopularButtonClick() {
+    @FXML
+    private void onPopularButtonClick() {
         popularButton.setOpacity(1);
         recentButton.setOpacity(0.5);
     }
 
     /**
      * Effect: Sorts conferences by date.
+     *
      * @implNote status: Unavailable at the moment.
      */
-    @FXML private void onRecentButtonClick() {
+    @FXML
+    private void onRecentButtonClick() {
         popularButton.setOpacity(0.5);
         recentButton.setOpacity(1);
     }
@@ -115,9 +123,11 @@ public class ControllerConferencesView
 
     /**
      * Effect: Search function for conferences.
+     *
      * @implNote status: Unavailable at the moment.
      */
-    @FXML private void onSearchButtonClick() {
+    @FXML
+    private void onSearchButtonClick() {
         searchBasedOn(searchTextField.getText());
     }
 

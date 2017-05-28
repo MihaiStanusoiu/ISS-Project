@@ -13,8 +13,8 @@ import transfarable.User;
 import view.ViewType;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.1
+ * @author Alexandru Stoica
+ * @version 1.1
  */
 
 @Lazy
@@ -22,10 +22,17 @@ import view.ViewType;
 public class ControllerPaginationUserItem
         implements PaginationControllerItemInterface<User> {
 
-    @FXML private Label locationLabel;
-    @FXML private Label nameLabel;
-    @FXML private Label usernameLabel;
-    @FXML private BorderPane pane;
+    @FXML
+    private Label locationLabel;
+
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private Label usernameLabel;
+
+    @FXML
+    private BorderPane pane;
 
     /**
      * Effect: The manager allows the item to switch the
@@ -43,6 +50,7 @@ public class ControllerPaginationUserItem
     /**
      * Effect: Sets the element in order to be displayed
      * and builds the view ones the item is set.
+     *
      * @param element: The required element for item's view
      */
     @Override
@@ -79,6 +87,7 @@ public class ControllerPaginationUserItem
 
     /**
      * Effect: Adds support for scene switching.
+     *
      * @param stageManager The main view's stage manager.
      */
     @Override

@@ -18,10 +18,11 @@ import transfarable.User;
 import view.ViewType;
 
 import java.rmi.RemoteException;
+import java.util.function.Predicate;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 @Lazy
@@ -29,12 +30,18 @@ import java.rmi.RemoteException;
 public class ControllerUsersView
         implements ControllerInterface, SubscriberService {
 
+    @FXML
+    private TextField searchTextField;
+
+    @FXML
+    public Pagination pagination;
+
     @Lazy
     @Autowired
     private StageManager manager;
 
-    @FXML private TextField searchTextField;
-    @FXML public Pagination pagination;
+    private Predicate<User> search = user -> user.getName()
+            .toLowerCase().contains(searchTextField.getText());
 
     private ObservableList<User> users;
 
@@ -42,23 +49,28 @@ public class ControllerUsersView
     public void initialize() {
         User[] usersList = {
                 new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
-                new User("Test", "password", "email@email", "Test Name"),
-                new User("Test", "password", "email@email", "Test Name"),
-                new User("Test", "password", "email@email", "Test Name"),
-                new User("Test", "password", "email@email", "Test Name"),
-                new User("Test", "password", "email@email", "Test Name"),
-                new User("Test", "password", "email@email", "Test Name")
+                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
+                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
+                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
+                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
+                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
+                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York")
         };
         users = FXCollections.observableArrayList(usersList);
         pagination = updatePagination(users);
         pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+        setUpSearchField();
+    }
+
+    private void setUpSearchField() {
+        searchTextField.textProperty().addListener((observable, oldValue, newValue) ->
+                updatePagination(users.filtered(search)));
     }
 
     @SuppressWarnings("unchecked")
     private Pagination updatePagination(ObservableList<User> list) {
         return new PaginationBuilder<User, ControllerPaginationUserItem, GridPane>()
-                .setRows(2)
-                .setColumns(4)
+                .setRows(2).setColumns(4)
                 .setElements(list)
                 .setView(ViewType.USER_ITEM)
                 .setStageManager(this.manager)
@@ -68,11 +80,12 @@ public class ControllerUsersView
 
     /**
      * Effect: Search function for users.
+     *
      * @implNote status: Unavailable at the moment.
      */
-    @FXML private void onSearchButtonClick() {
-        String searchTerm = searchTextField.getText();
-        System.out.println(searchTerm);
+    @FXML
+    private void onSearchButtonClick() {
+        pagination = updatePagination(users.filtered(search));
     }
 
     @Override

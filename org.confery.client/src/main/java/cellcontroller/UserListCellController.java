@@ -15,10 +15,14 @@ import transfarable.User;
 public class UserListCellController
         implements PaginationControllerItemInterface<User> {
 
-    @FXML private BorderPane pane;
-    @FXML private Label nameLabel;
+    @FXML
+    private BorderPane pane;
+
+    @FXML
+    private Label nameLabel;
 
     private User user;
+
     private StageManager manager;
 
     @Override
@@ -38,7 +42,7 @@ public class UserListCellController
 
     @Override
     public void setStageManager(StageManager stageManager) {
-         manager = stageManager;
+        manager = stageManager;
     }
 
     /**

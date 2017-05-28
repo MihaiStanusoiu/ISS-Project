@@ -15,8 +15,8 @@ import view.GradientGenerator;
 import view.ViewType;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.1
+ * @author Alexandru Stoica
+ * @version 1.1
  */
 
 @Lazy
@@ -24,19 +24,23 @@ import view.ViewType;
 public class ControllerPaginationConferenceItem
         implements PaginationControllerItemInterface<Conference> {
 
-    @FXML private Label editionNumberLabel;
+    @FXML
+    private Label editionNumberLabel;
 
-    @FXML private Label acronymLabel;
+    @FXML
+    private Label acronymLabel;
 
     /**
      * Displays the conference's name.
      */
-    @FXML private Label nameLabel;
+    @FXML
+    private Label nameLabel;
 
     /**
      * The item's root pane.
      */
-    @FXML private BorderPane pane;
+    @FXML
+    private BorderPane pane;
 
     /**
      * The manager allows the item to switch the main scene
@@ -49,7 +53,8 @@ public class ControllerPaginationConferenceItem
     /**
      * Effect: Defines the background of the item. (gradient)
      */
-    @FXML private Button background;
+    @FXML
+    private Button background;
 
     /**
      * Effect: Generates a gradient color for our element.
@@ -64,6 +69,7 @@ public class ControllerPaginationConferenceItem
     /**
      * Effect: Sets the element in order to be displayed
      * and builds the view ones the item is set.
+     *
      * @param element: The required element for item's view
      */
     @Override
@@ -102,6 +108,7 @@ public class ControllerPaginationConferenceItem
 
     /**
      * Effect: Adds support for scene switching.
+     *
      * @param stageManager The main view's stage manager.
      */
     @Override

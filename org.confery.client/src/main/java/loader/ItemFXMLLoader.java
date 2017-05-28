@@ -9,8 +9,8 @@ import view.ViewType;
 import java.io.IOException;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.1
+ * @author Alexandru Stoica
+ * @version 1.1
  */
 
 public class ItemFXMLLoader<T, Controller extends PaginationControllerItemInterface<T>> {
@@ -20,6 +20,7 @@ public class ItemFXMLLoader<T, Controller extends PaginationControllerItemInterf
     /**
      * Effect: Loads a view based on type and keeps
      * details about it's view-controller and root pane.
+     *
      * @param view [ViewType] The view's type.
      * @throws LoaderException: If we are unable to load the view.
      */
@@ -43,8 +44,9 @@ public class ItemFXMLLoader<T, Controller extends PaginationControllerItemInterf
 
     /**
      * Effect: Sets an element in the view-controller.
-     * @apiNote Used for item view controllers.
+     *
      * @param element [T]: The required element.
+     * @apiNote Used for item view controllers.
      */
     public void setElement(T element) {
         controller.setElement(element);
@@ -54,6 +56,7 @@ public class ItemFXMLLoader<T, Controller extends PaginationControllerItemInterf
      * Effect: The item may require the stage manager
      * in order to switch the main view.
      * This function offers support for such cases.
+     *
      * @param stageManager The main view's stage manager
      */
     public void setStageManager(StageManager stageManager) {

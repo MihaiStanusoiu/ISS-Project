@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 @Lazy
@@ -19,8 +19,11 @@ import org.springframework.stereotype.Component;
 public class ControllerMyConferencesView
         implements ControllerInterface {
 
-    @FXML private TextField searchTextField;
-    @FXML private Pagination pagination;
+    @FXML
+    private TextField searchTextField;
+
+    @FXML
+    private Pagination pagination;
 
     @Lazy
     @Autowired
@@ -41,9 +44,11 @@ public class ControllerMyConferencesView
 
     /**
      * Effect: Search function for conferences.
+     *
      * @implNote status: Unavailable at the moment.
      */
-    @FXML private void onSearchButtonClick() {
+    @FXML
+    private void onSearchButtonClick() {
         String searchTerm = searchTextField.getText();
         System.out.println(searchTerm);
     }

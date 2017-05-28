@@ -16,8 +16,8 @@ import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 @Configuration
@@ -47,7 +47,9 @@ public class SpringConfiguration {
         return listener;
     }
 
-    /** Local Resource Bundle */
+    /**
+     * Local Resource Bundle
+     */
     @Bean
     public ResourceBundle resourceBundle() {
         return ResourceBundle.getBundle("application");
@@ -55,7 +57,7 @@ public class SpringConfiguration {
 
     /**
      * Effect: Bean for Stage Manager Spring DI
-     *
+     * <p>
      * <p>Requires @Lazy because the stage is NOT initialized when Spring
      * is initializing the application's context.</p>
      *

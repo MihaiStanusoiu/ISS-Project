@@ -21,8 +21,8 @@ import transfarable.User;
 import view.ViewType;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 @Lazy
@@ -30,14 +30,26 @@ import view.ViewType;
 public class ControllerUserView
         implements ControllerInterface, ControllerItemInterface<User> {
 
-    @FXML private Label nameLabel;
-    @FXML private Text bioText;
-    @FXML private Text locationText;
-    @FXML private Text websiteText;
-    @FXML private Text emailText;
+    @FXML
+    private Label nameLabel;
 
-    @FXML private Pagination paginationConferences;
-    @FXML private Pagination paginationSubmissions;
+    @FXML
+    private Text bioText;
+
+    @FXML
+    private Text locationText;
+
+    @FXML
+    private Text websiteText;
+
+    @FXML
+    private Text emailText;
+
+    @FXML
+    private Pagination paginationConferences;
+
+    @FXML
+    private Pagination paginationSubmissions;
 
     private ObservableList<Conference> conferences;
     private ObservableList<Submission> submissions;
@@ -74,19 +86,18 @@ public class ControllerUserView
     @SuppressWarnings("unchecked")
     private Pagination updatePaginationSubmission(ObservableList<Submission> items) {
         return new PaginationBuilder<Submission, ControllerPaginationSubmissionItem, GridPane>()
-                .setRows(1)
-                .setColumns(4)
+                .setRows(1).setColumns(4)
                 .setElements(items)
                 .setView(ViewType.SUBMISSION_ITEM)
                 .setStageManager(manager)
                 .setPagination(paginationSubmissions)
                 .build(GridPane.class);
     }
+
     @SuppressWarnings("unchecked")
     private Pagination updatePaginationConference(ObservableList<Conference> items) {
         return new PaginationBuilder<Conference, ControllerPaginationConferenceItem, GridPane>()
-                .setRows(1)
-                .setColumns(4)
+                .setRows(1).setColumns(4)
                 .setElements(items)
                 .setView(ViewType.CONFERENCE_ITEM)
                 .setStageManager(manager)
@@ -96,6 +107,7 @@ public class ControllerUserView
 
     /**
      * {@inheritDoc}
+     *
      * @param element The view's element.
      */
     @Override

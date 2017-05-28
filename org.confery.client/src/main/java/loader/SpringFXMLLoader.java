@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.1
+ * @author Alexandru Stoica
+ * @version 1.1
  */
 
 @Component
@@ -29,7 +29,7 @@ public class SpringFXMLLoader {
     private final ApplicationContext context;
 
     /**
-     * @param context: The spring's application context [ApplicationContext]
+     * @param context:        The spring's application context [ApplicationContext]
      * @param resourceBundle: The local resources. [ResourceBundle]
      */
     @Autowired
@@ -40,6 +40,7 @@ public class SpringFXMLLoader {
 
     /**
      * Effect: Loads a given fxml file.
+     *
      * @param fxmlFilePath: The fxml file's path [String]
      * @return root: The root node [Parent]
      * @throws IOException: If we are unable to load the fxml file.
@@ -55,9 +56,10 @@ public class SpringFXMLLoader {
     /**
      * Effect: Loads a given fxml file.
      * and set's the fxml view's main item.
+     *
      * @param fxmlFilePath: The fxml file's path [String]
-     * @param element: The view's main element [T]
-     * @param <T>: The main element's type
+     * @param element:      The view's main element [T]
+     * @param <T>:          The main element's type
      * @return root: The root node [Parent]
      * @throws IOException: If we are unable to load the fxml file.
      */

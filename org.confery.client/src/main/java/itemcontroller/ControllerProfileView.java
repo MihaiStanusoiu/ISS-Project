@@ -30,11 +30,20 @@ import static utils.Try.runFunction;
 public class ControllerProfileView implements ControllerInterface,
         ControllerItemInterface<UserEntity>, SubscriberService {
 
-    @FXML private TextField nameTextField;
-    @FXML private TextField websiteTextField;
-    @FXML private TextField locationTextField;
-    @FXML private TextField bioTextField;
-    @FXML private TextField emailTextField;
+    @FXML
+    private TextField nameTextField;
+
+    @FXML
+    private TextField websiteTextField;
+
+    @FXML
+    private TextField locationTextField;
+
+    @FXML
+    private TextField bioTextField;
+
+    @FXML
+    private TextField emailTextField;
 
     private UserEntity user;
 
@@ -85,7 +94,7 @@ public class ControllerProfileView implements ControllerInterface,
 
     @Override
     public void update(NotificationUpdate notification) throws RemoteException {
-        if(notification.getType().equals(NotificationType.UPDATE_USER)) {
+        if (notification.getType().equals(NotificationType.UPDATE_USER)) {
             updateUserData();
         }
     }
