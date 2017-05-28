@@ -16,6 +16,7 @@ import java.rmi.RemoteException;
 public interface Listener extends SubscriberService, SubscriptionService, Serializable, Remote {
 
     void setActiveUser(UserEntity user) throws RemoteException;
+
     UserEntity getActiveUser() throws RemoteException;
 
 }

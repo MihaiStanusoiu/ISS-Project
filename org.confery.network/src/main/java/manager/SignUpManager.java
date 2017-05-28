@@ -22,7 +22,7 @@ public class SignUpManager implements SignUpService {
 
     private NotificationCenter notificationCenter;
     private UserProtocol userModel;
-    private UserEntity activeUser;
+    private UserEntity active;
 
     public SignUpManager(NotificationCenter notificationCenter, UserProtocol userModel) {
         this.notificationCenter = notificationCenter;
@@ -76,8 +76,7 @@ public class SignUpManager implements SignUpService {
     }
 
     @Override
-    public void setActiveUser(UserEntity user) {
-        activeUser = user;
+    public void activeUser(UserEntity user) throws RemoteException {
+        active = user;
     }
-
 }

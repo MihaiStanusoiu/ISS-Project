@@ -13,7 +13,7 @@ import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import service.SignUpService;
+import service.CollectionService;
 import service.SubscriberService;
 import view.ViewType;
 
@@ -45,7 +45,7 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
 
     @Lazy
     @Autowired
-    private SignUpService signUpService;
+    private CollectionService service;
 
     @Lazy
     @Autowired
@@ -90,7 +90,7 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         String confirm = confirmTextField.getText();
-        UserEntity user = this.signUpService.signUp(username, password, confirm, email, displayName);
+        UserEntity user = service.signUpService().signUp(username, password, confirm, email, displayName);
         this.listener.setActiveUser(user);
         this.listener.notifyAll(new Notification(NotificationType.SIGNAL_SIGN_UP));
         manager.switchScene(ViewType.CONFERENCES);

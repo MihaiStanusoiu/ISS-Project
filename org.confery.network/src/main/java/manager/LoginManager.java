@@ -21,7 +21,7 @@ public class LoginManager implements LoginService {
 
     private NotificationCenter notificationCenter;
     private UserProtocol userModel;
-    private UserEntity activeUser;
+    private UserEntity active;
 
     public LoginManager(NotificationCenter notificationCenter, UserProtocol userModel) throws RemoteException {
         this.notificationCenter = notificationCenter;
@@ -41,8 +41,7 @@ public class LoginManager implements LoginService {
     }
 
     @Override
-    public void setActiveUser(UserEntity user) {
-        activeUser = user;
+    public void activeUser(UserEntity user) throws RemoteException {
+        active = user;
     }
-
 }

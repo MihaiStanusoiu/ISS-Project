@@ -87,21 +87,9 @@ public class SpringConfiguration {
     }
 
     @Bean
-    public LoginService loginService()
-            throws RemoteException, NotBoundException, MalformedURLException {
-        return (LoginService) getService(LoginService.class, "LoginService", port).getObject();
-    }
-
-    @Bean
     public SubscriptionService subscriptionService()
             throws RemoteException, NotBoundException, MalformedURLException {
         return (SubscriptionService) getService(SubscriptionService.class, "SubscriptionService", port).getObject();
-    }
-
-    @Bean
-    public SignUpService signUpService()
-            throws RemoteException, NotBoundException, MalformedURLException {
-        return (SignUpService) getService(SignUpService.class, "SignUpService", port).getObject();
     }
 
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import domain.NotificationEntity;
 import domain.UserEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,14 +8,15 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import listener.Listener;
 import manager.StageManager;
-import service.UserService;
 import method.SimpleMethod;
 import notification.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.CollectionService;
+import service.NotificationService;
 import service.SubscriberService;
+import service.UserService;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -56,10 +58,18 @@ public class ControllerConferencesView
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
         // TODO
-        SimpleMethod<RemoteException> handler = exception -> System.out.print(exception.getMessage());
+        SimpleMethod<RemoteException> handler = exception -> System.out.print(exception.getCause());
         UserService userService = runFunction(service::userService).orHandle(handler);
+
         List<UserEntity> users = runFunction(userService::getAll).orHandle(handler);
         users.forEach(System.out::println);
+
+        NotificationService notificationService = runFunction(service::notificationService).orHandle(handler);
+
+        List<NotificationEntity> notifications = runFunction(notificationService::getAll).orHandle(handler);
+        notifications.forEach(System.out::println);
+
+
         manager.getPrimaryStage().setOnCloseRequest(event ->
                 runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
         runFunction(listener::addSubscriber, this).orHandle(System.out::println);

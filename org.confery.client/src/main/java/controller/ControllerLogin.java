@@ -14,7 +14,7 @@ import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import service.LoginService;
+import service.CollectionService;
 import service.SubscriberService;
 import view.ViewType;
 
@@ -43,7 +43,7 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
 
     @Lazy
     @Autowired
-    private LoginService loginService;
+    private CollectionService service;
 
     @Lazy
     @Autowired
@@ -88,7 +88,7 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         try {
-            UserEntity user = loginService.login(username, password);
+            UserEntity user = service.loginService().login(username, password);
             listener.setActiveUser(user);
             listener.notifyAll(new Notification(NotificationType.SIGNAL_LOGIN));
             manager.switchScene(ViewType.CONFERENCES);
