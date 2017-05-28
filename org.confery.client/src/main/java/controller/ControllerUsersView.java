@@ -1,16 +1,23 @@
 package controller;
 
-import domain.UserEntity;
-import itemcontroller.ControllerUserItem;
+import item.pagination.controller.ControllerPaginationUserItem;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import manager.StageManager;
+import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
+import service.SubscriberService;
+import transfarable.User;
+import view.ViewType;
+
+import java.rmi.RemoteException;
 
 /**
  * @author      Alexandru Stoica
@@ -19,37 +26,44 @@ import pagination.PaginationBuilder;
 
 @Lazy
 @Component
-public class ControllerUsersView implements ControllerInterface {
+public class ControllerUsersView
+        implements ControllerInterface, SubscriberService {
 
     @Lazy
     @Autowired
     private StageManager manager;
 
     @FXML private TextField searchTextField;
-    @FXML private Pagination pagination;
+    @FXML public Pagination pagination;
+
+    private ObservableList<User> users;
 
     @Override
-    @SuppressWarnings("unchecked")
     public void initialize() {
-        // This part is for testing the pagination's builder with mocking data.
-        UserEntity[] users = {
-                new UserEntity("test_user", "test", "test@test.com", "Test User"),
-                new UserEntity("test_user", "test", "test@test.com", "Test User"),
-                new UserEntity("test_user", "test", "test@test.com", "Test User"),
-                new UserEntity("test_user", "test", "test@test.com", "Test User"),
-                new UserEntity("test_user", "test", "test@test.com", "Test User"),
-                new UserEntity("test_user", "test", "test@test.com", "Test User"),
-                new UserEntity("test_user", "test", "test@test.com", "Test User"),
-                new UserEntity("test_user", "test", "test@test.com", "Test User")
+        User[] usersList = {
+                new User("Test", "password", "email@email", "Test Name"),
+                new User("Test", "password", "email@email", "Test Name"),
+                new User("Test", "password", "email@email", "Test Name"),
+                new User("Test", "password", "email@email", "Test Name"),
+                new User("Test", "password", "email@email", "Test Name"),
+                new User("Test", "password", "email@email", "Test Name"),
+                new User("Test", "password", "email@email", "Test Name")
         };
-        pagination = new PaginationBuilder<UserEntity, ControllerUserItem, GridPane>()
+        users = FXCollections.observableArrayList(usersList);
+        pagination = updatePagination(users);
+        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+    }
+
+    @SuppressWarnings("unchecked")
+    private Pagination updatePagination(ObservableList<User> list) {
+        return new PaginationBuilder<User, ControllerPaginationUserItem, GridPane>()
                 .setRows(2)
                 .setColumns(4)
-                .setElements(users)
+                .setElements(list)
+                .setView(ViewType.USER_ITEM)
                 .setStageManager(this.manager)
                 .setPagination(this.pagination)
                 .build(GridPane.class);
-        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
     }
 
     /**
@@ -61,4 +75,8 @@ public class ControllerUsersView implements ControllerInterface {
         System.out.println(searchTerm);
     }
 
+    @Override
+    public void update(NotificationUpdate notification) throws RemoteException {
+        System.out.println("Hello");
+    }
 }

@@ -8,26 +8,36 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerUsersView">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerUsersView">
    <center>
       <VBox minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" fillHeight="false" minHeight="60.0" minWidth="0.0" prefHeight="60.0" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%);">
+            <HBox alignment="CENTER" fillHeight="false" minHeight="-Infinity" minWidth="0.0" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%);">
                <children>
-                  <Label minWidth="0.0" text="People" textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Pane HBox.hgrow="ALWAYS" />
+                  <VBox alignment="CENTER_LEFT" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label minWidth="0.0" text="People" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </VBox>
                   <TextField fx:id="searchTextField" minWidth="0.0" promptText="Search..." style="-fx-background-color: transparent; -fx-prompt-text-fill: white; -fx-text-fill: white;" />
                   <Button minWidth="0.0" mnemonicParsing="false" onAction="#onSearchButtonClick" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../png_icons/search_icon_light.png" />
+                              <Image url="@../../png_icons/search_icon_light.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -37,7 +47,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </HBox>
-            <Pagination fx:id="pagination" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" stylesheets="@../css/pagination.css" VBox.vgrow="ALWAYS">
+            <Pagination fx:id="pagination" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" stylesheets="@../../css/pagination.css" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin></Pagination>
@@ -47,7 +57,7 @@
    <right>
       <StackPane alignment="TOP_CENTER" style="-fx-background-color: white;" BorderPane.alignment="TOP_CENTER">
          <children>
-            <fx:include source="Menu.fxml" />
+            <fx:include source="../Menu.fxml" />
          </children>
          <effect>
             <DropShadow blurType="GAUSSIAN" color="#0000000d" height="0.0" radius="18.4725" width="75.89" />
@@ -57,7 +67,7 @@
    <top>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <fx:include source="TopBar.fxml" />
+            <fx:include source="../TopBar.fxml" />
          </children>
          <effect>
             <DropShadow color="#0000000d" height="0.0" radius="4.5" spread="0.33" width="20.0" />

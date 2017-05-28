@@ -18,7 +18,7 @@ public enum ViewType implements ViewTypeInterface {
         /** Conferences View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/ConferencesView.fxml";
+            return "/fxml/grid/ConferencesView.fxml";
         }
 
     },
@@ -98,7 +98,7 @@ public enum ViewType implements ViewTypeInterface {
         /** UserEntity Item View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/UserItemView.fxml";
+            return "/fxml/pagination/UserItemView.fxml";
         }
 
     },
@@ -128,7 +128,7 @@ public enum ViewType implements ViewTypeInterface {
         /** Users View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/UsersView.fxml";
+            return "/fxml/grid/UsersView.fxml";
         }
 
     },

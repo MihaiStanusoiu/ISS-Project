@@ -1,6 +1,6 @@
-package itemcontroller;
+package item.pagination.controller;
 
-import domain.UserEntity;
+import itemcontroller.PaginationControllerItemInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -9,6 +9,7 @@ import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import transfarable.User;
 import view.ViewType;
 
 /**
@@ -18,8 +19,8 @@ import view.ViewType;
 
 @Lazy
 @Component
-public class ControllerUserItem
-        implements PaginationControllerItemInterface<UserEntity> {
+public class ControllerPaginationUserItem
+        implements PaginationControllerItemInterface<User> {
 
     @FXML private Label locationLabel;
     @FXML private Label nameLabel;
@@ -37,7 +38,7 @@ public class ControllerUserItem
     /**
      * Effect: The item that needs to be displayed inside the view. [UserEntity]
      */
-    private UserEntity item;
+    private User item;
 
     /**
      * Effect: Sets the element in order to be displayed
@@ -45,7 +46,7 @@ public class ControllerUserItem
      * @param element: The required element for item's view
      */
     @Override
-    public void setElement(UserEntity element) {
+    public void setElement(User element) {
         this.item = element;
         build();
     }
@@ -63,9 +64,9 @@ public class ControllerUserItem
      * Effect: Builds the view with the set item.
      */
     private void build() {
-        locationLabel.setText(item.getLocation());
-        nameLabel.setText(item.getName());
-        usernameLabel.setText("@" + item.getUsername());
+//        locationLabel.setText(item.getLocation());
+//        nameLabel.setText(item.getName());
+//        usernameLabel.setText("@" + item.getUsername());
     }
 
     /**
