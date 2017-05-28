@@ -1,6 +1,5 @@
 package itemcontroller;
 
-import cells.UserListCell;
 import controller.ControllerInterface;
 import domain.ConferenceEntity;
 import domain.UserEntity;
@@ -44,7 +43,7 @@ public class ControllerMembersConferenceView
     }
 
     private void setUpChairList() {
-        chairListView.setCellFactory(param -> new UserListCell(manager));
+        //chairListView.setCellFactory(param -> new UserListCell(manager));
     }
 
     private void updateData() {

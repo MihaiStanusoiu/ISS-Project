@@ -60,10 +60,10 @@ public class ControllerConferencesView
     @SuppressWarnings("unchecked")
     public void initialize() {
         Conference[] items = {
-                    new Conference("Test", "TEST"),
-                    new Conference("Test", "TEST"),
-                    new Conference("Test", "TEST"),
-                    new Conference("Test", "TEST"),
+                    new Conference("Conference Name", "TEST"),
+                    new Conference("Conference Name", "TEST"),
+                    new Conference("Conference Name", "TEST"),
+                    new Conference("Conference Name", "TEST"),
         };
         conferences = FXCollections.observableArrayList(items);
         pagination = updatePagination(conferences);

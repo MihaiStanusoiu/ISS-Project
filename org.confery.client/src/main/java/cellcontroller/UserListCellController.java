@@ -1,11 +1,11 @@
 package cellcontroller;
 
-import domain.UserEntity;
 import itemcontroller.PaginationControllerItemInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import manager.StageManager;
+import transfarable.User;
 
 /**
  * @author Alexandru Stoica
@@ -13,16 +13,16 @@ import manager.StageManager;
  */
 
 public class UserListCellController
-        implements PaginationControllerItemInterface<UserEntity> {
+        implements PaginationControllerItemInterface<User> {
 
     @FXML private BorderPane pane;
     @FXML private Label nameLabel;
 
-    private UserEntity user;
+    private User user;
     private StageManager manager;
 
     @Override
-    public void setElement(UserEntity element) {
+    public void setElement(User element) {
         user = element;
         build();
     }

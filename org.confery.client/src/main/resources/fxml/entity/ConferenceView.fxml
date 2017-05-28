@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itemcontroller.ControllerConferenceView">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itemcontroller.ControllerConferenceView">
    <top>
-      <fx:include source="TopBar.fxml" />
+      <fx:include source="../TopBar.fxml" />
    </top>
    <center>
       <VBox BorderPane.alignment="CENTER">
@@ -20,19 +25,19 @@
                      </font>
                   </Label>
                   <Pane HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: white;" text="Submit Papers" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </HBox>
+            <Pagination fx:id="pagination" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
          </children>
       </VBox>
    </center>
    <right>
-      <AnchorPane style="-fx-background-color: &quot;white&quot;;" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: &quot;white&quot;;" BorderPane.alignment="CENTER">
          <children>
-            <fx:include source="Menu.fxml" />
+            <fx:include source="../Menu.fxml" />
          </children>
       </AnchorPane>
    </right>
