@@ -2,7 +2,6 @@ package translator;
 
 
 import domain.UserEntity;
-import transferable.User;
 
 /**
  * @author Alexandru Stoica

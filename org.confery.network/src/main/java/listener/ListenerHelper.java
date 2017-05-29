@@ -3,7 +3,6 @@ package listener;
 import domain.UserEntity;
 import notification.NotificationUpdate;
 import service.SubscriberService;
-import transferable.User;
 import translator.UserTranslator;
 
 import java.rmi.RemoteException;

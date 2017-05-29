@@ -6,7 +6,6 @@ import domain.UserEntity;
 import exception.SystemException;
 import protocol.ModelInterface;
 import service.Service;
-import transferable.User;
 import translator.UserTranslator;
 
 import java.io.Serializable;
