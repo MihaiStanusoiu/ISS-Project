@@ -3,6 +3,7 @@ package listener;
 import domain.UserEntity;
 import notification.NotificationUpdate;
 import service.SubscriberService;
+import utils.Try;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -51,7 +52,7 @@ public class ListenerHelper extends UnicastRemoteObject implements Listener {
 
     @Override
     public void notifyAll(NotificationUpdate notification) throws RemoteException {
-        subscribers.forEach(subscriberService -> runFunction(subscriberService::update, notification));
+        subscribers.forEach(subscriberService -> Try.runMethod(subscriberService::update, notification));
     }
 
 }

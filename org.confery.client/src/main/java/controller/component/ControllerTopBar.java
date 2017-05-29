@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.SubscriberService;
+import utils.Try;
 import view.ViewType;
 
 import java.rmi.RemoteException;
@@ -70,8 +71,8 @@ public class ControllerTopBar
                 .run(item -> ((Button) item).setText(runFunction(
                         listener::getActiveUser).or(null).getName()));
         manager.getPrimaryStage().setOnCloseRequest(event ->
-                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
-        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
+                Try.runMethod(listener::removeSubscriber, this).orHandle(System.out::print));
+        Try.runMethod(listener::addSubscriber, this).orHandle(System.out::println);
     }
 
     private Boolean existsActiveUser() throws RemoteException {
@@ -123,7 +124,7 @@ public class ControllerTopBar
         if (notification.getType().equals(NotificationType.SIGNAL_LOGIN) ||
                 notification.getType().equals(NotificationType.SIGNAL_SIGN_UP) ||
                 notification.getType().equals(NotificationType.UPDATE_USER)) {
-            Platform.runLater(() -> runFunction(this::showActiveUser).orHandle(System.out::println));
+            Platform.runLater(() -> Try.runMethod(this::showActiveUser).orHandle(System.out::println));
         }
         if (notification.getType().equals(NotificationType.SIGNAL_LOGOUT)) {
             Platform.runLater(this::showRegistrationButtons);

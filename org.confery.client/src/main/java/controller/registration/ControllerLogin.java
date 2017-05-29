@@ -10,18 +10,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import listener.Listener;
 import manager.StageManager;
-import notification.NotificationUpdate;
 import notification.NotificationType;
+import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.CollectionService;
 import service.SubscriberService;
+import utils.Try;
 import view.ViewType;
 
 import java.rmi.RemoteException;
-
-import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -68,8 +67,8 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         backgroundImage.fitWidthProperty().bind(backgroundImagePane.widthProperty());
         backgroundImage.fitHeightProperty().bind(backgroundImagePane.heightProperty());
         manager.getPrimaryStage().setOnCloseRequest(event ->
-                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
-        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
+                Try.runMethod(listener::removeSubscriber, this).orHandle(System.out::print));
+        Try.runMethod(listener::addSubscriber, this).orHandle(System.out::println);
     }
 
 
