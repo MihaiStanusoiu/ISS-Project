@@ -15,7 +15,6 @@ import view.ViewType;
  * @version 1.0
  */
 
-@SuppressWarnings("EmptyMethod")
 @Lazy
 @Component
 public class ControllerAddConferenceView

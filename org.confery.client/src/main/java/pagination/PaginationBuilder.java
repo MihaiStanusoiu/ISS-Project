@@ -10,6 +10,7 @@ import view.ViewType;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 import static utils.Conditional.basedOn;
 
@@ -68,12 +69,23 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
      */
     @SuppressWarnings("unused")
     public PaginationBuilder setElements(Collection<T> elements) {
-        this.elements.addAll(elements);
+        elements.forEach(element -> this.elements.add(element));
         return this;
     }
 
     public PaginationBuilder setElements(ObservableList<T> elements) {
         this.elements = elements;
+        return this;
+    }
+
+    /**
+     * Effect: Sets the pagination's elements and returns the builder for later chaining.
+     *
+     * @param elements The pagination's elements
+     * @return the builder for later chaining.
+     */
+    public PaginationBuilder setElements(T[] elements) {
+        Collections.addAll(this.elements, elements);
         return this;
     }
 
@@ -121,19 +133,16 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
         return this;
     }
 
-    @SuppressWarnings("SameReturnValue")
     private Boolean checkViewTypeState() {
         basedOn(view != null).orThrow(new IllegalStateException("Missing Pagination View!"));
         return Boolean.TRUE;
     }
 
-    @SuppressWarnings("SameReturnValue")
     private Boolean checkStageManagerState() {
         basedOn(stageManager != null).orThrow(new IllegalStateException("Missing Stage Manager!"));
         return Boolean.TRUE;
     }
 
-    @SuppressWarnings("SameReturnValue")
     private Boolean checkPaginationState() {
         basedOn(pagination != null).orThrow(new IllegalStateException("Missing Pagination!"));
         return Boolean.TRUE;
@@ -143,7 +152,6 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
         return checkViewTypeState() && checkStageManagerState() && checkPaginationState();
     }
 
-    @SuppressWarnings("SameReturnValue")
     private Boolean checkCurrentPaginationManager(PaginationManagerInterface<T, E, U> manager) {
         basedOn(manager != null).orThrow(new IllegalStateException("Pane not supported yet!"));
         return Boolean.TRUE;

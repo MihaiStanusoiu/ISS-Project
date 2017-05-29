@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import manager.StageManager;
 import view.ViewType;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -38,11 +39,25 @@ public interface PaginationManagerInterface<T, E extends PaginationControllerIte
     void setStageManager(StageManager stageManager);
 
     /**
+     * Effect: Sets the data based on an ArrayList.
+     *
+     * @param elements: The data we need to set in the pagination.
+     */
+    void setElements(ArrayList<T> elements);
+
+    /**
      * Effect: Sets the data based on a Collection.
      *
      * @param elements: The data we need to set in the pagination.
      */
     void setElements(Collection<T> elements);
+
+    /**
+     * Effect: Sets the data based on an generic list of items.
+     *
+     * @param elements: The data we need to set in the pagination.
+     */
+    void setElements(T[] elements);
 
     /**
      * Builds the view's pagination.
@@ -51,5 +66,18 @@ public interface PaginationManagerInterface<T, E extends PaginationControllerIte
      * @return The pagination with the wanted configuration for pages.
      */
     Pagination buildPagination(Pagination pagination);
+
+    /**
+     * @return [Integer] The number of items per page.
+     */
+    Integer getItemsPerPage();
+
+    /**
+     * Effect: Creates the pagination's page based on index.
+     *
+     * @param pageIndex The page's index.
+     * @return [U] The page's pane.
+     */
+    U createPage(Integer pageIndex);
 
 }
