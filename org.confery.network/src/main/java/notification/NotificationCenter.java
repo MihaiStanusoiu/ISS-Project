@@ -30,7 +30,7 @@ public class NotificationCenter implements SubscriptionService {
     }
 
     @Override
-    public void notifyAll(Notification notification) {
+    public void notifyAll(NotificationUpdate notification) {
         subscribers.forEach(subscriberService -> {
             try {
                 subscriberService.update(notification);

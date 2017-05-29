@@ -206,7 +206,7 @@ public class Try<T, E extends Throwable> {
 
     @SuppressWarnings("unchecked")
     public static <T1, T2, T3, T4, T5, T6, R, E extends Throwable> Try<R, E>
-    runFunction(throwSextupletFunction<T1, T2, T3, T4, T5, T6, R, E> function, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6) {
+    runFunction(ThrowSextupletFunction<T1, T2, T3, T4, T5, T6, R, E> function, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6) {
         try {
             return new Try(function.apply(param1, param2, param3, param4, param5, param6));
         } catch (Throwable exception) {

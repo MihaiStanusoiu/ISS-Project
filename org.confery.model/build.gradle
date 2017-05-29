@@ -7,6 +7,7 @@ task wrapper(type: Wrapper) {
 }
 
 apply plugin: 'java'
+apply plugin: 'kotlin'
 
 sourceCompatibility = 1.8
 
@@ -15,8 +16,12 @@ repositories {
 }
 
 buildscript {
+    ext.kotlin_version = '1.1.2-4'
     repositories {
         mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -25,4 +30,5 @@ dependencies {
     compile 'com.google.guava:guava:21.0'
     compile("org.hibernate:hibernate-core:5.2.9.Final")
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
 }

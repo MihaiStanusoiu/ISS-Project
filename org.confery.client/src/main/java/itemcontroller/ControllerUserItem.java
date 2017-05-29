@@ -1,56 +1,43 @@
 package itemcontroller;
 
+import domain.UserEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import manager.StageManager;
-import transferable.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import view.ViewType;
 
 /**
- * Name:        ControllerUserItem
- * Effect:      Controls a user item view.
- * Date:        08/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.1
  */
 
+@Lazy
+@Component
 public class ControllerUserItem
-        implements PaginationControllerItemInterface<User> {
+        implements PaginationControllerItemInterface<UserEntity> {
 
-    /**
-     * Displays the user's location.
-     */
     @FXML private Label locationLabel;
-
-    /**
-     * Displays the user's real name.
-     */
     @FXML private Label nameLabel;
-
-    /**
-     * Displays the user's username.
-     */
     @FXML private Label usernameLabel;
-
-    /**
-     * Effect: The item's root pane.
-     */
     @FXML private BorderPane pane;
 
     /**
      * Effect: The manager allows the item to switch the
      * main scene 'UsersView' to the item's main scene 'UserView'.
      */
+    @Lazy
+    @Autowired
     private StageManager manager;
 
     /**
      * Effect: The item that needs to be displayed inside the view. [UserEntity]
      */
-    private User item;
+    private UserEntity item;
 
     /**
      * Effect: Sets the element in order to be displayed
@@ -58,7 +45,7 @@ public class ControllerUserItem
      * @param element: The required element for item's view
      */
     @Override
-    public void setElement(User element) {
+    public void setElement(UserEntity element) {
         this.item = element;
         build();
     }

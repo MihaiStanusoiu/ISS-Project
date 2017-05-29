@@ -1,21 +1,13 @@
 package main;
 
 import database.DatabaseLoader;
-import manager.LoginManager;
-import manager.SignUpManager;
-import manager.SubscriptionManager;
-import manager.UserManager;
-import model.UserModel;
+import manager.*;
+import model.*;
 import notification.NotificationCenter;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 import org.springframework.remoting.rmi.RmiServiceExporter;
-import protocol.UserProtocol;
-import service.LoginService;
-import service.SignUpService;
-import service.SubscriptionService;
-import service.UserService;
+import protocol.*;
+import service.*;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -25,6 +17,7 @@ import java.rmi.RemoteException;
  * @version 1.0
  */
 
+@ComponentScan("org.confery.network")
 @Configuration
 @SuppressWarnings("all")
 public class ServerSpringConfiguration {
@@ -37,16 +30,123 @@ public class ServerSpringConfiguration {
         return new DatabaseLoader();
     }
 
-
     @Bean
     public UserProtocol userModel() throws IOException {
         return new UserModel(databaseLoader());
     }
 
     @Bean
+    public SubmissionProtocol submissionModel() throws IOException {
+        return new SubmissionModel(databaseLoader());
+    }
+
+    @Bean
+    public EditionProtocol editionModel() throws IOException {
+        return new EditionModel(databaseLoader());
+    }
+
+    @Bean
+    public NotificationProtocol notificationModel() throws IOException {
+        return new NotificationModel(databaseLoader());
+    }
+
+    @Bean
+    public TagProtocol tagModel() throws IOException {
+        return new TagModel(databaseLoader());
+    }
+
+    @Bean
+    public TopicProtocol topicModel() throws IOException {
+        return new TopicModel(databaseLoader());
+    }
+
+    @Bean
+    public SessionProtocol sessionModel() throws IOException {
+        return new SessionModel(databaseLoader());
+    }
+
+    @Bean
     @Scope("singleton")
     public NotificationCenter notificationCenter() throws RemoteException {
         return new NotificationCenter();
+    }
+
+    @Bean
+    public RmiServiceExporter collectionService() throws IOException {
+        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
+        CollectionService collectionService = new CollectionManager(loginService(), signUpService(),
+                userService(), submissionSerive(), topicService(), tagService(),
+                editionService(), sessionService(), notificationService());
+
+        collectionService.setUserService(userService());
+        collectionService.setLoginService(loginService());
+        collectionService.setSignUpService(signUpService());
+        collectionService.setEditionService(editionService());
+        collectionService.setTagService(tagService());
+        collectionService.setTopicService(topicService());
+        collectionService.setSessionService(sessionService());
+        collectionService.setSubmissionService(submissionSerive());
+
+        rmiServiceExporter.setServiceName("CollectionService");
+        rmiServiceExporter.setService(collectionService);
+        rmiServiceExporter.setServiceInterface(CollectionService.class);
+        rmiServiceExporter.setRegistryPort(port);
+        return rmiServiceExporter;
+    }
+
+    public Object getService(Class<?> serviceClass, String serviceName, ServiceInterface service) {
+        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
+        rmiServiceExporter.setServiceName(serviceName);
+        rmiServiceExporter.setService(service);
+        rmiServiceExporter.setServiceInterface(serviceClass);
+        rmiServiceExporter.setRegistryPort(port);
+        return rmiServiceExporter.getService();
+    }
+
+    @Bean
+    public UserService userService() throws IOException {
+        UserService userService = new UserManager(userModel());
+        return (UserService) getService(UserService.class, "userService", userService);
+    }
+
+    @Bean
+    public SubmissionService submissionSerive() throws IOException {
+        SubmissionService submissionService = new SubmissionManager(submissionModel());
+        return (SubmissionService) getService(SubmissionService.class, "submissionService", submissionService);
+    }
+
+    @Bean
+    public TopicService topicService() throws IOException {
+        TopicService topicService = new TopicManager(topicModel());
+        return (TopicService) getService(TopicService.class, "topicService", topicService);
+    }
+
+    @Bean
+    public TagService tagService() throws IOException {
+        TagService tagService = new TagManager(tagModel());
+        return (TagService) getService(TagService.class, "tagService", tagService);
+    }
+
+    @Bean
+    public SessionService sessionService() throws IOException {
+        SessionService sessionService = new SessionManager(sessionModel());
+        return (SessionService) getService(SessionService.class, "sessionService", sessionService);
+    }
+    @Bean
+    public NotificationService notificationService() throws IOException {
+        NotificationService notificationService = new NotificationManager(notificationModel());
+        return (NotificationService) getService(NotificationService.class, "notificationService", notificationService);
+    }
+    @Bean
+    public EditionService editionService() throws IOException {
+        EditionService editionService = new EditionManager(editionModel());
+        return (EditionService) getService(EditionService.class, "editionMaanger", editionService);
+    }
+
+    @Bean
+    public LoginService loginService() throws IOException {
+        LoginService loginService = new LoginManager(notificationCenter(), userModel());
+        return (LoginService) getService(LoginService.class, "LoginService", loginService);
     }
 
     @Bean
@@ -61,36 +161,10 @@ public class ServerSpringConfiguration {
     }
 
     @Bean
-    public RmiServiceExporter loginService() throws IOException {
-        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
-        LoginService loginService = new LoginManager(notificationCenter(), userModel());
-        rmiServiceExporter.setServiceName("LoginService");
-        rmiServiceExporter.setService(loginService);
-        rmiServiceExporter.setServiceInterface(LoginService.class);
-        rmiServiceExporter.setRegistryPort(port);
-        return rmiServiceExporter;
-    }
-
-    @Bean
-    public RmiServiceExporter signUpService() throws IOException {
-        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
+    public SignUpService signUpService() throws IOException {
         SignUpService signUpService = new SignUpManager(notificationCenter(), userModel());
-        rmiServiceExporter.setServiceName("SignUpService");
-        rmiServiceExporter.setService(signUpService);
-        rmiServiceExporter.setServiceInterface(SignUpService.class);
-        rmiServiceExporter.setRegistryPort(port);
-        return rmiServiceExporter;
+        return (SignUpService) getService(SignUpService.class, "SignUpService", signUpService);
     }
 
-    @Bean
-    public RmiServiceExporter userService() throws IOException {
-        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
-        UserService userService = new UserManager(notificationCenter(), userModel());
-        rmiServiceExporter.setServiceName("UserService");
-        rmiServiceExporter.setService(userService);
-        rmiServiceExporter.setServiceInterface(UserService.class);
-        rmiServiceExporter.setRegistryPort(port);
-        return rmiServiceExporter;
-    }
 
 }

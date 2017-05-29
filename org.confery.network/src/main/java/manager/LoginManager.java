@@ -1,15 +1,15 @@
 package manager;
 
-import convertor.UserConverter;
 import domain.UserEntity;
 import exception.SystemException;
 import notification.NotificationCenter;
 import protocol.UserProtocol;
 import service.LoginService;
-import transferable.User;
 
 import java.rmi.RemoteException;
 import java.util.Optional;
+
+import static utils.Try.runFunction;
 
 /**
  * Tested: True
@@ -19,9 +19,9 @@ import java.util.Optional;
 
 public class LoginManager implements LoginService {
 
-    @SuppressWarnings("all")
     private NotificationCenter notificationCenter;
     private UserProtocol userModel;
+    private UserEntity active;
 
     public LoginManager(NotificationCenter notificationCenter, UserProtocol userModel) throws RemoteException {
         this.notificationCenter = notificationCenter;
@@ -34,8 +34,14 @@ public class LoginManager implements LoginService {
     }
 
     @Override
-    public User login(String username, String password) throws RemoteException, SystemException {
-        return UserConverter.convertUserEntity(findUser(username, password)
-                .orElseThrow(() -> new RemoteException("Wrong Username or Password!")));
+    public UserEntity login(String username, String password) throws RemoteException {
+        return runFunction(this::findUser, username, password)
+                .orThrow(exception -> new RemoteException("Wrong Username or Password!"))
+                .orElseThrow(() -> new RemoteException("Wrong Username or Password!"));
+    }
+
+    @Override
+    public void activeUser(UserEntity user) throws RemoteException {
+        active = user;
     }
 }

@@ -1,46 +1,33 @@
 package itemcontroller;
 
+import domain.NotificationEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import manager.StageManager;
-import transferable.Notification;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import view.GradientGenerator;
 
 /**
- * Name:        ControllerNotificationItem
- * Effect:      Controls a notification item view.
- * Date:        08/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.1
  */
 
+@Lazy
+@Component
 public class ControllerNotificationItem
-        implements PaginationControllerItemInterface<Notification> {
+        implements PaginationControllerItemInterface<NotificationEntity> {
 
-    /**
-     * Displays the notification's text.
-     */
     @FXML private Label textLabel;
-
-    /**
-     * Button to perform payment action.
-     */
     @FXML private Button payButton;
-
-    /**
-     * Effect: The item's root pane.
-     */
     @FXML private BorderPane pane;
 
-    /**
-     * Support for future development.
-     */
-    @SuppressWarnings("all")
+    @Lazy
+    @Autowired
     private StageManager manager;
 
     /**
@@ -56,7 +43,7 @@ public class ControllerNotificationItem
     /**
      * Effect: The item that needs to be displayed inside the view. [NotificationEntity]
      */
-    private Notification item;
+    private NotificationEntity item;
 
     /**
      * Effect: Sets the element in order to be displayed
@@ -64,7 +51,7 @@ public class ControllerNotificationItem
      * @param element: The required element for item's view
      */
     @Override
-    public void setElement(Notification element) {
+    public void setElement(NotificationEntity element) {
         this.item = element;
         build();
     }
@@ -80,7 +67,7 @@ public class ControllerNotificationItem
      * Effect: Builds the view with the set item.
      */
     private void build() {
-        if (item.getPayment().equals(Boolean.TRUE)) {   /* hides the payment button */
+        if (item.getPaymentType().equals(Boolean.TRUE)) {   /* hides the payment button */
             payButton.setOpacity(0);                    /* if it's not required */
             payButton.setMaxWidth(0);
             payButton.setMaxHeight(0);

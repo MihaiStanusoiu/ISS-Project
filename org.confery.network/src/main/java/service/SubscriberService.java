@@ -1,6 +1,6 @@
 package service;
 
-import notification.Notification;
+import notification.NotificationUpdate;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -12,6 +12,6 @@ import java.rmi.RemoteException;
 
 public interface SubscriberService extends Remote {
 
-    void update(Notification notification) throws RemoteException;
+    void update(NotificationUpdate notification) throws RemoteException;
 
 }

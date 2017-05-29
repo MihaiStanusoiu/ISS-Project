@@ -1,43 +1,42 @@
 package controller;
 
+import domain.ConferenceEntity;
+import domain.EditionEntity;
 import itemcontroller.ControllerConferenceItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import listener.ListenerHelper;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
-import transferable.Conference;
-import transferable.Edition;
 import view.ViewType;
 
 import java.util.Date;
 
 /**
- * Name:        ControllerMyConferencesView
- * Effect:      Lists all the user's conferences.
- * Date:        02/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
-public class ControllerMyConferencesView implements ControllerInterface {
+public class ControllerMyConferencesView
+        implements ControllerInterface {
 
     @FXML private TextField searchTextField;
     @FXML private Pagination pagination;
 
+    @Lazy
+    @Autowired
     private StageManager manager;
 
-    @Autowired @Lazy
-    public ControllerMyConferencesView(StageManager manager) {
-        this.manager = manager;
-    }
+    @Lazy
+    @Autowired
+    private ListenerHelper listener;
 
     /**
      * Effect: Builds the pagination and it's data.
@@ -46,27 +45,27 @@ public class ControllerMyConferencesView implements ControllerInterface {
     @SuppressWarnings("unchecked")
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
-        Edition[] editions = {
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York")
+        EditionEntity[] editions = {
+                new EditionEntity(new Date(), new Date(), "New York"),
+                new EditionEntity(new Date(), new Date(), "New York"),
+                new EditionEntity(new Date(), new Date(), "New York"),
+                new EditionEntity(new Date(), new Date(), "New York"),
+                new EditionEntity(new Date(), new Date(), "New York"),
+                new EditionEntity(new Date(), new Date(), "New York"),
+                new EditionEntity(new Date(), new Date(), "New York"),
+                new EditionEntity(new Date(), new Date(), "New York")
         };
-        Conference[] conferences = {
-                new Conference("Test", "AAA", editions[0]),
-                new Conference("Test", "AAA", editions[1]),
-                new Conference("Test", "AAA", editions[2]),
-                new Conference("Test", "AAA", editions[3]),
-                new Conference("Test", "AAA", editions[4]),
-                new Conference("Test", "AAA", editions[5]),
-                new Conference("Test", "AAA", editions[6]),
-                new Conference("Test", "AAA", editions[7]),
+        ConferenceEntity[] conferences = {
+                new ConferenceEntity("Test", "AAA"),
+                new ConferenceEntity("Test", "AAA"),
+                new ConferenceEntity("Test", "AAA"),
+                new ConferenceEntity("Test", "AAA"),
+                new ConferenceEntity("Test", "AAA"),
+                new ConferenceEntity("Test", "AAA"),
+                new ConferenceEntity("Test", "AAA"),
+                new ConferenceEntity("Test", "AAA"),
         };
-        pagination = new PaginationBuilder<Conference, ControllerConferenceItem, GridPane>()
+        pagination = new PaginationBuilder<ConferenceEntity, ControllerConferenceItem, GridPane>()
                 .setRows(2)
                   .setColumns(4)
                   .setElements(conferences)

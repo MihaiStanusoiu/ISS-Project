@@ -1,51 +1,54 @@
 package controller;
 
-import itemcontroller.ControllerConferenceItem;
+import domain.NotificationEntity;
+import domain.UserEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import listener.Listener;
 import manager.StageManager;
-import notification.Notification;
+import method.SimpleMethod;
+import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import pagination.PaginationBuilder;
+import service.CollectionService;
+import service.NotificationService;
 import service.SubscriberService;
-import transferable.Conference;
-import transferable.Edition;
-import view.ViewType;
+import service.UserService;
 
 import java.rmi.RemoteException;
-import java.util.Date;
+import java.util.List;
+
+import static utils.Try.runFunction;
 
 /**
- * <p> Lists all the available conferences. </p>
- * <p> Tested: False </p>
- *
  * @author Alexandru Stoica
  * @version 1.0
  */
 
+@Lazy
 @Component
-public class ControllerConferencesView implements ControllerInterface, SubscriberService {
+public class ControllerConferencesView
+        implements ControllerInterface, SubscriberService {
 
     @FXML private Button recentButton;
     @FXML private Button popularButton;
     @FXML private TextField searchTextField;
     @FXML private Pagination pagination;
 
-    private final StageManager manager;
-    private final Listener listener;
+    @Lazy
+    @Autowired
+    private StageManager manager;
 
-    @Autowired @Lazy
-    public ControllerConferencesView(StageManager manager, Listener listener) throws RemoteException {
-        this.manager = manager;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-    }
+    @Lazy
+    @Autowired
+    private Listener listener;
+
+    @Lazy
+    @Autowired
+    private CollectionService service;
 
     /**
      * Effect: Builds the pagination and it's data.
@@ -54,36 +57,24 @@ public class ControllerConferencesView implements ControllerInterface, Subscribe
     @SuppressWarnings("unchecked")
     public void initialize() {
         // This part is for testing the pagination's builder with mocking data.
-        Edition[] editions = {
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York"),
-                new Edition(new Date(), new Date(), "New York")
-        };
-        Conference[] conferences = {
-                new Conference("Test", "AAA", editions[0]),
-                new Conference("Test", "AAA", editions[1]),
-                new Conference("Test", "AAA", editions[2]),
-                new Conference("Test", "AAA", editions[3]),
-                new Conference("Test", "AAA", editions[4]),
-                new Conference("Test", "AAA", editions[5]),
-                new Conference("Test", "AAA", editions[6]),
-                new Conference("Test", "AAA", editions[7]),
-        };
-        pagination = new PaginationBuilder<Conference, ControllerConferenceItem, GridPane>()
-              .setRows(2)
-              .setColumns(4)
-              .setElements(conferences)
-              .setView(ViewType.CONFERENCE_ITEM)
-              .setStageManager(this.manager)
-              .setPagination(this.pagination)
-              .build(GridPane.class);
-        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
+        // TODO
+        SimpleMethod<RemoteException> handler = exception -> System.out.print(exception.getCause());
+        UserService userService = runFunction(service::userService).orHandle(handler);
+
+        List<UserEntity> users = runFunction(userService::getAll).orHandle(handler);
+        users.forEach(System.out::println);
+
+        NotificationService notificationService = runFunction(service::notificationService).orHandle(handler);
+
+        List<NotificationEntity> notifications = runFunction(notificationService::getAll).orHandle(handler);
+        notifications.forEach(System.out::println);
+
+
+        manager.getPrimaryStage().setOnCloseRequest(event ->
+                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
     }
+
 
     /**
      * Effect: Sorts conferences by popularity
@@ -114,7 +105,7 @@ public class ControllerConferencesView implements ControllerInterface, Subscribe
     }
 
     @Override
-    public void update(Notification notification) throws RemoteException {
+    public void update(NotificationUpdate notification) throws RemoteException {
         System.out.print("Test");
     }
 }

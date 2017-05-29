@@ -3,6 +3,7 @@ package manager;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import loader.SpringFXMLLoader;
 import view.ViewType;
 
@@ -10,22 +11,20 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Name:        StageManager
- * Effect:      Manages switching scenes on the primary stage.
- *              <p>
- *                  Update 1.1: Supports views based on element.
- *                  @implNote See 'ConferenceView' as an example.
- *              </p>
- * Date:        31/03/2017
- * Tested:      False
- * @author      Alexandru Stoica
- * @version     1.1
+ * Manages switching scenes on the primary stage.
+ * @author Alexandru Stoica
+ * @version 1.1
  */
 
 public class StageManager implements Serializable {
 
     private final Stage primaryStage;           // the application's primary stage
     private final SpringFXMLLoader loader;      // the fxml loader with DI
+
+    @Getter
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
 
     /**
      * Effect: Manages the load process of the scenes (fxml files).

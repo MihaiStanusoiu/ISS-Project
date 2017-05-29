@@ -1,32 +1,34 @@
 package itemcontroller;
 
 import controller.ControllerInterface;
+import domain.UserEntity;
 import exception.SystemException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import listener.Listener;
 import manager.StageManager;
-import notification.Notification;
+import notification.NotificationUpdate;
 import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.SubscriberService;
-import service.UserService;
-import transferable.User;
+
 import view.ViewType;
 
 import java.rmi.RemoteException;
+
+import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-
+@Lazy
 @Component
 public class ControllerProfileView implements ControllerInterface,
-        ControllerItemInterface<User>, SubscriberService {
+        ControllerItemInterface<UserEntity>, SubscriberService {
 
     @FXML private TextField nameTextField;
     @FXML private TextField websiteTextField;
@@ -34,41 +36,40 @@ public class ControllerProfileView implements ControllerInterface,
     @FXML private TextField bioTextField;
     @FXML private TextField emailTextField;
 
-    private User user;
+    private UserEntity user;
 
-    private final StageManager manager;
-    private final Listener listener;
-    private final UserService userService;
+    @Lazy
+    @Autowired
+    private StageManager manager;
 
-    @Autowired @Lazy
-    public ControllerProfileView(StageManager manager, Listener listener, UserService userService)
-            throws RemoteException {
-        this.manager = manager;
-        this.userService = userService;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-    }
+    @Lazy
+    @Autowired
+    private Listener listener;
+
 
     /**
      * Effect: Builds the pagination and it's data.
      */
-    public void initialize() { }
+    public void initialize() {
+        manager.getPrimaryStage().setOnCloseRequest(event ->
+                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
+    }
 
     @FXML
     public void onSaveButtonClick() throws RemoteException, SystemException {
-        User other = new User(user.getId(), user.getUsername(),
+        UserEntity other = new UserEntity(user.getId(), user.getUsername(),
                 user.getPassword(), emailTextField.getText(),
                 nameTextField.getText(), websiteTextField.getText(),
-                bioTextField.getText(), locationTextField.getText(), user.getType());
-        userService.update(user, other);
+                bioTextField.getText(), locationTextField.getText());
         listener.setActiveUser(other);
-        listener.notifyAll(new Notification(NotificationType.UPDATE_USER));
+        listener.notifyAll(new NotificationUpdate(NotificationType.UPDATE_USER));
     }
 
     @FXML
     public void onDeleteButtonClick() throws RemoteException, SystemException {
-        userService.delete(user);
-        listener.notifyAll(new Notification(NotificationType.SIGNAL_LOGOUT));
+        //userService.delete(user);
+        listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGOUT));
         listener.setActiveUser(null);
         listener.removeSubscriber(this);
         manager.switchScene(ViewType.CONFERENCES);
@@ -83,14 +84,14 @@ public class ControllerProfileView implements ControllerInterface,
     }
 
     @Override
-    public void update(Notification notification) throws RemoteException {
+    public void update(NotificationUpdate notification) throws RemoteException {
         if(notification.getType().equals(NotificationType.UPDATE_USER)) {
             updateUserData();
         }
     }
 
     @Override
-    public void setElement(User element) {
+    public void setElement(UserEntity element) {
         user = element;
         updateUserData();
     }

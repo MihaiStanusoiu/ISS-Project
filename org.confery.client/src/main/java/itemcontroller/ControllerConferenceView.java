@@ -1,41 +1,31 @@
 package itemcontroller;
 
 import controller.ControllerInterface;
+import domain.ConferenceEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import transferable.Conference;
 
 /**
- * Name:        ControllerConferencesView
- * Effect:      Displays a conference in a main view and shows
- *              all it's details to the application's user.
- * Date:        02/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
 public class ControllerConferenceView
-        implements ControllerInterface, ControllerItemInterface<Conference> {
+        implements ControllerInterface, ControllerItemInterface<ConferenceEntity> {
 
     @FXML private Label nameLabel;
 
-    @SuppressWarnings("all")
-    private Conference element;
+    private ConferenceEntity element;
 
-    @SuppressWarnings("all")
+    @Lazy
+    @Autowired
     private StageManager manager;
-
-    @Autowired @Lazy
-    public ControllerConferenceView(StageManager manager) {
-        this.manager = manager;
-    }
 
     /**
      * Effect: Builds the pagination and it's data.
@@ -49,7 +39,7 @@ public class ControllerConferenceView
      * @param element The view's element.
      */
     @Override
-    public void setElement(Conference element) {
+    public void setElement(ConferenceEntity element) {
         this.element = element;
         nameLabel.setText(element.getName());
     }

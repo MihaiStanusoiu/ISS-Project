@@ -2,18 +2,17 @@ package itemcontroller;
 
 import cells.UserListCell;
 import controller.ControllerInterface;
+import domain.ConferenceEntity;
+import domain.UserEntity;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import listener.Listener;
 import manager.StageManager;
-import notification.Notification;
+import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.SubscriberService;
-import transferable.Conference;
-import transferable.User;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -24,29 +23,21 @@ import java.util.List;
  * @version 1.0
  */
 
-
+@Lazy
 @Component
 public class ControllerMembersConferenceView
-        implements ControllerInterface, ControllerItemInterface<Conference>, SubscriberService {
+        implements ControllerInterface, ControllerItemInterface<ConferenceEntity>, SubscriberService {
 
-    @FXML private ListView<User> chairListView;
+    @FXML private ListView<UserEntity> chairListView;
 
-    private final StageManager manager;
-    private final Listener listener;
-    private Conference conference;
+    @Lazy
+    @Autowired
+    private StageManager manager;
 
-
-    @Autowired @Lazy
-    public ControllerMembersConferenceView(StageManager manager, Listener listener)
-            throws RemoteException {
-        this.manager = manager;
-        this.listener = listener;
-        this.listener.addSubscriber(this);
-        this.chairListView = new ListView<>();
-    }
+    private ConferenceEntity conference;
 
     @Override
-    public void setElement(Conference element) {
+    public void setElement(ConferenceEntity element) {
         this.conference = element;
         setUpChairList();
         updateData();
@@ -61,8 +52,8 @@ public class ControllerMembersConferenceView
     }
 
     private void updateChairList() {
-        List<User> chairs = new ArrayList<>();
-        chairs.add(new User("john-snow", "test", "John Snow"));
+        List<UserEntity> chairs = new ArrayList<>();
+        chairs.add(new UserEntity("test", "John Snow"));
         updateListView(chairListView, chairs);
     }
 
@@ -73,10 +64,10 @@ public class ControllerMembersConferenceView
     /**
      * Effect: Builds the pagination and it's data.
      */
-    public void initialize() { }
+    public void initialize() {}
 
     @Override
-    public void update(Notification notification) throws RemoteException { }
+    public void update(NotificationUpdate notification) throws RemoteException { }
 
     @FXML private void onPublishButtonClick() {
         System.out.print("Publish Button Click" +  conference.getName());

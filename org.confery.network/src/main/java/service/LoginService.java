@@ -1,9 +1,7 @@
 package service;
 
-import exception.SystemException;
-import transferable.User;
+import domain.UserEntity;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
@@ -11,8 +9,8 @@ import java.rmi.RemoteException;
  * @version 1.0
  */
 
-public interface LoginService extends Remote {
+public interface LoginService extends ServiceInterface {
 
-    User login(String username, String password) throws RemoteException, SystemException;
+    UserEntity login(String username, String password) throws RemoteException;
 
 }

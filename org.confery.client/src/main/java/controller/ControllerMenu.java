@@ -1,43 +1,59 @@
 package controller;
 
+import context.Context;
+import context.ContextClass;
+import context.ContextType;
+import context.CoreContext;
 import javafx.fxml.FXML;
-import listener.Listener;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import listener.ListenerHelper;
 import manager.StageManager;
-import notification.Notification;
+import notification.NotificationUpdate;
 import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import transferable.Conference;
-import transferable.Edition;
 import view.ViewType;
 
 import java.rmi.RemoteException;
 
+
 /**
- * Name:        ControllerMenu
- * Effect:      Controls the main side navigation system.
- * Date:        05/04/2017
- * Tested:      False
- *
  * @author      Alexandru Stoica
  * @version     1.0
  */
 
+@Lazy
 @Component
+@ContextClass
 public class ControllerMenu implements ControllerInterface {
 
-    private final StageManager manager;
-    private final Listener listener;
+    @FXML
+    @Context({ContextType.GUEST})
+    public Button logoutButton;
 
-    @Autowired @Lazy
-    public ControllerMenu(StageManager manager, Listener listener) {
-        this.manager = manager;
-        this.listener = listener;
-    }
+    @FXML
+    public Button myConferencesButton;
+
+    @Lazy
+    @Autowired
+    private StageManager manager;
+
+    @Lazy
+    @Autowired
+    private ListenerHelper listener;
+
+    @Lazy
+    @Autowired
+    private CoreContext context;
+
 
     @Override
-    public void initialize() { }
+    public void initialize() {
+        context.forType(ContextType.GUEST).in(this)
+            .run(item -> ((Node)item).setVisible(Boolean.FALSE));
+    }
 
     /**
      * Effect: Loads the ConferencesView responsible
@@ -54,7 +70,7 @@ public class ControllerMenu implements ControllerInterface {
      * @implNote status: Unavailable at the moment.
      */
     @FXML private void onAddConferenceViewButtonClick() {
-        manager.switchScene(ViewType.ADD_CONFERENCE, new Conference(new Edition()));
+        manager.switchScene(ViewType.ADD_CONFERENCE, null);
     }
 
     /**
@@ -99,7 +115,7 @@ public class ControllerMenu implements ControllerInterface {
      */
     @FXML private void onLogoutButtonClick() throws RemoteException {
         listener.setActiveUser(null);
-        listener.notifyAll(new Notification(NotificationType.SIGNAL_LOGOUT));
+        listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGOUT));
     }
 
 }
