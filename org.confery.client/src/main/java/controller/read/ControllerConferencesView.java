@@ -1,29 +1,27 @@
 package controller.read;
 
 import controller.main.ControllerInterface;
-import item.pagination.controller.ControllerPaginationConferenceItem;
+import controller.pagination.ControllerPaginationConferenceItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import listener.Listener;
 import manager.StageManager;
-import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
 import service.CollectionService;
-import service.SubscriberService;
 import transfarable.Conference;
 import view.ViewType;
 
-import java.rmi.RemoteException;
+import java.util.List;
 
-import static utils.Try.runFunction;
+import static java.util.Arrays.asList;
 
 /**
  * @author Alexandru Stoica
@@ -32,54 +30,46 @@ import static utils.Try.runFunction;
 
 @Lazy
 @Component
-public class ControllerConferencesView
-        implements ControllerInterface, SubscriberService {
+public class ControllerConferencesView implements ControllerInterface {
 
     @FXML
     private Button recentButton;
+
     @FXML
     private Button popularButton;
+
     @FXML
     private TextField searchTextField;
+
     @FXML
     private Pagination pagination;
 
     @Lazy
     @Autowired
+    @SuppressWarnings("unused")
     private StageManager manager;
 
     @Lazy
     @Autowired
-    private Listener listener;
-
-    @Lazy
-    @Autowired
+    @SuppressWarnings("unused")
     private CollectionService service;
 
     private ObservableList<Conference> conferences;
 
-    /**
-     * Effect: Builds the pagination and it's data.
-     */
     @Override
-    @SuppressWarnings("unchecked")
     public void initialize() {
-        Conference[] items = {
+        List<Conference> items = asList(
                 new Conference("Conference Name", "TEST"),
                 new Conference("Conference Name", "TEST"),
                 new Conference("Conference Name", "TEST"),
-                new Conference("Conference Name", "TEST"),
-        };
+                new Conference("Conference Name", "TEST"));
         conferences = FXCollections.observableArrayList(items);
         pagination = updatePagination(conferences);
-        manager.getPrimaryStage().setOnCloseRequest(event ->
-                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
-        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
         setUpSearchTextField();
     }
 
     private void setUpSearchTextField() {
-        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> searchBasedOn(newValue));
+        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> search(newValue));
     }
 
     private Pagination updatePagination(ObservableList<Conference> items) {
@@ -91,46 +81,31 @@ public class ControllerConferencesView
                 .build(GridPane.class);
     }
 
-    /**
-     * Effect: Sorts conferences by popularity
-     * based on the number of members that participate at the conference.
-     *
-     * @implNote status: Unavailable at the moment.
-     */
-    @FXML
-    private void onPopularButtonClick() {
-        popularButton.setOpacity(1);
-        recentButton.setOpacity(0.5);
+    private void switchOpacity(Node left, Node right) {
+        Double aux = right.getOpacity();
+        right.setOpacity(left.getOpacity());
+        left.setOpacity(aux);
     }
 
-    /**
-     * Effect: Sorts conferences by date.
-     *
-     * @implNote status: Unavailable at the moment.
-     */
-    @FXML
-    private void onRecentButtonClick() {
-        popularButton.setOpacity(0.5);
-        recentButton.setOpacity(1);
-    }
-
-    private void searchBasedOn(String name) {
+    private void search(String name) {
         pagination = updatePagination(conferences.filtered(conference ->
                 conference.getName().toLowerCase().contains(name.toLowerCase())));
     }
 
-    /**
-     * Effect: Search function for conferences.
-     *
-     * @implNote status: Unavailable at the moment.
-     */
     @FXML
-    private void onSearchButtonClick() {
-        searchBasedOn(searchTextField.getText());
+    private void onPopularButtonClick() {
+        switchOpacity(popularButton, recentButton);
+        // TODO: Sort conferences by number of members
     }
 
-    @Override
-    public void update(NotificationUpdate notification) throws RemoteException {
-        System.out.print("Test");
+    @FXML
+    private void onRecentButtonClick() {
+        switchOpacity(popularButton, recentButton);
+        // TODO: Sort conferences by the starting date of the latest edition.
+    }
+
+    @FXML
+    private void onSearchButtonClick() {
+        search(searchTextField.getText());
     }
 }

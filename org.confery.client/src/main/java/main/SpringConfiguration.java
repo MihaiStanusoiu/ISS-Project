@@ -23,7 +23,9 @@ import java.util.ResourceBundle;
 @Configuration
 @ComponentScan("loader")
 @ComponentScan("itemcontroller")
+@ComponentScan("cellcontroller")
 @ComponentScan("controller")
+@ComponentScan("pagination")
 @ComponentScan("context")
 @SuppressWarnings("all")
 public class SpringConfiguration {

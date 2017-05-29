@@ -1,7 +1,8 @@
-package itemcontroller;
+package controller.item;
 
 import cells.UserListCell;
 import controller.main.ControllerInterface;
+import itemcontroller.ControllerItemInterface;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -24,8 +25,7 @@ import static java.util.Arrays.asList;
 
 @Lazy
 @Component
-public class ControllerEditionView
-        implements ControllerInterface, ControllerItemInterface<Edition> {
+public class ControllerEditionView implements ControllerInterface, ControllerItemInterface<Edition> {
 
     @FXML
     private Label locationLabel;
@@ -69,9 +69,6 @@ public class ControllerEditionView
     @Autowired
     private StageManager manager;
 
-    /**
-     * Effect: Builds the pagination and it's data.
-     */
     @Override
     public void initialize() {
         User[] chairsList = {new User("Test", "password", "test@test", "Test")};
@@ -97,17 +94,11 @@ public class ControllerEditionView
         // TODO Create Submit Paper FXML
     }
 
-    /**
-     * Sets the element in the controller's view
-     * and builds the UI data based on the conference's attributes.
-     *
-     * @param element The view's element.
-     */
     @Override
     public void setElement(Edition element) {
         this.edition = element;
-        build();
         setUpLists();
+        build();
     }
 
     private void setUpLists() {

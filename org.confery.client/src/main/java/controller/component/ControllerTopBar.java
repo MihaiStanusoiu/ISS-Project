@@ -78,45 +78,21 @@ public class ControllerTopBar
         return listener.getActiveUser() != null;
     }
 
-    /**
-     * Effect: Loads the LoginView responsible
-     * for the user's authentication process.
-     *
-     * @implNote status: In development
-     */
     @FXML
     private void onLoginButtonClick() {
         manager.switchScene(ViewType.LOGIN);
     }
 
-    /**
-     * Effect: Loads the SignUpView responsible
-     * for the user's authentication process.
-     *
-     * @implNote status: In development
-     */
     @FXML
     private void onSignUpButtonClick() {
         manager.switchScene(ViewType.SIGN_UP);
     }
 
-    /**
-     * Effect: Loads the ConferencesView responsible
-     * for listing all the available conferences.
-     *
-     * @implNote status: In development.
-     */
     @FXML
     private void onLogoButtonClick() {
         manager.switchScene(ViewType.CONFERENCES);
     }
 
-    /**
-     * Effect: Loads the ProfileView responsible
-     * for updating the active user's profile information.
-     *
-     * @implNote status: In development.
-     */
     @FXML
     private void onProfileButtonClick() throws RemoteException {
         basedOn(existsActiveUser())

@@ -34,6 +34,7 @@ public class ControllerMembersConferenceView
     @Autowired
     private StageManager manager;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private ConferenceEntity conference;
 
     @Override
@@ -59,42 +60,27 @@ public class ControllerMembersConferenceView
         listView.setItems(FXCollections.observableArrayList(list));
     }
 
-    /**
-     * Effect: Builds the pagination and it's data.
-     */
     public void initialize() { }
 
     @Override
     public void update(NotificationUpdate notification) throws RemoteException { }
 
     @FXML
-    private void onPublishButtonClick() {
-        // TODO
-    }
+    private void onPublishButtonClick() { }
 
     @FXML
-    private void onSaveButtonClick() {
-        // TODO
-    }
+    private void onSaveButtonClick() { }
 
     @FXML
-    private void onMembersButtonClick() {
-        // TODO
-    }
+    private void onMembersButtonClick() { }
 
     @FXML
-    private void onBasicButtonClick() {
-        // TODO
-    }
+    private void onBasicButtonClick() { }
 
     @FXML
-    private void onSessionsButtonClick() {
-        // TODO
-    }
+    private void onSessionsButtonClick() { }
 
     @FXML
-    private void onSubmissionsButtonClick() {
-        // TODO
-    }
+    private void onSubmissionsButtonClick() { }
 
 }

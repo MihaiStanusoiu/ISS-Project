@@ -1,7 +1,9 @@
 package itemcontroller;
 
+import controller.main.ControllerInterface;
 import javafx.scene.layout.Pane;
-import manager.StageManager;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 /**
  * Any view-controller that controls an item view (example: ConferenceItem)
@@ -21,18 +23,9 @@ import manager.StageManager;
  * @version 1.1
  */
 
-public interface PaginationControllerItemInterface<T> {
-
-    /**
-     * Adds an element to the item's view.
-     * <p>
-     * <p>The element is used to populate the date the item's view,
-     * but can also be passed forward from the item's view to
-     * another view.</p>
-     *
-     * @param element: The required element for item's view
-     */
-    void setElement(T element);
+@Lazy
+@Component
+public interface PaginationControllerItemInterface<T> extends ControllerItemInterface<T>, ControllerInterface {
 
     /**
      * Returns the view's main pane in order for the
@@ -40,20 +33,7 @@ public interface PaginationControllerItemInterface<T> {
      *
      * @return [Pane]: The view's main pane.
      */
-    Pane getPane();
-
-    /**
-     * The item controller may need the stage manager
-     * in order to switch the main scene of the application.
-     * <p>
-     * If the displayed item is actually a link/button to a view
-     * that shows details about the item, than this stage manager
-     * will allow the item's controller to switch the main scene with a new one.
-     * </p>
-     *
-     * @param stageManager The main view's stage manager.
-     */
-    void setStageManager(StageManager stageManager);
+    Pane getRootPane();
 
     /**
      * @return The main pane's width

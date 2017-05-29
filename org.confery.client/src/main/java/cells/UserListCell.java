@@ -1,11 +1,9 @@
 package cells;
 
 
-import cellcontroller.UserListCellController;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.Pane;
-import loader.ItemFXMLLoader;
 import loader.LoaderException;
 import manager.StageManager;
 import transfarable.User;
@@ -27,11 +25,7 @@ public class UserListCell extends ListCell<User> {
     }
 
     private Pane getGraphic(User item) throws LoaderException {
-        ItemFXMLLoader<User, UserListCellController> loader =
-                new ItemFXMLLoader<>(ViewType.USER_CELL_LIST_ITEM);
-        loader.setElement(item);
-        loader.setStageManager(manager);
-        return loader.getRootPane();
+        return (Pane)manager.getRootNode(ViewType.USER_CELL_LIST_ITEM.getFXMLFile(), item);
     }
 
     protected void updateItem(User item, boolean empty) {

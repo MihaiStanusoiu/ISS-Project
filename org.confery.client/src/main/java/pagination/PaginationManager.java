@@ -2,14 +2,11 @@ package pagination;
 
 import itemcontroller.PaginationControllerItemInterface;
 import javafx.scene.control.Control;
-import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import loader.ItemFXMLLoader;
-import loader.LoaderException;
 import manager.StageManager;
 import view.ViewType;
 
@@ -196,14 +193,14 @@ public class PaginationManager<T, E extends PaginationControllerItemInterface<T>
                          Integer indexData,
                          Integer indexColumn,
                          Integer indexRow) {
-        try {
-            ItemFXMLLoader<T, E> loader = new ItemFXMLLoader<>(view);
-            loader.setElement(elements.get(indexData));
-            loader.setStageManager(stageManager);
-            pane.add(loader.getRootPane(), indexColumn - startingPoint, indexRow - 1);
-        } catch (LoaderException error) {
-            pane.add(new Label(error.getMessage()), indexColumn - startingPoint, indexRow - 1);
-        }
+
+//            ItemFXMLLoader<T, E> loader = new ItemFXMLLoader<>(view);
+//            loader.setElement(elements.get(indexData));
+//            loader.setStageManager(stageManager);
+            //stageManager.getRootNode(view.getFXMLFile(), elements.get(indexData));
+            pane.add(stageManager.getRootNode(view.getFXMLFile(), elements.get(indexData)),
+                    indexColumn - startingPoint, indexRow - 1);
+
     }
 
     /**

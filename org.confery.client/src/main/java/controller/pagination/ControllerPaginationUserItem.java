@@ -1,4 +1,4 @@
-package item.pagination.controller;
+package controller.pagination;
 
 import itemcontroller.PaginationControllerItemInterface;
 import javafx.fxml.FXML;
@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import transfarable.User;
 import view.ViewType;
+
+import java.rmi.RemoteException;
 
 /**
  * @author Alexandru Stoica
@@ -32,83 +34,46 @@ public class ControllerPaginationUserItem
     private Label usernameLabel;
 
     @FXML
-    private BorderPane pane;
+    private BorderPane rootPane;
 
-    /**
-     * Effect: The manager allows the item to switch the
-     * main scene 'UsersView' to the item's main scene 'UserView'.
-     */
     @Lazy
     @Autowired
     private StageManager manager;
 
-    /**
-     * Effect: The item that needs to be displayed inside the view. [UserEntity]
-     */
     private User item;
 
-    /**
-     * Effect: Sets the element in order to be displayed
-     * and builds the view ones the item is set.
-     *
-     * @param element: The required element for item's view
-     */
+    @Override
+    public void initialize() throws RemoteException { }
+
     @Override
     public void setElement(User element) {
         this.item = element;
         build();
     }
 
-    /**
-     * Effect: Loads the UserView based on item [UserEntity]
-     * from the current object controller.
-     */
     @FXML
     public void onItemClick() {
         manager.switchScene(ViewType.USER, item);
     }
 
-    /**
-     * Effect: Builds the view with the set item.
-     */
     private void build() {
         locationLabel.setText(item.getLocation());
         nameLabel.setText(item.getName());
         usernameLabel.setText("@" + item.getUsername());
     }
 
-    /**
-     * @return [Pane] the root pane of the item view.
-     */
-    @Override
-    public Pane getPane() {
-        return pane;
+    public Pane getRootPane() {
+        return rootPane;
     }
 
-    /**
-     * Effect: Adds support for scene switching.
-     *
-     * @param stageManager The main view's stage manager.
-     */
-    @Override
-    public void setStageManager(StageManager stageManager) {
-        manager = stageManager;
-    }
-
-    /**
-     * @return The width of the main pane [double]
-     */
     @Override
     public double getWidth() {
-        return pane.getWidth();
+        return rootPane.getWidth();
     }
 
-    /**
-     * @return The height of the main pane [double]
-     */
     @Override
     public double getHeight() {
-        return pane.getHeight();
+        return rootPane.getHeight();
     }
 
 }

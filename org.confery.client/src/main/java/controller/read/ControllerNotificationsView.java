@@ -1,7 +1,7 @@
 package controller.read;
 
 import controller.main.ControllerInterface;
-import item.pagination.controller.ControllerPaginationNotificationItem;
+import controller.pagination.ControllerPaginationNotificationItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +14,10 @@ import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
 import transfarable.Notification;
 import view.ViewType;
+
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 /**
  * @author Alexandru Stoica
@@ -29,37 +33,30 @@ public class ControllerNotificationsView implements ControllerInterface {
 
     @Lazy
     @Autowired
+    @SuppressWarnings("unused")
     private StageManager manager;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private ObservableList<Notification> notifications;
 
-
-    /**
-     * Effect: Builds the pagination and it's data.
-     */
     @Override
     public void initialize() {
-        Notification[] items = {
+        List<Notification> items = asList(
                 new Notification(1, "Test", Boolean.TRUE),
-                new Notification(1, "Test", Boolean.FALSE),
-                new Notification(1, "Test", Boolean.FALSE),
-                new Notification(1, "Test", Boolean.TRUE),
-                new Notification(1, "Test", Boolean.TRUE),
-                new Notification(1, "Test", Boolean.TRUE),
-        };
+                new Notification(2, "Test", Boolean.FALSE),
+                new Notification(3, "Test", Boolean.FALSE),
+                new Notification(4, "Test", Boolean.TRUE));
         notifications = FXCollections.observableArrayList(items);
         pagination = updatePagination(notifications);
-        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
     }
 
-    @SuppressWarnings("unchecked")
     private Pagination updatePagination(ObservableList<Notification> items) {
         return new PaginationBuilder<Notification, ControllerPaginationNotificationItem, GridPane>()
-                .setRows(2).setColumns(4)
                 .setElements(items)
                 .setView(ViewType.NOTIFICATION_ITEM)
                 .setStageManager(manager)
                 .setPagination(pagination)
                 .build(GridPane.class);
     }
+
 }

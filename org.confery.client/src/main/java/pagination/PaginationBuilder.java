@@ -28,14 +28,15 @@ import static utils.Conditional.basedOn;
  * @version 1.0
  */
 
+@SuppressWarnings("SameParameterValue")
 public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>, U extends Pane> {
 
     private ViewType view;
     private ObservableList<T> elements;
     private Integer rows = 2;
     private Integer columns = 4;
-    private StageManager stageManager;
     private Pagination pagination;
+    private StageManager stageManager;
 
     /**
      * Sets the item's view and returns the builder for later chaining.
@@ -149,7 +150,7 @@ public class PaginationBuilder<T, E extends PaginationControllerItemInterface<T>
 
     private Boolean checkCurrentState() {
         return checkViewTypeState() && checkStageManagerState() && checkPaginationState();
-     }
+    }
 
     private Boolean checkCurrentPaginationManager(PaginationManagerInterface<T, E, U> manager) {
         basedOn(manager != null).orThrow(new IllegalStateException("Pane not supported yet!"));

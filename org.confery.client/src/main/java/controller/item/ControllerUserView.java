@@ -1,8 +1,9 @@
-package itemcontroller;
+package controller.item;
 
 import controller.main.ControllerInterface;
-import item.pagination.controller.ControllerPaginationConferenceItem;
-import item.pagination.controller.ControllerPaginationSubmissionItem;
+import controller.pagination.ControllerPaginationConferenceItem;
+import controller.pagination.ControllerPaginationSubmissionItem;
+import itemcontroller.ControllerItemInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -51,9 +52,13 @@ public class ControllerUserView
     @FXML
     private Pagination paginationSubmissions;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private ObservableList<Conference> conferences;
+
+    @SuppressWarnings("FieldCanBeLocal")
     private ObservableList<Submission> submissions;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private User element;
 
     @Lazy

@@ -1,5 +1,6 @@
 package manager;
 
+import function.ThrowFunction;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -7,8 +8,11 @@ import jdk.nashorn.internal.objects.annotations.Getter;
 import loader.SpringFXMLLoader;
 import view.ViewType;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Objects;
+
+import static utils.Try.runFunction;
 
 /**
  * Manages switching scenes on the primary stage.
@@ -94,6 +98,10 @@ public class StageManager implements Serializable {
         return scene;
     }
 
+    private void handlerException(Exception exception) {
+        exception.printStackTrace();
+    }
+
     /**
      * Effect: Loads the provided fxml file using the Spring FXML Loader object.
      *
@@ -101,14 +109,8 @@ public class StageManager implements Serializable {
      * @return root: the root node of the fxml file [Parent]
      */
     private Parent getRootNode(String fxmlFilePath) {
-        Parent root = null;
-        try {
-            root = loader.load(fxmlFilePath);
-            Objects.requireNonNull(root, "The root FXML should not be null!");
-        } catch (Exception error) {
-            handleErrors(error);
-        }
-        return root;
+        return runFunction((ThrowFunction<String, Parent, IOException>)loader::load, fxmlFilePath)
+                .orHandle(this::handlerException);
     }
 
     /**
@@ -120,7 +122,7 @@ public class StageManager implements Serializable {
      * @param <T>:          the main element's type.
      * @return root: the root node of the fxml file [Parent]
      */
-    private <T> Parent getRootNode(String fxmlFilePath, T element) {
+    public <T> Parent getRootNode(String fxmlFilePath, T element) {
         Parent root = null;
         try {
             root = loader.load(fxmlFilePath, element);
@@ -137,6 +139,6 @@ public class StageManager implements Serializable {
      * @param error: the error that occurred in the loading process. [Exception]
      */
     private void handleErrors(Exception error) {
-        System.out.println(error.getMessage());
+        System.out.println(error);
     }
 }

@@ -1,7 +1,7 @@
 package controller.read;
 
 import controller.main.ControllerInterface;
-import item.pagination.controller.ControllerPaginationUserItem;
+import controller.pagination.ControllerPaginationUserItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,17 +9,16 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import manager.StageManager;
-import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
-import service.SubscriberService;
 import transfarable.User;
 import view.ViewType;
 
-import java.rmi.RemoteException;
-import java.util.function.Predicate;
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 /**
  * @author Alexandru Stoica
@@ -28,8 +27,7 @@ import java.util.function.Predicate;
 
 @Lazy
 @Component
-public class ControllerUsersView
-        implements ControllerInterface, SubscriberService {
+public class ControllerUsersView implements ControllerInterface {
 
     @FXML
     private TextField searchTextField;
@@ -41,56 +39,42 @@ public class ControllerUsersView
     @Autowired
     private StageManager manager;
 
-    private Predicate<User> search = user -> user.getName()
-            .toLowerCase().contains(searchTextField.getText());
-
     private ObservableList<User> users;
 
     @Override
     public void initialize() {
-        User[] usersList = {
+        List<User> items = asList(
                 new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
                 new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
                 new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
                 new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
-                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
-                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
-                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York")
-        };
-        users = FXCollections.observableArrayList(usersList);
+                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"));
+        users = FXCollections.observableArrayList(items);
         pagination = updatePagination(users);
-        pagination.getStyleClass().add(Pagination.STYLE_CLASS_BULLET);
         setUpSearchField();
     }
 
     private void setUpSearchField() {
-        searchTextField.textProperty().addListener((observable, oldValue, newValue) ->
-                updatePagination(users.filtered(search)));
+        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> search(newValue));
     }
 
-    @SuppressWarnings("unchecked")
+    private void search(String name) {
+        pagination = updatePagination(users.filtered(conference ->
+                conference.getName().toLowerCase().contains(name.toLowerCase())));
+    }
+
     private Pagination updatePagination(ObservableList<User> list) {
         return new PaginationBuilder<User, ControllerPaginationUserItem, GridPane>()
-                .setRows(2).setColumns(4)
                 .setElements(list)
                 .setView(ViewType.USER_ITEM)
-                .setStageManager(this.manager)
-                .setPagination(this.pagination)
+                .setStageManager(manager)
+                .setPagination(pagination)
                 .build(GridPane.class);
     }
 
-    /**
-     * Effect: Search function for users.
-     *
-     * @implNote status: Unavailable at the moment.
-     */
     @FXML
     private void onSearchButtonClick() {
-        pagination = updatePagination(users.filtered(search));
+        search(searchTextField.getText());
     }
 
-    @Override
-    public void update(NotificationUpdate notification) throws RemoteException {
-        System.out.println("Hello");
-    }
 }

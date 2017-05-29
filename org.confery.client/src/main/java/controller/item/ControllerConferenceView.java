@@ -1,7 +1,8 @@
-package itemcontroller;
+package controller.item;
 
 import controller.main.ControllerInterface;
-import item.pagination.controller.ControllerPaginationEditionItem;
+import controller.pagination.ControllerPaginationEditionItem;
+import itemcontroller.ControllerItemInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,8 +33,10 @@ public class ControllerConferenceView
     @FXML
     private Label nameLabel;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private Conference element;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private ObservableList<Edition> editions;
 
     @FXML
@@ -43,41 +46,23 @@ public class ControllerConferenceView
     @Autowired
     private StageManager manager;
 
-    /**
-     * Effect: Builds the pagination and it's data.
-     */
     @Override
     public void initialize() {
-        Edition[] items = {
-                new Edition(1, new Date(), new Date(), "New York", "Lorem",
-                        new Date(), new Date(), new Date(), new Date()),
-                new Edition(new Date(), "New York"),
-                new Edition(new Date(), "New York"),
-                new Edition(new Date(), "New York"),
-                new Edition(new Date(), "New York"),
-                new Edition(new Date(), "New York")
-        };
+        Edition[] items = { new Edition(1, new Date(), new Date(),
+                "New York", "Lorem", new Date(), new Date(), new Date(), new Date())};
         editions = FXCollections.observableArrayList(items);
         pagination = updatePagination(editions);
     }
 
-    @SuppressWarnings("unchecked")
     private Pagination updatePagination(ObservableList<Edition> items) {
         return new PaginationBuilder<Edition, ControllerPaginationEditionItem, GridPane>()
-                .setRows(2).setColumns(4)
                 .setElements(items)
                 .setView(ViewType.EDITION_ITEM)
-                .setStageManager(this.manager)
-                .setPagination(this.pagination)
+                .setStageManager(manager)
+                .setPagination(pagination)
                 .build(GridPane.class);
     }
 
-    /**
-     * Sets the element in the controller's view
-     * and builds the UI data based on the conference's attributes.
-     *
-     * @param element The view's element.
-     */
     @Override
     public void setElement(Conference element) {
         this.element = element;

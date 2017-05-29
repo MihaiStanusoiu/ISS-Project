@@ -1,14 +1,24 @@
 package controller.read;
 
 import controller.main.ControllerInterface;
+import controller.pagination.ControllerPaginationConferenceItem;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
-import listener.ListenerHelper;
+import javafx.scene.layout.GridPane;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import pagination.PaginationBuilder;
+import transfarable.Conference;
+import view.ViewType;
+
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 /**
  * @author Alexandru Stoica
@@ -17,8 +27,7 @@ import org.springframework.stereotype.Component;
 
 @Lazy
 @Component
-public class ControllerMyConferencesView
-        implements ControllerInterface {
+public class ControllerMyConferencesView implements ControllerInterface {
 
     @FXML
     private TextField searchTextField;
@@ -28,30 +37,45 @@ public class ControllerMyConferencesView
 
     @Lazy
     @Autowired
+    @SuppressWarnings("unused")
     private StageManager manager;
 
-    @Lazy
-    @Autowired
-    private ListenerHelper listener;
+    private ObservableList<Conference> conferences;
 
-    /**
-     * Effect: Builds the pagination and it's data.
-     */
     @Override
-    @SuppressWarnings("unchecked")
     public void initialize() {
-        // TODO : Add pagination view for my conferences.
+        // TODO: Filter conferences based on ownership
+        List<Conference> items = asList(
+                new Conference("Conference Name", "TEST"),
+                new Conference("Conference Name", "TEST"),
+                new Conference("Conference Name", "TEST"),
+                new Conference("Conference Name", "TEST"));
+        conferences = FXCollections.observableArrayList(items);
+        pagination = updatePagination(conferences);
+        setUpSearchTextField();
     }
 
-    /**
-     * Effect: Search function for conferences.
-     *
-     * @implNote status: Unavailable at the moment.
-     */
+    private void setUpSearchTextField() {
+        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> search(newValue));
+    }
+
+    private Pagination updatePagination(ObservableList<Conference> items) {
+        return new PaginationBuilder<Conference, ControllerPaginationConferenceItem, GridPane>()
+                .setElements(items)
+                .setView(ViewType.CONFERENCE_ITEM)
+                .setStageManager(manager)
+                .setPagination(pagination)
+                .build(GridPane.class);
+    }
+
+    private void search(String name) {
+        pagination = updatePagination(conferences.filtered(conference ->
+                conference.getName().toLowerCase().contains(name.toLowerCase())));
+    }
+
     @FXML
     private void onSearchButtonClick() {
-        String searchTerm = searchTextField.getText();
-        System.out.println(searchTerm);
+        search(searchTextField.getText());
     }
 
 }
