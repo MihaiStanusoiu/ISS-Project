@@ -1,6 +1,7 @@
 package itemcontroller;
 
 import controller.main.ControllerInterface;
+import javafx.scene.layout.Pane;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -24,4 +25,30 @@ import org.springframework.stereotype.Component;
 
 @Lazy
 @Component
-public interface PaginationControllerItemInterface<T> extends ControllerItemInterface<T>, ControllerInterface { }
+public interface PaginationControllerItemInterface<T> extends ControllerItemInterface<T>, ControllerInterface {
+
+    /**
+     * Returns the view's main pane in order for the
+     * PaginationManager to add the main pane to the page's grid-pane.
+     *
+     * @return [Pane]: The view's main pane.
+     */
+    Pane getRootPane();
+
+    /**
+     * @return The main pane's width
+     * or the main value of a double (by default)
+     */
+    default double getWidth() {
+        return Double.MIN_VALUE;
+    }
+
+    /**
+     * @return The main pane's height
+     * or the main value of a double (by default)
+     */
+    default double getHeight() {
+        return Double.MIN_VALUE;
+    }
+
+}

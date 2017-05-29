@@ -4,8 +4,6 @@ import context.CoreContext;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import manager.StageManager;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -19,10 +17,7 @@ public class Main extends Application {
     private StageManager stageManager;
     private CoreContext coreContext;
 
-    static Logger logger = Logger.getLogger(Main.class);
-
     public static void main(String[] args) {
-        BasicConfigurator.configure();
         Application.launch();
     }
 

@@ -20,7 +20,7 @@
                         <Insets left="20.0" right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Label text="CONFERY">
+                  <Label text="COMFERY">
                      <font>
                         <Font name="Proxima Nova Bold" size="18.0" />
                      </font>
@@ -70,7 +70,7 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </HBox>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="60.0" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%);" text="LOGIN" textFill="WHITE">
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="60.0" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%)(-135deg, #4DE0EB 0%, #6A75D9 100%);" text="LOGIN" textFill="WHITE">
                <font>
                   <Font name="Proxima Nova Bold" size="16.0" />
                </font>
@@ -103,7 +103,7 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </HBox>
-            <Label text="Create a new account on Confery" textFill="#8f8f8f">
+            <Label text="Create a new account on Comfery" textFill="#8f8f8f">
                <font>
                   <Font name="Proxima Nova Regular" size="16.0" />
                </font>
