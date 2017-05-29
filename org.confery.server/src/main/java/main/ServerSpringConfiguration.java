@@ -77,15 +77,26 @@ public class ServerSpringConfiguration {
         CollectionService collectionService = new CollectionManager(loginService(), signUpService(),
                 userService(), submissionSerive(), topicService(), tagService(),
                 editionService(), sessionService(), notificationService());
-
-        collectionService.setUserService(userService());
-        collectionService.setLoginService(loginService());
-        collectionService.setSignUpService(signUpService());
-        collectionService.setEditionService(editionService());
-        collectionService.setTagService(tagService());
-        collectionService.setTopicService(topicService());
-        collectionService.setSessionService(sessionService());
-        collectionService.setSubmissionService(submissionSerive());
+//        CollectionService collectionService = new CollectionManager(
+//                (LoginService)getService(LoginService.class, "LoginService", loginService()),
+//                (SignUpService) getService(SignUpService.class, "SignUpService", signUpService()),
+//                (UserService) getService(UserService.class, "UserService", userService()),
+//                (SubmissionService) getService(SubmissionService.class, "SubmissionService", submissionSerive()),
+//                (TopicService) getService(TopicService.class, "TopicService", topicService()),
+//                (TagService) getService(TagService.class, "TagService", tagService()),
+//                (EditionService) getService(EditionService.class, "EditionService", editionService()),
+//                (SessionService) getService(SessionService.class, "SessionService", sessionService()),
+//                (NotificationService) getService(NotificationService.class, "NotificationService", notificationService())
+//        );
+//
+//        collectionService.setUserService(userService());
+//        collectionService.setLoginService(loginService());
+//        collectionService.setSignUpService(signUpService());
+//        collectionService.setEditionService(editionService());
+//        collectionService.setTagService(tagService());
+//        collectionService.setTopicService(topicService());
+//        collectionService.setSessionService(sessionService());
+//        collectionService.setSubmissionService(submissionSerive());
 
         rmiServiceExporter.setServiceName("CollectionService");
         rmiServiceExporter.setService(collectionService);
@@ -101,6 +112,7 @@ public class ServerSpringConfiguration {
         rmiServiceExporter.setServiceInterface(serviceClass);
         rmiServiceExporter.setRegistryPort(port);
         return rmiServiceExporter.getService();
+//        return rmiServiceExporter;
     }
 
     @Bean

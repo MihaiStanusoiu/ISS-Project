@@ -1,7 +1,7 @@
 package translator;
 
 import domain.ConferenceEntity;
-import transfarable.Conference;
+import transferable.Conference;
 
 /**
  * @author Alexandru Stoica

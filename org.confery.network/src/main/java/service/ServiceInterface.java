@@ -1,6 +1,7 @@
 package service;
 
 import domain.UserEntity;
+import transferable.User;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -12,6 +13,6 @@ import java.rmi.RemoteException;
 
 public interface ServiceInterface extends Remote {
 
-    void activeUser(UserEntity user) throws RemoteException;
+    void activeUser(User user) throws RemoteException;
 
 }

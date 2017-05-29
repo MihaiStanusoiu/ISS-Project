@@ -6,6 +6,8 @@ import domain.UserEntity;
 import exception.SystemException;
 import protocol.ModelInterface;
 import service.Service;
+import transferable.User;
+import translator.UserTranslator;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -59,7 +61,8 @@ public class GenericManager<T extends Idable<Id>, Id extends Serializable>
     }
 
     @Override
-    public void activeUser(UserEntity user) throws RemoteException {
-        active = user;
+    public void activeUser(User user) throws RemoteException {
+        UserEntity userEntity = UserTranslator.translate(user);
+        active = userEntity;
     }
 }

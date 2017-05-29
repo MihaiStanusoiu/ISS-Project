@@ -1,10 +1,12 @@
-package transfarable;
+package transferable;
+
+import java.io.Serializable;
 
 /**
  * @author Alexandru Stoica
  * @version 1.0
  */
-public class Topic {
+public class Topic implements Serializable {
 
     private Integer id;
     private String word;

@@ -1,7 +1,7 @@
 package translator;
 
 import domain.NotificationEntity;
-import transfarable.Notification;
+import transferable.Notification;
 
 /**
  * @author Alexandru Stoica

@@ -1,7 +1,7 @@
 package translator;
 
 import domain.TagEntity;
-import transfarable.Tag;
+import transferable.Tag;
 
 /**
  * @author Alexandru Stoica

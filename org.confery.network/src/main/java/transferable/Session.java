@@ -1,12 +1,13 @@
-package transfarable;
+package transferable;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Alexandru Stoica
  * @version 1.0
  */
-public class Session {
+public class Session implements Serializable {
 
     private Integer id;
     private String name;

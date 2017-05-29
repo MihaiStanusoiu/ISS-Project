@@ -5,6 +5,8 @@ import exception.SystemException;
 import notification.NotificationCenter;
 import protocol.UserProtocol;
 import service.LoginService;
+import transferable.User;
+import translator.UserTranslator;
 
 import java.rmi.RemoteException;
 import java.util.Optional;
@@ -34,14 +36,17 @@ public class LoginManager implements LoginService {
     }
 
     @Override
-    public UserEntity login(String username, String password) throws RemoteException {
-        return runFunction(this::findUser, username, password)
+    public User login(String username, String password) throws RemoteException {
+        return UserTranslator.translate(
+                runFunction(this::findUser, username, password)
                 .orThrow(exception -> new RemoteException("Wrong Username or Password!"))
-                .orElseThrow(() -> new RemoteException("Wrong Username or Password!"));
+                .orElseThrow(() -> new RemoteException("Wrong Username or Password!"))
+        );
     }
 
     @Override
-    public void activeUser(UserEntity user) throws RemoteException {
-        active = user;
+    public void activeUser(User user) throws RemoteException {
+        UserEntity userEntity = UserTranslator.translate(user);
+        active = userEntity;
     }
 }

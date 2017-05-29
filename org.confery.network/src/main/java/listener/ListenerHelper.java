@@ -3,6 +3,8 @@ package listener;
 import domain.UserEntity;
 import notification.NotificationUpdate;
 import service.SubscriberService;
+import transferable.User;
+import translator.UserTranslator;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -25,13 +27,15 @@ public class ListenerHelper extends UnicastRemoteObject implements Listener {
     }
 
     @Override
-    public void setActiveUser(UserEntity user) throws RemoteException {
-        activeUser = user;
+    public void setActiveUser(User user) throws RemoteException {
+        UserEntity userEntity = UserTranslator.translate(user);
+        activeUser = userEntity;
     }
 
     @Override
-    public UserEntity getActiveUser() throws RemoteException {
-        return activeUser;
+    public User getActiveUser() throws RemoteException {
+        User transferableUser = UserTranslator.translate(activeUser);
+        return transferableUser;
     }
 
     @Override

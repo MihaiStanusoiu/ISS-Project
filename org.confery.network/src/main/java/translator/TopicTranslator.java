@@ -1,7 +1,7 @@
 package translator;
 
 import domain.TopicEntity;
-import transfarable.Topic;
+import transferable.Topic;
 
 /**
  * @author Alexandru Stoica

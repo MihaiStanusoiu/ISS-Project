@@ -5,8 +5,11 @@ import exception.SystemException;
 import notification.NotificationCenter;
 import protocol.UserProtocol;
 import service.SignUpService;
+import transferable.User;
+import translator.UserTranslator;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.stream.Collectors;
 
 import static utils.Conditional.basedOn;
@@ -18,13 +21,14 @@ import static utils.Try.runFunction;
  * Tested: True
  */
 
-public class SignUpManager implements SignUpService {
+public class SignUpManager extends UnicastRemoteObject implements SignUpService {
 
     private NotificationCenter notificationCenter;
     private UserProtocol userModel;
     private UserEntity active;
 
-    public SignUpManager(NotificationCenter notificationCenter, UserProtocol userModel) {
+    public SignUpManager(NotificationCenter notificationCenter, UserProtocol userModel)
+            throws RemoteException {
         this.notificationCenter = notificationCenter;
         this.userModel = userModel;
     }
@@ -64,7 +68,7 @@ public class SignUpManager implements SignUpService {
     }
 
     @Override
-    public UserEntity signUp(String username, String password, String confirm, String email, String name)
+    public User signUp(String username, String password, String confirm, String email, String name)
             throws RemoteException {
         basedOn(runFunction(this::isUsernameUnique, username)
                 .orThrow(exception-> new RemoteException("Invalid Username")))
@@ -72,11 +76,16 @@ public class SignUpManager implements SignUpService {
         UserEntity user = (isPasswordValid(password, confirm) && isEmailValid(email)) ?
                 new UserEntity(username, password, email, name) : null;
         Integer id = runFunction(userModel::add, user).orThrow(exception -> new RemoteException(exception.getMessage()));
-        return runFunction(userModel::getElementById, id).orThrow(exception -> new RemoteException(exception.getMessage()));
+        User transferableUser = UserTranslator.translate(
+                runFunction(userModel::getElementById, id).orThrow(exception -> new RemoteException(exception.getMessage()))
+        );
+
+        return transferableUser;
     }
 
     @Override
-    public void activeUser(UserEntity user) throws RemoteException {
-        active = user;
+    public void activeUser(User user) throws RemoteException {
+        UserEntity userEntity = UserTranslator.translate(user);
+        active = userEntity;
     }
 }

@@ -1,7 +1,7 @@
 package translator;
 
 import domain.SubmissionEntity;
-import transfarable.Submission;
+import transferable.Submission;
 
 /**
  * @author Alexandru Stoica

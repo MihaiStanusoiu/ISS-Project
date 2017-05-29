@@ -1,7 +1,7 @@
 package translator;
 
 import domain.EditionEntity;
-import transfarable.Edition;
+import transferable.Edition;
 
 /**
  * @author Alexandru Stoica

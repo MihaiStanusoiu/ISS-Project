@@ -2,6 +2,8 @@ package manager;
 
 import domain.UserEntity;
 import service.*;
+import transferable.User;
+import translator.UserTranslator;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -145,8 +147,9 @@ public class CollectionManager implements CollectionService {
     }
 
     @Override
-    public void activeUser(UserEntity user) throws RemoteException {
-        this.activeUser = user;
+    public void activeUser(User user) throws RemoteException {
+        UserEntity userEntity = UserTranslator.translate(user);
+        this.activeUser = userEntity;
         List<ServiceInterface> list = asList(loginService, signUpService, notificationService, userService,
                 sessionService, submissionService, editionService, tagService, topicService);
         list.forEach(service -> runFunction(service::activeUser, user));

@@ -1,7 +1,7 @@
 package translator;
 
 import domain.SessionEntity;
-import transfarable.Session;
+import transferable.Session;
 
 
 /**
