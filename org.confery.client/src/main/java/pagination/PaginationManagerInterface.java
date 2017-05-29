@@ -13,17 +13,14 @@ import java.util.Collection;
  * Allows alternatives to the grid-view used in the original/main pagination builder.
  * <p>
  * The pagination is organized in a U [Pane].
- * </p>
  * <p>
  * T : The data's type (example: ConferenceEntity -- from domain package)
  * E : The view-controller's type, the controller that manages the item's view.
  * U : The pane used to display a page.
- * </p>
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-@SuppressWarnings("unused")
 public interface PaginationManagerInterface<T, E extends PaginationControllerItemInterface<T>, U extends Pane> {
 
     /**

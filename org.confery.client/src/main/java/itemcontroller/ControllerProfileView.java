@@ -1,6 +1,6 @@
 package itemcontroller;
 
-import controller.ControllerInterface;
+import controller.main.ControllerInterface;
 import domain.UserEntity;
 import exception.SystemException;
 import javafx.fxml.FXML;

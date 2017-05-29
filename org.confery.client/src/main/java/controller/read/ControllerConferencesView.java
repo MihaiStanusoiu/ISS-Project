@@ -1,5 +1,6 @@
-package controller;
+package controller.read;
 
+import controller.main.ControllerInterface;
 import item.pagination.controller.ControllerPaginationConferenceItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -81,11 +82,8 @@ public class ControllerConferencesView
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> searchBasedOn(newValue));
     }
 
-    @SuppressWarnings("unchecked")
     private Pagination updatePagination(ObservableList<Conference> items) {
         return new PaginationBuilder<Conference, ControllerPaginationConferenceItem, GridPane>()
-                .setRows(2)
-                .setColumns(4)
                 .setElements(items)
                 .setView(ViewType.CONFERENCE_ITEM)
                 .setStageManager(manager)

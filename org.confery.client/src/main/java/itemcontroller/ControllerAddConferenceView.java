@@ -1,6 +1,6 @@
 package itemcontroller;
 
-import controller.ControllerInterface;
+import controller.main.ControllerInterface;
 import domain.ConferenceEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

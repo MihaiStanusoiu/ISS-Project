@@ -1,8 +1,9 @@
-package controller;
+package controller.component;
 
 import context.Context;
 import context.ContextType;
 import context.CoreContext;
+import controller.main.ControllerInterface;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

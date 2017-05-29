@@ -1,5 +1,6 @@
-package controller;
+package controller.read;
 
+import controller.main.ControllerInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;

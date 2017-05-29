@@ -1,4 +1,4 @@
-package controller;
+package controller.main;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;

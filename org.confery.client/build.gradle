@@ -14,6 +14,7 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+	jcenter()
 }
 
 buildscript {
@@ -27,12 +28,20 @@ buildscript {
     }
 }
 
+jar {
+	manifest {
+		attributes 'Main-Class': 'com.main.Main'
+	}
+}
+
 dependencies {
     // Project
     compile project(':org.confery.model')
     compile project(':org.confery.network')
 
-    // Reflections
+	testCompile "com.athaydes.automaton:Automaton:1.3.2"
+
+	// Reflections
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
     compile("org.hibernate:hibernate-core:5.2.9.Final")
 
@@ -46,6 +55,9 @@ dependencies {
     testCompile "org.testfx:testfx-core:4.0.+"
     testCompile "org.testfx:testfx-junit:4.0.+"
     compile group: 'org.jfxtras', name: 'openjfx-monocle', version: '1.8.0_20'
+	testCompile "org.testfx:testfx-legacy:4.0.+", {
+		exclude group: "junit", module: "junit"
+	}
 
     // JUnit
     testCompile group: 'junit', name: 'junit', version: '4.11'

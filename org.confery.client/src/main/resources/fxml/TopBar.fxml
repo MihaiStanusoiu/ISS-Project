@@ -5,7 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<BorderPane maxHeight="60.0" minHeight="60.0" minWidth="0.0" prefHeight="60.0" style="-fx-background-color: &quot;white&quot;;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTopBar">
+<BorderPane maxHeight="60.0" minHeight="60.0" minWidth="0.0" prefHeight="60.0" style="-fx-background-color: &quot;white&quot;;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.component.ControllerTopBar">
    <left>
       <HBox alignment="CENTER_LEFT" minWidth="0.0" onMouseClicked="#onLogoButtonClick" BorderPane.alignment="CENTER">
          <children>

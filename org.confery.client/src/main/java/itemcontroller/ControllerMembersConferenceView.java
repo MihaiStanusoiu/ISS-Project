@@ -1,6 +1,6 @@
 package itemcontroller;
 
-import controller.ControllerInterface;
+import controller.main.ControllerInterface;
 import domain.ConferenceEntity;
 import domain.UserEntity;
 import javafx.collections.FXCollections;

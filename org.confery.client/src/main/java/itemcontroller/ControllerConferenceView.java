@@ -1,6 +1,6 @@
 package itemcontroller;
 
-import controller.ControllerInterface;
+import controller.main.ControllerInterface;
 import item.pagination.controller.ControllerPaginationEditionItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

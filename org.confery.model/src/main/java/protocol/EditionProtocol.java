@@ -46,7 +46,7 @@ public interface EditionProtocol extends ModelInterface<EditionEntity, Integer> 
     /**
      * Deletes a session from the edition.
      *
-     * @param edition The target entity [already in the database]
+     * @param edition The target read [already in the database]
      * @param session The target session [already in the database]
      * @return The edition after we delete the session
      * @throws SystemException If the session is not a part of the edition.

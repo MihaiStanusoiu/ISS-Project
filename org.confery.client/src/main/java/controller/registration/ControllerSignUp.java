@@ -1,7 +1,7 @@
-package controller;
+package controller.registration;
 
+import controller.main.ControllerInterface;
 import domain.UserEntity;
-import exception.SystemException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -29,13 +29,22 @@ import static utils.Try.runFunction;
 
 @Lazy
 @Component
-public class ControllerLogin implements ControllerInterface, SubscriberService {
+public class ControllerSignUp implements ControllerInterface, SubscriberService {
 
     @FXML
     private TextField usernameTextField;
 
     @FXML
     private TextField passwordTextField;
+
+    @FXML
+    private TextField emailTextField;
+
+    @FXML
+    private TextField displayNameTextField;
+
+    @FXML
+    private TextField confirmTextField;
 
     @FXML
     private Label errorLabel;
@@ -71,7 +80,6 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         runFunction(listener::addSubscriber, this).orHandle(System.out::println);
     }
 
-
     /**
      * Effect: Loads the ConferencesView.
      *
@@ -82,38 +90,36 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         manager.switchScene(ViewType.CONFERENCES);
     }
 
-
     /**
-     * Effect: Loads the SignUpView.
+     * Effect: Loads the LoginView.
      *
      * @implNote status: In development.
      */
     @FXML
-    void onSignUpButtonClick() throws RemoteException {
-        manager.switchScene(ViewType.SIGN_UP);
+    void onLoginButtonClick() throws RemoteException {
+        manager.switchScene(ViewType.LOGIN);
     }
 
     /**
-     * Effect: The user logs in the system with account data.
+     * Effect: The user registers in the system with his data.
      *
      * @implNote status: Unavailable at the moment.
      */
     @FXML
-    void onLoginButtonClick() throws RemoteException, SystemException {
+    void onSignUpButtonClick() throws RemoteException {
+        String email = emailTextField.getText();
+        String displayName = displayNameTextField.getText();
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        try {
-            UserEntity user = service.loginService().login(username, password);
-            listener.setActiveUser(user);
-            listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGIN));
-            manager.switchScene(ViewType.CONFERENCES);
-        } catch (RemoteException exception) {
-            errorLabel.setText(exception.getCause().getMessage());
-        }
+        String confirm = confirmTextField.getText();
+        UserEntity user = service.signUpService().signUp(username, password, confirm, email, displayName);
+        this.listener.setActiveUser(user);
+        this.listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_SIGN_UP));
+        manager.switchScene(ViewType.CONFERENCES);
     }
 
     @Override
     public void update(NotificationUpdate notification) throws RemoteException {
-        System.out.print(notification.getType());
+        System.out.print(notification);
     }
 }

@@ -1,5 +1,6 @@
-package controller;
+package controller.read;
 
+import controller.main.ControllerInterface;
 import item.pagination.controller.ControllerPaginationNotificationItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

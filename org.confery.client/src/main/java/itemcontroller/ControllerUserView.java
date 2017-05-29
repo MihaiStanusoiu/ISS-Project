@@ -1,6 +1,6 @@
 package itemcontroller;
 
-import controller.ControllerInterface;
+import controller.main.ControllerInterface;
 import item.pagination.controller.ControllerPaginationConferenceItem;
 import item.pagination.controller.ControllerPaginationSubmissionItem;
 import javafx.collections.FXCollections;

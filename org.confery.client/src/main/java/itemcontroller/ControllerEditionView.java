@@ -1,7 +1,7 @@
 package itemcontroller;
 
 import cells.UserListCell;
-import controller.ControllerInterface;
+import controller.main.ControllerInterface;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
