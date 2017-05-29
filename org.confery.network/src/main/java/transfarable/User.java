@@ -1,12 +1,14 @@
 package transfarable;
 
 
+import java.io.Serializable;
+
 /**
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-public class User {
+public class User implements Serializable {
 
     private Integer id;
     private String username;
