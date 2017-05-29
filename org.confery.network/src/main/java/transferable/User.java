@@ -1,4 +1,4 @@
-package transfarable;
+package transferable;
 
 
 import java.io.Serializable;
@@ -34,8 +34,8 @@ public class User implements Serializable {
         this(0, username, password, email, name, website, bio, location);
     }
 
-    public User(String username, String password, String email, String name) {
-        this(username, password, email, name, "", "", "");
+    public User(String username, String password) {
+        this(0, username, password, "", "", "", "", "");
     }
 
     /**

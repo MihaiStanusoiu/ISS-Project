@@ -1,6 +1,7 @@
 package service;
 
 import domain.UserEntity;
+import transferable.User;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

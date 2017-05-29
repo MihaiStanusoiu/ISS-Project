@@ -5,6 +5,7 @@ import exception.SystemException;
 import notification.NotificationCenter;
 import protocol.UserProtocol;
 import service.LoginService;
+import transferable.User;
 import translator.UserTranslator;
 
 import java.rmi.RemoteException;

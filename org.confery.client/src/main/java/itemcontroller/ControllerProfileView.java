@@ -1,21 +1,26 @@
-package controller.item;
+package itemcontroller;
 
-import controller.main.ControllerInterface;
+import controller.ControllerInterface;
 import domain.UserEntity;
 import exception.SystemException;
-import itemcontroller.ControllerItemInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import listener.Listener;
 import manager.StageManager;
-import notification.NotificationType;
 import notification.NotificationUpdate;
+import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import service.SubscriberService;
+
+import transferable.User;
+import translator.UserTranslator;
 import view.ViewType;
 
 import java.rmi.RemoteException;
+
+import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -24,22 +29,14 @@ import java.rmi.RemoteException;
 
 @Lazy
 @Component
-public class ControllerProfileView implements ControllerInterface, ControllerItemInterface<UserEntity> {
+public class ControllerProfileView implements ControllerInterface,
+        ControllerItemInterface<UserEntity>, SubscriberService {
 
-    @FXML
-    private TextField nameTextField;
-
-    @FXML
-    private TextField websiteTextField;
-
-    @FXML
-    private TextField locationTextField;
-
-    @FXML
-    private TextField bioTextField;
-
-    @FXML
-    private TextField emailTextField;
+    @FXML private TextField nameTextField;
+    @FXML private TextField websiteTextField;
+    @FXML private TextField locationTextField;
+    @FXML private TextField bioTextField;
+    @FXML private TextField emailTextField;
 
     private UserEntity user;
 
@@ -51,7 +48,15 @@ public class ControllerProfileView implements ControllerInterface, ControllerIte
     @Autowired
     private Listener listener;
 
-    public void initialize() { }
+
+    /**
+     * Effect: Builds the pagination and it's data.
+     */
+    public void initialize() {
+        manager.getPrimaryStage().setOnCloseRequest(event ->
+                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
+    }
 
     @FXML
     public void onSaveButtonClick() throws RemoteException, SystemException {
@@ -59,7 +64,8 @@ public class ControllerProfileView implements ControllerInterface, ControllerIte
                 user.getPassword(), emailTextField.getText(),
                 nameTextField.getText(), websiteTextField.getText(),
                 bioTextField.getText(), locationTextField.getText());
-        listener.setActiveUser(other);
+        User tranferableUser = UserTranslator.translate(other);
+        listener.setActiveUser(tranferableUser);
         listener.notifyAll(new NotificationUpdate(NotificationType.UPDATE_USER));
     }
 
@@ -68,6 +74,7 @@ public class ControllerProfileView implements ControllerInterface, ControllerIte
         //userService.delete(user);
         listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGOUT));
         listener.setActiveUser(null);
+        listener.removeSubscriber(this);
         manager.switchScene(ViewType.CONFERENCES);
     }
 
@@ -77,6 +84,13 @@ public class ControllerProfileView implements ControllerInterface, ControllerIte
         locationTextField.setText(user.getLocation());
         bioTextField.setText(user.getBio());
         emailTextField.setText(user.getEmail());
+    }
+
+    @Override
+    public void update(NotificationUpdate notification) throws RemoteException {
+        if(notification.getType().equals(NotificationType.UPDATE_USER)) {
+            updateUserData();
+        }
     }
 
     @Override

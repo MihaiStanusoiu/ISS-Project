@@ -1,6 +1,5 @@
-package controller.registration;
+package controller;
 
-import controller.main.ControllerInterface;
 import domain.UserEntity;
 import exception.SystemException;
 import javafx.fxml.FXML;
@@ -10,41 +9,35 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import listener.Listener;
 import manager.StageManager;
-import notification.NotificationType;
 import notification.NotificationUpdate;
+import notification.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.CollectionService;
 import service.SubscriberService;
-import utils.Try;
+import transferable.User;
+import translator.UserTranslator;
 import view.ViewType;
 
 import java.rmi.RemoteException;
 
+import static utils.Try.runFunction;
+
 /**
- * @author Alexandru Stoica
- * @version 1.0
+ * @author      Alexandru Stoica
+ * @version     1.0
  */
 
 @Lazy
 @Component
 public class ControllerLogin implements ControllerInterface, SubscriberService {
 
-    @FXML
-    private TextField usernameTextField;
-
-    @FXML
-    private TextField passwordTextField;
-
-    @FXML
-    private Label errorLabel;
-
-    @FXML
-    private ImageView backgroundImage;
-
-    @FXML
-    private StackPane backgroundImagePane;
+    @FXML private TextField usernameTextField;
+    @FXML private TextField passwordTextField;
+    @FXML private Label errorLabel;
+    @FXML private ImageView backgroundImage;
+    @FXML private StackPane backgroundImagePane;
 
     @Lazy
     @Autowired
@@ -67,44 +60,39 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         backgroundImage.fitWidthProperty().bind(backgroundImagePane.widthProperty());
         backgroundImage.fitHeightProperty().bind(backgroundImagePane.heightProperty());
         manager.getPrimaryStage().setOnCloseRequest(event ->
-                Try.runMethod(listener::removeSubscriber, this).orHandle(System.out::print));
-        Try.runMethod(listener::addSubscriber, this).orHandle(System.out::println);
+                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
     }
 
 
     /**
      * Effect: Loads the ConferencesView.
-     *
      * @implNote status: In development.
      */
-    @FXML
-    void onLogoButtonClick() throws RemoteException {
+    @FXML void onLogoButtonClick() throws RemoteException {
         manager.switchScene(ViewType.CONFERENCES);
     }
 
 
     /**
      * Effect: Loads the SignUpView.
-     *
      * @implNote status: In development.
      */
-    @FXML
-    void onSignUpButtonClick() throws RemoteException {
+    @FXML void onSignUpButtonClick() throws RemoteException {
         manager.switchScene(ViewType.SIGN_UP);
     }
 
     /**
      * Effect: The user logs in the system with account data.
-     *
      * @implNote status: Unavailable at the moment.
      */
-    @FXML
-    void onLoginButtonClick() throws RemoteException, SystemException {
+    @FXML void onLoginButtonClick() throws RemoteException, SystemException {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         try {
-            UserEntity user = service.loginService().login(username, password);
-            listener.setActiveUser(user);
+            User transferableUser = service.loginService().login(username, password);
+            UserEntity user = UserTranslator.translate(transferableUser);
+            listener.setActiveUser(transferableUser);
             listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGIN));
             manager.switchScene(ViewType.CONFERENCES);
         } catch (RemoteException exception) {

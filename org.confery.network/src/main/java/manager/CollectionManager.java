@@ -2,6 +2,7 @@ package manager;
 
 import domain.UserEntity;
 import service.*;
+import transferable.User;
 import translator.UserTranslator;
 
 import java.rmi.RemoteException;

@@ -1,7 +1,9 @@
 package listener;
 
+import domain.UserEntity;
 import service.SubscriberService;
 import service.SubscriptionService;
+import transferable.User;
 
 import java.io.Serializable;
 import java.rmi.Remote;

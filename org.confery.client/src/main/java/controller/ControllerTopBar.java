@@ -1,9 +1,9 @@
-package controller.component;
+package controller;
 
 import context.Context;
 import context.ContextType;
 import context.CoreContext;
-import controller.main.ControllerInterface;
+import domain.UserEntity;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.SubscriberService;
-import utils.Try;
+import translator.UserTranslator;
 import view.ViewType;
 
 import java.rmi.RemoteException;
@@ -25,8 +25,8 @@ import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 
 /**
- * @author Alexandru Stoica
- * @version 1.0
+ * @author      Alexandru Stoica
+ * @version     1.0
  */
 
 @Lazy
@@ -64,38 +64,54 @@ public class ControllerTopBar
     @Override
     public void initialize() throws RemoteException {
         context.in(this).forType(ContextType.REGULAR)
-                .run(item -> ((Label) item).setText(""));
-        context.basedOn(listener.getActiveUser() != null)
-                .in(this)
-                .forType(ContextType.GUEST)
-                .run(item -> ((Button) item).setText(runFunction(
-                        listener::getActiveUser).or(null).getName()));
+                .run(item -> ((Label)item).setText(""));
+        context = context.basedOn(listener.getActiveUser() != null);
+        context = context.in(this)
+                .forType(ContextType.GUEST);
+        UserEntity userEntity = UserTranslator.translate(listener.getActiveUser());
+        context.run(item -> ((Button)item).setText(userEntity.getName()));
         manager.getPrimaryStage().setOnCloseRequest(event ->
-                Try.runMethod(listener::removeSubscriber, this).orHandle(System.out::print));
-        Try.runMethod(listener::addSubscriber, this).orHandle(System.out::println);
+                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
+        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
     }
 
     private Boolean existsActiveUser() throws RemoteException {
         return listener.getActiveUser() != null;
     }
 
-    @FXML
-    private void onLoginButtonClick() {
+    /**
+     * Effect: Loads the LoginView responsible
+     * for the user's authentication process.
+     * @implNote status: In development
+     */
+    @FXML private void onLoginButtonClick() {
         manager.switchScene(ViewType.LOGIN);
     }
 
-    @FXML
-    private void onSignUpButtonClick() {
+    /**
+     * Effect: Loads the SignUpView responsible
+     * for the user's authentication process.
+     * @implNote status: In development
+     */
+    @FXML private void onSignUpButtonClick() {
         manager.switchScene(ViewType.SIGN_UP);
     }
 
-    @FXML
-    private void onLogoButtonClick() {
+    /**
+     * Effect: Loads the ConferencesView responsible
+     * for listing all the available conferences.
+     * @implNote status: In development.
+     */
+    @FXML private void onLogoButtonClick() {
         manager.switchScene(ViewType.CONFERENCES);
     }
 
-    @FXML
-    private void onProfileButtonClick() throws RemoteException {
+    /**
+     * Effect: Loads the ProfileView responsible
+     * for updating the active user's profile information.
+     * @implNote status: In development.
+     */
+    @FXML private void onProfileButtonClick() throws RemoteException {
         basedOn(existsActiveUser())
                 .runTrue(manager::switchScene, ViewType.PROFILE, listener.getActiveUser());
     }
@@ -124,7 +140,7 @@ public class ControllerTopBar
         if (notification.getType().equals(NotificationType.SIGNAL_LOGIN) ||
                 notification.getType().equals(NotificationType.SIGNAL_SIGN_UP) ||
                 notification.getType().equals(NotificationType.UPDATE_USER)) {
-            Platform.runLater(() -> Try.runMethod(this::showActiveUser).orHandle(System.out::println));
+            Platform.runLater(() -> runFunction(this::showActiveUser).orHandle(System.out::println));
         }
         if (notification.getType().equals(NotificationType.SIGNAL_LOGOUT)) {
             Platform.runLater(this::showRegistrationButtons);

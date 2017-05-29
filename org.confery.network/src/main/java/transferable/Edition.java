@@ -1,4 +1,4 @@
-package transfarable;
+package transferable;
 
 import java.io.Serializable;
 import java.util.Date;
