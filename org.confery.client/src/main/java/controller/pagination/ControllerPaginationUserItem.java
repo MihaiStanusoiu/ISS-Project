@@ -4,7 +4,6 @@ import itemcontroller.PaginationControllerItemInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -60,20 +59,6 @@ public class ControllerPaginationUserItem
         locationLabel.setText(item.getLocation());
         nameLabel.setText(item.getName());
         usernameLabel.setText("@" + item.getUsername());
-    }
-
-    public Pane getRootPane() {
-        return rootPane;
-    }
-
-    @Override
-    public double getWidth() {
-        return rootPane.getWidth();
-    }
-
-    @Override
-    public double getHeight() {
-        return rootPane.getHeight();
     }
 
 }

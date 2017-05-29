@@ -1,8 +1,6 @@
 package context;
 
-import function.ThrowBiFunction;
 import method.SimpleMethod;
-import method.ThrowBiMethod;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.springframework.stereotype.Component;
@@ -24,7 +22,7 @@ import static utils.Try.runFunction;
 @Component
 public class CoreContext {
 
-    private Reflections reflections;
+    private final Reflections reflections;
     private Set<Field> fields;
     private Boolean condition;
     private ContextType type;
@@ -85,8 +83,7 @@ public class CoreContext {
     }
 
     private Method getMethod(Field field, String methodName, Class<?>... paramTypes) {
-        return runFunction((ThrowBiFunction<String, Class<?>[], Method, NoSuchMethodException>)
-                field.getType()::getMethod, methodName, paramTypes).orHandle(this::handleExceptions);
+        return runFunction(field.getType()::getMethod, methodName, paramTypes).orHandle(this::handleExceptions);
     }
 
     private Boolean isType(Field field) {
@@ -94,8 +91,7 @@ public class CoreContext {
     }
 
     private void execute(Field field, String methodName, Class<?>... types) {
-        Try.runMethod((ThrowBiMethod<Object, Object[], ReflectiveOperationException>)
-                getMethod(field, methodName, types)::invoke, getObject(field, object), parameters)
+        Try.runMethod(getMethod(field, methodName, types)::invoke, getObject(field, object), parameters)
                 .orHandle(this::handleExceptions);
     }
 

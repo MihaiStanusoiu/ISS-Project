@@ -40,6 +40,7 @@ public class ControllerPaginationSubmissionItem
 
     @Lazy
     @Autowired
+    @SuppressWarnings("unused")
     private StageManager manager;
 
     private Submission item;
@@ -55,6 +56,7 @@ public class ControllerPaginationSubmissionItem
         build();
     }
 
+    @SuppressWarnings("EmptyMethod")
     @FXML
     public void onItemClick() {
 
@@ -66,20 +68,6 @@ public class ControllerPaginationSubmissionItem
         acronymLabel.setText(item.getName());
         statusIndicator.setStyle(statusIndicator.getStyle() +
                 "-fx-background-color: " + getStatusColorValue());
-    }
-
-    public Pane getRootPane() {
-        return rootPane;
-    }
-
-    @Override
-    public double getWidth() {
-        return rootPane.getWidth();
-    }
-
-    @Override
-    public double getHeight() {
-        return rootPane.getHeight();
     }
 
     private String getStatusColorValue() {

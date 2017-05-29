@@ -12,7 +12,8 @@ import view.ViewType;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Builds the pagination's pages and manages the data.
@@ -46,12 +47,12 @@ public class PaginationManager<T, E extends PaginationControllerItemInterface<T>
     /**
      * The number of columns in page's grid-pane.
      */
-    private Integer columns;
+    private final Integer columns;
 
     /**
      * The elements displayed in the grid-pane's pagination. [the data]
      */
-    private ArrayList<T> elements;
+    private final List<T> elements;
 
     /**
      * The element's view [the view to display the data]
@@ -96,38 +97,19 @@ public class PaginationManager<T, E extends PaginationControllerItemInterface<T>
     }
 
     /**
-     * Effect: Sets the data based on an ArrayList.
-     *
-     * @param elements: The data we need to set in the pagination.
-     */
-    @SuppressWarnings("unused")
-    public void setElements(ArrayList<T> elements) {
-        this.elements = elements;
-    }
-
-    /**
      * Effect: Sets the data based on a Collection.
      *
      * @param elements: The data we need to set in the pagination.
      */
     @SuppressWarnings("unused")
     public void setElements(Collection<T> elements) {
-        elements.forEach(element -> this.elements.add(element));
-    }
-
-    /**
-     * Effect: Sets the data based on an generic list of items.
-     *
-     * @param elements: The data we need to set in the pagination.
-     */
-    public void setElements(T[] elements) {
-        Collections.addAll(this.elements, elements);
+        this.elements.addAll(elements);
     }
 
     /**
      * @return [Integer] The number of items per page.
      */
-    public Integer getItemsPerPage() {
+    private Integer getItemsPerPage() {
         return rows * columns;
     }
 
@@ -141,9 +123,7 @@ public class PaginationManager<T, E extends PaginationControllerItemInterface<T>
         ColumnConstraints columnConstraints =
                 new ColumnConstraints(Double.MIN_VALUE, Control.USE_COMPUTED_SIZE, Double.MAX_VALUE);
         columnConstraints.setHgrow(Priority.SOMETIMES);
-        for (Integer indexColumn = 0; indexColumn < columns; indexColumn++) {
-            pane.getColumnConstraints().add(columnConstraints);
-        }
+        IntStream.range(0, columns).forEach(item -> pane.getColumnConstraints().add(columnConstraints));
     }
 
     /**
@@ -156,9 +136,7 @@ public class PaginationManager<T, E extends PaginationControllerItemInterface<T>
         RowConstraints rowConstraints =
                 new RowConstraints(Double.MIN_VALUE, Control.USE_COMPUTED_SIZE, Double.MAX_VALUE);
         rowConstraints.setVgrow(Priority.ALWAYS);
-        for (Integer indexRow = 0; indexRow < rows; indexRow++) {
-            pane.getRowConstraints().add(rowConstraints);
-        }
+        IntStream.range(0, rows).forEach(item -> pane.getRowConstraints().add(rowConstraints));
     }
 
     /**
@@ -167,16 +145,23 @@ public class PaginationManager<T, E extends PaginationControllerItemInterface<T>
      * @return [GridPane] the page's pane.
      */
     private GridPane getGrid() {
-        GridPane pane = new GridPane();
+        return setUpGrid(new GridPane());
+    }
+
+    private GridPane setUpGrid(GridPane pane) {
+        setPaneSizeConstraints(pane);
+        setColumnConstraints(pane);
+        setRowConstraints(pane);
+        return pane;
+    }
+
+    private void setPaneSizeConstraints(GridPane pane) {
         pane.setMinWidth(Double.MIN_VALUE);
         pane.setMinHeight(Double.MIN_VALUE);
         pane.setPrefWidth(Control.USE_COMPUTED_SIZE);
         pane.setPrefHeight(Control.USE_COMPUTED_SIZE);
         pane.setMaxWidth(Double.MAX_VALUE);
         pane.setMaxHeight(Double.MAX_VALUE);
-        setColumnConstraints(pane);
-        setRowConstraints(pane);
-        return pane;
     }
 
     /**
@@ -188,19 +173,10 @@ public class PaginationManager<T, E extends PaginationControllerItemInterface<T>
      * @param indexColumn   The column's index
      * @param indexRow      The row's index
      */
-    private void addItem(GridPane pane,
-                         Integer startingPoint,
-                         Integer indexData,
-                         Integer indexColumn,
-                         Integer indexRow) {
-
-//            ItemFXMLLoader<T, E> loader = new ItemFXMLLoader<>(view);
-//            loader.setElement(elements.get(indexData));
-//            loader.setStageManager(stageManager);
-            //stageManager.getRootNode(view.getFXMLFile(), elements.get(indexData));
-            pane.add(stageManager.getRootNode(view.getFXMLFile(), elements.get(indexData)),
-                    indexColumn - startingPoint, indexRow - 1);
-
+    private void addItem(GridPane pane, Integer startingPoint, Integer indexData,
+                         Integer indexColumn, Integer indexRow) {
+        pane.add(stageManager.getRootNode(view.getFXMLFile(), elements.get(indexData)),
+                indexColumn - startingPoint, indexRow - 1);
     }
 
     /**
@@ -209,18 +185,23 @@ public class PaginationManager<T, E extends PaginationControllerItemInterface<T>
      * @param pageIndex The page's index.
      * @return [GridPane] The page's pane.
      */
-    public GridPane createPage(Integer pageIndex) {
-        GridPane pane = getGrid();
-        Integer startingPoint = pageIndex * getItemsPerPage();
+    private GridPane createPage(Integer pageIndex) {
+        return createElements(getGrid(), pageIndex * getItemsPerPage());
+    }
+
+    private GridPane createElements(GridPane pane, Integer startingPoint) {
         Integer index = startingPoint;
         for (Integer indexRow = 1; indexRow <= rows; indexRow++) {
-            for (Integer indexColumn = startingPoint;
-                 indexColumn < startingPoint + columns && index < elements.size();
-                 indexColumn++, index++) {
-                addItem(pane, startingPoint, index, indexColumn, indexRow);
-            }
+            index = createPageRow(pane, startingPoint, index, indexRow);
         }
         return pane;
+    }
+
+    private Integer createPageRow(GridPane pane, Integer startingPoint, Integer index, Integer indexRow) {
+        for (Integer indexColumn = startingPoint; indexColumn < startingPoint + columns && index < elements.size(); indexColumn++, index++) {
+            addItem(pane, startingPoint, index, indexColumn, indexRow);
+        }
+        return index;
     }
 
     /**

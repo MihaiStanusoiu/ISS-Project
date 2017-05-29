@@ -12,10 +12,12 @@
 }
 
 /* Style for page buttons */
+/*noinspection CssUnusedSymbol*/
 #pagination .toggle-button {
     -fx-opacity: 0%;
 }
 
+/*noinspection CssUnusedSymbol*/
 .pagination .toggle-button {
    -fx-opacity: 0%;
 }

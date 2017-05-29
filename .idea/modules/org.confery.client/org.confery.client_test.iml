@@ -38,6 +38,8 @@
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-actuator:1.5.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: eu.lestard:advanced-bindings:0.4.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jfxtras:openjfx-monocle:1.8.0_20" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-api:2.8.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-core:2.8.2" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jre8:1.1.2-4" level="project" />
     <orderEntry type="library" name="Gradle: com.athaydes.automaton:Automaton:1.3.2" level="project" />
     <orderEntry type="library" name="Gradle: org.testfx:testfx-core:4.0.6-alpha" level="project" />
