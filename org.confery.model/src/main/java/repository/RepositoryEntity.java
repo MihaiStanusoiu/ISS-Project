@@ -6,6 +6,7 @@ import exception.SystemException;
 import exception.ValidatorSystemException;
 import method.ThrowMethod;
 import org.hibernate.Session;
+import utils.Try;
 import validator.ValidatorRepository;
 
 import javax.persistence.Query;
@@ -94,7 +95,7 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
         Session session = loader.getFactory().openSession();
         session.beginTransaction();
         T element = this.getElementById(id);
-        runFunction((ThrowMethod<T, RuntimeException>) session::delete, element)
+        Try.runMethod((ThrowMethod<T, RuntimeException>) session::delete, element)
                 .orThrow(exception -> new ValidatorSystemException(exception.getMessage()));
         session.getTransaction().commit();
         session.close();

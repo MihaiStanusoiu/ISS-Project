@@ -6,6 +6,7 @@ import database.DatabaseLoaderType;
 import domain.TopicEntity;
 import org.junit.Assert;
 import org.junit.Test;
+import utils.Try;
 
 import static utils.Try.runFunction;
 
@@ -26,7 +27,7 @@ public class TopicModelTest {
         TopicEntity second = new TopicEntity("test");
         // then:
         Assert.assertTrue(model.add(first).equals(1));
-        runFunction(() -> Assert.assertTrue(model.add(second).equals(2)))
+        Try.runMethod(() -> Assert.assertTrue(model.add(second).equals(2)))
                 .orHandle(exception -> Assert.assertTrue(exception.getMessage()
                         .equals("Error test is already in our system.")));
     }

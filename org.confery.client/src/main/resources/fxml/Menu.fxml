@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane alignment="TOP_CENTER" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMenu">
+<StackPane alignment="TOP_CENTER" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.component.ControllerMenu">
    <children>
       <VBox alignment="CENTER" maxHeight="420.0" minHeight="0.0" minWidth="60.0" style="-fx-background-color: &quot;white&quot;;" StackPane.alignment="TOP_CENTER">
          <children>
