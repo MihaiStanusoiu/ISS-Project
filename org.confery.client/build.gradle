@@ -28,12 +28,6 @@ buildscript {
     }
 }
 
-jar {
-	manifest {
-		attributes 'Main-Class': 'com.main.Main'
-	}
-}
-
 dependencies {
     // Project
     compile project(':org.confery.model')
@@ -58,6 +52,10 @@ dependencies {
 	testCompile "org.testfx:testfx-legacy:4.0.+", {
 		exclude group: "junit", module: "junit"
 	}
+    
+    // Log4J
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.2'
 
     // JUnit
     testCompile group: 'junit', name: 'junit', version: '4.11'

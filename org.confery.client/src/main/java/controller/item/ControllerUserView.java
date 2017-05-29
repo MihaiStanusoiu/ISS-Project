@@ -118,6 +118,10 @@ public class ControllerUserView
     @Override
     public void setElement(User element) {
         this.element = element;
+        build(this.element);
+    }
+
+    private void build(User element) {
         nameLabel.setText(element.getName());
         bioText.setText(element.getBio());
         locationText.setText(element.getLocation());

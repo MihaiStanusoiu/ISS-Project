@@ -32,9 +32,10 @@ public class ControllerMembersConferenceView
 
     @Lazy
     @Autowired
+    @SuppressWarnings("unused")
     private StageManager manager;
 
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private ConferenceEntity conference;
 
     @Override
@@ -44,6 +45,7 @@ public class ControllerMembersConferenceView
         updateData();
     }
 
+    @SuppressWarnings("EmptyMethod")
     private void setUpChairList() { }
 
     private void updateData() {
@@ -65,21 +67,27 @@ public class ControllerMembersConferenceView
     @Override
     public void update(NotificationUpdate notification) throws RemoteException { }
 
+    @SuppressWarnings("EmptyMethod")
     @FXML
     private void onPublishButtonClick() { }
 
+    @SuppressWarnings("EmptyMethod")
     @FXML
     private void onSaveButtonClick() { }
 
+    @SuppressWarnings("EmptyMethod")
     @FXML
     private void onMembersButtonClick() { }
 
+    @SuppressWarnings("EmptyMethod")
     @FXML
     private void onBasicButtonClick() { }
 
+    @SuppressWarnings("EmptyMethod")
     @FXML
     private void onSessionsButtonClick() { }
 
+    @SuppressWarnings("EmptyMethod")
     @FXML
     private void onSubmissionsButtonClick() { }
 

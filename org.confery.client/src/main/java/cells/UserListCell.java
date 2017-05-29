@@ -4,7 +4,6 @@ package cells;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.Pane;
-import loader.LoaderException;
 import manager.StageManager;
 import transfarable.User;
 import view.ViewType;
@@ -18,13 +17,13 @@ import static utils.Try.runFunction;
 
 public class UserListCell extends ListCell<User> {
 
-    private StageManager manager;
+    private final StageManager manager;
 
     public UserListCell(StageManager stageManager) {
         manager = stageManager;
     }
 
-    private Pane getGraphic(User item) throws LoaderException {
+    private Pane getGraphic(User item) {
         return (Pane)manager.getRootNode(ViewType.USER_CELL_LIST_ITEM.getFXMLFile(), item);
     }
 

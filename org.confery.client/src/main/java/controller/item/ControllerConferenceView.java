@@ -66,6 +66,6 @@ public class ControllerConferenceView
     @Override
     public void setElement(Conference element) {
         this.element = element;
-        nameLabel.setText(element.getName());
+        nameLabel.setText(this.element.getName());
     }
 }

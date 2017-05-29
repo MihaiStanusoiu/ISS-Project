@@ -3,14 +3,15 @@ package controller.registration;
 import controller.main.ControllerInterface;
 import domain.UserEntity;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import listener.Listener;
 import manager.StageManager;
-import notification.NotificationUpdate;
 import notification.NotificationType;
+import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -20,8 +21,6 @@ import utils.Try;
 import view.ViewType;
 
 import java.rmi.RemoteException;
-
-import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -67,6 +66,9 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
     @Lazy
     @Autowired
     private Listener listener;
+
+    @FXML
+    private Button signUpButton;
 
     /**
      * Effect: Adds width & height constraints on the

@@ -2,7 +2,6 @@ package controller.item;
 
 import controller.main.ControllerInterface;
 import domain.UserEntity;
-import exception.SystemException;
 import itemcontroller.ControllerItemInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -54,7 +53,7 @@ public class ControllerProfileView implements ControllerInterface, ControllerIte
     public void initialize() { }
 
     @FXML
-    public void onSaveButtonClick() throws RemoteException, SystemException {
+    public void onSaveButtonClick() throws RemoteException {
         UserEntity other = new UserEntity(user.getId(), user.getUsername(),
                 user.getPassword(), emailTextField.getText(),
                 nameTextField.getText(), websiteTextField.getText(),
@@ -64,7 +63,7 @@ public class ControllerProfileView implements ControllerInterface, ControllerIte
     }
 
     @FXML
-    public void onDeleteButtonClick() throws RemoteException, SystemException {
+    public void onDeleteButtonClick() throws RemoteException {
         //userService.delete(user);
         listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGOUT));
         listener.setActiveUser(null);
