@@ -1,12 +1,13 @@
 package transfarable;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Alexandru Stoica
  * @version 1.0
  */
-public class Edition {
+public class Edition implements Serializable {
 
     private Integer id;
     private Date startDate;

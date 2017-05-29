@@ -2,12 +2,12 @@ package manager;
 
 import domain.UserEntity;
 import service.*;
+import utils.Try;
 
 import java.rmi.RemoteException;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -149,6 +149,6 @@ public class CollectionManager implements CollectionService {
         this.activeUser = user;
         List<ServiceInterface> list = asList(loginService, signUpService, notificationService, userService,
                 sessionService, submissionService, editionService, tagService, topicService);
-        list.forEach(service -> runFunction(service::activeUser, user));
+        list.forEach(service -> Try.runMethod(service::activeUser, user));
     }
 }

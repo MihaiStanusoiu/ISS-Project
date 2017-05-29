@@ -6,6 +6,7 @@ import domain.UserEntity;
 import exception.SystemException;
 import protocol.ModelInterface;
 import service.Service;
+import utils.Try;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -39,7 +40,7 @@ public class GenericManager<T extends Idable<Id>, Id extends Serializable>
 
     @Override
     public T update(T element, T with) throws RemoteException {
-        runFunction(model::update, element, with).orThrow(thrower);
+        Try.runMethod(model::update, element, with).orThrow(thrower);
         return runFunction(model::getElementById, element.getId()).orThrow(thrower);
     }
 

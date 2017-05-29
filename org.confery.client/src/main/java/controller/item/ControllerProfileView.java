@@ -1,24 +1,21 @@
-package itemcontroller;
+package controller.item;
 
-import controller.ControllerInterface;
+import controller.main.ControllerInterface;
 import domain.UserEntity;
 import exception.SystemException;
+import itemcontroller.ControllerItemInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import listener.Listener;
 import manager.StageManager;
-import notification.NotificationUpdate;
 import notification.NotificationType;
+import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import service.SubscriberService;
-
 import view.ViewType;
 
 import java.rmi.RemoteException;
-
-import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -27,14 +24,22 @@ import static utils.Try.runFunction;
 
 @Lazy
 @Component
-public class ControllerProfileView implements ControllerInterface,
-        ControllerItemInterface<UserEntity>, SubscriberService {
+public class ControllerProfileView implements ControllerInterface, ControllerItemInterface<UserEntity> {
 
-    @FXML private TextField nameTextField;
-    @FXML private TextField websiteTextField;
-    @FXML private TextField locationTextField;
-    @FXML private TextField bioTextField;
-    @FXML private TextField emailTextField;
+    @FXML
+    private TextField nameTextField;
+
+    @FXML
+    private TextField websiteTextField;
+
+    @FXML
+    private TextField locationTextField;
+
+    @FXML
+    private TextField bioTextField;
+
+    @FXML
+    private TextField emailTextField;
 
     private UserEntity user;
 
@@ -46,15 +51,7 @@ public class ControllerProfileView implements ControllerInterface,
     @Autowired
     private Listener listener;
 
-
-    /**
-     * Effect: Builds the pagination and it's data.
-     */
-    public void initialize() {
-        manager.getPrimaryStage().setOnCloseRequest(event ->
-                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
-        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
-    }
+    public void initialize() { }
 
     @FXML
     public void onSaveButtonClick() throws RemoteException, SystemException {
@@ -71,7 +68,6 @@ public class ControllerProfileView implements ControllerInterface,
         //userService.delete(user);
         listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGOUT));
         listener.setActiveUser(null);
-        listener.removeSubscriber(this);
         manager.switchScene(ViewType.CONFERENCES);
     }
 
@@ -81,13 +77,6 @@ public class ControllerProfileView implements ControllerInterface,
         locationTextField.setText(user.getLocation());
         bioTextField.setText(user.getBio());
         emailTextField.setText(user.getEmail());
-    }
-
-    @Override
-    public void update(NotificationUpdate notification) throws RemoteException {
-        if(notification.getType().equals(NotificationType.UPDATE_USER)) {
-            updateUserData();
-        }
     }
 
     @Override

@@ -1,18 +1,14 @@
 package itemcontroller;
 
-import controller.ControllerInterface;
+import controller.main.ControllerInterface;
 import domain.ConferenceEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import manager.StageManager;
-import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import service.SubscriberService;
 import view.ViewType;
-
-import java.rmi.RemoteException;
 
 /**
  * @author Alexandru Stoica
@@ -22,12 +18,19 @@ import java.rmi.RemoteException;
 @Lazy
 @Component
 public class ControllerAddConferenceView
-        implements ControllerInterface, ControllerItemInterface<ConferenceEntity>, SubscriberService {
+        implements ControllerInterface, ControllerItemInterface<ConferenceEntity> {
 
-    @FXML private TextField nameTextField;
-    @FXML private TextField acronymTextField;
-    @FXML private TextField locationTextField;
-    @FXML private TextField bioTextField;
+    @FXML
+    private TextField nameTextField;
+
+    @FXML
+    private TextField acronymTextField;
+
+    @FXML
+    private TextField locationTextField;
+
+    @FXML
+    private TextField bioTextField;
 
     @Lazy
     @Autowired
@@ -41,43 +44,26 @@ public class ControllerAddConferenceView
         this.conference = element;
     }
 
-    /**
-     * Effect: Builds the pagination and it's data.
-     */
     public void initialize() { }
 
-    @Override
-    public void update(NotificationUpdate notification) throws RemoteException { }
+    @FXML
+    private void onPublishButtonClick() { }
 
-    @FXML private void onPublishButtonClick() {
-        System.out.print("Publish Button Click" +  conference.getName());
-        // TODO
-    }
+    @FXML
+    private void onSaveButtonClick() { }
 
-    @FXML private void onSaveButtonClick() {
-        System.out.print("Save Button Click" +  conference.getName());
-        // TODO
-    }
-
-    @FXML private void onMembersButtonClick() {
-        System.out.print("Members Button Click" +  conference.getName());
+    @FXML
+    private void onMembersButtonClick() {
         manager.switchScene(ViewType.MEMBERS_CONFERENCE, conference);
-        // TODO
     }
 
-    @FXML private void onBasicButtonClick() {
-        System.out.print("Basic Button Click" +  conference.getName());
-        // TODO
-    }
+    @FXML
+    private void onBasicButtonClick() { }
 
-    @FXML private void onSessionsButtonClick() {
-        System.out.print("Session Button Click" +  conference.getName());
-        // TODO
-    }
+    @FXML
+    private void onSessionsButtonClick() { }
 
-    @FXML private void onSubmissionsButtonClick() {
-        System.out.print("Submission Button Click" +  conference.getName());
-        // TODO
-    }
+    @FXML
+    private void onSubmissionsButtonClick() { }
 
 }

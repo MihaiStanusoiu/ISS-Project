@@ -1,12 +1,14 @@
 package transfarable;
 
 
+import java.io.Serializable;
+
 /**
  * @author Alexandru Stoica
  * @version 1.0
  */
 
-public class User {
+public class User implements Serializable {
 
     private Integer id;
     private String username;
@@ -32,8 +34,8 @@ public class User {
         this(0, username, password, email, name, website, bio, location);
     }
 
-    public User(String username, String password) {
-        this(0, username, password, "", "", "", "", "");
+    public User(String username, String password, String email, String name) {
+        this(username, password, email, name, "", "", "");
     }
 
     /**

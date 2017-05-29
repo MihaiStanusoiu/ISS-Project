@@ -70,7 +70,7 @@ public class Try<T, E extends Throwable> {
 
     @SuppressWarnings("unchecked")
     public static <E extends Throwable> Try<Boolean, E>
-    runFunction(ThrowEmptyMethod<E> method) {
+    runMethod(ThrowEmptyMethod<E> method) {
         try {
             method.accept();
             return new Try(true);
@@ -80,7 +80,7 @@ public class Try<T, E extends Throwable> {
     }
     @SuppressWarnings("unchecked")
     public static <T, E extends Throwable> Try<Boolean, E>
-    runFunction(ThrowMethod<T, E> method, T param) {
+    runMethod(ThrowMethod<T, E> method, T param) {
         try {
             method.accept(param);
             return new Try(true);
@@ -91,7 +91,7 @@ public class Try<T, E extends Throwable> {
 
     @SuppressWarnings("unchecked")
     public static <T1, T2, E extends Throwable> Try<Boolean, E>
-    runFunction(ThrowBiMethod<T1, T2, E> method, T1 param1, T2 param2) {
+    runMethod(ThrowBiMethod<T1, T2, E> method, T1 param1, T2 param2) {
         try {
             method.accept(param1, param2);
             return new Try(true);
@@ -102,7 +102,7 @@ public class Try<T, E extends Throwable> {
 
     @SuppressWarnings("unchecked")
     public static <T1, T2, T3, E extends Throwable> Try<Boolean, E>
-    runFunction(ThrowTripleMethod<T1, T2, T3, E> method, T1 param1, T2 param2, T3 param3) {
+    runMethod(ThrowTripleMethod<T1, T2, T3, E> method, T1 param1, T2 param2, T3 param3) {
         try {
             method.accept(param1, param2, param3);
             return new Try(true);
@@ -113,7 +113,7 @@ public class Try<T, E extends Throwable> {
 
     @SuppressWarnings("unchecked")
     public static <T1, T2, T3, T4, E extends Throwable> Try<Boolean, E>
-    runFunction(ThrowQuintupleMethod<T1, T2, T3, T4, E> method, T1 param1, T2 param2, T3 param3, T4 param4) {
+    runMethod(ThrowQuintupleMethod<T1, T2, T3, T4, E> method, T1 param1, T2 param2, T3 param3, T4 param4) {
         try {
             method.accept(param1, param2, param3, param4);
             return new Try(true);
@@ -124,7 +124,7 @@ public class Try<T, E extends Throwable> {
 
     @SuppressWarnings("unchecked")
     public static <T1, T2, T3, T4, T5, E extends Throwable> Try<Boolean, E>
-    runFunction(ThrowQuadrupleMethod<T1, T2, T3, T4, T5, E> method, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) {
+    runMethod(ThrowQuadrupleMethod<T1, T2, T3, T4, T5, E> method, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) {
         try {
             method.accept(param1, param2, param3, param4, param5);
             return new Try(true);
@@ -135,7 +135,7 @@ public class Try<T, E extends Throwable> {
 
     @SuppressWarnings("unchecked")
     public static <T1, T2, T3, T4, T5, T6, E extends Throwable> Try<Boolean, E>
-    runFunction(ThrowSextupletMethod<T1, T2, T3, T4, T5, T6, E> method, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6) {
+    runMethod(ThrowSextupletMethod<T1, T2, T3, T4, T5, T6, E> method, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6) {
         try {
             method.accept(param1, param2, param3, param4, param5, param6);
             return new Try(true);

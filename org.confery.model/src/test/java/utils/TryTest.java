@@ -73,7 +73,7 @@ public class TryTest {
         assertTrue(runFunction(model::add, user)
                 .orThrow(exception -> new RemoteException(exception.getMessage())).equals(1));
         // then: [test model user update]
-        assertTrue(runFunction(model::update, user, with)
+        assertTrue(Try.runMethod(model::update, user, with)
                 .orThrow(exception -> new RemoteException(exception.getMessage())).equals(true));
         // then: [test model user getAll]
         assertTrue(runFunction(model::getAll)

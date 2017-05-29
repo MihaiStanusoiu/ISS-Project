@@ -6,6 +6,7 @@ import database.DatabaseLoaderType;
 import domain.UserEntity;
 import org.junit.Before;
 import org.junit.Test;
+import utils.Try;
 
 import java.rmi.RemoteException;
 
@@ -48,10 +49,10 @@ public class ModelTest {
         // preconditions:
         runFunction(model::add, user).orThrow(exception -> new RemoteException(exception.getMessage()));
         // then:
-        assertTrue(runFunction(model::update, user, with)
+        assertTrue(Try.runMethod(model::update, user, with)
                 .orThrow(exception -> new RemoteException(exception.getMessage())));
         // then: [test exceptions]
-        runFunction(model::update, user, except).orThrow(exception -> new RemoteException(exception.getMessage()));
+        Try.runMethod(model::update, user, except).orThrow(exception -> new RemoteException(exception.getMessage()));
     }
     @Test(expected = RemoteException.class)
     public void isDeletingObject() throws Exception {

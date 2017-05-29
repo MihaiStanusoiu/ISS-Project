@@ -1,5 +1,6 @@
-package controller;
+package controller.registration;
 
+import controller.main.ControllerInterface;
 import domain.UserEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.CollectionService;
 import service.SubscriberService;
+import utils.Try;
 import view.ViewType;
 
 import java.rmi.RemoteException;
@@ -22,22 +24,37 @@ import java.rmi.RemoteException;
 import static utils.Try.runFunction;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 @Lazy
 @Component
 public class ControllerSignUp implements ControllerInterface, SubscriberService {
 
-    @FXML private TextField usernameTextField;
-    @FXML private TextField passwordTextField;
-    @FXML private TextField emailTextField;
-    @FXML private TextField displayNameTextField;
-    @FXML private TextField confirmTextField;
-    @FXML private Label errorLabel;
-    @FXML private ImageView backgroundImage;
-    @FXML private StackPane backgroundImagePane;
+    @FXML
+    private TextField usernameTextField;
+
+    @FXML
+    private TextField passwordTextField;
+
+    @FXML
+    private TextField emailTextField;
+
+    @FXML
+    private TextField displayNameTextField;
+
+    @FXML
+    private TextField confirmTextField;
+
+    @FXML
+    private Label errorLabel;
+
+    @FXML
+    private ImageView backgroundImage;
+
+    @FXML
+    private StackPane backgroundImagePane;
 
     @Lazy
     @Autowired
@@ -60,31 +77,37 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
         backgroundImage.fitWidthProperty().bind(backgroundImagePane.widthProperty());
         backgroundImage.fitHeightProperty().bind(backgroundImagePane.heightProperty());
         manager.getPrimaryStage().setOnCloseRequest(event ->
-                runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
-        runFunction(listener::addSubscriber, this).orHandle(System.out::println);
+                Try.runMethod(listener::removeSubscriber, this).orHandle(System.out::print));
+        Try.runMethod(listener::addSubscriber, this).orHandle(System.out::println);
     }
 
     /**
      * Effect: Loads the ConferencesView.
+     *
      * @implNote status: In development.
      */
-    @FXML void onLogoButtonClick() throws RemoteException {
+    @FXML
+    void onLogoButtonClick() throws RemoteException {
         manager.switchScene(ViewType.CONFERENCES);
     }
 
     /**
      * Effect: Loads the LoginView.
+     *
      * @implNote status: In development.
      */
-    @FXML void onLoginButtonClick() throws RemoteException {
+    @FXML
+    void onLoginButtonClick() throws RemoteException {
         manager.switchScene(ViewType.LOGIN);
     }
 
     /**
      * Effect: The user registers in the system with his data.
+     *
      * @implNote status: Unavailable at the moment.
      */
-    @FXML void onSignUpButtonClick() throws RemoteException {
+    @FXML
+    void onSignUpButtonClick() throws RemoteException {
         String email = emailTextField.getText();
         String displayName = displayNameTextField.getText();
         String username = usernameTextField.getText();

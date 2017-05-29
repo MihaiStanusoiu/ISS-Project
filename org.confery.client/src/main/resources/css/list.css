@@ -1,0 +1,18 @@
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-text-fill: white;
+}
+
+.list-cell:odd {
+    -fx-background-color: white;
+}
+
+.list-cell:filled:hover {
+    -fx-text-fill: white;
+}
+
+.scroll-bar:horizontal,
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-opacity: 0%;
+}

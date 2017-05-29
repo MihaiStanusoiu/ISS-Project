@@ -7,6 +7,7 @@ import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.springframework.stereotype.Component;
 import utils.Conditional;
+import utils.Try;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -89,11 +90,11 @@ public class CoreContext {
     }
 
     private Boolean isType(Field field) {
-        return Arrays.stream(field.getAnnotation(Context.class).value()).anyMatch(value->value.equals(type));
+        return Arrays.stream(field.getAnnotation(Context.class).value()).anyMatch(value -> value.equals(type));
     }
 
     private void execute(Field field, String methodName, Class<?>... types) {
-        runFunction((ThrowBiMethod<Object, Object[], ReflectiveOperationException>)
+        Try.runMethod((ThrowBiMethod<Object, Object[], ReflectiveOperationException>)
                 getMethod(field, methodName, types)::invoke, getObject(field, object), parameters)
                 .orHandle(this::handleExceptions);
     }

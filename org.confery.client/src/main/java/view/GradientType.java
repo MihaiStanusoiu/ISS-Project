@@ -3,19 +3,13 @@ package view;
 import java.util.ResourceBundle;
 
 /**
- * Name:        GradientType
- * Effect:      Defines all the gradients designed for our UI system.
- * Date:        12/04/2017
- * Tested:      False
- *
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 public enum GradientType implements GradientTypeInterface {
 
     BLUE {
-
         /**
          * {@inheritDoc}
          */
@@ -27,7 +21,6 @@ public enum GradientType implements GradientTypeInterface {
     },
 
     RED {
-
         /**
          * {@inheritDoc}
          */
@@ -39,7 +32,6 @@ public enum GradientType implements GradientTypeInterface {
     },
 
     GREEN {
-
         /**
          * {@inheritDoc}
          */
@@ -51,7 +43,6 @@ public enum GradientType implements GradientTypeInterface {
     },
 
     LIGHT_GREEN {
-
         /**
          * {@inheritDoc}
          */
@@ -64,6 +55,7 @@ public enum GradientType implements GradientTypeInterface {
 
     /**
      * Effect: Returns data from gradient properties.
+     *
      * @param key: The data's key in properties file.
      * @return String value from gradient.properties external files.
      */
