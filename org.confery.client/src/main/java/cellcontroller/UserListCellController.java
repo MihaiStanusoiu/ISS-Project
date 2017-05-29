@@ -1,28 +1,44 @@
 package cellcontroller;
 
-import domain.UserEntity;
 import itemcontroller.PaginationControllerItemInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import manager.StageManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
+import transfarable.User;
+
+import java.rmi.RemoteException;
 
 /**
  * @author Alexandru Stoica
  * @version 1.0
  */
 
+@Lazy
+@Component
 public class UserListCellController
-        implements PaginationControllerItemInterface<UserEntity> {
+        implements PaginationControllerItemInterface<User> {
 
-    @FXML private BorderPane pane;
-    @FXML private Label nameLabel;
+    @FXML
+    private BorderPane rootPane;
 
-    private UserEntity user;
+    @FXML
+    private Label nameLabel;
+
+    private User user;
+
+    @Lazy
+    @Autowired
     private StageManager manager;
 
     @Override
-    public void setElement(UserEntity element) {
+    public void initialize() throws RemoteException { }
+
+    @Override
+    public void setElement(User element) {
         user = element;
         build();
     }
@@ -31,30 +47,8 @@ public class UserListCellController
         nameLabel.setText(user.getName());
     }
 
-    @Override
-    public BorderPane getPane() {
-        return pane;
-    }
-
-    @Override
-    public void setStageManager(StageManager stageManager) {
-         manager = stageManager;
-    }
-
-    /**
-     * @return The width of the main pane [double]
-     */
-    @Override
-    public double getWidth() {
-        return pane.getWidth();
-    }
-
-    /**
-     * @return The height of the main pane [double]
-     */
-    @Override
-    public double getHeight() {
-        return pane.getHeight();
+    public BorderPane getRootPane() {
+        return rootPane;
     }
 
 }

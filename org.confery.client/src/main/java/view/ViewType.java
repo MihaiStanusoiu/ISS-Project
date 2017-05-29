@@ -3,28 +3,22 @@ package view;
 import java.util.ResourceBundle;
 
 /**
- * Name:        ViewType
- * Effect:      Defines the views and their fxml paths.
- * Date:        31/03/2017
- * Tested:      False
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 public enum ViewType implements ViewTypeInterface {
 
     CONFERENCES {
-
         /** Conferences View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/ConferencesView.fxml";
+            return "/fxml/grid/ConferencesView.fxml";
         }
 
     },
 
     ADD_CONFERENCE {
-
         /** My Conferences View */
         @Override
         public String getFXMLFile() {
@@ -34,7 +28,6 @@ public enum ViewType implements ViewTypeInterface {
     },
 
     MEMBERS_CONFERENCE {
-
         /** My Conferences View */
         @Override
         public String getFXMLFile() {
@@ -44,17 +37,15 @@ public enum ViewType implements ViewTypeInterface {
     },
 
     USER_CELL_LIST_ITEM {
-
         /** My Conferences View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/UserCellListView.fxml";
+            return "/fxml/list/UserCellListView.fxml";
         }
 
     },
 
     MY_CONFERENCES {
-
         /** My Conferences View */
         @Override
         public String getFXMLFile() {
@@ -64,47 +55,42 @@ public enum ViewType implements ViewTypeInterface {
     },
 
     CONFERENCE {
-
         /** ConferenceEntity View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/ConferenceView.fxml";
+            return "/fxml/entity/ConferenceView.fxml";
         }
 
     },
 
     USER {
-
         /** UserEntity View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/UserView.fxml";
+            return "/fxml/entity/UserView.fxml";
         }
 
     },
 
     CONFERENCE_ITEM {
-
         /** ConferenceEntity Item View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/ConferenceItemView.fxml";
+            return "/fxml/pagination/ConferenceItemView.fxml";
         }
 
     },
 
     USER_ITEM {
-
         /** UserEntity Item View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/UserItemView.fxml";
+            return "/fxml/pagination/UserItemView.fxml";
         }
 
     },
 
     LOGIN {
-
         /** Login View */
         @Override
         public String getFXMLFile() {
@@ -114,7 +100,6 @@ public enum ViewType implements ViewTypeInterface {
     },
 
     SIGN_UP {
-
         /** Sign Up View */
         @Override
         public String getFXMLFile() {
@@ -124,17 +109,15 @@ public enum ViewType implements ViewTypeInterface {
     },
 
     USERS {
-
         /** Users View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/UsersView.fxml";
+            return "/fxml/grid/UsersView.fxml";
         }
 
     },
 
     NOTIFICATIONS {
-
         /** Notifications View */
         @Override
         public String getFXMLFile() {
@@ -144,7 +127,6 @@ public enum ViewType implements ViewTypeInterface {
     },
 
     PROFILE {
-
         /** Profile View */
         @Override
         public String getFXMLFile() {
@@ -154,17 +136,41 @@ public enum ViewType implements ViewTypeInterface {
     },
 
     NOTIFICATION_ITEM {
-
         /** NotificationEntity Item View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/NotificationItemView.fxml";
+            return "/fxml/pagination/NotificationItemView.fxml";
+        }
+
+    },
+
+    EDITION_ITEM {
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/pagination/EditionItemView.fxml";
+        }
+
+    },
+
+    EDITION {
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/entity/EditionView.fxml";
+        }
+
+    },
+
+    SUBMISSION_ITEM {
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/pagination/SubmissionItemView.fxml";
         }
 
     };
 
     /**
      * Effect: Returns data from application properties.
+     *
      * @param key: The data's key in properties file.
      * @return String value from application.properties external files.
      */

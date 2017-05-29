@@ -18,6 +18,11 @@ public class Edition {
     private Date evaluationDeadline;
     private Date biddingDeadline;
 
+    public Edition(Date startDate, String location) {
+        this.startDate = startDate;
+        this.location = location;
+    }
+
     public Edition(Integer id,
                    Date startDate,
                    Date endDate,

@@ -1,8 +1,9 @@
-package controller;
+package controller.component;
 
 import context.Context;
 import context.ContextType;
 import context.CoreContext;
+import controller.main.ControllerInterface;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,8 +24,8 @@ import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 
 /**
- * @author      Alexandru Stoica
- * @version     1.0
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
 @Lazy
@@ -62,11 +63,11 @@ public class ControllerTopBar
     @Override
     public void initialize() throws RemoteException {
         context.in(this).forType(ContextType.REGULAR)
-                .run(item -> ((Label)item).setText(""));
+                .run(item -> ((Label) item).setText(""));
         context.basedOn(listener.getActiveUser() != null)
                 .in(this)
                 .forType(ContextType.GUEST)
-                .run(item -> ((Button)item).setText(runFunction(
+                .run(item -> ((Button) item).setText(runFunction(
                         listener::getActiveUser).or(null).getName()));
         manager.getPrimaryStage().setOnCloseRequest(event ->
                 runFunction(listener::removeSubscriber, this).orHandle(System.out::print));
@@ -77,39 +78,23 @@ public class ControllerTopBar
         return listener.getActiveUser() != null;
     }
 
-    /**
-     * Effect: Loads the LoginView responsible
-     * for the user's authentication process.
-     * @implNote status: In development
-     */
-    @FXML private void onLoginButtonClick() {
+    @FXML
+    private void onLoginButtonClick() {
         manager.switchScene(ViewType.LOGIN);
     }
 
-    /**
-     * Effect: Loads the SignUpView responsible
-     * for the user's authentication process.
-     * @implNote status: In development
-     */
-    @FXML private void onSignUpButtonClick() {
+    @FXML
+    private void onSignUpButtonClick() {
         manager.switchScene(ViewType.SIGN_UP);
     }
 
-    /**
-     * Effect: Loads the ConferencesView responsible
-     * for listing all the available conferences.
-     * @implNote status: In development.
-     */
-    @FXML private void onLogoButtonClick() {
+    @FXML
+    private void onLogoButtonClick() {
         manager.switchScene(ViewType.CONFERENCES);
     }
 
-    /**
-     * Effect: Loads the ProfileView responsible
-     * for updating the active user's profile information.
-     * @implNote status: In development.
-     */
-    @FXML private void onProfileButtonClick() throws RemoteException {
+    @FXML
+    private void onProfileButtonClick() throws RemoteException {
         basedOn(existsActiveUser())
                 .runTrue(manager::switchScene, ViewType.PROFILE, listener.getActiveUser());
     }

@@ -36,6 +36,10 @@ public class User {
         this(0, username, password, "", "", "", "", "");
     }
 
+    public User(String username, String password, String email, String name) {
+        this(username, password, email, name, "", "", "");
+    }
+
     /**
      * Getter for property 'id'.
      *

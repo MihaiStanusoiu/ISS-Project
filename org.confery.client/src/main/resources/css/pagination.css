@@ -13,5 +13,17 @@
 
 /* Style for page buttons */
 #pagination .toggle-button {
+    -fx-opacity: 0%;
+}
+
+.pagination .toggle-button {
+
+}
+
+.pagination .button{
+
+}
+
+.pagination .label {
 
 }
