@@ -1,6 +1,8 @@
 
 package domain;
 
+import java.io.Serializable;
+
 /**
  * Tested: True
  *
@@ -8,7 +10,7 @@ package domain;
  * @version 1.0
  */
 
-public enum MemberRole {
+public enum MemberRole implements Serializable {
     SESSION_CHAIR,
     SESSION_SPEAKER,
     SESSION_LISTENER,

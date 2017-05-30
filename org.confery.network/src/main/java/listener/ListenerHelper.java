@@ -55,7 +55,11 @@ public class ListenerHelper extends UnicastRemoteObject implements Listener {
 
     @Override
     public void notifyAll(NotificationUpdate notification) throws RemoteException {
-        subscribers.forEach(subscriberService -> runFunction(subscriberService::update, notification));
+        // Broken runFunction
+//        subscribers.forEach(subscriberService -> runFunction(subscriberService::update, notification));
+        for (SubscriberService subscriberService : subscribers) {
+            subscriberService.update(notification);
+        }
     }
 
 }

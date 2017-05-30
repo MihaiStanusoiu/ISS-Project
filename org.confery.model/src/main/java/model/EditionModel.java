@@ -9,6 +9,8 @@ import repository.RepositoryEntity;
 import repository.RepositoryInterface;
 
 import static utils.Conditional.basedOn;
+import static utils.Try.runFunction;
+import static utils.Try.runMethod;
 
 /**
  * Tested: True
@@ -23,6 +25,7 @@ public class EditionModel extends Model<EditionEntity, Integer> implements Editi
     private RepositoryInterface<EditionMemberEntity, Integer> repositoryMember;
     private RepositoryInterface<SessionEntity, Integer> repositorySession;
     private RepositoryInterface<SubmissionEntity, Integer> repositorySubmission;
+    private RepositoryInterface<UserEntity, Integer> repositoryUser;
 
     public EditionModel(DatabaseLoaderInterface loader) {
         super(EditionEntity.class, loader);
@@ -30,6 +33,7 @@ public class EditionModel extends Model<EditionEntity, Integer> implements Editi
         repositoryMember = new RepositoryEntity<>(EditionMemberEntity.class, loader);
         repositorySession = new RepositoryEntity<>(SessionEntity.class, loader);
         repositorySubmission = new RepositoryEntity<>(SubmissionEntity.class, loader);
+        repositoryUser = new RepositoryEntity<>(UserEntity.class, loader);
     }
 
     /**
@@ -39,9 +43,19 @@ public class EditionModel extends Model<EditionEntity, Integer> implements Editi
     public EditionEntity addMemberTo(EditionEntity edition, UserEntity user, MemberRole role) throws SystemException {
         basedOn(edition.getUsers().stream().noneMatch(item -> item.getId().equals(user.getId())))
                 .orThrow(new ModelException("The user is already a member of the edition!"));
+
+//        EditionEntity oldEdition = runFunction(repository::getElementById, edition.getId()).getElement();
+//        UserEntity oldUser = runFunction(repositoryUser::getElementById, user.getId()).getElement();
         EditionMemberEntity member = new EditionMemberEntity(user, edition,
                 new ConfigurationEditionFactory(repositoryConfiguration).getConfiguration(role));
+
+//        edition.getMembers().add(member);
+//        user.getEditionMembers().add(member);
+
+//        runMethod(repository::update, oldEdition, edition);
+//        runMethod(repositoryUser::update, oldUser, user);
         repositoryMember.add(member);
+
         return getElementById(edition.getId());
     }
 
@@ -53,6 +67,15 @@ public class EditionModel extends Model<EditionEntity, Integer> implements Editi
         repositoryMember.delete(edition.getMembers().stream().findFirst()
                 .filter(item -> item.getId().equals(member.getId()))
                 .orElseThrow(() -> new ModelException("404 Member Not Found!")).getId());
+
+//        EditionEntity oldEdition = runFunction(repository::getElementById, edition.getId()).getElement();
+//        UserEntity oldUser = runFunction(repositoryUser::getElementById, member.getId()).getElement();
+//        edition.getMembers().removeIf(item -> item.getId().equals(member.getId()));
+//        member.getEditionMembers().removeIf(item -> item.getId().equals(member.getId()));
+//
+//        runMethod(repository::update, oldEdition, edition);
+//        runMethod(repositoryUser::update, oldUser, member);
+
         return getElementById(edition.getId());
     }
 
@@ -63,6 +86,9 @@ public class EditionModel extends Model<EditionEntity, Integer> implements Editi
     public EditionEntity addSessionTo(EditionEntity edition, SessionEntity session) throws SystemException {
         basedOn(edition.getSessions().stream().noneMatch(item -> item.getId().equals(session.getId())))
                 .orThrow(new ModelException("The session is already a member of the edition!"));
+
+//        EditionEntity oldEdition = runFunction(repository::getElementById, edition.getId()).getElement();
+
         session.setEdition(edition);
         repositorySession.add(session);
         return getElementById(edition.getId());

@@ -2,6 +2,7 @@
 package domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -66,6 +67,7 @@ public class ConferenceEntity implements Idable<Integer> {
         this.id = id;
         this.name = name;
         this.acronym = acronym;
+        this.editions = new HashSet<>();
     }
 
     /**

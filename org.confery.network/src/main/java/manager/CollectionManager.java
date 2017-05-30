@@ -152,6 +152,9 @@ public class CollectionManager implements CollectionService {
         this.activeUser = userEntity;
         List<ServiceInterface> list = asList(loginService, signUpService, notificationService, userService,
                 sessionService, submissionService, editionService, tagService, topicService);
-        list.forEach(service -> runFunction(service::activeUser, user));
+//        list.forEach(service -> runFunction(service::activeUser, user));
+        for (ServiceInterface service : list) {
+            service.activeUser(user);
+        }
     }
 }
