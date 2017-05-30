@@ -155,7 +155,7 @@ public class ControllerAddMembersEditionView
 
     @FXML
     private void onSubmissionsButtonClick() {
-        // TODO
+        manager.switchScene(ViewType.ADD_SUBMISSION, context);
     }
 
 }

@@ -15,7 +15,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.add.ControllerAddConferenceView">
    <top>
-      <fx:include source="TopBar.fxml" />
+      <fx:include source="../TopBar.fxml" />
    </top>
    <center>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
@@ -101,7 +101,7 @@
                               <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
                            </VBox.margin>
                         </HBox>
-                        <ListView fx:id="editionListView" minHeight="0.0" prefHeight="180.0" style="-fx-border-color: white;" stylesheets="@../css/list.css">
+                        <ListView fx:id="editionListView" minHeight="0.0" prefHeight="180.0" style="-fx-border-color: white;" stylesheets="@../../css/list.css">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -158,7 +158,7 @@
    <right>
       <AnchorPane style="-fx-background-color: &quot;white&quot;;" BorderPane.alignment="CENTER">
          <children>
-            <fx:include source="Menu.fxml" />
+            <fx:include source="../Menu.fxml" />
          </children>
       </AnchorPane>
    </right>
