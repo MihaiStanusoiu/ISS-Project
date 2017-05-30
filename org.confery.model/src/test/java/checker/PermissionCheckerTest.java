@@ -15,7 +15,6 @@ import protocol.ConferenceProtocol;
 import protocol.EditionProtocol;
 import protocol.UserProtocol;
 
-import static checker.UserPermissionChecker.isAllowed;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -24,18 +23,19 @@ import static org.junit.Assert.assertTrue;
  * @version 1.0
  */
 
-public class UserPermissionCheckerTest {
+public class PermissionCheckerTest {
 
     @Test
     public void isActiveUserAbleToUser() throws Exception {
         // declarations:
         UserEntity active = new UserEntity(1, "Test", "Test");
         UserEntity user = new UserEntity(1, "Test", "Test");
+        PermissionChecker<UserEntity> checker = new UserPermissionChecker();
         // then:
-        isAllowed(active).toDelete().theUser(user);
-        isAllowed(active).toAdd().theUser(user);
-        isAllowed(active).toUpdate().theUser(user);
-        isAllowed(active).toRead().theUser(user);
+        assertTrue(checker.isAllowed(active).toDelete().theObject(user));
+        assertTrue(checker.isAllowed(active).toAdd().theObject(user));
+        assertTrue(checker.isAllowed(active).toUpdate().theObject(user));
+        assertTrue(checker.isAllowed(active).toRead().theObject(user));
     }
 
     @Test
@@ -48,10 +48,11 @@ public class UserPermissionCheckerTest {
         ConferenceProtocol conferenceModel = new ConferenceModel(loader);
         EditionProtocol editionModel = new EditionModel(loader);
         UserProtocol userModel = new UserModel(loader);
+        PermissionChecker<EditionEntity> checker = new EditionPermissionChecker();
 
         // then: [when nothing is set up]
-        assertFalse(isAllowed(active).toDelete().theEdition(edition));
-        assertFalse(isAllowed(active).toUpdate().theEdition(edition));
+        assertFalse(checker.isAllowed(active).toUpdate().theObject(edition));
+        assertFalse(checker.isAllowed(active).toDelete().theObject(edition));
 
         // preconditions:
         userModel.add(active);
@@ -61,9 +62,9 @@ public class UserPermissionCheckerTest {
         edition = editionModel.addMemberTo(edition, active, MemberRole.EDITION_CHAIR);
 
         // then:
-        assertTrue(isAllowed(active).toAdd().theEdition(edition));
-        assertTrue(isAllowed(active).toDelete().theEdition(edition));
-        assertTrue(isAllowed(active).toUpdate().theEdition(edition));
-        assertTrue(isAllowed(active).toRead().theEdition(edition));
+        assertTrue(checker.isAllowed(active).toAdd().theObject(edition));
+        assertTrue(checker.isAllowed(active).toDelete().theObject(edition));
+        assertTrue(checker.isAllowed(active).toUpdate().theObject(edition));
+        assertTrue(checker.isAllowed(active).toRead().theObject(edition));
     }
 }

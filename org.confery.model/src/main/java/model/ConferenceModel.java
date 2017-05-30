@@ -37,6 +37,9 @@ public class ConferenceModel
 
     @Override
     public ConferenceEntity removeEditionFrom(ConferenceEntity conference, EditionEntity edition) throws SystemException {
-        return null;
+        basedOn(conference.getEditions().stream().anyMatch(item -> item.getId().equals(edition.getId())))
+                .orThrow(new ModelException("The edition is not a part of the conference"));
+        repositoryEdition.delete(edition.getId());
+        return getElementById(conference.getId());
     }
 }

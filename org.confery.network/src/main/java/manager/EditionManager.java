@@ -1,6 +1,6 @@
 package manager;
 
-import checker.UserPermissionChecker;
+import checker.PermissionChecker;
 import domain.*;
 import exception.SystemException;
 import protocol.EditionProtocol;
@@ -30,7 +30,7 @@ public class EditionManager implements EditionService {
     protected EditionProtocol model;
     protected UserEntity active;
     private Function<SystemException, RemoteException> thrower;
-    private UserPermissionChecker checker;
+    private PermissionChecker checker;
 
     public EditionManager(EditionProtocol model) throws RemoteException {
         this.model = model;
