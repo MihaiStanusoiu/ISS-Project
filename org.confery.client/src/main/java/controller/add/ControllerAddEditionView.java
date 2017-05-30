@@ -135,7 +135,7 @@ public class ControllerAddEditionView
 
     @FXML
     private void onBackButtonClick() {
-        context.updateEdition(getCurrentEdition());
+        context.getEditionContext().updateEdition(getCurrentEdition());
         manager.switchScene(ViewType.ADD_CONFERENCE, context);
     }
 
@@ -202,7 +202,8 @@ public class ControllerAddEditionView
 
     @FXML
     private void onMembersButtonClick() {
-        // manager.switchScene(ViewType.MEMBERS_CONFERENCE, conference);
+        context.getEditionContext().updateEdition(getCurrentEdition());
+        manager.switchScene(ViewType.MEMBERS_CONFERENCE, context);
     }
 
     @FXML
