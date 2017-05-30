@@ -1,6 +1,7 @@
-package itemcontroller;
+package controller.add;
 
 import controller.main.ControllerInterface;
+import itemcontroller.ControllerItemInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,6 +32,7 @@ import java.util.List;
 public class ControllerAddMembersEditionView
         implements ControllerInterface, ControllerItemInterface<ConferenceContext> {
 
+    @SuppressWarnings("unused")
     private static Logger logger;
 
     @FXML
@@ -148,7 +150,7 @@ public class ControllerAddMembersEditionView
 
     @FXML
     private void onSessionsButtonClick() {
-        // TODO
+        manager.switchScene(ViewType.ADD_SESSION, context);
     }
 
     @FXML

@@ -212,6 +212,9 @@ public class ControllerAddEditionView
 
     @FXML
     private void onSessionsButtonClick() {
+
+        context.getEditionContext().updateEdition(getCurrentEdition());
+        manager.switchScene(ViewType.ADD_SESSION, context);
     }
 
     @FXML
