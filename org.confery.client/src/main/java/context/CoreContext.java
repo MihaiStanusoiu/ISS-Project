@@ -3,6 +3,8 @@ package context;
 import method.SimpleMethod;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
 import org.springframework.stereotype.Component;
 import utils.Conditional;
 import utils.Try;
@@ -32,7 +34,9 @@ public class CoreContext {
     private Class<?>[] types;
 
     public CoreContext() {
-        reflections = new Reflections(new FieldAnnotationsScanner());
+        reflections = new Reflections(ConfigurationBuilder.build()
+                .setUrls(ClasspathHelper.forPackage("controller"))
+                .setScanners(new FieldAnnotationsScanner()));
     }
 
     public void init() {

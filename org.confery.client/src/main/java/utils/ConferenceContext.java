@@ -1,10 +1,9 @@
 package utils;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import transfarable.Conference;
 import transfarable.Edition;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Alexandru Stoica
@@ -14,7 +13,7 @@ import java.util.List;
 public class ConferenceContext {
 
     private Conference conference;
-    private List<Edition> editions;
+    private ObservableList<Edition> editions;
     private Edition selectedEdition;
 
     public ConferenceContext() {
@@ -23,7 +22,7 @@ public class ConferenceContext {
 
     private ConferenceContext(Conference conference) {
         this.conference = conference;
-        editions = new ArrayList<>();
+        editions = FXCollections.observableArrayList();
     }
 
     public void setConference(Conference conference) {
@@ -39,7 +38,7 @@ public class ConferenceContext {
         selectedEdition = edition;
     }
 
-    public List<Edition> getEditions() {
+    public ObservableList<Edition> getEditions() {
         return editions;
     }
 

@@ -2,10 +2,10 @@ package controller.add;
 
 import controller.main.ControllerInterface;
 import itemcontroller.ControllerItemInterface;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import list.ListViewBuilder;
 import manager.StageManager;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,11 @@ import org.springframework.stereotype.Component;
 import transfarable.Conference;
 import transfarable.Edition;
 import utils.ConferenceContext;
+import view.Icon;
 import view.ViewType;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Alexandru Stoica
@@ -53,9 +55,14 @@ public class ControllerAddConferenceView
     }
 
     private void build() {
+        editionListView = new ListViewBuilder<>(editionListView)
+                .setIcon(Icon.CLOSE)
+                .visibleText(item -> item.getLocation() + item.getStartDate())
+                .setAction(List::remove,  context.getEditions())
+                .build();
         nameTextField.setText(context.getConference().getName());
         acronymTextField.setText(context.getConference().getAcronym());
-        editionListView.setItems(FXCollections.observableArrayList(context.getEditions()));
+        editionListView.setItems(context.getEditions());
         editionListView.setOnMouseClicked(event -> onEditionItemClick());
     }
 

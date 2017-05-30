@@ -1,17 +1,16 @@
 
-/*noinspection CssUnusedSymbol,CssUnusedSymbol*/
-.list-cell:filled:selected:focused, .list-cell:filled:selected {
-    -fx-text-fill: white;
-}
-
 /*noinspection CssUnusedSymbol*/
 .list-cell:odd {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
+}
+
+.list-cell:even {
+    -fx-background-color: transparent;
 }
 
 /*noinspection CssUnusedSymbol*/
-.list-cell:filled:hover {
-    -fx-text-fill: white;
+.list-cell {
+    -fx-padding: 10 10 10 10;
 }
 
 /*noinspection CssUnusedSymbol,CssUnusedSymbol*/
