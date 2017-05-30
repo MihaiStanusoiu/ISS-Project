@@ -176,7 +176,7 @@
                                        <children>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="50.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="1" style="-fx-background-color: transparent;">
+                                                <TextField fx:id="startingDateDay" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" promptText="1" style="-fx-background-color: transparent;">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>
@@ -188,7 +188,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <ChoiceBox maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December" HBox.hgrow="ALWAYS">
+                                                <ChoiceBox fx:id="startingDateMonth" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December" HBox.hgrow="ALWAYS">
                                                    <items>
                                                       <FXCollections fx:factory="observableArrayList">
                                                          <String fx:value="January" />
@@ -216,7 +216,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="80.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;">
+                                                <TextField fx:id="startingDateYear" alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>
@@ -247,7 +247,7 @@
                                        <children>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="50.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="1" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="endingDateDay" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" promptText="1" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>
@@ -259,7 +259,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December" HBox.hgrow="ALWAYS">
+                                                <ChoiceBox fx:id="endingDateMonth" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December" HBox.hgrow="ALWAYS">
                                                    <items>
                                                       <FXCollections fx:factory="observableArrayList">
                                                          <String fx:value="January" />
@@ -287,7 +287,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="80.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="endingDateYear" alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>
@@ -342,7 +342,7 @@
                                        <children>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="50.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="1" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="abstractDateDay" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" promptText="1" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>
@@ -354,7 +354,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December">
+                                                <ChoiceBox fx:id="abstractDateMonth" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December" HBox.hgrow="ALWAYS">
                                                    <items>
                                                       <FXCollections fx:factory="observableArrayList">
                                                          <String fx:value="January" />
@@ -382,7 +382,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="80.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="abstractDateYear" alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>
@@ -413,7 +413,7 @@
                                        <children>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="50.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="1" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="paperDateDay" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" promptText="1" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>
@@ -425,7 +425,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December">
+                                                <ChoiceBox fx:id="paperDateMonth" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December" HBox.hgrow="ALWAYS">
                                                    <items>
                                                       <FXCollections fx:factory="observableArrayList">
                                                          <String fx:value="January" />
@@ -453,7 +453,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="80.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="paperDateYear" alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>
@@ -488,7 +488,7 @@
                                        <children>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="50.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="1" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="biddingDateDay" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" promptText="1" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>
@@ -500,7 +500,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December">
+                                                <ChoiceBox fx:id="biddingDateMonth" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December" HBox.hgrow="ALWAYS">
                                                    <items>
                                                       <FXCollections fx:factory="observableArrayList">
                                                          <String fx:value="January" />
@@ -528,7 +528,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="80.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="biddingDateYear" alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>
@@ -559,7 +559,7 @@
                                        <children>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="50.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="1" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="evaluationDateDay" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" promptText="1" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>
@@ -571,7 +571,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" HBox.hgrow="ALWAYS">
                                              <children>
-                                                <ChoiceBox prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December">
+                                                <ChoiceBox fx:id="evaluationDateMonth" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefWidth="150.0" style="-fx-background-color: white; -fx-font-size: 16; -fx-font-family: Proxima Nova Regular;" value="December" HBox.hgrow="ALWAYS">
                                                    <items>
                                                       <FXCollections fx:factory="observableArrayList">
                                                          <String fx:value="January" />
@@ -599,7 +599,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="80.0" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
                                              <children>
-                                                <TextField alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                                <TextField fx:id="evaluationDateYear" alignment="CENTER" minWidth="0.0" promptText="2017" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                                    <font>
                                                       <Font name="Proxima Nova Regular" size="16.0" />
                                                    </font>

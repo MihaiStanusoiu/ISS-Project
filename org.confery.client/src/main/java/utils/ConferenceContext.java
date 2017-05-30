@@ -26,7 +26,6 @@ public class ConferenceContext {
         editions = new ArrayList<>();
     }
 
-
     public void setConference(Conference conference) {
         this.conference = conference;
     }
