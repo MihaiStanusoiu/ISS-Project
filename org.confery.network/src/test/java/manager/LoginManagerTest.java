@@ -31,6 +31,7 @@ public class LoginManagerTest {
     private UserModel model;
     private LoginManager manager;
 
+
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 

@@ -7,6 +7,7 @@ package domain;
 
 public interface QualifierTypeEntityInterface {
 
+
     /**
      * @return A numeric value to represent the qualifier.
      */

@@ -33,6 +33,7 @@ public class UserPermissionChecker {
         return check(this.user, edition, operation);
     }
 
+
     private Boolean check(UserEntity user, EditionEntity edition, OperationType operation) throws SystemException {
         switch (operation) {
             case TO_DELETE:

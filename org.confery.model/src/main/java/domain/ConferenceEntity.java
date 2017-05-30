@@ -15,6 +15,7 @@ import static utils.Comparator.checkObjects;
  * @version 1.1
  */
 
+
 @Entity
 @Table(name = "CONFERENCE")
 @SuppressWarnings("unused")

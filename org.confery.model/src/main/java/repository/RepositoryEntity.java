@@ -4,7 +4,6 @@ import database.DatabaseLoaderInterface;
 import domain.Idable;
 import exception.SystemException;
 import exception.ValidatorSystemException;
-import method.ThrowMethod;
 import org.hibernate.Session;
 import utils.Try;
 import validator.ValidatorRepository;
@@ -24,6 +23,7 @@ import static utils.Try.runFunction;
  * @author Alexandru Stoica
  * @version 1.0
  */
+
 
 public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
         implements RepositoryInterface<T, Id> {
@@ -95,7 +95,7 @@ public class RepositoryEntity<T extends Idable<Id>, Id extends Serializable>
         Session session = loader.getFactory().openSession();
         session.beginTransaction();
         T element = this.getElementById(id);
-        Try.runMethod((ThrowMethod<T, RuntimeException>) session::delete, element)
+        Try.runMethod(session::delete, element)
                 .orThrow(exception -> new ValidatorSystemException(exception.getMessage()));
         session.getTransaction().commit();
         session.close();

@@ -11,6 +11,7 @@ import method.ThrowMethod;
  * @version 1.0
  */
 
+
 public class Conditional {
 
     private Boolean condition;

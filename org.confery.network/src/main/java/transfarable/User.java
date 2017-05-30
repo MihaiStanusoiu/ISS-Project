@@ -38,6 +38,7 @@ public class User implements Serializable {
         this(username, password, email, name, "", "", "");
     }
 
+
     /**
      * Getter for property 'id'.
      *

@@ -7,6 +7,7 @@ import transfarable.Topic;
  * @author Alexandru Stoica
  * @version 1.0
  */
+
 public class TopicTranslator {
 
     public static Topic translate(TopicEntity topic) {
@@ -16,5 +17,4 @@ public class TopicTranslator {
     public static TopicEntity translate(Topic topic) {
         return new TopicEntity(topic.getId(), topic.getWord());
     }
-
 }

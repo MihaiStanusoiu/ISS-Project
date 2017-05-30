@@ -10,8 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import listener.Listener;
 import manager.StageManager;
-import notification.NotificationUpdate;
 import notification.NotificationType;
+import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,6 @@ import view.ViewType;
 import java.rmi.RemoteException;
 
 import static utils.Conditional.basedOn;
-import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -62,18 +61,7 @@ public class ControllerTopBar
     private CoreContext context;
 
     @Override
-    public void initialize() throws RemoteException {
-        context.in(this).forType(ContextType.REGULAR)
-                .run(item -> ((Label) item).setText(""));
-        context.basedOn(listener.getActiveUser() != null)
-                .in(this)
-                .forType(ContextType.GUEST)
-                .run(item -> ((Button) item).setText(runFunction(
-                        listener::getActiveUser).or(null).getName()));
-        manager.getPrimaryStage().setOnCloseRequest(event ->
-                Try.runMethod(listener::removeSubscriber, this).orHandle(System.out::print));
-        Try.runMethod(listener::addSubscriber, this).orHandle(System.out::println);
-    }
+    public void initialize() throws RemoteException {}
 
     private Boolean existsActiveUser() throws RemoteException {
         return listener.getActiveUser() != null;

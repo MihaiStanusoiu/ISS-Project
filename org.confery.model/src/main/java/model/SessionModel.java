@@ -19,6 +19,7 @@ import static utils.Conditional.basedOn;
  * @version 1.0
  */
 
+
 public class SessionModel extends Model<SessionEntity, Integer> implements SessionProtocol {
 
     private RepositoryInterface<UserEntity, Integer> repositoryUser;

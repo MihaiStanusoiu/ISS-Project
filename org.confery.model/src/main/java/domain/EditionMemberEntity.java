@@ -15,6 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
  * @version 1.0
  */
 
+
 @Entity
 @Table(name = "EDITION_MEMBER")
 @SuppressWarnings("unused")

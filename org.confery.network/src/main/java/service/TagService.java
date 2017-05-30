@@ -1,5 +1,6 @@
 package service;
 
-import domain.TagEntity;
 
-public interface TagService extends Service<TagEntity, Integer> {}
+import transfarable.Tag;
+
+public interface TagService extends Service<Tag, Integer> {}

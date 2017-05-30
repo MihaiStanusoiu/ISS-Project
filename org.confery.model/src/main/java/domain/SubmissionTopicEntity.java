@@ -17,6 +17,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @SuppressWarnings("unused")
 public class SubmissionTopicEntity implements Idable<Integer> {
 
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_SUBMISSION_TOPIC")

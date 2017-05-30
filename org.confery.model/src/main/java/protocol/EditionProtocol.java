@@ -10,6 +10,7 @@ import exception.SystemException;
  * @version 1.0
  */
 
+
 public interface EditionProtocol extends ModelInterface<EditionEntity, Integer> {
 
     /**

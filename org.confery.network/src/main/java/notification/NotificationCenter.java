@@ -29,6 +29,7 @@ public class NotificationCenter implements SubscriptionService {
         subscribers.remove(subscriber);
     }
 
+
     @Override
     public void notifyAll(NotificationUpdate notification) {
         subscribers.forEach(subscriberService -> {

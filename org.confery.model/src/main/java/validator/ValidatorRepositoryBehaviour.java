@@ -10,6 +10,7 @@ import java.util.List;
  * @version 1.0
  */
 
+
 public abstract class ValidatorRepositoryBehaviour<T> {
 
     protected List<String> accumulator;

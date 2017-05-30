@@ -30,6 +30,7 @@ public class SubscriptionManager implements SubscriptionService {
         notificationCenter.removeSubscriber(subscriber);
     }
 
+
     @Override
     public void notifyAll(NotificationUpdate notification) throws RemoteException {
         notificationCenter.notifyAll(notification);

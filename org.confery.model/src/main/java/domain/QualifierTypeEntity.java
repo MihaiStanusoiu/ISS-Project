@@ -10,6 +10,7 @@ package domain;
 
 public enum QualifierTypeEntity implements QualifierTypeEntityInterface {
 
+
     STRONG_AGREE {
         @Override public Integer getValue() {
             return DEFAULT_STRONG_AGREE;

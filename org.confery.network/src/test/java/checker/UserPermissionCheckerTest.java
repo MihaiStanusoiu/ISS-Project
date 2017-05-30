@@ -20,6 +20,7 @@ import static org.mockito.Mockito.when;
 @PrepareForTest(UserPermissionChecker.class)
 public class UserPermissionCheckerTest {
 
+
     @Test
     public void isAllowedUserToDeleteEdition() throws Exception {
         // declarations:

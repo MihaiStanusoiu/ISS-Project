@@ -11,6 +11,7 @@ import java.util.function.BiFunction;
  * @version 1.0
  */
 
+
 public class Comparator implements Serializable {
 
     private Comparator() { }

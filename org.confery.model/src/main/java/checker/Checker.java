@@ -9,6 +9,7 @@ import exception.SystemException;
 
 public interface Checker<T> {
 
+
     /**
      * Checks if an element if valid based on conditions
      *

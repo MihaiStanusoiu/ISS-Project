@@ -7,12 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import listener.Listener;
 import manager.StageManager;
-import notification.NotificationType;
-import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import view.ViewType;
 
 import java.rmi.RemoteException;
 
@@ -58,16 +55,14 @@ public class ControllerProfileView implements ControllerInterface, ControllerIte
                 user.getPassword(), emailTextField.getText(),
                 nameTextField.getText(), websiteTextField.getText(),
                 bioTextField.getText(), locationTextField.getText());
-        listener.setActiveUser(other);
-        listener.notifyAll(new NotificationUpdate(NotificationType.UPDATE_USER));
     }
 
     @FXML
     public void onDeleteButtonClick() throws RemoteException {
         //userService.delete(user);
-        listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGOUT));
-        listener.setActiveUser(null);
-        manager.switchScene(ViewType.CONFERENCES);
+//        listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGOUT));
+//        listener.setActiveUser(null);
+//        manager.switchScene(ViewType.CONFERENCES);
     }
 
     private void updateUserData() {

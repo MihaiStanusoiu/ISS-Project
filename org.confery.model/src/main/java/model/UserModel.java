@@ -17,6 +17,7 @@ import static utils.Conditional.basedOn;
  * @version 1.0
  */
 
+
 public class UserModel extends Model<UserEntity, Integer> implements UserProtocol {
 
     private RepositoryInterface<ConfigurationEditionMemberEntity, Integer> repositoryEditionConfiguration;

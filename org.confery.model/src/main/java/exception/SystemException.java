@@ -9,4 +9,5 @@ package exception;
 
 public abstract class SystemException extends Exception {
 
+
 }

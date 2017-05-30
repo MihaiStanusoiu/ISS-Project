@@ -12,6 +12,7 @@ import java.util.function.Function;
  * @version 1.0
  */
 
+
 public class Try<T, E extends Throwable> {
 
     private T element;

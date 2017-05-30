@@ -1,8 +1,8 @@
 package listener;
 
-import domain.UserEntity;
 import service.SubscriberService;
 import service.SubscriptionService;
+import transfarable.User;
 
 import java.io.Serializable;
 import java.rmi.Remote;
@@ -15,8 +15,8 @@ import java.rmi.RemoteException;
 
 public interface Listener extends SubscriberService, SubscriptionService, Serializable, Remote {
 
-    void setActiveUser(UserEntity user) throws RemoteException;
+    void setActiveUser(User user) throws RemoteException;
 
-    UserEntity getActiveUser() throws RemoteException;
+    User getActiveUser() throws RemoteException;
 
 }

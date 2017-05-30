@@ -26,6 +26,7 @@ import static utils.Try.runFunction;
 @SuppressWarnings("unused")
 public class SessionEntity implements Idable<Integer> {
 
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_SESSION")

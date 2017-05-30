@@ -1,5 +1,6 @@
 package service;
 
-import domain.UserEntity;
 
-public interface UserService extends Service<UserEntity, Integer> {}
+import transfarable.User;
+
+public interface UserService extends Service<User, Integer> { }

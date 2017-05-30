@@ -1,6 +1,7 @@
 
 package service;
 
-import domain.SessionEntity;
 
-public interface SessionService extends Service<SessionEntity, Integer> {}
+import transfarable.Session;
+
+public interface SessionService extends Service<Session, Integer> {}

@@ -1,5 +1,6 @@
 package service;
 
-import domain.SubmissionEntity;
 
-public interface SubmissionService extends Service<SubmissionEntity, Integer> {}
+import transfarable.Submission;
+
+public interface SubmissionService extends Service<Submission, Integer> {}

@@ -9,4 +9,5 @@ import domain.TopicEntity;
  * @version 1.0
  */
 
+
 public interface TopicProtocol extends ModelInterface<TopicEntity, Integer> { }

@@ -8,9 +8,10 @@ import java.io.Serializable;
  */
 
 public enum NotificationType implements Serializable {
-    UPDATE,
+
     SIGNAL_LOGIN,
     SIGNAL_SIGN_UP,
     SIGNAL_LOGOUT,
     UPDATE_USER
+
 }

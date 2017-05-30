@@ -12,6 +12,7 @@ import java.util.List;
 
 @SuppressWarnings("all")
 public class ValidatorSystemException extends SystemException {
+
     private List<String> messages;
 
     public ValidatorSystemException(List<String> messages) {

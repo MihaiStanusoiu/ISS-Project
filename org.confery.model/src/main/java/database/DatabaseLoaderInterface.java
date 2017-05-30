@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
  * @version 1.0
  */
 
+
 public interface DatabaseLoaderInterface {
 
     /**

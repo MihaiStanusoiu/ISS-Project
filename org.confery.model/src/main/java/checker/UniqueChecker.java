@@ -20,6 +20,7 @@ public class UniqueChecker<T> implements Checker<T> {
         this.elements = elements;
     }
 
+
     /**
      * {@inheritDoc}
      *

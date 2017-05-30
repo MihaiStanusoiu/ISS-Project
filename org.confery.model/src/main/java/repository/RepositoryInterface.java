@@ -42,6 +42,7 @@ public interface RepositoryInterface<T extends Idable<Id>, Id extends Serializab
      */
     List<T> getAll();
 
+
     /**
      * @param id The object's id.
      * @return The wanted object based on the given id.

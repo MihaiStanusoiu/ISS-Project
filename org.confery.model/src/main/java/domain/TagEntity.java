@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unused")
 public class TagEntity implements Idable<Integer> {
 
+
     @Id
     @GeneratedValue
     @Column(name = "ID_TAG")

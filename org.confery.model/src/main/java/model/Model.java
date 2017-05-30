@@ -17,6 +17,7 @@ import java.util.List;
  * @version 1.0
  */
 
+
 public class Model<T extends Idable<Id>, Id extends Serializable> implements ModelInterface<T, Id> {
 
     protected RepositoryInterface<T, Id> repository;

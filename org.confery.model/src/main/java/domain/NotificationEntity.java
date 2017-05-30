@@ -11,6 +11,7 @@ import java.io.Serializable;
  * @version 1.1
  */
 
+
 @Entity
 @Table(name = "NOTIFICATION")
 @SuppressWarnings("unused")

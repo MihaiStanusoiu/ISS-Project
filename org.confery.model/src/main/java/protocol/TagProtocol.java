@@ -9,4 +9,5 @@ import domain.TagEntity;
  * @version 1.0
  */
 
+
 public interface TagProtocol extends ModelInterface<TagEntity, Integer> { }

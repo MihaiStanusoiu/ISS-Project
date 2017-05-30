@@ -8,6 +8,7 @@ import transfarable.Conference;
  * @version 1.0
  */
 
+
 public class ConferenceTranslator {
 
     public static ConferenceEntity translate(Conference conference) {

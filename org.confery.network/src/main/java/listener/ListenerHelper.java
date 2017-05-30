@@ -3,13 +3,12 @@ package listener;
 import domain.UserEntity;
 import notification.NotificationUpdate;
 import service.SubscriberService;
-import utils.Try;
+import transfarable.User;
+import translator.UserTranslator;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-
-import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -26,13 +25,15 @@ public class ListenerHelper extends UnicastRemoteObject implements Listener {
     }
 
     @Override
-    public void setActiveUser(UserEntity user) throws RemoteException {
-        activeUser = user;
+    public void setActiveUser(User user) throws RemoteException {
+        UserEntity userEntity = UserTranslator.translate(user);
+        activeUser = userEntity;
     }
 
     @Override
-    public UserEntity getActiveUser() throws RemoteException {
-        return activeUser;
+    public User getActiveUser() throws RemoteException {
+        User transferableUser = UserTranslator.translate(activeUser);
+        return transferableUser;
     }
 
     @Override
@@ -52,7 +53,11 @@ public class ListenerHelper extends UnicastRemoteObject implements Listener {
 
     @Override
     public void notifyAll(NotificationUpdate notification) throws RemoteException {
-        subscribers.forEach(subscriberService -> Try.runMethod(subscriberService::update, notification));
+        // Broken runFunction
+        // subscribers.forEach(subscriberService -> runFunction(subscriberService::update, notification));
+        for (SubscriberService subscriberService : subscribers) {
+            subscriberService.update(notification);
+        }
     }
 
 }

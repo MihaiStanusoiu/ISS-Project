@@ -16,6 +16,7 @@ public class EditionTranslator {
                 edition.getEvaluationDeadline(), edition.getBiddingDeadline());
     }
 
+
     public static Edition translate(EditionEntity edition) {
         return new Edition(edition.getId(), edition.getStartDate(),
                 edition.getEndDate(), edition.getLocation(), edition.getBio(),

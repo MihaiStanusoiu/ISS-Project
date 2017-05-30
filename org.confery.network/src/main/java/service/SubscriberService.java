@@ -2,6 +2,7 @@ package service;
 
 import notification.NotificationUpdate;
 
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

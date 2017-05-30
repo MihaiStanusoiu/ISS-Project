@@ -78,14 +78,6 @@ public class ServerSpringConfiguration {
                 userService(), submissionSerive(), topicService(), tagService(),
                 editionService(), sessionService(), notificationService());
 
-        collectionService.setUserService(userService());
-        collectionService.setLoginService(loginService());
-        collectionService.setSignUpService(signUpService());
-        collectionService.setEditionService(editionService());
-        collectionService.setTagService(tagService());
-        collectionService.setTopicService(topicService());
-        collectionService.setSessionService(sessionService());
-        collectionService.setSubmissionService(submissionSerive());
 
         rmiServiceExporter.setServiceName("CollectionService");
         rmiServiceExporter.setService(collectionService);

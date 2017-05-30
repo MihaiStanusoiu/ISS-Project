@@ -5,12 +5,10 @@ import exception.SystemException;
 import notification.NotificationCenter;
 import protocol.UserProtocol;
 import service.SignUpService;
+import transfarable.User;
 
 import java.rmi.RemoteException;
 import java.util.stream.Collectors;
-
-import static utils.Conditional.basedOn;
-import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -51,6 +49,7 @@ public class SignUpManager implements SignUpService {
                 (password.length() - countLowerCaseLetters(password)) * 2;
     }
 
+
     private Boolean isPasswordValid(String password, String confirm) {
         return password.equals(confirm) && getPasswordScore(password) > 48;
     }
@@ -64,19 +63,21 @@ public class SignUpManager implements SignUpService {
     }
 
     @Override
-    public UserEntity signUp(String username, String password, String confirm, String email, String name)
+    public User signUp(String username, String password, String confirm, String email, String name)
             throws RemoteException {
-        basedOn(runFunction(this::isUsernameUnique, username)
-                .orThrow(exception-> new RemoteException("Invalid Username")))
-                .orThrow(new RemoteException("Username already used in our system"));
-        UserEntity user = (isPasswordValid(password, confirm) && isEmailValid(email)) ?
-                new UserEntity(username, password, email, name) : null;
-        Integer id = runFunction(userModel::add, user).orThrow(exception -> new RemoteException(exception.getMessage()));
-        return runFunction(userModel::getElementById, id).orThrow(exception -> new RemoteException(exception.getMessage()));
+        return null;
+//        basedOn(runFunction(this::isUsernameUnique, username)
+//                .orThrow(exception-> new RemoteException("Invalid Username")))
+//                .orThrow(new RemoteException("Username already used in our system"));
+//        UserEntity user = (isPasswordValid(password, confirm) && isEmailValid(email)) ?
+//                new UserEntity(username, password, email, name) : null;
+//        Integer id = runFunction(userModel::add, user).orThrow(exception -> new RemoteException(exception.getMessage()));
+//        return runFunction(userModel::getElementById, id).orThrow(exception -> new RemoteException(exception.getMessage()));
     }
 
+
     @Override
-    public void activeUser(UserEntity user) throws RemoteException {
-        active = user;
+    public void activeUser(User user) throws RemoteException {
+
     }
 }

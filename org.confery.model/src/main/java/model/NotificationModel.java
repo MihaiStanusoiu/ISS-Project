@@ -44,6 +44,7 @@ public class NotificationModel extends Model<NotificationEntity, Integer> implem
         return getElementById(notification.getId());
     }
 
+
     /**
      * {@inheritDoc}
      */

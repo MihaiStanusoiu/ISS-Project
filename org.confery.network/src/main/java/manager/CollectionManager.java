@@ -2,7 +2,8 @@ package manager;
 
 import domain.UserEntity;
 import service.*;
-import utils.Try;
+import transfarable.User;
+import translator.UserTranslator;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -47,51 +48,6 @@ public class CollectionManager implements CollectionService {
         this.editionService = editionService;
         this.sessionService = sessionService;
         this.notificationService = notificationService;
-    }
-
-    @Override
-    public void setLoginService(LoginService loginService) throws RemoteException {
-        this.loginService = loginService;
-    }
-
-    @Override
-    public void setSignUpService(SignUpService signUpService) throws RemoteException {
-        this.signUpService = signUpService;
-    }
-
-    @Override
-    public void setUserService(UserService userService) throws RemoteException {
-        this.userService = userService;
-    }
-
-    @Override
-    public void setNotificationService(NotificationService notificationService) throws RemoteException {
-        this.notificationService = notificationService;
-    }
-
-    @Override
-    public void setSessionService(SessionService sessionService) throws RemoteException {
-        this.sessionService = sessionService;
-    }
-
-    @Override
-    public void setSubmissionService(SubmissionService submissionService) throws RemoteException {
-        this.submissionService = submissionService;
-    }
-
-    @Override
-    public void setTagService(TagService tagService) throws RemoteException {
-        this.tagService = tagService;
-    }
-
-    @Override
-    public void setTopicService(TopicService topicService) throws RemoteException {
-        this.topicService = topicService;
-    }
-
-    @Override
-    public void setEditionService(EditionService editionService) throws RemoteException {
-        this.editionService = editionService;
     }
 
     @Override
@@ -145,10 +101,14 @@ public class CollectionManager implements CollectionService {
     }
 
     @Override
-    public void activeUser(UserEntity user) throws RemoteException {
-        this.activeUser = user;
+    public void activeUser(User user) throws RemoteException {
+        UserEntity userEntity = UserTranslator.translate(user);
+        this.activeUser = userEntity;
         List<ServiceInterface> list = asList(loginService, signUpService, notificationService, userService,
                 sessionService, submissionService, editionService, tagService, topicService);
-        list.forEach(service -> Try.runMethod(service::activeUser, user));
+//      list.forEach(service -> runFunction(service::activeUser, user));
+        for (ServiceInterface service : list) {
+            service.activeUser(user);
+        }
     }
 }

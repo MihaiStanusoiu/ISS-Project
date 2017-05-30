@@ -1,7 +1,5 @@
 package service;
 
-import domain.Idable;
-
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface Service<T extends Idable<Id>, Id extends Serializable> extends ServiceInterface {
+public interface Service<T, Id extends Serializable> extends ServiceInterface {
 
     Id add(T element) throws RemoteException;
 

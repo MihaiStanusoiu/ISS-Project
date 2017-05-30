@@ -9,6 +9,8 @@ package domain;
  */
 
 public enum StatusEntityType {
+
     REVIEWED,
     NOT_REVIEWED
+
 }

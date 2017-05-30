@@ -34,6 +34,7 @@ import java.util.ResourceBundle;
 
 public class DatabaseLoader implements DatabaseLoaderInterface {
 
+
     /**
      * The hibernate configuration.
      */

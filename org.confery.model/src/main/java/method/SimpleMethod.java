@@ -7,6 +7,7 @@ package method;
  * @version 1.0
  */
 
+
 @FunctionalInterface
 public interface SimpleMethod<T> {
     void accept(T element);

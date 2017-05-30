@@ -17,6 +17,7 @@ import static utils.Conditional.basedOn;
  * @version 1.0
  */
 
+
 public class SubmissionModel extends Model<SubmissionEntity, Integer>
         implements SubmissionProtocol {
 

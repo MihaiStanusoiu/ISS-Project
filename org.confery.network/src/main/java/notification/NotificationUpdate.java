@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class NotificationUpdate implements Serializable {
 
-    private NotificationType type;
+    private final NotificationType type;
 
     public NotificationUpdate(NotificationType type) {
         this.type = type;

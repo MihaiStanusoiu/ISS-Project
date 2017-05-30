@@ -6,7 +6,9 @@ package domain;
  */
 
 public enum ResultTypeEntity {
+
     ACCEPTED,
     CONTRADICTORY,
     REJECTED
+
 }

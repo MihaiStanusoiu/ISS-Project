@@ -15,6 +15,7 @@ public class SubmissionTranslator {
                 submission.getAbstractUrl(), submission.getFullPaperUrl(), submission.isPaid());
     }
 
+
     public static SubmissionEntity translate(Submission submission) {
         return new SubmissionEntity(submission.getId(), submission.getName(), submission.getStatus(),
                 submission.getAbstractUrl(), submission.getFullPaperUrl(), submission.isPaid()) ;

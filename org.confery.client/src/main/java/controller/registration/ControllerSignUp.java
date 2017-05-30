@@ -1,7 +1,6 @@
 package controller.registration;
 
 import controller.main.ControllerInterface;
-import domain.UserEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -115,8 +114,8 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         String confirm = confirmTextField.getText();
-        UserEntity user = service.signUpService().signUp(username, password, confirm, email, displayName);
-        this.listener.setActiveUser(user);
+        // UserEntity user = service.signUpService().signUp(username, password, confirm, email, displayName);
+        // this.listener.setActiveUser(user);
         this.listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_SIGN_UP));
         manager.switchScene(ViewType.CONFERENCES);
     }

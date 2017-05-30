@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unused")
 public class UserEntity implements Serializable, Idable<Integer> {
 
+
     @Id
     @GeneratedValue
     @Column(name = "ID_USER")

@@ -1,6 +1,7 @@
 package service;
 
-import domain.UserEntity;
+
+import transfarable.User;
 
 import java.rmi.RemoteException;
 
@@ -11,6 +12,6 @@ import java.rmi.RemoteException;
 
 public interface LoginService extends ServiceInterface {
 
-    UserEntity login(String username, String password) throws RemoteException;
+    User login(String username, String password) throws RemoteException;
 
 }

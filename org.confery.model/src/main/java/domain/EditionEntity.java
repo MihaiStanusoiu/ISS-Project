@@ -20,6 +20,7 @@ import static javax.persistence.GenerationType.IDENTITY;
  * @version 1.1
  */
 
+
 @Entity
 @Table(name = "EDITION")
 @SuppressWarnings("unused")

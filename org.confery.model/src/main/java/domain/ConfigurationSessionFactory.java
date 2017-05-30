@@ -13,6 +13,7 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
+
 public class ConfigurationSessionFactory {
 
     private RepositoryInterface<ConfigurationSessionMemberEntity, Integer> configurations;

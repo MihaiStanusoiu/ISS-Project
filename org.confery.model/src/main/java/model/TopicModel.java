@@ -18,6 +18,7 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
+
 public class TopicModel extends Model<TopicEntity, Integer> implements TopicProtocol {
 
     public TopicModel(DatabaseLoaderInterface loader) {

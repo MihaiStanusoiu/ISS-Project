@@ -9,6 +9,7 @@ package exception;
 
 public class ModelException extends SystemException {
 
+
     private String message;
 
     public ModelException(String message) {

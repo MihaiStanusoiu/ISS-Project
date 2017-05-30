@@ -1,6 +1,7 @@
 package service;
 
 import domain.UserEntity;
+import transfarable.User;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -11,24 +12,6 @@ import java.rmi.RemoteException;
  */
 
 public interface CollectionService extends Remote {
-
-    void setLoginService(LoginService loginService) throws RemoteException;
-
-    void setSignUpService(SignUpService signUpService) throws RemoteException;
-
-    void setUserService(UserService userService) throws RemoteException;
-
-    void setNotificationService(NotificationService notificationService) throws RemoteException;
-
-    void setSessionService(SessionService sessionService) throws RemoteException;
-
-    void setSubmissionService(SubmissionService submissionService) throws RemoteException;
-
-    void setTagService(TagService tagService) throws RemoteException;
-
-    void setTopicService(TopicService topicService) throws RemoteException;
-
-    void setEditionService(EditionService editionService) throws RemoteException;
 
     LoginService loginService() throws RemoteException;
 
@@ -50,6 +33,6 @@ public interface CollectionService extends Remote {
 
     UserEntity getActiveUser() throws RemoteException;
 
-    void activeUser(UserEntity user) throws RemoteException;
+    void activeUser(User user) throws RemoteException;
 
 }

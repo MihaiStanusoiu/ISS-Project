@@ -1,7 +1,6 @@
 package controller.registration;
 
 import controller.main.ControllerInterface;
-import domain.UserEntity;
 import exception.SystemException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -103,8 +102,8 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         try {
-            UserEntity user = service.loginService().login(username, password);
-            listener.setActiveUser(user);
+            //UserEntity user = service.loginService().login(username, password);
+            //listener.setActiveUser(user);
             listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGIN));
             manager.switchScene(ViewType.CONFERENCES);
         } catch (RemoteException exception) {

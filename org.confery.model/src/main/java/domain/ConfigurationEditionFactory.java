@@ -13,6 +13,7 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
+
 public class ConfigurationEditionFactory {
 
     private RepositoryInterface<ConfigurationEditionMemberEntity, Integer> configurations;

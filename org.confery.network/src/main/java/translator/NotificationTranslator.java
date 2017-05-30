@@ -7,6 +7,7 @@ import transfarable.Notification;
  * @author Alexandru Stoica
  * @version 1.0
  */
+
 public class NotificationTranslator {
 
     public static Notification translate(NotificationEntity notification) {

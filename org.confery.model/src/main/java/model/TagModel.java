@@ -18,6 +18,7 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
+
 public class TagModel extends Model<TagEntity, Integer> implements TagProtocol {
 
     public TagModel(DatabaseLoaderInterface loader) {
