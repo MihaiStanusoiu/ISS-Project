@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import transfarable.Conference;
 import transfarable.Edition;
 
+import java.util.stream.Collectors;
+
 /**
  * @author Alexandru Stoica
  * @version 1.0
@@ -13,8 +15,8 @@ import transfarable.Edition;
 public class ConferenceContext {
 
     private Conference conference;
-    private ObservableList<Edition> editions;
-    private Edition selectedEdition;
+    private ObservableList<EditionContext> editionContexts;
+    private EditionContext selectedEditionContext;
 
     public ConferenceContext() {
         this(new Conference("", ""));
@@ -22,7 +24,7 @@ public class ConferenceContext {
 
     private ConferenceContext(Conference conference) {
         this.conference = conference;
-        editions = FXCollections.observableArrayList();
+        editionContexts = FXCollections.observableArrayList();
     }
 
     public void setConference(Conference conference) {
@@ -33,23 +35,35 @@ public class ConferenceContext {
         return conference;
     }
 
-    public void addEdition(Edition edition) {
-        editions.add(edition);
-        selectedEdition = edition;
+    public void addEdition(Edition edition) {;
+        selectedEditionContext = new EditionContext(edition);
+        editionContexts.add(selectedEditionContext);
     }
 
     public ObservableList<Edition> getEditions() {
-        return editions;
+        return FXCollections.observableArrayList(editionContexts
+                .stream().map(EditionContext::getEdition)
+                .collect(Collectors.toList()));
     }
 
     public Edition getEdition() {
-        return selectedEdition;
+        return selectedEditionContext.getEdition();
     }
 
     public void updateEdition(Edition edition) {
-        editions.remove(selectedEdition);
-        selectedEdition = edition;
-        editions.add(selectedEdition);
+        editionContexts.remove(selectedEditionContext);
+        selectedEditionContext = new EditionContext(edition);
+        editionContexts.add(selectedEditionContext);
+    }
+
+    public EditionContext getEditionContext() {
+        return selectedEditionContext;
+    }
+
+    public void updateEditionContext(EditionContext context) {
+        editionContexts.remove(selectedEditionContext);
+        selectedEditionContext = context;
+        editionContexts.add(selectedEditionContext);
     }
 
 }

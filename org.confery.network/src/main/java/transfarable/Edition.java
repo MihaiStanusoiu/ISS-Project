@@ -96,15 +96,6 @@ public class Edition implements Serializable {
     }
 
     /**
-     * Setter for property 'abstractDeadline'.
-     *
-     * @param abstractDeadline Value to set for property 'abstractDeadline'.
-     */
-    public void setAbstractDeadline(Date abstractDeadline) {
-        this.abstractDeadline = abstractDeadline;
-    }
-
-    /**
      * Getter for property 'paperDeadline'.
      *
      * @return Value for property 'paperDeadline'.
@@ -131,4 +122,37 @@ public class Edition implements Serializable {
         return biddingDeadline;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Edition edition = (Edition) o;
+        return (id != null ? id.equals(edition.id) : edition.id == null) &&
+                (startDate != null ? startDate.equals(edition.startDate) : edition.startDate == null) &&
+                (endDate != null ? endDate.equals(edition.endDate) : edition.endDate == null) &&
+                (location != null ? location.equals(edition.location) : edition.location == null) &&
+                (bio != null ? bio.equals(edition.bio) : edition.bio == null) &&
+                (abstractDeadline != null ? abstractDeadline.equals(edition.abstractDeadline) :
+                        edition.abstractDeadline == null) &&
+                (paperDeadline != null ? paperDeadline.equals(edition.paperDeadline) :
+                        edition.paperDeadline == null) &&
+                (evaluationDeadline != null ? evaluationDeadline.equals(edition.evaluationDeadline) :
+                        edition.evaluationDeadline == null) &&
+                (biddingDeadline != null ? biddingDeadline.equals(edition.biddingDeadline) :
+                        edition.biddingDeadline == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + (bio != null ? bio.hashCode() : 0);
+        result = 31 * result + (abstractDeadline != null ? abstractDeadline.hashCode() : 0);
+        result = 31 * result + (paperDeadline != null ? paperDeadline.hashCode() : 0);
+        result = 31 * result + (evaluationDeadline != null ? evaluationDeadline.hashCode() : 0);
+        result = 31 * result + (biddingDeadline != null ? biddingDeadline.hashCode() : 0);
+        return result;
+    }
 }

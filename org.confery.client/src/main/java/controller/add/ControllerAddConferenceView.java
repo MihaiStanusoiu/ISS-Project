@@ -67,7 +67,8 @@ public class ControllerAddConferenceView
     }
 
     private void onEditionItemClick() {
-        context.updateEdition(getSelectedEdition());
+        //context.updateEdition(getSelectedEdition());
+        context.getEditionContext().updateEdition(getSelectedEdition());
         manager.switchScene(ViewType.ADD_EDITION, context);
     }
 

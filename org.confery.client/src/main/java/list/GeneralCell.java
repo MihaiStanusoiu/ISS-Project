@@ -45,14 +45,14 @@ public class GeneralCell<T> extends ListCell<T> {
 
     private Node getItemGraphic(T item) {
         HBox pane = createItemPane();
-        pane.getChildren().addAll(createCircle(), createSpace(20.0), createLabel(item), createButton(item));
+        pane.getChildren().addAll(createCircle(), createSpace(10.0), createLabel(item), createButton(item));
         return pane;
     }
 
     @NotNull
     private Label createLabel(T item) {
         Label label = new Label(textProvider.apply(item));
-        label.setFont(new Font("Proxima Nova Regular", 18.0));
+        label.setFont(new Font("Proxima Nova Regular", 14.0));
         return label;
     }
 
@@ -108,7 +108,7 @@ public class GeneralCell<T> extends ListCell<T> {
 
     private HBox setUpPaneSize(HBox pane) {
         setSizeForPane(pane, Double.MIN_VALUE, USE_COMPUTED_SIZE, Double.MAX_VALUE);
-        pane.setPadding(new Insets(20, 20, 20, 20));
+        pane.setPadding(new Insets(10, 10, 10, 10));
         return pane;
     }
 
