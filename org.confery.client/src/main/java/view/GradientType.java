@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
  * @version 1.0
  */
 
-public enum GradientType implements GradientTypeInterface {
+public enum GradientType implements ResourceGetter {
 
     BLUE {
         /**

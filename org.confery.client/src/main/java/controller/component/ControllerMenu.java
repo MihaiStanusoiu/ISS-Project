@@ -10,11 +10,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import listener.ListenerHelper;
 import manager.StageManager;
-import notification.NotificationUpdate;
 import notification.NotificationType;
+import notification.NotificationUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import utils.ConferenceContext;
 import view.ViewType;
 
 import java.rmi.RemoteException;
@@ -63,7 +64,7 @@ public class ControllerMenu implements ControllerInterface {
 
     @FXML
     private void onAddConferenceViewButtonClick() {
-        manager.switchScene(ViewType.ADD_CONFERENCE, null);
+        manager.switchScene(ViewType.ADD_CONFERENCE, new ConferenceContext());
     }
 
     @FXML

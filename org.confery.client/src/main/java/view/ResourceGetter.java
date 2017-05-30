@@ -5,7 +5,7 @@ package view;
  * @version 1.0
  */
 
-public interface GradientTypeInterface {
+public interface ResourceGetter {
 
     /**
      * Returns the CSS attribute for the CSS color property of your object.
