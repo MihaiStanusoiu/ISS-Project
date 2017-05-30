@@ -45,13 +45,12 @@ public class TopicManager implements TopicService {
 
 
     @Override
-    public Topic update(Topic element, Topic with) throws RemoteException {
+    public void update(Topic element, Topic with) throws RemoteException {
         Try.runMethod(
                 model::update,
                 TopicTranslator.translate(element),
                 TopicTranslator.translate(with)
         ).orThrow(thrower);
-        return with;
     }
 
     @Override

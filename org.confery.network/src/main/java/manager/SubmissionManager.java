@@ -44,13 +44,12 @@ public class SubmissionManager implements SubmissionService {
     }
 
     @Override
-    public Submission update(Submission element, Submission with) throws RemoteException {
+    public void update(Submission element, Submission with) throws RemoteException {
         Try.runMethod(
                 model::update,
                 SubmissionTranslator.translate(element),
                 SubmissionTranslator.translate(with)
         ).orThrow(thrower);
-        return with;
     }
 
 

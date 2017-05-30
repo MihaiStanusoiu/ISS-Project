@@ -45,13 +45,12 @@ public class ConferenceManager implements ConferenceService {
     }
 
     @Override
-    public Conference update(Conference element, Conference with) throws RemoteException {
+    public void update(Conference element, Conference with) throws RemoteException {
         Try.runMethod(
                 model::update,
                 ConferenceTranslator.translate(element),
                 ConferenceTranslator.translate(with)
         ).orThrow(thrower);
-        return with;
     }
 
     @Override

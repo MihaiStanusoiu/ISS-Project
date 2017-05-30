@@ -44,13 +44,12 @@ public class NotificationManager implements NotificationService {
     }
 
     @Override
-    public Notification update(Notification element, Notification with) throws RemoteException {
+    public void update(Notification element, Notification with) throws RemoteException {
         Try.runMethod(
                 model::update,
                 NotificationTranslator.translate(element),
                 NotificationTranslator.translate(with)
         ).orThrow(thrower);
-        return with;
     }
 
 

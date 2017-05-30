@@ -12,4 +12,6 @@ public interface ConferenceProtocol extends ModelInterface<ConferenceEntity, Int
 
     ConferenceEntity addEditionTo(ConferenceEntity conference, EditionEntity edition) throws SystemException;
 
+    ConferenceEntity removeEditionFrom(ConferenceEntity conference, EditionEntity edition) throws SystemException;
+
 }

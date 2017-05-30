@@ -30,6 +30,7 @@ public class SignUpManagerTest {
 
     private UserModel model;
     private SignUpManager manager;
+
     @Before
     public void setUp() throws Exception {
         NotificationCenter center = PowerMockito.mock(NotificationCenter.class);
@@ -53,7 +54,7 @@ public class SignUpManagerTest {
         List<UserEntity> result = singletonList(userEntity);
         // when:
         PowerMockito.doReturn(result).when(model, "getAll");
-        PowerMockito.doReturn(1).when(model, "add", user);
+        PowerMockito.doReturn(1).when(model, "isAddinfg", user);
         PowerMockito.doReturn(user).when(model, "getElementById", 1);
         // then:
         assertEquals(manager.signUp("test", "passwordTest", "passwordTest", "try@gmail.com", "Test").getUsername(), "test");

@@ -34,7 +34,6 @@ public class EditionManager implements EditionService {
 
     public EditionManager(EditionProtocol model) throws RemoteException {
         this.model = model;
-        this.checker = new UserPermissionChecker();
         this.thrower = exception -> new RemoteException(exception != null ? exception.getMessage() : null);
     }
 
@@ -51,13 +50,12 @@ public class EditionManager implements EditionService {
 
 
     @Override
-    public Edition update(Edition element, Edition with) throws RemoteException {
+    public void update(Edition element, Edition with) throws RemoteException {
         Try.runMethod(
                 model::update,
                 EditionTranslator.translate(element),
                 EditionTranslator.translate(with)
         ).orThrow(thrower);
-        return with;
     }
 
     @Override

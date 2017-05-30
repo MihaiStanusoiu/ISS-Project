@@ -15,7 +15,9 @@ import static utils.Try.runMethod;
 /**
  * Created by Mike on 5/29/2017.
  */
-public class ConferenceModel extends Model<ConferenceEntity, Integer> implements ConferenceProtocol {
+public class ConferenceModel
+        extends Model<ConferenceEntity, Integer>
+        implements ConferenceProtocol {
 
     private RepositoryInterface<EditionEntity, Integer> repositoryEdition;
 
@@ -30,6 +32,11 @@ public class ConferenceModel extends Model<ConferenceEntity, Integer> implements
                 .orThrow(new ModelException("The edition is already part of the conference"));
         edition.setConference(conference);
         runMethod(repositoryEdition::add, edition);
-        return conference;
+        return getElementById(conference.getId());
+    }
+
+    @Override
+    public ConferenceEntity removeEditionFrom(ConferenceEntity conference, EditionEntity edition) throws SystemException {
+        return null;
     }
 }

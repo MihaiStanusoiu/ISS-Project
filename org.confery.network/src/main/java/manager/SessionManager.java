@@ -44,13 +44,12 @@ public class SessionManager implements SessionService {
     }
 
     @Override
-    public Session update(Session element, Session with) throws RemoteException {
+    public void update(Session element, Session with) throws RemoteException {
         Try.runMethod(
                 model::update,
                 SessionTranslator.translate(element),
                 SessionTranslator.translate(with)
         ).orThrow(thrower);
-        return with;
     }
 
 

@@ -13,7 +13,7 @@ public interface Service<T, Id extends Serializable> extends ServiceInterface {
 
     Id add(T element) throws RemoteException;
 
-    T update(T element, T with) throws RemoteException;
+    void update(T element, T with) throws RemoteException;
 
     T delete(T element) throws RemoteException;
 

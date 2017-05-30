@@ -45,13 +45,12 @@ public class TagManager implements TagService {
 
 
     @Override
-    public Tag update(Tag element, Tag with) throws RemoteException {
+    public void update(Tag element, Tag with) throws RemoteException {
         Try.runMethod(
                 model::update,
                 TagTranslator.translate(element),
                 TagTranslator.translate(with)
         ).orThrow(thrower);
-        return with;
     }
 
     @Override
