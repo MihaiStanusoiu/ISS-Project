@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.add.ControllerAddMembersEditionView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.add.ControllerAddSessionEditionView">
    <top>
-      <fx:include source="TopBar.fxml" />
+      <fx:include source="../TopBar.fxml" />
    </top>
    <center>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
@@ -30,7 +30,7 @@
                      <children>
                         <ImageView blendMode="GREEN" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                            <image>
-                              <Image url="@../png_icons/next_icon.png" />
+                              <Image url="@../../png_icons/next_icon.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -73,7 +73,7 @@
                                     <InnerShadow choke="1.0" color="#0000001a" height="1.0" offsetY="-1.0" radius="0.0" width="0.0" />
                                  </effect>
                               </HBox>
-                              <HBox alignment="CENTER" maxHeight="50.0" prefHeight="50.0" style="-fx-background-color: white;">
+                              <HBox alignment="CENTER" maxHeight="50.0" onMouseClicked="#onMembersButtonClick" prefHeight="50.0" style="-fx-background-color: white;">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -84,13 +84,13 @@
                                        </font>
                                     </Label>
                                     <Pane prefWidth="20.0" HBox.hgrow="ALWAYS" />
-                                    <Pane maxHeight="10.0" maxWidth="10.0" minHeight="10.0" minWidth="10.0" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: #6BFF6D; -fx-background-radius: 10;" />
+                                    <Pane maxHeight="10.0" maxWidth="10.0" minHeight="10.0" minWidth="10.0" opacity="0.0" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: #6BFF6D; -fx-background-radius: 10;" />
                                  </children>
                                  <effect>
                                     <InnerShadow choke="1.0" color="#0000001a" height="1.0" offsetY="-1.0" radius="0.0" width="0.0" />
                                  </effect>
                               </HBox>
-                              <HBox alignment="CENTER" maxHeight="50.0" onMouseClicked="#onSessionsButtonClick" prefHeight="50.0" style="-fx-background-color: white;">
+                              <HBox alignment="CENTER" maxHeight="50.0" prefHeight="50.0" style="-fx-background-color: white;">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -101,7 +101,7 @@
                                        </font>
                                     </Label>
                                     <Pane prefWidth="20.0" HBox.hgrow="ALWAYS" />
-                                    <Pane maxHeight="10.0" maxWidth="10.0" minHeight="10.0" minWidth="10.0" opacity="0.0" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: #6BFF6D; -fx-background-radius: 10;" />
+                                    <Pane maxHeight="10.0" maxWidth="10.0" minHeight="10.0" minWidth="10.0" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: #6BFF6D; -fx-background-radius: 10;" />
                                  </children>
                                  <effect>
                                     <InnerShadow choke="1.0" color="#0000001a" height="1.0" offsetY="-1.0" radius="0.0" width="0.0" />
@@ -135,7 +135,7 @@
                      <children>
                         <VBox>
                            <children>
-                              <Label minWidth="0.0" text="Chair">
+                              <Label minWidth="0.0" text="Sessions">
                                  <font>
                                     <Font name="Proxima Nova Bold" size="16.0" />
                                  </font>
@@ -143,38 +143,22 @@
                                     <Insets bottom="10.0" />
                                  </padding>
                               </Label>
-                              <ListView fx:id="chairListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="80.0" style="-fx-background-color: white;" stylesheets="@../css/list.css">
+                              <ListView fx:id="sessionsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="80.0" style="-fx-background-color: white;" stylesheets="@../../css/list.css">
                                     </ListView>
                            </children>
                         </VBox>
-                        <VBox>
-                           <children>
-                              <Label minWidth="0.0" text="CoChairs">
-                                 <font>
-                                    <Font name="Proxima Nova Bold" size="16.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="10.0" />
-                                 </padding>
-                              </Label>
-                              <ListView fx:id="coChairsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="140.0" style="-fx-background-color: white;" stylesheets="@../css/list.css" />
-                           </children>
-                        </VBox>
                         <HBox>
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
-                           </VBox.margin>
                            <children>
                               <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <TextField fx:id="coChairTextField" promptText="Type the username" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                    <TextField fx:id="sessionTextField" promptText="Type the name" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font name="Proxima Nova Regular" size="12.0" />
                                        </font>
                                     </TextField>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../png_icons/new_user_icon.png" />
+                                          <Image url="@../../png_icons/rings_icon_icon.png" />
                                        </image>
                                     </ImageView>
                                  </children>
@@ -182,14 +166,14 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </HBox>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onMouseClicked="#onAddCoChairButtonClick" prefWidth="50.0" style="-fx-background-color: white;">
+                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onMouseClicked="#onAddSessionButtonClick" prefWidth="50.0" style="-fx-background-color: white;">
                                  <effect>
                                     <DropShadow color="#00000026" height="20.0" radius="9.5" width="20.0" />
                                  </effect>
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../png_icons/plus_icon.png" />
+                                          <Image url="@../../png_icons/plus_icon.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -198,91 +182,6 @@
                                  </HBox.margin>
                               </Button>
                            </children>
-                        </HBox>
-                        <VBox>
-                           <children>
-                              <Label minWidth="0.0" text="Program Committee">
-                                 <font>
-                                    <Font name="Proxima Nova Bold" size="16.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets bottom="10.0" />
-                                 </padding>
-                              </Label>
-                              <ListView fx:id="pcMembersListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="140.0" style="-fx-background-color: white;" stylesheets="@../css/list.css" />
-                           </children>
-                        </VBox>
-                        <HBox>
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
-                           </VBox.margin>
-                           <children>
-                              <HBox alignment="CENTER" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <TextField fx:id="pcMemberTextField" promptText="Type the username" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font name="Proxima Nova Regular" size="12.0" />
-                                       </font>
-                                    </TextField>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../png_icons/new_user_icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </HBox>
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onMouseClicked="#onAddPCMemberButtonClick" prefWidth="50.0" style="-fx-background-color: white;">
-                                 <effect>
-                                    <DropShadow color="#00000026" height="20.0" radius="9.5" width="20.0" />
-                                 </effect>
-                                 <graphic>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../png_icons/plus_icon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER" maxHeight="50.0" maxWidth="100.0" minHeight="0.0" minWidth="0.0" onMouseClicked="#onSaveButtonClick" style="-fx-background-color: linear-gradient(to bottom right, #FED64A 0%, #FA7A92 100%); -fx-background-radius: 5;">
-                                 <children>
-                                    <Label text="Save" textFill="WHITE">
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                       <font>
-                                          <Font name="Proxima Nova Bold" size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </HBox>
-                              <Label opacity="0.0" text="ERROR TEXT" textFill="#ff6700">
-                                 <padding>
-                                    <Insets left="40.0" />
-                                 </padding>
-                                 <font>
-                                    <Font name="Proxima Nova Regular" size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <padding>
-                              <Insets top="10.0" />
-                           </padding>
                         </HBox>
                      </children>
                      <opaqueInsets>
@@ -300,7 +199,7 @@
    <right>
       <AnchorPane style="-fx-background-color: &quot;white&quot;;" BorderPane.alignment="CENTER">
          <children>
-            <fx:include source="Menu.fxml" />
+            <fx:include source="../Menu.fxml" />
          </children>
       </AnchorPane>
    </right>

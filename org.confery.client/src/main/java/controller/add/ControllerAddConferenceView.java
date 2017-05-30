@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import transfarable.Conference;
 import transfarable.Edition;
 import utils.ConferenceContext;
+import utils.EditionContext;
 import view.Icon;
 import view.ViewType;
 
@@ -38,7 +39,7 @@ public class ControllerAddConferenceView
     private TextField acronymTextField;
 
     @FXML
-    private ListView<Edition> editionListView;
+    private ListView<EditionContext> editionListView;
 
     @Lazy
     @Autowired
@@ -57,22 +58,21 @@ public class ControllerAddConferenceView
     private void build() {
         editionListView = new ListViewBuilder<>(editionListView)
                 .setIcon(Icon.CLOSE)
-                .visibleText(item -> item.getLocation() + item.getStartDate())
-                .setAction(List::remove,  context.getEditions())
+                .visibleText(context -> context.getEdition().getLocation())
+                .setAction(List::remove,  context.getEditionContexts())
                 .build();
         nameTextField.setText(context.getConference().getName());
         acronymTextField.setText(context.getConference().getAcronym());
-        editionListView.setItems(context.getEditions());
+        editionListView.setItems(context.getEditionContexts());
         editionListView.setOnMouseClicked(event -> onEditionItemClick());
     }
 
     private void onEditionItemClick() {
-        //context.updateEdition(getSelectedEdition());
-        context.getEditionContext().updateEdition(getSelectedEdition());
+        context.updateEditionContext(getSelectedEdition());
         manager.switchScene(ViewType.ADD_EDITION, context);
     }
 
-    private Edition getSelectedEdition() {
+    private EditionContext getSelectedEdition() {
         return editionListView.getSelectionModel().getSelectedItem();
     }
 

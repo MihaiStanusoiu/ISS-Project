@@ -50,6 +50,7 @@ public class ConferenceContext {
         return selectedEditionContext.getEdition();
     }
 
+    @SuppressWarnings("unused")
     public void updateEdition(Edition edition) {
         editionContexts.remove(selectedEditionContext);
         selectedEditionContext = new EditionContext(edition);
@@ -61,9 +62,13 @@ public class ConferenceContext {
     }
 
     public void updateEditionContext(EditionContext context) {
-        editionContexts.remove(selectedEditionContext);
+        editionContexts.remove(context);
         selectedEditionContext = context;
         editionContexts.add(selectedEditionContext);
+    }
+
+    public ObservableList<EditionContext> getEditionContexts() {
+        return editionContexts;
     }
 
 }

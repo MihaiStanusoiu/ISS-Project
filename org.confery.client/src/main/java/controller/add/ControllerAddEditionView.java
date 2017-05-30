@@ -219,6 +219,7 @@ public class ControllerAddEditionView
 
     @FXML
     private void onSubmissionsButtonClick() {
+        manager.switchScene(ViewType.ADD_SUBMISSION, context);
     }
 
 }

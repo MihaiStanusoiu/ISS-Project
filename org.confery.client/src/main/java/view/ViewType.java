@@ -22,7 +22,7 @@ public enum ViewType implements ViewTypeInterface {
         /** My Conferences View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/AddConferenceView.fxml";
+            return "/fxml/add/AddConferenceView.fxml";
         }
 
     },
@@ -31,7 +31,7 @@ public enum ViewType implements ViewTypeInterface {
         /** My Conferences View */
         @Override
         public String getFXMLFile() {
-            return "/fxml/AddMembersEditionView.fxml";
+            return "/fxml/add/AddMembersEditionView.fxml";
         }
 
     },
@@ -171,14 +171,19 @@ public enum ViewType implements ViewTypeInterface {
     ADD_EDITION {
         @Override
         public String getFXMLFile() {
-            return "/fxml/AddEditionView.fxml";
+            return "/fxml/add/AddEditionView.fxml";
         }
     },
 
     ADD_SESSION {
         @Override
         public String getFXMLFile() {
-            return "/fxml/AddSessionsEditionView.fxml";
+            return "/fxml/add/AddSessionsEditionView.fxml";
+        }
+    }, ADD_SUBMISSION {
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/add/AddSubmissionsEditionView.fxml";
         }
     };
 
