@@ -12,6 +12,7 @@ import translator.UserTranslator;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -26,7 +27,7 @@ import static utils.Try.runMethod;
  */
 
 public class GenericManager<TransferT, Id extends Serializable, EntityT extends Idable<Id>>
-        implements Service<TransferT, Id, EntityT> {
+    extends UnicastRemoteObject implements Service<TransferT, Id, EntityT> {
 
     protected ModelInterface<EntityT, Id> model;
     protected PermissionChecker<EntityT> checker;
@@ -34,7 +35,7 @@ public class GenericManager<TransferT, Id extends Serializable, EntityT extends 
     protected Function<SystemException, RemoteException> thrower;
     protected GenericTranslator<EntityT, TransferT> translator;
 
-    protected GenericManager(ModelInterface<EntityT, Id> model) {
+    protected GenericManager(ModelInterface<EntityT, Id> model) throws RemoteException {
         this.model = model;
         thrower = exception -> new RemoteException(exception.getMessage());
     }

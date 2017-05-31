@@ -11,17 +11,22 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import manager.StageManager;
+import method.SimpleMethod;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
 import service.CollectionService;
+import service.UserService;
 import transfarable.Conference;
 import view.ViewType;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -31,6 +36,8 @@ import static java.util.Arrays.asList;
 @Lazy
 @Component
 public class ControllerConferencesView implements ControllerInterface {
+
+    private static Logger logger;
 
     @FXML
     private Button recentButton;
@@ -56,8 +63,16 @@ public class ControllerConferencesView implements ControllerInterface {
 
     private ObservableList<Conference> conferences;
 
+    private SimpleMethod<RemoteException> handler;
+
     @Override
     public void initialize() {
+
+        logger = Logger.getLogger(StageManager.class);
+        handler = exception -> logger.error(exception.getCause());
+        UserService userService = runFunction(service::userService).orHandle(handler);
+        runFunction(userService::getAll).orHandle(handler).forEach(System.out::println);
+
         List<Conference> items = asList(
                 new Conference("Conference Name", "TEST"),
                 new Conference("Conference Name", "TEST"),
