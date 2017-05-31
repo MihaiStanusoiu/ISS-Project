@@ -1,5 +1,6 @@
 package service;
 
+import domain.EditionEntity;
 import domain.MemberRole;
 import transfarable.Edition;
 import transfarable.Session;
@@ -8,7 +9,7 @@ import transfarable.User;
 
 import java.rmi.RemoteException;
 
-public interface EditionService extends Service<Edition, Integer> {
+public interface EditionService extends Service<Edition, Integer, EditionEntity> {
 
     Edition addMemberToEdition(Edition edition, User user, MemberRole memberRole) throws RemoteException;
 

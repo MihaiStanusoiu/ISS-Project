@@ -1,6 +1,7 @@
 package translator;
 
 import domain.TagEntity;
+import org.jetbrains.annotations.NotNull;
 import transfarable.Tag;
 
 /**
@@ -8,14 +9,15 @@ import transfarable.Tag;
  * @version 1.0
  */
 
-public class TagTranslator {
+public class TagTranslator implements GenericTranslator<TagEntity, Tag> {
 
-    public static Tag translate(TagEntity tag) {
+    @Override
+    public Tag translate(@NotNull TagEntity tag) {
         return new Tag(tag.getId(), tag.getWord());
     }
 
-
-    public static TagEntity translate(Tag tag) {
+    @Override
+    public TagEntity translate(@NotNull Tag tag) {
         return new TagEntity(tag.getId(), tag.getWord());
     }
 

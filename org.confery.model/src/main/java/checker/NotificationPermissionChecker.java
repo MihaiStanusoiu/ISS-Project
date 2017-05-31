@@ -1,6 +1,6 @@
 package checker;
 
-import domain.TagEntity;
+import domain.NotificationEntity;
 
 /**
  * @author Alexandru Stoica
@@ -8,7 +8,7 @@ import domain.TagEntity;
  */
 
 @SuppressWarnings("unused")
-public class NotificationPermissionChecker extends PermissionChecker<TagEntity> {
+public class NotificationPermissionChecker extends PermissionChecker<NotificationEntity> {
 
     public NotificationPermissionChecker() {
         super();

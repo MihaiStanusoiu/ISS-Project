@@ -1,6 +1,7 @@
 package translator;
 
 import domain.NotificationEntity;
+import org.jetbrains.annotations.NotNull;
 import transfarable.Notification;
 
 /**
@@ -8,13 +9,15 @@ import transfarable.Notification;
  * @version 1.0
  */
 
-public class NotificationTranslator {
+public class NotificationTranslator implements GenericTranslator<NotificationEntity, Notification>{
 
-    public static Notification translate(NotificationEntity notification) {
+    @Override
+    public Notification translate(@NotNull NotificationEntity notification) {
         return new Notification(notification.getId(), notification.getText(), notification.getPaymentType());
     }
 
-    public static NotificationEntity translate(Notification notification) {
+    @Override
+    public NotificationEntity translate(@NotNull Notification notification) {
         return new NotificationEntity(notification.getId(), notification.getText(), notification.getPaymentType());
     }
     

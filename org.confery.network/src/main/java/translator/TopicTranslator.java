@@ -1,6 +1,7 @@
 package translator;
 
 import domain.TopicEntity;
+import org.jetbrains.annotations.NotNull;
 import transfarable.Topic;
 
 /**
@@ -8,13 +9,16 @@ import transfarable.Topic;
  * @version 1.0
  */
 
-public class TopicTranslator {
+public class TopicTranslator implements GenericTranslator<TopicEntity, Topic>{
 
-    public static Topic translate(TopicEntity topic) {
+    @Override
+    public Topic translate(@NotNull TopicEntity topic) {
         return new Topic(topic.getId(), topic.getWord());
     }
 
-    public static TopicEntity translate(Topic topic) {
+    @Override
+    public TopicEntity translate(@NotNull Topic topic) {
         return new TopicEntity(topic.getId(), topic.getWord());
     }
+
 }

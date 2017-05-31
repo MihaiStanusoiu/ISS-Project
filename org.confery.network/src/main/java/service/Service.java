@@ -1,5 +1,7 @@
 package service;
 
+import domain.Idable;
+
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -9,16 +11,16 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface Service<T, Id extends Serializable> extends ServiceInterface {
+public interface Service<TransferT, Id extends Serializable, EntityT extends Idable<Id>> extends ServiceInterface {
 
-    Id add(T element) throws RemoteException;
+    Id add(TransferT element) throws RemoteException;
 
-    void update(T element, T with) throws RemoteException;
+    void update(TransferT element, TransferT with) throws RemoteException;
 
-    T delete(T element) throws RemoteException;
+    TransferT delete(TransferT element) throws RemoteException;
 
-    T getElementById(Id id) throws RemoteException;
+    TransferT getElementById(Id id) throws RemoteException;
 
-    List<T> getAll() throws RemoteException;
+    List<TransferT> getAll() throws RemoteException;
 
 }

@@ -26,14 +26,12 @@ public class ListenerHelper extends UnicastRemoteObject implements Listener {
 
     @Override
     public void setActiveUser(User user) throws RemoteException {
-        UserEntity userEntity = UserTranslator.translate(user);
-        activeUser = userEntity;
+        activeUser = new UserTranslator().translate(user);
     }
 
     @Override
     public User getActiveUser() throws RemoteException {
-        User transferableUser = UserTranslator.translate(activeUser);
-        return transferableUser;
+        return new UserTranslator().translate(activeUser);
     }
 
     @Override

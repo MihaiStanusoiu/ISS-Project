@@ -1,16 +1,16 @@
 package translator;
 
 import domain.Idable;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by Mike on 5/30/2017.
+ * @author Alexandru Stoica
+ * @version 1.0
  */
 
-public abstract class GenericTranslator<T extends Idable<Id>, Id, TransferableT> {
+public interface GenericTranslator<T extends Idable<?>, TransferT> {
 
-    protected GenericTranslator() {}
+    T translate(@NotNull TransferT transferable);
+    TransferT translate(@NotNull T entity);
 
-    public abstract T translate(TransferableT transferable);
-
-    public abstract TransferableT translate(T type);
 }

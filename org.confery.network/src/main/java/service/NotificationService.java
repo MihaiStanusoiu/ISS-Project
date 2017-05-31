@@ -1,13 +1,14 @@
 package service;
 
 
+import domain.NotificationEntity;
 import transfarable.Notification;
 import transfarable.User;
 
 import java.rmi.RemoteException;
 import java.util.List;
 
-public interface NotificationService extends Service<Notification, Integer> {
+public interface NotificationService extends Service<Notification, Integer, NotificationEntity> {
 
     Notification sendNotificationToUser(User user, Notification notification) throws RemoteException;
 

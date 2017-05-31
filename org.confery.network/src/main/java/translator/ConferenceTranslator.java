@@ -1,6 +1,7 @@
 package translator;
 
 import domain.ConferenceEntity;
+import org.jetbrains.annotations.NotNull;
 import transfarable.Conference;
 
 /**
@@ -9,13 +10,15 @@ import transfarable.Conference;
  */
 
 
-public class ConferenceTranslator {
+public class ConferenceTranslator implements GenericTranslator<ConferenceEntity, Conference> {
 
-    public static ConferenceEntity translate(Conference conference) {
+    @Override
+    public ConferenceEntity translate(@NotNull Conference conference) {
         return new ConferenceEntity(conference.getId(), conference.getName(), conference.getAcronym());
     }
 
-    public static Conference translate(ConferenceEntity conference) {
+    @Override
+    public Conference translate(@NotNull ConferenceEntity conference) {
         return new Conference(conference.getId(), conference.getName(), conference.getAcronym());
     }
 

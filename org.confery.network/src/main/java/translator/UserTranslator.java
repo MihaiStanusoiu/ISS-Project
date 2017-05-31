@@ -2,6 +2,7 @@ package translator;
 
 
 import domain.UserEntity;
+import org.jetbrains.annotations.NotNull;
 import transfarable.User;
 
 /**
@@ -10,17 +11,18 @@ import transfarable.User;
  */
 
 
-public class UserTranslator {
+public class UserTranslator implements GenericTranslator<UserEntity, User> {
 
-    public static UserEntity translate(User user) {
-        return user != null ? new UserEntity(user.getId(), user.getUsername(), user.getPassword(),
-                user.getEmail(), user.getName(), user.getWebsite(), user.getBio(), user.getLocation()) : null;
+    @Override
+    public UserEntity translate(@NotNull User user) {
+        return new UserEntity(user.getId(), user.getUsername(), user.getPassword(),
+                user.getEmail(), user.getName(), user.getWebsite(), user.getBio(), user.getLocation());
     }
 
-
-    public static User translate(UserEntity user) {
-        return user != null ? new User(user.getId(), user.getUsername(), user.getPassword(),
-                user.getEmail(), user.getName(), user.getWebsite(), user.getBio(), user.getLocation()) : null;
+    @Override
+    public User translate(@NotNull UserEntity user) {
+        return new User(user.getId(), user.getUsername(), user.getPassword(),
+                user.getEmail(), user.getName(), user.getWebsite(), user.getBio(), user.getLocation());
     }
 
 }
