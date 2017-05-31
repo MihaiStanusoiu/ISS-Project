@@ -5,10 +5,12 @@ import javafx.stage.Stage;
 import listener.ListenerHelper;
 import loader.SpringFXMLLoader;
 import manager.StageManager;
+import notifier.LocalNotificationCenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.remoting.rmi.RmiProxyFactoryBean;
-import service.*;
+import service.CollectionService;
+import service.SubscriptionService;
 
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
@@ -28,6 +30,7 @@ import java.util.ResourceBundle;
 @ComponentScan("pagination")
 @ComponentScan("context")
 @SuppressWarnings("all")
+
 public class SpringConfiguration {
 
     @Autowired
@@ -38,6 +41,9 @@ public class SpringConfiguration {
 
     private StageManager stageManager;
 
+    @Autowired
+    private LocalNotificationCenter center;
+
     @Bean
     @Lazy
     @Scope("singleton")
@@ -47,6 +53,13 @@ public class SpringConfiguration {
         SubscriptionService service = subscriptionService();
         service.addSubscriber(listener);
         return listener;
+    }
+
+    @Bean
+    @Lazy
+    @Scope("singleton")
+    public LocalNotificationCenter localNotificationCenter() {
+        return new LocalNotificationCenter();
     }
 
     /**

@@ -20,7 +20,7 @@ public class CollectionManager implements CollectionService {
     private LoginService loginService;
     private SignUpService signUpService;
     private UserService userService;
-    private UserEntity activeUser;
+    private User activeUser;
 
     private SubmissionService submissionService;
     private TopicService topicService;
@@ -58,12 +58,12 @@ public class CollectionManager implements CollectionService {
     }
 
     @Override
-    public LoginService loginService() {
+    public LoginService loginService() throws RemoteException {
         return loginService;
     }
 
     @Override
-    public SignUpService signUpService() {
+    public SignUpService signUpService() throws RemoteException  {
         return signUpService;
     }
 
@@ -103,12 +103,13 @@ public class CollectionManager implements CollectionService {
     }
 
     @Override
-    public UserEntity getActiveUser() {
+    public User getActiveUser() throws RemoteException {
         return activeUser;
     }
 
     @Override
     public void activeUser(User user) throws RemoteException {
+        activeUser = user;
         List<ServiceInterface> list = asList(loginService, signUpService, notificationService, userService,
                 sessionService, submissionService, editionService, tagService, topicService);
         list.forEach(service -> runMethod(service::activeUser, user));

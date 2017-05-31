@@ -1,7 +1,6 @@
 package controller.registration;
 
 import controller.main.ControllerInterface;
-import exception.SystemException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -9,17 +8,26 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import listener.Listener;
 import manager.StageManager;
-import notification.NotificationType;
+import method.SimpleMethod;
 import notification.NotificationUpdate;
+import notifier.EventType;
+import notifier.LocalNotificationCenter;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.CollectionService;
+import service.LoginService;
 import service.SubscriberService;
+import transfarable.User;
 import utils.Try;
 import view.ViewType;
 
 import java.rmi.RemoteException;
+
+import static utils.Conditional.basedOn;
+import static utils.Try.runFunction;
+import static utils.Try.runMethod;
 
 /**
  * @author Alexandru Stoica
@@ -29,6 +37,8 @@ import java.rmi.RemoteException;
 @Lazy
 @Component
 public class ControllerLogin implements ControllerInterface, SubscriberService {
+
+    private static Logger logger;
 
     @FXML
     private TextField usernameTextField;
@@ -45,6 +55,9 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
     @FXML
     private StackPane backgroundImagePane;
 
+    @Autowired
+    private LocalNotificationCenter center;
+
     @Lazy
     @Autowired
     private StageManager manager;
@@ -52,6 +65,14 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
     @Lazy
     @Autowired
     private CollectionService service;
+
+    private LoginService loginService;
+
+    private final SimpleMethod<RemoteException> handler =
+            exception -> logger.error(exception.getCause());
+
+    private final SimpleMethod<RemoteException> printer =
+            exception -> errorLabel.setText(exception.getCause().getMessage());
 
     @Lazy
     @Autowired
@@ -63,13 +84,15 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
      */
     @Override
     public void initialize() {
+        logger = Logger.getLogger(ControllerLogin.class);
+        loginService = runFunction(service::loginService).orHandle(handler);
         backgroundImage.fitWidthProperty().bind(backgroundImagePane.widthProperty());
         backgroundImage.fitHeightProperty().bind(backgroundImagePane.heightProperty());
         manager.getPrimaryStage().setOnCloseRequest(event ->
                 Try.runMethod(listener::removeSubscriber, this).orHandle(System.out::print));
         Try.runMethod(listener::addSubscriber, this).orHandle(System.out::println);
-    }
 
+    }
 
     /**
      * Effect: Loads the ConferencesView.
@@ -80,7 +103,6 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
     void onLogoButtonClick() throws RemoteException {
         manager.switchScene(ViewType.CONFERENCES);
     }
-
 
     /**
      * Effect: Loads the SignUpView.
@@ -98,17 +120,18 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
      * @implNote status: Unavailable at the moment.
      */
     @FXML
-    void onLoginButtonClick() throws RemoteException, SystemException {
+    void onLoginButtonClick() {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        try {
-            //UserEntity user = service.loginService().login(username, password);
-            //listener.setActiveUser(user);
-            listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_LOGIN));
-            manager.switchScene(ViewType.CONFERENCES);
-        } catch (RemoteException exception) {
-            errorLabel.setText(exception.getCause().getMessage());
-        }
+        User user = runFunction(loginService::login, username, password).orHandle(printer);
+        basedOn(user != null).runTrue(this::makeUserActive, user);
+    }
+
+    private void makeUserActive(User user) {
+        runMethod(service::activeUser, user).orHandle(handler);
+        // TODO Notify Everyone About Login Event;
+        center.notifyObservers(EventType.LOGIN);
+        manager.switchScene(ViewType.CONFERENCES);
     }
 
     @Override

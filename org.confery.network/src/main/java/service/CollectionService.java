@@ -1,6 +1,5 @@
 package service;
 
-import domain.UserEntity;
 import transfarable.User;
 
 import java.rmi.Remote;
@@ -33,7 +32,7 @@ public interface CollectionService extends Remote {
 
     EditionService editionService() throws RemoteException;
 
-    UserEntity getActiveUser() throws RemoteException;
+    User getActiveUser() throws RemoteException;
 
     void activeUser(User user) throws RemoteException;
 

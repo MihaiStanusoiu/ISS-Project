@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import listener.ListenerHelper;
 import manager.StageManager;
+import notifier.LocalNotificationCenter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,8 @@ import utils.ConferenceContext;
 import view.ViewType;
 
 import java.rmi.RemoteException;
+import java.util.Observable;
+import java.util.Observer;
 
 
 /**
@@ -27,7 +30,7 @@ import java.rmi.RemoteException;
 @Lazy
 @Component
 @ContextClass
-public class ControllerMenu implements ControllerInterface {
+public class ControllerMenu implements ControllerInterface, Observer {
 
     @FXML
     @Context({ContextType.GUEST})
@@ -48,9 +51,12 @@ public class ControllerMenu implements ControllerInterface {
     @Autowired
     private CoreContext context;
 
+    @Autowired
+    private LocalNotificationCenter center;
 
     @Override
     public void initialize() {
+        center.addObserver(this);
         context.forType(ContextType.GUEST).in(this)
                 .run(item -> ((Node) item).setVisible(Boolean.FALSE));
     }
@@ -90,4 +96,8 @@ public class ControllerMenu implements ControllerInterface {
 
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        // TODO
+    }
 }

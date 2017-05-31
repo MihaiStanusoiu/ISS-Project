@@ -1,6 +1,7 @@
 package service;
 
 
+import org.jetbrains.annotations.NotNull;
 import transfarable.User;
 
 import java.rmi.RemoteException;
@@ -12,6 +13,6 @@ import java.rmi.RemoteException;
 
 public interface LoginService extends ServiceInterface {
 
-    User login(String username, String password) throws RemoteException;
+    User login(@NotNull String username, @NotNull String password) throws RemoteException;
 
 }
