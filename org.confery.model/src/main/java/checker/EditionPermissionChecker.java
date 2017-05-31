@@ -1,6 +1,7 @@
 package checker;
 
 import domain.EditionEntity;
+import nulldomain.NullUserEntity;
 
 import static utils.Try.runFunction;
 
@@ -9,6 +10,7 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
+@SuppressWarnings("unused")
 public class EditionPermissionChecker extends PermissionChecker<EditionEntity> {
 
     public EditionPermissionChecker() {

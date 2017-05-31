@@ -1,13 +1,14 @@
 
 package domain;
 
+import nulldomain.NullEditionEntity;
+
 import javax.persistence.*;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
-import static utils.Comparator.checkClass;
-import static utils.Comparator.checkObjects;
 
 /**
  * Tested True
@@ -144,15 +145,25 @@ public class ConferenceEntity implements Idable<Integer> {
     }
 
     public EditionEntity getLatestEdition() {
-        // TODO
-        return editions.stream().findFirst().orElse(new EditionEntity());
+        return editions.stream().sorted(Comparator.comparing(EditionEntity::getStartDate))
+                .findFirst().orElse(new NullEditionEntity());
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return checkObjects((left, right) -> left.getId().equals(right.getId()) &&
-                        left.getName().equals(right.getName()) && left.getAcronym().equals(right.getAcronym()),
-                this, checkClass(obj, this.getClass()));
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConferenceEntity that = (ConferenceEntity) o;
+        return id.equals(that.id) && name.equals(that.name) && acronym.equals(that.acronym) &&
+                (editions != null ? editions.equals(that.editions) : that.editions == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + acronym.hashCode();
+        return result;
     }
 
     @Override

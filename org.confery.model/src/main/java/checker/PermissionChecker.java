@@ -15,9 +15,9 @@ public abstract class PermissionChecker<T> {
 
     private UserEntity active;
     private OperationType operation;
-    protected Dictionary<OperationType, BiFunction<UserEntity, T, Boolean>> checker;
+    protected final Dictionary<OperationType, BiFunction<UserEntity, T, Boolean>> checker;
 
-    public PermissionChecker() {
+    protected PermissionChecker() {
         this.checker = new Hashtable<>();
         setUpChecker();
     }

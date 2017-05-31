@@ -1,4 +1,4 @@
-package checker;
+package nulldomain;
 
 import domain.UserEntity;
 

@@ -49,18 +49,15 @@ public class PermissionCheckerTest {
         EditionProtocol editionModel = new EditionModel(loader);
         UserProtocol userModel = new UserModel(loader);
         PermissionChecker<EditionEntity> checker = new EditionPermissionChecker();
-
         // then: [when nothing is set up]
         assertFalse(checker.isAllowed(active).toUpdate().theObject(edition));
         assertFalse(checker.isAllowed(active).toDelete().theObject(edition));
-
         // preconditions:
         userModel.add(active);
         conferenceModel.add(conference);
         conference = conferenceModel.addEditionTo(conference, edition);
         edition = conference.getLatestEdition();
         edition = editionModel.addMemberTo(edition, active, MemberRole.EDITION_CHAIR);
-
         // then:
         assertTrue(checker.isAllowed(active).toAdd().theObject(edition));
         assertTrue(checker.isAllowed(active).toDelete().theObject(edition));
