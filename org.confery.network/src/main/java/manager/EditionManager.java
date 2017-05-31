@@ -10,8 +10,13 @@ import transfarable.Session;
 import transfarable.Submission;
 import transfarable.User;
 import translator.EditionTranslator;
+import translator.UserTranslator;
 
 import java.rmi.RemoteException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -20,10 +25,20 @@ import java.rmi.RemoteException;
 
 public class EditionManager extends GenericManager<Edition, Integer, EditionEntity> implements EditionService {
 
+    private UserTranslator userTranslator;
+
     public EditionManager(EditionProtocol model) throws RemoteException {
         super(model);
         checker = new EditionPermissionChecker();
         translator = new EditionTranslator();
+        userTranslator = new UserTranslator();
+    }
+
+    @Override
+    public List<User> getAllMembersOf(Edition edition) throws RemoteException {
+        return runFunction(model::getElementById, edition.getId()).orThrow(thrower).getUsers().stream()
+                .map(entity -> userTranslator.translate(entity))
+                .collect(Collectors.toList());
     }
 
     @Override

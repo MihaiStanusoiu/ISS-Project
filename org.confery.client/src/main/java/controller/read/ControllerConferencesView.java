@@ -18,14 +18,16 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
 import service.CollectionService;
-import service.UserService;
+import service.ConferenceService;
+import service.EditionService;
 import transfarable.Conference;
+import transfarable.Edition;
 import view.ViewType;
 
 import java.rmi.RemoteException;
+import java.util.Comparator;
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static utils.Try.runFunction;
 
 /**
@@ -65,22 +67,20 @@ public class ControllerConferencesView implements ControllerInterface {
 
     private SimpleMethod<RemoteException> handler;
 
+    private ConferenceService conferenceService;
+    private EditionService editionService;
+
     @Override
     public void initialize() {
-
         logger = Logger.getLogger(StageManager.class);
-        handler = exception -> logger.error(exception.getCause());
-        UserService userService = runFunction(service::userService).orHandle(handler);
-        runFunction(userService::getAll).orHandle(handler).forEach(System.out::println);
-
-        List<Conference> items = asList(
-                new Conference("Conference Name", "TEST"),
-                new Conference("Conference Name", "TEST"),
-                new Conference("Conference Name", "TEST"),
-                new Conference("Conference Name", "TEST"));
+        handler = exception -> logger.error(exception.getMessage());
+        conferenceService = runFunction(service::conferenceService).orHandle(handler);
+        editionService = runFunction(service::editionService).orHandle(handler);
+        List<Conference> items = runFunction(conferenceService::getAll).orHandle(handler);
         conferences = FXCollections.observableArrayList(items);
         pagination = updatePagination(conferences);
         setUpSearchTextField();
+        sortConferenceByPopular();
     }
 
     private void setUpSearchTextField() {
@@ -107,16 +107,42 @@ public class ControllerConferencesView implements ControllerInterface {
                 conference.getName().toLowerCase().contains(name.toLowerCase())));
     }
 
+    private Integer getSizeEditions(List<Edition> editions) {
+        return editions.stream()
+                .map(edition -> runFunction(editionService::getAllMembersOf, edition).orHandle(handler).size())
+                .reduce(0, (accumulator, size) -> accumulator + size);
+    }
+
+    private List<Edition> getEditions(Conference conference) {
+        return runFunction(conferenceService::getEditionsOf, conference).orHandle(handler);
+    }
+
     @FXML
     private void onPopularButtonClick() {
         switchOpacity(popularButton, recentButton);
-        // TODO: Sort conferences by number of members
+        sortConferenceByPopular();
+    }
+
+    private void sortConferenceByPopular() {
+        conferences.sort(Comparator.comparing(left -> getSizeEditions(getEditions(left))));
+        updatePagination(conferences);
+    }
+
+    private Edition getLatest(List<Edition> list) {
+        return list == null ? new Edition("none") :
+                list.stream().sorted(Comparator.comparing(Edition::getStartDate))
+                        .findFirst().orElse(new Edition("none"));
     }
 
     @FXML
     private void onRecentButtonClick() {
         switchOpacity(popularButton, recentButton);
-        // TODO: Sort conferences by the starting date of the latest edition.
+        sortConferenceByRecent();
+    }
+
+    private void sortConferenceByRecent() {
+        conferences.sort(Comparator.comparing(left -> getLatest(getEditions(left)).getStartDate()));
+        updatePagination(conferences);
     }
 
     @FXML

@@ -40,6 +40,10 @@ public class Edition implements Serializable {
         this.biddingDeadline = biddingDeadline;
     }
 
+    public Edition(String location) {
+        this(0, new Date(0), new Date(0), location, "", new Date(0), new Date(0), new Date(0), new Date(0));
+    }
+
     /**
      * Getter for property 'id'.
      *

@@ -8,8 +8,11 @@ import transfarable.Submission;
 import transfarable.User;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 public interface EditionService extends Service<Edition, Integer, EditionEntity> {
+
+    List<User> getAllMembersOf(Edition edition) throws RemoteException;
 
     Edition addMemberToEdition(Edition edition, User user, MemberRole memberRole) throws RemoteException;
 

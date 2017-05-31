@@ -28,9 +28,10 @@ public class CollectionManager implements CollectionService {
     private EditionService editionService;
     private SessionService sessionService;
     private NotificationService notificationService;
+    private ConferenceService conferenceService;
 
-
-    public CollectionManager(LoginService loginService,
+    public CollectionManager(ConferenceService conferenceService,
+                             LoginService loginService,
                              SignUpService signUpService,
                              UserService userService,
                              SubmissionService submissionService,
@@ -39,6 +40,7 @@ public class CollectionManager implements CollectionService {
                              EditionService editionService,
                              SessionService sessionService,
                              NotificationService notificationService) {
+        this.conferenceService = conferenceService;
         this.loginService = loginService;
         this.signUpService = signUpService;
         this.userService = userService;
@@ -48,6 +50,11 @@ public class CollectionManager implements CollectionService {
         this.editionService = editionService;
         this.sessionService = sessionService;
         this.notificationService = notificationService;
+    }
+
+    @Override
+    public ConferenceService conferenceService() throws RemoteException {
+        return conferenceService;
     }
 
     @Override

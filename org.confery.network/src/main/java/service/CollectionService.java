@@ -13,6 +13,8 @@ import java.rmi.RemoteException;
 
 public interface CollectionService extends Remote {
 
+    ConferenceService conferenceService() throws RemoteException;
+
     LoginService loginService() throws RemoteException;
 
     SignUpService signUpService() throws RemoteException;

@@ -4,7 +4,10 @@ import database.DatabaseLoader;
 import manager.*;
 import model.*;
 import notification.NotificationCenter;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.remoting.rmi.RmiServiceExporter;
 import protocol.*;
 import service.*;
@@ -74,7 +77,8 @@ public class ServerSpringConfiguration {
     @Bean
     public RmiServiceExporter collectionService() throws IOException {
         RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
-        CollectionService collectionService = new CollectionManager(loginService(), signUpService(),
+        CollectionService collectionService = new CollectionManager(
+                conferenceService(), loginService(), signUpService(),
                 userService(), submissionSerive(), topicService(), tagService(),
                 editionService(), sessionService(), notificationService());
 
@@ -93,6 +97,16 @@ public class ServerSpringConfiguration {
         rmiServiceExporter.setServiceInterface(serviceClass);
         rmiServiceExporter.setRegistryPort(port);
         return rmiServiceExporter.getService();
+    }
+    @Bean
+    public ConferenceService conferenceService() throws IOException {
+        ConferenceService conferenceService = new ConferenceManager(conferenceModel());
+        return (ConferenceService)getService(ConferenceService.class, "conferenceService", conferenceService);
+    }
+
+    @Bean
+    public ConferenceProtocol conferenceModel() throws IOException {
+        return new ConferenceModel(databaseLoader());
     }
 
     @Bean

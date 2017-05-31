@@ -1,10 +1,12 @@
 package transfarable;
 
+import java.io.Serializable;
+
 /**
  * @author Alexandru Stoica
  * @version 1.0
  */
-public class Conference {
+public class Conference implements Serializable {
 
     private Integer id;
     private String name;
