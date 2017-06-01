@@ -36,6 +36,7 @@ public class GenericManager<TransferT, Id extends Serializable, EntityT extends 
     protected Function<SystemException, RemoteException> thrower;
     protected GenericTranslator<EntityT, TransferT> translator;
 
+
     protected GenericManager(ModelInterface<EntityT, Id> model) throws RemoteException {
         this.model = model;
         thrower = exception -> new RemoteException(exception.getMessage());

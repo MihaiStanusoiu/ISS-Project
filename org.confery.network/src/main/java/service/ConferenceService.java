@@ -14,4 +14,6 @@ public interface ConferenceService extends Service<Conference, Integer, Conferen
 
     List<Edition> getEditionsOf(Conference conference) throws RemoteException;
 
+    Edition getLatestEdition(Conference conference) throws RemoteException;
+
 }

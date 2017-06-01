@@ -44,6 +44,13 @@ public class ConferenceManager
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Edition getLatestEdition(Conference conference) throws RemoteException {
+        EditionEntity entity = runFunction(model::getElementById, conference.getId()).orThrow(thrower)
+                .getLatestEdition();
+        return editionTranslator.translate(entity);
+    }
+
     public List<Conference> getConferencesOf(User user) throws RemoteException {
         // TODO
         return null;
