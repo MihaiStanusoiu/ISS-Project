@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import transfarable.Edition;
+import transfarable.Submission;
 import transfarable.User;
+import view.ViewType;
 
 import static java.util.Arrays.asList;
 
@@ -93,6 +95,7 @@ public class ControllerEditionView implements ControllerInterface, ControllerIte
     @FXML
     private void onSubmitPaperButtonClick() {
         // TODO Create Submit Paper FXML
+        manager.switchScene(ViewType.ADD_SUBMISSION_TO_EDITION, new Submission());
     }
 
     @Override

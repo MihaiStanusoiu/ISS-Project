@@ -187,6 +187,13 @@ public enum ViewType implements ViewTypeInterface {
         public String getFXMLFile() {
             return "/fxml/add/AddSubmissionsEditionView.fxml";
         }
+    },
+
+    ADD_SUBMISSION_TO_EDITION {
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/add/AddSubmissionView.fxml";
+        }
     };
 
     /**
