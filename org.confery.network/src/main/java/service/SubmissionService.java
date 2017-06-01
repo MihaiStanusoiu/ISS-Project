@@ -26,4 +26,19 @@ public interface SubmissionService extends Service<Submission, Integer, Submissi
     public List<User> getAllowedReviewers(Submission edition) throws RemoteException;
 
     public List<User> getRejectedReviewers(Submission edition) throws RemoteException;
+
+    public Submission addTagTo(Submission submission, Tag tag) throws RemoteException;
+
+    public Submission addTopicTo(Submission submission, Topic topic) throws RemoteException;
+
+    public Submission addAuthorTo(Submission submission, User author) throws RemoteException;
+
+    public Submission addOwnerTo(Submission submission, User owner) throws RemoteException;
+
+    public Submission removeAuthorFrom(Submission submission, User author) throws RemoteException;
+
+    public Submission removeTagFrom(Submission submission, Tag tag) throws RemoteException;
+
+    public Submission removeTopicFrom(Submission submission, Topic topic) throws RemoteException;
+
 }
