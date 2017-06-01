@@ -68,6 +68,7 @@ public class ControllerConferencesView implements ControllerInterface {
     private SimpleMethod<RemoteException> handler;
 
     private ConferenceService conferenceService;
+
     private EditionService editionService;
 
     @Override

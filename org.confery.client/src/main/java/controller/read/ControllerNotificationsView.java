@@ -8,16 +8,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.GridPane;
 import manager.StageManager;
+import method.SimpleMethod;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
+import service.CollectionService;
+import service.NotificationService;
 import transfarable.Notification;
 import view.ViewType;
 
-import java.util.List;
+import java.rmi.RemoteException;
 
-import static java.util.Arrays.asList;
+import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -39,14 +43,18 @@ public class ControllerNotificationsView implements ControllerInterface {
     @SuppressWarnings("FieldCanBeLocal")
     private ObservableList<Notification> notifications;
 
+    @Lazy
+    @Autowired
+    private CollectionService service;
+
+    private static Logger logger;
+
     @Override
     public void initialize() {
-        List<Notification> items = asList(
-                new Notification(1, "Test", Boolean.TRUE),
-                new Notification(2, "Test", Boolean.FALSE),
-                new Notification(3, "Test", Boolean.FALSE),
-                new Notification(4, "Test", Boolean.TRUE));
-        notifications = FXCollections.observableArrayList(items);
+        logger = Logger.getLogger(ControllerNotificationsView.class);
+        SimpleMethod<RemoteException> handler = exception -> logger.error(exception.getCause().getMessage());
+        NotificationService notificationService = runFunction(service::notificationService).orHandle(handler);
+        notifications = FXCollections.observableArrayList(runFunction(notificationService::getAll).orHandle(handler));
         pagination = updatePagination(notifications);
     }
 

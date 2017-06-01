@@ -9,6 +9,7 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import manager.StageManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -42,8 +43,11 @@ public class ControllerMyConferencesView implements ControllerInterface {
 
     private ObservableList<Conference> conferences;
 
+    private Logger logger;
+
     @Override
     public void initialize() {
+        logger = Logger.getLogger(ControllerMyConferencesView.class);
         // TODO: Filter conferences based on ownership
         List<Conference> items = asList(
                 new Conference("Conference Name", "TEST"),

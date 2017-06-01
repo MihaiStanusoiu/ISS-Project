@@ -12,6 +12,7 @@ import translator.UserTranslator;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.RemoteServer;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.function.Function;
@@ -73,6 +74,7 @@ public class GenericManager<TransferT, Id extends Serializable, EntityT extends 
 
     @Override
     public List<TransferT> getAll() throws RemoteException {
+        System.out.print(runFunction(RemoteServer::getClientHost).orHandle(exception -> System.out.print(exception.getCause())));
         return model.getAll().stream().map(entity -> translator.translate(entity)).collect(Collectors.toList());
     }
 
