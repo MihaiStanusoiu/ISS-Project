@@ -2,9 +2,7 @@
 package service;
 
 import domain.SessionEntity;
-import transfarable.MemberRoleTransferable;
-import transfarable.Session;
-import transfarable.User;
+import transfarable.*;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -20,5 +18,4 @@ public interface SessionService extends Service<Session, Integer, SessionEntity>
     public Session addMemberTo(Session session, User user, MemberRoleTransferable role) throws RemoteException;
 
     public Session removeMemberFrom(Session session, User user) throws RemoteException;
-
 }
