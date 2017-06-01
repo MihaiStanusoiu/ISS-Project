@@ -3,6 +3,7 @@ package manager;
 import checker.EditionPermissionChecker;
 import domain.EditionEntity;
 import domain.MemberRole;
+import domain.UserEntity;
 import protocol.EditionProtocol;
 import service.EditionService;
 import transfarable.Edition;
@@ -29,6 +30,7 @@ public class EditionManager extends GenericManager<Edition, Integer, EditionEnti
 
     public EditionManager(EditionProtocol model) throws RemoteException {
         super(model);
+
         checker = new EditionPermissionChecker();
         translator = new EditionTranslator();
         userTranslator = new UserTranslator();
@@ -36,10 +38,38 @@ public class EditionManager extends GenericManager<Edition, Integer, EditionEnti
 
     @Override
     public List<User> getAllMembersOf(Edition edition) throws RemoteException {
-        return runFunction(model::getElementById, edition.getId()).orThrow(thrower).getUsers().stream()
+        return getEditionEntity(edition).getUsers().stream()
                 .map(entity -> userTranslator.translate(entity))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<User> getPcMembersOf(Edition edition) throws RemoteException {
+        return getEditionEntity(edition).getPcMembers().stream()
+                .map(entity -> userTranslator.translate(entity))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<User> getCoChairsOf(Edition edition) throws RemoteException {
+        return getEditionEntity(edition).getCoChairs().stream()
+                .map(entity -> userTranslator.translate(entity))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public User getChair(Edition edition) throws RemoteException {
+        return userTranslator.translate(getEditionChair(edition));
+    }
+
+    private UserEntity getEditionChair(Edition edition) throws RemoteException {
+        return runFunction(this.getEditionEntity(edition)::getChair).orThrow(thrower);
+    }
+
+    private EditionEntity getEditionEntity(Edition edition) throws RemoteException {
+        return runFunction(model::getElementById, edition.getId()).orThrow(thrower);
+    }
+
 
     @Override
     public Edition addMemberToEdition(Edition edition, User user, MemberRole memberRole) throws RemoteException {

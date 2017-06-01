@@ -14,6 +14,12 @@ public interface EditionService extends Service<Edition, Integer, EditionEntity>
 
     List<User> getAllMembersOf(Edition edition) throws RemoteException;
 
+    List<User> getPcMembersOf(Edition edition) throws RemoteException;
+
+    List<User> getCoChairsOf(Edition edition) throws RemoteException;
+
+    User getChair(Edition edition) throws RemoteException;
+
     Edition addMemberToEdition(Edition edition, User user, MemberRole memberRole) throws RemoteException;
 
     Edition deleteMemberOfEdition(Edition edition, User user) throws RemoteException;
