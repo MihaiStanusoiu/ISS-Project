@@ -1,5 +1,6 @@
 package service;
 
+import com.sun.org.apache.regexp.internal.RE;
 import transfarable.User;
 
 import java.rmi.Remote;
@@ -32,8 +33,5 @@ public interface CollectionService extends Remote, ServiceInterface {
 
     EditionService editionService() throws RemoteException;
 
-    User getActiveUser() throws RemoteException;
-
-    void activeUser(User user) throws RemoteException;
-
+    AuthenticationService authenticationService() throws RemoteException;
 }

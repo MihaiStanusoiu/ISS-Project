@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import service.AuthenticationService;
 import service.CollectionService;
 import service.LoginService;
 import service.SubscriberService;
@@ -128,7 +129,8 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
     }
 
     private void makeUserActive(User user) {
-        runMethod(service::activeUser, user).orHandle(handler);
+        AuthenticationService authenticationService = runFunction(service::authenticationService).orHandle(handler);
+        runMethod(authenticationService::addActiveUser, user);
         // TODO Notify Everyone About Login Event;
         center.notifyObservers(EventType.LOGIN);
         manager.switchScene(ViewType.CONFERENCES);

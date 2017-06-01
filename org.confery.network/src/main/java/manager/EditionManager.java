@@ -5,6 +5,7 @@ import domain.EditionEntity;
 import domain.MemberRole;
 import domain.UserEntity;
 import protocol.EditionProtocol;
+import protocol.LoginProtocol;
 import service.EditionService;
 import transfarable.Edition;
 import transfarable.Session;
@@ -28,9 +29,8 @@ public class EditionManager extends GenericManager<Edition, Integer, EditionEnti
 
     private UserTranslator userTranslator;
 
-    public EditionManager(EditionProtocol model) throws RemoteException {
-        super(model);
-
+    public EditionManager(EditionProtocol model, LoginProtocol loginProtocol) throws RemoteException {
+        super(model, loginProtocol);
         checker = new EditionPermissionChecker();
         translator = new EditionTranslator();
         userTranslator = new UserTranslator();

@@ -12,7 +12,4 @@ import java.rmi.RemoteException;
  */
 
 public interface ServiceInterface extends Remote {
-
-    void activeUser(User user) throws RemoteException;
-
 }

@@ -89,6 +89,7 @@ public class DatabaseLoader implements DatabaseLoaderInterface {
         configuration.addAnnotatedClass(TopicEntity.class);
         configuration.addAnnotatedClass(AuthorSubmissionEntity.class);
         configuration.addAnnotatedClass(NotificationEntity.class);
+        configuration.addAnnotatedClass(LoginEntity.class);
     }
 
     /**

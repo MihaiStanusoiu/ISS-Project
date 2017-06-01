@@ -4,6 +4,7 @@ import domain.UserEntity;
 import exception.SystemException;
 import notification.NotificationCenter;
 import org.jetbrains.annotations.NotNull;
+import protocol.LoginProtocol;
 import protocol.UserProtocol;
 import service.LoginService;
 import transfarable.User;
@@ -11,6 +12,7 @@ import translator.GenericTranslator;
 import translator.UserTranslator;
 
 import java.rmi.RemoteException;
+import java.rmi.server.RemoteServer;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Optional;
 
@@ -30,11 +32,12 @@ public class LoginManager
 
     private NotificationCenter notificationCenter;
     private UserProtocol userModel;
-    private UserEntity active;
+    private LoginProtocol provider;
     private GenericTranslator<UserEntity, User> translator;
 
-    public LoginManager(NotificationCenter notificationCenter, UserProtocol userModel) throws RemoteException {
+    public LoginManager(NotificationCenter notificationCenter, UserProtocol userModel, LoginProtocol loginProtocol) throws RemoteException {
         this.notificationCenter = notificationCenter;
+        this.provider = loginProtocol;
         this.userModel = userModel;
         translator = new UserTranslator();
     }
@@ -46,16 +49,18 @@ public class LoginManager
                 .findFirst();
     }
 
+    private UserEntity getActiveUser() throws RemoteException {
+        String host = runFunction(RemoteServer::getClientHost)
+                .orThrow(exception -> new RemoteException(exception.getMessage()));
+        return runFunction(provider::getById, host).getElement();
+    }
+
     @Override
     public User login(@NotNull String username, @NotNull String password) throws RemoteException {
+        UserEntity active =  getActiveUser();
         basedOn(active == null).orThrow(new RemoteException("You're already logged with another account!"));
         return runFunction(this::findUser, username, password)
                 .orThrow(exception -> new RemoteException("Wrong Username or Password!"))
                 .orElseThrow(() -> new RemoteException("Wrong Username or Password!"));
-    }
-
-    @Override
-    public void activeUser(User user) throws RemoteException {
-        active = translator.translate(user);
     }
 }

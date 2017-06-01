@@ -48,6 +48,8 @@ public class ValidatorRepositoryBehaviourFactory {
             return new ValidatorRepositoryBehaviourTagEntity();
         } else if (type.equals(TopicEntity.class)) {
             return new ValidatorRepositoryBehaviourTopicEntity();
+        } else if (type.equals(LoginEntity.class)) {
+            return new ValidatorRepositoryBehaviourLoginEntity();
         } else {
             throw new RuntimeException("Cannot get behaviour for given class type");
         }

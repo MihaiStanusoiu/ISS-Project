@@ -4,12 +4,14 @@ import domain.UserEntity;
 import exception.SystemException;
 import notification.NotificationCenter;
 import org.jetbrains.annotations.Nullable;
+import protocol.LoginProtocol;
 import protocol.UserProtocol;
 import service.SignUpService;
 import transfarable.User;
 import translator.UserTranslator;
 
 import java.rmi.RemoteException;
+import java.rmi.server.RemoteServer;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -28,15 +30,22 @@ public class SignUpManager extends UnicastRemoteObject implements SignUpService 
 
     private final NotificationCenter notificationCenter;
     private final UserProtocol userModel;
-    private UserEntity active;
     private final UserTranslator translator;
+    private LoginProtocol provider;
     private final Function<SystemException, RemoteException> thrower;
 
-    public SignUpManager(NotificationCenter notificationCenter, UserProtocol userModel) throws RemoteException {
+    public SignUpManager(NotificationCenter notificationCenter, UserProtocol userModel, LoginProtocol loginProtocol) throws RemoteException {
         this.notificationCenter = notificationCenter;
+        this.provider = loginProtocol;
         this.userModel = userModel;
         this.translator = new UserTranslator();
         this.thrower = exception -> new RemoteException(exception.getMessage());
+    }
+
+    private UserEntity getActiveUser() throws RemoteException {
+        String host = runFunction(RemoteServer::getClientHost)
+                .orThrow(exception -> new RemoteException(exception.getMessage()));
+        return runFunction(provider::getById, host).getElement();
     }
 
     private Integer countDigitLetters(String string) {
@@ -73,15 +82,10 @@ public class SignUpManager extends UnicastRemoteObject implements SignUpService 
         return email.matches(".*@.*");
     }
 
-    private void checkActiveUser() throws RemoteException {
-        basedOn(active == null).orThrow(new RemoteException("You're already logged in!"));
-    }
-
     @Override
     public User signUp(String username, String password, String confirm, String email, String name)
             throws RemoteException {
         checkUsername(username);
-        checkActiveUser();
         UserEntity user = getUser(username, password, confirm, email, name);
         Integer id = runFunction(userModel::add, user).orThrow(thrower);
         return translator.translate(runFunction(userModel::getElementById, id).orThrow(thrower));
@@ -99,8 +103,4 @@ public class SignUpManager extends UnicastRemoteObject implements SignUpService 
                 .orThrow(new RemoteException("Username already used in our system"));
     }
 
-    @Override
-    public void activeUser(User user) throws RemoteException {
-        active = translator.translate(user);
-    }
 }

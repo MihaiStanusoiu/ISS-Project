@@ -1,5 +1,6 @@
 package manager;
 
+import com.sun.org.apache.regexp.internal.RE;
 import domain.UserEntity;
 import service.*;
 import transfarable.User;
@@ -20,7 +21,6 @@ public class CollectionManager implements CollectionService {
     private LoginService loginService;
     private SignUpService signUpService;
     private UserService userService;
-    private User activeUser;
 
     private SubmissionService submissionService;
     private TopicService topicService;
@@ -29,6 +29,7 @@ public class CollectionManager implements CollectionService {
     private SessionService sessionService;
     private NotificationService notificationService;
     private ConferenceService conferenceService;
+    private AuthenticationService authenticationService;
 
     public CollectionManager(ConferenceService conferenceService,
                              LoginService loginService,
@@ -39,7 +40,8 @@ public class CollectionManager implements CollectionService {
                              TagService tagService,
                              EditionService editionService,
                              SessionService sessionService,
-                             NotificationService notificationService) {
+                             NotificationService notificationService,
+                             AuthenticationService authenticationService) {
         this.conferenceService = conferenceService;
         this.loginService = loginService;
         this.signUpService = signUpService;
@@ -50,6 +52,7 @@ public class CollectionManager implements CollectionService {
         this.editionService = editionService;
         this.sessionService = sessionService;
         this.notificationService = notificationService;
+        this.authenticationService = authenticationService;
     }
 
     @Override
@@ -103,15 +106,7 @@ public class CollectionManager implements CollectionService {
     }
 
     @Override
-    public User getActiveUser() throws RemoteException {
-        return activeUser;
-    }
-
-    @Override
-    public void activeUser(User user) throws RemoteException {
-        activeUser = user;
-        List<ServiceInterface> list = asList(loginService, signUpService, notificationService, userService,
-                sessionService, submissionService, editionService, tagService, topicService);
-        list.forEach(service -> runMethod(service::activeUser, user));
+    public AuthenticationService authenticationService() throws RemoteException {
+        return authenticationService;
     }
 }

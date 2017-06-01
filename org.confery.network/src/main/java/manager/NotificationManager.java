@@ -3,6 +3,7 @@ package manager;
 import checker.NotificationPermissionChecker;
 import domain.NotificationEntity;
 import domain.UserEntity;
+import protocol.LoginProtocol;
 import protocol.NotificationProtocol;
 import service.NotificationService;
 import transfarable.Notification;
@@ -24,8 +25,8 @@ public class NotificationManager extends GenericManager<Notification, Integer, N
 
     private UserTranslator userTranslator;
 
-    public NotificationManager(NotificationProtocol model) throws RemoteException {
-        super(model);
+    public NotificationManager(NotificationProtocol model, LoginProtocol loginProtocol) throws RemoteException {
+        super(model, loginProtocol);
         checker = new NotificationPermissionChecker();
         translator = new NotificationTranslator();
     }
