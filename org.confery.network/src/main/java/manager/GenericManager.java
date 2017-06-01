@@ -51,7 +51,7 @@ public class GenericManager<TransferT, Id extends Serializable, EntityT extends 
         return runFunction(model::add, translator.translate(element)).orThrow(thrower);
     }
 
-    private UserEntity getActiveUser() throws RemoteException {
+    protected UserEntity getActiveUser() throws RemoteException {
         String host = runFunction(RemoteServer::getClientHost)
                 .orThrow(exception -> new RemoteException(exception.getMessage()));
         return runFunction(provider::getById, host).getElement();

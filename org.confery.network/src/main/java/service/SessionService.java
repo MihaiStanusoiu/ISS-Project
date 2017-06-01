@@ -1,9 +1,8 @@
 
 package service;
 
-
 import domain.SessionEntity;
-import domain.UserEntity;
+import transfarable.MemberRoleTransferable;
 import transfarable.Session;
 import transfarable.User;
 
@@ -17,4 +16,9 @@ public interface SessionService extends Service<Session, Integer, SessionEntity>
     List<User> getListeners(Session session) throws RemoteException;
 
     User getChair(Session session) throws RemoteException;
+
+    public Session addMemberTo(Session session, User user, MemberRoleTransferable role) throws RemoteException;
+
+    public Session removeMemberFrom(Session session, User user) throws RemoteException;
+
 }
