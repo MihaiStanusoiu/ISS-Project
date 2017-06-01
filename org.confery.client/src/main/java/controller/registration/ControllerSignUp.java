@@ -9,17 +9,23 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import listener.Listener;
 import manager.StageManager;
-import notification.NotificationType;
+import method.SimpleMethod;
 import notification.NotificationUpdate;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.CollectionService;
+import service.SignUpService;
 import service.SubscriberService;
-import utils.Try;
+import transfarable.User;
 import view.ViewType;
 
 import java.rmi.RemoteException;
+
+import static utils.Conditional.basedOn;
+import static utils.Try.runFunction;
+import static utils.Try.runMethod;
 
 /**
  * @author Alexandru Stoica
@@ -69,17 +75,26 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
     @FXML
     private Button signUpButton;
 
+    private SignUpService signUpService;
+
+    private SimpleMethod<RemoteException> handler;
+
+    private SimpleMethod<RemoteException> printer;
+
+    private static Logger logger;
+
     /**
      * Effect: Adds width & height constraints on the
      * background image view in order to be responsive.
      */
     @Override
     public void initialize() {
+        logger = Logger.getLogger(ControllerSignUp.class);
+        handler = exception -> logger.info(exception.getCause().getMessage());
+        printer = exception -> errorLabel.setText(exception.getCause().getMessage());
+        signUpService = runFunction(service::signUpService).orHandle(handler);
         backgroundImage.fitWidthProperty().bind(backgroundImagePane.widthProperty());
         backgroundImage.fitHeightProperty().bind(backgroundImagePane.heightProperty());
-        manager.getPrimaryStage().setOnCloseRequest(event ->
-                Try.runMethod(listener::removeSubscriber, this).orHandle(System.out::print));
-        Try.runMethod(listener::addSubscriber, this).orHandle(System.out::println);
     }
 
     /**
@@ -108,15 +123,19 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
      * @implNote status: Unavailable at the moment.
      */
     @FXML
-    void onSignUpButtonClick() throws RemoteException {
+    void onSignUpButtonClick() {
         String email = emailTextField.getText();
         String displayName = displayNameTextField.getText();
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         String confirm = confirmTextField.getText();
-        // UserEntity user = service.signUpService().signUp(username, password, confirm, email, displayName);
-        // this.listener.setActiveUser(user);
-        this.listener.notifyAll(new NotificationUpdate(NotificationType.SIGNAL_SIGN_UP));
+        User user = runFunction(signUpService::signUp, username, password, confirm, email, displayName).orHandle(printer);
+        basedOn(user != null).runTrue(this::makeUserActive, user);
+    }
+
+    private void makeUserActive(User user) {
+        runMethod(service::activeUser, user).orHandle(handler);
+        // TODO Notify Everyone About Sign Up Event;
         manager.switchScene(ViewType.CONFERENCES);
     }
 

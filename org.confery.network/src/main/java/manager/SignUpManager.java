@@ -3,58 +3,69 @@ package manager;
 import domain.UserEntity;
 import exception.SystemException;
 import notification.NotificationCenter;
+import org.jetbrains.annotations.Nullable;
 import protocol.UserProtocol;
 import service.SignUpService;
 import transfarable.User;
+import translator.UserTranslator;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static utils.Conditional.basedOn;
+import static utils.Try.runFunction;
+
 /**
+ * Tested: True
+ *
  * @author Alexandru Stoica
  * @version 1.0
- * Tested: True
  */
 
-public class SignUpManager implements SignUpService {
+public class SignUpManager extends UnicastRemoteObject implements SignUpService {
 
-    private NotificationCenter notificationCenter;
-    private UserProtocol userModel;
+    private final NotificationCenter notificationCenter;
+    private final UserProtocol userModel;
     private UserEntity active;
+    private final UserTranslator translator;
+    private final Function<SystemException, RemoteException> thrower;
 
-    public SignUpManager(NotificationCenter notificationCenter, UserProtocol userModel) {
+    public SignUpManager(NotificationCenter notificationCenter, UserProtocol userModel) throws RemoteException {
         this.notificationCenter = notificationCenter;
         this.userModel = userModel;
+        this.translator = new UserTranslator();
+        this.thrower = exception -> new RemoteException(exception.getMessage());
     }
 
     private Integer countDigitLetters(String string) {
-        return string.chars().mapToObj(character -> (char)character)
+        return string.chars().mapToObj(character -> (char) character)
                 .filter(Character::isDigit).collect(Collectors.toList()).size();
     }
 
     private Integer countUpperCaseLetters(String string) {
-        return string.chars().mapToObj(character -> (char)character)
+        return string.chars().mapToObj(character -> (char) character)
                 .filter(Character::isUpperCase).collect(Collectors.toList()).size();
     }
 
     private Integer countLowerCaseLetters(String string) {
-        return string.chars().mapToObj(character -> (char)character)
+        // TODO Check if (char) is effective.
+        return string.chars().mapToObj(character -> (char) character)
                 .filter(Character::isLowerCase).collect(Collectors.toList()).size();
     }
 
     private Integer getPasswordScore(String password) {
-        return password.length() * 4 +
-                countDigitLetters(password) * 4 +
+        return password.length() * 4 + countDigitLetters(password) * 4 +
                 (password.length() - countUpperCaseLetters(password)) * 2 +
                 (password.length() - countLowerCaseLetters(password)) * 2;
     }
-
 
     private Boolean isPasswordValid(String password, String confirm) {
         return password.equals(confirm) && getPasswordScore(password) > 48;
     }
 
-    private Boolean isUsernameUnique(String username) throws SystemException {
+    private Boolean isUsernameUnique(String username) {
         return userModel.getAll().stream().noneMatch(user -> user.getUsername().equals(username));
     }
 
@@ -62,22 +73,34 @@ public class SignUpManager implements SignUpService {
         return email.matches(".*@.*");
     }
 
+    private void checkActiveUser() throws RemoteException {
+        basedOn(active == null).orThrow(new RemoteException("You're already logged in!"));
+    }
+
     @Override
     public User signUp(String username, String password, String confirm, String email, String name)
             throws RemoteException {
-        return null;
-//        basedOn(runFunction(this::isUsernameUnique, username)
-//                .orThrow(exception-> new RemoteException("Invalid Username")))
-//                .orThrow(new RemoteException("Username already used in our system"));
-//        UserEntity user = (isPasswordValid(password, confirm) && isEmailValid(email)) ?
-//                new UserEntity(username, password, email, name) : null;
-//        Integer id = runFunction(userModel::add, user).orThrow(exception -> new RemoteException(exception.getMessage()));
-//        return runFunction(userModel::getElementById, id).orThrow(exception -> new RemoteException(exception.getMessage()));
+        checkUsername(username);
+        checkActiveUser();
+        UserEntity user = getUser(username, password, confirm, email, name);
+        Integer id = runFunction(userModel::add, user).orThrow(thrower);
+        return translator.translate(runFunction(userModel::getElementById, id).orThrow(thrower));
     }
 
+    @Nullable
+    private UserEntity getUser(String username, String password, String confirm, String email, String name) {
+        return (isPasswordValid(password, confirm) && isEmailValid(email)) ?
+                new UserEntity(username, password, email, name) : null;
+    }
+
+    private void checkUsername(String username) throws RemoteException {
+        basedOn(runFunction(this::isUsernameUnique, username)
+                .orThrow(exception -> new RemoteException("Invalid Username")))
+                .orThrow(new RemoteException("Username already used in our system"));
+    }
 
     @Override
     public void activeUser(User user) throws RemoteException {
-
+        active = translator.translate(user);
     }
 }

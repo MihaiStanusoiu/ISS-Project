@@ -180,7 +180,9 @@ public enum ViewType implements ViewTypeInterface {
         public String getFXMLFile() {
             return "/fxml/add/AddSessionsEditionView.fxml";
         }
-    }, ADD_SUBMISSION {
+    },
+
+    ADD_SUBMISSION {
         @Override
         public String getFXMLFile() {
             return "/fxml/add/AddSubmissionsEditionView.fxml";

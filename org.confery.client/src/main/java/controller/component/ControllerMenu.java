@@ -6,20 +6,27 @@ import context.ContextType;
 import context.CoreContext;
 import controller.main.ControllerInterface;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import listener.ListenerHelper;
 import manager.StageManager;
+import method.SimpleMethod;
 import notifier.LocalNotificationCenter;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import service.CollectionService;
+import transfarable.User;
 import utils.ConferenceContext;
 import view.ViewType;
 
 import java.rmi.RemoteException;
 import java.util.Observable;
 import java.util.Observer;
+
+import static utils.Conditional.basedOn;
+import static utils.Try.runFunction;
+import static utils.Try.runMethod;
 
 
 /**
@@ -49,16 +56,26 @@ public class ControllerMenu implements ControllerInterface, Observer {
 
     @Lazy
     @Autowired
+    private CollectionService service;
+
+    @Lazy
+    @Autowired
     private CoreContext context;
 
     @Autowired
     private LocalNotificationCenter center;
 
+    private static Logger logger;
+
+    private SimpleMethod<RemoteException> handler;
+
     @Override
     public void initialize() {
+        handler = exception -> logger.info(exception.getCause().getMessage());
+        logger = Logger.getLogger(ControllerMenu.class);
         center.addObserver(this);
-        context.forType(ContextType.GUEST).in(this)
-                .run(item -> ((Node) item).setVisible(Boolean.FALSE));
+//        context.forType(ContextType.GUEST).in(this)
+//                .run(item -> ((Node) item).setVisible(Boolean.FALSE));
     }
 
     @FXML
@@ -92,8 +109,13 @@ public class ControllerMenu implements ControllerInterface, Observer {
     }
 
     @FXML
-    private void onLogoutButtonClick() throws RemoteException {
+    private void onLogoutButtonClick() {
+        User active = runFunction(service::getActiveUser).orHandle(handler);
+        basedOn(active != null).runTrue(this::resetActiveUser);
+    }
 
+    private void resetActiveUser() {
+        runMethod(service::activeUser, null).orHandle(handler);
     }
 
     @Override
