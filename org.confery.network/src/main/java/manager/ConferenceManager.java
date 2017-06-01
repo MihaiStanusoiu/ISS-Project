@@ -2,12 +2,15 @@ package manager;
 
 import checker.ConferencePermissionChecker;
 import domain.ConferenceEntity;
+import domain.EditionEntity;
 import protocol.ConferenceProtocol;
 import service.ConferenceService;
 import transfarable.Conference;
 import transfarable.Edition;
+import transfarable.User;
 import translator.ConferenceTranslator;
 import translator.EditionTranslator;
+import translator.UserTranslator;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -22,12 +25,14 @@ public class ConferenceManager
         extends GenericManager<Conference, Integer, ConferenceEntity>
         implements ConferenceService {
 
+    private final UserTranslator userTranslator;
     private EditionTranslator editionTranslator;
 
     public ConferenceManager(ConferenceProtocol model) throws RemoteException {
         super(model);
         checker = new ConferencePermissionChecker();
         translator = new ConferenceTranslator();
+        userTranslator = new UserTranslator();
         editionTranslator = new EditionTranslator();
     }
 
@@ -37,6 +42,15 @@ public class ConferenceManager
                 .getEditions().stream()
                 .map(entity -> editionTranslator.translate(entity))
                 .collect(Collectors.toList());
+    }
+
+    public List<Conference> getConferencesOf(User user) throws RemoteException {
+        // TODO
+        return null;
+    }
+
+    private Boolean isChair(User user, EditionEntity edition) throws RemoteException {
+        return runFunction(edition::getChair).orThrow(thrower).equals(userTranslator.translate(user));
     }
 
     @Override

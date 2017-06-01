@@ -9,16 +9,20 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import manager.StageManager;
+import method.SimpleMethod;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
+import service.CollectionService;
+import service.UserService;
 import transfarable.User;
 import view.ViewType;
 
-import java.util.List;
+import java.rmi.RemoteException;
 
-import static java.util.Arrays.asList;
+import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -41,15 +45,18 @@ public class ControllerUsersView implements ControllerInterface {
 
     private ObservableList<User> users;
 
+    @Lazy
+    @Autowired
+    private CollectionService service;
+
+    private Logger logger;
+
     @Override
     public void initialize() {
-        List<User> items = asList(
-                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
-                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
-                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
-                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"),
-                new User("Test", "password", "email@email", "Test Name", "website.com", "superb", "New York"));
-        users = FXCollections.observableArrayList(items);
+        logger = Logger.getLogger(ControllerUsersView.class);
+        SimpleMethod<RemoteException> handler = exception -> logger.error(exception.getCause().getMessage());
+        UserService userService = runFunction(service::userService).orHandle(handler);
+        users = FXCollections.observableArrayList(runFunction(userService::getAll).orHandle(handler));
         pagination = updatePagination(users);
         setUpSearchField();
     }

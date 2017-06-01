@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
  * @version 1.0
  */
 
-public interface CollectionService extends Remote {
+public interface CollectionService extends Remote, ServiceInterface {
 
     ConferenceService conferenceService() throws RemoteException;
 

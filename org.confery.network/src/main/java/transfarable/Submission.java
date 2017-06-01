@@ -24,6 +24,10 @@ public class Submission implements Serializable {
         this.isPaid = isPaid;
     }
 
+    public Submission() {
+        this(0, "", "", "", "", Boolean.FALSE);
+    }
+
     /**
      * Getter for property 'id'.
      *
