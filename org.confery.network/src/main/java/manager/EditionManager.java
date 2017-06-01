@@ -7,17 +7,14 @@ import domain.UserEntity;
 import protocol.EditionProtocol;
 import protocol.LoginProtocol;
 import service.EditionService;
-import transfarable.Edition;
-import transfarable.Session;
-import transfarable.Submission;
-import transfarable.User;
-import translator.EditionTranslator;
-import translator.UserTranslator;
+import transfarable.*;
+import translator.*;
 
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 
 /**
@@ -28,6 +25,10 @@ import static utils.Try.runFunction;
 public class EditionManager extends GenericManager<Edition, Integer, EditionEntity> implements EditionService {
 
     private UserTranslator userTranslator;
+    private MemberRoleTranslator memberRoleTranslator;
+    protected EditionProtocol model;
+    private SessionTranslator sessionTranslator;
+    private SubmissionTranslator submissionTranslator;
 
     public EditionManager(EditionProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
@@ -72,38 +73,60 @@ public class EditionManager extends GenericManager<Edition, Integer, EditionEnti
 
 
     @Override
-    public Edition addMemberToEdition(Edition edition, User user, MemberRole memberRole) throws RemoteException {
-        // TODO
-        return null;
+    public Edition addMemberToEdition(Edition edition, User user, MemberRoleTransferable memberRole) throws RemoteException {
+        UserEntity active = getActiveUser();
+        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(edition)))
+                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
+        return translator.translate(runFunction(model::addMemberTo,
+                translator.translate(edition),
+                userTranslator.translate(user),
+                memberRoleTranslator.translate(memberRole))
+                .orThrow(thrower));
     }
 
     @Override
     public Edition deleteMemberOfEdition(Edition edition, User user) throws RemoteException {
-        // TODO
-        return null;
+        UserEntity active = getActiveUser();
+        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(edition)))
+                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
+        return translator.translate(runFunction(model::deleteMemberOf, translator.translate(edition), userTranslator.translate(user))
+                .orThrow(thrower));
     }
 
     @Override
     public Edition addSessionToEdition(Edition edition, Session session) throws RemoteException {
-        // TODO
-        return null;
+        UserEntity active = getActiveUser();
+        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(edition)))
+                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
+        return translator.translate(runFunction(model::addSessionTo, translator.translate(edition), sessionTranslator.translate(session))
+                .orThrow(thrower));
     }
 
     @Override
     public Edition deleteSessionOfEdition(Edition edition, Session session) throws RemoteException {
-        // TODO
-        return null;
+        UserEntity active = getActiveUser();
+        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(edition)))
+                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
+        return translator.translate(runFunction(model::deleteSessionOf, translator.translate(edition), sessionTranslator.translate(session))
+                .orThrow(thrower));
+
     }
 
     @Override
     public Edition addSubmissionToEdition(Edition edition, Submission submission) throws RemoteException {
-        // TODO
-        return null;
+        UserEntity active = getActiveUser();
+        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(edition)))
+                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
+        return translator.translate(runFunction(model::addSubmissionTo, translator.translate(edition), submissionTranslator.translate(submission))
+                .orThrow(thrower));
     }
 
     @Override
     public Edition deleteSubmissionOfEdition(Edition edition, Submission submission) throws RemoteException {
-        // TODO
-        return null;
+        UserEntity active = getActiveUser();
+        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(edition)))
+                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
+        return translator.translate(runFunction(model::deleteSubmissionOf, translator.translate(edition), submissionTranslator.translate(submission))
+                .orThrow(thrower));
     }
 }

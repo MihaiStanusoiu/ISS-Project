@@ -2,10 +2,7 @@ package service;
 
 import domain.EditionEntity;
 import domain.MemberRole;
-import transfarable.Edition;
-import transfarable.Session;
-import transfarable.Submission;
-import transfarable.User;
+import transfarable.*;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -20,7 +17,7 @@ public interface EditionService extends Service<Edition, Integer, EditionEntity>
 
     User getChair(Edition edition) throws RemoteException;
 
-    Edition addMemberToEdition(Edition edition, User user, MemberRole memberRole) throws RemoteException;
+    Edition addMemberToEdition(Edition edition, User user, MemberRoleTransferable memberRole) throws RemoteException;
 
     Edition deleteMemberOfEdition(Edition edition, User user) throws RemoteException;
 
