@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import service.AuthenticationService;
 import service.CollectionService;
 import service.SignUpService;
 import service.SubscriberService;
@@ -130,11 +131,14 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
         String password = passwordTextField.getText();
         String confirm = confirmTextField.getText();
         User user = runFunction(signUpService::signUp, username, password, confirm, email, displayName).orHandle(printer);
-        basedOn(user != null).runTrue(this::makeUserActive, user);
+        if (user != null) {
+            makeUserActive(user);
+        }
     }
 
     private void makeUserActive(User user) {
-        runMethod(service::activeUser, user).orHandle(handler);
+        AuthenticationService authenticationService = runFunction(service::authenticationService).orHandle(handler);
+        runMethod(authenticationService::addActiveUser, user);
         // TODO Notify Everyone About Sign Up Event;
         manager.switchScene(ViewType.CONFERENCES);
     }

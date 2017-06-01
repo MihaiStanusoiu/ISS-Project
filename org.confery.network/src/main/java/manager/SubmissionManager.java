@@ -3,6 +3,7 @@ package manager;
 import checker.SubmissionPermissionChecker;
 import domain.SubmissionEntity;
 import domain.UserEntity;
+import protocol.LoginProtocol;
 import protocol.SubmissionProtocol;
 import service.SubmissionService;
 import transfarable.Submission;
@@ -31,8 +32,8 @@ public class SubmissionManager extends GenericManager<Submission, Integer, Submi
     private TopicTranslator topicTransalor;
     private TagTranslator tagTransalor;
 
-    public SubmissionManager(SubmissionProtocol model) throws RemoteException {
-        super(model);
+    public SubmissionManager(SubmissionProtocol model, LoginProtocol loginProtocol) throws RemoteException {
+        super(model, loginProtocol);
         this.translator = new SubmissionTranslator();
         this.checker = new SubmissionPermissionChecker();
     }
@@ -59,7 +60,7 @@ public class SubmissionManager extends GenericManager<Submission, Integer, Submi
     private UserEntity getSubmissionOwner(Submission submission) throws RemoteException {
         return getSubmissionEntity(submission).getOwner();
     }
-    
+
     @Override
     public List<Topic> getTopics(Submission submission) throws RemoteException {
         return getSubmissionEntity(submission).getTopics().stream()

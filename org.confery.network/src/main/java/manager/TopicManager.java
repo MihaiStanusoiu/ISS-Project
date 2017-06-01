@@ -2,6 +2,7 @@ package manager;
 
 import checker.TopicPermissionChecker;
 import domain.TopicEntity;
+import protocol.LoginProtocol;
 import protocol.TopicProtocol;
 import service.TopicService;
 import transfarable.Submission;
@@ -24,8 +25,8 @@ public class TopicManager extends GenericManager<Topic, Integer, TopicEntity> im
 
     private final SubmissionTranslator submissionTranslator;
 
-    public TopicManager(TopicProtocol model) throws RemoteException {
-        super(model);
+    public TopicManager(TopicProtocol model, LoginProtocol loginProtocol) throws RemoteException {
+        super(model, loginProtocol);
         super.translator = new TopicTranslator();
         super.checker = new TopicPermissionChecker();
         submissionTranslator = new SubmissionTranslator();

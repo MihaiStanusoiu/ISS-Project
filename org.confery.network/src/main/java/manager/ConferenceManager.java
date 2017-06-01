@@ -4,6 +4,7 @@ import checker.ConferencePermissionChecker;
 import domain.ConferenceEntity;
 import domain.EditionEntity;
 import protocol.ConferenceProtocol;
+import protocol.LoginProtocol;
 import service.ConferenceService;
 import transfarable.Conference;
 import transfarable.Edition;
@@ -28,8 +29,8 @@ public class ConferenceManager
     private final UserTranslator userTranslator;
     private EditionTranslator editionTranslator;
 
-    public ConferenceManager(ConferenceProtocol model) throws RemoteException {
-        super(model);
+    public ConferenceManager(ConferenceProtocol model, LoginProtocol loginProtocol) throws RemoteException {
+        super(model, loginProtocol);
         checker = new ConferencePermissionChecker();
         translator = new ConferenceTranslator();
         userTranslator = new UserTranslator();

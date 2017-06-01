@@ -3,6 +3,7 @@ package manager;
 import checker.SessionPermissionChecker;
 import domain.SessionEntity;
 import domain.UserEntity;
+import protocol.LoginProtocol;
 import protocol.ModelInterface;
 import service.SessionService;
 import transfarable.Session;
@@ -25,8 +26,8 @@ public class SessionManager extends GenericManager<Session, Integer, SessionEnti
 
     private UserTranslator userTranslator;
 
-    public SessionManager(ModelInterface<SessionEntity, Integer> model) throws RemoteException {
-        super(model);
+    public SessionManager(ModelInterface<SessionEntity, Integer> model, LoginProtocol loginProtocol) throws RemoteException {
+        super(model, loginProtocol);
         checker = new SessionPermissionChecker();
         translator = new SessionTranslator();
     }

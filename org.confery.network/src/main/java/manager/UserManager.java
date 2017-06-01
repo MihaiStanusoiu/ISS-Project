@@ -2,6 +2,7 @@ package manager;
 
 import checker.UserPermissionChecker;
 import domain.UserEntity;
+import protocol.LoginProtocol;
 import protocol.UserProtocol;
 import service.UserService;
 import transfarable.Edition;
@@ -30,8 +31,8 @@ public class UserManager extends GenericManager<User, Integer, UserEntity> imple
     private final SessionTranslator sessionTranslator;
     private final SubmissionTranslator submissionTranslator;
 
-    public UserManager(UserProtocol model) throws RemoteException {
-        super(model);
+    public UserManager(UserProtocol model, LoginProtocol loginProtocol) throws RemoteException {
+        super(model, loginProtocol);
         super.translator = new UserTranslator();
         super.checker = new UserPermissionChecker();
         this.editionTranslator = new EditionTranslator();

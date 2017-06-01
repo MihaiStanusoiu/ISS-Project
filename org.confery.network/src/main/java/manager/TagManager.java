@@ -2,6 +2,7 @@ package manager;
 
 import checker.TagPermissionChecker;
 import domain.TagEntity;
+import protocol.LoginProtocol;
 import protocol.TagProtocol;
 import service.TagService;
 import transfarable.Submission;
@@ -24,8 +25,8 @@ public class TagManager extends GenericManager<Tag, Integer, TagEntity> implemen
 
     private final SubmissionTranslator submissionTranslator;
 
-    public TagManager(TagProtocol model) throws RemoteException {
-        super(model);
+    public TagManager(TagProtocol model, LoginProtocol loginProtocol) throws RemoteException {
+        super(model, loginProtocol);
         this.submissionTranslator = new SubmissionTranslator();
         this.translator = new TagTranslator();
         this.checker = new TagPermissionChecker();

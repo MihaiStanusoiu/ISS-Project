@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import service.AuthenticationService;
 import service.CollectionService;
 import transfarable.User;
 import utils.ConferenceContext;
@@ -110,12 +111,14 @@ public class ControllerMenu implements ControllerInterface, Observer {
 
     @FXML
     private void onLogoutButtonClick() {
-        User active = runFunction(service::getActiveUser).orHandle(handler);
-        basedOn(active != null).runTrue(this::resetActiveUser);
+        //User active = runFunction(service::getActiveUser).orHandle(handler);
+        AuthenticationService authenticationService = runFunction(service::authenticationService).orHandle(handler);
+        //authenticationService.deleteActiveUser();
+        //basedOn(active != null).runTrue(this::resetActiveUser);
     }
 
     private void resetActiveUser() {
-        runMethod(service::activeUser, null).orHandle(handler);
+        //runMethod(service::activeUser, null).orHandle(handler);
     }
 
     @Override
