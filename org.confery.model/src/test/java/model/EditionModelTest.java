@@ -22,6 +22,7 @@ public class EditionModelTest {
     private UserModel userModel;
     private SessionModel sessionModel;
     private SubmissionModel submissionModel;
+    private ConferenceModel conferenceModel;
 
     @Before
     public void setUp() throws Exception {
@@ -31,6 +32,7 @@ public class EditionModelTest {
         userModel = new UserModel(loader);
         sessionModel = new SessionModel(loader);
         submissionModel = new SubmissionModel(loader);
+        conferenceModel = new ConferenceModel(loader);
     }
 
     @Test
@@ -128,6 +130,25 @@ public class EditionModelTest {
         edition = editionModel.deleteSubmissionOf(edition, submission);
         // then:
         assertEquals(edition.getSubmissions().size(), 0);
+    }
+
+    @Test
+    public void isGettingAllConferenceOfUser() throws Exception {
+        //declarations:
+        EditionEntity edition = new EditionEntity("New York");
+        UserEntity user = new UserEntity("username", "password");
+        ConferenceEntity conference = new ConferenceEntity("Test", "T");
+        //preconditions
+        conferenceModel.add(conference);
+        editionModel.add(edition);
+        userModel.add(user);
+        //when:
+        conference = conferenceModel.addEditionTo(conference,edition);
+        Integer id = conference.getId();
+        edition = editionModel.addMemberTo(edition, user, MemberRole.EDITION_CHAIR);
+        //then:
+        assertEquals(conferenceModel.getConferencesOf(user).stream()
+                .anyMatch(conferenceEntity -> conferenceEntity.getId().equals(id)) , Boolean.TRUE);
     }
 
 }

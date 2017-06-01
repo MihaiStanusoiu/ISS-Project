@@ -3,11 +3,15 @@ package model;
 import database.DatabaseLoaderInterface;
 import domain.ConferenceEntity;
 import domain.EditionEntity;
+import domain.UserEntity;
 import exception.ModelException;
 import exception.SystemException;
 import protocol.ConferenceProtocol;
 import repository.RepositoryEntity;
 import repository.RepositoryInterface;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static utils.Conditional.basedOn;
 import static utils.Try.runMethod;
@@ -41,5 +45,18 @@ public class ConferenceModel
                 .orThrow(new ModelException("The edition is not a part of the conference"));
         repositoryEdition.delete(edition.getId());
         return getElementById(conference.getId());
+    }
+
+    @Override
+    public List<ConferenceEntity> getConferencesOf(UserEntity user) throws SystemException {
+        List<ConferenceEntity> result = new ArrayList<>();
+        for(ConferenceEntity c : getAll())
+        {
+            if(c.getLatestEdition().getChair() != null &&  c.getLatestEdition().getChair().getId().equals(user.getId()))
+            {
+                result.add(c);
+            }
+        }
+        return result;
     }
 }

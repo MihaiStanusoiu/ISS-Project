@@ -3,7 +3,9 @@ package manager;
 import checker.ConferencePermissionChecker;
 import domain.ConferenceEntity;
 import domain.EditionEntity;
+import domain.UserEntity;
 import protocol.ConferenceProtocol;
+import protocol.EditionProtocol;
 import protocol.LoginProtocol;
 import service.ConferenceService;
 import transfarable.Conference;
@@ -14,9 +16,11 @@ import translator.EditionTranslator;
 import translator.UserTranslator;
 
 import java.rmi.RemoteException;
+import java.rmi.server.RemoteServer;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 
 /**
@@ -28,6 +32,7 @@ public class ConferenceManager
 
     private final UserTranslator userTranslator;
     private EditionTranslator editionTranslator;
+    protected ConferenceProtocol model;
 
     public ConferenceManager(ConferenceProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
@@ -52,9 +57,19 @@ public class ConferenceManager
         return editionTranslator.translate(entity);
     }
 
+
+    @Override
+    public Conference removeEditionFromConference(Conference conference, Edition edition) throws RemoteException {
+        UserEntity active = getActiveUser();
+        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(conference)))
+                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
+        return translator.translate(runFunction(model::removeEditionFrom, translator.translate(conference), editionTranslator.translate(edition))
+                .orThrow(thrower));
+    }
+
     public List<Conference> getConferencesOf(User user) throws RemoteException {
-        // TODO
-        return null;
+        List<ConferenceEntity> entities = runFunction(model::getConferencesOf, userTranslator.translate(user)).orThrow(thrower);
+        return entities.stream().map(entity -> translator.translate(entity)).collect(Collectors.toList());
     }
 
     private Boolean isChair(User user, EditionEntity edition) throws RemoteException {
@@ -63,8 +78,11 @@ public class ConferenceManager
 
     @Override
     public Conference addEditionToConference(Conference conference, Edition edition) throws RemoteException {
-        // TODO
-        return null;
+        UserEntity active = getActiveUser();
+        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(conference)))
+                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
+        return translator.translate(runFunction(model::addEditionTo, translator.translate(conference), editionTranslator.translate(edition))
+                .orThrow(thrower));
     }
 
 }
