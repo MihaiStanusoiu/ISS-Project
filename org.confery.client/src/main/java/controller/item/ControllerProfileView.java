@@ -77,15 +77,14 @@ public class ControllerProfileView
                 nameTextField.getText(), websiteTextField.getText(),
                 bioTextField.getText(), locationTextField.getText());
         runMethod(userService::update, user, other).orHandle(handler);
-        user = other;
-        updateUserData();
+        manager.refresh(other);
     }
 
     @FXML
     public void onDeleteButtonClick() {
         User active = runFunction(authenticationService::getActiveUser).orHandle(handler);
-        runMethod(authenticationService::deleteActiveUser, active).orHandle(handler);
         runFunction(userService::delete, active).orHandle(handler);
+        runMethod(authenticationService::deleteActiveUser, active).orHandle(handler);
         manager.switchScene(ViewType.CONFERENCES);
     }
 

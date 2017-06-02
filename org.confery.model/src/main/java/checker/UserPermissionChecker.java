@@ -16,8 +16,8 @@ public class UserPermissionChecker extends PermissionChecker<UserEntity> {
     @Override
     protected void setUpChecker() {
         checker.put(OperationType.TO_ADD, (active, item) -> active != null);
-        checker.put(OperationType.TO_DELETE, UserEntity::equals);
-        checker.put(OperationType.TO_UPDATE, UserEntity::equals);
+        checker.put(OperationType.TO_DELETE, (active, item) -> active.getId().equals(item.getId()));
+        checker.put(OperationType.TO_UPDATE, (active, item) -> active.getId().equals(item.getId()));
         checker.put(OperationType.TO_READ, (active, item) -> Boolean.TRUE);
     }
 
