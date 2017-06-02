@@ -131,15 +131,12 @@ public class ControllerSignUp implements ControllerInterface, SubscriberService 
         String password = passwordTextField.getText();
         String confirm = confirmTextField.getText();
         User user = runFunction(signUpService::signUp, username, password, confirm, email, displayName).orHandle(printer);
-        if (user != null) {
-            makeUserActive(user);
-        }
+        basedOn(user != null && !user.getId().equals(0)).runTrue(this::makeUserActive, user);
     }
 
     private void makeUserActive(User user) {
         AuthenticationService authenticationService = runFunction(service::authenticationService).orHandle(handler);
-        runMethod(authenticationService::addActiveUser, user);
-        // TODO Notify Everyone About Sign Up Event;
+        runMethod(authenticationService::addActiveUser, user).orHandle(handler);
         manager.switchScene(ViewType.CONFERENCES);
     }
 
