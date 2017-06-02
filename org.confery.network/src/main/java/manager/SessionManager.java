@@ -35,6 +35,8 @@ public class SessionManager extends GenericManager<Session, Integer, SessionEnti
         super(model, loginProtocol);
         this.model = model;
         checker = new SessionPermissionChecker();
+        userTranslator = new UserTranslator();
+        memberRoleTranslator = new MemberRoleTranslator();
         translator = new SessionTranslator();
     }
 
@@ -60,7 +62,8 @@ public class SessionManager extends GenericManager<Session, Integer, SessionEnti
     @Override
     public Session addMemberTo(Session session, User user, MemberRoleTransferable role) throws RemoteException {
         UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(session)))
+        basedOn(role.equals(MemberRoleTransferable.SESSION_LISTENER) ||
+                checker.isAllowed(active).toUpdate().theObject(translator.translate(session)))
                 .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
         return translator.translate(runFunction(model::addMemberTo, translator.translate(session), userTranslator.translate(user),
                 memberRoleTranslator.translate(role)).orThrow(thrower));
@@ -77,7 +80,7 @@ public class SessionManager extends GenericManager<Session, Integer, SessionEnti
 
 
     private UserEntity getSessionChair(Session session) throws RemoteException {
-        return runFunction(this.getSessionEntity(session)::getChair).orThrow(thrower);
+        return this.getSessionEntity(session).getChair();
     }
 
 

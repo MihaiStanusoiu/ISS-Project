@@ -1,8 +1,7 @@
 
 package domain;
 
-import exception.ModelException;
-import exception.SystemException;
+import nulldomain.NullUserEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,7 +23,7 @@ import static utils.Try.runFunction;
 @Entity
 @Table(name = "SESSION")
 @SuppressWarnings("unused")
-public class SessionEntity implements Idable<Integer> {
+public class SessionEntity implements Idable<Integer>, Cloneable {
 
 
     @Id
@@ -289,12 +288,12 @@ public class SessionEntity implements Idable<Integer> {
      *
      * @return The chair of the session or null if the chair is not set
      */
-    public UserEntity getChair() throws SystemException {
+    public UserEntity getChair() {
         return members.stream()
                 .filter(member -> member.getConfiguration().getChair().equals(true))
                 .findFirst()
                 .map(SessionMemberEntity::getUser)
-                .orElseThrow(() -> new ModelException("Chair Not Set!"));
+                .orElse(new NullUserEntity());
     }
 
     /**
@@ -307,6 +306,9 @@ public class SessionEntity implements Idable<Integer> {
                 (Objects.nonNull(runFunction(this::getChair).or(null)) ? 1 : 0);
     }
 
+    public SessionEntity getClone() {
+        return new SessionEntity(id, name, startDate, endDate, location, bio, seats);
+    }
 
     @Override
     public boolean equals(Object o) {

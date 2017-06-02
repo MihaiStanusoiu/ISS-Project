@@ -27,7 +27,7 @@
                         <Insets left="20.0" right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Label text="COMFERY">
+                  <Label text="CONFERY">
                      <font>
                         <Font name="Proxima Nova Bold" size="18.0" />
                      </font>

@@ -20,7 +20,7 @@
                <HBox.margin>
                   <Insets left="20.0" right="10.0" />
                </HBox.margin></ImageView>
-            <Label minHeight="0.0" minWidth="0.0" text="COMFERY">
+            <Label minHeight="0.0" minWidth="0.0" text="CONFERY">
                <font>
                   <Font name="Proxima Nova Black" size="14.0" />
                </font></Label>

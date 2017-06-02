@@ -44,7 +44,14 @@ public class SessionModel extends Model<SessionEntity, Integer> implements Sessi
                 .orThrow(new ModelException("404 User Not Found!"));
         repositoryMember.add(new SessionMemberEntity(session, user,
                 new ConfigurationSessionFactory(repositoryConfiguration).getConfiguration(role)));
+        //updateNumberOfSeats(session);
         return getElementById(session.getId());
+    }
+
+    private void updateNumberOfSeats(SessionEntity session) throws SystemException {
+        SessionEntity update = session.getClone();
+        update.setSeats(update.getSeats() - 1);
+        update(session, update);
     }
 
     /**

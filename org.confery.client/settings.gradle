@@ -1,2 +1,3 @@
 rootProject.name = 'org.confery.client'
-
+include 'org.confery.model'
+include 'org.confery.network'

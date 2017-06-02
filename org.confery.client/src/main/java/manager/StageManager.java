@@ -1,16 +1,16 @@
 package manager;
 
-import function.ThrowFunction;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import loader.SpringFXMLLoader;
+import method.SimpleMethod;
+import org.apache.log4j.Logger;
 import view.ViewType;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Objects;
 
 import static utils.Try.runFunction;
 
@@ -22,6 +22,10 @@ import static utils.Try.runFunction;
  */
 
 public class StageManager implements Serializable {
+
+    private static Logger logger;
+    private SimpleMethod<IOException> handler;
+    private SimpleMethod<RuntimeException> explorer;
 
     private final Stage primaryStage;           // the application's primary stage
     private final SpringFXMLLoader loader;      // the fxml loader with DI
@@ -39,6 +43,9 @@ public class StageManager implements Serializable {
      * @param stage:  The stage of the FX Application.
      */
     public StageManager(SpringFXMLLoader loader, Stage stage) {
+        logger = Logger.getLogger(StageManager.class);
+        handler = exception -> logger.error(exception.getCause());
+        explorer = exception -> logger.error(exception.getCause());
         this.loader = loader;
         this.primaryStage = stage;
     }
@@ -87,11 +94,7 @@ public class StageManager implements Serializable {
         Scene scene = getNewScene(root);
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);
-        try {
-            primaryStage.show();
-        } catch (Exception error) {
-            handleErrors(error);
-        }
+        primaryStage.show();
     }
 
     /**
@@ -102,15 +105,9 @@ public class StageManager implements Serializable {
      */
     private Scene getNewScene(Parent root) {
         Scene scene = primaryStage.getScene();
-        if (scene == null) {
-            scene = new Scene(root);
-        }
+        scene = (scene == null) ? new Scene(root) : scene;
         scene.setRoot(root);
         return scene;
-    }
-
-    private void handlerException(Exception exception) {
-        exception.printStackTrace();
     }
 
     /**
@@ -120,8 +117,7 @@ public class StageManager implements Serializable {
      * @return root: the root node of the fxml file [Parent]
      */
     private Parent getRootNode(String fxmlFilePath) {
-        return runFunction((ThrowFunction<String, Parent, IOException>)loader::load, fxmlFilePath)
-                .orHandle(this::handlerException);
+        return runFunction(loader::load, fxmlFilePath).orHandle(handler);
     }
 
     /**
@@ -134,22 +130,7 @@ public class StageManager implements Serializable {
      * @return root: the root node of the fxml file [Parent]
      */
     public <T> Parent getRootNode(String fxmlFilePath, T element) {
-        Parent root = null;
-        try {
-            root = loader.load(fxmlFilePath, element);
-            Objects.requireNonNull(root, "The root FXML should not be null!");
-        } catch (Exception error) {
-            handleErrors(error);
-        }
-        return root;
+        return runFunction(loader::load, fxmlFilePath, element).orHandle(handler);
     }
 
-    /**
-     * Effect: Handle for errors. (that occurred in this class) [open for improvements]
-     *
-     * @param error: the error that occurred in the loading process. [Exception]
-     */
-    private void handleErrors(Exception error) {
-        System.out.println(error);
-    }
 }
