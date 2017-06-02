@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import transfarable.Edition;
 import view.GradientGenerator;
@@ -23,6 +24,7 @@ import java.rmi.RemoteException;
 
 @Lazy
 @Component
+@Scope("prototype")
 public class ControllerPaginationEditionItem
         implements PaginationControllerItemInterface<Edition> {
 

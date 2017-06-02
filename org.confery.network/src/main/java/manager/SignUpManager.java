@@ -2,11 +2,11 @@ package manager;
 
 import domain.UserEntity;
 import exception.SystemException;
-import notification.NotificationCenter;
 import org.jetbrains.annotations.Nullable;
 import protocol.LoginProtocol;
 import protocol.UserProtocol;
 import service.SignUpService;
+import transfarable.NullUser;
 import transfarable.User;
 import translator.UserTranslator;
 
@@ -28,14 +28,12 @@ import static utils.Try.runFunction;
 
 public class SignUpManager extends UnicastRemoteObject implements SignUpService {
 
-    private final NotificationCenter notificationCenter;
     private final UserProtocol userModel;
     private final UserTranslator translator;
     private LoginProtocol provider;
     private final Function<SystemException, RemoteException> thrower;
 
-    public SignUpManager(NotificationCenter notificationCenter, UserProtocol userModel, LoginProtocol loginProtocol) throws RemoteException {
-        this.notificationCenter = notificationCenter;
+    public SignUpManager( UserProtocol userModel, LoginProtocol loginProtocol) throws RemoteException {
         this.provider = loginProtocol;
         this.userModel = userModel;
         this.translator = new UserTranslator();
@@ -59,7 +57,6 @@ public class SignUpManager extends UnicastRemoteObject implements SignUpService 
     }
 
     private Integer countLowerCaseLetters(String string) {
-        // TODO Check if (char) is effective.
         return string.chars().mapToObj(character -> (char) character)
                 .filter(Character::isLowerCase).collect(Collectors.toList()).size();
     }
@@ -87,8 +84,11 @@ public class SignUpManager extends UnicastRemoteObject implements SignUpService 
             throws RemoteException {
         checkUsername(username);
         UserEntity user = getUser(username, password, confirm, email, name);
+        basedOn(user != null).orThrow(new RemoteException("Invalid Password"));
         Integer id = runFunction(userModel::add, user).orThrow(thrower);
-        return translator.translate(runFunction(userModel::getElementById, id).orThrow(thrower));
+        UserEntity register = runFunction(userModel::getElementById, id)
+                .orThrow(exception -> new RemoteException(exception.getMessage()));
+        return register != null ? translator.translate(register) : new NullUser();
     }
 
     @Nullable

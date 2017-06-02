@@ -10,15 +10,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.GridPane;
 import manager.StageManager;
+import method.SimpleMethod;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
+import service.CollectionService;
+import service.ConferenceService;
 import transfarable.Conference;
 import transfarable.Edition;
 import view.ViewType;
 
-import java.util.Date;
+import java.rmi.RemoteException;
+import java.util.List;
+
+import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -33,7 +40,6 @@ public class ControllerConferenceView
     @FXML
     private Label nameLabel;
 
-    @SuppressWarnings("FieldCanBeLocal")
     private Conference element;
 
     @SuppressWarnings("FieldCanBeLocal")
@@ -46,12 +52,21 @@ public class ControllerConferenceView
     @Autowired
     private StageManager manager;
 
+    @Lazy
+    @Autowired
+    private CollectionService collectionService;
+
+    private ConferenceService conferenceService;
+
+    private static Logger logger;
+
+    private SimpleMethod<RemoteException> handler;
+
     @Override
     public void initialize() {
-        Edition[] items = { new Edition(1, new Date(), new Date(),
-                "New York", "Lorem", new Date(), new Date(), new Date(), new Date())};
-        editions = FXCollections.observableArrayList(items);
-        pagination = updatePagination(editions);
+        logger = Logger.getLogger(ControllerConferenceView.class);
+        handler = exception -> logger.error(exception.getCause());
+        conferenceService = runFunction(collectionService::conferenceService).orHandle(handler);
     }
 
     private Pagination updatePagination(ObservableList<Edition> items) {
@@ -67,5 +82,8 @@ public class ControllerConferenceView
     public void setElement(Conference element) {
         this.element = element;
         nameLabel.setText(element.getName());
+        List<Edition> items = runFunction(conferenceService::getEditionsOf, element).orHandle(handler);
+        editions = FXCollections.observableArrayList(items);
+        pagination = updatePagination(editions);
     }
 }

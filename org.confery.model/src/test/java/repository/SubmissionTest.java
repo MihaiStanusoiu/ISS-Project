@@ -16,15 +16,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
  * @author Tiron Andreea- Ecaterina
  * @version 1.0
  */
+
 public class SubmissionTest {
+
     private RepositoryInterface<EditionEntity, Integer> repositoryEdition;
     private RepositoryInterface<SubmissionEntity, Integer> repositorySubmission;
     private DatabaseLoaderInterface loader;
-    Date date = new Date();
+    private Date date = new Date();
 
     @Before
     public void setUp() throws Exception {
@@ -42,31 +47,18 @@ public class SubmissionTest {
     @Transactional
     public void add() throws Exception {
         SubmissionEntity submission = new SubmissionEntity("thesis", "status", "abstractUrl", "fullPaperUrl");
-        try {
-            Integer idSubmission = repositorySubmission.add(submission);
-            Assert.assertTrue(idSubmission.equals(1) &&
-                    submission.getName().equals("thesis") &&
-                    submission.getAbstractUrl().equals("abstractUrl") &&
-                    submission.getFullPaperUrl().equals("fullPaperUrl") &&
-                    submission.getStatus().equals("status")
-            );
-        } catch (SystemException exception) {
-            Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
-        }
+        Integer idSubmission = repositorySubmission.add(submission);
+        assertEquals((long) idSubmission, 1L);
     }
 
     @Test
     public void update() throws Exception {
         SubmissionEntity submission = new SubmissionEntity("thesis", "status", "abstractUrl", "fullPaperUrl");
         SubmissionEntity update = new SubmissionEntity("math", "status2", "abstractUrl", "fullPaperUrl");
-        try {
-            repositorySubmission.add(submission);
-            repositorySubmission.update(submission, update);
-            SubmissionEntity result = repositorySubmission.getElementById(submission.getId());
-            Assert.assertTrue(result.getName().equals("math") && result.getStatus().equals("status2"));
-        } catch (SystemException exception) {
-            Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
-        }
+        repositorySubmission.add(submission);
+        repositorySubmission.update(submission, update);
+        SubmissionEntity result = repositorySubmission.getElementById(submission.getId());
+        assertEquals(result.getName(), "math");
     }
 
     @Test
@@ -76,9 +68,9 @@ public class SubmissionTest {
             repositorySubmission.add(submission);
 
             // This test is here only to make sure that we have something in repository in order to delete.
-            Assert.assertTrue(submission.getName().equals(repositorySubmission.getElementById(1).getName()));
+            assertTrue(submission.getName().equals(repositorySubmission.getElementById(1).getName()));
             repositorySubmission.delete(submission.getId());
-            Assert.assertTrue(repositorySubmission.getAll().isEmpty());
+            assertTrue(repositorySubmission.getAll().isEmpty());
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }
@@ -92,7 +84,7 @@ public class SubmissionTest {
             repositorySubmission.add(submission);
             repositorySubmission.add(test);
             ArrayList<SubmissionEntity> result = new ArrayList<>(repositorySubmission.getAll());
-            Assert.assertTrue(result.get(0).getId().equals(submission.getId()) &&
+            assertTrue(result.get(0).getId().equals(submission.getId()) &&
                     result.get(1).getId().equals(test.getId()));
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -107,7 +99,7 @@ public class SubmissionTest {
             repositorySubmission.add(submission);
             repositorySubmission.add(test);
             SubmissionEntity result = repositorySubmission.getElementById(1);
-            Assert.assertTrue(result.getId().equals(submission.getId()) &&
+            assertTrue(result.getId().equals(submission.getId()) &&
                     result.getName().equals(submission.getName()));
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
@@ -130,7 +122,7 @@ public class SubmissionTest {
             repositorySubmission.add(submission3);
             EditionEntity sameEdition = repositoryEdition.getElementById(1);
             Set<SubmissionEntity> submissions = sameEdition.getSubmissions();
-            Assert.assertTrue(submissions.size() == 3);
+            assertTrue(submissions.size() == 3);
         } catch (SystemException exception) {
             Assert.assertEquals(exception.getMessage(), "Unable to add element to database!");
         }

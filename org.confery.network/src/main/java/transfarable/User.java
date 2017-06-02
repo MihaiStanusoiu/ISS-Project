@@ -38,6 +38,9 @@ public class User implements Serializable {
         this(username, password, email, name, "", "", "");
     }
 
+    public User(String username, String password) {
+        this(username, password, "", "", "", "", "");
+    }
 
     /**
      * Getter for property 'id'.

@@ -10,7 +10,6 @@ import listener.Listener;
 import manager.StageManager;
 import method.SimpleMethod;
 import notification.NotificationUpdate;
-import notifier.EventType;
 import notifier.LocalNotificationCenter;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,14 +124,12 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         User user = runFunction(loginService::login, username, password).orHandle(printer);
-        basedOn(user != null).runTrue(this::makeUserActive, user);
+        basedOn(!user.getId().equals(0)).runTrue(this::makeUserActive, user);
     }
 
     private void makeUserActive(User user) {
         AuthenticationService authenticationService = runFunction(service::authenticationService).orHandle(handler);
         runMethod(authenticationService::addActiveUser, user);
-        // TODO Notify Everyone About Login Event;
-        center.notifyObservers(EventType.LOGIN);
         manager.switchScene(ViewType.CONFERENCES);
     }
 

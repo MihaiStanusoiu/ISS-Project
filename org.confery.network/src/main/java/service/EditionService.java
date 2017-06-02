@@ -1,13 +1,14 @@
 package service;
 
 import domain.EditionEntity;
-import domain.MemberRole;
 import transfarable.*;
 
 import java.rmi.RemoteException;
 import java.util.List;
 
 public interface EditionService extends Service<Edition, Integer, EditionEntity> {
+
+    List<Session> getAllSessionsOf(Edition edition) throws RemoteException;
 
     List<User> getAllMembersOf(Edition edition) throws RemoteException;
 

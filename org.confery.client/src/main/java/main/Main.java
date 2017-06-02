@@ -7,18 +7,23 @@ import manager.StageManager;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import view.ViewType;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @SpringBootApplication
 @SuppressWarnings("all")
 public class Main extends Application {
 
-    private ConfigurableApplicationContext context;
+    public ConfigurableApplicationContext context;
     private StageManager stageManager;
     private CoreContext coreContext;
 
-    public static void main(String[] args) {
-        Application.launch();
+    public static void main(final String[] args) {
+        Application.launch(args);
     }
 
     /**
@@ -73,12 +78,17 @@ public class Main extends Application {
      *
      * @return ConfigurableApplicationContext The application's context.
      */
-    private ConfigurableApplicationContext getContext() {
+    public ConfigurableApplicationContext getContext() {
         // creates an application & context builder based on the main class
         SpringApplicationBuilder builder = new SpringApplicationBuilder(Main.class);
         // retrieves a read-only list of raw arg and converts the list to String[] -- application's args
         String[] args = getParameters().getRaw().stream().toArray(String[]::new);
         builder.headless(false); // needed for TestFX integration
         return builder.run(args);
+    }
+    @Bean
+    public ExecutorService executorService() {
+        String threadNamePrefix = "ApplicationThread-";
+        return Executors.newFixedThreadPool(5, new CustomizableThreadFactory(threadNamePrefix));
     }
 }
