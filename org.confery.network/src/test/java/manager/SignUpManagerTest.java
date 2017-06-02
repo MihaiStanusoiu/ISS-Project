@@ -35,7 +35,7 @@ public class SignUpManagerTest {
     public void setUp() throws Exception {
         NotificationCenter center = PowerMockito.mock(NotificationCenter.class);
         model = PowerMockito.mock(UserModel.class);
-        manager = new SignUpManager(center, model);
+        //manager = new SignUpManager(center, model);
     }
 
     @Test

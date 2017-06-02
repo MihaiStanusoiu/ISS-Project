@@ -17,5 +17,5 @@ public interface ControllerInterface extends Serializable {
      * if the necessary constraints are not available in fxml [file/scene-builder].
      */
     void initialize() throws RemoteException;
-
+    
 }

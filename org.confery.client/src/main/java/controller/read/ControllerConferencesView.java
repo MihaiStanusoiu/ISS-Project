@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
 import service.CollectionService;
 import service.ConferenceService;
-import service.EditionService;
 import transfarable.Conference;
 import transfarable.Edition;
 import view.ViewType;
@@ -64,19 +63,14 @@ public class ControllerConferencesView implements ControllerInterface {
     private CollectionService service;
 
     private ObservableList<Conference> conferences;
-
     private SimpleMethod<RemoteException> handler;
-
     private ConferenceService conferenceService;
-
-    private EditionService editionService;
 
     @Override
     public void initialize() {
         logger = Logger.getLogger(StageManager.class);
         handler = exception -> logger.error(exception.getCause());
         conferenceService = runFunction(service::conferenceService).orHandle(handler);
-        editionService = runFunction(service::editionService).orHandle(handler);
         List<Conference> items = runFunction(conferenceService::getAll).orHandle(handler);
         conferences = FXCollections.observableArrayList(items);
         pagination = updatePagination(conferences);
@@ -106,10 +100,6 @@ public class ControllerConferencesView implements ControllerInterface {
     private void search(String name) {
         pagination = updatePagination(conferences.filtered(conference ->
                 conference.getName().toLowerCase().contains(name.toLowerCase())));
-    }
-
-    private List<Edition> getEditions(Conference conference) {
-        return runFunction(conferenceService::getEditionsOf, conference).orHandle(handler);
     }
 
     @FXML

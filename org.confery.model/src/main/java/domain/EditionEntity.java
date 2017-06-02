@@ -3,6 +3,7 @@ package domain;
 
 import exception.ModelException;
 import exception.SystemException;
+import nulldomain.NullUserEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -463,13 +464,12 @@ public class EditionEntity implements Idable<Integer> {
      *
      * @return The chair of the edition.
      * <p>You can't have a edition without a chair to act as an admin!</p>
-     * @throws SystemException If the chair is not set.
      */
-    public UserEntity getChair() throws SystemException {
+    public UserEntity getChair() {
         return members.stream().findFirst()
                 .filter(member -> member.getConfigurationEditionMember().getChair().equals(Boolean.TRUE))
                 .map(EditionMemberEntity::getUser)
-                .orElseThrow(() -> new ModelException("The chair is not set!"));
+                .orElse(new NullUserEntity());
     }
 
     /**

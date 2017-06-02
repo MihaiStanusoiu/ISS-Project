@@ -58,7 +58,7 @@ public class LoginManager
     @Override
     public User login(@NotNull String username, @NotNull String password) throws RemoteException {
         UserEntity active =  getActiveUser();
-        basedOn(active == null).orThrow(new RemoteException("You're already logged with another account!"));
+        basedOn(active.getId().equals(0)).orThrow(new RemoteException("You're already logged with another account!"));
         return runFunction(this::findUser, username, password)
                 .orThrow(exception -> new RemoteException("Wrong Username or Password!"))
                 .orElseThrow(() -> new RemoteException("Wrong Username or Password!"));

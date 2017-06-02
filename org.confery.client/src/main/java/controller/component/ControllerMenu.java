@@ -7,7 +7,6 @@ import context.CoreContext;
 import controller.main.ControllerInterface;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import listener.ListenerHelper;
 import manager.StageManager;
 import method.SimpleMethod;
 import notifier.LocalNotificationCenter;
@@ -22,10 +21,7 @@ import utils.ConferenceContext;
 import view.ViewType;
 
 import java.rmi.RemoteException;
-import java.util.Observable;
-import java.util.Observer;
 
-import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 import static utils.Try.runMethod;
 
@@ -38,7 +34,7 @@ import static utils.Try.runMethod;
 @Lazy
 @Component
 @ContextClass
-public class ControllerMenu implements ControllerInterface, Observer {
+public class ControllerMenu implements ControllerInterface {
 
     @FXML
     @Context({ContextType.GUEST})
@@ -53,10 +49,6 @@ public class ControllerMenu implements ControllerInterface, Observer {
 
     @Lazy
     @Autowired
-    private ListenerHelper listener;
-
-    @Lazy
-    @Autowired
     private CollectionService service;
 
     @Lazy
@@ -67,16 +59,23 @@ public class ControllerMenu implements ControllerInterface, Observer {
     private LocalNotificationCenter center;
 
     private static Logger logger;
+    private AuthenticationService authenticationService;
 
     private SimpleMethod<RemoteException> handler;
 
     @Override
     public void initialize() {
-        handler = exception -> logger.info(exception.getCause().getMessage());
         logger = Logger.getLogger(ControllerMenu.class);
-        center.addObserver(this);
-//        context.forType(ContextType.GUEST).in(this)
-//                .run(item -> ((Node) item).setVisible(Boolean.FALSE));
+        handler = exception -> logger.info(exception.getCause().getMessage());
+        authenticationService = runFunction(service::authenticationService).orHandle(handler);
+        context.in(this).basedOn(getActiveUser().getId().equals(0))
+                .forType(ContextType.GUEST)
+                .run(button -> ((Button)button).setVisible(false))
+                .or(button -> ((Button)button).setVisible(true));
+    }
+
+    private User getActiveUser() {
+        return runFunction(authenticationService::getActiveUser).orHandle(handler);
     }
 
     @FXML
@@ -111,18 +110,8 @@ public class ControllerMenu implements ControllerInterface, Observer {
 
     @FXML
     private void onLogoutButtonClick() {
-        //User active = runFunction(service::getActiveUser).orHandle(handler);
-        AuthenticationService authenticationService = runFunction(service::authenticationService).orHandle(handler);
-        //authenticationService.deleteActiveUser();
-        //basedOn(active != null).runTrue(this::resetActiveUser);
+        runMethod(authenticationService::deleteActiveUser, getActiveUser()).orHandle(handler);
+        manager.refresh();
     }
 
-    private void resetActiveUser() {
-        //runMethod(service::activeUser, null).orHandle(handler);
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        // TODO
-    }
 }

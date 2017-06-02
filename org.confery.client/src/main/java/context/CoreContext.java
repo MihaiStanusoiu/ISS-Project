@@ -1,6 +1,8 @@
 package context;
 
+import function.ThrowBiFunction;
 import method.SimpleMethod;
+import method.ThrowBiMethod;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
@@ -24,7 +26,7 @@ import static utils.Try.runFunction;
 @Component
 public class CoreContext {
 
-    private final Reflections reflections;
+    private Reflections reflections;
     private Set<Field> fields;
     private Boolean condition;
     private ContextType type;
@@ -67,9 +69,16 @@ public class CoreContext {
         return this;
     }
 
-    public void run(SimpleMethod<Object> function) {
+    public CoreContext run(SimpleMethod<Object> method) {
         Conditional.basedOn(condition).runTrue(() -> fields.stream().filter(this::isType).filter(this::inObject)
-                .forEach(field -> function.accept(getObject(field, object))));
+                .forEach(field -> method.accept(getObject(field, object))));
+        return this;
+    }
+
+    public CoreContext or(SimpleMethod<Object> method) {
+        Conditional.basedOn(!condition).runTrue(() -> fields.stream().filter(this::isType).filter(this::inObject)
+                .forEach(field -> method.accept(getObject(field, object))));
+        return this;
     }
 
     @SuppressWarnings("unused")
@@ -87,7 +96,8 @@ public class CoreContext {
     }
 
     private Method getMethod(Field field, String methodName, Class<?>... paramTypes) {
-        return runFunction(field.getType()::getMethod, methodName, paramTypes).orHandle(this::handleExceptions);
+        return runFunction((ThrowBiFunction<String, Class<?>[], Method, NoSuchMethodException>)
+                field.getType()::getMethod, methodName, paramTypes).orHandle(this::handleExceptions);
     }
 
     private Boolean isType(Field field) {
@@ -95,7 +105,8 @@ public class CoreContext {
     }
 
     private void execute(Field field, String methodName, Class<?>... types) {
-        Try.runMethod(getMethod(field, methodName, types)::invoke, getObject(field, object), parameters)
+        Try.runMethod((ThrowBiMethod<Object, Object[], ReflectiveOperationException>)
+                getMethod(field, methodName, types)::invoke, getObject(field, object), parameters)
                 .orHandle(this::handleExceptions);
     }
 

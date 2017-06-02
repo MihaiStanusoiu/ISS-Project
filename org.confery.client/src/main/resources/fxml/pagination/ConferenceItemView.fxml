@@ -24,7 +24,7 @@
                      </font>
                   </Label>
                   <Pane minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS" />
-                  <Label fx:id="acronymLabel" minHeight="0.0" minWidth="0.0" opacity="0.5" text="ACRONYM">
+                  <Label fx:id="acronymLabel" minHeight="0.0" minWidth="0.0" opacity="0.5" text="ACRON">
                      <font>
                         <Font name="Proxima Nova Bold" size="30.0" />
                      </font>

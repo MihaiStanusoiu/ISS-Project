@@ -1,4 +1,4 @@
-package controller.cell;
+package cellcontroller;
 
 import itemcontroller.PaginationControllerItemInterface;
 import javafx.fxml.FXML;
@@ -32,7 +32,6 @@ public class UserListCellController
 
     @Lazy
     @Autowired
-    @SuppressWarnings("unused")
     private StageManager manager;
 
     @Override
@@ -46,6 +45,10 @@ public class UserListCellController
 
     private void build() {
         nameLabel.setText(user.getName());
+    }
+
+    public BorderPane getRootPane() {
+        return rootPane;
     }
 
 }

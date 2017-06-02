@@ -67,13 +67,14 @@ public class ConferenceManager
                 .orThrow(thrower));
     }
 
+    @Override
     public List<Conference> getConferencesOf(User user) throws RemoteException {
         List<ConferenceEntity> entities = runFunction(model::getConferencesOf, userTranslator.translate(user)).orThrow(thrower);
         return entities.stream().map(entity -> translator.translate(entity)).collect(Collectors.toList());
     }
 
     private Boolean isChair(User user, EditionEntity edition) throws RemoteException {
-        return runFunction(edition::getChair).orThrow(thrower).equals(userTranslator.translate(user));
+        return edition.getChair().equals(userTranslator.translate(user));
     }
 
     @Override

@@ -125,7 +125,7 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         User user = runFunction(loginService::login, username, password).orHandle(printer);
-        basedOn(user != null).runTrue(this::makeUserActive, user);
+        basedOn(!user.getId().equals(0)).runTrue(this::makeUserActive, user);
     }
 
     private void makeUserActive(User user) {

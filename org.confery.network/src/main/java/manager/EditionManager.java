@@ -64,7 +64,7 @@ public class EditionManager extends GenericManager<Edition, Integer, EditionEnti
     }
 
     private UserEntity getEditionChair(Edition edition) throws RemoteException {
-        return runFunction(this.getEditionEntity(edition)::getChair).orThrow(thrower);
+        return this.getEditionEntity(edition).getChair();
     }
 
     private EditionEntity getEditionEntity(Edition edition) throws RemoteException {
