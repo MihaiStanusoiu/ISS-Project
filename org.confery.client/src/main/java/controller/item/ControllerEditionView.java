@@ -91,7 +91,6 @@ public class ControllerEditionView implements ControllerInterface, ControllerIte
         pcMembers.setItems(FXCollections.observableArrayList(pcMembersList));
     }
 
-    @SuppressWarnings("EmptyMethod")
     @FXML
     private void onSubmitPaperButtonClick() {
         // TODO Create Submit Paper FXML

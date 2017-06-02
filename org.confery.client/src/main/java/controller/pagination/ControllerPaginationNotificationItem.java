@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import manager.StageManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Component;
 import transfarable.Notification;
 import view.GradientGenerator;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.rmi.RemoteException;
 
 /**
@@ -56,7 +59,6 @@ public class ControllerPaginationNotificationItem
         build();
     }
 
-    @SuppressWarnings("EmptyMethod")
     @FXML
     public void onItemClick() { }
 
@@ -71,8 +73,22 @@ public class ControllerPaginationNotificationItem
                 generator.getGradient().getValue()));   /* sets a random gradient */
     }
 
+    public Pane getRootPane() {
+        return rootPane;
+    }
+
+    @Override
+    public double getWidth() {
+        return rootPane.getWidth();
+    }
+
+    @Override
+    public double getHeight() {
+        return rootPane.getHeight();
+    }
+
     @FXML
-    public void onPayButtonClick() {
+    public void onPayButtonClick() throws URISyntaxException, IOException {
         System.out.println("Pay Button Click");
     }
 
