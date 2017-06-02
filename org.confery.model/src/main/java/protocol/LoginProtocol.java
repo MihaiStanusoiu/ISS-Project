@@ -9,7 +9,7 @@ import exception.SystemException;
  */
 public interface LoginProtocol extends ModelInterface<LoginEntity, Integer> {
 
-    LoginEntity getByIp (String ip) throws SystemException;
+    LoginEntity getLoginDataByIp(String ip) throws SystemException;
 
-    UserEntity getById (String ip) throws SystemException;
+    UserEntity getUserByIp(String ip) throws SystemException;
 }

@@ -5,9 +5,13 @@ import transfarable.User;
 import java.rmi.RemoteException;
 
 /**
- * Created by Vlad on 6/1/2017.
+ * @author Vlad Teodorescu
+ * @version 1.0
  */
+
 public interface AuthenticationService extends ServiceInterface {
+
+    User getActiveUser() throws RemoteException;
 
     void addActiveUser(User user) throws RemoteException;
 

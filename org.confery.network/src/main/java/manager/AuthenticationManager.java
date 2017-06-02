@@ -1,32 +1,49 @@
 package manager;
 
 import domain.LoginEntity;
+import exception.SystemException;
 import protocol.LoginProtocol;
 import service.AuthenticationService;
 import transfarable.User;
+import translator.UserTranslator;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RemoteServer;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.function.Function;
 
 import static utils.Try.runFunction;
 
 /**
- * Created by Vlad on 6/1/2017.
+ * Tested: True
+ *
+ * @author Vlad Teodorescu
+ * @version 1.0
  */
-public class AuthenticationManager implements AuthenticationService {
+
+public class AuthenticationManager extends UnicastRemoteObject implements AuthenticationService {
 
     private LoginProtocol model;
+    private Function<SystemException, RemoteException> thrower;
+    private UserTranslator userTranslator;
 
-    public AuthenticationManager(LoginProtocol model) {
+    public AuthenticationManager(LoginProtocol model) throws RemoteException {
         this.model = model;
+        thrower = exception -> new RemoteException(exception.getMessage());
+        userTranslator = new UserTranslator();
+    }
+
+    @Override
+    public User getActiveUser() throws RemoteException {
+        return userTranslator.translate(runFunction(model::getUserByIp, getHost()).orThrow(thrower));
     }
 
     @Override
     public void addActiveUser(User user) throws RemoteException {
-        runFunction(model::add, new LoginEntity(user.getId(), getClientHost()));
+        runFunction(model::add, new LoginEntity(user.getId(), getHost()));
     }
 
-    private String getClientHost() throws RemoteException {
+    private String getHost() throws RemoteException {
         return runFunction(RemoteServer::getClientHost)
                 .orThrow(exception -> new RemoteException("Inactive Server!"));
     }
@@ -37,7 +54,8 @@ public class AuthenticationManager implements AuthenticationService {
     }
 
     private LoginEntity getLoginEntityByIp() throws RemoteException {
-        return runFunction(model::getByIp, getClientHost())
+        return runFunction(model::getLoginDataByIp, getHost())
                 .orThrow(exception -> new RemoteException(exception.getMessage()));
     }
+
 }

@@ -36,6 +36,7 @@ public class SubmissionManager extends GenericManager<Submission, Integer, Submi
 
     public SubmissionManager(SubmissionProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
+        this.model = model;
         this.translator = new SubmissionTranslator();
         this.checker = new SubmissionPermissionChecker();
     }

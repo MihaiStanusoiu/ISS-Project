@@ -1,8 +1,5 @@
 package service;
 
-import com.sun.org.apache.regexp.internal.RE;
-import transfarable.User;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

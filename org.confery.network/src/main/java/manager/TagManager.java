@@ -27,6 +27,7 @@ public class TagManager extends GenericManager<Tag, Integer, TagEntity> implemen
 
     public TagManager(TagProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
+        this.model = model;
         this.submissionTranslator = new SubmissionTranslator();
         this.translator = new TagTranslator();
         this.checker = new TagPermissionChecker();

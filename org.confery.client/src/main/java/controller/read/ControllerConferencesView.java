@@ -74,7 +74,7 @@ public class ControllerConferencesView implements ControllerInterface {
     @Override
     public void initialize() {
         logger = Logger.getLogger(StageManager.class);
-        handler = exception -> logger.error(exception.getMessage());
+        handler = exception -> logger.error(exception.getCause());
         conferenceService = runFunction(service::conferenceService).orHandle(handler);
         editionService = runFunction(service::editionService).orHandle(handler);
         List<Conference> items = runFunction(conferenceService::getAll).orHandle(handler);
@@ -108,12 +108,6 @@ public class ControllerConferencesView implements ControllerInterface {
                 conference.getName().toLowerCase().contains(name.toLowerCase())));
     }
 
-    private Integer getSizeEditions(List<Edition> editions) {
-        return editions.stream()
-                .map(edition -> runFunction(editionService::getAllMembersOf, edition).orHandle(handler).size())
-                .reduce(0, (accumulator, size) -> accumulator + size);
-    }
-
     private List<Edition> getEditions(Conference conference) {
         return runFunction(conferenceService::getEditionsOf, conference).orHandle(handler);
     }
@@ -125,14 +119,16 @@ public class ControllerConferencesView implements ControllerInterface {
     }
 
     private void sortConferenceByPopular() {
-        conferences.sort(Comparator.comparing(left -> getSizeEditions(getEditions(left))));
+        conferences.sort(Comparator.comparing(this::getTheNumberOfEditionsFor));
         updatePagination(conferences);
     }
 
-    private Edition getLatest(List<Edition> list) {
-        return list == null ? new Edition("none") :
-                list.stream().sorted(Comparator.comparing(Edition::getStartDate))
-                        .findFirst().orElse(new Edition("none"));
+    private Integer getTheNumberOfEditionsFor(Conference conference) {
+        return runFunction(conferenceService::getEditionsOf, conference).orHandle(handler).size();
+    }
+
+    private Edition getLatestEdition(Conference conference) {
+        return runFunction(conferenceService::getLatestEdition, conference).orHandle(handler);
     }
 
     @FXML
@@ -142,7 +138,7 @@ public class ControllerConferencesView implements ControllerInterface {
     }
 
     private void sortConferenceByRecent() {
-        conferences.sort(Comparator.comparing(left -> getLatest(getEditions(left)).getStartDate()));
+        conferences.sort(Comparator.comparing(element -> getLatestEdition(element).getStartDate()));
         updatePagination(conferences);
     }
 

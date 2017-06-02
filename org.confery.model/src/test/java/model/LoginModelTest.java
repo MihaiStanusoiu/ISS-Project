@@ -5,14 +5,19 @@ import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.LoginEntity;
 import domain.UserEntity;
+import nulldomain.NullUserEntity;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Vlad on 6/1/2017.
+ * Tested: True
+ *
+ * @author Vlad Teodorescu
+ * @version 1.0
  */
+
 public class LoginModelTest {
 
     private LoginModel loginModel;
@@ -34,7 +39,7 @@ public class LoginModelTest {
         loginModel.add(login);
         // when:
         // then:
-        assertEquals(loginModel.getByIp(login.getIp()), login);
+        assertEquals(loginModel.getLoginDataByIp(login.getHostUser()), login);
     }
 
     @Test
@@ -47,6 +52,16 @@ public class LoginModelTest {
         // when:
         loginModel.add(login);
         // then:
-        assertEquals(loginModel.getById(login.getIp()), user);
+        assertEquals(loginModel.getUserByIp(login.getHostUser()), user);
+    }
+
+    @Test
+    public void isNotGettingUserBasedOnIp() throws Exception {
+        // declarations:
+        LoginEntity login = new LoginEntity(1,0, "192.168.0.1");
+        // when:
+        loginModel.add(login);
+        // then:
+        assertEquals(loginModel.getUserByIp(login.getHostUser()), new NullUserEntity());
     }
 }

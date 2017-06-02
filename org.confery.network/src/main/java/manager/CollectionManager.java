@@ -1,15 +1,8 @@
 package manager;
 
-import com.sun.org.apache.regexp.internal.RE;
-import domain.UserEntity;
 import service.*;
-import transfarable.User;
 
 import java.rmi.RemoteException;
-import java.util.List;
-
-import static java.util.Arrays.asList;
-import static utils.Try.runMethod;
 
 /**
  * @author Alexandru Stoica
@@ -66,7 +59,7 @@ public class CollectionManager implements CollectionService {
     }
 
     @Override
-    public SignUpService signUpService() throws RemoteException  {
+    public SignUpService signUpService() throws RemoteException {
         return signUpService;
     }
 

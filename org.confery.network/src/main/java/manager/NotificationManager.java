@@ -31,6 +31,7 @@ public class NotificationManager extends GenericManager<Notification, Integer, N
 
     public NotificationManager(NotificationProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
+        this.model = model;
         checker = new NotificationPermissionChecker();
         translator = new NotificationTranslator();
         userTranslator = new UserTranslator();

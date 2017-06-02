@@ -27,6 +27,7 @@ public class TopicManager extends GenericManager<Topic, Integer, TopicEntity> im
 
     public TopicManager(TopicProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
+        this.model = model;
         super.translator = new TopicTranslator();
         super.checker = new TopicPermissionChecker();
         submissionTranslator = new SubmissionTranslator();
