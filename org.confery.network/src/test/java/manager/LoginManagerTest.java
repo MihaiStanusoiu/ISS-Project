@@ -39,7 +39,7 @@ public class LoginManagerTest {
     public void setUp() throws Exception {
         NotificationCenter center = PowerMockito.mock(NotificationCenter.class);
         model = PowerMockito.mock(UserModel.class);
-        manager = new LoginManager(center, model);
+        //manager = new LoginManager(center, model);
     }
 
     @Test

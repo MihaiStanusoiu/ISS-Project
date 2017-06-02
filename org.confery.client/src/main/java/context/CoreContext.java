@@ -69,9 +69,16 @@ public class CoreContext {
         return this;
     }
 
-    public void run(SimpleMethod<Object> function) {
+    public CoreContext run(SimpleMethod<Object> method) {
         Conditional.basedOn(condition).runTrue(() -> fields.stream().filter(this::isType).filter(this::inObject)
-                .forEach(field -> function.accept(getObject(field, object))));
+                .forEach(field -> method.accept(getObject(field, object))));
+        return this;
+    }
+
+    public CoreContext or(SimpleMethod<Object> method) {
+        Conditional.basedOn(!condition).runTrue(() -> fields.stream().filter(this::isType).filter(this::inObject)
+                .forEach(field -> method.accept(getObject(field, object))));
+        return this;
     }
 
     @SuppressWarnings("unused")

@@ -10,8 +10,8 @@ import protocol.ConferenceProtocol;
 import repository.RepositoryEntity;
 import repository.RepositoryInterface;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static utils.Conditional.basedOn;
 import static utils.Try.runMethod;
@@ -49,14 +49,8 @@ public class ConferenceModel
 
     @Override
     public List<ConferenceEntity> getConferencesOf(UserEntity user) throws SystemException {
-        List<ConferenceEntity> result = new ArrayList<>();
-        for(ConferenceEntity c : getAll())
-        {
-            if(c.getLatestEdition().getChair() != null &&  c.getLatestEdition().getChair().getId().equals(user.getId()))
-            {
-                result.add(c);
-            }
-        }
-        return result;
+        return getAll().stream()
+                .filter(conference -> conference.getLatestEdition().getChair().getId().equals(user.getId()))
+                .collect(Collectors.toList());
     }
 }

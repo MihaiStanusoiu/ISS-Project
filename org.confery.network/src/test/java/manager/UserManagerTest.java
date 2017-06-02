@@ -30,10 +30,10 @@ public class UserManagerTest {
     @Before
     public void setUp() throws Exception {
         model = PowerMockito.mock(UserModel.class);
-        manager = new UserManager(model);
+        //manager = new UserManager(model);
         active = new User(1, "username", "password", "email",
                 "name", "website", "bio", "location" );
-        manager.activeUser(active);
+        //manager.activeUser(active);
         translator = new UserTranslator();
     }
 

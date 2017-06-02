@@ -25,6 +25,7 @@ public class StageManager implements Serializable {
 
     private final Stage primaryStage;           // the application's primary stage
     private final SpringFXMLLoader loader;      // the fxml loader with DI
+    private ViewType lastVisited;
 
     @Getter
     public Stage getPrimaryStage() {
@@ -51,6 +52,7 @@ public class StageManager implements Serializable {
     public void switchScene(final ViewType type) {
         Parent root = getRootNode(type.getFXMLFile());
         show(root, type.getTitle());
+        lastVisited = type;
     }
 
     /**
@@ -64,6 +66,15 @@ public class StageManager implements Serializable {
     public <T> void switchScene(final ViewType type, T element) {
         Parent root = getRootNode(type.getFXMLFile(), element);
         show(root, type.getTitle());
+        lastVisited = type;
+    }
+
+    public <T> void refresh(T element) {
+        switchScene(lastVisited, element);
+    }
+
+    public void refresh() {
+        switchScene(lastVisited);
     }
 
     /**
