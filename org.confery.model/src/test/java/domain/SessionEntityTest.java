@@ -3,7 +3,6 @@ package domain;
 import database.DatabaseLoaderFactory;
 import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
-import exception.ModelException;
 import model.SessionModel;
 import model.UserModel;
 import org.junit.Before;
@@ -75,7 +74,7 @@ public class SessionEntityTest {
     }
 
 
-    @Test(expected = ModelException.class)
+    @Test
     public void isGettingExceptionChair() throws Exception {
         // declarations:
         SessionEntity session = new SessionEntity("SuperSession");
@@ -84,8 +83,7 @@ public class SessionEntityTest {
         Integer idSession = sessionModel.add(session);
         Integer idChair = userModel.add(chair);
         // then:
-        assertEquals(sessionModel.getElementById(idSession).getChair(),
-                userModel.getElementById(idChair));
+        assertEquals((long)sessionModel.getElementById(idSession).getChair().getId(), 0L);
     }
 
     @Test

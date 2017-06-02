@@ -189,18 +189,10 @@ public class PaginationManager<T, E extends PaginationControllerItemInterface<T>
      * @param indexRow      The row's index
      */
     private void addItem(GridPane pane,
-                         Integer startingPoint,
-                         Integer indexData,
-                         Integer indexColumn,
-                         Integer indexRow) {
-
-//            ItemFXMLLoader<T, E> loader = new ItemFXMLLoader<>(view);
-//            loader.setElement(elements.get(indexData));
-//            loader.setStageManager(stageManager);
-            //stageManager.getRootNode(view.getFXMLFile(), elements.get(indexData));
-            pane.add(stageManager.getRootNode(view.getFXMLFile(), elements.get(indexData)),
-                    indexColumn - startingPoint, indexRow - 1);
-
+                         Integer startingPoint, Integer indexData,
+                         Integer indexColumn, Integer indexRow) {
+        pane.add(stageManager.getRootNode(view.getFXMLFile(), elements.get(indexData)),
+                indexColumn - startingPoint, indexRow - 1);
     }
 
     /**

@@ -194,6 +194,20 @@ public enum ViewType implements ViewTypeInterface {
         public String getFXMLFile() {
             return "/fxml/add/AddSubmissionView.fxml";
         }
+    },
+
+    SESSION_ITEM {
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/pagination/SessionItemView.fxml";
+        }
+    },
+
+    SESSION {
+        @Override
+        public String getFXMLFile() {
+            return "/fxml/entity/SessionView.fxml";
+        }
     };
 
     /**

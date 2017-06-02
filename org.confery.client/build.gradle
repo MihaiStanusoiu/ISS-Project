@@ -32,6 +32,8 @@ jar {
 	manifest {
 		attributes 'Main-Class': 'com.main.Main'
 	}
+    baseName = 'test-app'
+    version =  '0.1.0'
 }
 
 dependencies {
@@ -48,12 +50,14 @@ dependencies {
     // Spring
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile("org.springframework.boot:spring-boot-starter-actuator")
-
     compile 'eu.lestard:advanced-bindings:0.4.0'
+    compile group: 'org.springframework', name: 'spring-test', version: '4.0.5.RELEASE'
+
 
     // TestFX
     testCompile "org.testfx:testfx-core:4.0.+"
     testCompile "org.testfx:testfx-junit:4.0.+"
+
     compile group: 'org.jfxtras', name: 'openjfx-monocle', version: '1.8.0_20'
 	testCompile "org.testfx:testfx-legacy:4.0.+", {
 		exclude group: "junit", module: "junit"

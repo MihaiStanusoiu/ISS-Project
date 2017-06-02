@@ -52,7 +52,6 @@ gradle/
 org.confery.client/build/
 org.confery.client/gradle/
 org.confery.client/src/main/kotlin/
-org.confery.client/src/test/
 org.confery.model/build/
 org.confery.model/gradle/
 org.confery.model/src/test/resources/
