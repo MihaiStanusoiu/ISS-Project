@@ -16,7 +16,7 @@ import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 
 /**
- * @author Alexandru Stoica & Tiron Andreea - Ecaterina
+ * @author Tiron Andreea - Ecaterina
  * @version 1.0
  */
 

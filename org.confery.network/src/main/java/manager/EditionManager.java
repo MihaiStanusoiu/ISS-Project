@@ -2,7 +2,6 @@ package manager;
 
 import checker.EditionPermissionChecker;
 import domain.EditionEntity;
-import domain.MemberRole;
 import domain.UserEntity;
 import protocol.EditionProtocol;
 import protocol.LoginProtocol;
@@ -32,6 +31,7 @@ public class EditionManager extends GenericManager<Edition, Integer, EditionEnti
 
     public EditionManager(EditionProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
+        this.model = model;
         checker = new EditionPermissionChecker();
         translator = new EditionTranslator();
         userTranslator = new UserTranslator();

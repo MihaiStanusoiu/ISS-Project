@@ -15,31 +15,32 @@ public class LoginEntity implements Serializable, Idable<Integer> {
 
     @Id
     @GeneratedValue
-    @Column(name = "ID_LOGIN")
+    @Column(name = "ID")
     private Integer id;
 
     @Column(name = "ID_USER")
-    private Integer id_user;
+    private Integer idUser;
 
-    @Column(name = "IP")
-    private String ip;
+    @Column(name = "HOST_USER")
+    private String hostUser;
 
     private static final Integer DEFAULT_ID = 0;
 
+    @Deprecated
     public LoginEntity() {
         this.id = DEFAULT_ID;
-        this.id_user = DEFAULT_ID;
-        this.ip = "";
+        this.idUser = DEFAULT_ID;
+        this.hostUser = "";
     }
 
-    public LoginEntity(Integer id, Integer id_user, String ip) {
+    public LoginEntity(Integer id, Integer idUser, String hostUser) {
         this.id = id;
-        this.id_user = id_user;
-        this.ip = ip;
+        this.idUser = idUser;
+        this.hostUser = hostUser;
     }
 
-    public LoginEntity(Integer id_user, String ip) {
-        this(0, id_user, ip);
+    public LoginEntity(Integer idUser, String hostUser) {
+        this(0, idUser, hostUser);
     }
 
     /**
@@ -63,21 +64,12 @@ public class LoginEntity implements Serializable, Idable<Integer> {
     }
 
     /**
-     * Effect: Returns the ip of the logged user
+     * Effect: Returns the hostUser of the logged user
      *
-     * @return [String]: ip of the logged user
+     * @return [String]: hostUser of the logged user
      */
-    public String getIp() {
-        return ip;
-    }
-
-    /**
-     * Effect: Sets the ip to the given value
-     *
-     * @param ip [String]: new value for the ip
-     */
-    public void setIp(String ip) {
-        this.ip = ip;
+    public String getHostUser() {
+        return hostUser;
     }
 
     /**
@@ -85,21 +77,8 @@ public class LoginEntity implements Serializable, Idable<Integer> {
      *
      * @return [Integer]: id of the logged user
      */
-    public Integer getId_user() {
-        return id_user;
-    }
-
-    /**
-     * Effect: Sets the id to the given value
-     *
-     * @param id_user [Integer]: new value for the id
-     */
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
-    }
-
-    public static Integer getDefaultId() {
-        return DEFAULT_ID;
+    public Integer getIdUser() {
+        return idUser;
     }
 
     @Override
@@ -108,14 +87,14 @@ public class LoginEntity implements Serializable, Idable<Integer> {
         if (o == null || getClass() != o.getClass()) return false;
         LoginEntity that = (LoginEntity) o;
         return id.equals(that.id) &&
-                (ip != null ? ip.equals(that.ip) : that.ip == null);
+                (hostUser != null ? hostUser.equals(that.hostUser) : that.hostUser == null);
     }
 
     @Override
     public int hashCode() {
         int result = id.hashCode();
-        result = 31 * result + (ip != null ? ip.hashCode() : 0);
-        result = 31 *  result + (id_user != 0 ? id_user.hashCode() : 0);
+        result = 31 * result + (hostUser != null ? hostUser.hashCode() : 0);
+        result = 31 *  result + (idUser != 0 ? idUser.hashCode() : 0);
         return result;
     }
 }

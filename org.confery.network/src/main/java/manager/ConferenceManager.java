@@ -5,7 +5,6 @@ import domain.ConferenceEntity;
 import domain.EditionEntity;
 import domain.UserEntity;
 import protocol.ConferenceProtocol;
-import protocol.EditionProtocol;
 import protocol.LoginProtocol;
 import service.ConferenceService;
 import transfarable.Conference;
@@ -16,7 +15,6 @@ import translator.EditionTranslator;
 import translator.UserTranslator;
 
 import java.rmi.RemoteException;
-import java.rmi.server.RemoteServer;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +24,7 @@ import static utils.Try.runFunction;
 /**
  * Created by Mike on 5/30/2017.
  */
+
 public class ConferenceManager
         extends GenericManager<Conference, Integer, ConferenceEntity>
         implements ConferenceService {
@@ -36,6 +35,7 @@ public class ConferenceManager
 
     public ConferenceManager(ConferenceProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
+        this.model = model;
         checker = new ConferencePermissionChecker();
         translator = new ConferenceTranslator();
         userTranslator = new UserTranslator();

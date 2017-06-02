@@ -12,7 +12,6 @@ import translator.GenericTranslator;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.RemoteServer;
-import java.rmi.server.ServerNotActiveException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.function.Function;
@@ -54,7 +53,7 @@ public class GenericManager<TransferT, Id extends Serializable, EntityT extends 
     protected UserEntity getActiveUser() throws RemoteException {
         String host = runFunction(RemoteServer::getClientHost)
                 .orThrow(exception -> new RemoteException(exception.getMessage()));
-        return runFunction(provider::getById, host).getElement();
+        return runFunction(provider::getUserByIp, host).getElement();
     }
 
     @Override

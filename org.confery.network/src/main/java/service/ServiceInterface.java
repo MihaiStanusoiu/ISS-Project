@@ -1,10 +1,7 @@
 package service;
 
 
-import transfarable.User;
-
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 
 /**
  * @author Alexandru Stoica

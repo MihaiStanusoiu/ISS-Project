@@ -45,7 +45,7 @@ public class SignUpManager extends UnicastRemoteObject implements SignUpService 
     private UserEntity getActiveUser() throws RemoteException {
         String host = runFunction(RemoteServer::getClientHost)
                 .orThrow(exception -> new RemoteException(exception.getMessage()));
-        return runFunction(provider::getById, host).getElement();
+        return runFunction(provider::getUserByIp, host).getElement();
     }
 
     private Integer countDigitLetters(String string) {

@@ -17,9 +17,9 @@ public class ValidatorRepositoryBehaviourLoginEntity extends ValidatorRepository
                 .runTrue(accumulator::add, "Logged in user is NULL!");
         basedOn(Objects.isNull(object.getId()))
                 .runTrue(accumulator::add, "Logged id is NULL!");
-        basedOn(Objects.isNull(object.getIp()))
+        basedOn(Objects.isNull(object.getHostUser()))
                 .runTrue(accumulator::add, "Logged in user's ip is NULL!");
-        basedOn(Objects.isNull(object.getId_user()))
+        basedOn(Objects.isNull(object.getIdUser()))
                 .runTrue(accumulator::add, "Logged in user's ip is NULL!");
         return accumulator;
     }

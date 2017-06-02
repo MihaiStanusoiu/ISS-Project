@@ -52,7 +52,7 @@ public class LoginManager
     private UserEntity getActiveUser() throws RemoteException {
         String host = runFunction(RemoteServer::getClientHost)
                 .orThrow(exception -> new RemoteException(exception.getMessage()));
-        return runFunction(provider::getById, host).getElement();
+        return runFunction(provider::getUserByIp, host).getElement();
     }
 
     @Override

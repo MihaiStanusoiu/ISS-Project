@@ -4,7 +4,6 @@ import checker.SessionPermissionChecker;
 import domain.SessionEntity;
 import domain.UserEntity;
 import protocol.LoginProtocol;
-import protocol.ModelInterface;
 import protocol.SessionProtocol;
 import service.SessionService;
 import transfarable.MemberRoleTransferable;
@@ -32,11 +31,11 @@ public class SessionManager extends GenericManager<Session, Integer, SessionEnti
     private MemberRoleTranslator memberRoleTranslator;
     protected SessionProtocol model;
 
-    public SessionManager(ModelInterface<SessionEntity, Integer> model, LoginProtocol loginProtocol) throws RemoteException {
+    public SessionManager(SessionProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
+        this.model = model;
         checker = new SessionPermissionChecker();
         translator = new SessionTranslator();
-
     }
 
     @Override
@@ -63,7 +62,7 @@ public class SessionManager extends GenericManager<Session, Integer, SessionEnti
         UserEntity active = getActiveUser();
         basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(session)))
                 .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::addMemberTo, translator.translate(session),userTranslator.translate(user),
+        return translator.translate(runFunction(model::addMemberTo, translator.translate(session), userTranslator.translate(user),
                 memberRoleTranslator.translate(role)).orThrow(thrower));
     }
 
@@ -73,7 +72,7 @@ public class SessionManager extends GenericManager<Session, Integer, SessionEnti
         basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(session)))
                 .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
         return translator.translate(runFunction(model::removeMemberFrom,
-                translator.translate(session),userTranslator.translate(user)).orThrow(thrower));
+                translator.translate(session), userTranslator.translate(user)).orThrow(thrower));
     }
 
 
