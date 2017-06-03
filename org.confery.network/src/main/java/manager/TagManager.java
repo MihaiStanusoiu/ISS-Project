@@ -21,23 +21,29 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
-public class TagManager extends GenericManager<Tag, Integer, TagEntity> implements TagService {
+public class TagManager
+        extends GenericManager<Tag, Integer, TagEntity>
+        implements TagService {
 
     private final SubmissionTranslator submissionTranslator;
 
     public TagManager(TagProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
         this.model = model;
-        this.submissionTranslator = new SubmissionTranslator();
-        this.translator = new TagTranslator();
-        this.checker = new TagPermissionChecker();
+        submissionTranslator = new SubmissionTranslator();
+        translator = new TagTranslator();
+        checker = new TagPermissionChecker();
     }
 
     @Override
     public List<Submission> getSubmissionsFromTag(Tag tag) throws RemoteException{
-        return runFunction(model::getElementById, tag.getId()).orThrow(thrower)
-                .getSubmissions().stream()
+        return getTagFromDatabase(tag).getSubmissions().stream()
                 .map(submissionTranslator::translate)
                 .collect(Collectors.toList());
     }
+
+    private TagEntity getTagFromDatabase(Tag tag) throws RemoteException {
+        return runFunction(model::getElementById, tag.getId()).orThrow(thrower);
+    }
+
 }

@@ -9,6 +9,12 @@ import java.util.List;
 
 public interface UserService extends Service<User, Integer, UserEntity> {
 
+    List<User> findUsersByUsername(String username) throws RemoteException;
+
+    User findUserByUsername(String username) throws RemoteException;
+
+    List<Notification> getNotificationsFrom(User user) throws RemoteException;
+
     List<Session> getSessionsForUser(User user) throws RemoteException;
 
     List<Edition> getEditionsForUser(User user) throws RemoteException;

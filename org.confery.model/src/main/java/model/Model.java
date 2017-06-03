@@ -21,9 +21,15 @@ import java.util.List;
 public class Model<T extends Idable<Id>, Id extends Serializable> implements ModelInterface<T, Id> {
 
     protected RepositoryInterface<T, Id> repository;
+    private DatabaseLoaderInterface loader;
 
     protected Model(Class<T> entityClass, DatabaseLoaderInterface loader) {
+        this.loader = loader;
         repository = new RepositoryEntity<>(entityClass, loader);
+    }
+
+    public DatabaseLoaderInterface getLoader() {
+        return loader;
     }
 
     /**

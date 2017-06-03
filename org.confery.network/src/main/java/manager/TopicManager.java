@@ -21,7 +21,9 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
-public class TopicManager extends GenericManager<Topic, Integer, TopicEntity> implements TopicService {
+public class TopicManager
+        extends GenericManager<Topic, Integer, TopicEntity>
+        implements TopicService {
 
     private final SubmissionTranslator submissionTranslator;
 
@@ -35,9 +37,13 @@ public class TopicManager extends GenericManager<Topic, Integer, TopicEntity> im
 
     @Override
     public List<Submission> getSubmissionsFromTopic(Topic topic) throws RemoteException {
-        return runFunction(model::getElementById, topic.getId()).orThrow(thrower)
-                .getSubmissions().stream()
+        return getTopicFromDatabase(topic).getSubmissions().stream()
                 .map(submissionTranslator::translate)
                 .collect(Collectors.toList());
     }
+
+    private TopicEntity getTopicFromDatabase(Topic topic) throws RemoteException {
+        return runFunction(model::getElementById, topic.getId()).orThrow(thrower);
+    }
+
 }

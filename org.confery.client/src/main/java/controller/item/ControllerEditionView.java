@@ -12,6 +12,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import list.ListViewBuilder;
 import manager.StageManager;
 import method.SimpleMethod;
 import org.apache.log4j.Logger;
@@ -21,7 +22,11 @@ import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
 import service.CollectionService;
 import service.EditionService;
-import transfarable.*;
+import transfarable.Edition;
+import transfarable.Session;
+import transfarable.Submission;
+import transfarable.User;
+import view.Icon;
 import view.ViewType;
 
 import java.rmi.RemoteException;
@@ -30,7 +35,6 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static utils.Try.runFunction;
-
 
 /**
  * @author Alexandru Stoica
@@ -80,8 +84,6 @@ public class ControllerEditionView implements ControllerInterface, ControllerIte
     @FXML
     private Pagination pagination;
 
-    private ObservableList<Session> sessions;
-
     private Edition edition;
 
     @Lazy
@@ -118,9 +120,9 @@ public class ControllerEditionView implements ControllerInterface, ControllerIte
     }
 
     private void setUpSessionsPagination() {
-        List<Session> sessions = runFunction(editionService::getAllSessionsOf, edition).orHandle(handler);
-        this.sessions = FXCollections.observableArrayList(sessions);
-        pagination = updatePagination(this.sessions);
+        List<Session> items = runFunction(editionService::getAllSessionsOf, edition).orHandle(handler);
+        ObservableList<Session> sessions = FXCollections.observableArrayList(items);
+        pagination = updatePagination(sessions);
     }
 
     @SuppressWarnings("unchecked")
@@ -134,13 +136,47 @@ public class ControllerEditionView implements ControllerInterface, ControllerIte
                 .build(GridPane.class);
     }
 
+    private ObservableList<User> coChairList;
+    private ObservableList<User> pcMemberList;
+    private ObservableList<User> chairList;
+
     private void buildLists() {
+        getMembersData();
+        setItemsInListView();
+        setUpListViews();
+    }
+
+    private void setItemsInListView() {
+        chairs.setItems(chairList);
+        pcMembers.setItems(pcMemberList);
+        coChairs.setItems(coChairList);
+    }
+
+    private void getMembersData() {
         User chair = runFunction(editionService::getChair, edition).orHandle(handler);
-        List<User> coChairs = runFunction(editionService::getCoChairsOf, edition).orHandle(handler);
-        List<User> pcMembers = runFunction(editionService::getPcMembersOf, edition).orHandle(handler);
-        chairs.setItems(FXCollections.observableArrayList(Collections.singletonList(chair)));
-        this.coChairs.setItems(FXCollections.observableArrayList(coChairs));
-        this.pcMembers.setItems(FXCollections.observableArrayList(pcMembers));
+        chairList = FXCollections.observableList(Collections.singletonList(chair));
+        coChairList = FXCollections.observableList(runFunction(editionService::getCoChairsOf,
+                edition).orHandle(handler));
+        pcMemberList = FXCollections.observableList(runFunction(editionService::getPcMembersOf,
+                edition).orHandle(handler));
+    }
+
+    private void setUpListViews() {
+        coChairs = new ListViewBuilder<>(coChairs)
+                .setIcon(Icon.CLOSE)
+                .visibleText(User::getName)
+                .setAction((list, item) -> Boolean.TRUE, coChairList)
+                .build();
+        chairs = new ListViewBuilder<>(chairs)
+                .setIcon(Icon.CLOSE)
+                .visibleText(User::getName)
+                .setAction((list, item) -> Boolean.TRUE, chairList)
+                .build();
+        pcMembers = new ListViewBuilder<>(pcMembers)
+                .setIcon(Icon.CLOSE)
+                .visibleText(User::getName)
+                .setAction((list, item) -> Boolean.TRUE, pcMemberList)
+                .build();
     }
 
     private void setUpLists() {

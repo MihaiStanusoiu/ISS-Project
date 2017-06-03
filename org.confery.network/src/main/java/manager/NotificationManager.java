@@ -23,10 +23,11 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
-public class NotificationManager extends GenericManager<Notification, Integer, NotificationEntity> implements NotificationService {
+public class NotificationManager
+        extends GenericManager<Notification, Integer, NotificationEntity>
+        implements NotificationService {
 
     private UserTranslator userTranslator;
-
     protected NotificationProtocol model;
 
     public NotificationManager(NotificationProtocol model, LoginProtocol loginProtocol) throws RemoteException {
@@ -39,35 +40,34 @@ public class NotificationManager extends GenericManager<Notification, Integer, N
 
     @Override
     public User getUser(Notification notification) throws RemoteException {
-        return userTranslator.translate(getUserEntity(notification));
+        return userTranslator.translate(getNotificationFromDatabase(notification).getUser());
     }
 
-    private UserEntity getUserEntity(Notification notification) throws RemoteException {
-        return getNotificationEntity(notification).getUser();
-    }
-
-    private NotificationEntity getNotificationEntity(Notification notification) throws RemoteException {
+    private NotificationEntity getNotificationFromDatabase(Notification notification) throws RemoteException {
         return runFunction(model::getElementById, notification.getId()).orThrow(thrower);
     }
 
     @Override
     public Notification sendNotificationToUser(User user, Notification notification) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(notification)))
+        checkUserPermissions(notification);
+        return translator.translate(runFunction(model::sendNotificationTo, userTranslator.translate(user),
+                getNotificationFromDatabase(notification)).orThrow(thrower));
+    }
+
+    private void checkUserPermissions(Notification notification) throws RemoteException {
+        basedOn(checker.isAllowed(getActiveUser()).toUpdate().theObject(getNotificationFromDatabase(notification)))
                 .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::sendNotificationTo,
-                userTranslator.translate(user), translator.translate(notification)).orThrow(thrower));
     }
 
     @Override
     public Notification sendNotificationToUsers(List<User> users, Notification notification) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(notification)))
-                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        List<UserEntity> entities = users.stream()
-                .map(user -> userTranslator.translate(user))
-                .collect(Collectors.toList());
-        return translator.translate(runFunction(model::sendNotificationToUsers, entities,
-                translator.translate(notification)).orThrow(thrower));
+        checkUserPermissions(notification);
+        return translator.translate(runFunction(model::sendNotificationToUsers, translateUsers(users),
+                getNotificationFromDatabase(notification)).orThrow(thrower));
     }
+
+    private List<UserEntity> translateUsers(List<User> users) {
+        return users.stream().map(user -> userTranslator.translate(user)).collect(Collectors.toList());
+    }
+
 }

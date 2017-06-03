@@ -18,6 +18,8 @@ public interface EditionService extends Service<Edition, Integer, EditionEntity>
 
     User getChair(Edition edition) throws RemoteException;
 
+    Edition addChairToEdition(Edition edition, User user) throws RemoteException;
+
     Edition addMemberToEdition(Edition edition, User user, MemberRoleTransferable memberRole) throws RemoteException;
 
     Edition deleteMemberOfEdition(Edition edition, User user) throws RemoteException;

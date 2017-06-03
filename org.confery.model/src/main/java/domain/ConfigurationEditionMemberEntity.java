@@ -16,7 +16,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "CONFIGURATION_EDITION_MEMBER")
-@SuppressWarnings("unused")
 public class ConfigurationEditionMemberEntity implements Idable<Integer> {
 
     @Id
@@ -78,15 +77,6 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the editionMembers of the conference member.
-     *
-     * @param editionMembers : new value for editionMembers
-     */
-    public void setEditionMembers(Set<EditionMemberEntity> editionMembers) {
-        this.editionMembers = editionMembers;
-    }
-
-    /**
      * Effect: Returns the id of the conference member.
      *
      * @return [Integer] : returns the id.
@@ -109,7 +99,6 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
      *
      * @return [Boolean] : returns true if it is a chair, false otherwise.
      */
-    @SuppressWarnings("unused")
     public Boolean getChair() {
         return isChair;
     }
@@ -119,7 +108,6 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
      *
      * @param chair: new value for chair.
      */
-    @SuppressWarnings("unused")
     public void setChair(Boolean chair) {
         isChair = chair;
     }
@@ -129,19 +117,8 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
      *
      * @return [Boolean] : returns true if it is a co-chair, false otherwise.
      */
-    @SuppressWarnings("unused")
     public Boolean getCoChair() {
         return isCoChair;
-    }
-
-    /**
-     * Effect: Sets whether the user is a co-chair.
-     *
-     * @param coChair: new value for co-chair.
-     */
-    @SuppressWarnings("unused")
-    public void setCoChair(Boolean coChair) {
-        isCoChair = coChair;
     }
 
     /**
@@ -149,19 +126,8 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
      *
      * @return [Boolean] : returns true if it is a pc-member, false otherwise.
      */
-    @SuppressWarnings("unused")
     public Boolean getPcMember() {
         return isPcMember;
-    }
-
-    /**
-     * Effect: Sets whether the user is a pc-member.
-     *
-     * @param pcMember: new value for pc-member.
-     */
-    @SuppressWarnings("unused")
-    public void setPcMember(Boolean pcMember) {
-        isPcMember = pcMember;
     }
 
     @Override

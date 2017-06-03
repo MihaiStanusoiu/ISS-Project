@@ -162,4 +162,16 @@ public class UserModelTest {
         assertEquals(user.getNotifications().size(), 0);
     }
 
+    @Test
+    public void isFindingUserByUsername() throws Exception {
+        // declarations:
+        UserEntity user = new UserEntity("username", "password");
+        UserEntity test = new UserEntity("test", "test");
+        // preconditions:
+        userModel.add(user);
+        userModel.add(test);
+        // when & then:
+        assertTrue(userModel.findUserByUsername("test").getId().equals(2));
+        assertTrue(userModel.findUsersByUsername("username").contains(user));
+    }
 }

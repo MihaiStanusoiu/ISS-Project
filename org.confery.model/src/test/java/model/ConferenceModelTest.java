@@ -14,6 +14,7 @@ import protocol.EditionProtocol;
 import protocol.UserProtocol;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Alexandru Stoica
@@ -37,9 +38,9 @@ public class ConferenceModelTest {
     @Test
     public void isGettingConferencesForUser() throws Exception {
         // declarations:
-        ConferenceEntity conference = new ConferenceEntity("Test");
+        ConferenceEntity conference = new ConferenceEntity("TestTest");
         EditionEntity edition = new EditionEntity("Test");
-        UserEntity user = new UserEntity("Test", "test");
+        UserEntity user = new UserEntity("User", "test");
         // preconditions:
         modelConference.add(conference);
         modelEdition.add(edition);
@@ -51,4 +52,35 @@ public class ConferenceModelTest {
         assertEquals(modelConference.getConferencesOf(user).stream().anyMatch(item -> item.getId().equals(id)), Boolean.TRUE);
     }
 
+    @Test
+    public void isAddingEditionTo() throws Exception {
+        // declaration:
+        ConferenceEntity conference = new ConferenceEntity("Test");
+        EditionEntity edition = new EditionEntity("test");
+        // preconditions:
+        //modelEdition.add(edition);
+        modelConference.add(conference);
+        modelEdition.add(edition);
+        // when:
+        conference = modelConference.addEditionTo(conference, edition);
+        // then:
+        assertEquals(modelEdition.getAll().size(), 1);
+        assertEquals(modelEdition.getElementById(1).getLocation(), edition.getLocation());
+        assertTrue(conference.getEditions().stream().anyMatch(item -> item.getId().equals(edition.getId())));
+    }
+
+    @Test
+    public void isRemovingEditionFrom() throws Exception {
+        // declaration:
+        ConferenceEntity conference = new ConferenceEntity("Test");
+        EditionEntity edition = new EditionEntity("test");
+        // preconditions:
+        modelEdition.add(edition);
+        modelConference.add(conference);
+        // when:
+        conference = modelConference.addEditionTo(conference, edition);
+        conference = modelConference.removeEditionFrom(conference, edition);
+        // then:
+        assertTrue(conference.getEditions().stream().noneMatch(item -> item.getId().equals(edition.getId())));
+    }
 }
