@@ -9,6 +9,7 @@ import service.EditionService;
 import service.SessionService;
 import transfarable.Conference;
 import transfarable.Edition;
+import transfarable.IdableTransfer;
 import transfarable.User;
 
 import java.rmi.RemoteException;
@@ -22,7 +23,7 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
-public class ConferenceContext {
+public class ConferenceContext implements IdableTransfer<Integer>{
 
     private Conference conference;
     private ObservableList<EditionContext> editionContexts;
@@ -127,4 +128,7 @@ public class ConferenceContext {
         return runFunction(conferenceService::getElementById, id).orHandle(handler);
     }
 
+    @Override public Integer getId() {
+        return conference.getId();
+    }
 }

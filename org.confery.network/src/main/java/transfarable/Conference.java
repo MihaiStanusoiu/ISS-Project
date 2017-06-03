@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author Alexandru Stoica
  * @version 1.0
  */
-public class Conference implements Serializable {
+public class Conference implements Serializable, IdableTransfer<Integer> {
 
     private Integer id;
     private String name;

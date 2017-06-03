@@ -39,4 +39,12 @@ public interface ConferenceProtocol extends ModelInterface<ConferenceEntity, Int
      */
     List<ConferenceEntity> getConferencesOf(UserEntity user) throws SystemException;
 
+    /**
+     * Returns the chair of the conference.
+     * @param conference: The target conference
+     * @return The conferences chair
+     * @throws SystemException If the conference is not in the database.
+     */
+    UserEntity getChairOf(ConferenceEntity conference) throws SystemException;
+
 }

@@ -20,4 +20,6 @@ public interface ConferenceService extends Service<Conference, Integer, Conferen
     Conference removeEditionFromConference (Conference conference, Edition edition) throws RemoteException;
 
     List<Conference> getConferencesOf(User user) throws RemoteException;
+
+    User getChairOf(Conference conference) throws RemoteException;
 }

@@ -14,6 +14,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import org.jetbrains.annotations.NotNull;
+import service.Service;
+import transfarable.IdableTransfer;
 import view.Icon;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 
 /**
@@ -28,13 +31,14 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
-public class GeneralCell<T> extends ListCell<T> {
+public class GeneralCell<T extends IdableTransfer<?>> extends ListCell<T> {
 
     private Function<T, String> textProvider = Object::toString;
     private BiFunction<List<T>, T, Boolean> action = (list, item) -> Boolean.TRUE;
     private List<T> list = new ArrayList<>();
     private Icon icon;
-
+    private BiFunction<Service<T, ?, ?>, T, ?> function;
+    private Service<T, ?, ?> service;
 
     @Override
     protected void updateItem(T item, boolean empty) {
@@ -81,8 +85,14 @@ public class GeneralCell<T> extends ListCell<T> {
         Button button = new Button();
         button.setStyle(getBackgroundBasedOnColor("transparent"));
         button.setGraphic(getIcon());
-        button.setOnMouseClicked(event -> action.apply(list, item));
+        setUpActivity(item, button);
         return button;
+    }
+
+    private void setUpActivity(T item, Button button) {
+        basedOn(function == null)
+                .runTrue(button::setOnMouseClicked, event -> action.apply(list, item))
+                .runFalse(button::setOnMouseClicked, event -> function.apply(service, item));
     }
 
     @NotNull
@@ -125,6 +135,11 @@ public class GeneralCell<T> extends ListCell<T> {
     public void setAction(BiFunction<List<T>, T, Boolean> action, List<T> list) {
         this.action = action;
         this.list = list;
+    }
+
+    public <R> void setFunction(BiFunction<Service<T, ?, ?>, T, R> function, Service<T, ?, ?> service) {
+        this.function = function;
+        this.service = service;
     }
 
     public void setIcon(Icon icon) {

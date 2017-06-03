@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author Alexandru Stoica
  * @version 1.0
  */
-public class Tag implements Serializable {
+public class Tag implements Serializable, IdableTransfer<Integer> {
 
     private Integer id;
     private String word;

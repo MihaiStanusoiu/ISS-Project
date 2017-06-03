@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author Alexandru Stoica
  * @version 1.0
  */
-public class Submission implements Serializable {
+public class Submission implements Serializable, IdableTransfer<Integer> {
 
     private Integer id;
     private String name;
