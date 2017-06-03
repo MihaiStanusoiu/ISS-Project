@@ -7,7 +7,7 @@ import java.util.Date;
  * @author Alexandru Stoica
  * @version 1.0
  */
-public class Session implements Serializable {
+public class Session implements Serializable, IdableTransfer<Integer> {
 
     private Integer id;
     private String name;

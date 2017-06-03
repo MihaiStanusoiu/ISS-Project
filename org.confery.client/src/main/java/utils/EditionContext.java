@@ -18,7 +18,7 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
-public class EditionContext {
+public class EditionContext implements IdableTransfer<Integer> {
 
     private Edition edition;
     private EditionService editionService;
@@ -133,4 +133,7 @@ public class EditionContext {
         return runFunction(sessionService::getElementById, idSession).orHandle(handler);
     }
 
+    @Override public Integer getId() {
+        return edition.getId();
+    }
 }

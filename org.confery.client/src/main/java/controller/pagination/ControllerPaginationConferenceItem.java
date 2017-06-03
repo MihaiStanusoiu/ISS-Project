@@ -14,14 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import service.AuthenticationService;
 import service.CollectionService;
 import service.ConferenceService;
 import transfarable.Conference;
+import transfarable.User;
 import view.GradientGenerator;
 import view.ViewType;
 
 import java.rmi.RemoteException;
 
+import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 
 /**
@@ -68,6 +71,10 @@ public class ControllerPaginationConferenceItem
 
     private SimpleMethod<RemoteException> handler;
 
+    @Lazy
+    @Autowired
+    private CollectionService service;
+
     @Override
     public void initialize() {
         generator = new GradientGenerator();
@@ -84,7 +91,13 @@ public class ControllerPaginationConferenceItem
 
     @FXML
     public void onItemClick() {
-        manager.switchScene(ViewType.CONFERENCE, item);
+        AuthenticationService authenticationService = runFunction(service::authenticationService).orHandle(handler);
+        ConferenceService conferenceService = runFunction(service::conferenceService).orHandle(handler);
+        User active = runFunction(authenticationService::getActiveUser).orHandle(handler);
+        User chair = runFunction(conferenceService::getChairOf, item).orHandle(handler);
+        basedOn(!active.getId().equals(0) &&  active.getId().equals(chair.getId()))
+                .runTrue(manager::switchScene, ViewType.CONFERENCE_UPDATE, item)
+                .runFalse(manager::switchScene, ViewType.CONFERENCE, item);
     }
 
     private void build() {

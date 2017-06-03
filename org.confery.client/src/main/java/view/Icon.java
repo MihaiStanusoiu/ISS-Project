@@ -11,5 +11,5 @@ public enum Icon implements ResourceGetter {
         public String getValue() {
             return "/png_icons/close_icon.png";
         }
-    };
+    }
 }

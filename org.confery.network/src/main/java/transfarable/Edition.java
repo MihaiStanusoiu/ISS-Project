@@ -8,7 +8,7 @@ import java.util.Date;
  * @version 1.0
  */
 
-public class Edition implements Serializable {
+public class Edition implements Serializable, IdableTransfer<Integer> {
 
     private Integer id;
     private Date startDate;

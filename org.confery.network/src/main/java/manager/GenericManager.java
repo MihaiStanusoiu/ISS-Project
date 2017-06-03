@@ -7,6 +7,7 @@ import exception.SystemException;
 import protocol.LoginProtocol;
 import protocol.ModelInterface;
 import service.Service;
+import transfarable.IdableTransfer;
 import translator.GenericTranslator;
 
 import java.io.Serializable;
@@ -26,7 +27,7 @@ import static utils.Try.runMethod;
  * @version 1.0
  */
 
-public class GenericManager<TransferT, Id extends Serializable, EntityT extends Idable<Id>>
+public class GenericManager<TransferT extends IdableTransfer<Id>, Id extends Serializable, EntityT extends Idable<Id>>
     extends UnicastRemoteObject implements Service<TransferT, Id, EntityT> {
 
     protected ModelInterface<EntityT, Id> model;
@@ -34,7 +35,6 @@ public class GenericManager<TransferT, Id extends Serializable, EntityT extends 
     protected PermissionChecker<EntityT> checker;
     protected Function<SystemException, RemoteException> thrower;
     protected GenericTranslator<EntityT, TransferT> translator;
-
 
     protected GenericManager(ModelInterface<EntityT, Id> model, LoginProtocol loginProtocol) throws RemoteException {
         this.model = model;
@@ -51,14 +51,18 @@ public class GenericManager<TransferT, Id extends Serializable, EntityT extends 
 
     @Override
     public void update(TransferT element, TransferT with) throws RemoteException {
-        basedOn(checker.isAllowed(getActiveUser()).toUpdate().theObject(translator.translate(element)))
+        basedOn(checker.isAllowed(getActiveUser()).toUpdate().theObject(getElementFromDatabase(element)))
                 .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
         runMethod(model::update, translator.translate(element), translator.translate(with)).orThrow(thrower);
     }
 
+    private EntityT getElementFromDatabase(TransferT element) throws RemoteException {
+        return runFunction(model::getElementById, element.getId()).orThrow(thrower);
+    }
+
     @Override
     public TransferT delete(TransferT element) throws RemoteException {
-        basedOn(checker.isAllowed(getActiveUser()).toDelete().theObject(translator.translate(element)))
+        basedOn(checker.isAllowed(getActiveUser()).toDelete().theObject(getElementFromDatabase(element)))
                 .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
         return translator.translate(runFunction(model::delete, translator.translate(element)).orThrow(thrower));
     }

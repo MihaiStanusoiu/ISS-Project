@@ -58,7 +58,6 @@ public class ConferenceModelTest {
         ConferenceEntity conference = new ConferenceEntity("Test");
         EditionEntity edition = new EditionEntity("test");
         // preconditions:
-        //modelEdition.add(edition);
         modelConference.add(conference);
         modelEdition.add(edition);
         // when:
@@ -82,5 +81,21 @@ public class ConferenceModelTest {
         conference = modelConference.removeEditionFrom(conference, edition);
         // then:
         assertTrue(conference.getEditions().stream().noneMatch(item -> item.getId().equals(edition.getId())));
+    }
+
+    @Test
+    public void isGettingChairOfConference() throws Exception {
+        // declarations:
+        UserEntity user = new UserEntity("test", "password");
+        ConferenceEntity conference = new ConferenceEntity("Test");
+        EditionEntity edition = new EditionEntity("test");
+        // preconditions:
+        Integer id = modelUser.add(user);
+        modelConference.add(conference);
+        modelEdition.add(edition);
+        edition = modelEdition.addMemberTo(edition, user, MemberRole.EDITION_CHAIR);
+        conference = modelConference.addEditionTo(conference, edition);
+        assertEquals(modelConference.getChairOf(conference).getUsername(),
+                modelUser.getElementById(id).getUsername());
     }
 }

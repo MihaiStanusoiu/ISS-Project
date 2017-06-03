@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author Alexandru Stoica
  * @version 1.0
  */
-public class Topic implements Serializable {
+public class Topic implements Serializable, IdableTransfer<Integer> {
 
     private Integer id;
     private String word;
