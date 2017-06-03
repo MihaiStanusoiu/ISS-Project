@@ -20,7 +20,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "CONFERENCE")
-@SuppressWarnings("unused")
 public class ConferenceEntity implements Idable<Integer> {
 
     @Id
@@ -118,30 +117,12 @@ public class ConferenceEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the acronym of a conference.
-     *
-     * @param acronym: new value for conference acronym.
-     */
-    public void setAcronym(String acronym) {
-        this.acronym = acronym;
-    }
-
-    /**
      * Effect: Return the editions of a conference.
      *
      * @return Set<EditionEntity>: returns the editions of a conference.
      */
     public Set<EditionEntity> getEditions() {
         return editions;
-    }
-
-    /**
-     * Effect: Sets the editions of this conference.
-     *
-     * @param editions: new value for conference editions.
-     */
-    public void setEditions(Set<EditionEntity> editions) {
-        this.editions = editions;
     }
 
     public EditionEntity getLatestEdition() {

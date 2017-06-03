@@ -20,8 +20,4 @@ public class ModelException extends SystemException {
         return message;
     }
 
-    public void addException(Exception exception) {
-        this.message += System.lineSeparator() + exception.getMessage();
-    }
-
 }

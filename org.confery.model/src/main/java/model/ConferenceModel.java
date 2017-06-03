@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static utils.Conditional.basedOn;
-import static utils.Try.runMethod;
 
 /**
  * Created by Mike on 5/29/2017.
@@ -35,7 +34,7 @@ public class ConferenceModel
         basedOn(conference.getEditions().stream().noneMatch(item -> item.getId().equals(edition.getId())))
                 .orThrow(new ModelException("The edition is already part of the conference"));
         edition.setConference(conference);
-        runMethod(repositoryEdition::add, edition);
+        repositoryEdition.update(repositoryEdition.getElementById(edition.getId()), edition);
         return getElementById(conference.getId());
     }
 

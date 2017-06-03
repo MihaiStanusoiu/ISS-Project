@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import utils.ConferenceContext;
 import view.ViewType;
 
+import static utils.Try.runMethod;
+
 /**
  * @author Alexandru Stoica
  * @version 1.0
@@ -22,12 +24,8 @@ import view.ViewType;
 public class ControllerAddSubmissionsEditionView
         implements ControllerInterface, ControllerItemInterface<ConferenceContext> {
 
-    @SuppressWarnings("unused")
-    private static Logger logger;
-
     @FXML
     private Label conferenceNameLabel;
-
 
     @Lazy
     @Autowired
@@ -43,9 +41,7 @@ public class ControllerAddSubmissionsEditionView
         conferenceNameLabel.setText(context.getConference().getName());
     }
 
-    public void initialize() {
-        logger = Logger.getLogger(ControllerAddSubmissionsEditionView.class);
-    }
+    public void initialize() { }
 
     @FXML
     private void onSessionsButtonClick() {
@@ -54,7 +50,9 @@ public class ControllerAddSubmissionsEditionView
 
     @FXML
     private void onPublishButtonClick() {
-        // TODO
+        Logger logger = Logger.getLogger(ControllerAddConferenceView.class);
+        runMethod(context::publish).orHandle(exception -> logger.error(exception.getMessage()));
+        manager.switchScene(ViewType.CONFERENCES);
     }
 
     @FXML

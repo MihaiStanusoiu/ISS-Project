@@ -24,7 +24,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "EDITION")
-@SuppressWarnings("unused")
 public class EditionEntity implements Idable<Integer> {
 
     @Id
@@ -196,30 +195,12 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the start date of a conference.
-     *
-     * @param startDate: new value for conference startDate.
-     */
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    /**
      * Effect: Return the end date of this conference.
      *
      * @return [Date]: returns the endDate of conference.
      */
     public Date getEndDate() {
         return endDate;
-    }
-
-    /**
-     * Effect: Sets the end date of a conference.
-     *
-     * @param endDate: new value for conference endDate.
-     */
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 
     /**
@@ -268,30 +249,12 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the abstract deadline of a conference.
-     *
-     * @param abstractDeadline: new value for conference abstractDeadline.
-     */
-    public void setAbstractDeadline(Date abstractDeadline) {
-        this.abstractDeadline = abstractDeadline;
-    }
-
-    /**
      * Effect: Return the paper deadline of this conference.
      *
      * @return [Date]: returns the paperDeadline of conference.
      */
     public Date getPaperDeadline() {
         return paperDeadline;
-    }
-
-    /**
-     * Effect: Sets the paper deadline of a conference.
-     *
-     * @param paperDeadline: new value for conference paperDeadline.
-     */
-    public void setPaperDeadline(Date paperDeadline) {
-        this.paperDeadline = paperDeadline;
     }
 
     /**
@@ -304,30 +267,12 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the evaluation deadline of a conference.
-     *
-     * @param evaluationDeadline: new value for conference evaluationDeadline.
-     */
-    public void setEvaluationDeadline(Date evaluationDeadline) {
-        this.evaluationDeadline = evaluationDeadline;
-    }
-
-    /**
      * Effect: Return the bidding deadline of this conference.
      *
      * @return [Date]: returns the biddingDeadline of conference.
      */
     public Date getBiddingDeadline() {
         return biddingDeadline;
-    }
-
-    /**
-     * Effect: Sets the bidding deadline of a conference.
-     *
-     * @param biddingDeadline: new value for conference biddingDeadline.
-     */
-    public void setBiddingDeadline(Date biddingDeadline) {
-        this.biddingDeadline = biddingDeadline;
     }
 
     /**
@@ -358,15 +303,6 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the members of an Edition.
-     *
-     * @param members: new value for members.
-     */
-    public void setMembers(Set<EditionMemberEntity> members) {
-        this.members = members;
-    }
-
-    /**
      * Effect: Returns the sessions of an Edition.
      *
      * @return [Set<SessionEntity>]: returns the sessions of an Edition.
@@ -382,15 +318,6 @@ public class EditionEntity implements Idable<Integer> {
      */
     public Set<SubmissionEntity> getSubmissions() {
         return submissions;
-    }
-
-    /**
-     * Effect: Sets the sessions of an Edition.
-     *
-     * @param sessions: new value for sessions.
-     */
-    public void setSessions(Set<SessionEntity> sessions) {
-        this.sessions = sessions;
     }
 
     /**

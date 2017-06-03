@@ -14,13 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
+import service.AuthenticationService;
 import service.CollectionService;
-import service.NotificationService;
+import service.UserService;
 import transfarable.Notification;
+import transfarable.User;
 import view.ViewType;
 
 import java.rmi.RemoteException;
 
+import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 
 /**
@@ -49,12 +52,24 @@ public class ControllerNotificationsView implements ControllerInterface {
 
     private static Logger logger;
 
+    private SimpleMethod<RemoteException> handler;
+
     @Override
     public void initialize() {
         logger = Logger.getLogger(ControllerNotificationsView.class);
-        SimpleMethod<RemoteException> handler = exception -> logger.error(exception.getCause().getMessage());
-        NotificationService notificationService = runFunction(service::notificationService).orHandle(handler);
-        notifications = FXCollections.observableArrayList(runFunction(notificationService::getAll).orHandle(handler));
+        handler = exception -> logger.error(exception.getCause().getMessage());
+        checkActiveUser();
+    }
+
+    private void checkActiveUser() {
+        AuthenticationService authenticationService = runFunction(service::authenticationService).orHandle(handler);
+        User active = runFunction(authenticationService::getActiveUser).orHandle(handler);
+        basedOn(!active.getId().equals(0)).runTrue(this::build, active);
+    }
+
+    private void build(User active) {
+        UserService userService = runFunction(service::userService).orHandle(handler);
+        notifications = FXCollections.observableArrayList(runFunction(userService::getNotificationsFrom, active).orHandle(handler));
         pagination = updatePagination(notifications);
     }
 

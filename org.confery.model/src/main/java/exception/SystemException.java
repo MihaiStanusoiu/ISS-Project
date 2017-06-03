@@ -7,7 +7,4 @@ package exception;
  * @version 1.0
  */
 
-public abstract class SystemException extends Exception {
-
-
-}
+public abstract class SystemException extends Exception { }

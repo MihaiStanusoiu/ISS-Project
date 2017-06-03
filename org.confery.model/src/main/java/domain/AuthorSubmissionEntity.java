@@ -15,7 +15,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "AUTHOR_SUBMISSION")
-@SuppressWarnings("unused")
 public class AuthorSubmissionEntity implements Idable<Integer> {
 
     @Id

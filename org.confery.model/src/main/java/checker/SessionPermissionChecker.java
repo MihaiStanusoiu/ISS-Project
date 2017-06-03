@@ -10,7 +10,6 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
-@SuppressWarnings("unused")
 public class SessionPermissionChecker extends PermissionChecker<SessionEntity> {
 
     public SessionPermissionChecker() {
@@ -19,8 +18,7 @@ public class SessionPermissionChecker extends PermissionChecker<SessionEntity> {
 
     @Override
     protected void setUpChecker() {
-        checker.put(OperationType.TO_ADD, (active, item) ->
-                runFunction(item.getEdition()::getChair).or(new NullUserEntity()).equals(active));
+        checker.put(OperationType.TO_ADD, (active, item) -> Boolean.TRUE);
         checker.put(OperationType.TO_DELETE, (active, item) ->
                 runFunction(item::getChair).or(new NullUserEntity()).equals(active));
         checker.put(OperationType.TO_UPDATE, (active, item) ->
