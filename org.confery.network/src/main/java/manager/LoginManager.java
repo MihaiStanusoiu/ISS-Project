@@ -34,8 +34,8 @@ public class LoginManager
     private GenericTranslator<UserEntity, User> translator;
 
     public LoginManager(UserProtocol userModel, LoginProtocol loginProtocol) throws RemoteException {
-        this.provider = loginProtocol;
         this.userModel = userModel;
+        provider = loginProtocol;
         translator = new UserTranslator();
     }
 
@@ -54,8 +54,7 @@ public class LoginManager
 
     @Override
     public @NotNull User login(@NotNull String username, @NotNull String password) throws RemoteException {
-        UserEntity active =  getActiveUser();
-        basedOn(active.getId().equals(0)).orThrow(new RemoteException("You're already logged with another account!"));
+        basedOn(getActiveUser().getId().equals(0)).orThrow(new RemoteException("You're already logged with another account!"));
         return runFunction(this::findUser, username, password)
                 .orThrow(exception -> new RemoteException("Wrong Username or Password!"));
     }

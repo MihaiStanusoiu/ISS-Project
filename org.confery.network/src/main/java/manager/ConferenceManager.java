@@ -2,8 +2,6 @@ package manager;
 
 import checker.ConferencePermissionChecker;
 import domain.ConferenceEntity;
-import domain.EditionEntity;
-import domain.UserEntity;
 import protocol.ConferenceProtocol;
 import protocol.LoginProtocol;
 import service.ConferenceService;
@@ -22,7 +20,8 @@ import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 
 /**
- * Created by Mike on 5/30/2017.
+ * @author Andreea Tiron
+ * @version 1.0
  */
 
 public class ConferenceManager
@@ -44,46 +43,47 @@ public class ConferenceManager
 
     @Override
     public List<Edition> getEditionsOf(Conference conference) throws RemoteException {
-        return runFunction(model::getElementById, conference.getId()).orThrow(thrower)
-                .getEditions().stream()
+        return getConferenceFromDatabase(conference).getEditions().stream()
                 .map(entity -> editionTranslator.translate(entity))
                 .collect(Collectors.toList());
     }
 
     @Override
     public Edition getLatestEdition(Conference conference) throws RemoteException {
-        EditionEntity entity = runFunction(model::getElementById, conference.getId()).orThrow(thrower)
-                .getLatestEdition();
-        return editionTranslator.translate(entity);
+        return editionTranslator.translate(getConferenceFromDatabase(conference).getLatestEdition());
     }
-
 
     @Override
     public Conference removeEditionFromConference(Conference conference, Edition edition) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(conference)))
+        checkActiveUserPermissions(conference);
+        return translator.translate(runFunction(model::removeEditionFrom, getConferenceFromDatabase(conference),
+                editionTranslator.translate(edition)).orThrow(thrower));
+    }
+
+    private void checkActiveUserPermissions(Conference conference) throws RemoteException {
+        checkActiveUserPermissions(Boolean.FALSE, conference);
+    }
+
+    private void checkActiveUserPermissions(Boolean alternative, Conference conference) throws RemoteException {
+        basedOn(alternative || checker.isAllowed(getActiveUser()).toUpdate().theObject(getConferenceFromDatabase(conference)))
                 .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::removeEditionFrom, translator.translate(conference), editionTranslator.translate(edition))
-                .orThrow(thrower));
     }
 
     @Override
     public List<Conference> getConferencesOf(User user) throws RemoteException {
-        List<ConferenceEntity> entities = runFunction(model::getConferencesOf, userTranslator.translate(user)).orThrow(thrower);
-        return entities.stream().map(entity -> translator.translate(entity)).collect(Collectors.toList());
-    }
-
-    private Boolean isChair(User user, EditionEntity edition) throws RemoteException {
-        return edition.getChair().equals(userTranslator.translate(user));
+        return runFunction(model::getConferencesOf, userTranslator.translate(user))
+                .orThrow(thrower).stream().map(entity -> translator.translate(entity)).collect(Collectors.toList());
     }
 
     @Override
     public Conference addEditionToConference(Conference conference, Edition edition) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(conference)))
-                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::addEditionTo, translator.translate(conference), editionTranslator.translate(edition))
-                .orThrow(thrower));
+        checkActiveUserPermissions(getConferenceFromDatabase(conference).getEditions().size() == 0, conference);
+        return translator.translate(runFunction(model::addEditionTo, translator.translate(conference),
+                editionTranslator.translate(edition)).orThrow(thrower));
+    }
+
+    private ConferenceEntity getConferenceFromDatabase(Conference conference) throws RemoteException {
+        return runFunction(model::getElementById, conference.getId()).orThrow(thrower);
     }
 
 }

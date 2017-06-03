@@ -16,7 +16,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "CONFIGURATION_SESSION_MEMBER")
-@SuppressWarnings("unused")
 public class ConfigurationSessionMemberEntity implements Idable<Integer> {
 
     @Id
@@ -78,15 +77,6 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the list of members to a section configuration.
-     *
-     * @param sectionMembers : new value for section members.
-     */
-    public void setSectionMembers(Set<SessionMemberEntity> sectionMembers) {
-        this.sectionMembers = sectionMembers;
-    }
-
-    /**
      * Effect: Return the id of a configuration section member.
      *
      * @return [Integer] : returns the id.
@@ -132,30 +122,12 @@ public class ConfigurationSessionMemberEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets whether the user is a speaker.
-     *
-     * @param speaker: new value for speaker.
-     */
-    public void setSpeaker(Boolean speaker) {
-        isSpeaker = speaker;
-    }
-
-    /**
      * Effect: Return whether the user is a listener.
      *
      * @return [Boolean] : returns true if it is a listener, false otherwise.
      */
     public Boolean getListener() {
         return isListener;
-    }
-
-    /**
-     * Effect: Sets whether the user is a listener.
-     *
-     * @param listener: new value for listener.
-     */
-    public void setListener(Boolean listener) {
-        isListener = listener;
     }
 
     @Override

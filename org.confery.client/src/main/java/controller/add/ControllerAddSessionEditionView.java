@@ -21,6 +21,8 @@ import view.ViewType;
 import java.util.Date;
 import java.util.List;
 
+import static utils.Try.runMethod;
+
 /**
  * @author Alexandru Stoica
  * @version 1.0
@@ -30,9 +32,6 @@ import java.util.List;
 @Component
 public class ControllerAddSessionEditionView
         implements ControllerInterface, ControllerItemInterface<ConferenceContext> {
-
-    @SuppressWarnings("unused")
-    private static Logger logger;
 
     @FXML
     private ListView<Session> sessionsListView;
@@ -61,7 +60,6 @@ public class ControllerAddSessionEditionView
 
     private void build() {
         conferenceNameLabel.setText(context.getConference().getName());
-        // TODO Add Active User
         sessions = context.getEditionContext().getSessions();
         setUpListViews();
     }
@@ -75,23 +73,21 @@ public class ControllerAddSessionEditionView
         sessionsListView.setItems(sessions);
     }
 
-    public void initialize() {
-        logger = Logger.getLogger(ControllerAddSessionEditionView.class);
-    }
+    public void initialize() { }
 
     @FXML
     private void onAddSessionButtonClick() {
         String name = sessionTextField.getText();
         Session session = new Session(0, name, new Date(), new Date(),
                 context.getEditionContext().getEdition().getLocation(), "", 100);
-        // TODO Improve Session Constructor
         context.getEditionContext().addSession(session);
     }
 
-
     @FXML
     private void onPublishButtonClick() {
-        // TODO
+        Logger logger = Logger.getLogger(ControllerAddConferenceView.class);
+        runMethod(context::publish).orHandle(exception -> logger.error(exception.getMessage()));
+        manager.switchScene(ViewType.CONFERENCES);
     }
 
     @FXML

@@ -10,17 +10,24 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import list.ListViewBuilder;
 import manager.StageManager;
+import method.SimpleMethod;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import service.CollectionService;
+import service.UserService;
 import transfarable.User;
 import utils.ConferenceContext;
 import view.Icon;
 import view.ViewType;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static utils.Try.runFunction;
+import static utils.Try.runMethod;
 
 /**
  * @author Alexandru Stoica
@@ -31,9 +38,6 @@ import java.util.List;
 @Component
 public class ControllerAddMembersEditionView
         implements ControllerInterface, ControllerItemInterface<ConferenceContext> {
-
-    @SuppressWarnings("unused")
-    private static Logger logger;
 
     @FXML
     private ListView<User> chairListView;
@@ -59,7 +63,15 @@ public class ControllerAddMembersEditionView
 
     @Lazy
     @Autowired
-    @SuppressWarnings("unused")
+    private CollectionService service;
+
+    private SimpleMethod<RemoteException> handler;
+    private UserService userService;
+
+    private static Logger logger;
+
+    @Lazy
+    @Autowired
     private StageManager manager;
 
     @SuppressWarnings({"FieldCanBeLocal", "unused"})
@@ -73,14 +85,15 @@ public class ControllerAddMembersEditionView
 
     private void build() {
         conferenceNameLabel.setText(context.getConference().getName());
+        getListsElements();
+        setUpListViews();
+        setUpListViewsItems();
+    }
 
-        // TODO Add Active User
-        chairs = FXCollections.observableArrayList();
-
+    private void getListsElements() {
+        chairs = FXCollections.observableArrayList(context.getChair());
         coChairs = context.getEditionContext().getCoChairs();
         pcMembers = context.getEditionContext().getPcMembers();
-
-        setUpListViews();
     }
 
     private void setUpListViews() {
@@ -99,7 +112,6 @@ public class ControllerAddMembersEditionView
                 .visibleText(User::getName)
                 .setAction(List::remove, context.getEditionContext().getPcMembers())
                 .build();
-        setUpListViewsItems();
     }
 
     private void setUpListViewsItems() {
@@ -109,28 +121,29 @@ public class ControllerAddMembersEditionView
     }
 
     public void initialize() {
-        logger = Logger.getLogger(ControllerAddMembersEditionView.class);
+        logger = Logger.getLogger(ControllerAddEditionView.class);
+        handler = exception -> logger.error(exception.getCause());
+        userService = runFunction(service::userService).orHandle(handler);
     }
 
     @FXML
     private void onAddCoChairButtonClick() {
         String username = coChairTextField.getText();
-        // TODO Get User Form Service By Username
-        User user = new User(username, "password", "email", username);
+        User user = runFunction(userService::findUserByUsername, username).orHandle(handler);
         context.getEditionContext().addCoChair(user);
     }
 
     @FXML
     private void onAddPCMemberButtonClick() {
         String username = pcMemberTextField.getText();
-        // TODO Get User Form Service By Username
-        User user = new User(username, "password", "email", username);
+        User user = runFunction(userService::findUserByUsername, username).orHandle(handler);
         context.getEditionContext().addPcMember(user);
     }
 
     @FXML
     private void onPublishButtonClick() {
-        // TODO
+        runMethod(context::publish).orHandle(exception -> logger.error(exception.getMessage()));
+        manager.switchScene(ViewType.CONFERENCES);
     }
 
     @FXML

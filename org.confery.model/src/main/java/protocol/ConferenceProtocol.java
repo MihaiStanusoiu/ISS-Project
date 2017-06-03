@@ -5,7 +5,6 @@ import domain.EditionEntity;
 import domain.UserEntity;
 import exception.SystemException;
 
-import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -14,9 +13,30 @@ import java.util.List;
 
 public interface ConferenceProtocol extends ModelInterface<ConferenceEntity, Integer> {
 
+    /**
+     * Adds an edition to a conference.
+     * @param conference The target conference [already in the database]
+     * @param edition The target edition [already in the database]
+     * @return The conference updated
+     * @throws SystemException If it's unable to add the edition to the database.
+     */
     ConferenceEntity addEditionTo(ConferenceEntity conference, EditionEntity edition) throws SystemException;
 
+    /**
+     * Removes an edition from conference.
+     * @param conference The target conference [already in the database]
+     * @param edition The target edition [already in the database]
+     * @return The conference updated
+     * @throws SystemException If it's unable to remove the edition.
+     */
     ConferenceEntity removeEditionFrom(ConferenceEntity conference, EditionEntity edition) throws SystemException;
 
-    public List<ConferenceEntity> getConferencesOf(UserEntity user) throws SystemException;
+    /**
+     * Returns all the user's conferences. [if that conference has at least an edition]
+     * @param user The target user
+     * @return The list of conference for that specific user.
+     * @throws SystemException [Only hibernate can throw something]
+     */
+    List<ConferenceEntity> getConferencesOf(UserEntity user) throws SystemException;
+
 }

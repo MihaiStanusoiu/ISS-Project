@@ -27,31 +27,36 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
-public class SubmissionManager extends GenericManager<Submission, Integer, SubmissionEntity> implements SubmissionService {
+public class SubmissionManager
+        extends GenericManager<Submission, Integer, SubmissionEntity>
+        implements SubmissionService {
 
     private UserTranslator userTranslator;
-    private TopicTranslator topicTransalor;
-    private TagTranslator tagTransalor;
+    private TopicTranslator topicTranslator;
+    private TagTranslator tagTranslator;
     protected SubmissionProtocol model;
 
     public SubmissionManager(SubmissionProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
         this.model = model;
-        this.translator = new SubmissionTranslator();
-        this.checker = new SubmissionPermissionChecker();
+        translator = new SubmissionTranslator();
+        checker = new SubmissionPermissionChecker();
+        userTranslator = new UserTranslator();
+        topicTranslator = new TopicTranslator();
+        tagTranslator = new TagTranslator();
     }
 
     @Override
     public List<User> getReviewers(Submission submission) throws RemoteException {
-        return getSubmissionEntity(submission).getReviewers().stream()
-                .map(entity -> userTranslator.translate(entity))
+        return getSubmissionFromDatabase(submission).getReviewers().stream()
+                .map(userTranslator::translate)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<User> getAuthors(Submission submission) throws RemoteException {
-        return getSubmissionEntity(submission).getAuthors().stream()
-                .map(entity -> userTranslator.translate(entity))
+        return getSubmissionFromDatabase(submission).getAuthors().stream()
+                .map(userTranslator::translate)
                 .collect(Collectors.toList());
     }
 
@@ -61,110 +66,104 @@ public class SubmissionManager extends GenericManager<Submission, Integer, Submi
     }
 
     private UserEntity getSubmissionOwner(Submission submission) throws RemoteException {
-        return getSubmissionEntity(submission).getOwner();
+        return getSubmissionFromDatabase(submission).getOwner();
     }
 
     @Override
     public List<Topic> getTopics(Submission submission) throws RemoteException {
-        return getSubmissionEntity(submission).getTopics().stream()
-                .map(entity -> topicTransalor.translate(entity))
+        return getSubmissionFromDatabase(submission).getTopics().stream()
+                .map(topicTranslator::translate)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Tag> getTags(Submission submission) throws RemoteException {
-        return getSubmissionEntity(submission).getTags().stream()
-                .map(entity -> tagTransalor.translate(entity))
+        return getSubmissionFromDatabase(submission).getTags().stream()
+                .map(tagTranslator::translate)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<User> getBindingReviewers(Submission submission) throws RemoteException {
-        return getSubmissionEntity(submission).getBindingReviewers().stream()
-                .map(entity -> userTranslator.translate(entity))
+        return getSubmissionFromDatabase(submission).getBindingReviewers().stream()
+                .map(userTranslator::translate)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<User> getAllowedReviewers(Submission submission) throws RemoteException {
-        return getSubmissionEntity(submission).getAllowedReviewers().stream()
-                .map(entity -> userTranslator.translate(entity))
+        return getSubmissionFromDatabase(submission).getAllowedReviewers().stream()
+                .map(userTranslator::translate)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<User> getRejectedReviewers(Submission submission) throws RemoteException {
-        return getSubmissionEntity(submission).getRejectedReviewers().stream()
-                .map(entity -> userTranslator.translate(entity))
+        return getSubmissionFromDatabase(submission).getRejectedReviewers().stream()
+                .map(userTranslator::translate)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Submission addTagTo(Submission submission, Tag tag) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(submission)))
-                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::addTagTo, translator.translate(submission),tagTransalor.translate(tag))
-                .orThrow(thrower));
+        checkUserPermissions(submission);
+        return translator.translate(runFunction(model::addTagTo, getSubmissionFromDatabase(submission),
+                tagTranslator.translate(tag)).orThrow(thrower));
+    }
+
+    private void checkUserPermissions(Submission submission) throws RemoteException {
+        checkUserPermissions(Boolean.FALSE, submission);
     }
 
     @Override
     public Submission addTopicTo(Submission submission, Topic topic) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(submission)))
-                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::addTopicTo, translator.translate(submission),topicTransalor.translate(topic))
-                .orThrow(thrower));
+        checkUserPermissions(submission);
+        return translator.translate(runFunction(model::addTopicTo, getSubmissionFromDatabase(submission),
+                topicTranslator.translate(topic)).orThrow(thrower));
     }
 
     @Override
     public Submission addAuthorTo(Submission submission, User author) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(submission)))
-                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::addAuthorTo, translator.translate(submission),userTranslator.translate(author))
-                .orThrow(thrower));
+        checkUserPermissions(submission);
+        return translator.translate(runFunction(model::addAuthorTo, getSubmissionFromDatabase(submission),
+                userTranslator.translate(author)).orThrow(thrower));
     }
 
     @Override
     public Submission addOwnerTo(Submission submission, User owner) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(submission)))
-                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::addOwnerTo, translator.translate(submission),userTranslator.translate(owner))
-                .orThrow(thrower));
+        checkUserPermissions(submission);
+        return translator.translate(runFunction(model::addOwnerTo, getSubmissionFromDatabase(submission),
+                userTranslator.translate(owner)).orThrow(thrower));
     }
-
 
     @Override
     public Submission removeAuthorFrom(Submission submission, User author) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(submission)))
-                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::removeAuthorFrom, translator.translate(submission),userTranslator.translate(author))
-                .orThrow(thrower));
+        checkUserPermissions(submission);
+        return translator.translate(runFunction(model::removeAuthorFrom, getSubmissionFromDatabase(submission),
+                userTranslator.translate(author)).orThrow(thrower));
     }
 
     @Override
     public Submission removeTagFrom(Submission submission, Tag tag) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(submission)))
-                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::removeTagFrom, translator.translate(submission),tagTransalor.translate(tag))
-                .orThrow(thrower));
+        checkUserPermissions(submission);
+        return translator.translate(runFunction(model::removeTagFrom, getSubmissionFromDatabase(submission),
+                tagTranslator.translate(tag)).orThrow(thrower));
     }
 
     @Override
     public Submission removeTopicFrom(Submission submission, Topic topic) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(submission)))
-                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::removeTopicFrom, translator.translate(submission),topicTransalor.translate(topic))
-                .orThrow(thrower));
+        checkUserPermissions(submission);
+        return translator.translate(runFunction(model::removeTopicFrom, getSubmissionFromDatabase(submission),
+                topicTranslator.translate(topic)).orThrow(thrower));
     }
 
-    private SubmissionEntity getSubmissionEntity(Submission submission) throws RemoteException {
+    private SubmissionEntity getSubmissionFromDatabase(Submission submission) throws RemoteException {
         return runFunction(model::getElementById, submission.getId()).orThrow(thrower);
+    }
+
+    private void checkUserPermissions(Boolean alternative, Submission submission) throws RemoteException {
+        basedOn(alternative || checker.isAllowed(getActiveUser()).toUpdate().theObject(getSubmissionFromDatabase(submission)))
+                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
     }
 
 }

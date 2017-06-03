@@ -2,7 +2,6 @@ package manager;
 
 import checker.SessionPermissionChecker;
 import domain.SessionEntity;
-import domain.UserEntity;
 import protocol.LoginProtocol;
 import protocol.SessionProtocol;
 import service.SessionService;
@@ -25,11 +24,13 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
-public class SessionManager extends GenericManager<Session, Integer, SessionEntity> implements SessionService {
+public class SessionManager
+        extends GenericManager<Session, Integer, SessionEntity>
+        implements SessionService {
 
+    protected SessionProtocol model;
     private UserTranslator userTranslator;
     private MemberRoleTranslator memberRoleTranslator;
-    protected SessionProtocol model;
 
     public SessionManager(SessionProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
@@ -41,50 +42,49 @@ public class SessionManager extends GenericManager<Session, Integer, SessionEnti
     }
 
     @Override
+    public User getChair(Session session) throws RemoteException {
+        return userTranslator.translate(getSessionFromDatabase(session).getChair());
+    }
+
+    @Override
     public List<User> getSpeakers(Session session) throws RemoteException {
-        return getSessionEntity(session).getSpeakers().stream()
-                .map(entity -> userTranslator.translate(entity))
+        return getSessionFromDatabase(session).getSpeakers().stream()
+                .map(userTranslator::translate)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<User> getListeners(Session session) throws RemoteException {
-        return getSessionEntity(session).getListeners().stream()
-                .map(entity -> userTranslator.translate(entity))
+        return getSessionFromDatabase(session).getListeners().stream()
+                .map(userTranslator::translate)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public User getChair(Session session) throws RemoteException {
-        return userTranslator.translate(getSessionChair(session));
-    }
-
-    @Override
     public Session addMemberTo(Session session, User user, MemberRoleTransferable role) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(role.equals(MemberRoleTransferable.SESSION_LISTENER) ||
-                checker.isAllowed(active).toUpdate().theObject(translator.translate(session)))
-                .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::addMemberTo, translator.translate(session), userTranslator.translate(user),
-                memberRoleTranslator.translate(role)).orThrow(thrower));
+        checkUserPermissions(role.equals(MemberRoleTransferable.SESSION_LISTENER), session);
+        return translator.translate(runFunction(model::addMemberTo, getSessionFromDatabase(session),
+                userTranslator.translate(user), memberRoleTranslator.translate(role)).orThrow(thrower));
     }
 
     @Override
     public Session removeMemberFrom(Session session, User user) throws RemoteException {
-        UserEntity active = getActiveUser();
-        basedOn(checker.isAllowed(active).toUpdate().theObject(translator.translate(session)))
+        checkUserPermissions(session);
+        return translator.translate(runFunction(model::removeMemberFrom, getSessionFromDatabase(session),
+                userTranslator.translate(user)).orThrow(thrower));
+    }
+
+    private void checkUserPermissions(Session session) throws RemoteException {
+        checkUserPermissions(Boolean.FALSE, session);
+    }
+
+    private void checkUserPermissions(Boolean alternative, Session session) throws RemoteException {
+        basedOn(alternative || checker.isAllowed(getActiveUser()).toUpdate().theObject(translator.translate(session)))
                 .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        return translator.translate(runFunction(model::removeMemberFrom,
-                translator.translate(session), userTranslator.translate(user)).orThrow(thrower));
     }
 
-
-    private UserEntity getSessionChair(Session session) throws RemoteException {
-        return this.getSessionEntity(session).getChair();
-    }
-
-
-    private SessionEntity getSessionEntity(Session session) throws RemoteException {
+    private SessionEntity getSessionFromDatabase(Session session) throws RemoteException {
         return runFunction(model::getElementById, session.getId()).orThrow(thrower);
     }
+
 }

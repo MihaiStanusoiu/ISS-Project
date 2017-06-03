@@ -13,7 +13,6 @@ import java.util.List;
  * @version 1.0
  */
 
-
 public interface NotificationProtocol
         extends ModelInterface<NotificationEntity, Integer> {
 
@@ -25,7 +24,7 @@ public interface NotificationProtocol
      * <p>The notification will be composed only with text.</p>
      *
      * @param user         The destination user [already in the database]
-     * @param notification The notification we want to send [not in the database]
+     * @param notification The notification we want to send [already in the database]
      * @return The notification after it's saved in the database
      * @throws SystemException If the user is not already saved in the database
      */
@@ -39,9 +38,10 @@ public interface NotificationProtocol
      * <p>The notification will be composed only with text.</p>
      *
      * @param users        The list of users [already in the database]
-     * @param notification The target notification [not in the database]
+     * @param notification The target notification [already in the database]
      * @return The notification after it's saved in the database
      * @throws SystemException If one of the users is not already saved in the database
      */
     NotificationEntity sendNotificationToUsers(List<UserEntity> users, NotificationEntity notification) throws SystemException;
+
 }

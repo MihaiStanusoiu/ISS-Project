@@ -4,9 +4,13 @@ import database.DatabaseLoaderInterface;
 import domain.*;
 import exception.ModelException;
 import exception.SystemException;
+import nulldomain.NullUserEntity;
 import protocol.UserProtocol;
 import repository.RepositoryEntity;
 import repository.RepositoryInterface;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static utils.Conditional.basedOn;
 
@@ -24,17 +28,13 @@ public class UserModel extends Model<UserEntity, Integer> implements UserProtoco
     private RepositoryInterface<ConfigurationSessionMemberEntity, Integer> repositorySessionConfiguration;
     private RepositoryInterface<EditionMemberEntity, Integer> repositoryEditionMember;
     private RepositoryInterface<SessionMemberEntity, Integer> repositorySessionMember;
-    private RepositoryInterface<SessionEntity, Integer> repositorySession;
     private RepositoryInterface<NotificationEntity, Integer> repositoryNotification;
-    private RepositoryInterface<SubmissionEntity, Integer> repositorySubmission;
     private RepositoryInterface<AuthorSubmissionEntity, Integer> repositoryAuthor;
 
     public UserModel(DatabaseLoaderInterface loader) {
         super(UserEntity.class, loader);
         repositoryEditionMember= new RepositoryEntity<>(EditionMemberEntity.class, loader);
         repositorySessionMember = new RepositoryEntity<>(SessionMemberEntity.class, loader);
-        repositorySession = new RepositoryEntity<>(SessionEntity.class, loader);
-        repositorySubmission = new RepositoryEntity<>(SubmissionEntity.class, loader);
         repositoryEditionConfiguration = new RepositoryEntity<>(ConfigurationEditionMemberEntity.class, loader);
         repositorySessionConfiguration = new RepositoryEntity<>(ConfigurationSessionMemberEntity.class, loader);
         repositoryAuthor = new RepositoryEntity<>(AuthorSubmissionEntity.class, loader);
@@ -134,4 +134,25 @@ public class UserModel extends Model<UserEntity, Integer> implements UserProtoco
                 .orElseThrow(() -> new ModelException("404 Notification Not Found!")).getId());
         return getElementById(user.getId());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<UserEntity> findUsersByUsername(String username) throws SystemException {
+        return getAll().stream()
+                .filter(user -> user.getUsername().toLowerCase().contains(username))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UserEntity findUserByUsername(String username) throws SystemException {
+        return getAll().stream()
+                .filter(user -> user.getUsername().toLowerCase().equals(username))
+                .findFirst().orElse(new NullUserEntity());
+    }
+
 }

@@ -10,17 +10,12 @@ import java.util.List;
  * @version 1.0
  */
 
-@SuppressWarnings("all")
 public class ValidatorSystemException extends SystemException {
 
     private List<String> messages;
 
     public ValidatorSystemException(List<String> messages) {
         this.messages = messages;
-    }
-
-    public ValidatorSystemException() {
-        messages = new ArrayList<>();
     }
 
     public ValidatorSystemException(String message) {

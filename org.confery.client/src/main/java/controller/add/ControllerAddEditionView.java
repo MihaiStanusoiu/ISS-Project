@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import static utils.Try.runFunction;
+import static utils.Try.runMethod;
 
 /**
  * @author Alexandru Stoica
@@ -41,8 +42,7 @@ public class ControllerAddEditionView
     @FXML
     private TextField locationTextField;
 
-    @FXML
-    private Label conferenceNameLabel;
+    @FXML private Label conferenceNameLabel;
 
     @FXML
     private TextField bioTextField;
@@ -194,6 +194,9 @@ public class ControllerAddEditionView
 
     @FXML
     private void onPublishButtonClick() {
+        context.getEditionContext().updateEdition(getCurrentEdition());
+        runMethod(context::publish).orHandle(exception -> logger.error(exception.getMessage()));
+        manager.switchScene(ViewType.CONFERENCES);
     }
 
     @FXML

@@ -3,6 +3,8 @@ package protocol;
 import domain.*;
 import exception.SystemException;
 
+import java.util.List;
+
 /**
  * Tested: True
  *
@@ -95,5 +97,21 @@ public interface UserProtocol extends ModelInterface<UserEntity, Integer> {
      * @throws SystemException If the user if doesn't have the notification.
      */
     UserEntity removeNotificationFrom(UserEntity user, NotificationEntity notification) throws SystemException;
+
+    /**
+     * Returns a list of users with a similar username.
+     * @param username The target username
+     * @return The list of users with similar username.
+     * @throws SystemException [Only hibernate can throw exception]
+     */
+    List<UserEntity> findUsersByUsername(String username) throws SystemException;
+
+    /**
+     * Returns the user with a specified username.
+     * @param username The target username
+     * @return The user found by username
+     * @throws SystemException If it's unable to find the user.
+     */
+    UserEntity findUserByUsername(String username) throws SystemException;
 
 }

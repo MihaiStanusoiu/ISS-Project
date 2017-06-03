@@ -12,14 +12,24 @@ import javafx.scene.control.Pagination;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import manager.StageManager;
+import method.SimpleMethod;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import pagination.PaginationBuilder;
+import service.CollectionService;
+import service.ConferenceService;
+import service.UserService;
 import transfarable.Conference;
 import transfarable.Submission;
 import transfarable.User;
 import view.ViewType;
+
+import java.rmi.RemoteException;
+import java.util.List;
+
+import static utils.Try.runFunction;
 
 /**
  * @author Alexandru Stoica
@@ -65,26 +75,44 @@ public class ControllerUserView
     @Autowired
     private StageManager manager;
 
-    /**
-     * {@inheritDoc}
-     */
+    @Lazy
+    @Autowired
+    private CollectionService collectionService;
+
+    private UserService userService;
+    private ConferenceService conferenceService;
+    private static Logger logger;
+    private SimpleMethod<RemoteException> handler;
+
     @Override
     public void initialize() {
-        Conference[] conferenceItems = {
-                new Conference("Conference Name", "TEST"),
-                new Conference("Conference Name", "TEST"),
-                new Conference("Conference Name", "TEST"),
-                new Conference("Conference Name", "TEST"),
-        };
-        Submission[] submissionItems = {
-                new Submission(1, "TestName", "Reviewed", "url@uer", "paper", Boolean.FALSE),
-                new Submission(1, "TestName", "Not Reviewed", "url@uer", "paper", Boolean.FALSE),
-                new Submission(1, "TestName", "Reviewed", "url@uer", "paper", Boolean.FALSE),
-                new Submission(1, "TestName", "Reviewed", "url@uer", "paper", Boolean.FALSE)
-        };
+        logger = Logger.getLogger(ControllerUserView.class);
+        handler = exception -> logger.error(exception.getCause());
+        userService = runFunction(collectionService::userService).orHandle(handler);
+        conferenceService = runFunction(collectionService::conferenceService).orHandle(handler);
+    }
+
+    @Override
+    public void setElement(User element) {
+        this.element = element;
+        build(element);
+        buildLists();
+    }
+
+    private void build(User element) {
+        nameLabel.setText(element.getName());
+        bioText.setText(element.getBio());
+        locationText.setText(element.getLocation());
+        websiteText.setText(element.getWebsite());
+        emailText.setText(element.getEmail());
+    }
+
+    private void buildLists() {
+        List<Submission> submissionItems = runFunction(userService::getSubmissionsByAuthorship, element).orHandle(handler);
+        List<Conference> conferenceItems = runFunction(conferenceService::getConferencesOf, element).orHandle(handler);
         conferences = FXCollections.observableArrayList(conferenceItems);
-        paginationConferences = updatePaginationConference(conferences);
         submissions = FXCollections.observableArrayList(submissionItems);
+        paginationConferences = updatePaginationConference(conferences);
         paginationSubmissions = updatePaginationSubmission(submissions);
     }
 
@@ -108,21 +136,6 @@ public class ControllerUserView
                 .setStageManager(manager)
                 .setPagination(paginationConferences)
                 .build(GridPane.class);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param element The view's element.
-     */
-    @Override
-    public void setElement(User element) {
-        this.element = element;
-        nameLabel.setText(element.getName());
-        bioText.setText(element.getBio());
-        locationText.setText(element.getLocation());
-        websiteText.setText(element.getWebsite());
-        emailText.setText(element.getEmail());
     }
 
 }

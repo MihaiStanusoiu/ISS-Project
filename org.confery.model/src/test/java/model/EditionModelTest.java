@@ -157,4 +157,19 @@ public class EditionModelTest {
                 .anyMatch(conferenceEntity -> conferenceEntity.getId().equals(id)) , Boolean.TRUE);
     }
 
+    @Test
+    public void isDeleting() throws Exception {
+        //declarations:
+        EditionEntity edition = new EditionEntity("New York");
+        UserEntity user = new UserEntity("username", "password");
+        // preconditions:
+        editionModel.add(edition);
+        userModel.add(user);
+        editionModel.addMemberTo(edition, user, MemberRole.EDITION_CHAIR);
+        // when:
+        editionModel.delete(edition);
+        // then:
+        assertTrue(editionModel.getAll().stream().noneMatch(item -> item.getId().equals(edition.getId())));
+    }
+
 }

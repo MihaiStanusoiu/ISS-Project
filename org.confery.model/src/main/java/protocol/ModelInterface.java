@@ -1,5 +1,6 @@
 package protocol;
 
+import database.DatabaseLoaderInterface;
 import domain.Idable;
 import exception.SystemException;
 
@@ -15,6 +16,8 @@ import java.util.List;
 
 
 public interface ModelInterface<T extends Idable<Id>, Id extends Serializable> {
+
+    DatabaseLoaderInterface getLoader();
 
     /**
      * Adds an element to database.
