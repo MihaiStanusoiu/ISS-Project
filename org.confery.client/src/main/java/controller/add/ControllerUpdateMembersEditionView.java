@@ -16,17 +16,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.CollectionService;
+import service.EditionService;
 import service.UserService;
+import transfarable.Edition;
+import transfarable.MemberRoleTransferable;
 import transfarable.User;
-import utils.ConferenceContext;
 import view.Icon;
 import view.ViewType;
 
 import java.rmi.RemoteException;
-import java.util.List;
 
 import static utils.Try.runFunction;
-import static utils.Try.runMethod;
 
 /**
  * @author Alexandru Stoica
@@ -35,8 +35,8 @@ import static utils.Try.runMethod;
 
 @Lazy
 @Component
-public class ControllerAddMembersEditionView
-        implements ControllerInterface, ControllerItemInterface<ConferenceContext> {
+public class ControllerUpdateMembersEditionView
+        implements ControllerInterface, ControllerItemInterface<Edition> {
 
     @FXML
     private ListView<User> chairListView;
@@ -73,26 +73,34 @@ public class ControllerAddMembersEditionView
     @Autowired
     private StageManager manager;
 
-    @SuppressWarnings({"FieldCanBeLocal", "unused"})
-    private ConferenceContext context;
+    private Edition edition;
+
+    private EditionService editionService;
 
     @Override
-    public void setElement(ConferenceContext element) {
-        this.context = element;
+    public void setElement(Edition element) {
+        this.edition = element;
         build();
     }
 
+    public void initialize() {
+        logger = Logger.getLogger(ControllerUpdateMembersEditionView.class);
+        handler = exception -> logger.error(exception.getCause());
+        userService = runFunction(service::userService).orHandle(handler);
+        editionService = runFunction(service::editionService).orHandle(handler);
+    }
+
     private void build() {
-        conferenceNameLabel.setText(context.getConference().getName());
+        conferenceNameLabel.setText(runFunction(editionService::getConferenceOf, edition).orHandle(handler).getName());
         getListsElements();
         setUpListViews();
         setUpListViewsItems();
     }
 
     private void getListsElements() {
-        chairs = FXCollections.observableArrayList(context.getChair());
-        coChairs = context.getEditionContext().getCoChairs();
-        pcMembers = context.getEditionContext().getPcMembers();
+        chairs = FXCollections.observableArrayList(runFunction(editionService::getChair, edition).orHandle(handler));
+        coChairs = FXCollections.observableArrayList(runFunction(editionService::getCoChairsOf, edition).orHandle(handler));
+        pcMembers = FXCollections.observableArrayList(runFunction(editionService::getPcMembersOf, edition).orHandle(handler));
     }
 
     private void setUpListViews() {
@@ -103,12 +111,21 @@ public class ControllerAddMembersEditionView
         coChairsListView = new ListViewBuilder<>(coChairsListView)
                 .setIcon(Icon.CLOSE)
                 .textProvider(User::getName)
-                .setAction((list, item) -> ((List)list).remove(item), context.getEditionContext().getCoChairs())
+                .setAction((service, item) -> {
+                    runFunction(((EditionService)service)::deleteMemberOfEdition, edition, item).orHandle(handler);
+                    manager.refresh(edition);
+                    return null;
+                }, editionService)
                 .build();
         pcMembersListView = new ListViewBuilder<>(pcMembersListView)
                 .setIcon(Icon.CLOSE)
                 .textProvider(User::getName)
-                .setAction((list, item) -> ((List)list).remove(item), context.getEditionContext().getPcMembers())
+                .setAction((service, item) -> {
+                    logger.info(item.getUsername());
+                    runFunction(((EditionService)service)::deleteMemberOfEdition, edition, item).orHandle(handler);
+                    manager.refresh(edition);
+                    return null;
+                }, editionService)
                 .build();
     }
 
@@ -118,55 +135,45 @@ public class ControllerAddMembersEditionView
         pcMembersListView.setItems(pcMembers);
     }
 
-    public void initialize() {
-        logger = Logger.getLogger(ControllerAddMembersEditionView.class);
-        handler = exception -> logger.error(exception.getCause());
-        userService = runFunction(service::userService).orHandle(handler);
-    }
-
     @FXML
     private void onAddCoChairButtonClick() {
-        String username = coChairTextField.getText();
-        User user = runFunction(userService::findUserByUsername, username).orHandle(handler);
-        context.getEditionContext().addCoChair(user);
+        addMemberToEdition(coChairTextField, MemberRoleTransferable.EDITION_CO_CHAIR);
+    }
+
+    private void addMemberToEdition(TextField username, MemberRoleTransferable role) {
+        User user = runFunction(userService::findUserByUsername, username.getText()).orHandle(handler);
+        edition = runFunction(editionService::addMemberToEdition, edition, user, role).orHandle(handler);
+        manager.refresh(edition);
     }
 
     @FXML
     private void onAddPCMemberButtonClick() {
-        String username = pcMemberTextField.getText();
-        User user = runFunction(userService::findUserByUsername, username).orHandle(handler);
-        context.getEditionContext().addPcMember(user);
-    }
-
-    @FXML
-    private void onPublishButtonClick() {
-        runMethod(context::publish).orHandle(exception -> logger.error(exception.getMessage()));
-        manager.switchScene(ViewType.CONFERENCES);
+        addMemberToEdition(pcMemberTextField, MemberRoleTransferable.EDITION_PC_MEMBER);
     }
 
     @FXML
     private void onSaveButtonClick() {
-        // TODO
+        manager.refresh(edition);
     }
 
     @FXML
     private void onBasicButtonClick() {
-        manager.switchScene(ViewType.ADD_EDITION, context);
+        manager.switchScene(ViewType.EDITION_UPDATE, edition);
     }
 
     @FXML
     private void onBackButtonClick() {
-        manager.switchScene(ViewType.ADD_CONFERENCE, context);
+        // TODO
     }
 
     @FXML
     private void onSessionsButtonClick() {
-        manager.switchScene(ViewType.ADD_SESSION, context);
+        // TODO
     }
 
     @FXML
     private void onSubmissionsButtonClick() {
-        manager.switchScene(ViewType.ADD_SUBMISSION, context);
+        // TODO
     }
 
 }

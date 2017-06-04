@@ -54,15 +54,11 @@ org.confery.client/gradle/
 org.confery.client/src/main/kotlin/
 org.confery.model/build/
 org.confery.model/gradle/
-org.confery.model/src/test/resources/
 org.confery.network/build/
 org.confery.network/gradle/
-org.confery.network/src/main/resources/
-org.confery.network/src/test/resources/
 org.confery.server/build/
 org.confery.server/gradle/
 org.confery.server/gradlew
 org.confery.server/gradlew.bat
-org.confery.server/src/test/
 src/main/
 src/test/groovy/

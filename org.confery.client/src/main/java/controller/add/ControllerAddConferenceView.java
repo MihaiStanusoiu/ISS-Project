@@ -118,8 +118,8 @@ public class ControllerAddConferenceView
         editionListView.setOnMouseClicked(event -> onEditionItemClick());
         editionListView = new ListViewBuilder<>(editionListView)
                 .setIcon(Icon.CLOSE)
-                .visibleText(context -> context.getEdition().getLocation())
-                .setAction(List::remove, context.getEditionContexts())
+                .textProvider(context -> context.getEdition().getLocation())
+                .setAction((list, item) -> ((List)list).remove(item), context.getEditionContexts())
                 .build();
     }
 

@@ -104,9 +104,9 @@ public class ControllerUpdateConferenceView
         editionListView.setOnMouseClicked(event -> onEditionItemClick());
         editionListView = new ListViewBuilder<>(editionListView)
                 .setIcon(Icon.CLOSE)
-                .visibleText(Edition::getLocation)
+                .textProvider(Edition::getLocation)
                 .setAction((service, item) -> {
-                    runFunction(service::delete, item).orHandle(handler);
+                    runFunction(((EditionService)service)::delete, item).orHandle(handler);
                     manager.refresh(conference);
                     return Boolean.TRUE;
                 }, editionService)

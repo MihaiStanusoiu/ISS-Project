@@ -67,8 +67,8 @@ public class ControllerAddSessionEditionView
     private void setUpListViews() {
         sessionsListView = new ListViewBuilder<>(sessionsListView)
                 .setIcon(Icon.CLOSE)
-                .visibleText(Session::getName)
-                .setAction(List::remove, context.getEditionContext().getSessions())
+                .textProvider(Session::getName)
+                .setAction((list, item) -> ((List)list).remove(item), context.getEditionContext().getSessions())
                 .build();
         sessionsListView.setItems(sessions);
     }
