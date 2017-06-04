@@ -34,6 +34,7 @@ public class Main extends Application {
      */
     @Override
     public void init() throws Exception {
+        super.init();
         context = getContext();
     }
 
@@ -55,7 +56,7 @@ public class Main extends Application {
     /**
      * Effect: Displays the frame scene of our application.
      */
-    private void displayScene() {
+    protected void displayScene() {
         stageManager.switchScene(ViewType.CONFERENCES);
     }
 
@@ -82,7 +83,7 @@ public class Main extends Application {
         // creates an application & context builder based on the main class
         SpringApplicationBuilder builder = new SpringApplicationBuilder(Main.class);
         // retrieves a read-only list of raw arg and converts the list to String[] -- application's args
-        String[] args = getParameters().getRaw().stream().toArray(String[]::new);
+        String[] args = {};
         builder.headless(false); // needed for TestFX integration
         return builder.run(args);
     }
@@ -91,4 +92,5 @@ public class Main extends Application {
         String threadNamePrefix = "ApplicationThread-";
         return Executors.newFixedThreadPool(5, new CustomizableThreadFactory(threadNamePrefix));
     }
+
 }
