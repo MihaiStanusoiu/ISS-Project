@@ -145,16 +145,14 @@ public class EditionModelTest {
         UserEntity user = new UserEntity("username", "password");
         ConferenceEntity conference = new ConferenceEntity("Test", "T");
         //preconditions
-        conferenceModel.add(conference);
-        editionModel.add(edition);
+        Integer idConference = conferenceModel.add(conference);
         userModel.add(user);
         //when:
-        conference = conferenceModel.addEditionTo(conference,edition);
-        Integer id = conference.getId();
-        edition = editionModel.addMemberTo(edition, user, MemberRole.EDITION_CHAIR);
+        edition = conferenceModel.addEditionTo(conference,edition);
+        editionModel.addMemberTo(edition, user, MemberRole.EDITION_CHAIR);
         //then:
         assertEquals(conferenceModel.getConferencesOf(user).stream()
-                .anyMatch(conferenceEntity -> conferenceEntity.getId().equals(id)) , Boolean.TRUE);
+                .anyMatch(conferenceEntity -> conferenceEntity.getId().equals(idConference)) , Boolean.TRUE);
     }
 
     @Test

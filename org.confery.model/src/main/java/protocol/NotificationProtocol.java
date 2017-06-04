@@ -15,7 +15,6 @@ import java.util.List;
 
 public interface NotificationProtocol
         extends ModelInterface<NotificationEntity, Integer> {
-
     /**
      * Sends a notification to a specified user.
      * <p>It's important to use an user that is already saved in our database.</p>

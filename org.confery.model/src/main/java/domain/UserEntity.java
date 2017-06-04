@@ -195,66 +195,12 @@ public class UserEntity implements Serializable, Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the username to the given value
-     *
-     * @param username [String]: new value for the username
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /**
      * Effect: Sets the password to the given value
      *
      * @param password [String]: new value for the password
      */
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    /**
-     * Effect: Sets the email to the given value
-     *
-     * @param email [String]: new value for the email
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * Effect: Sets the name to the given value
-     *
-     * @param name [String]: new value for the name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Effect: Sets the website to the given value
-     *
-     * @param website [String]: new value for the website
-     */
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    /**
-     * Effect: Sets the bio to the given value
-     *
-     * @param bio [String]: new value for the bio
-     */
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-    /**
-     * Effect: Sets the location to the given value
-     *
-     * @param location [String]: new value for the location
-     */
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     /**

@@ -24,11 +24,11 @@ public class SubmissionTopicEntity implements Idable<Integer> {
     private Integer id;
 
     @ManyToOne(targetEntity = SubmissionEntity.class)
-    @JoinColumn(name = "ID_SUBMISSION")
+    @JoinColumn(name = "ID_SUBMISSION", updatable = false)
     private SubmissionEntity submission;
 
     @ManyToOne(targetEntity = TopicEntity.class)
-    @JoinColumn(name = "ID_TOPIC")
+    @JoinColumn(name = "ID_TOPIC", updatable = false)
     private TopicEntity topic;
 
     private static final Integer DEFAULT_ID = 0;
@@ -46,8 +46,7 @@ public class SubmissionTopicEntity implements Idable<Integer> {
     }
 
     @SuppressWarnings("All")
-    public SubmissionTopicEntity(Integer id, SubmissionEntity submission,
-                                 TopicEntity topic) {
+    public SubmissionTopicEntity(Integer id, SubmissionEntity submission, TopicEntity topic) {
         this.id = id;
         this.submission = submission;
         this.topic = topic;
@@ -83,30 +82,12 @@ public class SubmissionTopicEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the submission of a SubmissionTopicEntity.
-     *
-     * @param submission: new value for submission.
-     */
-    public void setSubmission(SubmissionEntity submission) {
-        this.submission = submission;
-    }
-
-    /**
      * Effect: Returns the topic of a SubmissionTopicEntity.
      *
      * @return [TopicEntity]: returns the TopicEntity.
      */
     public TopicEntity getTopic() {
         return topic;
-    }
-
-    /**
-     * Effect: Sets the topic of a SubmissionTopicEntity.
-     *
-     * @param topic: new value for topic.
-     */
-    public void setTopic(TopicEntity topic) {
-        this.topic = topic;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package service;
 
 import domain.Idable;
+import transfarable.IdableTransfer;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -11,7 +12,8 @@ import java.util.List;
  * @version 1.0
  */
 
-public interface Service<TransferT, Id extends Serializable, EntityT extends Idable<Id>> extends ServiceInterface {
+public interface Service<TransferT extends IdableTransfer<Id>, Id extends Serializable,
+        EntityT extends Idable<Id>> extends ServiceInterface {
 
     Id add(TransferT element) throws RemoteException;
 

@@ -23,6 +23,7 @@ import static utils.Try.runFunction;
 
 public class EditionManager extends GenericManager<Edition, Integer, EditionEntity> implements EditionService {
 
+    private final ConferenceTranslator conferenceTranslator;
     private UserTranslator userTranslator;
     private MemberRoleTranslator memberRoleTranslator;
     protected EditionProtocol model;
@@ -38,6 +39,11 @@ public class EditionManager extends GenericManager<Edition, Integer, EditionEnti
         sessionTranslator = new SessionTranslator();
         memberRoleTranslator = new MemberRoleTranslator();
         submissionTranslator = new SubmissionTranslator();
+        conferenceTranslator = new ConferenceTranslator();
+    }
+
+    @Override public Conference getConferenceOf(Edition edition) throws RemoteException {
+        return conferenceTranslator.translate(getEditionFromDatabase(edition).getConference());
     }
 
     @Override

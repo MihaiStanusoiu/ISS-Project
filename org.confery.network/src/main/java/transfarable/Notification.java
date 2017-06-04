@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @version 1.0
  */
 
-public class Notification implements Serializable {
+public class Notification implements Serializable, IdableTransfer<Integer> {
 
     private Integer id;
     private String text;

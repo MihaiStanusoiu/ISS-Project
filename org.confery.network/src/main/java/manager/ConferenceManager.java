@@ -7,6 +7,7 @@ import protocol.LoginProtocol;
 import service.ConferenceService;
 import transfarable.Conference;
 import transfarable.Edition;
+import transfarable.NullUser;
 import transfarable.User;
 import translator.ConferenceTranslator;
 import translator.EditionTranslator;
@@ -76,9 +77,20 @@ public class ConferenceManager
     }
 
     @Override
-    public Conference addEditionToConference(Conference conference, Edition edition) throws RemoteException {
+    public User getChairOf(Conference conference) throws RemoteException {
+        User chair = getConferenceChair(conference);
+        return (chair == null) ? new NullUser() : chair;
+    }
+
+    private User getConferenceChair(Conference conference) throws RemoteException {
+        return userTranslator.translate(runFunction(model::getChairOf,
+                getConferenceFromDatabase(conference)).orThrow(thrower));
+    }
+
+    @Override
+    public Edition addEditionToConference(Conference conference, Edition edition) throws RemoteException {
         checkActiveUserPermissions(getConferenceFromDatabase(conference).getEditions().size() == 0, conference);
-        return translator.translate(runFunction(model::addEditionTo, translator.translate(conference),
+        return editionTranslator.translate(runFunction(model::addEditionTo, translator.translate(conference),
                 editionTranslator.translate(edition)).orThrow(thrower));
     }
 

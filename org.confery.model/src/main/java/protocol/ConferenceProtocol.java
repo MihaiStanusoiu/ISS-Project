@@ -20,7 +20,7 @@ public interface ConferenceProtocol extends ModelInterface<ConferenceEntity, Int
      * @return The conference updated
      * @throws SystemException If it's unable to add the edition to the database.
      */
-    ConferenceEntity addEditionTo(ConferenceEntity conference, EditionEntity edition) throws SystemException;
+    EditionEntity addEditionTo(ConferenceEntity conference, EditionEntity edition) throws SystemException;
 
     /**
      * Removes an edition from conference.
@@ -38,5 +38,13 @@ public interface ConferenceProtocol extends ModelInterface<ConferenceEntity, Int
      * @throws SystemException [Only hibernate can throw something]
      */
     List<ConferenceEntity> getConferencesOf(UserEntity user) throws SystemException;
+
+    /**
+     * Returns the chair of the conference.
+     * @param conference: The target conference
+     * @return The conferences chair
+     * @throws SystemException If the conference is not in the database.
+     */
+    UserEntity getChairOf(ConferenceEntity conference) throws SystemException;
 
 }

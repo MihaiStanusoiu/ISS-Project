@@ -29,7 +29,7 @@ public class NotificationEntity implements Serializable, Idable<Integer> {
     private Boolean paymentType;
 
     @ManyToOne(targetEntity = UserEntity.class)
-    @JoinColumn(name = "ID_USER")
+    @JoinColumn(name = "ID_USER", updatable = false)
     private UserEntity user;
 
     private static final Integer DEFAULT_ID = 0;
@@ -85,30 +85,12 @@ public class NotificationEntity implements Serializable, Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the text of a notification.
-     *
-     * @param text [String] id: new value for text
-     */
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    /**
      * Effect: Return the payment type of a notification.
      *
      * @return [Boolean]: returns the payment type of a notification.
      */
     public Boolean getPaymentType() {
         return paymentType;
-    }
-
-    /**
-     * Effect: Sets the payment type of a notification.
-     *
-     * @param paymentType [Boolean]: new value for payment type
-     */
-    public void setPaymentType(Boolean paymentType) {
-        this.paymentType = paymentType;
     }
 
     /**

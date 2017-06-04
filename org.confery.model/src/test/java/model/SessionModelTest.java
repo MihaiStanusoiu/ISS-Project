@@ -72,44 +72,4 @@ public class SessionModelTest {
         Assert.assertEquals(session.getSpeakers().size(), 0);
     }
 
-    @Test
-    public void isChangingMemberRole() throws Exception {
-        // declarations:
-        SessionEntity session = new SessionEntity("Test");
-        UserEntity test = new UserEntity(1, "username", "test");
-        // preconditions:
-        userModel.add(test);
-        sessionModel.add(session);
-        // when:
-        session = sessionModel.addMemberTo(session, test, MemberRole.SESSION_LISTENER);
-        // then:
-        Assert.assertEquals(session.getListeners().size(), 1);
-        // when:
-        session = sessionModel.changeMemberRoleIn(session, test, MemberRole.SESSION_SPEAKER);
-        // then
-        Assert.assertTrue(session.getListeners().size() == 0 &&
-                session.getSpeakers().size() == 1);
-    }
-
-    @Test
-    public void isChangingChair() throws Exception {
-        // declarations:
-        SessionEntity session = new SessionEntity("Test");
-        UserEntity user = new UserEntity("username", "test");
-        UserEntity test = new UserEntity("username", "test");
-        // preconditions:
-        userModel.add(user);
-        userModel.add(test);
-        sessionModel.add(session);
-        // when:
-        session = sessionModel.addMemberTo(session, user, MemberRole.SESSION_CHAIR);
-        // then:
-        Assert.assertTrue(session.getChair().equals(user));
-        // when:
-        session = sessionModel.changeChairIn(sessionModel.getElementById(session.getId()), test);
-        // then:
-        Assert.assertTrue(session.getChair().equals(test));
-        Assert.assertTrue(session.getMembers().size() == 1);
-    }
-
 }

@@ -40,10 +40,9 @@ public class NotificationModel extends Model<NotificationEntity, Integer> implem
         basedOn(Objects.nonNull(userRepository.getElementById(user.getId())))
                 .orThrow(new ModelException("404 Used Not Found!"));
         notification.setUser(user);
-        this.update(getElementById(notification.getId()), notification);
+        this.add(notification);
         return getElementById(notification.getId());
     }
-
 
     /**
      * {@inheritDoc}

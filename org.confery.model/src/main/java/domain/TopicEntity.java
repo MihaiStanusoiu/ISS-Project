@@ -81,15 +81,6 @@ public class TopicEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the word to the given value
-     *
-     * @param word: new value for word
-     */
-    public void setWord(String word) {
-        this.word = word;
-    }
-
-    /**
      * Effect: Getter for the elements of the relationship of the topic.
      *
      * @return ArrayList<SubmissionTopicEntity> : returns topicSubmissionTopics.
@@ -97,15 +88,6 @@ public class TopicEntity implements Idable<Integer> {
 
     public Set<SubmissionTopicEntity> getSubmissionTopics() {
         return submissionTopics;
-    }
-
-    /**
-     * Effect: Sets the topicSubmissionTopics to the given value
-     *
-     * @param submissionTopics: new value for topicSubmissionTopics
-     */
-    public void setSubmissionTopics(Set<SubmissionTopicEntity> submissionTopics) {
-        this.submissionTopics = submissionTopics;
     }
 
     /**

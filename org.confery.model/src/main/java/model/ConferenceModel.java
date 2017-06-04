@@ -12,12 +12,12 @@ import repository.RepositoryInterface;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static utils.Conditional.basedOn;
 
 /**
  * Created by Mike on 5/29/2017.
  */
+
 public class ConferenceModel
         extends Model<ConferenceEntity, Integer>
         implements ConferenceProtocol {
@@ -30,12 +30,12 @@ public class ConferenceModel
     }
 
     @Override
-    public ConferenceEntity addEditionTo(ConferenceEntity conference, EditionEntity edition) throws SystemException {
+    public EditionEntity addEditionTo(ConferenceEntity conference, EditionEntity edition) throws SystemException {
         basedOn(conference.getEditions().stream().noneMatch(item -> item.getId().equals(edition.getId())))
                 .orThrow(new ModelException("The edition is already part of the conference"));
         edition.setConference(conference);
-        repositoryEdition.update(repositoryEdition.getElementById(edition.getId()), edition);
-        return getElementById(conference.getId());
+        repositoryEdition.add(edition);
+        return repositoryEdition.getElementById(edition.getId());
     }
 
     @Override
@@ -51,5 +51,9 @@ public class ConferenceModel
         return getAll().stream()
                 .filter(conference -> conference.getLatestEdition().getChair().getId().equals(user.getId()))
                 .collect(Collectors.toList());
+    }
+
+    @Override public UserEntity getChairOf(ConferenceEntity conference) throws SystemException {
+        return conference.getLatestEdition().getChair();
     }
 }

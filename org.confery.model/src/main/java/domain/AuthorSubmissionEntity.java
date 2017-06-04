@@ -19,15 +19,15 @@ public class AuthorSubmissionEntity implements Idable<Integer> {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "ID_AUTHOR_SUBMISSION")
+    @Column(name = "ID_AUTHOR_SUBMISSION", updatable = false)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "ID_USER")
+    @JoinColumn(name = "ID_USER", updatable = false)
     private UserEntity author;
 
     @ManyToOne
-    @JoinColumn(name = "ID_SUBMISSION")
+    @JoinColumn(name = "ID_SUBMISSION", updatable = false)
     private SubmissionEntity submission;
 
     @Column(name = "IS_OWNER")
@@ -146,15 +146,6 @@ public class AuthorSubmissionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the presentationUrl to the given value.
-     *
-     * @param presentationUrl: new value for presentationUrl.
-     */
-    public void setPresentationUrl(String presentationUrl) {
-        this.presentationUrl = presentationUrl;
-    }
-
-    /**
      * Effect: Getter for the author.
      *
      * @return UserEntity: returns author.
@@ -199,14 +190,6 @@ public class AuthorSubmissionEntity implements Idable<Integer> {
         return isOwner;
     }
 
-    /**
-     * Effect: Sets the isOwner to the given value.
-     *
-     * @param owner: new value for isOwner.
-     */
-    public void setOwner(Boolean owner) {
-        isOwner = owner;
-    }
 
     @Override
     public boolean equals(Object o) {

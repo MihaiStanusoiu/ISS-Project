@@ -24,9 +24,9 @@ public class ConferenceEntityTest {
         DatabaseLoaderInterface loader = new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
         ConferenceProtocol conferenceModel = new ConferenceModel(loader);
         // preconditions:
-        conferenceModel.add(conference);
-        conference = conferenceModel.addEditionTo(conference, edition);
+        Integer idConference = conferenceModel.add(conference);
+        edition = conferenceModel.addEditionTo(conference, edition);
         // then:
-        assertEquals(conference.getLatestEdition().getId(), edition.getId());
+        assertEquals(conferenceModel.getElementById(idConference).getLatestEdition().getId(), edition.getId());
     }
 }

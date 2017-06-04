@@ -81,30 +81,12 @@ public class TagEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the word of the tag.
-     *
-     * @param word [Integer]: new value for the word
-     */
-    public void setWord(String word) {
-        this.word = word;
-    }
-
-    /**
      * Effect: Return the submission tags of the tag.
      *
      * @return [ArrayList<SubmissionTagEntity>]: returns the submission tags of the tag.
      */
     public Set<SubmissionTagEntity> getSubmissionTags() {
         return submissionTags;
-    }
-
-    /**
-     * Effect: Sets the submission tags of the tag.
-     *
-     * @param submissionTags [ArrayList<SubmissionTagEntity>]: new value for the submission tags
-     */
-    public void setSubmissionTags(Set<SubmissionTagEntity> submissionTags) {
-        this.submissionTags = submissionTags;
     }
 
     /**

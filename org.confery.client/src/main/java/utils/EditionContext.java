@@ -18,7 +18,7 @@ import static utils.Try.runFunction;
  * @version 1.0
  */
 
-public class EditionContext {
+public class EditionContext implements IdableTransfer<Integer> {
 
     private Edition edition;
     private EditionService editionService;
@@ -92,26 +92,21 @@ public class EditionContext {
     private SimpleMethod<RemoteException> handler;
 
     public void publish(Conference conference) {
-        addEditionToDatabase();
+        edition = addEditionToConference(conference);
         addChairToDatabase();
         addCoChairsToDatabase();
         addPcMembersToDatabase();
         addSessionsToDatabase();
-        addEditionToConference(conference);
     }
 
-    private void addEditionToConference(Conference conference) {
-        runFunction(conferenceService::addEditionToConference, conference, edition).orHandle(handler);
+    private Edition addEditionToConference(Conference conference) {
+        return runFunction(conferenceService::addEditionToConference, conference, edition).orHandle(handler);
     }
 
     private void addChairToDatabase() {
         runFunction(editionService::addChairToEdition, edition, chair).orHandle(handler);
     }
 
-    private void addEditionToDatabase() {
-        Integer id = runFunction(editionService::add, edition).orHandle(handler);
-        edition = runFunction(editionService::getElementById, id).orHandle(handler);
-    }
 
     private void addCoChairsToDatabase() {
         coChairs.forEach(coChair ->
@@ -125,12 +120,11 @@ public class EditionContext {
 
     private void addSessionsToDatabase() {
         sessions.forEach(session ->
-                runFunction(editionService::addSessionToEdition, edition, addSessionToDatabase(session)).orHandle(handler));
+                runFunction(editionService::addSessionToEdition, edition, session).orHandle(handler));
     }
 
-    private Session addSessionToDatabase(Session session) {
-        Integer idSession = runFunction(sessionService::add, session).orHandle(handler);
-        return runFunction(sessionService::getElementById, idSession).orHandle(handler);
-    }
 
+    @Override public Integer getId() {
+        return edition.getId();
+    }
 }

@@ -63,7 +63,6 @@ public class ControllerMyConferencesView implements ControllerInterface {
     public void initialize() {
         logger = Logger.getLogger(ControllerMyConferencesView.class);
         handler = exception -> logger.error(exception);
-
         conferenceService = runFunction(collectionService::conferenceService).orHandle(handler);
         AuthenticationService authenticationService = runFunction(collectionService::authenticationService).orHandle(handler);
         User active = runFunction(authenticationService::getActiveUser).orHandle(handler);
@@ -72,7 +71,6 @@ public class ControllerMyConferencesView implements ControllerInterface {
 
     private void build(User active) {
         List<Conference> items = runFunction(conferenceService::getConferencesOf, active).orHandle(handler);
-
         conferences = FXCollections.observableArrayList(items);
         pagination = updatePagination(conferences);
         setUpSearchTextField();
