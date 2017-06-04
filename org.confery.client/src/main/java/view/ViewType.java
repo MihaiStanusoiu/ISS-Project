@@ -220,6 +220,10 @@ public enum ViewType implements ViewTypeInterface {
         @Override public String getFXMLFile() {
             return "/fxml/add/UpdateEditionView.fxml";
         }
+    }, UPDATE_EDITION_MEMBERS {
+        @Override public String getFXMLFile() {
+            return "/fxml/add/UpdateMembersEditionView.fxml";
+        }
     };
 
     /**

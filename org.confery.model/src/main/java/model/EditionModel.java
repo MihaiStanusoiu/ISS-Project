@@ -50,8 +50,8 @@ public class EditionModel extends Model<EditionEntity, Integer> implements Editi
      */
     @Override
     public EditionEntity deleteMemberOf(EditionEntity edition, UserEntity member) throws SystemException {
-        repositoryMember.delete(edition.getMembers().stream().findFirst()
-                .filter(item -> item.getId().equals(member.getId()))
+        repositoryMember.delete(edition.getMembers().stream()
+                .filter(item -> item.getUser().getId().equals(member.getId())).findFirst()
                 .orElseThrow(() -> new ModelException("404 Member Not Found!")).getId());
         return getElementById(edition.getId());
     }
@@ -61,7 +61,8 @@ public class EditionModel extends Model<EditionEntity, Integer> implements Editi
      */
     @Override
     public EditionEntity addSessionTo(EditionEntity edition, SessionEntity session) throws SystemException {
-        basedOn(edition.getSessions().stream().noneMatch(item -> item.getId().equals(session.getId())))
+        basedOn(edition.getSessions().stream()
+                .noneMatch(item -> item.getId().equals(session.getId())))
                 .orThrow(new ModelException("The session is already a member of the edition!"));
         session.setEdition(edition);
         repositorySession.add(session);
@@ -73,8 +74,8 @@ public class EditionModel extends Model<EditionEntity, Integer> implements Editi
      */
     @Override
     public EditionEntity deleteSessionOf(EditionEntity edition, SessionEntity session) throws SystemException {
-        repositorySession.delete(edition.getSessions().stream().findFirst()
-                .filter(item -> item.getId().equals(session.getId()))
+        repositorySession.delete(edition.getSessions().stream()
+                .filter(item -> item.getId().equals(session.getId())).findFirst()
                 .orElseThrow(() -> new ModelException("404 Session Not Found!")).getId());
         return getElementById(edition.getId());
     }
@@ -84,7 +85,8 @@ public class EditionModel extends Model<EditionEntity, Integer> implements Editi
      */
     @Override
     public EditionEntity addSubmissionTo(EditionEntity edition, SubmissionEntity submission) throws SystemException {
-        basedOn(edition.getSubmissions().stream().noneMatch(item -> item.getId().equals(submission.getId())))
+        basedOn(edition.getSubmissions().stream()
+                .noneMatch(item -> item.getId().equals(submission.getId())))
                 .orThrow(new ModelException("The submission is already a member of the edition!"));
         submission.setEdition(edition);
         repositorySubmission.add(submission);
@@ -96,8 +98,8 @@ public class EditionModel extends Model<EditionEntity, Integer> implements Editi
      */
     @Override
     public EditionEntity deleteSubmissionOf(EditionEntity edition, SubmissionEntity submission) throws SystemException {
-        repositorySubmission.delete(edition.getSubmissions().stream().findFirst()
-                .filter(item -> item.getId().equals(submission.getId()))
+        repositorySubmission.delete(edition.getSubmissions().stream()
+                .filter(item -> item.getId().equals(submission.getId())).findFirst()
                 .orElseThrow(() -> new ModelException("404 Submission Not Found!")).getId());
         return getElementById(edition.getId());
 

@@ -3,8 +3,11 @@ package manager;
 import checker.EditionPermissionChecker;
 import domain.EditionEntity;
 import domain.MemberRole;
+import domain.UserEntity;
+import model.UserModel;
 import protocol.EditionProtocol;
 import protocol.LoginProtocol;
+import protocol.UserProtocol;
 import service.EditionService;
 import transfarable.*;
 import translator.*;
@@ -29,10 +32,12 @@ public class EditionManager extends GenericManager<Edition, Integer, EditionEnti
     protected EditionProtocol model;
     private SessionTranslator sessionTranslator;
     private SubmissionTranslator submissionTranslator;
+    private UserProtocol userModel;
 
     public EditionManager(EditionProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
         this.model = model;
+        this.userModel = new UserModel(model.getLoader());
         checker = new EditionPermissionChecker();
         translator = new EditionTranslator();
         userTranslator = new UserTranslator();
@@ -109,7 +114,11 @@ public class EditionManager extends GenericManager<Edition, Integer, EditionEnti
     public Edition deleteMemberOfEdition(Edition edition, User user) throws RemoteException {
         checkUserPermissions(edition);
         return translator.translate(runFunction(model::deleteMemberOf, getEditionFromDatabase(edition),
-                userTranslator.translate(user)).orThrow(thrower));
+                getUserFromDatabase(user)).orThrow(thrower));
+    }
+
+    private UserEntity getUserFromDatabase(User user) throws RemoteException {
+        return runFunction(userModel::getElementById, user.getId()).orThrow(thrower);
     }
 
     @Override

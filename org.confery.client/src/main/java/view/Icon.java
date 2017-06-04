@@ -6,6 +6,13 @@ package view;
  */
 
 public enum Icon implements ResourceGetter {
+
+    EMPTY {
+        @Override public String getValue() {
+            return "/png_icons/empty_icon.png";
+        }
+    },
+
     CLOSE {
         @Override
         public String getValue() {

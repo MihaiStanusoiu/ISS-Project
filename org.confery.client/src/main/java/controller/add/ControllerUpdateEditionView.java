@@ -1,5 +1,6 @@
 package controller.add;
 
+import controller.ControllerEdition;
 import controller.main.ControllerInterface;
 import itemcontroller.ControllerItemInterface;
 import javafx.fxml.FXML;
@@ -22,7 +23,6 @@ import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -37,7 +37,7 @@ import static utils.Try.runMethod;
 @Lazy
 @Component
 @SuppressWarnings("EmptyMethod")
-public class ControllerUpdateEditionView
+public class ControllerUpdateEditionView extends ControllerEdition
         implements ControllerInterface, ControllerItemInterface<Edition> {
 
     private static Logger logger;
@@ -49,60 +49,6 @@ public class ControllerUpdateEditionView
 
     @FXML
     private TextField bioTextField;
-
-    @FXML
-    private TextField startingDateDay;
-
-    @FXML
-    private ChoiceBox<String> startingDateMonth;
-
-    @FXML
-    private TextField startingDateYear;
-
-    @FXML
-    private TextField endingDateDay;
-
-    @FXML
-    private ChoiceBox<String> endingDateMonth;
-
-    @FXML
-    private TextField endingDateYear;
-
-    @FXML
-    private TextField abstractDateDay;
-
-    @FXML
-    private ChoiceBox<String> abstractDateMonth;
-
-    @FXML
-    private TextField abstractDateYear;
-
-    @FXML
-    private TextField paperDateDay;
-
-    @FXML
-    private ChoiceBox<String> paperDateMonth;
-
-    @FXML
-    private TextField paperDateYear;
-
-    @FXML
-    private TextField biddingDateDay;
-
-    @FXML
-    private ChoiceBox<String> biddingDateMonth;
-
-    @FXML
-    private TextField biddingDateYear;
-
-    @FXML
-    private TextField evaluationDateDay;
-
-    @FXML
-    private ChoiceBox<String> evaluationDateMonth;
-
-    @FXML
-    private TextField evaluationDateYear;
 
     @Lazy
     @Autowired
@@ -132,16 +78,7 @@ public class ControllerUpdateEditionView
         conferenceNameLabel.setText(getConference().getName());
         locationTextField.setText(edition.getLocation());
         bioTextField.setText(edition.getBio());
-        showDates();
-    }
-
-    private void showDates() {
-        showDate(startingDateDay, startingDateMonth, startingDateYear, edition.getStartDate());
-        showDate(endingDateDay, endingDateMonth, endingDateYear, edition.getEndDate());
-        showDate(abstractDateDay, abstractDateMonth, abstractDateYear, edition.getAbstractDeadline());
-        showDate(paperDateDay, paperDateMonth, paperDateYear, edition.getPaperDeadline());
-        showDate(biddingDateDay, biddingDateMonth, biddingDateYear, edition.getBiddingDeadline());
-        showDate(evaluationDateDay, evaluationDateMonth, evaluationDateYear, edition.getEvaluationDeadline());
+        showDates(edition);
     }
 
     public void initialize() {
@@ -156,7 +93,7 @@ public class ControllerUpdateEditionView
     }
 
     private Date getEvaluationDate() {
-        return runFunction(this::convertToDate, evaluationDateDay, evaluationDateMonth, endingDateYear)
+        return runFunction(this::convertToDate, evaluationDateDay, evaluationDateMonth, evaluationDateDay)
                 .orHandle(this::handler);
     }
 
@@ -190,14 +127,6 @@ public class ControllerUpdateEditionView
         return format.parse(month.getSelectionModel().getSelectedItem() + " " + day.getText() + ", " + year.getText());
     }
 
-    private void showDate(TextField day, ChoiceBox<String> month, TextField year, Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        day.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
-        year.setText(String.valueOf(calendar.get(Calendar.YEAR)));
-        month.getSelectionModel().select(calendar.get(Calendar.MONTH));
-    }
-
     private void handler(Throwable exception) {
         logger.warn(exception.getMessage());
     }
@@ -207,7 +136,7 @@ public class ControllerUpdateEditionView
         Edition update = new Edition(edition.getId(), getStartingDate(), getEndingDate(), locationTextField.getText(),
                 bioTextField.getText(), getAbstractDate(), getPaperDate(), getEvaluationDate(), getBiddingDate());
         runMethod(editionService::update, edition, update).orHandle(remoteHandler);
-        manager.refresh();
+        manager.refresh(runFunction(editionService::getElementById, edition.getId()).orHandle(remoteHandler));
     }
 
     @FXML
@@ -218,12 +147,12 @@ public class ControllerUpdateEditionView
 
     @FXML
     private void onMembersButtonClick() {
-        // TODO
+        manager.switchScene(ViewType.UPDATE_EDITION_MEMBERS, edition);
     }
 
     @FXML
     private void onBasicButtonClick() {
-        // TODO Delete
+        // TODO DELETE THIS EVENT
     }
 
     @FXML
