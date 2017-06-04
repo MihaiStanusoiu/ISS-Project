@@ -1,5 +1,6 @@
 package controller.add;
 
+import controller.ControllerEdition;
 import controller.main.ControllerInterface;
 import itemcontroller.ControllerItemInterface;
 import javafx.fxml.FXML;
@@ -19,7 +20,6 @@ import view.ViewType;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -34,7 +34,7 @@ import static utils.Try.runMethod;
 @Lazy
 @Component
 @SuppressWarnings("EmptyMethod")
-public class ControllerAddEditionView
+public class ControllerAddEditionView extends ControllerEdition
         implements ControllerInterface, ControllerItemInterface<ConferenceContext> {
 
     private static Logger logger;
@@ -47,59 +47,6 @@ public class ControllerAddEditionView
     @FXML
     private TextField bioTextField;
 
-    @FXML
-    private TextField startingDateDay;
-
-    @FXML
-    private ChoiceBox<String> startingDateMonth;
-
-    @FXML
-    private TextField startingDateYear;
-
-    @FXML
-    private TextField endingDateDay;
-
-    @FXML
-    private ChoiceBox<String> endingDateMonth;
-
-    @FXML
-    private TextField endingDateYear;
-
-    @FXML
-    private TextField abstractDateDay;
-
-    @FXML
-    private ChoiceBox<String> abstractDateMonth;
-
-    @FXML
-    private TextField abstractDateYear;
-
-    @FXML
-    private TextField paperDateDay;
-
-    @FXML
-    private ChoiceBox<String> paperDateMonth;
-
-    @FXML
-    private TextField paperDateYear;
-
-    @FXML
-    private TextField biddingDateDay;
-
-    @FXML
-    private ChoiceBox<String> biddingDateMonth;
-
-    @FXML
-    private TextField biddingDateYear;
-
-    @FXML
-    private TextField evaluationDateDay;
-
-    @FXML
-    private ChoiceBox<String> evaluationDateMonth;
-
-    @FXML
-    private TextField evaluationDateYear;
 
     @Lazy
     @Autowired
@@ -117,16 +64,7 @@ public class ControllerAddEditionView
         conferenceNameLabel.setText(context.getConference().getName());
         locationTextField.setText(context.getEdition().getLocation());
         bioTextField.setText(context.getEdition().getBio());
-        showDates();
-    }
-
-    private void showDates() {
-        showDate(startingDateDay, startingDateMonth, startingDateYear, context.getEdition().getStartDate());
-        showDate(endingDateDay, endingDateMonth, endingDateYear, context.getEdition().getEndDate());
-        showDate(abstractDateDay, abstractDateMonth, abstractDateYear, context.getEdition().getAbstractDeadline());
-        showDate(paperDateDay, paperDateMonth, paperDateYear, context.getEdition().getPaperDeadline());
-        showDate(biddingDateDay, biddingDateMonth, biddingDateYear, context.getEdition().getBiddingDeadline());
-        showDate(evaluationDateDay, evaluationDateMonth, evaluationDateYear, context.getEdition().getEvaluationDeadline());
+        showDates(context.getEdition());
     }
 
     public void initialize() {
@@ -146,7 +84,7 @@ public class ControllerAddEditionView
     }
 
     private Date getEvaluationDate() {
-        return runFunction(this::convertToDate, evaluationDateDay, evaluationDateMonth, endingDateYear)
+        return runFunction(this::convertToDate, evaluationDateDay, evaluationDateMonth, evaluationDateYear)
                 .orHandle(this::handler);
     }
 
@@ -180,14 +118,6 @@ public class ControllerAddEditionView
         return format.parse(month.getSelectionModel().getSelectedItem() + " " + day.getText() + ", " + year.getText());
     }
 
-    private void showDate(TextField day, ChoiceBox<String> month, TextField year, Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        day.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
-        year.setText(String.valueOf(calendar.get(Calendar.YEAR)));
-        month.getSelectionModel().select(calendar.get(Calendar.MONTH));
-    }
-
     private void handler(Throwable exception) {
         logger.warn(exception.getMessage());
     }
@@ -211,11 +141,11 @@ public class ControllerAddEditionView
 
     @FXML
     private void onBasicButtonClick() {
+        // TODO DELETE THIS EVENT
     }
 
     @FXML
     private void onSessionsButtonClick() {
-
         context.getEditionContext().updateEdition(getCurrentEdition());
         manager.switchScene(ViewType.ADD_SESSION, context);
     }

@@ -1,6 +1,5 @@
 package controller.item;
 
-import cells.UserListCell;
 import controller.main.ControllerInterface;
 import controller.pagination.ControllerPaginationSessionItem;
 import itemcontroller.ControllerItemInterface;
@@ -33,7 +32,6 @@ import java.rmi.RemoteException;
 import java.util.Collections;
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static utils.Try.runFunction;
 
 /**
@@ -113,7 +111,6 @@ public class ControllerEditionView implements ControllerInterface, ControllerIte
     @Override
     public void setElement(Edition element) {
         this.edition = element;
-        setUpLists();
         build();
         buildLists();
         setUpSessionsPagination();
@@ -142,8 +139,8 @@ public class ControllerEditionView implements ControllerInterface, ControllerIte
 
     private void buildLists() {
         getMembersData();
-        setItemsInListView();
         setUpListViews();
+        setItemsInListView();
     }
 
     private void setItemsInListView() {
@@ -155,36 +152,22 @@ public class ControllerEditionView implements ControllerInterface, ControllerIte
     private void getMembersData() {
         User chair = runFunction(editionService::getChair, edition).orHandle(handler);
         chairList = FXCollections.observableList(Collections.singletonList(chair));
-        coChairList = FXCollections.observableList(runFunction(editionService::getCoChairsOf,
-                edition).orHandle(handler));
-        pcMemberList = FXCollections.observableList(runFunction(editionService::getPcMembersOf,
-                edition).orHandle(handler));
+        coChairList = FXCollections.observableList(runFunction(editionService::getCoChairsOf, edition).orHandle(handler));
+        pcMemberList = FXCollections.observableList(runFunction(editionService::getPcMembersOf, edition).orHandle(handler));
     }
 
     private void setUpListViews() {
         coChairs = new ListViewBuilder<>(coChairs)
+                .textProvider(User::getName)
                 .setIcon(Icon.CLOSE)
-                .visibleText(User::getName)
-                .setAction((list, item) -> Boolean.TRUE, coChairList)
                 .build();
         chairs = new ListViewBuilder<>(chairs)
+                .textProvider(User::getName)
                 .setIcon(Icon.CLOSE)
-                .visibleText(User::getName)
-                .setAction((list, item) -> Boolean.TRUE, chairList)
                 .build();
         pcMembers = new ListViewBuilder<>(pcMembers)
-                .setIcon(Icon.CLOSE)
-                .visibleText(User::getName)
-                .setAction((list, item) -> Boolean.TRUE, pcMemberList)
+                .textProvider(User::getName)
                 .build();
-    }
-
-    private void setUpLists() {
-        asList(chairs, pcMembers, coChairs).forEach(this::setUpListViewCell);
-    }
-
-    private void setUpListViewCell(ListView<User> listView) {
-        listView.setCellFactory(param -> new UserListCell(manager));
     }
 
     private void build() {

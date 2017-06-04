@@ -13,17 +13,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import service.Service;
 import transfarable.IdableTransfer;
 import view.Icon;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static utils.Conditional.basedOn;
 import static utils.Try.runFunction;
 
 /**
@@ -33,12 +30,48 @@ import static utils.Try.runFunction;
 
 public class GeneralCell<T extends IdableTransfer<?>> extends ListCell<T> {
 
-    private Function<T, String> textProvider = Object::toString;
-    private BiFunction<List<T>, T, Boolean> action = (list, item) -> Boolean.TRUE;
-    private List<T> list = new ArrayList<>();
+    private Function<T, String> provider;
     private Icon icon;
-    private BiFunction<Service<T, ?, ?>, T, ?> function;
-    private Service<T, ?, ?> service;
+    private BiFunction<Object, T, ?> action;
+    private Object object;
+    private static Logger logger;
+    private String markerColor;
+
+    public GeneralCell() {
+        logger = Logger.getLogger(GeneralCell.class);
+        markerColor = "chartreuse";
+        icon = Icon.EMPTY;
+        provider = Object::toString;
+        action = (object, item) ->  {
+            logger.info(item.toString() + "'s button was clicked by the user!");
+            return null;
+        };
+    }
+
+    public GeneralCell<T> setMarkerColor(String color) {
+        markerColor = color;
+        return this;
+    }
+
+    public GeneralCell<T> setProvider(Function<T, String> provider) {
+        this.provider = provider;
+        return this;
+    }
+
+    public GeneralCell<T> setIcon(Icon icon) {
+        this.icon = icon;
+        return this;
+    }
+
+    public GeneralCell<T> setAction(BiFunction<Object, T, ?> action) {
+        this.action = action;
+        return this;
+    }
+
+    public GeneralCell<T> setObject(Object object) {
+        this.object = object;
+        return this;
+    }
 
     @Override
     protected void updateItem(T item, boolean empty) {
@@ -55,7 +88,7 @@ public class GeneralCell<T extends IdableTransfer<?>> extends ListCell<T> {
 
     @NotNull
     private Label createLabel(T item) {
-        Label label = new Label(textProvider.apply(item));
+        Label label = new Label(provider.apply(item));
         label.setFont(new Font("Proxima Nova Regular", 14.0));
         return label;
     }
@@ -90,9 +123,7 @@ public class GeneralCell<T extends IdableTransfer<?>> extends ListCell<T> {
     }
 
     private void setUpActivity(T item, Button button) {
-        basedOn(function == null)
-                .runTrue(button::setOnMouseClicked, event -> action.apply(list, item))
-                .runFalse(button::setOnMouseClicked, event -> function.apply(service, item));
+        button.setOnMouseClicked(event -> action.apply(object, item));
     }
 
     @NotNull
@@ -112,7 +143,7 @@ public class GeneralCell<T extends IdableTransfer<?>> extends ListCell<T> {
 
     private Pane createCircle() {
         Pane circle = createSpace(15.0);
-        circle.setStyle(getBackgroundBasedOnColor("chartreuse") + withRadius(100));
+        circle.setStyle(getBackgroundBasedOnColor(markerColor) + withRadius(100));
         return circle;
     }
 
@@ -128,22 +159,4 @@ public class GeneralCell<T extends IdableTransfer<?>> extends ListCell<T> {
         pane.setMaxSize(max, max);
     }
 
-    public void setTextProvider(Function<T, String> getVisibleText) {
-        this.textProvider = getVisibleText;
-    }
-
-    public void setAction(BiFunction<List<T>, T, Boolean> action, List<T> list) {
-        this.action = action;
-        this.list = list;
-    }
-
-    public <R> void setFunction(BiFunction<Service<T, ?, ?>, T, R> function, Service<T, ?, ?> service) {
-        this.function = function;
-        this.service = service;
-    }
-
-    public void setIcon(Icon icon) {
-        this.icon = icon;
-    }
-    
 }
