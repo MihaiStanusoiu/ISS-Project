@@ -59,30 +59,4 @@ public class SessionModel extends Model<SessionEntity, Integer> implements Sessi
         return getElementById(session.getId());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SessionEntity changeMemberRoleIn(SessionEntity session, UserEntity user, MemberRole role) throws SystemException {
-        repositoryMember.update(session.getMembers().stream()
-                        .filter(member -> member.getUser().getId().equals(user.getId()))
-                        .findFirst().orElseThrow(() -> new ModelException("404! Member Not Found!")),
-                new SessionMemberEntity(session, user,
-                        new ConfigurationSessionFactory(repositoryConfiguration).getConfiguration(role)));
-        return getElementById(session.getId());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SessionEntity changeChairIn(SessionEntity session, UserEntity user) throws SystemException {
-        repositoryMember.update(session.getMembers().stream()
-                        .filter(member -> member.getConfiguration().getChair().equals(Boolean.TRUE))
-                        .findFirst().orElseThrow(() -> new ModelException("404! Member Not Found!")),
-                new SessionMemberEntity(session, user,
-                        new ConfigurationSessionFactory(repositoryConfiguration)
-                                .getConfiguration(MemberRole.SESSION_CHAIR)));
-        return getElementById(session.getId());
-    }
 }

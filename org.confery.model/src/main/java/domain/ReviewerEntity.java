@@ -37,11 +37,11 @@ ReviewerEntity implements Idable<Integer> {
     private String recommendationUrl;
 
     @ManyToOne(targetEntity = SubmissionEntity.class)
-    @JoinColumn(name = "ID_SUBMISSION")
+    @JoinColumn(name = "ID_SUBMISSION", updatable = false)
     private SubmissionEntity submission;
 
     @ManyToOne(targetEntity = EditionMemberEntity.class)
-    @JoinColumn(name = "ID_EDITION_MEMBER")
+    @JoinColumn(name = "ID_EDITION_MEMBER", updatable = false)
     private EditionMemberEntity member;
 
     private static final String DEFAULT_RESPONSE = ResponseEntityType.NOT_ASSIGNED.toString();
@@ -126,30 +126,12 @@ ReviewerEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the response of a reviewer.
-     *
-     * @param response: new value for reviewer response.
-     */
-    public void setResponse(String response) {
-        this.response = response;
-    }
-
-    /**
      * Effect: Return the status of a reviewer.
      *
      * @return [String] : returns the status of a ReviewerEntity.
      */
     public String getStatus() {
         return status;
-    }
-
-    /**
-     * Effect: Sets the status of a reviewer.
-     *
-     * @param status: new value for reviewer status.
-     */
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     /**
@@ -180,15 +162,6 @@ ReviewerEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the recommendation url of a reviewer.
-     *
-     * @param recommendationUrl: new value for reviewer recommendationUrl.
-     */
-    public void setRecommendationUrl(String recommendationUrl) {
-        this.recommendationUrl = recommendationUrl;
-    }
-
-    /**
      * Effect: Returns the submission of the ReviewerEntity.
      *
      * @return [SubmissionEntity]: returns the submission of a ReviewerEntity.
@@ -198,30 +171,12 @@ ReviewerEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the submission of the ReviewerEntity.
-     *
-     * @param submission: new value for submission.
-     */
-    public void setSubmission(SubmissionEntity submission) {
-        this.submission = submission;
-    }
-
-    /**
      * Effect: Returns the member of the ReviewerEntity.
      *
      * @return [EditionMemberEntity]: returns the id of the EditionMemberEntity.
      */
     public EditionMemberEntity getMember() {
         return member;
-    }
-
-    /**
-     * Effect: Sets the member of the ReviewerEntity.
-     *
-     * @param member: new value for member
-     */
-    public void setMember(EditionMemberEntity member) {
-        this.member = member;
     }
 
     /**

@@ -54,9 +54,9 @@ public class PermissionCheckerTest {
         assertFalse(checker.isAllowed(active).toDelete().theObject(edition));
         // preconditions:
         userModel.add(active);
-        conferenceModel.add(conference);
-        conference = conferenceModel.addEditionTo(conference, edition);
-        edition = conference.getLatestEdition();
+        Integer idConference = conferenceModel.add(conference);
+        conferenceModel.addEditionTo(conferenceModel.getElementById(idConference), edition);
+        edition = conferenceModel.getElementById(idConference).getLatestEdition();
         edition = editionModel.addMemberTo(edition, active, MemberRole.EDITION_CHAIR);
         // then:
         assertTrue(checker.isAllowed(active).toAdd().theObject(edition));

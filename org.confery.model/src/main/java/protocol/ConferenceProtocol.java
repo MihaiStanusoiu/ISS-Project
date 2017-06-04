@@ -20,7 +20,7 @@ public interface ConferenceProtocol extends ModelInterface<ConferenceEntity, Int
      * @return The conference updated
      * @throws SystemException If it's unable to add the edition to the database.
      */
-    ConferenceEntity addEditionTo(ConferenceEntity conference, EditionEntity edition) throws SystemException;
+    EditionEntity addEditionTo(ConferenceEntity conference, EditionEntity edition) throws SystemException;
 
     /**
      * Removes an edition from conference.

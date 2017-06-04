@@ -88,9 +88,9 @@ public class ConferenceManager
     }
 
     @Override
-    public Conference addEditionToConference(Conference conference, Edition edition) throws RemoteException {
+    public Edition addEditionToConference(Conference conference, Edition edition) throws RemoteException {
         checkActiveUserPermissions(getConferenceFromDatabase(conference).getEditions().size() == 0, conference);
-        return translator.translate(runFunction(model::addEditionTo, translator.translate(conference),
+        return editionTranslator.translate(runFunction(model::addEditionTo, translator.translate(conference),
                 editionTranslator.translate(edition)).orThrow(thrower));
     }
 

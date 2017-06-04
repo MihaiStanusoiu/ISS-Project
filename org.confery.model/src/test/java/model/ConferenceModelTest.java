@@ -42,11 +42,9 @@ public class ConferenceModelTest {
         EditionEntity edition = new EditionEntity("Test");
         UserEntity user = new UserEntity("User", "test");
         // preconditions:
-        modelConference.add(conference);
-        modelEdition.add(edition);
         modelUser.add(user);
-        conference = modelConference.addEditionTo(conference, edition);
-        Integer id = conference.getId();
+        Integer id = modelConference.add(conference);
+        edition = modelConference.addEditionTo(conference, edition);
         modelEdition.addMemberTo(edition, user, MemberRole.EDITION_CHAIR);
         // then:
         assertEquals(modelConference.getConferencesOf(user).stream().anyMatch(item -> item.getId().equals(id)), Boolean.TRUE);
@@ -58,14 +56,15 @@ public class ConferenceModelTest {
         ConferenceEntity conference = new ConferenceEntity("Test");
         EditionEntity edition = new EditionEntity("test");
         // preconditions:
-        modelConference.add(conference);
-        modelEdition.add(edition);
+        Integer id = modelConference.add(conference);
         // when:
-        conference = modelConference.addEditionTo(conference, edition);
+        edition = modelConference.addEditionTo(conference, edition);
+        Integer idEdition = edition.getId();
         // then:
         assertEquals(modelEdition.getAll().size(), 1);
         assertEquals(modelEdition.getElementById(1).getLocation(), edition.getLocation());
-        assertTrue(conference.getEditions().stream().anyMatch(item -> item.getId().equals(edition.getId())));
+        assertTrue(modelConference.getElementById(id).getEditions().stream()
+                .anyMatch(item -> item.getId().equals(idEdition)));
     }
 
     @Test
@@ -74,13 +73,17 @@ public class ConferenceModelTest {
         ConferenceEntity conference = new ConferenceEntity("Test");
         EditionEntity edition = new EditionEntity("test");
         // preconditions:
-        modelEdition.add(edition);
-        modelConference.add(conference);
+        Integer idConference = modelConference.add(conference);
         // when:
-        conference = modelConference.addEditionTo(conference, edition);
-        conference = modelConference.removeEditionFrom(conference, edition);
+        edition = modelConference.addEditionTo(conference, edition);
+        Integer idEdition = edition.getId();
+        assertEquals((long)modelConference.getElementById(idConference).getEditions().size(), 1L);
+        assertTrue(modelConference.getElementById(idConference).getEditions().stream()
+                .anyMatch(item -> item.getId().equals(idEdition)));
+        modelConference.removeEditionFrom(modelConference.getElementById(idConference), edition);
         // then:
-        assertTrue(conference.getEditions().stream().noneMatch(item -> item.getId().equals(edition.getId())));
+        assertTrue(modelConference.getElementById(idConference).getEditions().stream()
+                .noneMatch(item -> item.getId().equals(idEdition)));
     }
 
     @Test
@@ -91,11 +94,10 @@ public class ConferenceModelTest {
         EditionEntity edition = new EditionEntity("test");
         // preconditions:
         Integer id = modelUser.add(user);
-        modelConference.add(conference);
-        modelEdition.add(edition);
-        edition = modelEdition.addMemberTo(edition, user, MemberRole.EDITION_CHAIR);
-        conference = modelConference.addEditionTo(conference, edition);
-        assertEquals(modelConference.getChairOf(conference).getUsername(),
+        Integer idConference = modelConference.add(conference);
+        edition = modelConference.addEditionTo(conference, edition);
+        modelEdition.addMemberTo(edition, user, MemberRole.EDITION_CHAIR);
+        assertEquals(modelConference.getChairOf(modelConference.getElementById(idConference)).getUsername(),
                 modelUser.getElementById(id).getUsername());
     }
 }

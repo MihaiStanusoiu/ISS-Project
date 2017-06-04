@@ -30,12 +30,12 @@ public class ConferenceModel
     }
 
     @Override
-    public ConferenceEntity addEditionTo(ConferenceEntity conference, EditionEntity edition) throws SystemException {
+    public EditionEntity addEditionTo(ConferenceEntity conference, EditionEntity edition) throws SystemException {
         basedOn(conference.getEditions().stream().noneMatch(item -> item.getId().equals(edition.getId())))
                 .orThrow(new ModelException("The edition is already part of the conference"));
         edition.setConference(conference);
-        repositoryEdition.update(repositoryEdition.getElementById(edition.getId()), edition);
-        return getElementById(conference.getId());
+        repositoryEdition.add(edition);
+        return repositoryEdition.getElementById(edition.getId());
     }
 
     @Override

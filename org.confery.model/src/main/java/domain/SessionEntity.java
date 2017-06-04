@@ -50,7 +50,7 @@ public class SessionEntity implements Idable<Integer>, Cloneable {
     private Integer seats;
 
     @ManyToOne(targetEntity = EditionEntity.class)
-    @JoinColumn(name = "ID_EDITION")
+    @JoinColumn(name = "ID_EDITION", updatable = false)
     private EditionEntity edition;
 
     @OneToMany(targetEntity = SessionMemberEntity.class, mappedBy = "session",
@@ -125,30 +125,12 @@ public class SessionEntity implements Idable<Integer>, Cloneable {
     }
 
     /**
-     * Effect: Sets the name of a section.
-     *
-     * @param name : new value for name.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Effect: Return the starting date of a section.
      *
      * @return [Date] : returns the starting date of a section.
      */
     public Date getStartDate() {
         return startDate;
-    }
-
-    /**
-     * Effect: Sets the starting date of a section.
-     *
-     * @param startDate : new value for start date.
-     */
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
     }
 
     /**
@@ -161,30 +143,12 @@ public class SessionEntity implements Idable<Integer>, Cloneable {
     }
 
     /**
-     * Effect: Sets the ending date of a section.
-     *
-     * @param endDate : new value for end date.
-     */
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    /**
      * Effect: Return the location of a section.
      *
      * @return [String] : returns the location of a section.
      */
     public String getLocation() {
         return location;
-    }
-
-    /**
-     * Effect: Sets the location of a section.
-     *
-     * @param location : new value for location.
-     */
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     /**
@@ -196,14 +160,6 @@ public class SessionEntity implements Idable<Integer>, Cloneable {
         return bio;
     }
 
-    /**
-     * Effect: Sets the bio of a section.
-     *
-     * @param bio : new value of bio.
-     */
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
 
     /**
      * Effect: Return the number of seats of a section.
@@ -212,15 +168,6 @@ public class SessionEntity implements Idable<Integer>, Cloneable {
      */
     public Integer getSeats() {
         return seats;
-    }
-
-    /**
-     * Effect: Sets the number of seats of a section.
-     *
-     * @param seats : new value for seats.
-     */
-    public void setSeats(Integer seats) {
-        this.seats = seats;
     }
 
     /**
@@ -248,15 +195,6 @@ public class SessionEntity implements Idable<Integer>, Cloneable {
      */
     public Set<SessionMemberEntity> getMembers() {
         return members;
-    }
-
-    /**
-     * Effect: Sets the members of a Session.
-     *
-     * @param members: new value for the members.
-     */
-    public void setMembers(Set<SessionMemberEntity> members) {
-        this.members = members;
     }
 
     /**

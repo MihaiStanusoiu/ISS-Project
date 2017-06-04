@@ -53,7 +53,7 @@ public class GenericManager<TransferT extends IdableTransfer<Id>, Id extends Ser
     public void update(TransferT element, TransferT with) throws RemoteException {
         basedOn(checker.isAllowed(getActiveUser()).toUpdate().theObject(getElementFromDatabase(element)))
                 .orThrow(new RemoteException("You don't have the required permissions to perform this action!"));
-        runMethod(model::update, translator.translate(element), translator.translate(with)).orThrow(thrower);
+        runMethod(model::update, getElementFromDatabase(element), translator.translate(with)).orThrow(thrower);
     }
 
     private EntityT getElementFromDatabase(TransferT element) throws RemoteException {

@@ -114,7 +114,7 @@ public class ControllerUpdateConferenceView
     }
 
     private void onEditionItemClick() {
-        // TODO
+        manager.switchScene(ViewType.EDITION_UPDATE, getSelectedEdition());
     }
 
     @FXML
@@ -141,4 +141,9 @@ public class ControllerUpdateConferenceView
         return new Edition(0, new Date(), new Date(), "", "",
                 new Date(), new Date(), new Date(), new Date());
     }
+
+    private Edition getSelectedEdition() {
+        return editionListView.getSelectionModel().getSelectedItem();
+    }
+
 }

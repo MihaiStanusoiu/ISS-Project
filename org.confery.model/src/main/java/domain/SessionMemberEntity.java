@@ -17,22 +17,21 @@ import static javax.persistence.GenerationType.IDENTITY;
 @SuppressWarnings("unused")
 public class SessionMemberEntity implements Idable<Integer> {
 
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_SESSION_MEMBER")
     private Integer id;
 
     @ManyToOne(targetEntity = SessionEntity.class)
-    @JoinColumn(name = "ID_SESSION")
+    @JoinColumn(name = "ID_SESSION", updatable = false)
     private SessionEntity session;
 
     @ManyToOne(targetEntity = UserEntity.class)
-    @JoinColumn(name = "ID_USER")
+    @JoinColumn(name = "ID_USER", updatable = false)
     private UserEntity user;
 
     @ManyToOne(targetEntity = ConfigurationSessionMemberEntity.class)
-    @JoinColumn(name = "ID_CONFIGURATION_SESSION_MEMBER")
+    @JoinColumn(name = "ID_CONFIGURATION_SESSION_MEMBER", updatable = false)
     private ConfigurationSessionMemberEntity configuration;
 
     private static final Integer DEFAULT_ID = 0;
@@ -86,15 +85,6 @@ public class SessionMemberEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the id of a section configuration.
-     *
-     * @param idConfiguration: new value for id configuration.
-     */
-    public void setConfiguration(ConfigurationSessionMemberEntity idConfiguration) {
-        this.configuration = idConfiguration;
-    }
-
-    /**
      * Effect: Returns the session of a SessionMember.
      *
      * @return [SessionEntity]: returns the session of a session member.
@@ -104,30 +94,12 @@ public class SessionMemberEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the session of a Session Member.
-     *
-     * @param session: new value for the session.
-     */
-    public void setSession(SessionEntity session) {
-        this.session = session;
-    }
-
-    /**
      * Effect: Returns the user of a SessionMemberEntity.
      *
      * @return [UserEntity]: returns the user of a session member.
      */
     public UserEntity getUser() {
         return user;
-    }
-
-    /**
-     * Effect: Sets the user of a SessionMemberEntity.
-     *
-     * @param user: new value for user.
-     */
-    public void setUser(UserEntity user) {
-        this.user = user;
     }
 
     @Override

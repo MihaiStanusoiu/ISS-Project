@@ -38,26 +38,4 @@ public interface SessionProtocol extends ModelInterface<SessionEntity, Integer> 
      */
     SessionEntity removeMemberFrom(SessionEntity session, UserEntity user) throws SystemException;
 
-    /**
-     * Changes the role of a member in target session [
-     *
-     * @param session The target session [already in the database]
-     * @param user    The target member [already in the database]
-     * @param role    The new role
-     * @throws SystemException If you're trying to change the role of the chair
-     * @implNote This function cannot change the chair!
-     * @apiNote Use function 'changeChair' to change the current chair member.
-     */
-    SessionEntity changeMemberRoleIn(SessionEntity session, UserEntity user, MemberRole role) throws SystemException;
-
-    /**
-     * Changes the chair with another user of the session.
-     *
-     * @param session The target session [already in the database]
-     * @param user    The target user [the new chair] [already in the database]
-     * @throws SystemException If the current chair is not set
-     * @apiNote The current chair will no longer be a part of the session
-     */
-    SessionEntity changeChairIn(SessionEntity session, UserEntity user) throws SystemException;
-
 }

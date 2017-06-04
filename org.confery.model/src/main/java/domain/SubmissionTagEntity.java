@@ -17,18 +17,17 @@ import static javax.persistence.GenerationType.IDENTITY;
 @SuppressWarnings("unused")
 public class SubmissionTagEntity implements Idable<Integer> {
 
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_SUBMISSION_TAG")
     private Integer id;
 
     @ManyToOne(targetEntity = SubmissionEntity.class)
-    @JoinColumn(name = "ID_SUBMISSION")
+    @JoinColumn(name = "ID_SUBMISSION", updatable = false)
     private SubmissionEntity submission;
 
     @ManyToOne(targetEntity = TagEntity.class)
-    @JoinColumn(name = "ID_TAG")
+    @JoinColumn(name = "ID_TAG", updatable = false)
     private TagEntity tag;
 
     private static final Integer DEFAULT_ID = 0;
@@ -72,30 +71,12 @@ public class SubmissionTagEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the submission of a SubmissionTagEntity.
-     *
-     * @param submission: new value for submission.
-     */
-    public void setSubmission(SubmissionEntity submission) {
-        this.submission = submission;
-    }
-
-    /**
      * Effect: Returns the tag of a SubmissionTagEntity.
      *
      * @return [TagEntity]: returns the tag.
      */
     public TagEntity getTag() {
         return tag;
-    }
-
-    /**
-     * Effect: Sets the tag of a SubmissionTagEntity.
-     *
-     * @param tag: new value for tag.
-     */
-    public void setTag(TagEntity tag) {
-        this.tag = tag;
     }
 
     @Override

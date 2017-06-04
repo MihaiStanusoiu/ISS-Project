@@ -9,8 +9,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 /**
  * @author Alexandru Stoica
@@ -51,12 +52,10 @@ public class NotificationModelTest {
         NotificationEntity notification = new NotificationEntity("Test", Boolean.FALSE);
         UserEntity first = new UserEntity("username", "password");
         UserEntity second = new UserEntity("username", "password");
-        List<UserEntity> list = new ArrayList<>();
+        List<UserEntity> list = asList(first, second);
         // preconditions:
         userModel.add(first);
         userModel.add(second);
-        list.add(first);
-        list.add(second);
         // when:
         notificationModel.sendNotificationToUsers(list, notification);
         // than:

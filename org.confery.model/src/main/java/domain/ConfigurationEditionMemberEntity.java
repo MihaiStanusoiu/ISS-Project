@@ -42,7 +42,7 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
     private static final Integer DEFAULT_ID = 0;
 
     public ConfigurationEditionMemberEntity() {
-        this(DEFAULT_ID, DEFAULT_CHAIR, DEFAULT_CO_CHAIR, DEFAULT_CO_CHAIR);
+        this(DEFAULT_ID, DEFAULT_CHAIR, DEFAULT_CO_CHAIR, DEFAULT_PC_MEMBER);
     }
 
     /**
@@ -101,15 +101,6 @@ public class ConfigurationEditionMemberEntity implements Idable<Integer> {
      */
     public Boolean getChair() {
         return isChair;
-    }
-
-    /**
-     * Effect: Sets whether the user is a chair.
-     *
-     * @param chair: new value for chair.
-     */
-    public void setChair(Boolean chair) {
-        isChair = chair;
     }
 
     /**

@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface EditionService extends Service<Edition, Integer, EditionEntity> {
 
+    Conference getConferenceOf(Edition edition) throws RemoteException;
+
     List<Session> getAllSessionsOf(Edition edition) throws RemoteException;
 
     List<User> getAllMembersOf(Edition edition) throws RemoteException;

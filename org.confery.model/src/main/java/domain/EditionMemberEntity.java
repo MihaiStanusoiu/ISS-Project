@@ -27,15 +27,15 @@ public class EditionMemberEntity implements Idable<Integer> {
     private Integer id;
 
     @ManyToOne(targetEntity = UserEntity.class)
-    @JoinColumn(name = "ID_USER")
+    @JoinColumn(name = "ID_USER", updatable = false)
     private UserEntity user;
 
     @ManyToOne(targetEntity = EditionEntity.class)
-    @JoinColumn(name = "ID_EDITION")
+    @JoinColumn(name = "ID_EDITION", updatable = false)
     private EditionEntity edition;
 
     @ManyToOne(targetEntity = ConfigurationEditionMemberEntity.class)
-    @JoinColumn(name = "ID_CONFIGURATION_EDITION_MEMBER")
+    @JoinColumn(name = "ID_CONFIGURATION_EDITION_MEMBER", updatable = false)
     private ConfigurationEditionMemberEntity configuration;
 
     @OneToMany(targetEntity = ReviewerEntity.class, mappedBy = "member",
@@ -93,15 +93,6 @@ public class EditionMemberEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the reviewers of the EditionMemberEntity.
-     *
-     * @param reviewers: new value for the reviewers.
-     */
-    public void setReviewers(Set<ReviewerEntity> reviewers) {
-        this.reviewers = reviewers;
-    }
-
-    /**
      * Effect: Returns the composite primary key id of the conference member
      *
      * @return [Integer]: id of the conference member
@@ -129,15 +120,6 @@ public class EditionMemberEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the user to the given value
-     *
-     * @param user [UserEntity]: new value for the user
-     */
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
-    /**
      * Effect: Returns the conference of the conference member
      *
      * @return [EditionEntity]: conference of the conference member
@@ -147,31 +129,12 @@ public class EditionMemberEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the conference to the given value
-     *
-     * @param editionTable [EditionEntity]: new value for the password
-     */
-    public void setEdition(EditionEntity editionTable) {
-        this.edition = editionTable;
-    }
-
-    /**
      * Effect: Returns the configuration of the conference member
      *
      * @return [ConfigurationEditionMember]: configuration of the conference member
      */
     public ConfigurationEditionMemberEntity getConfigurationEditionMember() {
         return configuration;
-    }
-
-    /**
-     * Effect: Sets the configuration to the given value
-     *
-     * @param configurationConferenceMember [ConfigurationEditionMember]: new value for the configuration
-     */
-    public void setConfigurationEditionMember(
-            ConfigurationEditionMemberEntity configurationConferenceMember) {
-        this.configuration = configurationConferenceMember;
     }
 
     /**

@@ -99,15 +99,6 @@ public class ConferenceEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the name of a conference.
-     *
-     * @param name: new value for conference name.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Effect: Return the acronym of this conference.
      *
      * @return [String]: returns the acronym of conference.

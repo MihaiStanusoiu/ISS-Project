@@ -56,7 +56,7 @@ public class EditionEntity implements Idable<Integer> {
     private Date biddingDeadline;
 
     @ManyToOne(targetEntity = ConferenceEntity.class)
-    @JoinColumn(name = "ID_CONFERENCE")
+    @JoinColumn(name = "ID_CONFERENCE", updatable = false)
     private ConferenceEntity conference;
 
     @OneToMany(targetEntity = EditionMemberEntity.class, fetch = FetchType.EAGER,
@@ -213,30 +213,12 @@ public class EditionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the location of a conference.
-     *
-     * @param location: new value for conference location.
-     */
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    /**
      * Effect: Return the bio of this conference.
      *
      * @return [String]: returns the bio of conference.
      */
     public String getBio() {
         return bio;
-    }
-
-    /**
-     * Effect: Sets the bio of a conference.
-     *
-     * @param bio: new value for conference bio.
-     */
-    public void setBio(String bio) {
-        this.bio = bio;
     }
 
     /**
@@ -318,15 +300,6 @@ public class EditionEntity implements Idable<Integer> {
      */
     public Set<SubmissionEntity> getSubmissions() {
         return submissions;
-    }
-
-    /**
-     * Effect: Sets the submissions of an Edition.
-     *
-     * @param submissions: new value for submissions.
-     */
-    public void setSubmissions(Set<SubmissionEntity> submissions) {
-        this.submissions = submissions;
     }
 
     /**

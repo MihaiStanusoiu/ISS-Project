@@ -43,7 +43,7 @@ public class SubmissionEntity implements Idable<Integer> {
     private Boolean isPaid;
 
     @ManyToOne(targetEntity = EditionEntity.class)
-    @JoinColumn(name = "ID_EDITION")
+    @JoinColumn(name = "ID_EDITION", updatable = false)
     private EditionEntity edition;
 
     @OneToMany(targetEntity = SubmissionTagEntity.class, mappedBy = "submission",
@@ -63,9 +63,9 @@ public class SubmissionEntity implements Idable<Integer> {
     private Set<ReviewerEntity> reviewers;
 
     private static final Integer DEFAULT_ID = 0;
+
     private static final String DEFAULT_URL = "";
     private static final Boolean DEFAULT_FLAG_PAID = Boolean.FALSE;
-
     public SubmissionEntity(String name, String status) {
         this(name, status, DEFAULT_URL, DEFAULT_URL);
     }
@@ -127,11 +127,6 @@ public class SubmissionEntity implements Idable<Integer> {
         return edition;
     }
 
-    /**
-     * Effect: Sets the id of the submission's conference.
-     *
-     * @param edition: new value for conference id.
-     */
     public void setEdition(EditionEntity edition) {
         this.edition = edition;
     }
@@ -143,15 +138,6 @@ public class SubmissionEntity implements Idable<Integer> {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Effect: Sets the name of a submission.
-     *
-     * @param name: new value for submission name.
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**
@@ -173,30 +159,12 @@ public class SubmissionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the abstract url of a submission.
-     *
-     * @param abstractUrl: new value for submission abstractUrl.
-     */
-    public void setAbstractUrl(String abstractUrl) {
-        this.abstractUrl = abstractUrl;
-    }
-
-    /**
      * Effect: Return the full paper url of this submission.
      *
      * @return [String]: returns the fullPaperUrl of SubmissionEntity.
      */
     public String getFullPaperUrl() {
         return fullPaperUrl;
-    }
-
-    /**
-     * Effect: Sets the full paper url of a submission.
-     *
-     * @param fullPaperUrl: new value for submission fullPaperUrl.
-     */
-    public void setFullPaperUrl(String fullPaperUrl) {
-        this.fullPaperUrl = fullPaperUrl;
     }
 
     /**
@@ -209,30 +177,12 @@ public class SubmissionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the paid status of a submission.
-     *
-     * @param paid: new value for submission isPaid.
-     */
-    public void setPaid(Boolean paid) {
-        isPaid = paid;
-    }
-
-    /**
      * Effect: Return the tags of this submission.
      *
      * @return [ArrayList<SubmissionTagEntity>]: returns the tags of a SubmissionEntity.
      */
     public Set<SubmissionTagEntity> getSubmissionTags() {
         return submissionTags;
-    }
-
-    /**
-     * Effect: Sets the tags of a submission.
-     *
-     * @param submissionTags: new value for submission tags.
-     */
-    public void setSubmissionTags(Set<SubmissionTagEntity> submissionTags) {
-        this.submissionTags = submissionTags;
     }
 
     /**
@@ -245,15 +195,6 @@ public class SubmissionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the topics of a submission.
-     *
-     * @param submissionTopic: new value for submission topics.
-     */
-    public void setSubmissionTopic(Set<SubmissionTopicEntity> submissionTopic) {
-        this.submissionTopics = submissionTopic;
-    }
-
-    /**
      * Effect: Return the authors of this submission.
      *
      * @return [ArrayList<AuthorSubmissionEntity>]: returns the authors of SubmissionEntity.
@@ -263,30 +204,12 @@ public class SubmissionEntity implements Idable<Integer> {
     }
 
     /**
-     * Effect: Sets the authors of a submission.
-     *
-     * @param submissionAuthors: new value for submission submissionAuthors.
-     */
-    public void setSubmissionAuthors(Set<AuthorSubmissionEntity> submissionAuthors) {
-        this.submissionAuthors = submissionAuthors;
-    }
-
-    /**
      * Effect: Return the reviewers of this submission.
      *
      * @return [ArrayList<ReviewerEntity>]: returns the reviewers of a SubmissionEntity.
      */
     public Set<ReviewerEntity> getReviewerEntities() {
         return reviewers;
-    }
-
-    /**
-     * Effect: Sets the reviewers of a submission.
-     *
-     * @param reviewers: new value for submission reviewers.
-     */
-    public void setReviewers(Set<ReviewerEntity> reviewers) {
-        this.reviewers = reviewers;
     }
 
     /**
