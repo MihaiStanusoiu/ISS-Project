@@ -212,17 +212,28 @@ public enum ViewType implements ViewTypeInterface {
 
     CONFERENCE_UPDATE {
         @Override public String getFXMLFile() {
-            return "/fxml/add/UpdateConferenceView.fxml";
+            return "/fxml/update/UpdateConferenceView.fxml";
         }
     },
 
     EDITION_UPDATE {
         @Override public String getFXMLFile() {
-            return "/fxml/add/UpdateEditionView.fxml";
+            return "/fxml/update/UpdateEditionView.fxml";
         }
     }, UPDATE_EDITION_MEMBERS {
         @Override public String getFXMLFile() {
-            return "/fxml/add/UpdateMembersEditionView.fxml";
+            return "/fxml/update/UpdateMembersEditionView.fxml";
+        }
+    },
+
+    SESSIONS_UPDATE {
+        @Override public String getFXMLFile() {
+            return "/fxml/update/UpdateSessionsEditionView.fxml";
+        }
+    },
+    SUBMISSIONS {
+        @Override public String getFXMLFile() {
+            return "/fxml/MySubmissionsView.fxml";
         }
     };
 

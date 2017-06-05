@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 /**
  * Tested: True
  *
@@ -16,12 +18,10 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "TOPIC")
-@SuppressWarnings("unused")
 public class TopicEntity implements Idable<Integer> {
 
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_TOPIC")
     private Integer idTopic;
 

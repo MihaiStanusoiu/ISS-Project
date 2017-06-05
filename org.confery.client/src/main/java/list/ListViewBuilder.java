@@ -1,5 +1,6 @@
 package list;
 
+import javafx.collections.ListChangeListener;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import org.apache.log4j.Logger;
@@ -24,6 +25,7 @@ public class ListViewBuilder<T extends IdableTransfer<?>> {
     private Object object;
     private String color;
     private static Logger logger;
+    private final Integer HEIGHT_CELL = 80;
 
     public ListViewBuilder(ListView<T> listView) {
         logger = Logger.getLogger(ListViewBuilder.class);
@@ -53,6 +55,10 @@ public class ListViewBuilder<T extends IdableTransfer<?>> {
 
     public ListView<T> build() {
         listView.setCellFactory(param -> generateListCell());
+        listView.setPrefHeight(listView.getItems().size() + HEIGHT_CELL);
+        listView.getItems().addListener((ListChangeListener<T>) change ->
+                listView.resize(listView.getWidth(),
+                        listView.getItems().size() + HEIGHT_CELL));
         return listView;
     }
 

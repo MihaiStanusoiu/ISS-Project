@@ -2,7 +2,12 @@ package manager;
 
 import checker.SubmissionPermissionChecker;
 import domain.SubmissionEntity;
+import domain.TagEntity;
+import domain.TopicEntity;
 import domain.UserEntity;
+import model.TagModel;
+import model.TopicModel;
+import model.UserModel;
 import protocol.LoginProtocol;
 import protocol.SubmissionProtocol;
 import service.SubmissionService;
@@ -35,10 +40,16 @@ public class SubmissionManager
     private TopicTranslator topicTranslator;
     private TagTranslator tagTranslator;
     protected SubmissionProtocol model;
+    private TagModel tagModel;
+    private UserModel userModel;
+    private TopicModel topicModel;
 
     public SubmissionManager(SubmissionProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
         this.model = model;
+        tagModel = new TagModel(model.getLoader());
+        topicModel = new TopicModel(model.getLoader());
+        userModel = new UserModel(model.getLoader());
         translator = new SubmissionTranslator();
         checker = new SubmissionPermissionChecker();
         userTranslator = new UserTranslator();
@@ -108,7 +119,11 @@ public class SubmissionManager
     public Submission addTagTo(Submission submission, Tag tag) throws RemoteException {
         checkUserPermissions(submission);
         return translator.translate(runFunction(model::addTagTo, getSubmissionFromDatabase(submission),
-                tagTranslator.translate(tag)).orThrow(thrower));
+                getTagFromDatabase(tag)).orThrow(thrower));
+    }
+
+    private TagEntity getTagFromDatabase(Tag tag) throws RemoteException {
+        return runFunction(tagModel::getElementById, tag.getId()).orThrow(thrower);
     }
 
     private void checkUserPermissions(Submission submission) throws RemoteException {
@@ -122,39 +137,47 @@ public class SubmissionManager
                 topicTranslator.translate(topic)).orThrow(thrower));
     }
 
+    private TopicEntity getTopicFromDatabase(Topic topic) throws RemoteException {
+        return runFunction(topicModel::getElementById, topic.getId()).orThrow(thrower);
+    }
+
     @Override
     public Submission addAuthorTo(Submission submission, User author) throws RemoteException {
         checkUserPermissions(submission);
         return translator.translate(runFunction(model::addAuthorTo, getSubmissionFromDatabase(submission),
-                userTranslator.translate(author)).orThrow(thrower));
+                getAuthorFromDatabase(author)).orThrow(thrower));
+    }
+
+    private UserEntity getAuthorFromDatabase(User author) throws RemoteException {
+        return runFunction(userModel::getElementById, author.getId()).orThrow(thrower);
     }
 
     @Override
     public Submission addOwnerTo(Submission submission, User owner) throws RemoteException {
         checkUserPermissions(submission);
         return translator.translate(runFunction(model::addOwnerTo, getSubmissionFromDatabase(submission),
-                userTranslator.translate(owner)).orThrow(thrower));
+                getAuthorFromDatabase(owner)).orThrow(thrower));
     }
 
     @Override
     public Submission removeAuthorFrom(Submission submission, User author) throws RemoteException {
         checkUserPermissions(submission);
         return translator.translate(runFunction(model::removeAuthorFrom, getSubmissionFromDatabase(submission),
-                userTranslator.translate(author)).orThrow(thrower));
+                getAuthorFromDatabase(author)).orThrow(thrower));
     }
 
     @Override
     public Submission removeTagFrom(Submission submission, Tag tag) throws RemoteException {
         checkUserPermissions(submission);
         return translator.translate(runFunction(model::removeTagFrom, getSubmissionFromDatabase(submission),
-                tagTranslator.translate(tag)).orThrow(thrower));
+                getTagFromDatabase(tag)).orThrow(thrower));
     }
 
     @Override
     public Submission removeTopicFrom(Submission submission, Topic topic) throws RemoteException {
         checkUserPermissions(submission);
         return translator.translate(runFunction(model::removeTopicFrom, getSubmissionFromDatabase(submission),
-                topicTranslator.translate(topic)).orThrow(thrower));
+                getTopicFromDatabase(topic)).orThrow(thrower));
     }
 
     private SubmissionEntity getSubmissionFromDatabase(Submission submission) throws RemoteException {

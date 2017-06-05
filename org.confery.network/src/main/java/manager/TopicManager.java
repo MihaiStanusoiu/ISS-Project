@@ -30,8 +30,8 @@ public class TopicManager
     public TopicManager(TopicProtocol model, LoginProtocol loginProtocol) throws RemoteException {
         super(model, loginProtocol);
         this.model = model;
-        super.translator = new TopicTranslator();
-        super.checker = new TopicPermissionChecker();
+        translator = new TopicTranslator();
+        checker = new TopicPermissionChecker();
         submissionTranslator = new SubmissionTranslator();
     }
 

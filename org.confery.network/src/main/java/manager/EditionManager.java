@@ -137,7 +137,6 @@ public class EditionManager extends GenericManager<Edition, Integer, EditionEnti
 
     @Override
     public Edition addSubmissionToEdition(Edition edition, Submission submission) throws RemoteException {
-        checkUserPermissions(edition);
         return translator.translate(runFunction(model::addSubmissionTo, getEditionFromDatabase(edition),
                 submissionTranslator.translate(submission)).orThrow(thrower));
     }

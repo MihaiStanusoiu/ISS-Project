@@ -1,4 +1,4 @@
-package controller.add;
+package controller.update;
 
 import controller.ControllerEdition;
 import controller.main.ControllerInterface;
@@ -157,7 +157,7 @@ public class ControllerUpdateEditionView extends ControllerEdition
 
     @FXML
     private void onSessionsButtonClick() {
-        // TODO
+        manager.switchScene(ViewType.SESSIONS_UPDATE, edition);
     }
 
     @FXML

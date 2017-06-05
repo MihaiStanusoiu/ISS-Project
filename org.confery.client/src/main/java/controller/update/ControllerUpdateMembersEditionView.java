@@ -1,4 +1,4 @@
-package controller.add;
+package controller.update;
 
 import controller.main.ControllerInterface;
 import itemcontroller.ControllerItemInterface;
@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import service.CollectionService;
 import service.EditionService;
 import service.UserService;
+import transfarable.Conference;
 import transfarable.Edition;
 import transfarable.MemberRoleTransferable;
 import transfarable.User;
@@ -163,12 +164,16 @@ public class ControllerUpdateMembersEditionView
 
     @FXML
     private void onBackButtonClick() {
-        // TODO
+        manager.switchScene(ViewType.CONFERENCE_UPDATE, getConference());
+    }
+
+    private Conference getConference() {
+        return runFunction(editionService::getConferenceOf, edition).orHandle(handler);
     }
 
     @FXML
     private void onSessionsButtonClick() {
-        // TODO
+        manager.switchScene(ViewType.SESSIONS_UPDATE, edition);
     }
 
     @FXML
