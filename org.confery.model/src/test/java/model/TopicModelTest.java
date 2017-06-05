@@ -4,11 +4,10 @@ import database.DatabaseLoaderFactory;
 import database.DatabaseLoaderInterface;
 import database.DatabaseLoaderType;
 import domain.TopicEntity;
-import org.junit.Assert;
 import org.junit.Test;
-import utils.Try;
 
-import static utils.Try.runFunction;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Alexandru Stoica
@@ -24,12 +23,21 @@ public class TopicModelTest {
                 new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
         TopicModel model = new TopicModel(loader);
         TopicEntity first = new TopicEntity("test");
+        // then:
+        assertTrue(model.add(first).equals(1));
+    }
+
+    @Test
+    public void isAddingTopicAgain() throws Exception {
+        // declaration:
+        DatabaseLoaderInterface loader =
+                new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
+        TopicModel model = new TopicModel(loader);
+        TopicEntity first = new TopicEntity("test");
         TopicEntity second = new TopicEntity("test");
         // then:
-        Assert.assertTrue(model.add(first).equals(1));
-        Try.runMethod(() -> Assert.assertTrue(model.add(second).equals(2)))
-                .orHandle(exception -> Assert.assertTrue(exception.getMessage()
-                        .equals("Error test is already in our system.")));
+        assertEquals((long)model.add(first), 1L);
+        assertEquals((long)model.add(second), 1L);
     }
 
 }

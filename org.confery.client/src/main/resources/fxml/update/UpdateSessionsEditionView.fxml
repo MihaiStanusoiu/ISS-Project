@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.add.ControllerAddSessionEditionView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.update.ControllerUpdateSessionEditionView">
    <top>
       <fx:include source="../TopBar.fxml" />
    </top>
@@ -143,7 +143,7 @@
                                     <Insets bottom="10.0" />
                                  </padding>
                               </Label>
-                              <ListView fx:id="sessionsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="80.0" style="-fx-background-color: white;" stylesheets="@../../css/list.css">
+                              <ListView fx:id="sessionsListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="80.0" style="-fx-background-color: white;" stylesheets="@../../css/list.css" VBox.vgrow="ALWAYS">
                                     </ListView>
                            </children>
                         </VBox>

@@ -4,6 +4,8 @@ package domain;
 import javax.persistence.*;
 import java.io.Serializable;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 /**
  * Tested True
  *
@@ -18,7 +20,7 @@ import java.io.Serializable;
 public class NotificationEntity implements Serializable, Idable<Integer> {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_NOTIFICATION")
     private Integer id;
 

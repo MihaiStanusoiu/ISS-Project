@@ -21,16 +21,17 @@ public class ReadEditionTest extends TestFxBase {
         clickOn(SEARCH_TEXT_FIELD_ID).write("Biology");
         BorderPane pane = find("#rootPane");
         clickOn(pane);
-        verifyThat("#locationLabel", (Label location) -> location.getText().contains("New"));
+        verifyThat("#locationLabel", (Label location) -> location.getText().contains("LOCATION"));
+        sleep(500);
     }
 
     @Test
     public void isReadingEdition() throws Exception {
         clickOn(SEARCH_TEXT_FIELD_ID).write("Biology");
-        BorderPane pane = find("#rootPane");
-        clickOn(pane);
-        verifyThat("#locationLabel", (Label location) -> location.getText().contains("New"));
-        clickOn((BorderPane)find("#rootPane"));
-        verifyThat("#bioText", (Text bio) -> bio.getText().contains("Lorem"));
+        moveTo("#rootPane").clickOn();
+        verifyThat("#nameLabel", (Label location) -> location.getText().contains("BIOLOGY"));
+        moveTo("#rootPane").clickOn();
+        verifyThat("#bioText", (Text bio) -> bio.getText().contains("BIO"));
+        sleep(4000);
     }
 }
