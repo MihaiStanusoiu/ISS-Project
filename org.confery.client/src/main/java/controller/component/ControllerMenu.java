@@ -100,7 +100,7 @@ public class ControllerMenu implements ControllerInterface {
 
     @FXML
     private void onSubmissionsViewButtonClick() {
-        System.out.println("Submissions View");
+        manager.switchScene(ViewType.SUBMISSIONS);
     }
 
     @FXML

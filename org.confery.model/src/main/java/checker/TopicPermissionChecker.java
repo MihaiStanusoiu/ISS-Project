@@ -7,7 +7,6 @@ import domain.TopicEntity;
  * @version 1.0
  */
 
-@SuppressWarnings("unused")
 public class TopicPermissionChecker extends PermissionChecker<TopicEntity> {
 
     public TopicPermissionChecker() {

@@ -23,7 +23,6 @@ import service.CollectionService;
 import service.EditionService;
 import transfarable.Edition;
 import transfarable.Session;
-import transfarable.Submission;
 import transfarable.User;
 import view.Icon;
 import view.ViewType;
@@ -105,7 +104,7 @@ public class ControllerEditionView implements ControllerInterface, ControllerIte
 
     @FXML
     private void onSubmitPaperButtonClick() {
-        manager.switchScene(ViewType.ADD_SUBMISSION_TO_EDITION, new Submission());
+        manager.switchScene(ViewType.ADD_SUBMISSION_TO_EDITION, edition);
     }
 
     @Override

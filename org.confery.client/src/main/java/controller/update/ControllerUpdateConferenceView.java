@@ -1,4 +1,4 @@
-package controller.add;
+package controller.update;
 
 import controller.main.ControllerInterface;
 import itemcontroller.ControllerItemInterface;

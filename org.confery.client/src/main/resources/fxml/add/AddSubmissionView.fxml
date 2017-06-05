@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -19,415 +21,505 @@
       <fx:include source="../TopBar.fxml" />
    </top>
    <center>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER" fillHeight="false" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%);">
+      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="400.0" BorderPane.alignment="TOP_CENTER">
+         <content>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;">
                <children>
-                  <Label text="Update Account" textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Pane HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: white;" text="Submit" />
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </HBox>
-            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;">
-               <children>
-                  <VBox>
+                  <HBox alignment="CENTER" fillHeight="false" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%);">
                      <children>
-                        <VBox>
-                           <children>
-                              <Label text="Deadlines">
-                                 <font>
-                                    <Font name="Proxima Nova Bold" size="16.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
-                                 <children>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../png_icons/time_icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <VBox>
-                                       <children>
-                                          <Label text="Abstract Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Bold" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Regular" size="16.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                       <padding>
-                                          <Insets left="20.0" />
-                                       </padding>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <effect>
-                                    <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
-                                 </effect>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
-                                 <children>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../png_icons/time_icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <VBox>
-                                       <children>
-                                          <Label text="Papers Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Bold" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Regular" size="16.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                       <padding>
-                                          <Insets left="20.0" />
-                                       </padding>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <effect>
-                                    <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
-                                 </effect>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
-                                 <children>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../png_icons/time_icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <VBox>
-                                       <children>
-                                          <Label text="Evaluation Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Bold" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Regular" size="16.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                       <padding>
-                                          <Insets left="20.0" />
-                                       </padding>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <effect>
-                                    <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
-                                 </effect>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
-                                 <children>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../png_icons/time_icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <VBox>
-                                       <children>
-                                          <Label text="Bidding Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Bold" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Regular" size="16.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                       <padding>
-                                          <Insets left="20.0" />
-                                       </padding>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <effect>
-                                    <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
-                                 </effect>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <Label text="Reviewers">
-                                 <font>
-                                    <Font name="Proxima Nova Bold" size="16.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
-                                 <children>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../png_icons/time_icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <VBox>
-                                       <children>
-                                          <Label text="Abstract Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Bold" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Regular" size="16.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                       <padding>
-                                          <Insets left="20.0" />
-                                       </padding>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <effect>
-                                    <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
-                                 </effect>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
-                                 <children>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../png_icons/time_icon.png" />
-                                       </image>
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </ImageView>
-                                    <VBox>
-                                       <children>
-                                          <Label text="Abstract Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Bold" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Deadline">
-                                             <font>
-                                                <Font name="Proxima Nova Regular" size="16.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                       <padding>
-                                          <Insets left="20.0" />
-                                       </padding>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <effect>
-                                    <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
-                                 </effect>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </HBox>
-                           </children>
-                        </VBox>
+                        <Label text="Submit Your Papers" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#onSubmitButtonClick" style="-fx-background-color: white;" text="Submit" />
                      </children>
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
-                  </VBox>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
+                  </HBox>
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;">
                      <children>
-                        <Label text="Name">
-                           <font>
-                              <Font name="Proxima Nova Bold" size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin></Label>
-                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" VBox.vgrow="ALWAYS">
+                        <VBox>
                            <children>
-                              <TextField maxWidth="1.7976931348623157E308" minWidth="0.0" promptText="Name" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="Proxima Nova Regular" size="16.0" />
-                                 </font>
-                              </TextField>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                              <VBox>
+                                 <children>
+                                    <Label text="Deadlines">
+                                       <font>
+                                          <Font name="Proxima Nova Bold" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
+                                       <children>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../png_icons/time_icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox>
+                                             <children>
+                                                <Label text="Abstract Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Regular" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <effect>
+                                          <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
+                                       </effect>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
+                                       <children>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../png_icons/time_icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox>
+                                             <children>
+                                                <Label text="Papers Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Regular" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <effect>
+                                          <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
+                                       </effect>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
+                                       <children>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../png_icons/time_icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox>
+                                             <children>
+                                                <Label text="Evaluation Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Regular" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <effect>
+                                          <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
+                                       </effect>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
+                                       <children>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../png_icons/time_icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox>
+                                             <children>
+                                                <Label text="Bidding Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Regular" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <effect>
+                                          <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
+                                       </effect>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Reviewers">
+                                       <font>
+                                          <Font name="Proxima Nova Bold" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
+                                       <children>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../png_icons/time_icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox>
+                                             <children>
+                                                <Label text="Abstract Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Regular" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <effect>
+                                          <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
+                                       </effect>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-background-radius: 5 5 5 5;">
+                                       <children>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../png_icons/time_icon.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox>
+                                             <children>
+                                                <Label text="Abstract Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Deadline">
+                                                   <font>
+                                                      <Font name="Proxima Nova Regular" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <effect>
+                                          <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
+                                       </effect>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
                            </children>
                            <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </padding>
-                        </HBox>
-                        <Label text="Abstract">
-                           <font>
-                              <Font name="Proxima Nova Bold" size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="20.0" />
-                           </VBox.margin></Label>
-                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" VBox.vgrow="ALWAYS">
+                        </VBox>
+                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <TextField maxWidth="1.7976931348623157E308" minWidth="0.0" promptText="Abstract" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                              <Label text="Name">
                                  <font>
-                                    <Font name="Proxima Nova Regular" size="16.0" />
+                                    <Font name="Proxima Nova Bold" size="16.0" />
                                  </font>
-                              </TextField>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                        <Label text="Full Paper">
-                           <font>
-                              <Font name="Proxima Nova Bold" size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="20.0" />
-                           </VBox.margin></Label>
-                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
-                           <children>
-                              <TextField maxWidth="1.7976931348623157E308" minWidth="0.0" promptText="Full Paper" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <TextField fx:id="nameTextField" maxWidth="1.7976931348623157E308" minWidth="0.0" promptText="Name" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font name="Proxima Nova Regular" size="16.0" />
+                                       </font>
+                                    </TextField>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                              <Label text="Abstract">
                                  <font>
-                                    <Font name="Proxima Nova Regular" size="16.0" />
+                                    <Font name="Proxima Nova Bold" size="16.0" />
                                  </font>
-                              </TextField>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                        <Label text="Authors">
-                           <font>
-                              <Font name="Proxima Nova Bold" size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="20.0" />
-                           </VBox.margin></Label>
-                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
-                           <children>
-                              <TextField maxWidth="1.7976931348623157E308" minWidth="0.0" promptText="Authors" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <TextField fx:id="abstractTextField" maxWidth="1.7976931348623157E308" minWidth="0.0" promptText="Abstract" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font name="Proxima Nova Regular" size="16.0" />
+                                       </font>
+                                    </TextField>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                              <Label text="Full Paper">
                                  <font>
-                                    <Font name="Proxima Nova Regular" size="16.0" />
+                                    <Font name="Proxima Nova Bold" size="16.0" />
                                  </font>
-                              </TextField>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                        <Label text="Topics">
-                           <font>
-                              <Font name="Proxima Nova Bold" size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="20.0" />
-                           </VBox.margin></Label>
-                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
-                           <children>
-                              <TextField maxWidth="1.7976931348623157E308" minWidth="0.0" promptText="Topics" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
+                                 <children>
+                                    <TextField fx:id="fullPaperTextField" maxWidth="1.7976931348623157E308" minWidth="0.0" promptText="Full Paper" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font name="Proxima Nova Regular" size="16.0" />
+                                       </font>
+                                    </TextField>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                              <Label text="Authors">
                                  <font>
-                                    <Font name="Proxima Nova Regular" size="16.0" />
+                                    <Font name="Proxima Nova Bold" size="16.0" />
                                  </font>
-                              </TextField>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ListView fx:id="authorsListView" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: white;" stylesheets="@../../css/list.css" />
+                              <HBox>
+                                 <children>
+                                    <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
+                                       <children>
+                                          <TextField fx:id="authorTextField" maxWidth="1.7976931348623157E308" minWidth="0.0" promptText="Authors" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font name="Proxima Nova Regular" size="16.0" />
+                                             </font>
+                                          </TextField>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </HBox>
+                                    <Button fx:id="addAuthorButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onAddAuthorButtonClick" prefWidth="50.0" style="-fx-background-color: white;">
+                                       <effect>
+                                          <DropShadow color="#00000026" height="20.0" radius="9.5" width="20.0" />
+                                       </effect>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../png_icons/plus_icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Label text="Topics">
+                                 <font>
+                                    <Font name="Proxima Nova Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ListView fx:id="topicsListView" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: white;" stylesheets="@../../css/list.css" />
+                              <HBox>
+                                 <children>
+                                    <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
+                                       <children>
+                                          <TextField fx:id="topicTextField" maxWidth="1.7976931348623157E308" minWidth="0.0" promptText="Type Your Topic" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font name="Proxima Nova Regular" size="16.0" />
+                                             </font>
+                                          </TextField>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </HBox>
+                                    <Button fx:id="addTopicButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onAddTopicButtonClick" prefWidth="50.0" style="-fx-background-color: white;">
+                                       <effect>
+                                          <DropShadow color="#00000026" height="20.0" radius="9.5" width="20.0" />
+                                       </effect>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../png_icons/plus_icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <Label text="Tags">
+                                 <font>
+                                    <Font name="Proxima Nova Bold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ListView fx:id="tagsListView" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: white;" stylesheets="@../../css/list.css" />
+                              <HBox>
+                                 <children>
+                                    <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 5; -fx-border-color: rgba(0,0,0,0.10);">
+                                       <children>
+                                          <TextField fx:id="tagTextField" maxWidth="1.7976931348623157E308" minWidth="0.0" promptText="Type Your Tag" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
+                                             <font>
+                                                <Font name="Proxima Nova Regular" size="16.0" />
+                                             </font>
+                                          </TextField>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </HBox>
+                                    <Button fx:id="addTagButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#onAddTagButtonClick" prefWidth="50.0" style="-fx-background-color: white;">
+                                       <effect>
+                                          <DropShadow color="#00000026" height="20.0" radius="9.5" width="20.0" />
+                                       </effect>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../png_icons/plus_icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
                            </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </HBox.margin>
+                        </VBox>
                      </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </HBox.margin>
-                  </VBox>
+                  </HBox>
                </children>
-            </HBox>
-         </children>
-      </VBox>
+            </VBox>
+         </content>
+      </ScrollPane>
    </center>
    <right>
       <AnchorPane style="-fx-background-color: &quot;white&quot;;" BorderPane.alignment="CENTER">

@@ -136,4 +136,5 @@ public class ControllerConferencesView implements ControllerInterface {
     private void onSearchButtonClick() {
         search(searchTextField.getText());
     }
+
 }

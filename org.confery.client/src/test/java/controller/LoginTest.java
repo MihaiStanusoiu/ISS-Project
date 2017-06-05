@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static org.loadui.testfx.Assertions.verifyThat;
 
+
 /**
  * @author Alexandru Stoica
  * @version 1.0
@@ -24,4 +25,5 @@ public class LoginTest extends TestFxBase {
         // finally:
         moveTo("#logoutButton").clickOn();
     }
+
 }

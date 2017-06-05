@@ -91,7 +91,6 @@ public class ControllerLogin implements ControllerInterface, SubscriberService {
         manager.getPrimaryStage().setOnCloseRequest(event ->
                 Try.runMethod(listener::removeSubscriber, this).orHandle(System.out::print));
         Try.runMethod(listener::addSubscriber, this).orHandle(System.out::println);
-
     }
 
     /**

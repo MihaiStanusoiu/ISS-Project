@@ -11,7 +11,7 @@
    <children>
       <VBox alignment="CENTER" maxHeight="420.0" minHeight="0.0" minWidth="60.0" style="-fx-background-color: &quot;white&quot;;" StackPane.alignment="TOP_CENTER">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onConferencesViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+            <Button fx:id="conferencesButton" alignment="CENTER" contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onConferencesViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -23,7 +23,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </Button>
-            <Button contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onAddConferenceViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+            <Button fx:id="addConferenceButton" contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onAddConferenceViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -35,7 +35,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onNotificationsViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+            <Button fx:id="notificationsButton" alignment="CENTER" contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onNotificationsViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -47,7 +47,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </Button>
-            <Button contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onUsersViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+            <Button fx:id="usersButton" contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onUsersViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -59,7 +59,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </Button>
-            <Button contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onSubmissionsViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
+            <Button fx:id="submissionsButton" contentDisplay="CENTER" minHeight="22.0" minWidth="60.0" mnemonicParsing="false" onAction="#onSubmissionsViewButtonClick" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: &quot;white&quot;; -fx-background-radius: 0;" VBox.vgrow="SOMETIMES">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

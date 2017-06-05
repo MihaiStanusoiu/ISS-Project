@@ -3,6 +3,8 @@ package domain;
 import javax.persistence.*;
 import java.io.Serializable;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 /**
  * Tested: False
  *
@@ -14,7 +16,7 @@ import java.io.Serializable;
 public class LoginEntity implements Serializable, Idable<Integer> {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID")
     private Integer id;
 

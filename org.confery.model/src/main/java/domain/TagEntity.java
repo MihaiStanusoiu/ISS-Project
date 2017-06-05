@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 /**
  * Tested: True
  *
@@ -21,7 +23,7 @@ public class TagEntity implements Idable<Integer> {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_TAG")
     private Integer id;
 
