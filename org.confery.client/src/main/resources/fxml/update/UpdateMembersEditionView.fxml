@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.update.ControllerUpdateMembersEditionView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.update.ControllerUpdateMembersEditionView">
    <top>
       <fx:include source="../TopBar.fxml" />
    </top>
@@ -237,7 +237,7 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </padding>
                                     </HBox>
-                                    <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onMouseClicked="#onAddPCMemberButtonClick" prefWidth="50.0" style="-fx-background-color: white;">
+                                    <Button fx:id="addPCMemberButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onMouseClicked="#onAddPCMemberButtonClick" prefWidth="50.0" style="-fx-background-color: white;">
                                        <effect>
                                           <DropShadow color="#00000026" height="20.0" radius="9.5" width="20.0" />
                                        </effect>

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.update.ControllerUpdateEditionView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.update.ControllerUpdateEditionView">
    <top>
       <fx:include source="../TopBar.fxml" />
    </top>
@@ -100,7 +100,7 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </padding>
                                        <children>
-                                          <Label text="Sesssions">
+                                          <Label text="Sessions">
                                              <font>
                                                 <Font name="Proxima Nova Regular" size="16.0" />
                                              </font>

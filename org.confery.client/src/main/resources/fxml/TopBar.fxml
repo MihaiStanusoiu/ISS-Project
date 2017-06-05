@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="60.0" minHeight="60.0" minWidth="0.0" prefHeight="60.0" style="-fx-background-color: &quot;white&quot;;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.component.ControllerTopBar">
+<BorderPane maxHeight="60.0" minHeight="60.0" minWidth="0.0" prefHeight="60.0" style="-fx-background-color: &quot;white&quot;;" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.component.ControllerTopBar">
    <left>
       <HBox alignment="CENTER_LEFT" minWidth="0.0" onMouseClicked="#onLogoButtonClick" BorderPane.alignment="CENTER">
          <children>
@@ -46,7 +47,7 @@
                </font></Label>
             <Button fx:id="userProfileButton" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#onProfileButtonClick" style="-fx-background-color: linear-gradient(to bottom right, #4DE0EB 0%, #6A75D9 100%); -fx-background-radius: 0;">
                <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profileButton" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../png_icons/new_user_icon_light.png" />
                      </image></ImageView>

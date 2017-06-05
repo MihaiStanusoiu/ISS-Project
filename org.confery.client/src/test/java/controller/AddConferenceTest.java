@@ -1,9 +1,12 @@
 package controller;
 
+import Utils.UtilsForTests;
+import javafx.geometry.VerticalDirection;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.loadui.testfx.Assertions.assertNodeExists;
 import static org.testfx.matcher.control.TextFlowMatchers.hasText;
 
@@ -17,27 +20,45 @@ public class AddConferenceTest extends TestFxBase {
     private final String EDITION_NAME = "Test Edition";
     private final String EDITION_BIO = "Edition Bio";
     private final String CONFERENCE_NAME = "Test Conference";
-    private final String USERNAME = "test";
+    private final String USERNAME = "oana.daniela";
     private final String PASSWORD = "password";
     private final String SESSION_NAME = "Test Session";
     private final String CO_CHAIR_USERNAME = "oana.daniela";
+    private final String PCMEMBER_USERNAME = "iulia.dorian";
+    UtilsForTests utils = new UtilsForTests();
+    private final Integer delay = 6000;
 
     @Override @Before
     public void setUp() throws Exception {
         super.setUp();
-        forceLoginInSystem();
+        utils.forceLoginInSystem(USERNAME,PASSWORD);
     }
 
     @Override @After
     public void tearDown() throws Exception {
         super.tearDown();
-        logoutFromSystem();
+    }
+
+    @Test
+    public void mainTest() throws Exception
+    {
+        isAbleToAddConference();
+        isAbleToUpdateConference();
+        isAbleToUpdateEditionInfo();
+        isAbleToUpdateEditionMembers();
+        isOneConferenceAvailable();
+        isOneSessionAvailable();
+        submitAPaper();
+        isAbleToDeleteConference();
+        isAbleToSignUp();
+        isAbleToModifyUser();
+        isAbleToDeleteUser();
     }
 
     @Test
     public void isAbleToAddConference() throws Exception {
         // when:
-        addConference();
+        utils.addConference(CONFERENCE_NAME,EDITION_NAME, EDITION_BIO, CO_CHAIR_USERNAME,SESSION_NAME);
         // go-to:
         moveTo(CONFERENCE_NAME).clickOn();
         moveTo(EDITION_NAME).clickOn();
@@ -47,95 +68,130 @@ public class AddConferenceTest extends TestFxBase {
         assertNodeExists(hasText(SESSION_NAME));
         assertNodeExists(hasText(EDITION_NAME));
         assertNodeExists(hasText(EDITION_BIO));
-    }
-
-    private void addConference() {
-        clickOnAddConferenceButton();
-        completeConferenceTextFields();
-        clickOnAddEditionButton();
-        completeEditionTextFields();
-        moveToMembersTab();
-        addMemberToEdition();
-        moveToSessionsTab();
-        completeSessionFields();
-        clickOnPublishButton();
-    }
-
-    private void forceLoginInSystem() {
-        try {
-            loginInSystem(USERNAME, PASSWORD);
-        } catch (Exception exception ) {
-            logoutFromSystem();
-            loginInSystem(USERNAME, PASSWORD);
-        }
+        sleep(delay);
+        moveTo("CONFERY").clickOn();
     }
 
     @Test
     public void isAbleToUpdateConference() throws Exception {
-        addConference();
-        loginInSystem(USERNAME, PASSWORD);
         // to-go:
         moveTo(CONFERENCE_NAME).clickOn();
-        completeConferenceTextFieldWith("Test Update", "Test Update");
-        clickOnPublishButton();
+        utils.updateConferenceTextFieldWith("Test Update", "Test Update");
+        utils.clickOnSaveButton();
         assertNodeExists(hasText("Test Update"));
-        sleep(4000);
+        sleep(delay);
     }
 
-    private void completeSessionFields() {
-        moveTo("#sessionTextField").clickOn().write(SESSION_NAME);
-        moveTo("#plusButton").clickOn();
+    @Test
+    public void isAbleToUpdateEditionInfo() throws Exception {
+        // to-go:
+        moveTo("Test Update").clickOn();
+        moveTo("Test Edition").clickOn();
+        utils.updateEditionTextFieldWith("Test Edition Update", "Test Bio Update");
+        scroll(25, VerticalDirection.DOWN);
+        utils.clickOnSaveButton();
+        moveTo("CONFERY").clickOn();
+        moveTo("Test Update").clickOn();
+        assertNodeExists(hasText("Test Edition Update"));
+        sleep(delay);
     }
 
-    private void moveToSessionsTab() {
-        moveTo("Sessions").clickOn();
-    }
-
-    private void addMemberToEdition() {
-        moveTo("#coChairTextField").clickOn().write(CO_CHAIR_USERNAME);
-        clickOn("#plusButton");
-    }
-
-    private void moveToMembersTab() {
+    @Test
+    public void isAbleToUpdateEditionMembers() throws Exception {
+        // to-go:
+        moveTo("CONFERY").clickOn();
+        moveTo("Test Update").clickOn();
+        moveTo("Test Edition Update").clickOn();
         moveTo("Members").clickOn();
+        scroll(25, VerticalDirection.DOWN);
+        utils.addPCMemberToEdition(PCMEMBER_USERNAME);
+        sleep(500);
+        scroll(25, VerticalDirection.DOWN);
+        assertNodeExists(hasText("Iulia Dorian"));
+        assertNodeExists(hasText("Test Edition Update"));
+        sleep(delay);
     }
 
-    private void completeEditionTextFields() {
-        moveTo("#locationTextField").clickOn().write(EDITION_NAME);
-        moveTo("#bioTextField").clickOn().write(EDITION_BIO);
+    @Test
+    public void isOneConferenceAvailable() throws Exception
+    {
+        moveTo("CONFERY").clickOn();
+        moveTo("#myConferences").clickOn();
+        assertNodeExists(hasText("Test Update"));
+        sleep(delay);
     }
 
-    private void clickOnAddEditionButton() {
-        moveTo("Add Edition").clickOn();
+    @Test
+    public void isOneSessionAvailable() throws Exception
+    {
+        moveTo("CONFERY").clickOn();
+        moveTo("Test Update").clickOn();
+        moveTo("Test Edition Update").clickOn();
+        moveTo("Sessions").clickOn();
+        assertNodeExists(hasText("Test Session"));
+        sleep(delay);
     }
 
-    private void clickOnPublishButton() {
-        moveTo("Publish").clickOn();
+    @Test
+    public void submitAPaper() throws Exception
+    {
+        utils.logoutFromSystem();
+        utils.loginInSystem("iulia.dorian", "password");
+        utils.addConference("Test2","Test2 Edition", "Test 2 Bio", "iulia.dorian","Test 2 session");
+        utils.logoutFromSystem();
+        utils.loginInSystem(USERNAME,PASSWORD);
+        moveTo("CONFERY").clickOn();
+        moveTo("Test2").clickOn();
+        moveTo("Test2 Edition").clickOn();
+        moveTo("Submit Papers").clickOn();
+        utils.addSubmission("Test Submission", "Test Abstract", "Test full paper", "oana.daniela", "Test", "Test");
+        assertNodeExists(hasText("Test Submission"));
+        sleep(delay);
     }
 
-    private void completeConferenceTextFields() {
-        completeConferenceTextFieldWith(CONFERENCE_NAME, "Test");
+
+    @Test
+    public void isAbleToDeleteConference() throws Exception
+    {
+        moveTo("CONFERY").clickOn();
+        moveTo("Test Update").clickOn();
+        moveTo("Delete").clickOn();
+        utils.logoutFromSystem();
+        utils.loginInSystem("iulia.dorian", "password");
+        moveTo("CONFERY").clickOn();
+        moveTo("Test2").clickOn();
+        moveTo("Delete").clickOn();
+        utils.logoutFromSystem();
+        assertEquals(find("Test Update"), null);
+        sleep(delay);
     }
 
-    private void completeConferenceTextFieldWith(String name, String acronym) {
-        moveTo("#nameTextField").clickOn().write(name);
-        moveTo("#acronymTextField").clickOn().write(acronym);
+    @Test
+    public void isAbleToSignUp()
+    {
+        moveTo("CONFERY").clickOn();
+        moveTo("#signUpButton").clickOn();
+        utils.addUser("example@example", "Test", "test.test", "password123");
+        assertNodeExists(hasText("Test"));
+        sleep(delay);
     }
 
-    private void clickOnAddConferenceButton() {
-        moveTo("#addConferenceButton").clickOn();
+    @Test
+    public void isAbleToModifyUser()
+    {
+        moveTo("#profileButton").clickOn();
+        utils.modifyUser("TestTest");
+        moveTo("CONFERY").clickOn();
+        assertNodeExists(hasText("TestTest"));
+        sleep(delay);
     }
 
-    @SuppressWarnings("all")
-    private void loginInSystem(final String username, final String password) {
-        moveTo("#loginButton").clickOn();
-        clickOn("#usernameTextField").write(username);
-        clickOn("#passwordTextField").write(password);
-        moveTo("LOGIN").clickOn();
+    @Test
+    public void isAbleToDeleteUser()
+    {
+        moveTo("#profileButton").clickOn();
+        clickOn("Delete Your Account");
+        assertEquals(find("TestTest"), null);
+        sleep(delay);
     }
-
-    private void logoutFromSystem() {
-        moveTo("#logoutButton").clickOn();
-    }
-
 }
