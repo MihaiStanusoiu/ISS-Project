@@ -4,10 +4,12 @@ import controller.main.ControllerInterface;
 import itemcontroller.ControllerItemInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import list.ListViewBuilder;
 import manager.StageManager;
 import method.SimpleMethod;
@@ -17,9 +19,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import service.CollectionService;
 import service.EditionService;
-import transfarable.Conference;
-import transfarable.Edition;
-import transfarable.Session;
+import service.SessionService;
+import transfarable.*;
 import view.Icon;
 import view.ViewType;
 
@@ -86,6 +87,8 @@ public class ControllerUpdateSessionEditionView
 
     private void setUpListViews() {
         sessionsListView.setItems(sessions);
+        sessionsListView.setOnMouseClicked(event -> manager.switchScene(ViewType.UPDATE_SESSION,
+                sessionsListView.getSelectionModel().getSelectedItem()));
         sessionsListView = new ListViewBuilder<>(sessionsListView)
                 .setIcon(Icon.CLOSE)
                 .textProvider(Session::getName)
@@ -96,10 +99,19 @@ public class ControllerUpdateSessionEditionView
                 }, editionService).build();
     }
 
+    private SessionService sessionService;
+
     @FXML
     private void onAddSessionButtonClick() {
-        Session session = new Session(0, sessionTextField.getText(), new Date(), new Date(), edition.getLocation(), "", 100);
+        Date date =  new Date();
+        Session session = new Session(0, sessionTextField.getText(), date, date, edition.getLocation(), "", 100);
         edition = runFunction(editionService::addSessionToEdition, edition, session).orHandle(handler);
+        session = runFunction(editionService::getAllSessionsOf, edition).orHandle(handler).stream()
+                .filter(item -> item.getName().equals(sessionTextField.getText()))
+                .findFirst().get();
+        User user = runFunction(editionService::getChair, edition).orHandle(handler);
+        sessionService = runFunction(service::sessionService).orHandle(handler);
+        session = runFunction(sessionService::addMemberTo, session, user, MemberRoleTransferable.SESSION_CHAIR).orHandle(handler);
         manager.refresh(edition);
     }
 

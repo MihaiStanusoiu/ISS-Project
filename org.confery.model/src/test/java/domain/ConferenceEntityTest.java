@@ -8,6 +8,7 @@ import org.junit.Test;
 import protocol.ConferenceProtocol;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * @author Alexandru Stoica
@@ -29,4 +30,14 @@ public class ConferenceEntityTest {
         // then:
         assertEquals(conferenceModel.getElementById(idConference).getLatestEdition().getId(), edition.getId());
     }
+
+    @Test
+    public void testEquals(){
+        ConferenceEntity conference = new ConferenceEntity("Conference in biology");
+        ConferenceEntity conference2 = new ConferenceEntity("Conference in biology");
+        assertEquals(conference,conference2);
+        ConferenceEntity conference3 = new ConferenceEntity("Conference in science");
+        assertNotEquals(conference,conference3);
+    }
+
 }

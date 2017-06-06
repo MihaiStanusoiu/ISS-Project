@@ -45,35 +45,6 @@ public class AuthorSubmissionEntity implements Idable<Integer> {
     }
 
     /**
-     * @param id The object's id
-     */
-    public AuthorSubmissionEntity(Integer id) {
-        this(id, DEFAULT_OWNER_FLAG, DEFAULT_PRESENTATION_URL);
-    }
-
-    /**
-     * @param isOwner Flag [true if the target author is the owner of the submission]
-     */
-    public AuthorSubmissionEntity(Boolean isOwner) {
-        this(DEFAULT_ID, isOwner, DEFAULT_PRESENTATION_URL);
-    }
-
-    /**
-     * @param presentationUrl The submission's presentation URL
-     */
-    public AuthorSubmissionEntity(String presentationUrl) {
-        this(DEFAULT_ID, DEFAULT_OWNER_FLAG, DEFAULT_PRESENTATION_URL);
-    }
-
-    /**
-     * @param presentationUrl The submission's presentation URL
-     * @param isOwner         Flag [true if the target author is the owner of the submission]
-     */
-    public AuthorSubmissionEntity(Boolean isOwner, String presentationUrl) {
-        this(DEFAULT_ID, isOwner, presentationUrl);
-    }
-
-    /**
      * @param id              The object's id
      * @param presentationUrl The submission's presentation URL
      * @param isOwner         Flag [true if the target author is the owner of the submission]

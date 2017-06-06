@@ -4,6 +4,7 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Alexandru Stoica
@@ -24,5 +25,6 @@ public class DatabaseLoaderFactoryTest {
         // then:
         assertFalse(testConfiguration.equals(defaultConfiguration));
     }
+
 
 }

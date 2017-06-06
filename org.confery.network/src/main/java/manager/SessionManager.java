@@ -62,7 +62,6 @@ public class SessionManager
 
     @Override
     public Session addMemberTo(Session session, User user, MemberRoleTransferable role) throws RemoteException {
-        checkUserPermissions(role.equals(MemberRoleTransferable.SESSION_LISTENER), session);
         return translator.translate(runFunction(model::addMemberTo, getSessionFromDatabase(session),
                 userTranslator.translate(user), memberRoleTranslator.translate(role)).orThrow(thrower));
     }
