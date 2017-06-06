@@ -18,7 +18,7 @@ public class TopicModel extends Model<TopicEntity, Integer> implements TopicProt
         super(TopicEntity.class, loader);
     }
 
-    private TopicEntity getTopicByWord(String word) {
+    public TopicEntity getTopicByWord(String word) {
         return getAll().stream()
                 .filter(topic -> topic.getWord().equals(word))
                 .findFirst().orElse(new TopicEntity("none"));

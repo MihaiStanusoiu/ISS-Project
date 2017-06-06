@@ -13,7 +13,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import transfarable.MemberRoleTransferable;
 import transfarable.Session;
+import transfarable.User;
 import utils.ConferenceContext;
 import view.Icon;
 import view.ViewType;
@@ -21,6 +23,7 @@ import view.ViewType;
 import java.util.Date;
 import java.util.List;
 
+import static utils.Try.runFunction;
 import static utils.Try.runMethod;
 
 /**

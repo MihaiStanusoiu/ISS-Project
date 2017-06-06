@@ -28,6 +28,19 @@ public class TopicModelTest {
     }
 
     @Test
+    public void isGettingTopicByWord() throws Exception {
+        // declaration:
+        DatabaseLoaderInterface loader =
+                new DatabaseLoaderFactory().getLoader(DatabaseLoaderType.TEST);
+        TopicModel model = new TopicModel(loader);
+        TopicEntity first = new TopicEntity("test");
+        model.add(first);
+        // then:
+        assertTrue(model.getTopicByWord("test").getId().equals(1));
+        assertTrue(model.getTopicByWord("no").getWord().equals("none"));
+    }
+
+    @Test
     public void isAddingTopicAgain() throws Exception {
         // declaration:
         DatabaseLoaderInterface loader =
@@ -37,7 +50,6 @@ public class TopicModelTest {
         TopicEntity second = new TopicEntity("test");
         // then:
         assertEquals((long)model.add(first), 1L);
-        assertEquals((long)model.add(second), 1L);
     }
 
 }

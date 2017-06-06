@@ -10,6 +10,7 @@ import service.SessionService;
 import transfarable.*;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import static utils.Try.runFunction;
 
@@ -119,8 +120,12 @@ public class EditionContext implements IdableTransfer<Integer> {
     }
 
     private void addSessionsToDatabase() {
-        sessions.forEach(session ->
-                runFunction(editionService::addSessionToEdition, edition, session).orHandle(handler));
+        sessions.forEach(session -> {
+            runFunction(editionService::addSessionToEdition, edition, session).orHandle(handler);
+        });
+        List<Session> items = runFunction(editionService::getAllSessionsOf, edition).orHandle(handler);
+        items.forEach(item -> runFunction(sessionService::addMemberTo, item, chair, MemberRoleTransferable.SESSION_CHAIR)
+                .orHandle(handler));
     }
 
 

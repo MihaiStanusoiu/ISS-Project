@@ -28,8 +28,6 @@ public class DatabaseLoaderFactory {
                         .setPropertiesFileName("database_url")
                         .setDatabaseUrlKey("test_database")
                         .build();
-            case DEFAULT:
-                return new DatabaseLoader();
             default:
                 return new DatabaseLoader();
         }
