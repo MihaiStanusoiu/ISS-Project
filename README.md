@@ -1,6 +1,6 @@
 # Conference Management System
 
-![Confery](https://s12.postimg.org/gh11ey92l/Home.png)
+![alt text](https://gifyu.com/images/Home.png)
 
 **Dependencies**
 
